@@ -12,7 +12,7 @@
 <xsl:import href="meta/stop-error.xsl"/>
 
 <xsl:output
-  encoding="Windows-1251"
+  encoding="UTF-8"
   indent="yes"
   method="text"
 />

@@ -21,7 +21,7 @@
 </xsl:template>
 
 <xsl:output
-  encoding="Windows-1251"
+  encoding="UTF-8"
   indent="yes"
 />
 
