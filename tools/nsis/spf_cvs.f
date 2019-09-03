@@ -9,8 +9,8 @@ REQUIRE /STRING lib/include/string.f
 
 S" util.f" INCLUDED
 
-\ Ïóòü ê êàòàëîãó ðàáî÷åé êîïèè
-\ Îïðåäåëÿåòñÿ ñíàðóæè
+\ ÐŸÑƒÑ‚ÑŒ Ðº ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ñƒ Ñ€Ð°Ð±Ð¾Ñ‡ÐµÐ¹ ÐºÐ¾Ð¿Ð¸Ð¸
+\ ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚ÑÑ ÑÐ½Ð°Ñ€ÑƒÐ¶Ð¸
 \ : SPF-PATH ( -- a u ) S" spf" ;
 : SPF-PATH-LEN ( -- u ) SPF-PATH NIP ;
 : double-slashed  ( a u -- s )  " {s}" DUP " \" " \\" replace-str- ;
@@ -46,11 +46,11 @@ SPF-PATH double-slashed VALUE path\\
 : SecAssociate S" {SecAssociate}" ;
 : SecShortcuts S" {SecShortcuts}" ;
 
-\ ïðÿìûå ñëåøè â îáðàòíûå
+\ Ð¿Ñ€ÑÐ¼Ñ‹Ðµ ÑÐ»ÐµÑˆÐ¸ Ð² Ð¾Ð±Ñ€Ð°Ñ‚Ð½Ñ‹Ðµ
 : />\ ( addr u -- )
   0 ?DO DUP I + C@ [CHAR] / = IF [CHAR] \ OVER I + C! THEN LOOP DROP ;
 
-\ ýòè ôàéëû èç êîðíÿ áåç äàëüíåéøèõ ïðîâåðîê ïðîïóñêàåì â ñïèñîê
+\ ÑÑ‚Ð¸ Ñ„Ð°Ð¹Ð»Ñ‹ Ð¸Ð· ÐºÐ¾Ñ€Ð½Ñ Ð±ÐµÐ· Ð´Ð°Ð»ÑŒÐ½ÐµÐ¹ÑˆÐ¸Ñ… Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¾Ðº Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ð² ÑÐ¿Ð¸ÑÐ¾Ðº
 : root-files=>
    PRO 
    S" spf4.exe" CONT
@@ -59,7 +59,7 @@ SPF-PATH double-slashed VALUE path\\
    S" help.fhlp" CONT
    S" uninstall.exe" CONT ;
 
-\ ïðîïóñêàòü òîëüêî ôàéëû èç ñëåäóþùèõ êàòàëîãîâ
+\ Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ„Ð°Ð¹Ð»Ñ‹ Ð¸Ð· ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ñ… ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ð¾Ð²
 : root-dirs=> 
    PRO 
    S" devel" CONT
@@ -68,7 +68,7 @@ SPF-PATH double-slashed VALUE path\\
    S" samples" CONT
    S" src" CONT ;
 
-\ íå ïðîïóñêàòü òàêèå ôàéëû
+\ Ð½Ðµ Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°Ñ‚ÑŒ Ñ‚Ð°ÐºÐ¸Ðµ Ñ„Ð°Ð¹Ð»Ñ‹
 : exceptions=>
   PRO
   S" *.log" CONT

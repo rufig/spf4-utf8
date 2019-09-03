@@ -1,8 +1,8 @@
 VARIABLE DeleteTime
-\ ¢‡•¨Ô ¨•¶§„ „§†´•≠®Ô¨® ¢ ¨·
+\ –≤—Ä–µ–º—è –º–µ–∂–¥—É —É–¥–∞–ª–µ–Ω–∏—è–º–∏ –≤ –º—Å
 
 : Time
-\ ß†§†≠®• ¢‡•¨•≠® ¨•¶§„ „§†´•≠®Ô¨®
+\ –∑–∞–¥–∞–Ω–∏–µ –≤—Ä–µ–º–µ–Ω–∏ –º–µ–∂–¥—É —É–¥–∞–ª–µ–Ω–∏—è–º–∏
   0.
   NextWord
   >NUMBER ABORT" Bad number"
@@ -14,15 +14,15 @@ VARIABLE DeleteTime
 : ms ; IMMEDIATE
 : sec DeleteTime @ 1000 * DeleteTime ! ; IMMEDIATE
 : min DeleteTime @ 60000 * DeleteTime ! ; IMMEDIATE
-\ ¨†·Ë‚†°®‡Æ¢†≠®• · „ÁÒ‚Æ¨ •§®≠®ÊÎ ®ß¨•‡•≠®Ô
+\ –º–∞—Å—à—Ç–∞–±–∏—Ä–æ–≤–∞–Ω–∏–µ —Å —É—á—ë—Ç–æ–º –µ–¥–∏–Ω–∏—Ü—ã –∏–∑–º–µ—Ä–µ–Ω–∏—è
 
 : Wait
-\ Æ·‚†≠Æ¢™† ≠† ß†§†≠≠Æ• ¢‡•¨Ô
+\ –æ—Å—Ç–∞–Ω–æ–≤–∫–∞ –Ω–∞ –∑–∞–¥–∞–Ω–Ω–æ–µ –≤—Ä–µ–º—è
   DeleteTime @ PAUSE
 ;
 
 : LoadList ( -- xt )
-\ ß†£‡„ß™† ™Æ≠‰®£†
+\ –∑–∞–≥—Ä—É–∑–∫–∞ –∫–æ–Ω—Ñ–∏–≥–∞
   :NONAME
   POSTPONE BEGIN
   S" deleter.cfg" INCLUDED

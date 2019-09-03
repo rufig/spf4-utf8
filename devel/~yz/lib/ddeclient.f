@@ -1,5 +1,5 @@
-\ Êëèåíò DDE
-\ Þ.Æèëîâåö, http://www.forth.org.ru/~yz
+\ ÐšÐ»Ð¸ÐµÐ½Ñ‚ DDE
+\ Ð®.Ð–Ð¸Ð»Ð¾Ð²ÐµÑ†, http://www.forth.org.ru/~yz
 
 REQUIRE " ~yz/lib/common.f
 REQUIRE { ~ac/lib/locals.f
@@ -45,7 +45,7 @@ EXPORT
 ;
 
 : dde-connect
-  ( zService zTopic -- hconv 0 |ñåðâåð íàéäåí| / 0 0 |ñåðâåð íå íàéäåí| / errorcode |îøèáêà|)
+  ( zService zTopic -- hconv 0 |ÑÐµÑ€Ð²ÐµÑ€ Ð½Ð°Ð¹Ð´ÐµÐ½| / 0 0 |ÑÐµÑ€Ð²ÐµÑ€ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½| / errorcode |Ð¾ÑˆÐ¸Ð±ÐºÐ°|)
   { service topic -- }
   topic z>hsz TO topic
   service z>hsz TO service
@@ -53,7 +53,7 @@ EXPORT
   topic free-string
   service free-string
   ?DUP IF 0 EXIT THEN
-  ( âåðíåì êîä îøèáêè)
+  ( Ð²ÐµÑ€Ð½ÐµÐ¼ ÐºÐ¾Ð´ Ð¾ÑˆÐ¸Ð±ÐºÐ¸)
   ddeid DdeGetLastError
   DUP 0= IF 0 THEN
 ;
@@ -78,10 +78,10 @@ EXPORT
   IF 0 ELSE ddeid DdeGetLastError THEN
 ;
 
-: dde-request ( z hconv -- z 0 / 0 0 ñåðâåð íè÷åãî íå âåðíóë / errorcode)
-\ âîçâðàùàåìóþ ñòðîêó ïîñëå èñïîëüçîâàíèÿ íàäî îñâîáîäèòü
-\ Ñëó÷àé 0 0, ïîõîæå, íàáëþäàåòñÿ òîëüêî íà 95/98, êîãäà ó ñåðâåðà
-\ òàéì-àóò. NT âîçâðàùàåò ïðàâèëüíûé êîä îøèáêè 0x4002
+: dde-request ( z hconv -- z 0 / 0 0 ÑÐµÑ€Ð²ÐµÑ€ Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð²ÐµÑ€Ð½ÑƒÐ» / errorcode)
+\ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ÑƒÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð¿Ð¾ÑÐ»Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð½Ð°Ð´Ð¾ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð´Ð¸Ñ‚ÑŒ
+\ Ð¡Ð»ÑƒÑ‡Ð°Ð¹ 0 0, Ð¿Ð¾Ñ…Ð¾Ð¶Ðµ, Ð½Ð°Ð±Ð»ÑŽÐ´Ð°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° 95/98, ÐºÐ¾Ð³Ð´Ð° Ñƒ ÑÐµÑ€Ð²ÐµÑ€Ð°
+\ Ñ‚Ð°Ð¹Ð¼-Ð°ÑƒÑ‚. NT Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ñ‹Ð¹ ÐºÐ¾Ð´ Ð¾ÑˆÐ¸Ð±ÐºÐ¸ 0x4002
   { request hconv \ hdata -- }
   0 10000 0x20B0 ( xtyp_request) 1 ( cf_text) request z>hsz DUP TO request
   hconv 0 0
@@ -89,7 +89,7 @@ EXPORT
   request free-string
   ?DUP 0= IF ddeid DdeGetLastError DUP 0= IF 0 THEN EXIT THEN
   TO hdata
-  0 0 0 hdata DdeGetData ( äëèíà äàííûõ)
+  0 0 0 hdata DdeGetData ( Ð´Ð»Ð¸Ð½Ð° Ð´Ð°Ð½Ð½Ñ‹Ñ…)
   DUP GETMEM ( # to) DUP >R 0 ROT ROT hdata DdeGetData DROP
   R> 0
   hdata DdeFreeDataHandle DROP

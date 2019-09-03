@@ -4,7 +4,7 @@ md5-ts.f
   GetCommandLineA ASCIIZ>
   TIB SWAP C/L MIN DUP #TIB ! MOVE >IN 0!
   TIB C@ [CHAR] " = IF [CHAR] " ELSE BL THEN
-  WORD DROP \ имя программы
+  WORD DROP \ РёРјСЏ РїСЂРѕРіСЂР°РјРјС‹
   NextWord ?DUP IF MD5 TYPE CR BYE THEN
   ." Usage:" CR
   ."       md5.exe string" CR

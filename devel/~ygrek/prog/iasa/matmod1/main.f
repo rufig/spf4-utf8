@@ -25,7 +25,7 @@ PRINT-FIX
    LOOP
    s1 s :add
 
-   \ Горизонтальная линия - стационарная точка
+   \ Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ Р»РёРЅРёСЏ - СЃС‚Р°С†РёРѕРЅР°СЂРЅР°СЏ С‚РѕС‡РєР°
 (   Graph2D :new -> s1
     2 2 * 8 * ALLOCATE THROW -> d
     2 d s1 :data!
@@ -64,7 +64,7 @@ TRUE WARNING !
   R> -text# >FLOAT 0= IF 0e THEN
   FREE THROW
 ;
-\ учитываем что без символа "e" вещественное число не воспринимается
+\ СѓС‡РёС‚С‹РІР°РµРј С‡С‚Рѕ Р±РµР· СЃРёРјРІРѕР»Р° "e" РІРµС‰РµСЃС‚РІРµРЅРЅРѕРµ С‡РёСЃР»Рѕ РЅРµ РІРѕСЃРїСЂРёРЅРёРјР°РµС‚СЃСЏ
 : >fnum >FNUM OVER + DUP [CHAR] e SWAP C! 1+ 0 SWAP C! ;
 \ : >fnum >FNUM OVER + 0 SWAP C! ;
 
@@ -76,7 +76,7 @@ add-graph.f
   WINDOWS...
   " Times New Roman Cyr" 12 create-font TO times
   0 dialog-window TO winmain
-  " Мат моделирование N1. yGREK heretix. КА-21" winmain -text!
+  " РњР°С‚ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ N1. yGREK heretix. РљРђ-21" winmain -text!
 
   GRID
 
@@ -84,7 +84,7 @@ add-graph.f
 
     hline 500 1 this ctlresize |
     ===
-    " График" button -times -center
+    " Р“СЂР°С„РёРє" button -times -center
            add-graph this -command! | 
   GRID; winmain -grid!
   winmain wincenter

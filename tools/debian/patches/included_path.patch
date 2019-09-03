@@ -15,7 +15,7 @@
  ;
  
  : +LibraryDirName ( addr u -- addr2 u2 )
--\ Добавить addr u к "полный_путь_приложения/devel/"
+-\ Р”РѕР±Р°РІРёС‚СЊ addr u Рє "РїРѕР»РЅС‹Р№_РїСѓС‚СЊ_РїСЂРёР»РѕР¶РµРЅРёСЏ/devel/"
 +\ Add a u to the spf devel path
    2>R
 -  ModuleDirName 2DUP +

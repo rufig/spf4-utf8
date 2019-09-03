@@ -1,15 +1,15 @@
 \ smtp.f
-\ "Частичная" реализация протокола SMTP с возможностью аттача файлов
+\ "Р§Р°СЃС‚РёС‡РЅР°СЏ" СЂРµР°Р»РёР·Р°С†РёСЏ РїСЂРѕС‚РѕРєРѕР»Р° SMTP СЃ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊСЋ Р°С‚С‚Р°С‡Р° С„Р°Р№Р»РѕРІ
 \
-\ ADD-ATTACH ( adr n -- ) - Добавить путь к файлу в список
+\ ADD-ATTACH ( adr n -- ) - Р”РѕР±Р°РІРёС‚СЊ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РІ СЃРїРёСЃРѕРє
 \
-\ SMTP-SEND&ATTACH ( adr n adr1 n1 adr2 n2 adr3 n3 adr4 n4 adr5 n5 -- ) - собственно сама отправка
-\ adr n     - содержимое письма
-\ adr1 n1   - тема письма
-\ adr2 n2   - от кого
-\ adr3 n3   - кому
-\ adr4 n4   - пароль
-\ adr5 n5   - адрес SMTP сервера
+\ SMTP-SEND&ATTACH ( adr n adr1 n1 adr2 n2 adr3 n3 adr4 n4 adr5 n5 -- ) - СЃРѕР±СЃС‚РІРµРЅРЅРѕ СЃР°РјР° РѕС‚РїСЂР°РІРєР°
+\ adr n     - СЃРѕРґРµСЂР¶РёРјРѕРµ РїРёСЃСЊРјР°
+\ adr1 n1   - С‚РµРјР° РїРёСЃСЊРјР°
+\ adr2 n2   - РѕС‚ РєРѕРіРѕ
+\ adr3 n3   - РєРѕРјСѓ
+\ adr4 n4   - РїР°СЂРѕР»СЊ
+\ adr5 n5   - Р°РґСЂРµСЃ SMTP СЃРµСЂРІРµСЂР°
 \
 
 
@@ -22,9 +22,9 @@ REQUIRE N>H ~nn/lib/num2s.f
 REQUIRE AddNode ~nn/lib/list.f
 
 
-VARIABLE attList        \ Указатель на список прикрепляемых файлов
+VARIABLE attList        \ РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃРїРёСЃРѕРє РїСЂРёРєСЂРµРїР»СЏРµРјС‹С… С„Р°Р№Р»РѕРІ
 
-\ Добавить путь к файлу в список
+\ Р”РѕР±Р°РІРёС‚СЊ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РІ СЃРїРёСЃРѕРє
 : ADD-ATTACH
 S>ZALLOC attList AddNode
 ;
@@ -72,7 +72,7 @@ smtpOK?
 M: Mail ( a n -- flag ) <# [CHAR] > HOLD vFrom @ ASCIIZ> HOLDS S" MAIL FROM: <" HOLDS 0#> write smtpOK? ;
 M: Rcpt ( a n -- flag ) <# [CHAR] > HOLD vTo @ ASCIIZ> HOLDS S" RCPT TO: <" HOLDS 0#> write smtpOK? ;
 
-M: sData ( adr n -- )   \ Начало передачи
+M: sData ( adr n -- )   \ РќР°С‡Р°Р»Рѕ РїРµСЂРµРґР°С‡Рё
 S" DATA" write \ read
 smtpOK?
 IF
@@ -215,8 +215,8 @@ S" c:\setup.log" ADD-ATTACH
 S" c:\config.sys" ADD-ATTACH
 \ S" c:\mdr.iss" ADD-ATTACH
 \ S" c:\tm_otl.exe" ADD-ATTACH
-S" Проверка без аутен."
-S" Ещё одно письмо"
+S" РџСЂРѕРІРµСЂРєР° Р±РµР· Р°СѓС‚РµРЅ."
+S" Р•С‰С‘ РѕРґРЅРѕ РїРёСЃСЊРјРѕ"
 S" xxxx@nm.ru"
 S" xxxx@inbox.ru"
 S" xxxx"

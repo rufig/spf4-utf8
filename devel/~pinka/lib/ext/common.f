@@ -4,7 +4,7 @@ REQUIRE [UNDEFINED] lib\include\tools.f
 
 [UNDEFINED] NDROP [IF]
 
-\ Взять со стек n, затем убрать n значений со стека.
+\ Р’Р·СЏС‚СЊ СЃРѕ СЃС‚РµРє n, Р·Р°С‚РµРј СѓР±СЂР°С‚СЊ n Р·РЅР°С‡РµРЅРёР№ СЃРѕ СЃС‚РµРєР°.
 
 : NDROP ( x*n n -- )  1+ CELLS SP@ + SP! ;
 

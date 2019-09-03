@@ -1,6 +1,6 @@
 \ 30-11-2007 ~mOleg
 \ Copyright [C] 2007 mOleg mininoleg@yahoo.com
-\ задачка с конкурса на форуме http://fforum.winglion.ru/viewtopic.php?t=1048
+\ Р·Р°РґР°С‡РєР° СЃ РєРѕРЅРєСѓСЂСЃР° РЅР° С„РѕСЂСѓРјРµ http://fforum.winglion.ru/viewtopic.php?t=1048
 
  REQUIRE >CIPHER   devel\~moleg\lib\parsing\number.f
  REQUIRE cmdline>  devel\~mOleg\lib\util\parser.f
@@ -9,19 +9,19 @@
  REQUIRE onward    devel\~moleg\lib\strings\subst.f
  REQUIRE xWord     devel\~moleg\lib\parsing\xWordn.f
 
-      0 VALUE sourceid   \ id файла исходника
+      0 VALUE sourceid   \ id С„Р°Р№Р»Р° РёСЃС…РѕРґРЅРёРєР°
       0 VALUE 'source
       0 VALUE #source
-      0 VALUE collector  \ id файла приемника
+      0 VALUE collector  \ id С„Р°Р№Р»Р° РїСЂРёРµРјРЅРёРєР°
       0 VALUE colbuf
       0 VALUE ^collector
 
-\ помощь по использованию
+\ РїРѕРјРѕС‰СЊ РїРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЋ
 SPELL: /? ( --> )
           s" \tusage: transttf.exe test.ttf [test2.bin]\n\r" TYPE
           BYE ;S
 
-\ разбор ком. строки, открытие файлов
+\ СЂР°Р·Р±РѕСЂ РєРѕРј. СЃС‚СЂРѕРєРё, РѕС‚РєСЂС‹С‚РёРµ С„Р°Р№Р»РѕРІ
 SECRET: NOTFOUND ( asc # --> )
                  <back ParseFileName 2DUP FILE-EXIST
                  IFNOT ." \tInvalid source file: " TYPE CR BYE THEN
@@ -34,26 +34,26 @@ SECRET: NOTFOUND ( asc # --> )
                  TO collector 2DROP
                  [COMPILE] \ ;S
 
-\ читаем весь исходник в память.
+\ С‡РёС‚Р°РµРј РІРµСЃСЊ РёСЃС…РѕРґРЅРёРє РІ РїР°РјСЏС‚СЊ.
 : ReadSource ( --> )
-             sourceid FILE-SIZE 2DROP \ считаем, что размер файла меньше 4 G
+             sourceid FILE-SIZE 2DROP \ СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ СЂР°Р·РјРµСЂ С„Р°Р№Р»Р° РјРµРЅСЊС€Рµ 4 G
              DUP TO #source
-             ALLOCATE THROW TO 'source \ считаем что получилось
+             ALLOCATE THROW TO 'source \ СЃС‡РёС‚Р°РµРј С‡С‚Рѕ РїРѕР»СѓС‡РёР»РѕСЃСЊ
              'source #source sourceid READ-FILE THROW
              #source <> THROW ;
 
-\ выделить место под результирующий массив
+\ РІС‹РґРµР»РёС‚СЊ РјРµСЃС‚Рѕ РїРѕРґ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РёР№ РјР°СЃСЃРёРІ
 : InitReceiver ( --> )
                #source 2/ ALLOCATE THROW DUP TO colbuf TO ^collector
                ;
 
-\ сохранить результат
+\ СЃРѕС…СЂР°РЅРёС‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚
 : SaveBuf ( --> ) colbuf ^collector OVER - collector WRITE-FILE THROW ;
 
 
  s" \000\t\n\r, " Delimiter: delimiters
 
-\ преобразование исходного текста
+\ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РёСЃС…РѕРґРЅРѕРіРѕ С‚РµРєСЃС‚Р°
 : Transform ( --> )
             'source #source SOURCE!
             BEGIN EndOfChunk WHILENOT
@@ -69,7 +69,7 @@ SECRET: NOTFOUND ( asc # --> )
 
             REPEAT ;
 
-\ главное слово программы
+\ РіР»Р°РІРЅРѕРµ СЃР»РѕРІРѕ РїСЂРѕРіСЂР°РјРјС‹
 : transttf ( --> )
            options
            sourceid IFNOT [ ALSO SPELLS ] /? [ PREVIOUS ] BYE THEN
@@ -77,7 +77,7 @@ SECRET: NOTFOUND ( asc # --> )
            sourceid CLOSE-FILE DROP collector CLOSE-FILE DROP
            BYE ;
 
-\ сохранение результата в отдельный файл:
+\ СЃРѕС…СЂР°РЅРµРЅРёРµ СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ РѕС‚РґРµР»СЊРЅС‹Р№ С„Р°Р№Р»:
 
 ' transttf MAINX !
 

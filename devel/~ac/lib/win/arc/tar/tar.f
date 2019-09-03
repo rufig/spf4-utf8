@@ -1,5 +1,5 @@
 \ $Id$ ~ac
-\ Чтение файлов формата TAR, извлечение файлов из TAR-архивов.
+\ Р§С‚РµРЅРёРµ С„Р°Р№Р»РѕРІ С„РѕСЂРјР°С‚Р° TAR, РёР·РІР»РµС‡РµРЅРёРµ С„Р°Р№Р»РѕРІ РёР· TAR-Р°СЂС…РёРІРѕРІ.
 
 REQUIRE UNIXTIME>FILETIME  ~ac/lib/win/date/unixtime.f 
 REQUIRE FILETIME>TIME&DATE ~ac/lib/win/file/filetime.f 
@@ -26,8 +26,8 @@ USER-CREATE TARHDR /TarHeader USER-ALLOT
   BASE @ >R 8 BASE ! SOURCE EVALUATE R> BASE !
 ;
 : ListTarFile ( addr u -- )
-\ Показать список файлов, содержащихся в TAR-архиве в файле с именем addr u.
-( просто чтобы убедиться, что наша читалка справляется с этим конкретно файлом :)
+\ РџРѕРєР°Р·Р°С‚СЊ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ, СЃРѕРґРµСЂР¶Р°С‰РёС…СЃСЏ РІ TAR-Р°СЂС…РёРІРµ РІ С„Р°Р№Р»Рµ СЃ РёРјРµРЅРµРј addr u.
+( РїСЂРѕСЃС‚Рѕ С‡С‚РѕР±С‹ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РЅР°С€Р° С‡РёС‚Р°Р»РєР° СЃРїСЂР°РІР»СЏРµС‚СЃСЏ СЃ СЌС‚РёРј РєРѕРЅРєСЂРµС‚РЅРѕ С„Р°Р№Р»РѕРј :)
 
   R/O OPEN-FILE THROW >R
   BEGIN
@@ -71,8 +71,8 @@ UNIXTIME>FILETIME ( 2DUP UTC>LOCAL  FILETIME>TIME&DATE . . . . . .) FILETIME-DD.
 WINAPI: SetFileTime KERNEL32.DLL
 
 : ExtractTarMemTo { addr u dira diru \ size h ft1 ft2 -- }
-\ Извлечь файлы из области памяти addr u (в TAR-формате)
-\ в каталог dira diru.
+\ РР·РІР»РµС‡СЊ С„Р°Р№Р»С‹ РёР· РѕР±Р»Р°СЃС‚Рё РїР°РјСЏС‚Рё addr u (РІ TAR-С„РѕСЂРјР°С‚Рµ)
+\ РІ РєР°С‚Р°Р»РѕРі dira diru.
   BEGIN
     /TarHeader u <
     IF addr tar.FileName ASCIIZ> NIP ELSE FALSE THEN

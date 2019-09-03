@@ -1,11 +1,11 @@
 \ $Id$
 \
-\ Ðàáîòà ñ RSS äîêóìåíòàìè (ñ èñïîëüçîâàíèåì bac4th)
+\ Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ RSS Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ (Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸ÐµÐ¼ bac4th)
 \
-\ - èòåðàòîð ïî âñåì ïîòîìêàì äàííîãî XML óçëà
-\ - ôèëüòð ïî èìåíè óçëà
-\ - èòåðàòîð ïî âñåì çàïèñÿì RSS
-\ - èòåðàòîð ïî "íîâûì" çàïèñÿì
+\ - Ð¸Ñ‚ÐµÑ€Ð°Ñ‚Ð¾Ñ€ Ð¿Ð¾ Ð²ÑÐµÐ¼ Ð¿Ð¾Ñ‚Ð¾Ð¼ÐºÐ°Ð¼ Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ XML ÑƒÐ·Ð»Ð°
+\ - Ñ„Ð¸Ð»ÑŒÑ‚Ñ€ Ð¿Ð¾ Ð¸Ð¼ÐµÐ½Ð¸ ÑƒÐ·Ð»Ð°
+\ - Ð¸Ñ‚ÐµÑ€Ð°Ñ‚Ð¾Ñ€ Ð¿Ð¾ Ð²ÑÐµÐ¼ Ð·Ð°Ð¿Ð¸ÑÑÐ¼ RSS
+\ - Ð¸Ñ‚ÐµÑ€Ð°Ñ‚Ð¾Ñ€ Ð¿Ð¾ "Ð½Ð¾Ð²Ñ‹Ð¼" Ð·Ð°Ð¿Ð¸ÑÑÐ¼
 
 REQUIRE XML_DOC_ROOT ~ac/lib/lin/xml/xml.f
 REQUIRE NUMBER ~ygrek/lib/parse.f
@@ -14,11 +14,11 @@ REQUIRE parse-num-unixdate ~ygrek/lib/spec/sdate2.f
 REQUIRE PRO ~profit/lib/bac4th.f
 REQUIRE ALLOCATED ~pinka/lib/ext/basics.f
 
-\ òåêñò óçëà
-\ îñâîáîäèòü ïàìÿòü: a FREE THROW
+\ Ñ‚ÐµÐºÑÑ‚ ÑƒÐ·Ð»Ð°
+\ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð´Ð¸Ñ‚ÑŒ Ð¿Ð°Ð¼ÑÑ‚ÑŒ: a FREE THROW
 : xml.text ( node -- a u ) DUP IF text@ ELSE DROP 0 ALLOCATED THEN ;
 
-\ Ãåíåðèðóþòñÿ âûçîâû äëÿ êàæäîãî ïîòîìêà ýëåìåíòà node
+\ Ð“ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÑŽÑ‚ÑÑ Ð²Ñ‹Ð·Ð¾Ð²Ñ‹ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð¿Ð¾Ñ‚Ð¾Ð¼ÐºÐ° ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° node
 : xml.children=> ( node --> node2 \ <-- node2 )
    DUP 0= IF DROP EXIT THEN
    PRO
@@ -30,17 +30,17 @@ REQUIRE ALLOCATED ~pinka/lib/ext/basics.f
      x.next @
     REPEAT DROP ;
 
-\ èìÿ óçëà
+\ Ð¸Ð¼Ñ ÑƒÐ·Ð»Ð°
 : xml.name@ ( node -- a u ) x.name @ ASCIIZ> ;
 
-\ ïðîïóñòèòü òîëüêî ýëåìåíòû ñ èìåíåì a u
+\ Ð¿Ñ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ Ñ Ð¸Ð¼ÐµÐ½ÐµÐ¼ a u
 : //name= ( node a u --> node )
     PRO
      2>R DUP xml.name@ 2R>
      COMPARE 0= ONTRUE CONT ;
 
-\ timestamp RSS-çàïèñè
-\ ïðîâåðÿþòñÿ ýëåìåíòû pubDate è â ñëó÷àå íåóäà÷ì - date
+\ timestamp RSS-Ð·Ð°Ð¿Ð¸ÑÐ¸
+\ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÑŽÑ‚ÑÑ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ pubDate Ð¸ Ð² ÑÐ»ÑƒÑ‡Ð°Ðµ Ð½ÐµÑƒÐ´Ð°Ñ‡Ð¼ - date
 : rss.item.timestamp { node -- timestamp|0 }
    S" pubDate" node nodeText DUP IF OVER SWAP parse-unixdate SWAP FREE THROW EXIT THEN 
    2DROP
@@ -48,12 +48,12 @@ REQUIRE ALLOCATED ~pinka/lib/ext/basics.f
    2DROP
    0 ;
 
-\ Çàãîëîâîê rss-çàïèñè (a FREE THROW)
+\ Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº rss-Ð·Ð°Ð¿Ð¸ÑÐ¸ (a FREE THROW)
 : rss.item.title ( node -- a u ) S" title" ROT node@ xml.text ;
-\ Ññûëêà rss-çàïèñè (a FREE THROW)
+\ Ð¡ÑÑ‹Ð»ÐºÐ° rss-Ð·Ð°Ð¿Ð¸ÑÐ¸ (a FREE THROW)
 : rss.item.link  ( node -- a u ) S" link"  ROT node@ xml.text ;
 
-\ Àâòîð rss-çàïèñè (a FREE THROW)
+\ ÐÐ²Ñ‚Ð¾Ñ€ rss-Ð·Ð°Ð¿Ð¸ÑÐ¸ (a FREE THROW)
 : rss.item.author ( node -- a u )
    >R
    S" creator" R@ nodeText DUP IF RDROP EXIT THEN
@@ -68,42 +68,42 @@ REQUIRE ALLOCATED ~pinka/lib/ext/basics.f
 ALSO libxml2.dll
 ALSO libxml2.so.2
 
-  \ îñâîáîäèòü ïàìÿòü çàíèìàåìóþ xml äîêóìåíòîì
+  \ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð´Ð¸Ñ‚ÑŒ Ð¿Ð°Ð¼ÑÑ‚ÑŒ Ð·Ð°Ð½Ð¸Ð¼Ð°ÐµÐ¼ÑƒÑŽ xml Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð¼
   : XML_FREE_DOC ( doc -- ) 1 xmlFreeDoc DROP ;
 
 PREVIOUS
 PREVIOUS
 
-\ Çàãðóçèòü XML äîêóìåíò èç ñòðîêè ( a u ) è ñãåíåðèðîâàòü âûçîâ
-\ Óäàëèòü äîêóìåíò ïðè îòêàòå
+\ Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ XML Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚ Ð¸Ð· ÑÑ‚Ñ€Ð¾ÐºÐ¸ ( a u ) Ð¸ ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð²Ñ‹Ð·Ð¾Ð²
+\ Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚ Ð¿Ñ€Ð¸ Ð¾Ñ‚ÐºÐ°Ñ‚Ðµ
 : xml.load=> ( a u --> doc \ <-- doc )
   PRO
   BACK XML_FREE_DOC TRACKING
   XML_READ_DOC_MEM RESTB 
   CONT DROP ;
 
-\ Äëÿ RSS äîêóìåíòà a u âûäàòü âñå ýëåìåíòû-çàïèñè
+\ Ð”Ð»Ñ RSS Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð° a u Ð²Ñ‹Ð´Ð°Ñ‚ÑŒ Ð²ÑÐµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹-Ð·Ð°Ð¿Ð¸ÑÐ¸
 : rss.items=> ( a u --> node \ <-- node )
    PRO
    xml.load=> DUP
-   XML_DOC_ROOT ?DUP ONTRUE \ êîðåíü - äîëæåí áûòü rss, íî íå ïðîâåðÿåì...
+   XML_DOC_ROOT ?DUP ONTRUE \ ÐºÐ¾Ñ€ÐµÐ½ÑŒ - Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ rss, Ð½Ð¾ Ð½Ðµ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼...
    ( node )
    DUP
-   S" channel" ROT node@ \ ýëåìåíò channel
+   S" channel" ROT node@ \ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ channel
    START{
      xml.children=> S" item" //name=
-     CONT \ âûäàòü âñå ýëåìåíòû /channel/item
+     CONT \ Ð²Ñ‹Ð´Ð°Ñ‚ÑŒ Ð²ÑÐµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ /channel/item
    }EMERGE 
    ( node )
    START{
      xml.children=> S" item" //name=
-     CONT \ âûäàòü âñå ýëåìåíòû /item (ó ForthWiki òàêîé rss)
+     CONT \ Ð²Ñ‹Ð´Ð°Ñ‚ÑŒ Ð²ÑÐµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ /item (Ñƒ ForthWiki Ñ‚Ð°ÐºÐ¾Ð¹ rss)
    }EMERGE
    ;
 
 USER-VALUE stamp
 
-\ âûäàòü âñå çàïèñè RSS äîêóìåíòà a u êîòîðûå íîâåå ÷åì îòìåòêà âðåìåíè stamp
+\ Ð²Ñ‹Ð´Ð°Ñ‚ÑŒ Ð²ÑÐµ Ð·Ð°Ð¿Ð¸ÑÐ¸ RSS Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð° a u ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð½Ð¾Ð²ÐµÐµ Ñ‡ÐµÐ¼ Ð¾Ñ‚Ð¼ÐµÑ‚ÐºÐ° Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ stamp
 : rss.items-new=> ( doc stamp --> node \ <-- node )
     TO stamp
     PRO
@@ -114,7 +114,7 @@ USER-VALUE stamp
 
 USER-VALUE stamp-newest
 
-\ îïðåäåëèòü îòìåòêó âðåìåíè ñàìîé ñâåæåé çàïèñè RSS äîêóìåíòà a u
+\ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ Ð¾Ñ‚Ð¼ÐµÑ‚ÐºÑƒ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ ÑÐ°Ð¼Ð¾Ð¹ ÑÐ²ÐµÐ¶ÐµÐ¹ Ð·Ð°Ð¿Ð¸ÑÐ¸ RSS Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð° a u
 : rss.items-newest ( a u -- max-timestamp )
     0 TO stamp-newest
     START{
@@ -125,11 +125,11 @@ USER-VALUE stamp-newest
 
 \ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-/TEST \ Ïðèìåðû
+/TEST \ ÐŸÑ€Ð¸Ð¼ÐµÑ€Ñ‹
 
 REQUIRE load-file ~profit/lib/bac4th-str.f
 
-\ äëÿ âûâîäà Win êîäèðîâêè â êîíñîëü
+\ Ð´Ð»Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð° Win ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ¸ Ð² ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ
 [DEFINED] ANSI>OEM [IF]
 ' ANSI>OEM TO ANSI><OEM
 [THEN]

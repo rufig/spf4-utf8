@@ -83,9 +83,9 @@ TRUE WARNING !
 
 
 : _INF_
-  C"  }"  MTOKEN DROP C@ [CHAR] { <> ABORT" ожидается {"
+  C"  }"  MTOKEN DROP C@ [CHAR] { <> ABORT" РѕР¶РёРґР°РµС‚СЃСЏ {"
   [ ALSO _INF_MOD ] POSTPONE ( [ PREVIOUS ]
-  BEGIN   C"  ~!@#$%^&*()+|{}:<>?`-=\[];',./" \ символы разделители
+  BEGIN   C"  ~!@#$%^&*()+|{}:<>?`-=\[];',./" \ СЃРёРјРІРѕР»С‹ СЂР°Р·РґРµР»РёС‚РµР»Рё
           MTOKEN DUP 
           IF  OVER  C@  [CHAR] }  = IF DROP 0 THEN
           THEN  DUP

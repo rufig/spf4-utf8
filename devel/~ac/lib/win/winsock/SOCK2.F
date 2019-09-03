@@ -2,7 +2,7 @@ REQUIRE {            ~ac/lib/locals.f
 REQUIRE CreateSocket ~ac/lib/win/winsock/sockets.f
 
 : read ( addr len socket -- )
-  \ прочесть ровно len байт из сокета socket и записать в addr
+  \ РїСЂРѕС‡РµСЃС‚СЊ СЂРѕРІРЅРѕ len Р±Р°Р№С‚ РёР· СЃРѕРєРµС‚Р° socket Рё Р·Р°РїРёСЃР°С‚СЊ РІ addr
   { _addr _len _sock \ _p }
   0 -> _p
   BEGIN
@@ -10,7 +10,7 @@ REQUIRE CreateSocket ~ac/lib/win/winsock/sockets.f
   WHILE
     _addr _p +  _len _sock
     ReadSocket THROW
-    DUP 0= IF DROP -1002 THROW THEN ( если принято 0, то обрыв соединения )
+    DUP 0= IF DROP -1002 THROW THEN ( РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, С‚Рѕ РѕР±СЂС‹РІ СЃРѕРµРґРёРЅРµРЅРёСЏ )
     DUP _p + -> _p
     _len SWAP - -> _len
   REPEAT

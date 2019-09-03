@@ -1,4 +1,4 @@
-\                                            Максимов М.О. 
+\                                            РњР°РєСЃРёРјРѕРІ Рњ.Рћ. 
 
 0xFF CONSTANT MAX$@   \ maximum length of contents of a counted string
 

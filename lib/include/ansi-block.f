@@ -7,7 +7,7 @@
 
 MODULE: BLK-SUPPORT
 
-CREATE $BUFFERS 2500 ALLOT \ можно выделять память и по другому, главное, чтобы $buffers возвращал ее адресс 
+CREATE $BUFFERS 2500 ALLOT \ РјРѕР¶РЅРѕ РІС‹РґРµР»СЏС‚СЊ РїР°РјСЏС‚СЊ Рё РїРѕ РґСЂСѓРіРѕРјСѓ, РіР»Р°РІРЅРѕРµ, С‡С‚РѕР±С‹ $buffers РІРѕР·РІСЂР°С‰Р°Р» РµРµ Р°РґСЂРµСЃСЃ 
 $BUFFERS 2500 ERASE $BUFFERS DUP 100 + DUP 1100 + ROT 2! 
 
 CREATE $STORAGE 0 , 
@@ -64,12 +64,12 @@ VARIABLE SCR
   CR I 0 <# # # #> TYPE SPACE 64 0 DO DUP C@ BL MAX EMIT CHAR+ LOOP ." \" 
  LOOP DROP 
 ; 
-: LOAD ( i*x u — j*x ) 
-  DUP 0= IF -35 ( invalid block number ) THROW THEN \ нулевого блока не существует 
+: LOAD ( i*x u вЂ” j*x ) 
+  DUP 0= IF -35 ( invalid block number ) THROW THEN \ РЅСѓР»РµРІРѕРіРѕ Р±Р»РѕРєР° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ 
 
-  BLK @ >IN @ SOURCE 4 N>R \ сохраняем старый источник (только то, что перепишем)
-  DUP BLK ! BLOCK 1024 SOURCE! \ устанавливаем новый источник
-  ['] INTERPRET CATCH DUP IF \ дальше идет вывод сообщения об ошибке
+  BLK @ >IN @ SOURCE 4 N>R \ СЃРѕС…СЂР°РЅСЏРµРј СЃС‚Р°СЂС‹Р№ РёСЃС‚РѕС‡РЅРёРє (С‚РѕР»СЊРєРѕ С‚Рѕ, С‡С‚Рѕ РїРµСЂРµРїРёС€РµРј)
+  DUP BLK ! BLOCK 1024 SOURCE! \ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅРѕРІС‹Р№ РёСЃС‚РѕС‡РЅРёРє
+  ['] INTERPRET CATCH DUP IF \ РґР°Р»СЊС€Рµ РёРґРµС‚ РІС‹РІРѕРґ СЃРѕРѕР±С‰РµРЅРёСЏ РѕР± РѕС€РёР±РєРµ
    CR ." BLOCK " BLK @ . ." , LINE " >IN @ 1- 64 / DUP 1+ . ." :" CR 
    SOURCE DROP SWAP 64 * + >IN @ 1- 64 MOD OVER + SWAP 
    ?DO I C@ BL MAX EMIT LOOP SPACE ." ERROR #" DUP . CR

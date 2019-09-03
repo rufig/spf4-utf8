@@ -1,9 +1,9 @@
-\ Создание AutoPusher-а
+\ ╨б╨╛╨╖╨┤╨░╨╜╨╕╨╡ AutoPusher-╨░
 
 S" ~micro/autopush/interface.f" INCLUDED
-\ интерфейс
+\ ╨╕╨╜╤В╨╡╤А╤Д╨╡╨╣╤Б
 S" ~micro/autopush/sheduler.f" INCLUDED
-\ собственная оболочка с интерпретатором конфига
+\ ╤Б╨╛╨▒╤Б╤В╨▓╨╡╨╜╨╜╨░╤П ╨╛╨▒╨╛╨╗╨╛╤З╨║╨░ ╤Б ╨╕╨╜╤В╨╡╤А╨┐╤А╨╡╤В╨░╤В╨╛╤А╨╛╨╝ ╨║╨╛╨╜╤Д╨╕╨│╨░
 S" ~micro/autopush/add.f" INCLUDED
 
 :NONAME

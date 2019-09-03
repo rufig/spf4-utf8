@@ -1,13 +1,13 @@
 \ 29.Jan.2007 Mon 20:18 ruv
 \ $Id$
-( Обертка поверх libxml2, предоставляет подмножество функций DOM,
-  пока все они относятся к типу R/O.
+( РћР±РµСЂС‚РєР° РїРѕРІРµСЂС… libxml2, РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ РїРѕРґРјРЅРѕР¶РµСЃС‚РІРѕ С„СѓРЅРєС†РёР№ DOM,
+  РїРѕРєР° РІСЃРµ РѕРЅРё РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє С‚РёРїСѓ R/O.
 
-  Пример использования:
+  РџСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ:
   `http://www.forth.org.ru/~ruvim/samples/ForthML/forthml.xml DefaultLSParser parseURI VALUE doc
   doc documentElement nodeName TYPE
 
-  Убрана зависимость от libcurl.dll
+  РЈР±СЂР°РЅР° Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ РѕС‚ libcurl.dll
 )
 
 
@@ -42,7 +42,7 @@ lib.libxml2 PUSH-SCOPE
   NIP
   2 xmlNodeSetBase DROP
 ;
-\ для слов, устанавливающих значения атрибутов, будем давать в имя суфикс '!'
+\ РґР»СЏ СЃР»РѕРІ, СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‰РёС… Р·РЅР°С‡РµРЅРёСЏ Р°С‚СЂРёР±СѓС‚РѕРІ, Р±СѓРґРµРј РґР°РІР°С‚СЊ РІ РёРјСЏ СЃСѓС„РёРєСЃ '!'
 
 : documentURI ( doc -- a u )
   DUP ownerDocument  ( node doc )
@@ -67,7 +67,7 @@ DROP-SCOPE \ lib.libxml2
 \ DOM3 LS (Load and Save)
 \ interface LSParser
 
-\ здесь LSParser представлен словарем
+\ Р·РґРµСЃСЊ LSParser РїСЂРµРґСЃС‚Р°РІР»РµРЅ СЃР»РѕРІР°СЂРµРј
 
 lib.libxml2 PUSH-SCOPE
 

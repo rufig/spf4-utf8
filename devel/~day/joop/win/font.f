@@ -28,7 +28,7 @@ CLASS: Font <SUPER Object
 ;
 
 
-( Ïàðàìåòðû CreateFont
+( ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ CreateFont
   int nHeight,             // logical height of font
   int nWidth,              // logical average character width
   int nEscapement,         // angle of escapement

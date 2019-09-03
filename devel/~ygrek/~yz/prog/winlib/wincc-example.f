@@ -1,7 +1,7 @@
 \ WinCC example
 \ need WinLib 1.14.1 +
 
-DIS-OPT \ äëÿ SPF íèæå 4.10 ïîä NT
+DIS-OPT \ Ð´Ð»Ñ SPF Ð½Ð¸Ð¶Ðµ 4.10 Ð¿Ð¾Ð´ NT
 REQUIRE toolbar ~yz/lib/wincc.f
 SET-OPT 
 REQUIRE def-small-icon-il ~ygrek/~yz/lib/icons.f
@@ -38,37 +38,37 @@ WINAPI: FindClose      KERNEL32.DLL
 : fill-listview { \ no fh [ 400 ] fdata }
   def-small-icon-il lv -imagelist!
   def-normal-icon-il lv -imagelist!
-  " Èìÿ ôàéëà" 0 0 lv add-column
-  " Ðàçìåð" 1 1 lv add-column
+  " Ð˜Ð¼Ñ Ñ„Ð°Ð¹Ð»Ð°" 0 0 lv add-column
+  " Ð Ð°Ð·Ð¼ÐµÑ€" 1 1 lv add-column
   fdata " *.f" FindFirstFileA TO fh
   BEGIN
     fdata 11 CELLS + 0 0 lv add-item
-    \ ñëåäóþùèé ôîêóñ ñ âå÷íî íóëåâûì ïîñëåäíèì ïîäúýëåìåíòîì íå ïðîõîäèò, 
-    \ êîãäà âêëþ÷åíà àâòîñîðòèðîâêà: íîìåðà êîíêðåòíîé èêîíêè âñå âðåìÿ ìåíÿþòñÿ
-    \ òîãäà íàäî çàïîìèíàòü óíèêàëüíûé param è ïîëüçîâàòüñÿ lv-param>i
+    \ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹ Ñ„Ð¾ÐºÑƒÑ Ñ Ð²ÐµÑ‡Ð½Ð¾ Ð½ÑƒÐ»ÐµÐ²Ñ‹Ð¼ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ð¼ Ð¿Ð¾Ð´ÑŠÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð¼ Ð½Ðµ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ñ‚, 
+    \ ÐºÐ¾Ð³Ð´Ð° Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð° Ð°Ð²Ñ‚Ð¾ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ°: Ð½Ð¾Ð¼ÐµÑ€Ð° ÐºÐ¾Ð½ÐºÑ€ÐµÑ‚Ð½Ð¾Ð¹ Ð¸ÐºÐ¾Ð½ÐºÐ¸ Ð²ÑÐµ Ð²Ñ€ÐµÐ¼Ñ Ð¼ÐµÐ½ÑÑŽÑ‚ÑÑ
+    \ Ñ‚Ð¾Ð³Ð´Ð° Ð½Ð°Ð´Ð¾ Ð·Ð°Ð¿Ð¾Ð¼Ð¸Ð½Ð°Ñ‚ÑŒ ÑƒÐ½Ð¸ÐºÐ°Ð»ÑŒÐ½Ñ‹Ð¹ param Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒÑÑ lv-param>i
     fdata 8 CELLS@ S>D <# 0 HOLD #S #> DROP 0 1 lv -isubitem!
   fdata fh FindNextFileA 0= UNTIL
   fh FindClose DROP ;
 
 : make-grids 
   
-  \ Âêëàäêà 1 ===========================
+  \ Ð’ÐºÐ»Ð°Ð´ÐºÐ° 1 ===========================
   GRID
-    " Èíäèêàòîð:" label |
+    " Ð˜Ð½Ð´Ð¸ÐºÐ°Ñ‚Ð¾Ñ€:" label |
     ===
-    progress -xspan 60 this +pos! " Ýòî ïðèìåð èíäèêàòîðà" this -tooltip! | 
+    progress -xspan 60 this +pos! " Ð­Ñ‚Ð¾ Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Ð¸Ð½Ð´Ð¸ÐºÐ°Ñ‚Ð¾Ñ€Ð°" this -tooltip! | 
     ===
-    " Ïîëçóíîê: " label |
+    " ÐŸÐ¾Ð»Ð·ÑƒÐ½Ð¾Ðº: " label |
     ===
-    W: tbs_autoticks trackbar -xspan 80 this -pos! " À âîò ïîëçóíîê" this -tooltip! |
+    W: tbs_autoticks trackbar -xspan 80 this -pos! " Ð Ð²Ð¾Ñ‚ Ð¿Ð¾Ð»Ð·ÑƒÐ½Ð¾Ðº" this -tooltip! |
     ===
-    " Ñòðîêà ââîäà ñî ñïèíîì:" label |
+    " Ð¡Ñ‚Ñ€Ð¾ÐºÐ° Ð²Ð²Ð¾Ð´Ð° ÑÐ¾ ÑÐ¿Ð¸Ð½Ð¾Ð¼:" label |
     ===
     edit -xspan " 40" this -text! W: uds_setbuddyint this add-updown 
-    " À ýòî ïðîñòî ñòðîêà" this -tooltip! |
+    " Ð ÑÑ‚Ð¾ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ ÑÑ‚Ñ€Ð¾ÐºÐ°" this -tooltip! |
   GRID; TO tab1
 
-  \ Âêëàäêà 2 ==========================
+  \ Ð’ÐºÐ»Ð°Ð´ÐºÐ° 2 ==========================
   GRID
     0 header DUP TO hd -xspan -yfixed |
     ===
@@ -77,9 +77,9 @@ WINAPI: FindClose      KERNEL32.DLL
   GRID; TO tab2
 
   \ 
-  0 " Èìÿ" none 0 0 hd add-item
-  0 " Ôàìèëèÿ" none 0 1 hd add-item
-  0 " Îò÷åñòâî" none 0 2 hd add-item
+  0 " Ð˜Ð¼Ñ" none 0 0 hd add-item
+  0 " Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ" none 0 1 hd add-item
+  0 " ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾" none 0 2 hd add-item
   90 0 hd -iwidth!
   100 1 hd -iwidth!
   100 2 hd -iwidth!
@@ -92,7 +92,7 @@ WINAPI: FindClose      KERNEL32.DLL
   " winctl-example" 0 0 0 W: tvi_last R@ tv add-item
   " wincc-example" 0 0 0 W: tvi_last R> tv add-item
 
-  \ Âêëàäêà 3 ========================
+  \ Ð’ÐºÐ»Ð°Ð´ÐºÐ° 3 ========================
   GRID
     0 listview DUP TO lv -xspan -yspan |
   GRID; TO tab3
@@ -102,15 +102,15 @@ WINAPI: FindClose      KERNEL32.DLL
   0 tabcontrol 
   this TO t
   def-small-icon-il t -imagelist!
-  tab1 " Ïåðâàÿ" 0 0 this add-item
-  tab2 " Âòîðàÿ" 0 1 this add-item
-  tab3 " Òðåòüÿ" 0 2 this add-item
+  tab1 " ÐŸÐµÑ€Ð²Ð°Ñ" 0 0 this add-item
+  tab2 " Ð’Ñ‚Ð¾Ñ€Ð°Ñ" 0 1 this add-item
+  tab3 " Ð¢Ñ€ÐµÑ‚ÑŒÑ" 0 2 this add-item
   -xspan
   -yspan
   ;
 
 PROC: tbutt
-  " Êíîïêà íà ïàíåëè èíñòðóìåíòîâ!" msg
+  " ÐšÐ½Ð¾Ð¿ÐºÐ° Ð½Ð° Ð¿Ð°Ð½ÐµÐ»Ð¸ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²!" msg
 PROC;
 
 PROC: mode1  lv icon-view       PROC;
@@ -133,7 +133,7 @@ PROC: mode4  lv report-view     PROC;
 : run
   WINDOWS...
   0 dialog-window TO winmain
-  " Îáùèå ýëåìåíòû óïðàâëåíèÿ" winmain -text!
+  " ÐžÐ±Ñ‰Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ" winmain -text!
   0 create-tooltip
   make-toolbar
   make-grids
@@ -153,5 +153,5 @@ PROC: mode4  lv report-view     PROC;
 \ ' ANSI>OEM TO ANSI><OEM
 \ TRUE TO ?GUI
 \ ' run MAINX !
-\ S" wincñ-example.exe" SAVE  
+\ S" wincÑ-example.exe" SAVE  
 run

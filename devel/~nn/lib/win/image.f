@@ -2,7 +2,7 @@ REQUIRE (WIN-SHOW-CONST) ~nn\lib\wincon.f
 WINAPI: LoadImageA    USER32.DLL
 WINAPI: LoadIconA     USER32.DLL
 WINAPI: DestroyIcon   USER32.DLL
-WINAPI: DeleteObject  GDI32.DLL  \ äëÿ bitmap
+WINAPI: DeleteObject  GDI32.DLL  \ Ð´Ð»Ñ bitmap
 WINAPI: DestroyCursor USER32.DLL
 
 BASE @ HEX
@@ -16,8 +16,8 @@ BASE !
 : LoadIcon ( addr u -- h )
   DROP >R LR_LOADFROMFILE 16 16 IMAGE_ICON R> 0 LoadImageA
 ;
-\ Äîáàâèë Àáäðàõèìîâ È.À.
-\ 02.11.04ã.
+\ Ð”Ð¾Ð±Ð°Ð²Ð¸Ð» ÐÐ±Ð´Ñ€Ð°Ñ…Ð¸Ð¼Ð¾Ð² Ð˜.Ð.
+\ 02.11.04Ð³.
 
 : LoadIcon32 ( addr u -- h )
   DROP >R LR_LOADFROMFILE 32 32 IMAGE_ICON R> 0 LoadImageA
@@ -32,12 +32,12 @@ BASE !
 ;
 
 : LoadIconResource16 ( id -- h )
-\ id - èäåíòèôèêàòîð ðåñóðñà GROUP_ICON, à íå ICON
+\ id - Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€ Ñ€ÐµÑÑƒÑ€ÑÐ° GROUP_ICON, Ð° Ð½Ðµ ICON
   >R
   0 16 16 IMAGE_ICON R> IMAGE-BASE LoadImageA
 ;
 : LoadIconResource32 ( id -- h )
-\ id - èäåíòèôèêàòîð ðåñóðñà GROUP_ICON
+\ id - Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€ Ñ€ÐµÑÑƒÑ€ÑÐ° GROUP_ICON
   >R
   0 32 32 IMAGE_ICON R> IMAGE-BASE LoadImageA
 ;

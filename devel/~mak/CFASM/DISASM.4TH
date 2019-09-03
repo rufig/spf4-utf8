@@ -4,7 +4,7 @@
                                                 \      update : 11/15/'96
                                                 \      update : 01/24/'97 v1.5
                                                 \ Last update : 01/27/'97 v1.5
-        \  11\26\'99  Ä§†Ø‚®‡Æ¢†≠Æ ØÆ§ SPFOpt å†™·®¨Æ¢Î¨ å.é.
+        \  11\26\'99  –ê–¥–∞–ø—Ç–∏—Ä–æ–≤–∞–Ω–æ –ø–æ–¥ SPFOpt –ú–∞–∫—Å–∏–º–æ–≤—ã–º –ú.–û.
         \  email:mak@mail.rtc.neva.ru
         \  http://informer.rtc.neva.ru/fpauk.html
 

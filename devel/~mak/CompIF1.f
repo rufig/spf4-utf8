@@ -8,7 +8,7 @@ VECT V_UPPER
     BEGIN
       PARSE-NAME 2DUP V_UPPER DUP
       IF  
-         2DUP 3 UMIN  S" [IF"  \ �� ᫮�� � ��䨪ᮬ "[IF"
+         2DUP 3 UMIN  S" [IF"  \ все слова с префиксом "[IF"
                         COMPARE 0= IF 2DROP 1+                 ELSE 
          2DUP S" [ELSE]" COMPARE 0= IF 2DROP 1- DUP  IF 1+ THEN ELSE 
               S" [THEN]" COMPARE 0= IF       1-                 THEN

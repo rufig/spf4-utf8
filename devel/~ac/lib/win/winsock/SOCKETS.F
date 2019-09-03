@@ -57,7 +57,7 @@ CONSTANT /sockaddr_in
 USER-CREATE sock_addr /sockaddr_in USER-ALLOT
 
 CREATE LINGER 1 W, 3 W,
-\ 6000 W, слишком много, это в секундах, заменил на 30 - 26.06.2001 ~ac
+\ 6000 W, СЃР»РёС€РєРѕРј РјРЅРѕРіРѕ, СЌС‚Рѕ РІ СЃРµРєСѓРЅРґР°С…, Р·Р°РјРµРЅРёР» РЅР° 30 - 26.06.2001 ~ac
 \ 3 W, 16.01.2004 ~ac
 
 CREATE BROADCAST -1 ,
@@ -127,9 +127,9 @@ USER UDP_TIMEOUT
   THEN
 ;
 : ToRead ( socket -- n ior )
-  \ сколько байт можно сейчас прочесть из сокета
-  \ можно использовать перед ReadSocket для того чтобы
-  \ избежать блокирования при n=0
+  \ СЃРєРѕР»СЊРєРѕ Р±Р°Р№С‚ РјРѕР¶РЅРѕ СЃРµР№С‡Р°СЃ РїСЂРѕС‡РµСЃС‚СЊ РёР· СЃРѕРєРµС‚Р°
+  \ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїРµСЂРµРґ ReadSocket РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹
+  \ РёР·Р±РµР¶Р°С‚СЊ Р±Р»РѕРєРёСЂРѕРІР°РЅРёСЏ РїСЂРё n=0
   4 ALLOCATE THROW >R R@ 0!
   R@ [ HEX ] 4004667F [ DECIMAL ] ROT ioctlsocket SOCKET_ERROR =
   IF 0 WSAGetLastError ELSE R@ @ 0 THEN R> FREE THROW
@@ -159,10 +159,10 @@ USER CONNECT-INTERFACE
   IF WSAGetLastError ELSE 0 THEN
 ;
 : CloseSocket ( s -- ior )
-\ linger по умолчанию: graceful close без таймаута, устанавливаем таймаут на закрытие
+\ linger РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: graceful close Р±РµР· С‚Р°Р№РјР°СѓС‚Р°, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚Р°Р№РјР°СѓС‚ РЅР° Р·Р°РєСЂС‹С‚РёРµ
   DUP >R 4 LINGER SO_LINGER SOL_SOCKET R> setsockopt DROP
-  100 PAUSE \ без этой паузы пакеты закрытия иногда доходят раньше хвоста
-            \ данных, что на клиенте выглядит как 10054, никакие варианты linger не спасают
+  100 PAUSE \ Р±РµР· СЌС‚РѕР№ РїР°СѓР·С‹ РїР°РєРµС‚С‹ Р·Р°РєСЂС‹С‚РёСЏ РёРЅРѕРіРґР° РґРѕС…РѕРґСЏС‚ СЂР°РЅСЊС€Рµ С…РІРѕСЃС‚Р°
+            \ РґР°РЅРЅС‹С…, С‡С‚Рѕ РЅР° РєР»РёРµРЅС‚Рµ РІС‹РіР»СЏРґРёС‚ РєР°Рє 10054, РЅРёРєР°РєРёРµ РІР°СЂРёР°РЅС‚С‹ linger РЅРµ СЃРїР°СЃР°СЋС‚
   2 ( SD_BOTH) OVER shutdown DROP
   100 PAUSE
   closesocket SOCKET_ERROR =
@@ -189,15 +189,15 @@ USER CONNECT-INTERFACE
   >R SWAP 2>R 0 2R> R> recv DUP SOCKET_ERROR =
   IF WSAGetLastError ELSE 0 THEN
   OVER 0= IF DROP -1002 THEN
-  ( если принято 0, то обрыв соединения )
+  ( РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, С‚Рѕ РѕР±СЂС‹РІ СЃРѕРµРґРёРЅРµРЅРёСЏ )
 ;
 \ : GetHostName ( IP -- addr u ior )
 \   PAD ! PF_INET 4 PAD gethostbyaddr
 \   ?DUP IF @ ASCIIZ> 0 ELSE HERE 0 WSAGetLastError THEN
 \ ;
 
-\ бывают случаи, когда не возвращают ошибку, но и имя не дают
-\ на других линках тот же IP дает ошибку 11004
+\ Р±С‹РІР°СЋС‚ СЃР»СѓС‡Р°Рё, РєРѕРіРґР° РЅРµ РІРѕР·РІСЂР°С‰Р°СЋС‚ РѕС€РёР±РєСѓ, РЅРѕ Рё РёРјСЏ РЅРµ РґР°СЋС‚
+\ РЅР° РґСЂСѓРіРёС… Р»РёРЅРєР°С… С‚РѕС‚ Р¶Рµ IP РґР°РµС‚ РѕС€РёР±РєСѓ 11004
 
 : GetHostName ( IP -- addr u ior )
   PAD ! PF_INET 4 PAD gethostbyaddr
@@ -210,7 +210,7 @@ USER CONNECT-INTERFACE
 ;
 : GetHostIP ( addr u -- IP ior )
   v>IDN
-  DUP 0= IF NIP 11004 EXIT THEN \ иначе пустой хост S" " дает 0 0
+  DUP 0= IF NIP 11004 EXIT THEN \ РёРЅР°С‡Рµ РїСѓСЃС‚РѕР№ С…РѕСЃС‚ S" " РґР°РµС‚ 0 0
   OVER inet_addr DUP -1 <> IF NIP NIP 0 EXIT ELSE DROP THEN
   DROP gethostbyname DUP IF 3 CELLS + @ @ @ 0
                          ELSE WSAGetLastError THEN
@@ -303,9 +303,9 @@ CREATE SINLEN /sockaddr_in ,
 USER _GetHostIPs
 
 : GetHostIPs ( addr u -- IPab IPae ior )
-\ Получить список IP multihomed-хоста
-\ IPab IPae возвращаются в формате для последующего цикла DO, см. ConnectHost
-  DUP 0= IF 11004 EXIT THEN \ иначе пустой хост S" " дает ior=0
+\ РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє IP multihomed-С…РѕСЃС‚Р°
+\ IPab IPae РІРѕР·РІСЂР°С‰Р°СЋС‚СЃСЏ РІ С„РѕСЂРјР°С‚Рµ РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ С†РёРєР»Р° DO, СЃРј. ConnectHost
+  DUP 0= IF 11004 EXIT THEN \ РёРЅР°С‡Рµ РїСѓСЃС‚РѕР№ С…РѕСЃС‚ S" " РґР°РµС‚ ior=0
   OVER inet_addr DUP -1 <> IF NIP NIP _GetHostIPs ! _GetHostIPs DUP CELL+ SWAP 
                               0 EXIT
                            ELSE DROP THEN
@@ -316,14 +316,14 @@ USER _GetHostIPs
 
 USER uLastCH_IP
 
-\ todo: в Vista и Win2008 можно переключиться на WSAConnectByName
+\ todo: РІ Vista Рё Win2008 РјРѕР¶РЅРѕ РїРµСЂРµРєР»СЋС‡РёС‚СЊСЃСЏ РЅР° WSAConnectByName
 
 : ConnectHost ( addr u port -- sock ior )
-\ Подключиться к хосту addr u на порт port
-\ с автоматическим перебором всех IP хоста.
-\ Если коннект не удался, то ior - код ошибки (на последнем хосте из списка)
-\ и socks=0.
-\ Если удался, то sock - новый соединенный сокет, ior=0.
+\ РџРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє С…РѕСЃС‚Сѓ addr u РЅР° РїРѕСЂС‚ port
+\ СЃ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёРј РїРµСЂРµР±РѕСЂРѕРј РІСЃРµС… IP С…РѕСЃС‚Р°.
+\ Р•СЃР»Рё РєРѕРЅРЅРµРєС‚ РЅРµ СѓРґР°Р»СЃСЏ, С‚Рѕ ior - РєРѕРґ РѕС€РёР±РєРё (РЅР° РїРѕСЃР»РµРґРЅРµРј С…РѕСЃС‚Рµ РёР· СЃРїРёСЃРєР°)
+\ Рё socks=0.
+\ Р•СЃР»Рё СѓРґР°Р»СЃСЏ, С‚Рѕ sock - РЅРѕРІС‹Р№ СЃРѕРµРґРёРЅРµРЅРЅС‹Р№ СЃРѕРєРµС‚, ior=0.
   uLastCH_IP 0!
   >R
   GetHostIPs ?DUP IF ROT DROP RDROP EXIT THEN
@@ -345,14 +345,14 @@ USER uLastCH_IP
 : READ-SOCK-EXACT ( a u socket -- ior )
   >R BEGIN DUP WHILE
     2DUP R@ ReadSocket ?DUP IF NIP NIP NIP RDROP EXIT THEN ( a1 u1 u2 )
-    ( в случае, если принято 0, ReadSocket возвращает ior -1002,
-      в отличии от READ-FILE, который возвращет ior 0 и длину 0 при
-      достижении конца файла или ior 109 при достижении конца pipe
+    ( РІ СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, ReadSocket РІРѕР·РІСЂР°С‰Р°РµС‚ ior -1002,
+      РІ РѕС‚Р»РёС‡РёРё РѕС‚ READ-FILE, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰РµС‚ ior 0 Рё РґР»РёРЅСѓ 0 РїСЂРё
+      РґРѕСЃС‚РёР¶РµРЅРёРё РєРѕРЅС†Р° С„Р°Р№Р»Р° РёР»Рё ior 109 РїСЂРё РґРѕСЃС‚РёР¶РµРЅРёРё РєРѕРЅС†Р° pipe
     )
     TUCK - -ROT + SWAP
   REPEAT ( a1 0 )
   NIP RDROP
 ;
-: ReadSocketExact ( a u socket -- ior ) \ см. также "read" в sock2.f
+: ReadSocketExact ( a u socket -- ior ) \ СЃРј. С‚Р°РєР¶Рµ "read" РІ sock2.f
   READ-SOCK-EXACT
 ;

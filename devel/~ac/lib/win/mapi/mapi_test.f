@@ -4,7 +4,7 @@ REQUIRE MapiListMessage  ~ac/lib/win/mapi/list.f
 HEX
 \ S" MGW" S" password" MapiLogon THROW  MapiGetStores
 \ S" Outlook" S" password" MapiLogon THROW  MapiGetStores
-\ профиль по умолчанию:
+\ РїСЂРѕС„РёР»СЊ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ:
 0 0 0 0 MapiLogon THROW  MapiGetStores
 
 \ CR MapiStoresRS DumpRowSet
@@ -13,36 +13,36 @@ HEX
 
 MapiOpenDefaultStore
 \ S" MAPILab Group Folders" MapiOpenProvStore
-\ S" RAINBOW:Личные папки" MapiOpenStore
+\ S" RAINBOW:Р›РёС‡РЅС‹Рµ РїР°РїРєРё" MapiOpenStore
 \ S" Personal Folders" MapiOpenStore
-\ S" Личные папки" MapiOpenStore
+\ S" Р›РёС‡РЅС‹Рµ РїР°РїРєРё" MapiOpenStore
 
 MapiGetRootFolderId MapiOpenFolder DROP
-DUP ( folder ) PR_DISPLAY_NAME  MapiProp@ ANSI>OEM TYPE CR \ дает "Корень личных папок"
+DUP ( folder ) PR_DISPLAY_NAME  MapiProp@ ANSI>OEM TYPE CR \ РґР°РµС‚ "РљРѕСЂРµРЅСЊ Р»РёС‡РЅС‹С… РїР°РїРѕРє"
     ( folder ) ' MapiListFolder MapiEnumSubfolders
 
 \ MapiOpenInbox DUP uMapiFolder ! ' MapiListMessage MapiEnumContent
 MapiOpenInbox uMapiFolder !
 
-\ S" Входящие/test" MapiOpenFolderPath DUP uMapiFolder ! ' MapiListMessage MapiEnumContent
+\ S" Р’С…РѕРґСЏС‰РёРµ/test" MapiOpenFolderPath DUP uMapiFolder ! ' MapiListMessage MapiEnumContent
 
 \ S" IPF.Task" MapiGetIPF MapiOpenFolder DROP 
-\ DUP ( folder ) PR_DISPLAY_NAME  MapiProp@ ANSI>OEM TYPE CR \ дает "Корень личных папок"
+\ DUP ( folder ) PR_DISPLAY_NAME  MapiProp@ ANSI>OEM TYPE CR \ РґР°РµС‚ "РљРѕСЂРµРЅСЊ Р»РёС‡РЅС‹С… РїР°РїРѕРє"
 \     ( folder ) DUP uMapiFolder ! ' MapiListMessage MapiEnumContent
 
 S" IPM.Task" MapiNewMessage
 
 S" test.eml" MapiImportMime
 
-\ перезапишем дату импортированного письма текущей датой
+\ РїРµСЂРµР·Р°РїРёС€РµРј РґР°С‚Сѓ РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРіРѕ РїРёСЃСЊРјР° С‚РµРєСѓС‰РµР№ РґР°С‚РѕР№
 MapiMessage PR_CREATION_TIME MapiProp@ ( x1 x2 )
-MapiMessage PR_MESSAGE_DELIVERY_TIME MapiProp! \ эта дата показывается в "Получено"
+MapiMessage PR_MESSAGE_DELIVERY_TIME MapiProp! \ СЌС‚Р° РґР°С‚Р° РїРѕРєР°Р·С‹РІР°РµС‚СЃСЏ РІ "РџРѕР»СѓС‡РµРЅРѕ"
 S" IPM.Task" MapiMessage PR_MESSAGE_CLASS MapiProp!
 
 
 S" Test subject 99" MapiSubject!
 S" tester@forth.org.ru" S" AYC88" MapiSender!
-\ S" Это тест 10" MapiBody!
+\ S" Р­С‚Рѕ С‚РµСЃС‚ 10" MapiBody!
 \ " X-MapiLib: LibMapi/$Id$/eserv.ru
 \ " STR@ MapiHeaders!
 

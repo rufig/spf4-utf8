@@ -1,4 +1,4 @@
-DIS-OPT \ для SPF ниже 4.10 под NT
+DIS-OPT \ РґР»СЏ SPF РЅРёР¶Рµ 4.10 РїРѕРґ NT
 REQUIRE toolbar ~yz/lib/wincc.f
 SET-OPT 
 
@@ -23,22 +23,22 @@ WINAPI: FindClose      KERNEL32.DLL
 : fill-listview { \ no fh [ 400 ] fdata }
   32 create-il DUP 1 SWAP add-icon W: lvsil_normal lv -imagelist!
   16 create-il DUP 1 SWAP add-icon W: lvsil_small  lv -imagelist!
-  " Имя файла" 0 0 lv add-column
-  " Размер" 1 1 lv add-column
+  " РРјСЏ С„Р°Р№Р»Р°" 0 0 lv add-column
+  " Р Р°Р·РјРµСЂ" 1 1 lv add-column
   fdata " *.f" FindFirstFileA TO fh
   BEGIN
     fdata 11 CELLS + 0 0 lv add-item
-    \ следующий фокус с вечно нулевым последним подъэлементом не проходит, 
-    \ когда включена автосортировка: номера конкретной иконки все время меняются
-    \ тогда надо запоминать уникальный param и пользоваться lv-param>i
+    \ СЃР»РµРґСѓСЋС‰РёР№ С„РѕРєСѓСЃ СЃ РІРµС‡РЅРѕ РЅСѓР»РµРІС‹Рј РїРѕСЃР»РµРґРЅРёРј РїРѕРґСЉСЌР»РµРјРµРЅС‚РѕРј РЅРµ РїСЂРѕС…РѕРґРёС‚, 
+    \ РєРѕРіРґР° РІРєР»СЋС‡РµРЅР° Р°РІС‚РѕСЃРѕСЂС‚РёСЂРѕРІРєР°: РЅРѕРјРµСЂР° РєРѕРЅРєСЂРµС‚РЅРѕР№ РёРєРѕРЅРєРё РІСЃРµ РІСЂРµРјСЏ РјРµРЅСЏСЋС‚СЃСЏ
+    \ С‚РѕРіРґР° РЅР°РґРѕ Р·Р°РїРѕРјРёРЅР°С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹Р№ param Рё РїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ lv-param>i
     fdata 8 CELLS@ S>D <# 0 HOLD #S #> DROP 0 1 lv -isubitem!
   fdata fh FindNextFileA 0= UNTIL
   fh FindClose DROP ;
 
 : fill-header,treeview
-  0 " Имя" none 0 0 hd add-item
-  0 " Фамилия" none 0 1 hd add-item
-  0 " Отчество" none 0 2 hd add-item
+  0 " РРјСЏ" none 0 0 hd add-item
+  0 " Р¤Р°РјРёР»РёСЏ" none 0 1 hd add-item
+  0 " РћС‚С‡РµСЃС‚РІРѕ" none 0 2 hd add-item
   90 0 hd -iwidth!
   100 1 hd -iwidth!
   100 2 hd -iwidth!
@@ -55,23 +55,23 @@ WINAPI: FindClose      KERNEL32.DLL
 : make-tabs ( -- tab)
   0 tabcontrol
   16 create-il DUP 1 SWAP add-icon 0 this -imagelist!
-  \ Вкладка 1 ===========================
+  \ Р’РєР»Р°РґРєР° 1 ===========================
   GRID
-    " Индикатор:" label |
+    " РРЅРґРёРєР°С‚РѕСЂ:" label |
     ===
-    progress -xspan 60 this +pos! " Это пример индикатора" this -tooltip! | 
+    progress -xspan 60 this +pos! " Р­С‚Рѕ РїСЂРёРјРµСЂ РёРЅРґРёРєР°С‚РѕСЂР°" this -tooltip! | 
     ===
-    " Ползунок: " label |
+    " РџРѕР»Р·СѓРЅРѕРє: " label |
     ===
-    W: tbs_autoticks trackbar -xspan 80 this -pos! " А вот ползунок" this -tooltip! |
+    W: tbs_autoticks trackbar -xspan 80 this -pos! " Рђ РІРѕС‚ РїРѕР»Р·СѓРЅРѕРє" this -tooltip! |
     ===
-    " Строка ввода со спином:" label |
+    " РЎС‚СЂРѕРєР° РІРІРѕРґР° СЃРѕ СЃРїРёРЅРѕРј:" label |
     ===
     edit -xspan " 40" this -text! W: uds_setbuddyint this add-updown 
-    " А это просто строка" this -tooltip! |
-  GRID; " Первая" 0 0 this add-item
+    " Рђ СЌС‚Рѕ РїСЂРѕСЃС‚Рѕ СЃС‚СЂРѕРєР°" this -tooltip! |
+  GRID; " РџРµСЂРІР°СЏ" 0 0 this add-item
 
-  \ Вкладка 2 ==========================
+  \ Р’РєР»Р°РґРєР° 2 ==========================
   GRID
     0 header DUP TO hd -xspan -yfixed |
     ===
@@ -79,16 +79,16 @@ WINAPI: FindClose      KERNEL32.DLL
     200 400 this ctlresize | 
     0 calendar -xfixed |
     fill-header,treeview
-  GRID; " Вторая" 0 1 this add-item
+  GRID; " Р’С‚РѕСЂР°СЏ" 0 1 this add-item
 
-  \ Вкладка 3 ========================
+  \ Р’РєР»Р°РґРєР° 3 ========================
   GRID
     0 listview DUP TO lv -xspan -yspan fill-listview |
-  GRID; " Третья" 0 2 this add-item
+  GRID; " РўСЂРµС‚СЊСЏ" 0 2 this add-item
 ;
   
 PROC: tbutt
-  " Кнопка на панели инструментов!" msg
+  " РљРЅРѕРїРєР° РЅР° РїР°РЅРµР»Рё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ!" msg
 PROC;
 
 PROC: mode1  lv icon-view       PROC;
@@ -111,7 +111,7 @@ PROC: mode4  lv report-view     PROC;
 : run
   WINDOWS...
   0 dialog-window TO winmain
-  " Общие элементы управления" winmain -text!
+  " РћР±С‰РёРµ СЌР»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ" winmain -text!
   0 create-tooltip
   make-toolbar
   GRID

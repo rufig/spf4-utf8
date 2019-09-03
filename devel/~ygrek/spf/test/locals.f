@@ -3,7 +3,7 @@
 REQUIRE TESTCASES ~ygrek/lib/testcase.f
 REQUIRE { lib/ext/locals.f
 
-\ Этот тест проходят как "старые" локалсы, так и "продвинутые"
+\ Р­С‚РѕС‚ С‚РµСЃС‚ РїСЂРѕС…РѕРґСЏС‚ РєР°Рє "СЃС‚Р°СЂС‹Рµ" Р»РѕРєР°Р»СЃС‹, С‚Р°Рє Рё "РїСЂРѕРґРІРёРЅСѓС‚С‹Рµ"
 TESTCASES locals.f
 
 : TEST1 { a b c d \ e f -- } a b c  b c + -> e   e  f ^ a @ ;
@@ -41,7 +41,7 @@ TESTCASES locals.f
 
 END-TESTCASES
 
-\ эти тесты проходят только "продвинутые" локалсы
+\ СЌС‚Рё С‚РµСЃС‚С‹ РїСЂРѕС…РѕРґСЏС‚ С‚РѕР»СЊРєРѕ "РїСЂРѕРґРІРёРЅСѓС‚С‹Рµ" Р»РѕРєР°Р»СЃС‹
 TESTCASES More strict locals
 
 : TEST1b { a -b |c \d \ --e f -- } a -b |c  -b |c + -> --e   --e  f ^ a @ ;

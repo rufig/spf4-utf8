@@ -1,13 +1,13 @@
 \ $Id$
 \
-\ Для простых сцен достаточно использовать(наследовать) класс CGLObject
-\ который представляет собой обьект отрисовываемый на GL-полотне
-\ Свойства : угол, сдвиг
-\ Действия : вращать, отрисовать
+\ Р”Р»СЏ РїСЂРѕСЃС‚С‹С… СЃС†РµРЅ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ(РЅР°СЃР»РµРґРѕРІР°С‚СЊ) РєР»Р°СЃСЃ CGLObject
+\ РєРѕС‚РѕСЂС‹Р№ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ РѕР±СЊРµРєС‚ РѕС‚СЂРёСЃРѕРІС‹РІР°РµРјС‹Р№ РЅР° GL-РїРѕР»РѕС‚РЅРµ
+\ РЎРІРѕР№СЃС‚РІР° : СѓРіРѕР», СЃРґРІРёРі
+\ Р”РµР№СЃС‚РІРёСЏ : РІСЂР°С‰Р°С‚СЊ, РѕС‚СЂРёСЃРѕРІР°С‚СЊ
 \
 \ CGLCube CGLPyramid
-\ CGLObjectList - список обьектов как один обьект
-\ CGLSimpleModel - моделька из треугольников
+\ CGLObjectList - СЃРїРёСЃРѕРє РѕР±СЊРµРєС‚РѕРІ РєР°Рє РѕРґРёРЅ РѕР±СЊРµРєС‚
+\ CGLSimpleModel - РјРѕРґРµР»СЊРєР° РёР· С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ
 
 REQUIRE WL-MODULES ~day/lib/includemodule.f
 
@@ -34,7 +34,7 @@ NEEDS ~ygrek/lib/wfl/opengl/Model.f
 
 \ -----------------------------------------------------------------------
 
-\ все обьекты которые рисуются в GL-окне должны предоставлять такой интерфейс
+\ РІСЃРµ РѕР±СЊРµРєС‚С‹ РєРѕС‚РѕСЂС‹Рµ СЂРёСЃСѓСЋС‚СЃСЏ РІ GL-РѕРєРЅРµ РґРѕР»Р¶РЅС‹ РїСЂРµРґРѕСЃС‚Р°РІР»СЏС‚СЊ С‚Р°РєРѕР№ РёРЅС‚РµСЂС„РµР№СЃ
 CLASS (CGLObject)
 
 : :draw ;
@@ -43,14 +43,14 @@ CLASS (CGLObject)
 
 \ -----------------------------------------------------------------------
 
-\ простой обьект
+\ РїСЂРѕСЃС‚РѕР№ РѕР±СЊРµРєС‚
 \ 
 (CGLObject) SUBCLASS CGLObject
 
-     CGLPoint OBJ angle \ поворот
-     CGLPoint OBJ angle.speed \ скорость вращения
-     CGLPoint OBJ shift \ сдвиг
-     CGLPoint OBJ scale \ сжатие-растяжение
+     CGLPoint OBJ angle \ РїРѕРІРѕСЂРѕС‚
+     CGLPoint OBJ angle.speed \ СЃРєРѕСЂРѕСЃС‚СЊ РІСЂР°С‰РµРЅРёСЏ
+     CGLPoint OBJ shift \ СЃРґРІРёРі
+     CGLPoint OBJ scale \ СЃР¶Р°С‚РёРµ-СЂР°СЃС‚СЏР¶РµРЅРёРµ
      CELL PROPERTY <visible
 
 : :print
@@ -104,14 +104,14 @@ dispose: ;
 
 \ -----------------------------------------------------------------------
 
-\ класс - список обьектов как один обьект для отрисовки
+\ РєР»Р°СЃСЃ - СЃРїРёСЃРѕРє РѕР±СЊРµРєС‚РѕРІ РєР°Рє РѕРґРёРЅ РѕР±СЊРµРєС‚ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё
 CGLObject SUBCLASS CGLObjectList
 
 VAR _list
 
 init: list::nil _list ! ;
 dispose:
-    _list @ LAMBDA{ => dispose } list::free-with \ удалим все обьекты в списке и сам список
+    _list @ LAMBDA{ => dispose } list::free-with \ СѓРґР°Р»РёРј РІСЃРµ РѕР±СЊРµРєС‚С‹ РІ СЃРїРёСЃРєРµ Рё СЃР°Рј СЃРїРёСЃРѕРє
 ;
 
 : :add ( obj -- ) _list @ list::cons _list ! ;
@@ -146,7 +146,7 @@ dispose:
 
 \ -----------------------------------------------------------------------
 
-\ Пирамида
+\ РџРёСЂР°РјРёРґР°
 CGLObject SUBCLASS CGLPyramid
 
    CGLPoint OBJ top
@@ -189,7 +189,7 @@ init:
 
 \ -----------------------------------------------------------------------
 
-\ Кубик разноцветный
+\ РљСѓР±РёРє СЂР°Р·РЅРѕС†РІРµС‚РЅС‹Р№
 CGLObject SUBCLASS CGLCube
 
    CGLPoint OBJ a1  CGLPoint OBJ b1
@@ -312,9 +312,9 @@ dispose: timer :ms@ CR ." Time in " SUPER name TYPE ."  = " . ;
 : Vertex3f ( F: x y z -- ) float float float glVertex3f DROP ;
 
 CLASS CPlot2D
-  CELL VAR data  \ адрес памяти с парами точек x,y
-  CELL VAR ndata \ кол-во точек
-  CELL VAR cur   \ текущий адрес в таблице точек
+  CELL VAR data  \ Р°РґСЂРµСЃ РїР°РјСЏС‚Рё СЃ РїР°СЂР°РјРё С‚РѕС‡РµРє x,y
+  CELL VAR ndata \ РєРѕР»-РІРѕ С‚РѕС‡РµРє
+  CELL VAR cur   \ С‚РµРєСѓС‰РёР№ Р°РґСЂРµСЃ РІ С‚Р°Р±Р»РёС†Рµ С‚РѕС‡РµРє
  CGLPoint OBJ min
  CGLPoint OBJ max
  CGLPoint OBJ color
@@ -336,13 +336,13 @@ CLASS CPlot2D
    own :free
 ;
 
-\ вычислить границы графика
+\ РІС‹С‡РёСЃР»РёС‚СЊ РіСЂР°РЅРёС†С‹ РіСЂР°С„РёРєР°
 : :findScale
-  \ Начальные значения
+  \ РќР°С‡Р°Р»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
   data @
    (x,y) FDUP max :y! min :y!
          FDUP max :x! min :x!
-  \ ищем границы графика
+  \ РёС‰РµРј РіСЂР°РЅРёС†С‹ РіСЂР°С„РёРєР°
   ndata @ 1- 0 DO
    (x,y) FDUP
      max :y FSWAP F< IF FDUP max :y! THEN
@@ -362,7 +362,7 @@ CLASS CPlot2D
    IF min :y 1e-5 F+ max :y!   min :y 1e-5 F- max :y!  THEN
 
  data @
-  ndata @ 0 DO   \ масштабируем
+  ndata @ 0 DO   \ РјР°СЃС€С‚Р°Р±РёСЂСѓРµРј
    DUP (x,y) DROP
    min :y F-
    max :y min :y F- F/
@@ -374,7 +374,7 @@ CLASS CPlot2D
   LOOP
 ;
 
-\ вручную установить масштаб
+\ РІСЂСѓС‡РЅСѓСЋ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РјР°СЃС€С‚Р°Р±
 : :setScale ( min.x max.x min.y max.y -- )
   max :y! min :y! max :x! min :x!
 ;
@@ -405,14 +405,14 @@ pvar: <min
 pvar: <max
 CLASS: GLPlot2D <SUPER GLObject
      Point OBJ max
-     Point OBJ min    \ размеры окна
-      List OBJ graphs \ графики
+     Point OBJ min    \ СЂР°Р·РјРµСЂС‹ РѕРєРЅР°
+      List OBJ graphs \ РіСЂР°С„РёРєРё
   Iterator OBJ iter
 
 : :init
   own :init
 
-  -0.7e -0.5e -1.5e shift :set \ для полноэкранного GL окна
+  -0.7e -0.5e -1.5e shift :set \ РґР»СЏ РїРѕР»РЅРѕСЌРєСЂР°РЅРЅРѕРіРѕ GL РѕРєРЅР°
   0e 0e 0e angle.speed :set
 
   graphs iter :set
@@ -422,7 +422,7 @@ CLASS: GLPlot2D <SUPER GLObject
 : :draw
   own :draw
 
-  \ Координатные орты
+  \ РљРѕРѕСЂРґРёРЅР°С‚РЅС‹Рµ РѕСЂС‚С‹
   GL_LINE_STRIP glBegin DROP \ Drawing Using Lines
     Green SetColor
     -0.05e -0.05e 0e Vertex3f

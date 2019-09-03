@@ -1,22 +1,22 @@
-\ Îáåðòêè äëÿ LibIDN.
-\ Êîíâåðòàöèÿ ðóññêèõ äîìåííûõ èìåí, îñòàëüíûå êîäèðîâêè çäåñü íå ïîääåðæèâàþòñÿ.
+\ ÐžÐ±ÐµÑ€Ñ‚ÐºÐ¸ Ð´Ð»Ñ LibIDN.
+\ ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ñ Ñ€ÑƒÑÑÐºÐ¸Ñ… Ð´Ð¾Ð¼ÐµÐ½Ð½Ñ‹Ñ… Ð¸Ð¼ÐµÐ½, Ð¾ÑÑ‚Ð°Ð»ÑŒÐ½Ñ‹Ðµ ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ¸ Ð·Ð´ÐµÑÑŒ Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÑŽÑ‚ÑÑ.
 \ $Id$
-\ òðåáóåòñÿ libidn-11.dll - http://www.gnu.org/software/libidn/
+\ Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ libidn-11.dll - http://www.gnu.org/software/libidn/
 
-\ Áóôåð, âîçâðàùàåìûé >PUNYCODE, PUNYCODE>, >IDN è IDN> íàäî îñâîáîæäàòü ïî FREE, êàê äëÿ âñåõ ICONV-ôóíêöèé.
+\ Ð‘ÑƒÑ„ÐµÑ€, Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼Ñ‹Ð¹ >PUNYCODE, PUNYCODE>, >IDN Ð¸ IDN> Ð½Ð°Ð´Ð¾ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°Ñ‚ÑŒ Ð¿Ð¾ FREE, ÐºÐ°Ðº Ð´Ð»Ñ Ð²ÑÐµÑ… ICONV-Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¹.
 
 REQUIRE SO            ~ac/lib/ns/so-xt.f
 REQUIRE >UCS4         ~ac/lib/lin/iconv/iconv.f 
 
 ALSO SO NEW: libidn-11.dll
-ALSO SO NEW: libc.so.6 \ íå âî âñåõ
+ALSO SO NEW: libc.so.6 \ Ð½Ðµ Ð²Ð¾ Ð²ÑÐµÑ…
 
-\ 0 stringprep_locale_charset ASCIIZ> TYPE \ âîçâðàùàåò "ASCII", ò.å. íå ïîíèìàåò Windows
+\ 0 stringprep_locale_charset ASCIIZ> TYPE \ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ "ASCII", Ñ‚.Ðµ. Ð½Ðµ Ð¿Ð¾Ð½Ð¸Ð¼Ð°ÐµÑ‚ Windows
 \ S" test" DROP 1 stringprep_locale_to_utf8 ASCIIZ> TYPE
-\ âîçâðàùàåò libidn: warning: libiconv not installed, cannot convert data to UTF-8,
-\ ïðè÷åì ýòî çàøèòî ïðè êîìïèëÿöèè (ñì. â èñõîäíèêàõ "#if HAVE_ICONV"), ò.å. íå èçìåíèòü
-\ Èòîãî: äëÿ êîíâåðòàöèè ñòðîê ìåæäó ÿçûêîâûìè êîäèðîâêàìè ïîä Windows libidn-11 áåñïîëåçåí,
-\ íî îíî íàì è íå íàäî, ò.ê. wrapper äëÿ iconv äàâíî åñòü :)
+\ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ libidn: warning: libiconv not installed, cannot convert data to UTF-8,
+\ Ð¿Ñ€Ð¸Ñ‡ÐµÐ¼ ÑÑ‚Ð¾ Ð·Ð°ÑˆÐ¸Ñ‚Ð¾ Ð¿Ñ€Ð¸ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ð¸ (ÑÐ¼. Ð² Ð¸ÑÑ…Ð¾Ð´Ð½Ð¸ÐºÐ°Ñ… "#if HAVE_ICONV"), Ñ‚.Ðµ. Ð½Ðµ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ
+\ Ð˜Ñ‚Ð¾Ð³Ð¾: Ð´Ð»Ñ ÐºÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ð¸ ÑÑ‚Ñ€Ð¾Ðº Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ·Ñ‹ÐºÐ¾Ð²Ñ‹Ð¼Ð¸ ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ°Ð¼Ð¸ Ð¿Ð¾Ð´ Windows libidn-11 Ð±ÐµÑÐ¿Ð¾Ð»ÐµÐ·ÐµÐ½,
+\ Ð½Ð¾ Ð¾Ð½Ð¾ Ð½Ð°Ð¼ Ð¸ Ð½Ðµ Ð½Ð°Ð´Ð¾, Ñ‚.Ðº. wrapper Ð´Ð»Ñ iconv Ð´Ð°Ð²Ð½Ð¾ ÐµÑÑ‚ÑŒ :)
 
 : IDNA_ACE_PREFIX S" xn--" ;
 
@@ -54,8 +54,8 @@ ALSO SO NEW: libc.so.6 \ íå âî âñåõ
 PREVIOUS PREVIOUS
 
 \EOF
-S" ïî÷òà" >PUNYCODE TYPE CR
+S" Ð¿Ð¾Ñ‡Ñ‚Ð°" >PUNYCODE TYPE CR
 S" 80a1acny" PUNYCODE> ANSI>OEM TYPE CR
 
-S" ïî÷òà.eserv.ru" >IDN TYPE CR
+S" Ð¿Ð¾Ñ‡Ñ‚Ð°.eserv.ru" >IDN TYPE CR
 S" xn--80a1acny.eserv.ru" IDN> ANSI>OEM TYPE CR

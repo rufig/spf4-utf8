@@ -29,7 +29,7 @@
   </xsl:when><xsl:otherwise>
 
     <xsl:copy-of select="."/>
-    <!-- ÷òîáû íå áûëî çàêðûâàþùèõ òåãîâ, êîãäà èñõîäíî çàêðûâàåòñÿ ñðàçó -->
+    <!-- Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð½Ðµ Ð±Ñ‹Ð»Ð¾ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°ÑŽÑ‰Ð¸Ñ… Ñ‚ÐµÐ³Ð¾Ð², ÐºÐ¾Ð³Ð´Ð° Ð¸ÑÑ…Ð¾Ð´Ð½Ð¾ Ð·Ð°ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ÑÑ ÑÑ€Ð°Ð·Ñƒ -->
   </xsl:otherwise></xsl:choose>
 
   <xsl:if test="name(.) = 'div' ">
@@ -40,8 +40,8 @@
 
 <xsl:template match="/" >
   <xsl:param name="links"/>
-  <!-- Ïðè òðàíñëÿöèè âëîæåííûõ document òàì åñòü è "/" è ïàðàìåòð links  -->
-  <!-- Â íà÷àëüíîì æå äîêóìåíòå ïàðàìåòðà links íåòó -->
+  <!-- ÐŸÑ€Ð¸ Ñ‚Ñ€Ð°Ð½ÑÐ»ÑÑ†Ð¸Ð¸ Ð²Ð»Ð¾Ð¶ÐµÐ½Ð½Ñ‹Ñ… document Ñ‚Ð°Ð¼ ÐµÑÑ‚ÑŒ Ð¸ "/" Ð¸ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ links  -->
+  <!-- Ð’ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¾Ð¼ Ð¶Ðµ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð° links Ð½ÐµÑ‚Ñƒ -->
   <xsl:choose><xsl:when test="$links">
     <xsl:apply-templates><xsl:with-param name="links" select="$links | xi:model"/></xsl:apply-templates>
   </xsl:when><xsl:otherwise>
@@ -87,10 +87,10 @@
   <xsl:param name="link" />
 
   <xsl:for-each select="$link">
-    <!-- ñòàâëþ òåêóùèì, ÷òîáû ïðè fallback èñïîëíèëîñü ñîäåðæèìîå ýòîãî link -->
+    <!-- ÑÑ‚Ð°Ð²Ð»ÑŽ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ð¼, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¿Ñ€Ð¸ fallback Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ð»Ð¾ÑÑŒ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ðµ ÑÑ‚Ð¾Ð³Ð¾ link -->
 
     <xsl:variable name="cut-links" select="$links[ count(.|$link) &gt; count( $link ) ]"/>
-    <!-- èç ïåðåäàâàåìîãî êîíòåêñòà links èñêëþ÷àþ ýòîò $link -->
+    <!-- Ð¸Ð· Ð¿ÐµÑ€ÐµÐ´Ð°Ð²Ð°ÐµÐ¼Ð¾Ð³Ð¾ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð° links Ð¸ÑÐºÐ»ÑŽÑ‡Ð°ÑŽ ÑÑ‚Ð¾Ñ‚ $link -->
 
     <xsl:if test="$link/@bind = 'before' or $link/@advice='after' ">
       <xsl:call-template name="recurse">
@@ -120,7 +120,7 @@
   <xsl:param name="href"/>
 
   <xsl:variable name="link" select="$links[@name = $href][last()]" />
-  <!-- $links - ëèíåéíûé node-set, â êîòîðîì îäíîçíà÷íàÿ íóìåðàöèÿ è last() -->
+  <!-- $links - Ð»Ð¸Ð½ÐµÐ¹Ð½Ñ‹Ð¹ node-set, Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼ Ð¾Ð´Ð½Ð¾Ð·Ð½Ð°Ñ‡Ð½Ð°Ñ Ð½ÑƒÐ¼ÐµÑ€Ð°Ñ†Ð¸Ñ Ð¸ last() -->
 
   <xsl:choose><xsl:when test="$link">
 
@@ -135,7 +135,7 @@
     </xsl:otherwise></xsl:choose>
 
   </xsl:when><xsl:otherwise>
-    <!-- åñëè íåòó òàêîãî link, âûïîëíÿåòñÿ 'fallback', ïî ñîäåðæàíèþ âûçâàâøåãî -->
+    <!-- ÐµÑÐ»Ð¸ Ð½ÐµÑ‚Ñƒ Ñ‚Ð°ÐºÐ¾Ð³Ð¾ link, Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ 'fallback', Ð¿Ð¾ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸ÑŽ Ð²Ñ‹Ð·Ð²Ð°Ð²ÑˆÐµÐ³Ð¾ -->
     <xsl:choose><xsl:when test="not(@parse) or @parse = 'xml' ">
       <xsl:apply-templates ><xsl:with-param name="links" select="$links | xi:model"/></xsl:apply-templates>
     </xsl:when><xsl:otherwise>

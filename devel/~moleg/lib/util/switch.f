@@ -1,14 +1,14 @@
 \ 2008-01-08 ~mOleg
-\ Ñopyright [C] 2008 mOleg mininoleg@yahoo.com
-\ âûáîð âàðèàíòà ïî íîìåðó (êîíå÷íûé àâòîìàò)
+\ Ð¡opyright [C] 2008 mOleg mininoleg@yahoo.com
+\ Ð²Ñ‹Ð±Ð¾Ñ€ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚Ð° Ð¿Ð¾ Ð½Ð¾Ð¼ÐµÑ€Ñƒ (ÐºÐ¾Ð½ÐµÑ‡Ð½Ñ‹Ð¹ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚)
 
  REQUIRE init:          .\devel\~mOleg\lib\util\run.f
  REQUIRE imm_word       .\devel\~moleg\lib\newfind\search.f
  REQUIRE COMPILE        .\devel\~moleg\lib\util\compile.f
  REQUIRE NEXT-WORD      .\devel\~mOleg\lib\util\parser.f
 
-\ âûáðàòü u-òûé âàðèàíò èç ñïèñêà ñëîâ,
-\ ïîëó÷åííûõ ìåæäó SWITCH: err_name namea nameb ... ;SWITCH
+\ Ð²Ñ‹Ð±Ñ€Ð°Ñ‚ÑŒ u-Ñ‚Ñ‹Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚ Ð¸Ð· ÑÐ¿Ð¸ÑÐºÐ° ÑÐ»Ð¾Ð²,
+\ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ñ… Ð¼ÐµÐ¶Ð´Ñƒ SWITCH: err_name namea nameb ... ;SWITCH
 : (switch) ( u --> )
            ADDR * R@ @ OVER CELL + SWAP 0 SWAP WITHIN
            IF R@ + [ 2 CELLS ] LITERAL
@@ -16,15 +16,15 @@
            THEN + A@ EXECUTE
            R> DUP @ + CELL + >R ;
 
-\ ìàðêåð îêàí÷èâàåò ñåêöèþ SWITCH: ;ENDSWITCH
+\ Ð¼Ð°Ñ€ÐºÐµÑ€ Ð¾ÐºÐ°Ð½Ñ‡Ð¸Ð²Ð°ÐµÑ‚ ÑÐµÐºÑ†Ð¸ÑŽ SWITCH: ;ENDSWITCH
 : ;SWITCH ( --> ) ." ;SWITCH without SWITCH:" TYPE -1 THROW  ; IMMEDIATE
 
-\ íà÷èíàåò ñåêöèþ SWITCH: ;SWITCH
+\ Ð½Ð°Ñ‡Ð¸Ð½Ð°ÐµÑ‚ ÑÐµÐºÑ†Ð¸ÑŽ SWITCH: ;SWITCH
 : SWITCH: ( --> )
           STATE @ IFNOT init: THEN 5 controls +!
           COMPILE (switch) <MARK 1 0 A,
           BEGIN NEXT-WORD DUP WHILE
-                SFIND DUP IFNOT -1 THROW THEN    \ åñëè ñëîâî íå íàéäåíî
+                SFIND DUP IFNOT -1 THROW THEN    \ ÐµÑÐ»Ð¸ ÑÐ»Ð¾Ð²Ð¾ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð¾
                 imm_word = WHILENOT
               A,
             REPEAT ['] ;SWITCH = IFNOT -1 THROW THEN
@@ -33,9 +33,9 @@
           controls @ IFNOT [COMPILE] ;stop THEN
           ; IMMEDIATE
 
-\ ïåðâîå ñëîâî ïîñëå SWITCH: âûïîëíÿåòñÿ â ñëó÷àå âûõîäà çà äèàïàçîí
+\ Ð¿ÐµÑ€Ð²Ð¾Ðµ ÑÐ»Ð¾Ð²Ð¾ Ð¿Ð¾ÑÐ»Ðµ SWITCH: Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÑ‚ÑÑ Ð² ÑÐ»ÑƒÑ‡Ð°Ðµ Ð²Ñ‹Ñ…Ð¾Ð´Ð° Ð·Ð° Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½
 
-?DEFINED test{ \EOF -- òåñòîâàÿ ñåêöèÿ ---------------------------------------
+?DEFINED test{ \EOF -- Ñ‚ÐµÑÑ‚Ð¾Ð²Ð°Ñ ÑÐµÐºÑ†Ð¸Ñ ---------------------------------------
 
 test{ : inv 123 ; : 1st 234 ; : 2st 345 ; : 3st 456 ; : 4st 567 ;
       : test SWITCH: inv 1st 2st 3st 4st ;SWITCH 678 ;

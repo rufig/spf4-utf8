@@ -11,16 +11,16 @@ WINAPI: GetTickCount              KERNEL32.DLL
 1 10 LSHIFT 1- CONSTANT FD_ALL_EVENTS
         0x04FF CONSTANT QS_ALLINPUT
 
-USER uSocketEvent \ event-сокет может быть только один per thread!
-                  \ vNoneventSocket? нужно переопределять, если могут быть еще обычные сокеты
-USER uLastSocketRead \ когда последний раз был ReadSocket, а не сообщение
-\ Если таймаут сокета больше частоты поступления сообщений,
-\ например если поставить 500 вместо 5000 в примере ниже,
-\ то таймаут MsgWFMO не сработает, поэтому в этом случае стоит проверять
-\ сокет в обработчике сообщений тоже.
-\ Для упрощения (отмены :) этой заботы сделан трюк с uLastSocketRead.
-\ К тому же теперь поток может в ответе на сообщение указать, как давно он
-\ висит на текущем ReadSocket.
+USER uSocketEvent \ event-СЃРѕРєРµС‚ РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ РѕРґРёРЅ per thread!
+                  \ vNoneventSocket? РЅСѓР¶РЅРѕ РїРµСЂРµРѕРїСЂРµРґРµР»СЏС‚СЊ, РµСЃР»Рё РјРѕРіСѓС‚ Р±С‹С‚СЊ РµС‰Рµ РѕР±С‹С‡РЅС‹Рµ СЃРѕРєРµС‚С‹
+USER uLastSocketRead \ РєРѕРіРґР° РїРѕСЃР»РµРґРЅРёР№ СЂР°Р· Р±С‹Р» ReadSocket, Р° РЅРµ СЃРѕРѕР±С‰РµРЅРёРµ
+\ Р•СЃР»Рё С‚Р°Р№РјР°СѓС‚ СЃРѕРєРµС‚Р° Р±РѕР»СЊС€Рµ С‡Р°СЃС‚РѕС‚С‹ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ СЃРѕРѕР±С‰РµРЅРёР№,
+\ РЅР°РїСЂРёРјРµСЂ РµСЃР»Рё РїРѕСЃС‚Р°РІРёС‚СЊ 500 РІРјРµСЃС‚Рѕ 5000 РІ РїСЂРёРјРµСЂРµ РЅРёР¶Рµ,
+\ С‚Рѕ С‚Р°Р№РјР°СѓС‚ MsgWFMO РЅРµ СЃСЂР°Р±РѕС‚Р°РµС‚, РїРѕСЌС‚РѕРјСѓ РІ СЌС‚РѕРј СЃР»СѓС‡Р°Рµ СЃС‚РѕРёС‚ РїСЂРѕРІРµСЂСЏС‚СЊ
+\ СЃРѕРєРµС‚ РІ РѕР±СЂР°Р±РѕС‚С‡РёРєРµ СЃРѕРѕР±С‰РµРЅРёР№ С‚РѕР¶Рµ.
+\ Р”Р»СЏ СѓРїСЂРѕС‰РµРЅРёСЏ (РѕС‚РјРµРЅС‹ :) СЌС‚РѕР№ Р·Р°Р±РѕС‚С‹ СЃРґРµР»Р°РЅ С‚СЂСЋРє СЃ uLastSocketRead.
+\ Рљ С‚РѕРјСѓ Р¶Рµ С‚РµРїРµСЂСЊ РїРѕС‚РѕРє РјРѕР¶РµС‚ РІ РѕС‚РІРµС‚Рµ РЅР° СЃРѕРѕР±С‰РµРЅРёРµ СѓРєР°Р·Р°С‚СЊ, РєР°Рє РґР°РІРЅРѕ РѕРЅ
+\ РІРёСЃРёС‚ РЅР° С‚РµРєСѓС‰РµРј ReadSocket.
 
 VARIABLE vSEvDebug
 
@@ -39,7 +39,7 @@ VECT vNoneventSocket?
   DROP FALSE
 ; ' NoneventSocket?1 TO vNoneventSocket?
 
-: ReadSocketB ReadSocket ; \ старая (блокирующая) версия
+: ReadSocketB ReadSocket ; \ СЃС‚Р°СЂР°СЏ (Р±Р»РѕРєРёСЂСѓСЋС‰Р°СЏ) РІРµСЂСЃРёСЏ
 
 WARNING @ WARNING 0!
 
@@ -53,7 +53,7 @@ WARNING @ WARNING 0!
   THEN
 
   DUP ToRead2 ?DUP IF 2>R DROP 2DROP 2R> EXIT THEN
-  IF ReadSocket GetTickCount uLastSocketRead ! EXIT THEN \ если сокет уже готов, то сразу читаем порцию (без событий) и выходим
+  IF ReadSocket GetTickCount uLastSocketRead ! EXIT THEN \ РµСЃР»Рё СЃРѕРєРµС‚ СѓР¶Рµ РіРѕС‚РѕРІ, С‚Рѕ СЃСЂР°Р·Сѓ С‡РёС‚Р°РµРј РїРѕСЂС†РёСЋ (Р±РµР· СЃРѕР±С‹С‚РёР№) Рё РІС‹С…РѕРґРёРј
 
   BEGIN
     QS_ALLINPUT
@@ -63,12 +63,12 @@ WARNING @ WARNING 0!
     DUP 2 U< 0=
     IF vSEvDebug @ IF ." MsgWFMO error " THEN 2DROP 2DROP 0 -1003 TRUE
     ELSE 0=
-      IF \ 0=сокеты
+      IF \ 0=СЃРѕРєРµС‚С‹
          DUP ToRead2 ?DUP IF 2>R DROP 2DROP 2R> EXIT THEN
          IF ReadSocket GetTickCount uLastSocketRead ! TRUE ELSE FALSE THEN
-      ELSE \ 1=сообщения
-         \ DUP ToRead2 ?DUP IF 2>R DROP 2DROP 2R> EXIT THEN \ а жив ли сокет?
-         \ ^ здесь ToRead2 или ioctlsocket использовать нельзя, будет 10038
+      ELSE \ 1=СЃРѕРѕР±С‰РµРЅРёСЏ
+         \ DUP ToRead2 ?DUP IF 2>R DROP 2DROP 2R> EXIT THEN \ Р° Р¶РёРІ Р»Рё СЃРѕРєРµС‚?
+         \ ^ Р·РґРµСЃСЊ ToRead2 РёР»Рё ioctlsocket РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РЅРµР»СЊР·СЏ, Р±СѓРґРµС‚ 10038
          TIMEOUT @ 0<>
          IF
            GetTickCount uLastSocketRead @ - TIMEOUT @ >

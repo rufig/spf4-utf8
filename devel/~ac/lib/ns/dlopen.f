@@ -1,4 +1,4 @@
-\ DLOPEN, DLSYM для SPF/Win32
+\ DLOPEN, DLSYM РґР»СЏ SPF/Win32
 
 : DLOPEN ( addr u -- h )
   DROP LoadLibraryA

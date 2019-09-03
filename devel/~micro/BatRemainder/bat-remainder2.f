@@ -3,8 +3,8 @@ S" bat-remainder.f" INCLUDED
 0 VALUE ScriptBaseDEPTH
 
 : ?S ( i*x n -- i*x f )
-\ n аргументов должно быть
-\ f=TRUE если не так
+\ n Р°СЂРіСѓРјРµРЅС‚РѕРІ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ
+\ f=TRUE РµСЃР»Рё РЅРµ С‚Р°Рє
     ScriptBaseDEPTH +
     DEPTH 1- <>
 ;

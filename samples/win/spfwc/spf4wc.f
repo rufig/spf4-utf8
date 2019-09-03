@@ -42,7 +42,7 @@ ALSO WINCONST
 MODULE: GUI-CONSOLE
 
 S" spf4wc.h.f"	INCLUDED  \ constants & data
-S" lru.f"	INCLUDED  \ буфер history (last recently used)
+S" lru.f"	INCLUDED  \ Р±СѓС„РµСЂ history (last recently used)
 
 WORDLIST TO BaseLStrings
 BaseLStrings TO CurLStrings
@@ -60,20 +60,20 @@ S" lang\base.txt" BaseLStrings INCLUDED-STRINGS
 : SendToTB ( lParam wParam Msg -- u )  TBhwnd SendMessage ;
 : SendToTBVoid  SendToTB DROP ;
 
-: GETLINECOUNT ( -- n ) \ возвращает число строк в консоли
+: GETLINECOUNT ( -- n ) \ РІРѕР·РІСЂР°С‰Р°РµС‚ С‡РёСЃР»Рѕ СЃС‚СЂРѕРє РІ РєРѕРЅСЃРѕР»Рё
   0 0 EM_GETLINECOUNT SendToCl
 ;
 : LastLineIndex ( -- n)
   0  GETLINECOUNT 1-  EM_LINEINDEX SendToCl
 ;
-: CurrentLine ( -- n) \ возвращает номер текущей строки
+: CurrentLine ( -- n) \ РІРѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРјРµСЂ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
   0 -1 EM_LINEFROMCHAR SendToCl
 ;
 : CursorHome
   LastLineIndex *promptbuf + DUP EM_SETSEL SendToClVoid
 ;
 
-: GetClTextLength ( -- n) \ возвращает длину текста в консоли
+: GetClTextLength ( -- n) \ РІРѕР·РІСЂР°С‰Р°РµС‚ РґР»РёРЅСѓ С‚РµРєСЃС‚Р° РІ РєРѕРЅСЃРѕР»Рё
   0 0 WM_GETTEXTLENGTH SendToCl
 ;
 
@@ -131,7 +131,7 @@ TRUE VALUE EnableEmit
     ANSI><OEM
     2DUP TO-LOG
     H-STDOUT 0 >
-    IF  \ Если пишем в файл например...
+    IF  \ Р•СЃР»Рё РїРёС€РµРј РІ С„Р°Р№Р» РЅР°РїСЂРёРјРµСЂ...
       H-STDOUT WRITE-FILE THROW
     ELSE
       OVER + SWAP
@@ -162,7 +162,7 @@ TRUE VALUE EnableEmit
 ' KEY?-GUI ' KEY? REPLACE-WORD
 
 : LastLineChange ( addr -- )
-  \ Заменяет последнюю строку текстом - промпт+строка addr 
+  \ Р—Р°РјРµРЅСЏРµС‚ РїРѕСЃР»РµРґРЅСЋСЋ СЃС‚СЂРѕРєСѓ С‚РµРєСЃС‚РѕРј - РїСЂРѕРјРїС‚+СЃС‚СЂРѕРєР° addr 
    ASCIIZ> 1+ promptbuf *promptbuf + SWAP CMOVE
    (( SendToClVoid
      LastLineIndex
@@ -171,8 +171,8 @@ TRUE VALUE EnableEmit
      EM_SETSEL )
    (( SendToClVoid promptbuf , 0 , EM_REPLACESEL )
 ;
-: GetPrompt \ кладет содержимое последней строки в буфер - промпт
-  \ Если строка пустая - выдает стандартный промпт
+: GetPrompt \ РєР»Р°РґРµС‚ СЃРѕРґРµСЂР¶РёРјРѕРµ РїРѕСЃР»РµРґРЅРµР№ СЃС‚СЂРѕРєРё РІ Р±СѓС„РµСЂ - РїСЂРѕРјРїС‚
+  \ Р•СЃР»Рё СЃС‚СЂРѕРєР° РїСѓСЃС‚Р°СЏ - РІС‹РґР°РµС‚ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РїСЂРѕРјРїС‚
    C/L promptbuf W!
    promptbuf  GETLINECOUNT 1-  EM_GETLINE SendToCl DUP TO *promptbuf
    0= IF
@@ -203,7 +203,7 @@ TRUE VALUE EnableEmit
   LT @ tib >in + !
 ;
 
-: VOC-NAME> ( wid -- s ) \ имя списка слов, если он именован
+: VOC-NAME> ( wid -- s ) \ РёРјСЏ СЃРїРёСЃРєР° СЃР»РѕРІ, РµСЃР»Рё РѕРЅ РёРјРµРЅРѕРІР°РЅ
   DUP FORTH-WORDLIST = IF
     DROP " FORTH"
   ELSE
@@ -216,10 +216,10 @@ TRUE VALUE EnableEmit
   MenuItemInfo FALSE idButton idMenu SetMenuItemInfo DROP
   ViewTB IF idButton TB_CHECKBUTTON SendToTBVoid ELSE DROP THEN
 ;
-\ обновляет отображение меню, тулбара и статусбара
+\ РѕР±РЅРѕРІР»СЏРµС‚ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РјРµРЅСЋ, С‚СѓР»Р±Р°СЂР° Рё СЃС‚Р°С‚СѓСЃР±Р°СЂР°
 : RefreshMenus { \ st curtls -- }
-  \ вывод информации в статусбар
-  \ берем данные из хипа главного потока
+  \ РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё РІ СЃС‚Р°С‚СѓСЃР±Р°СЂ
+  \ Р±РµСЂРµРј РґР°РЅРЅС‹Рµ РёР· С…РёРїР° РіР»Р°РІРЅРѕРіРѕ РїРѕС‚РѕРєР°
   ViewSB IF
     TlsIndex@ TO curtls
     MainTlsIndex TlsIndex!
@@ -234,7 +234,7 @@ TRUE VALUE EnableEmit
     st STRFREE
   THEN
 
-  \ обновление переключателей
+  \ РѕР±РЅРѕРІР»РµРЅРёРµ РїРµСЂРµРєР»СЋС‡Р°С‚РµР»РµР№
   {{ MENUITEMINFO
     MenuItemInfo  /SIZE ERASE
     /SIZE         MenuItemInfo cbSize !
@@ -245,7 +245,7 @@ TRUE VALUE EnableEmit
   hOptionsMenu cmdLOG     H-STDLOG    SetMenuStatus
   hDebugMenu   cmdDBG     DBG-RTime @ SetMenuStatus
 
-  \ обновление debug-меню
+  \ РѕР±РЅРѕРІР»РµРЅРёРµ debug-РјРµРЅСЋ
   {{ MENUITEMINFO
     Nesting @ 0<> DBG-RTime @ AND IF
       MFS_ENABLED  MenuItemInfo fState !
@@ -303,15 +303,15 @@ TRUE VALUE EnableEmit
   THEN
 ;
 : SaveScript { \ SizeEd Content fid -- }
-  \ получаем содержимое окна Script
+  \ РїРѕР»СѓС‡Р°РµРј СЃРѕРґРµСЂР¶РёРјРѕРµ РѕРєРЅР° Script
   0 0 WM_GETTEXTLENGTH SendToEd 1+ DUP TO SizeEd
   ALLOCATE THROW DUP TO Content
   SizeEd WM_GETTEXT SendToEdVoid
-  \ открываем файл
+  \ РѕС‚РєСЂС‹РІР°РµРј С„Р°Р№Р»
   S" spf4wc-script.f" +ModuleDirName W/O CREATE-FILE THROW TO fid
-  \ записываем код в файл
+  \ Р·Р°РїРёСЃС‹РІР°РµРј РєРѕРґ РІ С„Р°Р№Р»
   Content SizeEd 1- fid WRITE-FILE THROW
-  \ закрываем файл и буфер
+  \ Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р» Рё Р±СѓС„РµСЂ
   Content FREE THROW
   fid CLOSE-FILE THROW
 ;
@@ -332,9 +332,9 @@ TRUE VALUE EnableEmit
 ;
 
 :NONAME
-  \ сохраняем в файл
+  \ СЃРѕС…СЂР°РЅСЏРµРј РІ С„Р°Р№Р»
   SaveScript
-  \ выполняем код
+  \ РІС‹РїРѕР»РЅСЏРµРј РєРѕРґ
   S" spf4wc-script.f" +ModuleDirName INCLUDED
 ;
 TO RunScript
@@ -343,24 +343,24 @@ TO RunScript
 
 : ReSize { \ cury [ RECT::/SIZE ] Rect -- }
   ViewTB IF
-    \ перерисовываем тулбар
+    \ РїРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј С‚СѓР»Р±Р°СЂ
     0 0 TB_AUTOSIZE SendToTBVoid
-    \ узнаем высоту тулбара
+    \ СѓР·РЅР°РµРј РІС‹СЃРѕС‚Сѓ С‚СѓР»Р±Р°СЂР°
     Rect 0 TB_GETITEMRECT SendToTBVoid
     Rect RECT::bottom @ 3 + TO tb_height
   THEN
   ViewSB IF
-    \ узнаем высоту статусбара
+    \ СѓР·РЅР°РµРј РІС‹СЃРѕС‚Сѓ СЃС‚Р°С‚СѓСЃР±Р°СЂР°
     Rect SBhwnd GetWindowRect DROP
     Rect RECT::bottom @  Rect RECT::top @ - TO sb_height
   THEN
 
-  \ вычисляем высоту дочерних окон
+  \ РІС‹С‡РёСЃР»СЏРµРј РІС‹СЃРѕС‚Сѓ РґРѕС‡РµСЂРЅРёС… РѕРєРѕРЅ
   Myhwnd_height tb_height - split_height - sb_height -
   DUP SplitRatio 100 */ TO cl_height
   cl_height - TO ed_height
 
-  \ обновляем дочерние окна
+  \ РѕР±РЅРѕРІР»СЏРµРј РґРѕС‡РµСЂРЅРёРµ РѕРєРЅР°
   tb_height TO cury
   0 cl_height    Myhwnd_width cury  0 clhwnd    MoveWindow DROP
   cury cl_height + TO cury
@@ -375,8 +375,8 @@ TO RunScript
   FALSE 0 Myhwnd InvalidateRect DROP
   Myhwnd UpdateWindow DROP
 ;
-\ рисует перемещаемый горизонтальный сплиттер
-\ y - dragY, x - от 0 до Myhwnd_width-1
+\ СЂРёСЃСѓРµС‚ РїРµСЂРµРјРµС‰Р°РµРјС‹Р№ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№ СЃРїР»РёС‚С‚РµСЂ
+\ y - dragY, x - РѕС‚ 0 РґРѕ Myhwnd_width-1
 : DrawSplitter { \ hdc }
   Myhwnd GetDC TO hdc
   R2_NOTXORPEN hdc SetROP2
@@ -443,7 +443,7 @@ TO RunScript
 : DbgOut   OUT  DbgStep ;
 : DbgGo  -DEBUG DbgStep ;
 
-\ обработка WM_COMMAND
+\ РѕР±СЂР°Р±РѕС‚РєР° WM_COMMAND
 : DoCommand ( wnd_id -- )
   DUP cmdInclude [ cmdFavorites 100 + ] LITERAL WITHIN IF
     DUP cmdFavorites > IF
@@ -565,7 +565,7 @@ VOCABULARY ClKeys
 GET-CURRENT ALSO ClKeys DEFINITIONS
 
 VK_UP :M ( -- 0 FALSE | TRUE )
-  VK_SHIFT GetKeyState 0x80 AND 0= IF \ если не нажат Shift
+  VK_SHIFT GetKeyState 0x80 AND 0= IF \ РµСЃР»Рё РЅРµ РЅР°Р¶Р°С‚ Shift
     UpLru DROP LastLineChange
     0 FALSE
   ELSE
@@ -583,10 +583,10 @@ VK_DOWN :M
 ;
 
 VK_RETURN :M
-  CurrentLine DUP >R \ текущюю линию
+  CurrentLine DUP >R \ С‚РµРєСѓС‰СЋСЋ Р»РёРЅРёСЋ
   C/L tib W!
-  tib SWAP EM_GETLINE SendToCl TO >in \ в tib
-  \ если последняя строка, то удалим из tib'а промпт
+  tib SWAP EM_GETLINE SendToCl TO >in \ РІ tib
+  \ РµСЃР»Рё РїРѕСЃР»РµРґРЅСЏСЏ СЃС‚СЂРѕРєР°, С‚Рѕ СѓРґР°Р»РёРј РёР· tib'Р° РїСЂРѕРјРїС‚
   R> GETLINECOUNT 1- =   *promptbuf >in > 0=  AND IF 
     tib *promptbuf +  tib  >in *promptbuf -  DUP TO >in  MOVE
   THEN
@@ -694,8 +694,8 @@ WM_KEYDOWN :M ( lpar wpar msg hwnd -- 0 FALSE | TRUE )
 ;
 
 WM_LBUTTONDOWN :M ( lpar wpar msg hwnd -- 0 FALSE | TRUE )
-  \ если щелкнули мышью на промпте, то надо установить
-  \ курсор в конец промпта
+  \ РµСЃР»Рё С‰РµР»РєРЅСѓР»Рё РјС‹С€СЊСЋ РЅР° РїСЂРѕРјРїС‚Рµ, С‚Рѕ РЅР°РґРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ
+  \ РєСѓСЂСЃРѕСЂ РІ РєРѕРЅРµС† РїСЂРѕРјРїС‚Р°
   3 PICK 0 EM_CHARFROMPOS SendToCl LOWORD
   LastLineIndex DUP *promptbuf + WITHIN IF
     CursorHome
@@ -733,9 +733,9 @@ QUICK_WNDPROC MyClWndProc
 QUICK_WNDPROC MyEdWndProc
 
 : WMLBUTTONDOWN { hwnd wy \ [ RECT::/SIZE ] rect [ POINT::/SIZE ] point }
-  \ захватываем мышь
+  \ Р·Р°С…РІР°С‚С‹РІР°РµРј РјС‹С€СЊ
   hwnd SetCapture DROP
-  \ задаем границы, за которые мышь не может выйти
+  \ Р·Р°РґР°РµРј РіСЂР°РЅРёС†С‹, Р·Р° РєРѕС‚РѕСЂС‹Рµ РјС‹С€СЊ РЅРµ РјРѕР¶РµС‚ РІС‹Р№С‚Рё
   point POINT::x-point 0!
   point POINT::y-point 0!
   point Myhwnd ClientToScreen DROP
@@ -746,12 +746,12 @@ QUICK_WNDPROC MyEdWndProc
   DUP tb_height + rect RECT::top !
   Myhwnd_height 1+ + sb_height - rect RECT::bottom !
   rect ClipCursor DROP
-  \ расчитываем начальное смещение
+  \ СЂР°СЃС‡РёС‚С‹РІР°РµРј РЅР°С‡Р°Р»СЊРЅРѕРµ СЃРјРµС‰РµРЅРёРµ
   point POINT::y-point 0!
   point hwnd ClientToScreen DROP
   point POINT::y-point @
   SWAP - split_height 2 / + TO dragStart
-  \ рисуем перемещаемый сплиттер
+  \ СЂРёСЃСѓРµРј РїРµСЂРµРјРµС‰Р°РµРјС‹Р№ СЃРїР»РёС‚С‚РµСЂ
   dragStart wy + TO dragY
   DrawSplitter
 ;
@@ -759,27 +759,27 @@ QUICK_WNDPROC MyEdWndProc
 VOCABULARY SplitMes
 GET-CURRENT ALSO SplitMes DEFINITIONS
 
-\ начало перетаскивания сплиттера
+\ РЅР°С‡Р°Р»Рѕ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ СЃРїР»РёС‚С‚РµСЂР°
 WM_LBUTTONDOWN :M ( lparam wparam hwnd -- )
   NIP SWAP HIWORD W>S WMLBUTTONDOWN
   0
 ;
-\ конец перетаскивания сплиттера
+\ РєРѕРЅРµС† РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ СЃРїР»РёС‚С‚РµСЂР°
 WM_LBUTTONUP :M ( lparam wparam hwnd -- )
   2DROP
-  \ отпускаем мышь
+  \ РѕС‚РїСѓСЃРєР°РµРј РјС‹С€СЊ
   ReleaseCapture DROP
-  \ вычисляем новое положение сплиттера
+  \ РІС‹С‡РёСЃР»СЏРµРј РЅРѕРІРѕРµ РїРѕР»РѕР¶РµРЅРёРµ СЃРїР»РёС‚С‚РµСЂР°
   dragStart SWAP HIWORD W>S + tb_height -
   100
   Myhwnd_height tb_height - split_height - sb_height -
   */
   0 MAX 100 MIN TO SplitRatio
-  \ обновляем окно
+  \ РѕР±РЅРѕРІР»СЏРµРј РѕРєРЅРѕ
   ReSize
   0
 ;
-\ перетаскивание сплиттера
+\ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ СЃРїР»РёС‚С‚РµСЂР°
 WM_MOUSEMOVE :M ( lparam wparam hwnd -- )
   DROP
   MK_LBUTTON AND IF
@@ -792,7 +792,7 @@ WM_MOUSEMOVE :M ( lparam wparam hwnd -- )
   0
 ;
 
-WM_CAPTURECHANGED :M \ окно потеряло фокус или был ReleaseCapture
+WM_CAPTURECHANGED :M \ РѕРєРЅРѕ РїРѕС‚РµСЂСЏР»Рѕ С„РѕРєСѓСЃ РёР»Рё Р±С‹Р» ReleaseCapture
   2DROP DROP
   DrawSplitter
   0 ClipCursor DROP
@@ -1100,8 +1100,8 @@ EXPORT
 ' CON-MAIN TASK: Thread1
 
 : CONSOLE
-  0 -11 SetStdHandle DROP \ В WinXP GUI-приложение при запуске через линк
-  0 TO H-STDOUT           \ получает стандартные хэндлы
+  0 -11 SetStdHandle DROP \ Р’ WinXP GUI-РїСЂРёР»РѕР¶РµРЅРёРµ РїСЂРё Р·Р°РїСѓСЃРєРµ С‡РµСЂРµР· Р»РёРЅРє
+  0 TO H-STDOUT           \ РїРѕР»СѓС‡Р°РµС‚ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Рµ С…СЌРЅРґР»С‹
   TlsIndex@ TO MainTlsIndex
   ['] TYPE-GUI  TO TYPE
   ['] KEY-GUI   TO KEY

@@ -6,22 +6,22 @@
 <g xml:base="../../model/">
 <g xml:base="trans/">
 
-<comment> расширение лексикона ForthML до второго уровня </comment>
+<comment> СЂР°СЃС€РёСЂРµРЅРёРµ Р»РµРєСЃРёРєРѕРЅР° ForthML РґРѕ РІС‚РѕСЂРѕРіРѕ СѓСЂРѕРІРЅСЏ </comment>
 <include href="rules-std.f.xml"/>
 <include href="split-line.f.xml"/>
 <include href="rules-ext.f.xml"/>
 <include href="rules-string.f.xml"/>
 
-<comment> поддержка конструирования имени через "{}" в значении атрибута name </comment>
+<comment> РїРѕРґРґРµСЂР¶РєР° РєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРёСЏ РёРјРµРЅРё С‡РµСЂРµР· "{}" РІ Р·РЅР°С‡РµРЅРёРё Р°С‚СЂРёР±СѓС‚Р° name </comment>
 <also wordlist="document-context-hidden"><wordlist name="tpat-hidden">
 <include href="tpat.f.xml"/><init><xt-of name="T-PAT"/> _T-PAT ! </init>
 </wordlist></also>
 
-<comment> отображение URI-баз
-  (например, http://forth.org.ru/ на каталог локальной файловой системы) </comment>
+<comment> РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ URI-Р±Р°Р·
+  (РЅР°РїСЂРёРјРµСЂ, http://forth.org.ru/ РЅР° РєР°С‚Р°Р»РѕРі Р»РѕРєР°Р»СЊРЅРѕР№ С„Р°Р№Р»РѕРІРѕР№ СЃРёСЃС‚РµРјС‹) </comment>
 <include href="xml-uri-map.f.xml"/>
 
-<comment> дополнительные расширения в базовый словарь </comment>
+<comment> РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЂР°СЃС€РёСЂРµРЅРёСЏ РІ Р±Р°Р·РѕРІС‹Р№ СЃР»РѕРІР°СЂСЊ </comment>
 FORTH-WORDLIST PUSH-CURRENT
 <include href="obey.f.xml"/>
 <include href="StoN.f.xml"/>

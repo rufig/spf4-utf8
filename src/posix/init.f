@@ -1,7 +1,7 @@
 \ $Id$
-( Инициализация USER-переменных.
+( РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ USER-РїРµСЂРµРјРµРЅРЅС‹С….
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Сентябрь 1999
+  РЎРµРЅС‚СЏР±СЂСЊ 1999
 )
 
 : USER-INIT ( n -- )
@@ -70,8 +70,8 @@ VARIABLE IN-EXCEPTION
 ' (errsignal) 3 TC-CALLBACK: errsignal
 
 CREATE sigact
-' errsignal >VIRT ,   \ обработчик сигнала
-SIZEOF_SIGSET ALLOT \ маска блокировки
+' errsignal >VIRT ,   \ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРёРіРЅР°Р»Р°
+SIZEOF_SIGSET ALLOT \ РјР°СЃРєР° Р±Р»РѕРєРёСЂРѕРІРєРё
 SA_RESTART SA_SIGINFO + SA_NODEFER + ,
 0  ,   \ sa_restarter
 

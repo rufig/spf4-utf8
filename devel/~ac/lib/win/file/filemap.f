@@ -13,7 +13,7 @@ HEX 83000000 DECIMAL VALUE MAP-BASE
   2DUP R/W OPEN-FILE      ( mapbase size c-addr u fileid ior )
   IF DROP R/W CREATE-FILE
   ELSE NIP NIP 0 THEN        ( mapbase size fileid ior )
-  ?DUP IF NIP R> DROP EXIT THEN \ íå óäàëîñü îòêðûòü/ñîçäàòü ôàéë
+  ?DUP IF NIP R> DROP EXIT THEN \ Ð½Ðµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ/ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»
                      ( mapbase size fileid )
   R> SWAP >R
   OVER               ( mapbase size name size )

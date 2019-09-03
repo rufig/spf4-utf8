@@ -51,7 +51,7 @@ MODULE: bot_plugin_rss
     DUP gmtime - ABS 6 60 * <
     IF
      DROP
-     S" Только что"
+     S" РўРѕР»СЊРєРѕ С‡С‚Рѕ"
      EXIT
     THEN
 
@@ -61,14 +61,14 @@ MODULE: bot_plugin_rss
     IF
      DROP
      Num>Time ROT DROP SWAP ( hh mm)
-     <# S"  GMT" HOLDS S>D # # 2DROP [CHAR] : HOLD S>D # # 2DROP S" Сегодня " HOLDS 0 0 #>
+     <# S"  GMT" HOLDS S>D # # 2DROP [CHAR] : HOLD S>D # # 2DROP S" РЎРµРіРѕРґРЅСЏ " HOLDS 0 0 #>
      EXIT
     THEN
 
     -1 =
     IF
     Num>Time ROT DROP SWAP ( hh mm)
-     <# S"  GMT" HOLDS S>D # # 2DROP [CHAR] : HOLD S>D # # 2DROP S" Вчера " HOLDS 0 0 #>
+     <# S"  GMT" HOLDS S>D # # 2DROP [CHAR] : HOLD S>D # # 2DROP S" Р’С‡РµСЂР° " HOLDS 0 0 #>
     ELSE
      timestamp>pad
     THEN ;
@@ -101,7 +101,7 @@ MODULE: bot_plugin_rss
 
     PRO
      START{
-      rss.items-new=> DUP rss.item.timestamp ONTRUE \ не обяз. т.к. если stamp=0 то new не пропустит
+      rss.items-new=> DUP rss.item.timestamp ONTRUE \ РЅРµ РѕР±СЏР·. С‚.Рє. РµСЃР»Рё stamp=0 С‚Рѕ new РЅРµ РїСЂРѕРїСѓСЃС‚РёС‚
        CONT
      }EMERGE
     S" xml checked" log::trace
@@ -197,7 +197,7 @@ EXPORT
   0 rss-getter START DROP
   0 rss-checker START DROP
 
-  \ ограничим сообщения с форума только на время онлайна бота
+  \ РѕРіСЂР°РЅРёС‡РёРј СЃРѕРѕР±С‰РµРЅРёСЏ СЃ С„РѕСЂСѓРјР° С‚РѕР»СЊРєРѕ РЅР° РІСЂРµРјСЏ РѕРЅР»Р°Р№РЅР° Р±РѕС‚Р°
   gmtime fforum-url >STR url-to-filename STR@ write-number
 
   %[ fforum-url >STR % 5 minutes % ]% submitter START DROP

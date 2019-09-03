@@ -10,7 +10,7 @@ project-full-search
 S" spf_help_ru.chm" project-out-file
 
  ' NOOP TO ANSI><OEM
- S" index.ru.htm" S" Справка SPF" add-file
+ S" index.ru.htm" S" РЎРїСЂР°РІРєР° SPF" add-file
  ' OEM>ANSI TO ANSI><OEM
 
  \ S" docs/help/ANSFth94.fhlp" S" parts\ans94\" S" fhlp.css"  convertm

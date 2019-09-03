@@ -1,11 +1,11 @@
-( Целевой компилятор для компиляции SP-Forth v3.7x
+( Р¦РµР»РµРІРѕР№ РєРѕРјРїРёР»СЏС‚РѕСЂ РґР»СЏ РєРѕРјРїРёР»СЏС†РёРё SP-Forth v3.7x
   Copyright [C] 1992-2000 A.Cherezov ac@forth.org
 )
 
 
 3968 CONSTANT #ST-RES
 
-HEX IMAGE-BASE 1034 + CONSTANT AddrOfLoadLibrary      \ адреса процедур в spf-stub.exe
+HEX IMAGE-BASE 1034 + CONSTANT AddrOfLoadLibrary      \ Р°РґСЂРµСЃР° РїСЂРѕС†РµРґСѓСЂ РІ spf-stub.exe
     IMAGE-BASE 1038 + CONSTANT AddrOfGetProcAddress
 DECIMAL
 
@@ -46,7 +46,7 @@ VARIABLE SAVED-CURRENT
 
 VARIABLE TC-WINAP
 VARIABLE TC-WINAPLINK
-VARIABLE TC-USER-OFFS 16 TC-USER-OFFS ! \ 16 байт зарезервировано
+VARIABLE TC-USER-OFFS 16 TC-USER-OFFS ! \ 16 Р±Р°Р№С‚ Р·Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅРѕ
 
 : TC-USER-ALLOT ( n -- )
   TC-USER-OFFS +!
@@ -56,16 +56,16 @@ VARIABLE TC-USER-OFFS 16 TC-USER-OFFS ! \ 16 байт зарезервировано
 ;
 HEX
 : TC-CALL, ( addr -- )
-  \ так компилируется вызов слова в СП-Форте 3.x
-  0E8 C,              \ машинная команда CALL
+  \ С‚Р°Рє РєРѕРјРїРёР»РёСЂСѓРµС‚СЃСЏ РІС‹Р·РѕРІ СЃР»РѕРІР° РІ РЎРџ-Р¤РѕСЂС‚Рµ 3.x
+  0E8 C,              \ РјР°С€РёРЅРЅР°СЏ РєРѕРјР°РЅРґР° CALL
   HERE CELL+ - ,
 ;
 DECIMAL
 
-VOCABULARY TC     \ слова, работающие в режиме интерпретации при ЦК
-VOCABULARY TC-IMM \ immediate-слова для режима компиляции при ЦК,
-                  \ вынесены в отдельный словарь, т.к. их нельзя
-                  \ переопределять словами из TC-WL
+VOCABULARY TC     \ СЃР»РѕРІР°, СЂР°Р±РѕС‚Р°СЋС‰РёРµ РІ СЂРµР¶РёРјРµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РїСЂРё Р¦Рљ
+VOCABULARY TC-IMM \ immediate-СЃР»РѕРІР° РґР»СЏ СЂРµР¶РёРјР° РєРѕРјРїРёР»СЏС†РёРё РїСЂРё Р¦Рљ,
+                  \ РІС‹РЅРµСЃРµРЅС‹ РІ РѕС‚РґРµР»СЊРЅС‹Р№ СЃР»РѕРІР°СЂСЊ, С‚.Рє. РёС… РЅРµР»СЊР·СЏ
+                  \ РїРµСЂРµРѕРїСЂРµРґРµР»СЏС‚СЊ СЃР»РѕРІР°РјРё РёР· TC-WL
 ALSO TC DEFINITIONS PREVIOUS
 
 : CODE [T] CODE CONTEXT @ [I] CONTEXT ! ;
@@ -84,7 +84,7 @@ ALSO TC DEFINITIONS PREVIOUS
   CREATE-CODE COMPILE,
   ,
 ;
-: USER ( "<spaces>name" -- ) \ локальные переменные потока
+: USER ( "<spaces>name" -- ) \ Р»РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ РїРѕС‚РѕРєР°
   [T] HEADER [I]
   USER-CODE COMPILE,
   TC-USER-HERE ,
@@ -129,7 +129,7 @@ ALSO TC DEFINITIONS PREVIOUS
 ;
 
 
-: WINAPI: ( "ИмяПроцедуры" "ИмяБиблиотеки" -- )
+: WINAPI: ( "РРјСЏРџСЂРѕС†РµРґСѓСЂС‹" "РРјСЏР‘РёР±Р»РёРѕС‚РµРєРё" -- )
   >IN @
   [T] HEADER [I]
   >IN !
@@ -139,13 +139,13 @@ ALSO TC DEFINITIONS PREVIOUS
   0 , \ address of library name
   0 , \ address of function name
 \  0 , \ # of parameters
-  HERE TC-WINAPLINK @ , TC-WINAPLINK ! ( связь )
+  HERE TC-WINAPLINK @ , TC-WINAPLINK ! ( СЃРІСЏР·СЊ )
   HERE TC-WINAP @ CELL+ CELL+ !
   HERE >R
-  BL WORD COUNT HERE SWAP DUP ALLOT MOVE 0 C, \ имя функции
+  BL WORD COUNT HERE SWAP DUP ALLOT MOVE 0 C, \ РёРјСЏ С„СѓРЅРєС†РёРё
   HERE TC-WINAP @ CELL+ !
   HERE >R
-  BL WORD COUNT HERE SWAP DUP ALLOT MOVE 0 C, \ имя библиотеки
+  BL WORD COUNT HERE SWAP DUP ALLOT MOVE 0 C, \ РёРјСЏ Р±РёР±Р»РёРѕС‚РµРєРё
   R> LoadLibraryA DUP 0= ABORT" Library not found"
   R> SWAP GetProcAddress 0= ABORT" Procedure not found"
 ;
@@ -171,13 +171,13 @@ ALSO TC DEFINITIONS PREVIOUS
 : :  [T] : ALSO TC-IMM ;
 
 (
- Во время компиляции "двоеточечного" определения в ЦК порядок поиска
- представляет собой такой пирог:
+ Р’Рѕ РІСЂРµРјСЏ РєРѕРјРїРёР»СЏС†РёРё "РґРІРѕРµС‚РѕС‡РµС‡РЅРѕРіРѕ" РѕРїСЂРµРґРµР»РµРЅРёСЏ РІ Р¦Рљ РїРѕСЂСЏРґРѕРє РїРѕРёСЃРєР°
+ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ С‚Р°РєРѕР№ РїРёСЂРѕРі:
 
-  TC-IMM    \ imm-слова управления, которые опасно переопределять
-  TC-WL     \ создаваемый целевой список слов, он же в CURRENT
-  TC        \ словарь определяющих слов ЦК - ":", CREATE, CONSTANT, etc
-  FORTH     \ основной словарь инструментальной форт-системы
+  TC-IMM    \ imm-СЃР»РѕРІР° СѓРїСЂР°РІР»РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РѕРїР°СЃРЅРѕ РїРµСЂРµРѕРїСЂРµРґРµР»СЏС‚СЊ
+  TC-WL     \ СЃРѕР·РґР°РІР°РµРјС‹Р№ С†РµР»РµРІРѕР№ СЃРїРёСЃРѕРє СЃР»РѕРІ, РѕРЅ Р¶Рµ РІ CURRENT
+  TC        \ СЃР»РѕРІР°СЂСЊ РѕРїСЂРµРґРµР»СЏСЋС‰РёС… СЃР»РѕРІ Р¦Рљ - ":", CREATE, CONSTANT, etc
+  FORTH     \ РѕСЃРЅРѕРІРЅРѕР№ СЃР»РѕРІР°СЂСЊ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Р»СЊРЅРѕР№ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹
 )
 
 ALSO TC-IMM DEFINITIONS PREVIOUS
@@ -205,7 +205,7 @@ ALSO TC-IMM DEFINITIONS PREVIOUS
 
 : C"   \ 94 CORE EXT
   [CHAR] " WORD DUP COUNT NIP 1+
-  DUP ALLOCATE THROW DUP >R SWAP CMOVE R>   \ WORD кладёт строку в HERE :(
+  DUP ALLOCATE THROW DUP >R SWAP CMOVE R>   \ WORD РєР»Р°РґС‘С‚ СЃС‚СЂРѕРєСѓ РІ HERE :(
   STATE @
   IF DUP [COMPILE] CLITERAL FREE THROW THEN
 ; IMMEDIATE
@@ -222,7 +222,7 @@ ALSO TC-IMM DEFINITIONS PREVIOUS
   COMPILE,
 ; IMMEDIATE
 
-\ ниже просто копии слов из FORTH
+\ РЅРёР¶Рµ РїСЂРѕСЃС‚Рѕ РєРѕРїРёРё СЃР»РѕРІ РёР· FORTH
 
 : \ POSTPONE \ ; IMMEDIATE
 : ( POSTPONE ( ; IMMEDIATE
@@ -253,8 +253,8 @@ ALSO TC-IMM DEFINITIONS PREVIOUS
 : LEAVE POSTPONE LEAVE ; IMMEDIATE
 
 HEX
-HERE 10000 + 10000 / 10000 * 2000 + DP !    \ выравнивание
+HERE 10000 + 10000 / 10000 * 2000 + DP !    \ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ
 DECIMAL
 
-\ *** поехали! ***
+\ *** РїРѕРµС…Р°Р»Рё! ***
 ONLY FORTH DEFINITIONS ALSO TC

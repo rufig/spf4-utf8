@@ -1,12 +1,12 @@
-\ â exe ôàéëå:
-\ 512 - çàãîëîâîê
-\ ïî 512 íà êàæäóþ èç ñåêöèé
-\ êîä
+\ Ð² exe Ñ„Ð°Ð¹Ð»Ðµ:
+\ 512 - Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº
+\ Ð¿Ð¾ 512 Ð½Ð° ÐºÐ°Ð¶Ð´ÑƒÑŽ Ð¸Ð· ÑÐµÐºÑ†Ð¸Ð¹
+\ ÐºÐ¾Ð´
 
-\ Â ïàìÿòè íà÷èíàÿ ñ IMAGE-BASE
+\ Ð’ Ð¿Ð°Ð¼ÑÑ‚Ð¸ Ð½Ð°Ñ‡Ð¸Ð½Ð°Ñ Ñ IMAGE-BASE
 \ 4096  - ???
-\ 4096 (1000h) - .idata \ èìïîðòèðóåìûå ïðîöåäóðû
-\  N           - .text  \ ñîáñòâåííî êîä
+\ 4096 (1000h) - .idata \ Ð¸Ð¼Ð¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐµÐ¼Ñ‹Ðµ Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñ‹
+\  N           - .text  \ ÑÐ¾Ð±ÑÑ‚Ð²ÐµÐ½Ð½Ð¾ ÐºÐ¾Ð´
 
 S" lib\EXT\SPF-ASM.F" INCLUDED
 S" lib\win\const.f" INCLUDED
@@ -14,7 +14,7 @@ S" lib\win\const.f" INCLUDED
 HEX
 
 
-\ ñòðóêòóðà PE-HEADER
+\ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° PE-HEADER
  0
  4 -- Signature \ PE/0/0
  2 -- CPUtype   \ 14Ch - 386
@@ -61,7 +61,7 @@ HEX
  4 -- LoaderFlags
  4 -- NumberOfRvaAndSizes
  
- \ IMAGE_DATA_DIRECTORY - âñåãî 16 entries
+ \ IMAGE_DATA_DIRECTORY - Ð²ÑÐµÐ³Ð¾ 16 entries
  
  4 -- ExportTableRVA
  4 -- TotalExportDataSize
@@ -92,18 +92,18 @@ HEX
  4 -- DelayImportTableRVA
  4 -- TotalDelayImportDataSize
   
- \ 14 îïèñàëè, äàëüøå ïðîñòî ALLOT
+ \ 14 Ð¾Ð¿Ð¸ÑÐ°Ð»Ð¸, Ð´Ð°Ð»ÑŒÑˆÐµ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ ALLOT
  2 8 * -- ReservedSections
  
 CONSTANT /PE-HEADER
 
-\ ñòðóêòóðà - òàáëèöà îáúåêòîâ (èä¸ò âñëåä çà PE-header)
+\ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° - Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ð° Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð² (Ð¸Ð´Ñ‘Ñ‚ Ð²ÑÐ»ÐµÐ´ Ð·Ð° PE-header)
  0
  8 -- OT.ObjectName        \ CODE\0\0\0\0
- 4 -- OT.VirtualSize       \ ñêîëüêî ïàìÿòè îòâîäèòñÿ îáúåêòó ïðè çàãðóêå
- 4 -- OT.RVA               \ îòíîñèòåëüíûé âèðòóàëüíûé àäðåñ
- 4 -- OT.PhisicalSize      \ ôèçè÷åñêèé ðàçìåð îáúåêòà â ôàéëå
- 4 -- OT.PhisicalOffset    \ ñìåùåíèå â exe-ôàéëå
+ 4 -- OT.VirtualSize       \ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¿Ð°Ð¼ÑÑ‚Ð¸ Ð¾Ñ‚Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¾Ð±ÑŠÐµÐºÑ‚Ñƒ Ð¿Ñ€Ð¸ Ð·Ð°Ð³Ñ€ÑƒÐºÐµ
+ 4 -- OT.RVA               \ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð²Ð¸Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ
+ 4 -- OT.PhisicalSize      \ Ñ„Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° Ð² Ñ„Ð°Ð¹Ð»Ðµ
+ 4 -- OT.PhisicalOffset    \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð² exe-Ñ„Ð°Ð¹Ð»Ðµ
  4 -- OT.Res1              \ pointer to relocations
  4 -- OT.Res2              \ pointer to line numbers
  2 -- OT.Res3              \ number of relocations
@@ -112,14 +112,14 @@ CONSTANT /PE-HEADER
 CONSTANT /ObjectTable
 
 
-\ Ñòðóêòóðà çàïèñåé â êàòàëîãå èìïîðòà .idata (îïûòíûì ïóòåì)
+\ Ð¡Ñ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð·Ð°Ð¿Ð¸ÑÐµÐ¹ Ð² ÐºÐ°Ñ‚Ð°Ð»Ð¾Ð³Ðµ Ð¸Ð¼Ð¿Ð¾Ñ€Ñ‚Ð° .idata (Ð¾Ð¿Ñ‹Ñ‚Ð½Ñ‹Ð¼ Ð¿ÑƒÑ‚ÐµÐ¼)
 0
-4 -- ID.ImportLookupTableRVA  \ óêàçàòåëü íà òàáëèöó àäðåñîâ èì¸í èìï.ïðîöåäóð
+4 -- ID.ImportLookupTableRVA  \ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ Ð°Ð´Ñ€ÐµÑÐ¾Ð² Ð¸Ð¼Ñ‘Ð½ Ð¸Ð¼Ð¿.Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€
 4 -- ID.TimeDateStamp
 2 -- ID.MajorVersion
 2 -- ID.MinorVersion
-4 -- ID.NameRVA               \ óêàçàòåëü íà èìÿ DLL
-4 -- ID.ImportAddressTableRVA \ óêàçàòåëü íà òàáëèöó àäðåñîâ ïðîöåäóð
+4 -- ID.NameRVA               \ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð¸Ð¼Ñ DLL
+4 -- ID.ImportAddressTableRVA \ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ Ð°Ð´Ñ€ÐµÑÐ¾Ð² Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€
 CONSTANT /ImportDirectory
 
  0
@@ -131,12 +131,12 @@ CONSTANT /ImportDirectory
  4 -- ED.OrdinalBase       \ 1
  4 -- ED.NumberOfFunctions
  4 -- ED.NumberOfNames
- 4 -- ED.AddressTableRVA   \ 50028h òàì 1006Eh = entry point of "__Get..."
- 4 -- ED.NamePtrTableRVA   \ 5002Ch òàì 5003D, à â 5003D "__GetExceptDLLInfo"
- 4 -- ED.OrdinalTableRVA   \ 50030h òàì 0000 = ordinal of "__Get..."
+ 4 -- ED.AddressTableRVA   \ 50028h Ñ‚Ð°Ð¼ 1006Eh = entry point of "__Get..."
+ 4 -- ED.NamePtrTableRVA   \ 5002Ch Ñ‚Ð°Ð¼ 5003D, Ð° Ð² 5003D "__GetExceptDLLInfo"
+ 4 -- ED.OrdinalTableRVA   \ 50030h Ñ‚Ð°Ð¼ 0000 = ordinal of "__Get..."
 CONSTANT /ExportDirectory
 
-\ -------------------------- ïðèìåð ---------------------------------
+\ -------------------------- Ð¿Ñ€Ð¸Ð¼ÐµÑ€ ---------------------------------
 
 CREATE ImportDirectory
        HERE /ImportDirectory 2 * DUP ALLOT ERASE
@@ -223,10 +223,10 @@ HERE PE-HEADER -  18 -  PE-HEADER NTHDRsize W!
 \ --------------------------------------------------------
 
 HERE DUP /ObjectTable DUP ALLOT ERASE DUP S" .idata" ROT OT.ObjectName SWAP MOVE       \ CODE\0\0\0\0
- /ID-SIZE OVER OT.VirtualSize !      \ ñêîëüêî ïàìÿòè îòâîäèòñÿ îáúåêòó ïðè çàãðóêå
- 1000 OVER OT.RVA !              \ îòíîñèòåëüíûé âèðòóàëüíûé àäðåñ
+ /ID-SIZE OVER OT.VirtualSize !      \ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¿Ð°Ð¼ÑÑ‚Ð¸ Ð¾Ñ‚Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¾Ð±ÑŠÐµÐºÑ‚Ñƒ Ð¿Ñ€Ð¸ Ð·Ð°Ð³Ñ€ÑƒÐºÐµ
+ 1000 OVER OT.RVA !              \ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð²Ð¸Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ
   200 OVER OT.PhisicalSize !     \
-  200 OVER OT.PhisicalOffset !   \ ñìåùåíèå â exe-ôàéëå
+  200 OVER OT.PhisicalOffset !   \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð² exe-Ñ„Ð°Ð¹Ð»Ðµ
 \  IMAGE_SCN_CNT_INITIALIZED_DATA
   IMAGE_SCN_CNT_CODE
   IMAGE_SCN_MEM_READ     OR
@@ -236,10 +236,10 @@ HERE DUP /ObjectTable DUP ALLOT ERASE DUP S" .idata" ROT OT.ObjectName SWAP MOVE
 DROP
 
 HERE DUP /ObjectTable DUP ALLOT ERASE DUP S" .text" ROT OT.ObjectName SWAP MOVE       \ CODE\0\0\0\0
- 1000 OVER OT.VirtualSize !      \ ñêîëüêî ïàìÿòè îòâîäèòñÿ îáúåêòó ïðè çàãðóêå
- 2000 OVER OT.RVA !              \ îòíîñèòåëüíûé âèðòóàëüíûé àäðåñ
+ 1000 OVER OT.VirtualSize !      \ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¿Ð°Ð¼ÑÑ‚Ð¸ Ð¾Ñ‚Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¾Ð±ÑŠÐµÐºÑ‚Ñƒ Ð¿Ñ€Ð¸ Ð·Ð°Ð³Ñ€ÑƒÐºÐµ
+ 2000 OVER OT.RVA !              \ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð²Ð¸Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ
   200 OVER OT.PhisicalSize !     \
-  400 OVER OT.PhisicalOffset !   \ ñìåùåíèå â exe-ôàéëå
+  400 OVER OT.PhisicalOffset !   \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð² exe-Ñ„Ð°Ð¹Ð»Ðµ
   IMAGE_SCN_CNT_CODE  
   IMAGE_SCN_MEM_READ     OR
   IMAGE_SCN_MEM_WRITE    OR
@@ -251,7 +251,7 @@ OT.VirtualSize
 
 HERE EXE-HEADER - CONSTANT /EXE-HEADER
 \ -----------------
-VARIABLE ADDROFUSER32       \ âðåìåííûå ïåðåìåííûå (íóæíû äëÿ ðó÷íîé ñáîðêè ìîäóëÿ)
+VARIABLE ADDROFUSER32       \ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ (Ð½ÑƒÐ¶Ð½Ñ‹ Ð´Ð»Ñ Ñ€ÑƒÑ‡Ð½Ð¾Ð¹ ÑÐ±Ð¾Ñ€ÐºÐ¸ Ð¼Ð¾Ð´ÑƒÐ»Ñ)
 VARIABLE ADDROFMESSAGEBOX
 VARIABLE ADDROFOK
 VARIABLE ADDROFALL
@@ -277,7 +277,7 @@ INIT-ASM
     PUSH # 0
     PUSH # 300000       \ Z" OK"
      A; HERE 4 - ADDROFOK !
-    PUSH # 400000       \ Z" Âñ¸ ðàáîòàåò!"
+    PUSH # 400000       \ Z" Ð’ÑÑ‘ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚!"
      A; HERE 4 - ADDROFALL !
     PUSH # 0
 
@@ -289,11 +289,11 @@ HEX
 HERE OVER - 402000 +  ADDROFUSER32 @ !     S" USER32.DLL"    HERE SWAP DUP ALLOT MOVE 0 C,
 HERE OVER - 402000 +  ADDROFMESSAGEBOX @ ! S" MessageBoxA"   HERE SWAP DUP ALLOT MOVE 0 C,
 HERE OVER - 402000 +  ADDROFOK @ !         S" SPF-STUB"       HERE SWAP DUP ALLOT MOVE 0 C,
-HERE OVER - 402000 +  ADDROFALL @ !        S" Ýòî øàáëîí EXE-ôàéëà ôîðìàòà PE," HERE SWAP DUP ALLOT MOVE 0D C,
-                                           S" èñïîëüçóåìûé JP-Ôîðòîì 1.0 äëÿ"   HERE SWAP DUP ALLOT MOVE 0D C,
-                                           S" ôîðìèðîâàíèÿ âûïîëíèìûõ ôàéëîâ."  HERE SWAP DUP ALLOT MOVE 0D C, 0D C,
-                                           S" Copyright (C) 1995-96 ×åðåçîâ À.Þ." HERE SWAP DUP ALLOT MOVE 0D C,
-                                           S" Ìîäèôèêàöèÿ 19.06.2000 ßêèìîâ Ä.À." HERE SWAP DUP ALLOT MOVE 0 C,                                           
+HERE OVER - 402000 +  ADDROFALL @ !        S" Ð­Ñ‚Ð¾ ÑˆÐ°Ð±Ð»Ð¾Ð½ EXE-Ñ„Ð°Ð¹Ð»Ð° Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð° PE," HERE SWAP DUP ALLOT MOVE 0D C,
+                                           S" Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ð¹ JP-Ð¤Ð¾Ñ€Ñ‚Ð¾Ð¼ 1.0 Ð´Ð»Ñ"   HERE SWAP DUP ALLOT MOVE 0D C,
+                                           S" Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ð¼Ñ‹Ñ… Ñ„Ð°Ð¹Ð»Ð¾Ð²."  HERE SWAP DUP ALLOT MOVE 0D C, 0D C,
+                                           S" Copyright (C) 1995-96 Ð§ÐµÑ€ÐµÐ·Ð¾Ð² Ð.Ð®." HERE SWAP DUP ALLOT MOVE 0D C,
+                                           S" ÐœÐ¾Ð´Ð¸Ñ„Ð¸ÐºÐ°Ñ†Ð¸Ñ 19.06.2000 Ð¯ÐºÐ¸Ð¼Ð¾Ð² Ð”.Ð." HERE SWAP DUP ALLOT MOVE 0 C,                                           
 
 HERE CONSTANT TEST-MSG-END
      CONSTANT TEST-MSG-BEGIN
@@ -305,7 +305,7 @@ HEX
 : WRITE-EXE-HEADER
   >R
   EXE-HEADER /EXE-HEADER R@ WRITE-FILE THROW
-  200 /EXE-HEADER - HERE OVER ERASE \ äîâîäèì äî 512, çàòåì ïîéäóò ñåêöèè
+  200 /EXE-HEADER - HERE OVER ERASE \ Ð´Ð¾Ð²Ð¾Ð´Ð¸Ð¼ Ð´Ð¾ 512, Ð·Ð°Ñ‚ÐµÐ¼ Ð¿Ð¾Ð¹Ð´ÑƒÑ‚ ÑÐµÐºÑ†Ð¸Ð¸
   HERE SWAP R> WRITE-FILE THROW
 ;
 : WRITE-ID

@@ -1,9 +1,9 @@
 \ original (c) A.Cherezov  ( SPF314\EXT\MUTEX.F)
 
 \ 06.Apr.2001 Ruv
-\  * выделил мутексы в отдельную либу (синхронизация в Synchr.f)
-\  * имена: CreateMut ReleaseMut DeleteMut
-\  * Wait и Release* не возвращают ior. При ошибке вызывают THROW внутри.
+\  * РІС‹РґРµР»РёР» РјСѓС‚РµРєСЃС‹ РІ РѕС‚РґРµР»СЊРЅСѓСЋ Р»РёР±Сѓ (СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЏ РІ Synchr.f)
+\  * РёРјРµРЅР°: CreateMut ReleaseMut DeleteMut
+\  * Wait Рё Release* РЅРµ РІРѕР·РІСЂР°С‰Р°СЋС‚ ior. РџСЂРё РѕС€РёР±РєРµ РІС‹Р·С‹РІР°СЋС‚ THROW РІРЅСѓС‚СЂРё.
 
 WINAPI: CreateMutexA        KERNEL32.DLL
 WINAPI: ReleaseMutex        KERNEL32.DLL
@@ -23,14 +23,14 @@ WINAPI: ReleaseMutex        KERNEL32.DLL
 )
 
 : CreateMut ( addr u flag -- handle ior )
-\ создает объект взаимного исключения
-\ addr u - имя
-\ flag=TRUE, если создаваемый объект нужно сразу занять
+\ СЃРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ РІР·Р°РёРјРЅРѕРіРѕ РёСЃРєР»СЋС‡РµРЅРёСЏ
+\ addr u - РёРјСЏ
+\ flag=TRUE, РµСЃР»Рё СЃРѕР·РґР°РІР°РµРјС‹Р№ РѕР±СЉРµРєС‚ РЅСѓР¶РЅРѕ СЃСЂР°Р·Сѓ Р·Р°РЅСЏС‚СЊ
   NIP  1 AND  0 CreateMutexA DUP ERR
 ;
 
 : ReleaseMut ( handle -- )
-\ освобождает объект
+\ РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РѕР±СЉРµРєС‚
   ReleaseMutex ERR THROW
 ;
 

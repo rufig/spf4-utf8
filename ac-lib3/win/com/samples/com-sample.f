@@ -1,11 +1,11 @@
-\ 07.02.2000 А.Черезов
-\ ------------------- пример реализации методов интерфейсов ----------------
+\ 07.02.2000 Рђ.Р§РµСЂРµР·РѕРІ
+\ ------------------- РїСЂРёРјРµСЂ СЂРµР°Р»РёР·Р°С†РёРё РјРµС‚РѕРґРѕРІ РёРЅС‚РµСЂС„РµР№СЃРѕРІ ----------------
 
 REQUIRE CreateObject ~ac/lib/win/com/com.f
 
 VARIABLE ForthComClassObject
 
-\ реализованные интерфейсы (эти переменные [адреса] можно отдавать там, где требуется указатель интерфейса )
+\ СЂРµР°Р»РёР·РѕРІР°РЅРЅС‹Рµ РёРЅС‚РµСЂС„РµР№СЃС‹ (СЌС‚Рё РїРµСЂРµРјРµРЅРЅС‹Рµ [Р°РґСЂРµСЃР°] РјРѕР¶РЅРѕ РѕС‚РґР°РІР°С‚СЊ С‚Р°Рј, РіРґРµ С‚СЂРµР±СѓРµС‚СЃСЏ СѓРєР°Р·Р°С‚РµР»СЊ РёРЅС‚РµСЂС„РµР№СЃР° )
 VARIABLE ForthIClassFactory
 VARIABLE ForthIUnknown
 VARIABLE ForthIForth
@@ -64,11 +64,11 @@ VARIABLE LOCKCNT
 ' (FStub) WNDPROC: FStub
 
 CREATE ForthVTable
-' FQueryInterface ,         \ методы интерфейса IUnknown
+' FQueryInterface ,         \ РјРµС‚РѕРґС‹ РёРЅС‚РµСЂС„РµР№СЃР° IUnknown
 ' FAddRef ,
 ' FRelease ,
 
-' FCreateInstance ,         \ методы интерфейса IClassFactory
+' FCreateInstance ,         \ РјРµС‚РѕРґС‹ РёРЅС‚РµСЂС„РµР№СЃР° IClassFactory
 ' FLockServer ,
 
 ' FStub ,
@@ -103,7 +103,7 @@ VARIABLE ForthComInterface
   CLSCTX_LOCAL_SERVER
   0 \ outer
   ForthComGUID
-  CoCreateInstance ( это вызывает на сервере IClassFactory.CreateInstance)
+  CoCreateInstance ( СЌС‚Рѕ РІС‹Р·С‹РІР°РµС‚ РЅР° СЃРµСЂРІРµСЂРµ IClassFactory.CreateInstance)
 ;
 : ComConnectToForth ( -- ior )
   ForthComGUID ComGetForthGUID
@@ -112,7 +112,7 @@ VARIABLE ForthComInterface
   0 \ server
   CLSCTX_LOCAL_SERVER
   ForthComGUID
-  CoGetClassObject ( это вызывает на сервере LockServer, но не CreateInstance)
+  CoGetClassObject ( СЌС‚Рѕ РІС‹Р·С‹РІР°РµС‚ РЅР° СЃРµСЂРІРµСЂРµ LockServer, РЅРѕ РЅРµ CreateInstance)
 ;
 
 : TEST

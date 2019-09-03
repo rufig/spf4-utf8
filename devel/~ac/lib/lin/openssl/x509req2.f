@@ -1,5 +1,5 @@
-\ Ôóíêöèè ãåíåðàöèè çàïðîñîâ X.509-ñåðòèôèêàòîâ (PKCS #10) ñ óêàçàíèåì òîëüêî äîìåíà (â CN)
-\ äëÿ èñïîëüçîâàíèÿ â ACME-ïðîòîêîëå.
+\ Ð¤ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð³ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ¾Ð² X.509-ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ð² (PKCS #10) Ñ ÑƒÐºÐ°Ð·Ð°Ð½Ð¸ÐµÐ¼ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð¾Ð¼ÐµÐ½Ð° (Ð² CN)
+\ Ð´Ð»Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð² ACME-Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð»Ðµ.
 
 REQUIRE X509MkReq  ~ac/lib/lin/openssl/x509req.f
 
@@ -43,7 +43,7 @@ ALSO /usr/local/lib/libssl.so.1.1
 \  reqBio X509ReadBio DUMP
   reqBio keyBio
 ;
-: X509DER2PEM { addr u \ derBio pemBio x509 -- addr2 u2 } \ íà âõîäå è âûõîäå áàéòîâûå ìàññèâû
+: X509DER2PEM { addr u \ derBio pemBio x509 -- addr2 u2 } \ Ð½Ð° Ð²Ñ…Ð¾Ð´Ðµ Ð¸ Ð²Ñ‹Ñ…Ð¾Ð´Ðµ Ð±Ð°Ð¹Ñ‚Ð¾Ð²Ñ‹Ðµ Ð¼Ð°ÑÑÐ¸Ð²Ñ‹
   0 BIO_s_mem 1 BIO_new -> derBio
   u addr derBio 3 BIO_write DROP
   0 derBio 2 d2i_X509_bio -> x509

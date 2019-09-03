@@ -7,7 +7,7 @@ REQUIRE GET-FILE-LASTWRITETIME ~ac/lib/win/file/filetime.f
   2R> R> #N [CHAR] - HOLD
   DateM>S HOLDS [CHAR] - HOLD #N## #>
 ;
-: FILENAME-INTERNALDATE ( addr u -- addr2 u2 ) \ локальное время с указанием смещения
+: FILENAME-INTERNALDATE ( addr u -- addr2 u2 ) \ Р»РѕРєР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ СЃ СѓРєР°Р·Р°РЅРёРµРј СЃРјРµС‰РµРЅРёСЏ
   R/O OPEN-FILE
   IF DROP S" 23-Jun-2000 23:06:00 +0200"
   ELSE DUP FILE-INTERNALDATE ROT CLOSE-FILE THROW THEN  
@@ -19,7 +19,7 @@ REQUIRE GET-FILE-LASTWRITETIME ~ac/lib/win/file/filetime.f
   2R> R> ROT #N## [CHAR] - HOLD
   SWAP #N## [CHAR] - HOLD #N #>
 ;
-: FILENAME-UDATE ( addr u -- addr2 u2 ) \ локальное время
+: FILENAME-UDATE ( addr u -- addr2 u2 ) \ Р»РѕРєР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ
   R/O OPEN-FILE
   IF DROP S" 2000-06-23 23:06:00"
   ELSE DUP FILE-UDATE ROT CLOSE-FILE THROW THEN  

@@ -1,4 +1,4 @@
-\ Âñïîìîãàòåëüíûå ñëîâà äëÿ ðàáîòû ñ ÓÒÌ
+\ Ð’ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð° Ð´Ð»Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ Ð£Ð¢Ðœ
 [UNDEFINED] TIME&DATE [IF]
 S" lib\include\facil.f" INCLUDED
 [THEN]
@@ -11,16 +11,16 @@ CREATE MON-LENGTH1 31 C, 28 C, 31 C, 30 C, 31 C, 30 C,
 CREATE MON-LENGTH2 31 C, 31 C, 30 C, 31 C, 30 C, 31 C,
 
 EXPORT
-\ Ñ÷èòàåì CRC (8 áèò)
-\ ãäå: 	adr - àäðåñ íà÷àëà áóôåðà ñ äàííûìè
-\			n - êîëè÷åñòâî áàéò äëÿ ïîäñ÷¸òà
-\			c - êîä CRC
+\ Ð¡Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ CRC (8 Ð±Ð¸Ñ‚)
+\ Ð³Ð´Ðµ: 	adr - Ð°Ð´Ñ€ÐµÑ Ð½Ð°Ñ‡Ð°Ð»Ð° Ð±ÑƒÑ„ÐµÑ€Ð° Ñ Ð´Ð°Ð½Ð½Ñ‹Ð¼Ð¸
+\			n - ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð±Ð°Ð¹Ñ‚ Ð´Ð»Ñ Ð¿Ð¾Ð´ÑÑ‡Ñ‘Ñ‚Ð°
+\			c - ÐºÐ¾Ð´ CRC
 : CRC ( adr n -- c )
 crc 0!
 OVER + SWAP 
  ?DO I C@ crc +! ( @ + crc C!)  LOOP crc C@ ;
 
-\ Ïåðåâîäèì ÷èñëî n (áàéò) èç äâîè÷íî-äåñÿòè÷íîãî ïðåäñòàâëåíèÿ â äåñÿòè÷íîå
+\ ÐŸÐµÑ€ÐµÐ²Ð¾Ð´Ð¸Ð¼ Ñ‡Ð¸ÑÐ»Ð¾ n (Ð±Ð°Ð¹Ñ‚) Ð¸Ð· Ð´Ð²Ð¾Ð¸Ñ‡Ð½Ð¾-Ð´ÐµÑÑÑ‚Ð¸Ñ‡Ð½Ð¾Ð³Ð¾ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð² Ð´ÐµÑÑÑ‚Ð¸Ñ‡Ð½Ð¾Ðµ
 : HEX>DEC ( n -- n )
 DUP 0xF AND >R
 4 RSHIFT
@@ -48,17 +48,17 @@ DEN 30 * CONSTANT MES
 0 VALUE tMin
 0 VALUE tSek
 0 VALUE tmSek
-0 VALUE tTrue	\ ×àñû èäóò
-TRUE VALUE GMT		\ Åñëè 1, òî ÷àñ +3
-TRUE VALUE tekDate	\ Ðàñ÷¸ò ïî òåêóùåìó âðåìåíè TRUE - äà, FALSE - íåò
+0 VALUE tTrue	\ Ð§Ð°ÑÑ‹ Ð¸Ð´ÑƒÑ‚
+TRUE VALUE GMT		\ Ð•ÑÐ»Ð¸ 1, Ñ‚Ð¾ Ñ‡Ð°Ñ +3
+TRUE VALUE tekDate	\ Ð Ð°ÑÑ‡Ñ‘Ñ‚ Ð¿Ð¾ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¼Ñƒ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ TRUE - Ð´Ð°, FALSE - Ð½ÐµÑ‚
 
-: ?Âèñîêîñíûé
+: ?Ð’Ð¸ÑÐ¾ÐºÐ¾ÑÐ½Ñ‹Ð¹
   4 MOD 0=
 ;
 
 : (CTS>TIME) { n \ x  -- }
 0 TO tMes
-DUP TTRUEMASK AND IF TRUE TO tTrue ELSE FALSE TO tTrue THEN \ Ïðîâåðÿåì ôëàã äîñòîâåðíîñòè
+DUP TTRUEMASK AND IF TRUE TO tTrue ELSE FALSE TO tTrue THEN \ ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ Ñ„Ð»Ð°Ð³ Ð´Ð¾ÑÑ‚Ð¾Ð²ÐµÑ€Ð½Ð¾ÑÑ‚Ð¸
 TMASK AND 
 TO x 
 x DEN / tTrue IF 1+ THEN TO tDen
@@ -79,12 +79,12 @@ tDen n C@
 REPEAT
 ;
 
-\ Ïåðåñ÷èòûâàåì âðåìÿ (4 áàéòà) âûðàæåííîå â äåñÿòêàõ ìèëèñåêóíä
-\ â ÷èñëîâûå çíà÷åíèÿ
+\ ÐŸÐµÑ€ÐµÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ Ð²Ñ€ÐµÐ¼Ñ (4 Ð±Ð°Ð¹Ñ‚Ð°) Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð½Ð¾Ðµ Ð² Ð´ÐµÑÑÑ‚ÐºÐ°Ñ… Ð¼Ð¸Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´
+\ Ð² Ñ‡Ð¸ÑÐ»Ð¾Ð²Ñ‹Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ
 : CTS>TIME
 tekDate IF SYSTEMTIME GetLocalTime DROP THEN	\ 
 
-	SYSTEMTIME wYear W@ ?Âèñîêîñíûé  IF  29 ELSE 28 THEN MON-LENGTH1 1+ C!
+	SYSTEMTIME wYear W@ ?Ð’Ð¸ÑÐ¾ÐºÐ¾ÑÐ½Ñ‹Ð¹  IF  29 ELSE 28 THEN MON-LENGTH1 1+ C!
 	SYSTEMTIME wMonth W@ 6 >
 IF
 MON-LENGTH2 (CTS>TIME)
@@ -105,8 +105,8 @@ SYSTEMTIME wMilliseconds W@ 10 / +
 TTRUEMASK OR
 ;
 
-\ Ôîðìèðóåì âðåìÿ âûðàæåííîå â äåñÿòêàõ ìèëèñåêóíä
-\ â 4-åõ áàéòíîå çíà÷åíèå
+\ Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€ÑƒÐµÐ¼ Ð²Ñ€ÐµÐ¼Ñ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð½Ð¾Ðµ Ð² Ð´ÐµÑÑÑ‚ÐºÐ°Ñ… Ð¼Ð¸Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´
+\ Ð² 4-ÐµÑ… Ð±Ð°Ð¹Ñ‚Ð½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ
 : TIME>CTS ( -- n )
 	SYSTEMTIME wMonth W@ DUP 6 >
 	IF

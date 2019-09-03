@@ -90,7 +90,7 @@ USER link
   IF NextWord ." Replay-Nonce:[" 2DUP TYPE ." ]" CR " {s}" nonce ! THEN
   >IN 0! NextWord S" Link:" COMPARE 0=
   IF NextWord ." Link:[" 2DUP TYPE ." ]" CR " {s}" link ! THEN
-  \ варианты Link в ответах на разные запросы:
+  \ РІР°СЂРёР°РЅС‚С‹ Link РІ РѕС‚РІРµС‚Р°С… РЅР° СЂР°Р·РЅС‹Рµ Р·Р°РїСЂРѕСЃС‹:
   \ <https://acme-v01.api.letsencrypt.org/acme/authz/fQ...>;rel="up"
   \ <https://acme-v01.api.letsencrypt.org/acme/issuer-cert>;rel="up"		
 ;
@@ -130,7 +130,7 @@ USER link
 \  S" https://acme-staging.api.letsencrypt.org/acme/new-cert"
   S" https://acme-v01.api.letsencrypt.org/acme/new-cert"
   csr_a csr_u S" {" S' {s}"resource":"new-cert","csr":"{s}"}' S@ 2DUP TYPE CR
-  privateKey_ headerSuffix_a headerSuffix_u sendRequest \ здесь может быть JSON-ответ с ошибкой вместо сертификата
+  privateKey_ headerSuffix_a headerSuffix_u sendRequest \ Р·РґРµСЃСЊ РјРѕР¶РµС‚ Р±С‹С‚СЊ JSON-РѕС‚РІРµС‚ СЃ РѕС€РёР±РєРѕР№ РІРјРµСЃС‚Рѕ СЃРµСЂС‚РёС„РёРєР°С‚Р°
   ?DUP IF
     OVER C@ [CHAR] { =
     IF TYPE CR
@@ -178,7 +178,7 @@ USER link
   THEN
   type STR@ S" http-01" COMPARE 0=
   IF
-    \ если status=valid, а не pending, то повторную валидацию проводить не нужно (LE и не будет делать попытку)
+    \ РµСЃР»Рё status=valid, Р° РЅРµ pending, С‚Рѕ РїРѕРІС‚РѕСЂРЅСѓСЋ РІР°Р»РёРґР°С†РёСЋ РїСЂРѕРІРѕРґРёС‚СЊ РЅРµ РЅСѓР¶РЅРѕ (LE Рё РЅРµ Р±СѓРґРµС‚ РґРµР»Р°С‚СЊ РїРѕРїС‹С‚РєСѓ)
     token STR@ uri STR@ jwkThumbprint_a jwkThumbprint_u privateKey_ headerSuffix_a headerSuffix_u dom_a dom_u ProcessHttpChallenge
   THEN
 ;

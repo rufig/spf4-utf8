@@ -1,11 +1,11 @@
-\   ÍÓÌÍÛÒÛ Â¯ÂÌËˇ Á‡‰‡˜ Ì‡ ÙÓÚÂ (http://fforum.winglion.ru/viewtopic.php?p=7491#7491)
+\ –ö –∫–æ–Ω–∫—É—Ä—Å—É —Ä–µ—à–µ–Ω–∏—è –∑–∞–¥–∞—á –Ω–∞ —Ñ–æ—Ä—Ç–µ (http://fforum.winglion.ru/viewtopic.php?p=7491#7491)
 
-\ «‡‰‡˜‡ Ó ¯ÂÒÚË ¯‡ıÏ‡ÚÌ˚ı ÍÓÌˇı
+\ –ó–∞–¥–∞—á–∞ –æ —à–µ—Å—Ç–∏ —à–∞—Ö–º–∞—Ç–Ω—ã—Ö –∫–æ–Ω—è—Ö
 
-\ ƒÎˇ Á‡ÔÛÒÍ‡ ÌÛÊÂÌ ‰ËÒÚË·ÛÚË‚ SPF:
+\ –î–ª—è –∑–∞–ø—É—Å–∫–∞ –Ω—É–∂–µ–Ω –¥–∏—Å—Ç—Ä–∏–±—É—Ç–∏–≤ SPF:
 \ http://sourceforge.net/project/showfiles.php?group_id=17919
 
-\ » ‡ÔÂÎ¸ÒÍÓÂ Ó·ÌÓ‚ÎÂÌËÂ:
+\ –ò –∞–ø—Ä–µ–ª—å—Å–∫–æ–µ –æ–±–Ω–æ–≤–ª–µ–Ω–∏–µ:
 \ http://sourceforge.net/project/shownotes.php?release_id=497972&group_id=17919
 
 
@@ -21,29 +21,29 @@ REQUIRE iterateByCellValues ~profit/lib/bac4th-iterators.f
 REQUIRE list+ ~pinka/lib/list.f
 
 
-3 CONSTANT W \ ¯ËËÌ‡ ÔÓÎˇ
-4 CONSTANT H \ ‚˚ÒÓÚ‡ ÔÓÎˇ
+3 CONSTANT W \ —à–∏—Ä–∏–Ω–∞ –ø–æ–ª—è
+4 CONSTANT H \ –≤—ã—Å–æ—Ç–∞ –ø–æ–ª—è
 
-50 CONSTANT MAX-MOVES \ Ï‡ÍÒËÏ‡Î¸ÌÓÂ ÍÓÎ-‚Ó ıÓ‰Ó‚ ‚ ÔÂÂ·ÓÂ
+50 CONSTANT MAX-MOVES \ –º–∞–∫—Å–∏–º–∞–ª—å–Ω–æ–µ –∫–æ–ª-–≤–æ —Ö–æ–¥–æ–≤ –≤ –ø–µ—Ä–µ–±–æ—Ä–µ
 
-: list=> ( list --> value \ <-- ) R> SWAP List-ForEach ; \ ËÚÂ‡ÚÓ ÔÓ ÒÔËÒÍÛ
+: list=> ( list --> value \ <-- ) R> SWAP List-ForEach ; \ –∏—Ç–µ—Ä–∞—Ç–æ—Ä –ø–æ —Å–ø–∏—Å–∫—É
 
-\ —ÚÛÍÚÛ‡ ÒÔËÒÍ‡
+\ –°—Ç—Ä—É–∫—Ç—É—Ä–∞ —Å–ø–∏—Å–∫–∞
 0
 __ board-link
 __ board-addr
 __ board-moves
 CONSTANT board-elem
 
-\ ŒÚÍ‡Ú˚‚‡ÂÏÓÂ ‰‚ÓÈÌÓÂ ÔËÒ‚‡Ë‚‡ÌËÂ
+\ –û—Ç–∫–∞—Ç—ã–≤–∞–µ–º–æ–µ –¥–≤–æ–π–Ω–æ–µ –ø—Ä–∏—Å–≤–∞–∏–≤–∞–Ω–∏–µ
 : 2KEEP! ( d addr --> \ <-- ) PRO SWAP OVER KEEP! CELL+ KEEP! CONT ;
 
- \ Ï‡ÒÒË‚ ÍÓÚÓ˚È ı‡ÌËÚ ÛÍ‡Á‡ÚÂÎË Ì‡ ÔÂ‰ÒÚ‡‚ÎÂÌËÂ ÔÓÁËˆËÈ ‰Îˇ ıÓ‰Ó‚
+ \ –º–∞—Å—Å–∏–≤ –∫–æ—Ç–æ—Ä—ã–π —Ö—Ä–∞–Ω–∏—Ç —É–∫–∞–∑–∞—Ç–µ–ª–∏ –Ω–∞ –ø—Ä–µ–¥—Å—Ç–∞–≤–ª–µ–Ω–∏–µ –ø–æ–∑–∏—Ü–∏–π –¥–ª—è —Ö–æ–¥–æ–≤
 CREATE LAST-BOARDS MAX-MOVES CELLS ALLOT
 
-W CONSTANT HORSES \ ÒÍÓÎ¸ÍÓ ÍÓÌÂÈ Û ·ÂÎ˚ı Ë Û ˜∏Ì˚ı
+W CONSTANT HORSES \ —Å–∫–æ–ª—å–∫–æ –∫–æ–Ω–µ–π —É –±–µ–ª—ã—Ö –∏ —É —á—ë—Ä–Ω—ã—Ö
 
-CREATE STABLES \ ÁÌ‡˜ÂÌËˇ ÚÂÍÛ˘Ëı ÔÓÎÓÊÂÌËÈ
+CREATE STABLES \ –∑–Ω–∞—á–µ–Ω–∏—è —Ç–µ–∫—É—â–∏—Ö –ø–æ–ª–æ–∂–µ–Ω–∏–π
 HORSES 2 CELLS * ALLOT \ white horses
 HORSES 2 CELLS * ALLOT \ black horses
 
@@ -51,79 +51,79 @@ HORSES 2 CELLS * ALLOT \ black horses
 : WHITE ( i -- i )  ;
 : BLACK ( i -- i' ) HORSES + ;
 
-: WHITE-HORSES ( --> i \ <-- i ) PRO \ ·ÂÎ˚Â ÎÓ¯‡‰ÍË
+: WHITE-HORSES ( --> i \ <-- i ) PRO \ –±–µ–ª—ã–µ –ª–æ—à–∞–¥–∫–∏
 HORSES 0 DO I WHITE CONT DROP LOOP ;
 
-: BLACK-HORSES ( --> i \ <-- i ) PRO \ ˜∏Ì˚Â ÎÓ¯‡‰ÍË
+: BLACK-HORSES ( --> i \ <-- i ) PRO \ —á—ë—Ä–Ω—ã–µ –ª–æ—à–∞–¥–∫–∏
 HORSES 0 DO I BLACK CONT DROP LOOP ;
 
-: WCOORD (  --> x  \  <-- x )  PRO W 1+ 1 DO  I CONT DROP  LOOP ; \ ÔÓ·Â„ ÔÓ „ÓËÁÓÌÚ‡ÎË
-: HCOORD (  --> y  \  <-- y )  PRO H 1+ 1 DO  I CONT DROP  LOOP ; \ ÔÓ·Â„ ÔÓ ‚ÂÚËÍ‡ÎË
+: WCOORD (  --> x  \  <-- x )  PRO W 1+ 1 DO  I CONT DROP  LOOP ; \ –ø—Ä–æ–±–µ–≥ –ø–æ –≥–æ—Ä–∏–∑–æ–Ω—Ç–∞–ª–∏
+: HCOORD (  --> y  \  <-- y )  PRO H 1+ 1 DO  I CONT DROP  LOOP ; \ –ø—Ä–æ–±–µ–≥ –ø–æ –≤–µ—Ä—Ç–∏–∫–∞–ª–∏
 
-: BOARD ( --> y x \ <-- y x ) PRO HCOORD WCOORD CONT ; \ ÔÓ·Â„ ÔÓ ‚ÒÂÈ ‰ÓÒÍÂ
-\ ÚÂ·ÛÂÚ "˜ËÒÚÓ„Ó" ÒÚÂÍ‡ Û WCOORD Ë HCOORD ˜ÚÓ·˚ ‚˚‰‡‚‡Ú¸ ‰‚‡ ˜ËÒÎ‡
+: BOARD ( --> y x \ <-- y x ) PRO HCOORD WCOORD CONT ; \ –ø—Ä–æ–±–µ–≥ –ø–æ –≤—Å–µ–π –¥–æ—Å–∫–µ
+\ —Ç—Ä–µ–±—É–µ—Ç "—á–∏—Å—Ç–æ–≥–æ" —Å—Ç–µ–∫–∞ —É WCOORD –∏ HCOORD —á—Ç–æ–±—ã –≤—ã–¥–∞–≤–∞—Ç—å –¥–≤–∞ —á–∏—Å–ª–∞
 
-\ ÙËÎ¸Ú, ÔÓÔÛÒÍ‡ÂÚ ÚÓÎ¸ÍÓ ÚÂ ÁÌ‡˜ÂÌËˇ ÍÓÓ‰ËÌ‡Ú ÍÓÚÓ˚Â ÏÓ„ÛÚ ÒÓÒÚ‡‚ÎˇÚ¸ ıÓ‰ ÍÓÌ∏Ï
+\ —Ñ–∏–ª—å—Ç—Ä, –ø—Ä–æ–ø—É—Å–∫–∞–µ—Ç —Ç–æ–ª—å–∫–æ —Ç–µ –∑–Ω–∞—á–µ–Ω–∏—è –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç –∫–æ—Ç–æ—Ä—ã–µ –º–æ–≥—É—Ç —Å–æ—Å—Ç–∞–≤–ª—è—Ç—å —Ö–æ–¥ –∫–æ–Ω—ë–º
 : ?HORSE-MOVE ( x1 y1 y2 x2 <--> x1 y1 y2 x2 ) PRO
 2OVER 2OVER
 ROT - ABS  -ROT - ABS
 *> 2RESTB <*> SWAP <*   1 2 D= ONTRUE CONT ;
 
-\ „ÂÌÂËÓ‚‡Ú¸ ‚ÒÂ ‚ÓÁÏÓÊÌ˚Â ıÓ‰˚ ÍÓÌ∏Ï ËÁ ÍÓÓ‰ËÌ‡Ú x y
+\ –≥–µ–Ω–µ—Ä–∏—Ä–æ–≤–∞—Ç—å –≤—Å–µ –≤–æ–∑–º–æ–∂–Ω—ã–µ —Ö–æ–¥—ã –∫–æ–Ω—ë–º –∏–∑ –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç x y
 : HORSE-MOVES ( x y --> u v \ <-- u v ) PRO 2DROPB WCOORD HCOORD ( x y ) ?HORSE-MOVE CONT ;
 
-\ Á‡ÌˇÚÓ ·ÂÎÓÈ ÎÓ¯‡‰ÍÓÈ?
+\ –∑–∞–Ω—è—Ç–æ –±–µ–ª–æ–π –ª–æ—à–∞–¥–∫–æ–π?
 : ?IS-WHITE-HERE ( x y --> x y \ <-- x y ) PRO
 LOCAL x  LOCAL y
 2DUP y ! x !
 S| CUT: WHITE-HORSES DUP HORSE 2@ x @ y @ D= ONTRUE -CUT CONT ;
 
-\ Á‡ÌˇÚÓ ˜∏ÌÓÈ ÎÓ¯‡‰ÍÓÈ?
+\ –∑–∞–Ω—è—Ç–æ —á—ë—Ä–Ω–æ–π –ª–æ—à–∞–¥–∫–æ–π?
 : ?IS-BLACK-HERE ( x y --> x y \ <-- x y ) PRO
 LOCAL x  LOCAL y
 2DUP y ! x ! 
 S| CUT: BLACK-HORSES DUP HORSE 2@ x @ y @ D= ONTRUE -CUT CONT ;
 
-\ Á‡ÌˇÚÓ ÎË ‚ÓÓ·˘Â?
+\ –∑–∞–Ω—è—Ç–æ –ª–∏ –≤–æ–æ–±—â–µ?
 : ?CAN-MOVE-HERE ( x y --> x y \ <-- x y ) PRO S|
-NOT: ?IS-WHITE-HERE -NOT \ Õ≈“ ¡≈À€’ ÎÓ¯‡‰ÓÍ ‚ ÔÓÁËˆËË x y
-                         \ »
-NOT: ?IS-BLACK-HERE -NOT \ Õ≈“ ◊®–Õ€’ ÎÓ¯‡‰ÓÍ ‚ ÔÓÁËˆËË x y
+NOT: ?IS-WHITE-HERE -NOT \ –ù–ï–¢ –ë–ï–õ–´–• –ª–æ—à–∞–¥–æ–∫ –≤ –ø–æ–∑–∏—Ü–∏–∏ x y
+                         \ –ò
+NOT: ?IS-BLACK-HERE -NOT \ –ù–ï–¢ –ß–Å–†–ù–´–• –ª–æ—à–∞–¥–æ–∫ –≤ –ø–æ–∑–∏—Ü–∏–∏ x y
 CONT ;
 
-\ ‡Ú‡ÍÓ‚‡ÌÓ ·ÂÎ˚Ï ÍÓÌ∏Ï?
+\ –∞—Ç–∞–∫–æ–≤–∞–Ω–æ –±–µ–ª—ã–º –∫–æ–Ω—ë–º?
 : ?IS-ATTACKED-BY-WHITE ( x y --> x y \ <-- x y ) PRO
 LOCAL x  LOCAL y
 2DUP y ! x !
 S| CUT: WHITE-HORSES DUP HORSE 2@ x @ y @ 2DROPB ?HORSE-MOVE -CUT CONT ;
 
-\ ‡Ú‡ÍÓ‚‡ÌÓ ˜∏Ì˚Ï ÍÓÌ∏Ï?
+\ –∞—Ç–∞–∫–æ–≤–∞–Ω–æ —á—ë—Ä–Ω—ã–º –∫–æ–Ω—ë–º?
 : ?IS-ATTACKED-BY-BLACK ( x y --> x y \ <-- x y ) PRO
 LOCAL x  LOCAL y
 2DUP y ! x !
 S| CUT: BLACK-HORSES DUP HORSE 2@ x @ y @ 2DROPB ?HORSE-MOVE -CUT CONT ;
 
-\ ·ÂÎ˚È ÍÓÌ¸ ÏÓÊÂÚ ÔÓÈÚË ÚÛ‰‡?
+\ –±–µ–ª—ã–π –∫–æ–Ω—å –º–æ–∂–µ—Ç –ø–æ–π—Ç–∏ —Ç—É–¥–∞?
 : ?CAN-WHITE-MOVE-HERE PRO
 ?CAN-MOVE-HERE
 S| NOT: ?IS-ATTACKED-BY-BLACK -NOT CONT ;
 
-\ ˜∏Ì˚È ÍÓÌ¸ ÏÓÊÂÚ ÔÓÈÚË ÚÛ‰‡?
+\ —á—ë—Ä–Ω—ã–π –∫–æ–Ω—å –º–æ–∂–µ—Ç –ø–æ–π—Ç–∏ —Ç—É–¥–∞?
 : ?CAN-BLACK-MOVE-HERE PRO
 ?CAN-MOVE-HERE
 S| NOT: ?IS-ATTACKED-BY-WHITE -NOT CONT ;
 
-\ ‰‚ËÌÛÚ¸ ·ÂÎÓ„Ó ÍÓÌˇ ÔÓ‰ ÌÓÏÂÓÏ i
+\ –¥–≤–∏–Ω—É—Ç—å –±–µ–ª–æ–≥–æ –∫–æ–Ω—è –ø–æ–¥ –Ω–æ–º–µ—Ä–æ–º i
 : MOVE-WHITE-HORSE ( i --> \ <-- i ) PRO LOCAL h DUP
 HORSE DUP h ! 2@ HORSE-MOVES ( x y )
 ?CAN-WHITE-MOVE-HERE  2DUP h @ 2KEEP! CONT ;
 
-\ ‰‚ËÌÛÚ¸ ˜∏ÌÓ„Ó ÍÓÌˇ ÔÓ‰ ÌÓÏÂÓÏ i
+\ –¥–≤–∏–Ω—É—Ç—å —á—ë—Ä–Ω–æ–≥–æ –∫–æ–Ω—è –ø–æ–¥ –Ω–æ–º–µ—Ä–æ–º i
 : MOVE-BLACK-HORSE ( i --> \ <-- i ) PRO LOCAL h DUP
 HORSE DUP h ! 2@ HORSE-MOVES ( x y )
 ?CAN-BLACK-MOVE-HERE  2DUP h @ 2KEEP! CONT ;
 
-\ ‡ÒÒÚ‡‚ËÚ¸ ÍÓÌÂÈ ÔÓ Ì‡˜‡Î¸Ì˚Ï ÒÚÓÈÎ‡Ï
+\ —Ä–∞—Å—Å—Ç–∞–≤–∏—Ç—å –∫–æ–Ω–µ–π –ø–æ –Ω–∞—á–∞–ª—å–Ω—ã–º —Å—Ç–æ–π–ª–∞–º
 : INIT-POS
 LOCAL i
 
@@ -139,18 +139,18 @@ BLACK-HORSES
 i 1+! i @ OVER H SWAP HORSE 2!
 }EMERGE ;
 
- \ ‚˚‰‡Ú¸ Û˜‡ÒÚÓÍ Ô‡ÏˇÚË ÍÛ‰‡ Á‡ÔËÒ‡ÌÓ ÔÂ‰ÒÚ‡‚ÎÂÌËÂ ÚÂÍÛ˘ÂÈ ÔÓÁËˆËË ‰ÓÒÍË
+ \ –≤—ã–¥–∞—Ç—å —É—á–∞—Å—Ç–æ–∫ –ø–∞–º—è—Ç–∏ –∫—É–¥–∞ –∑–∞–ø–∏—Å–∞–Ω–æ –ø—Ä–µ–¥—Å—Ç–∞–≤–ª–µ–Ω–∏–µ —Ç–µ–∫—É—â–µ–π –ø–æ–∑–∏—Ü–∏–∏ –¥–æ—Å–∫–∏
 : DRAW-BOARD  ( --> addr u \ <-- )
-PRO arr{ \ Ì‡˜ËÌ‡ÂÏ „ÂÌÂËÓ‚‡Ú¸ Ï‡ÒÒË‚
+PRO arr{ \ –Ω–∞—á–∏–Ω–∞–µ–º –≥–µ–Ω–µ—Ä–∏—Ä–æ–≤–∞—Ç—å –º–∞—Å—Å–∏–≤
 BOARD ( y x ) 2DUP 2DROPB SWAP
-S| PREDICATE ?IS-WHITE-HERE SUCCEEDS \ ÂÒÎË ·ÂÎ‡ˇ ÎÓ¯‡‰Í‡
+S| PREDICATE ?IS-WHITE-HERE SUCCEEDS \ –µ—Å–ª–∏ –±–µ–ª–∞—è –ª–æ—à–∞–¥–∫–∞
 IF [CHAR] @ ELSE
-S| PREDICATE ?IS-BLACK-HERE SUCCEEDS \ ÂÒÎË ˜∏Ì‡ˇ ÎÓ¯‡‰Í‡
+S| PREDICATE ?IS-BLACK-HERE SUCCEEDS \ –µ—Å–ª–∏ —á—ë—Ä–Ω–∞—è –ª–æ—à–∞–¥–∫–∞
 IF [CHAR] # ELSE
-   BL       THEN THEN                \ ÂÒÎË ÌÂÚÛ ÌË˜Â„Ó
+   BL       THEN THEN                \ –µ—Å–ª–∏ –Ω–µ—Ç—É –Ω–∏—á–µ–≥–æ
 }arr CONT ;
 
-: PRINT-BOARD ( addr u -- ) \ ‡ÒÔÂ˜‡Ú‡Ú¸ ÔÂ‰ÒÚ‡‚ÎÂÌËÂ ÔÓÁËˆËË ‰ÓÒÍË
+: PRINT-BOARD ( addr u -- ) \ —Ä–∞—Å–ø–µ—á–∞—Ç–∞—Ç—å –ø—Ä–µ–¥—Å—Ç–∞–≤–ª–µ–Ω–∏–µ –ø–æ–∑–∏—Ü–∏–∏ –¥–æ—Å–∫–∏
 
 (: CR ."    " WCOORD DUP . SPACE ;)
 BACK EXECUTE TRACKING RESTB EXECUTE
@@ -167,74 +167,74 @@ i 1+! DUP EMIT ."  |" ;
 INIT-POS ( 1 c   1 BLACK HORSE 2! ) \ SHOW-BOARD \EOF
 \ DRAW-BOARD DUMP
 
-\ ›ÚË 2 ÓÔÂ‰ÂÎÂÌËˇ ‡‚ÌÓÁÌ‡˜Ì˚
+\ –≠—Ç–∏ 2 –æ–ø—Ä–µ–¥–µ–ª–µ–Ω–∏—è —Ä–∞–≤–Ω–æ–∑–Ω–∞—á–Ω—ã
 
-: ?ARE-WE-DONE-YET ( -- f ) \ ÒÛÏÏËÛ˛˘ÂÂ ÓÔÂ‰ÂÎÂÌËÂ
-&{ BLACK-HORSES DUP HORSE 2@ ( x y ) NIP 1 = }& \ AND(y(‚ÒÂ ˜∏Ì˚Â ÎÓ¯‡‰ÍË)=1)
-&{ WHITE-HORSES DUP HORSE 2@ ( x y ) NIP H = }& \ AND(y(‚ÒÂ ·ÂÎ˚Â  ÎÓ¯‡‰ÍË)=h)
+: ?ARE-WE-DONE-YET ( -- f ) \ —Å—É–º–º–∏—Ä—É—é—â–µ–µ –æ–ø—Ä–µ–¥–µ–ª–µ–Ω–∏–µ
+&{ BLACK-HORSES DUP HORSE 2@ ( x y ) NIP 1 = }& \ AND(y(–≤—Å–µ —á—ë—Ä–Ω—ã–µ –ª–æ—à–∞–¥–∫–∏)=1)
+&{ WHITE-HORSES DUP HORSE 2@ ( x y ) NIP H = }& \ AND(y(–≤—Å–µ –±–µ–ª—ã–µ  –ª–æ—à–∞–¥–∫–∏)=h)
 AND ;
 
-: ?ARE-WE-DONE-YET ( -- f ) PREDICATE \ ÓÔÂ‰ÂÎÂÌËÂ Í‚‡ÌÚÓÓÏ ÓÚËˆ‡ÌËˇ
-S| NOT: BLACK-HORSES DUP HORSE 2@ ( x y ) NIP 1 = ONFALSE -NOT \ Õ≈“ Ú‡ÍËı ¡≈À€’  ÀŒÿ¿ƒŒ  Û ÍÓÚÓ˚ı Ë„ÂÍ Õ≈ –¿¬≈Õ 1
-S| NOT: WHITE-HORSES DUP HORSE 2@ ( x y ) NIP H = ONFALSE -NOT \ Õ≈“ Ú‡ÍËı ◊®–Õ€’ ÀŒÿ¿ƒŒ  Û ÍÓÚÓ˚ı Ë„ÂÍ Õ≈ –¿¬≈Õ H
+: ?ARE-WE-DONE-YET ( -- f ) PREDICATE \ –æ–ø—Ä–µ–¥–µ–ª–µ–Ω–∏–µ –∫–≤–∞–Ω—Ç–æ—Ä–æ–º –æ—Ç—Ä–∏—Ü–∞–Ω–∏—è
+S| NOT: BLACK-HORSES DUP HORSE 2@ ( x y ) NIP 1 = ONFALSE -NOT \ –ù–ï–¢ —Ç–∞–∫–∏—Ö –ë–ï–õ–´–•  –õ–û–®–ê–î–û–ö —É –∫–æ—Ç–æ—Ä—ã—Ö –∏–≥—Ä–µ–∫ –ù–ï –†–ê–í–ï–ù 1
+S| NOT: WHITE-HORSES DUP HORSE 2@ ( x y ) NIP H = ONFALSE -NOT \ –ù–ï–¢ —Ç–∞–∫–∏—Ö –ß–Å–†–ù–´–• –õ–û–®–ê–î–û–ö —É –∫–æ—Ç–æ—Ä—ã—Ö –∏–≥—Ä–µ–∫ –ù–ï –†–ê–í–ï–ù H
 SUCCEEDS ;
 
 : ?ODD ( n -- f )  1 AND ;
 
 :NONAME
 
-LOCAL moves \ ÔÂÂÏÂÌÌ‡ˇ ıÓ‰‡
+LOCAL moves \ –ø–µ—Ä–µ–º–µ–Ω–Ω–∞—è —Ö–æ–¥–∞
 
 LOCAL cur-board
 LOCAL cur-board#
 
-LOCAL boards \ ÒÔËÒÓÍ ÔÓÁËˆËÈ
+LOCAL boards \ —Å–ø–∏—Å–æ–∫ –ø–æ–∑–∏—Ü–∏–π
 boards 0!
 
 LOCAL i
 
 moves 0!
 
-START{ \ „Î‡‚Ì˚È ˆËÍÎ ÔÂÂ·Ó‡
+START{ \ –≥–ª–∞–≤–Ω—ã–π —Ü–∏–∫–ª –ø–µ—Ä–µ–±–æ—Ä–∞
 BEGIN
-boards @ \ ÒÚ‡ÓÂ ÁÌ‡˜ÂÌËÂ ÒÔËÒÍ‡ ÒÓı‡ÌˇÂÏ
+boards @ \ —Å—Ç–∞—Ä–æ–µ –∑–Ω–∞—á–µ–Ω–∏–µ —Å–ø–∏—Å–∫–∞ —Å–æ—Ö—Ä–∞–Ω—è–µ–º
 
-START{ \ ˆËÍÎ ÓÔÂ‰ÂÎÂÌËˇ ÛÌËÍ‡Î¸ÌÓÒÚË ÔÓÁËˆËË
+START{ \ —Ü–∏–∫–ª –æ–ø—Ä–µ–¥–µ–ª–µ–Ω–∏—è —É–Ω–∏–∫–∞–ª—å–Ω–æ—Å—Ç–∏ –ø–æ–∑–∏—Ü–∏–∏
 DRAW-BOARD cur-board# ! cur-board !
 S| NOT:
-boards list=> DROPB \ ˆËÍÎ ÔÓ ÒÔËÒÍÛ ÔÓÁËˆËÈ
+boards list=> DROPB \ —Ü–∏–∫–ª –ø–æ —Å–ø–∏—Å–∫—É –ø–æ–∑–∏—Ü–∏–π
 DUP board-moves @ ?ODD moves @ ?ODD = ONTRUE \ 
-DUP board-moves @ moves @ > ONFALSE \ ÚÓÎ¸ÍÓ ÒÂ‰Ë ÔÓÁËˆËÈ ‚ÓÁÌËÍ¯Ëı ‚ ‡ÌÌËı ıÓ‰‡ı
-DUP board-addr @ cur-board# @ cur-board @ cur-board# @ COMPARE 0= ONTRUE \ Ò‡‚ÌË‚‡ÂÏ ÔÓÁËˆËË Ì‡ ‡‚ÂÌÒÚ‚Ó
--NOT \ ÌÂÚ ÔÓÁËˆËÈ ‚ ÒÔËÒÍÂ, ÒÓ‚Ô‡‰‡˛˘Ëı Ò ÚÂÍÛ˘ÂÈ
-\ ˝ÚÓ ÁÌ‡˜ËÚ ˜ÚÓ ÔÓÁËˆËˇ ÛÌËÍ‡Î¸Ì‡, Ë Ì‡‰Ó
+DUP board-moves @ moves @ > ONFALSE \ —Ç–æ–ª—å–∫–æ —Å—Ä–µ–¥–∏ –ø–æ–∑–∏—Ü–∏–π –≤–æ–∑–Ω–∏–∫—à–∏—Ö –≤ —Ä–∞–Ω–Ω–∏—Ö —Ö–æ–¥–∞—Ö
+DUP board-addr @ cur-board# @ cur-board @ cur-board# @ COMPARE 0= ONTRUE \ —Å—Ä–∞–≤–Ω–∏–≤–∞–µ–º –ø–æ–∑–∏—Ü–∏–∏ –Ω–∞ —Ä–∞–≤–µ–Ω—Å—Ç–≤–æ
+-NOT \ –Ω–µ—Ç –ø–æ–∑–∏—Ü–∏–π –≤ —Å–ø–∏—Å–∫–µ, —Å–æ–≤–ø–∞–¥–∞—é—â–∏—Ö —Å —Ç–µ–∫—É—â–µ–π
+\ —ç—Ç–æ –∑–Ω–∞—á–∏—Ç —á—Ç–æ –ø–æ–∑–∏—Ü–∏—è —É–Ω–∏–∫–∞–ª—å–Ω–∞, –∏ –Ω–∞–¥–æ
 
-\ Á‡ÔËÒ˚‚‡Ú¸ ÌÓ‚˚È ˝ÎÂÏÂÌÚ ÒÔËÒÍ‡
-board-elem ALLOCATE THROW >R \ ÒÓÁ‰‡ÎË ˝ÎÂÏÂÌÚ
-cur-board @ cur-board# @ HEAP-COPY \ DRAW-BOARD ÒÌËÏ‡ÂÚ "Ò‚ÓÈ" Û˜‡ÒÚÓÍ Ô‡ÏˇÚË ËÁ ÍÛ˜Ë, ÔÓ˝ÚÓÏÛ ÍÓÔËÛÂÏ ˇ‚ÌÓ
-DUP R@ board-addr ! \ Á‡ÔËÒ˚‚‡ÂÏ ‚ ÔÓÎÂ ‰ÓÒÍÛ
-moves @ CELLS LAST-BOARDS + ! \ Ú‡ÍÊÂ ÍÓÔË˛ ÚÂÍÛ˘ÂÈ ‰ÓÒÍË ÔË¯ÂÏ ‚ ËÒÚÓË˛ ÚÂÍÛ˘Â„Ó Â¯ÂÌËˇ
-moves @ R@ board-moves ! \ Á‡ÔËÒ˚‚‡ÂÏ ÚÂÍÛ˘ËÈ ıÓ‰
+\ –∑–∞–ø–∏—Å—ã–≤–∞—Ç—å –Ω–æ–≤—ã–π —ç–ª–µ–º–µ–Ω—Ç —Å–ø–∏—Å–∫–∞
+board-elem ALLOCATE THROW >R \ —Å–æ–∑–¥–∞–ª–∏ —ç–ª–µ–º–µ–Ω—Ç
+cur-board @ cur-board# @ HEAP-COPY \ DRAW-BOARD —Å–Ω–∏–º–∞–µ—Ç "—Å–≤–æ–π" —É—á–∞—Å—Ç–æ–∫ –ø–∞–º—è—Ç–∏ –∏–∑ –∫—É—á–∏, –ø–æ—ç—Ç–æ–º—É –∫–æ–ø–∏—Ä—É–µ–º —è–≤–Ω–æ
+DUP R@ board-addr ! \ –∑–∞–ø–∏—Å—ã–≤–∞–µ–º –≤ –ø–æ–ª–µ –¥–æ—Å–∫—É
+moves @ CELLS LAST-BOARDS + ! \ —Ç–∞–∫–∂–µ –∫–æ–ø–∏—é —Ç–µ–∫—É—â–µ–π –¥–æ—Å–∫–∏ –ø–∏—à–µ–º –≤ –∏—Å—Ç–æ—Ä–∏—é —Ç–µ–∫—É—â–µ–≥–æ —Ä–µ—à–µ–Ω–∏—è
+moves @ R@ board-moves ! \ –∑–∞–ø–∏—Å—ã–≤–∞–µ–º —Ç–µ–∫—É—â–∏–π —Ö–æ–¥
 R> boards list+
 
 }EMERGE
 
-boards @ = ONFALSE \ ÌÓ‚‡ˇ ÎË ÔÓÁËˆËˇ? ŒÔÂ‰ÂÎˇÂÚÒˇ ÔÓ ËÁÏÂÌÂÌË˛ ÒÔËÒÍ‡ boards
+boards @ = ONFALSE \ –Ω–æ–≤–∞—è –ª–∏ –ø–æ–∑–∏—Ü–∏—è? –û–ø—Ä–µ–¥–µ–ª—è–µ—Ç—Å—è –ø–æ –∏–∑–º–µ–Ω–µ–Ω–∏—é —Å–ø–∏—Å–∫–∞ boards
 
-?ARE-WE-DONE-YET IF \ ÒÎÓÊËÎ‡Ò¸ ÎË Û Ì‡Ò ÌÛÊÌ‡ˇ ÔÓÁËˆËˇ Ì‡ ‰ÓÒÍÂ?
-CR CR DEPTH ." S: " . ."  R: " RP@ R0 @ - ABS CELL / . \ ËÌÚÂÂÒÛ ‡‰Ë ÔÂ˜‡Ú‡ÂÏ „ÎÛ·ËÌÛ ÒÚÂÍÓ‚
-START{ i 0! \ Ì‡˜ËÌ‡ÂÏ ˆËÍÎ ÔÂ˜‡ÚË ÔÓÁËˆËÈ ˝ÚÓ„Ó Â¯ÂÌËˇ
+?ARE-WE-DONE-YET IF \ —Å–ª–æ–∂–∏–ª–∞—Å—å –ª–∏ —É –Ω–∞—Å –Ω—É–∂–Ω–∞—è –ø–æ–∑–∏—Ü–∏—è –Ω–∞ –¥–æ—Å–∫–µ?
+CR CR DEPTH ." S: " . ."  R: " RP@ R0 @ - ABS CELL / . \ –∏–Ω—Ç–µ—Ä–µ—Å—É —Ä–∞–¥–∏ –ø–µ—á–∞—Ç–∞–µ–º –≥–ª—É–±–∏–Ω—É —Å—Ç–µ–∫–æ–≤
+START{ i 0! \ –Ω–∞—á–∏–Ω–∞–µ–º —Ü–∏–∫–ª –ø–µ—á–∞—Ç–∏ –ø–æ–∑–∏—Ü–∏–π —ç—Ç–æ–≥–æ —Ä–µ—à–µ–Ω–∏—è
 LAST-BOARDS moves @ iterateByCellValues DUP cur-board# @
 CR CR i 1+! ." Move:" i @ . PRINT-BOARD }EMERGE
 THEN
 
 moves @ ?ODD                  IF
-WHITE-HORSES MOVE-WHITE-HORSE ELSE \ ˜∏ÚÌÓÂ ÁÌ‡˜ÂÌËÂ "ıÓ‰‡" -- ıÓ‰ˇÚ ·ÂÎ˚Â
-BLACK-HORSES MOVE-BLACK-HORSE THEN \ ÌÂ˜∏ÚÌÓÂ -- ˜∏Ì˚Â
-moves KEEP moves 1+! \ ÔÂÂÏÂÌÌÛ˛ ıÓ‰‡ Û‚ÂÎË˜Ë‚‡ÂÏ (KEEP Â∏ ÓÚÍ‡Ú˚‚‡ÂÚ)
+WHITE-HORSES MOVE-WHITE-HORSE ELSE \ —á—ë—Ç–Ω–æ–µ –∑–Ω–∞—á–µ–Ω–∏–µ "—Ö–æ–¥–∞" -- —Ö–æ–¥—è—Ç –±–µ–ª—ã–µ
+BLACK-HORSES MOVE-BLACK-HORSE THEN \ –Ω–µ—á—ë—Ç–Ω–æ–µ -- —á—ë—Ä–Ω—ã–µ
+moves KEEP moves 1+! \ –ø–µ—Ä–µ–º–µ–Ω–Ω—É—é —Ö–æ–¥–∞ —É–≤–µ–ª–∏—á–∏–≤–∞–µ–º (KEEP –µ—ë –æ—Ç–∫–∞—Ç—ã–≤–∞–µ—Ç)
 
-moves @ MAX-MOVES > ONFALSE \ Ó„‡ÌË˜Ë‚‡ÂÏ ÔÂÂ·Ó Ï‡ÍÒËÏ‡Î¸ÌÓÈ „ÎÛ·ËÌÓÈ
-AGAIN \ Ë‰ÚË ‰Ó ÛÔÓ‡ -- ÔÓÍ‡ ‚ÂÒ¸ ÔÂÂ·Ó ÌÂ ËÒ˜ÂÔ‡ÂÚ ÒÂ·ˇ
+moves @ MAX-MOVES > ONFALSE \ –æ–≥—Ä–∞–Ω–∏—á–∏–≤–∞–µ–º –ø–µ—Ä–µ–±–æ—Ä –º–∞–∫—Å–∏–º–∞–ª—å–Ω–æ–π –≥–ª—É–±–∏–Ω–æ–π
+AGAIN \ –∏–¥—Ç–∏ –¥–æ —É–ø–æ—Ä–∞ -- –ø–æ–∫–∞ –≤–µ—Å—å –ø–µ—Ä–µ–±–æ—Ä –Ω–µ –∏—Å—á–µ—Ä–ø–∞–µ—Ç —Å–µ–±—è
 }EMERGE
 
 CR ." Maximum move: " MAX-MOVES .

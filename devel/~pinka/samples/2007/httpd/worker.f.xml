@@ -38,7 +38,7 @@ content-length-number
 
 </text><each-word><alias name="{2DUP}"> &amp; </alias></each-word></g>
 
-<rem> todo: read* должны мочь прочитать не более, чем content-lenght </rem>
+<rem> todo: read* РґРѕР»Р¶РЅС‹ РјРѕС‡СЊ РїСЂРѕС‡РёС‚Р°С‚СЊ РЅРµ Р±РѕР»РµРµ, С‡РµРј content-lenght </rem>
 
 </export>
 

@@ -1,8 +1,8 @@
-\ 22.10.99г. Ruv - WaitAny, WaitAll, Wait
-\ 01.04.2001 выделил  в отдельную либу  в связи с наличием semaphore.f.
-\  * Wait и Release* не возвращают ior. При ошибке вызывают THROW внутри.
-\    (просмотр исходников показал, что эти ошибки не обрабатывается 
-\    иначе, чем DROP или THROW почти всегда).
+\ 22.10.99Рі. Ruv - WaitAny, WaitAll, Wait
+\ 01.04.2001 РІС‹РґРµР»РёР»  РІ РѕС‚РґРµР»СЊРЅСѓСЋ Р»РёР±Сѓ  РІ СЃРІСЏР·Рё СЃ РЅР°Р»РёС‡РёРµРј semaphore.f.
+\  * Wait Рё Release* РЅРµ РІРѕР·РІСЂР°С‰Р°СЋС‚ ior. РџСЂРё РѕС€РёР±РєРµ РІС‹Р·С‹РІР°СЋС‚ THROW РІРЅСѓС‚СЂРё.
+\    (РїСЂРѕСЃРјРѕС‚СЂ РёСЃС…РѕРґРЅРёРєРѕРІ РїРѕРєР°Р·Р°Р», С‡С‚Рѕ СЌС‚Рё РѕС€РёР±РєРё РЅРµ РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ 
+\    РёРЅР°С‡Рµ, С‡РµРј DROP РёР»Рё THROW РїРѕС‡С‚Рё РІСЃРµРіРґР°).
 
 REQUIRE [UNDEFINED] lib\include\tools.f
 
@@ -50,14 +50,14 @@ DECIMAL                  [THEN]
 \ ;
 \ ===
 
-\ неудобно было возится с дополнительными массивами.
-\ Такая, как ниже, стековая нотация кажется удобней.
+\ РЅРµСѓРґРѕР±РЅРѕ Р±С‹Р»Рѕ РІРѕР·РёС‚СЃСЏ СЃ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹РјРё РјР°СЃСЃРёРІР°РјРё.
+\ РўР°РєР°СЏ, РєР°Рє РЅРёР¶Рµ, СЃС‚РµРєРѕРІР°СЏ РЅРѕС‚Р°С†РёСЏ РєР°Р¶РµС‚СЃСЏ СѓРґРѕР±РЅРµР№.
 
 : WaitAny  (  h1 h2 ... hn  n time -- false|number_from_top )
   SWAP >R 0    ( S: h1 h2 ... hn time 0 ) \ flag-WaitAll=0  - any object
   SP@ 8 +  R@  ( S: h1 h2 ... hn  time 0  a-array n )
   WaitForMultipleObjects  ( S: ... wait_flag )
-  R> 2>R  SP@ R> CELLS + SP!  R>  ( wait_flag ) \ убираем список хэндлов
+  R> 2>R  SP@ R> CELLS + SP!  R>  ( wait_flag ) \ СѓР±РёСЂР°РµРј СЃРїРёСЃРѕРє С…СЌРЅРґР»РѕРІ
   DUP WAIT_FAILED  =  IF   GetLastError  ( true  err_no ) THROW ELSE
   DUP WAIT_TIMEOUT =  IF   DROP FALSE    ( false        ) ELSE
   WAIT_OBJECT_0 - 1+  THEN THEN
@@ -67,18 +67,18 @@ DECIMAL                  [THEN]
   SWAP >R -1   ( S: h1 h2 ... hn time -1 ) \ flag-WaitAll = -1  -all objects
   SP@ 8 +  R@  ( S: h1 h2 ... hn  time -1 a-array n )
   WaitForMultipleObjects  ( S: ... wait_flag )
-  R> 2>R  SP@ R> CELLS + SP!  R>  ( wait_flag ) \ убираем список хэндлов
+  R> 2>R  SP@ R> CELLS + SP!  R>  ( wait_flag ) \ СѓР±РёСЂР°РµРј СЃРїРёСЃРѕРє С…СЌРЅРґР»РѕРІ
   DUP WAIT_FAILED  =  IF   GetLastError  ( true  err_no ) THROW ELSE
       WAIT_TIMEOUT =  IF   FALSE         ( false        ) ELSE
   TRUE                THEN THEN
 ;
 
-\ и Wait  можно  в том же стиле сделать.
+\ Рё Wait  РјРѕР¶РЅРѕ  РІ С‚РѕРј Р¶Рµ СЃС‚РёР»Рµ СЃРґРµР»Р°С‚СЊ.
 
 : Wait ( handle time -- flag )
-\ возвращает истину, если объект освобожден другим потоком
-\ (либо он освободился сам собой при завершении др.потока)
-\ и после этого занят текущим
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ РёСЃС‚РёРЅСѓ, РµСЃР»Рё РѕР±СЉРµРєС‚ РѕСЃРІРѕР±РѕР¶РґРµРЅ РґСЂСѓРіРёРј РїРѕС‚РѕРєРѕРј
+\ (Р»РёР±Рѕ РѕРЅ РѕСЃРІРѕР±РѕРґРёР»СЃСЏ СЃР°Рј СЃРѕР±РѕР№ РїСЂРё Р·Р°РІРµСЂС€РµРЅРёРё РґСЂ.РїРѕС‚РѕРєР°)
+\ Рё РїРѕСЃР»Рµ СЌС‚РѕРіРѕ Р·Р°РЅСЏС‚ С‚РµРєСѓС‰РёРј
   SWAP WaitForSingleObject DUP WAIT_FAILED =
   IF GetLastError THROW ELSE DUP WAIT_OBJECT_0 = SWAP WAIT_ABANDONED = OR THEN
 ;

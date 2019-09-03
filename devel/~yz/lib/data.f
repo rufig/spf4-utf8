@@ -1,5 +1,5 @@
-\ Работа с данными
-\ Ю. Жиловец, 2002
+\ Р Р°Р±РѕС‚Р° СЃ РґР°РЅРЅС‹РјРё
+\ Р®. Р–РёР»РѕРІРµС†, 2002
 
 REQUIRE ZMOVE ~yz/lib/common.f
 
@@ -23,7 +23,7 @@ USER ptr
   >R ptr @ R@ CMOVE R> ptr +! ;
 : Z>> ( z -- )
   DUP ptr @ ZMOVE ZLEN 1+ ptr +! ;
-\ пересылает строку, но без завершающего нуля
+\ РїРµСЂРµСЃС‹Р»Р°РµС‚ СЃС‚СЂРѕРєСѓ, РЅРѕ Р±РµР· Р·Р°РІРµСЂС€Р°СЋС‰РµРіРѕ РЅСѓР»СЏ
 : z>> ( z -- )
   DUP ptr @ ZMOVE ZLEN ptr +! ;
 : zeroes>> ( n -- ) 0 ?DO 0 >> LOOP ;
@@ -36,7 +36,7 @@ USER ptr
   R> DUP DUP @ + >R CELL+ ;
 : DATA[ ( -- a)
   ?COMP POSTPONE (DATA)
-  HERE 0 , ( длина данных) [COMPILE] [ ; IMMEDIATE
+  HERE 0 , ( РґР»РёРЅР° РґР°РЅРЅС‹С…) [COMPILE] [ ; IMMEDIATE
 : ]DATA ( a -- )
   DUP HERE SWAP - SWAP ! ] ; IMMEDIATE
 

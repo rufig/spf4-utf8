@@ -1,4 +1,4 @@
-\ цитатник для бота
+\ С†РёС‚Р°С‚РЅРёРє РґР»СЏ Р±РѕС‚Р°
 
 REQUIRE STR@ ~ac/lib/str5.f
 REQUIRE FileLines=> ~ygrek/lib/filelines.f
@@ -23,9 +23,9 @@ list::nil VALUE quotes
 : quotes-file S" quotes.txt" ;
 
 \ : dump-quotes ( -- )
-   \ очистить файл
+   \ РѕС‡РёСЃС‚РёС‚СЊ С„Р°Р№Р»
 \   quotes-file EMPTY
-   \ записать весь список
+   \ Р·Р°РїРёСЃР°С‚СЊ РІРµСЃСЊ СЃРїРёСЃРѕРє
 \   LAMBDA{ STR@ quotes-file ATTACH-LINE-CATCH DROP } quotes mapcar ;
 
 EXPORT
@@ -85,4 +85,4 @@ EXPORT
 /TEST
 
 load-quotes
-CR S" форт" search-quote STR@ TYPE
+CR S" С„РѕСЂС‚" search-quote STR@ TYPE

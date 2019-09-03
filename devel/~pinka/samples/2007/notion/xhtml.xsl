@@ -34,7 +34,7 @@
 </xsl:template>
 
 <xsl:template match="toc">
-  <div><h4>Содержание</h4>
+  <div><h4>РЎРѕРґРµСЂР¶Р°РЅРёРµ</h4>
   <ul><xsl:apply-templates mode="toc" select=".."/></ul>
   </div>
 </xsl:template>

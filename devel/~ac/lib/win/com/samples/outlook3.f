@@ -49,10 +49,10 @@ WINAPI: VarFormatDateTime Oleaut32.dll
   DROP :: Items @
   ListContacts
 
-." ====== Контакты" CR
+." ====== РљРѕРЅС‚Р°РєС‚С‹" CR
 
-  ns :: Folders ["Личные папки"] @
-  DROP :: Folders ["Контакты"] @
+  ns :: Folders ["Р›РёС‡РЅС‹Рµ РїР°РїРєРё"] @
+  DROP :: Folders ["РљРѕРЅС‚Р°РєС‚С‹"] @
   DROP :: Items @
   ListContacts
 
@@ -74,10 +74,10 @@ WINAPI: VarFormatDateTime Oleaut32.dll
           + 0 >
           IF 
 \             OBJ-I DROP :: Status @
-\             DROP 2 <> \ невыполненные - 0, выполненные - 2
-\ более читабельно:
+\             DROP 2 <> \ РЅРµРІС‹РїРѕР»РЅРµРЅРЅС‹Рµ - 0, РІС‹РїРѕР»РЅРµРЅРЅС‹Рµ - 2
+\ Р±РѕР»РµРµ С‡РёС‚Р°Р±РµР»СЊРЅРѕ:
              OBJ-I DROP :: Complete @
-             DROP 0= \ не выполненные
+             DROP 0= \ РЅРµ РІС‹РїРѕР»РЅРµРЅРЅС‹Рµ
              IF
                ." ----|" 
                OBJ-I DROP :: CreationTime @

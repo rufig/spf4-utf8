@@ -13,7 +13,7 @@ REQUIRE OPEN-FILE-SHARED-DELETE ~ac/lib/win/file/share-delete.f
 
 \ READ-SOCK-EXACT ( a u socket -- ior )
 \ ReadSocketExact ( a u socket -- ior )
-\ -- в базовом ~ac/lib/win/winsock/SOCKETS.F
+\ -- РІ Р±Р°Р·РѕРІРѕРј ~ac/lib/win/winsock/SOCKETS.F
 
 
 [UNDEFINED] TransmitFile [IF]
@@ -43,9 +43,9 @@ REQUIRE OPEN-FILE-SHARED-DELETE ~ac/lib/win/file/share-delete.f
   R> OVER >R
   WRITE-SOCK-FILE
   R> CLOSE-FILE OVER IF DROP EXIT THEN NIP
-  ( Файл, который находится в процессе отправки, лучше не менять. Если его размер уменьшиться,
-    то TransmitFile так и повиснет [в ожидании данных для отправки?].
-    Вариант предупреждения ситуации: открывать здесь файл в эксклюзивном режиме, вместо shared.
+  ( Р¤Р°Р№Р», РєРѕС‚РѕСЂС‹Р№ РЅР°С…РѕРґРёС‚СЃСЏ РІ РїСЂРѕС†РµСЃСЃРµ РѕС‚РїСЂР°РІРєРё, Р»СѓС‡С€Рµ РЅРµ РјРµРЅСЏС‚СЊ. Р•СЃР»Рё РµРіРѕ СЂР°Р·РјРµСЂ СѓРјРµРЅСЊС€РёС‚СЊСЃСЏ,
+    С‚Рѕ TransmitFile С‚Р°Рє Рё РїРѕРІРёСЃРЅРµС‚ [РІ РѕР¶РёРґР°РЅРёРё РґР°РЅРЅС‹С… РґР»СЏ РѕС‚РїСЂР°РІРєРё?].
+    Р’Р°СЂРёР°РЅС‚ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёСЏ СЃРёС‚СѓР°С†РёРё: РѕС‚РєСЂС‹РІР°С‚СЊ Р·РґРµСЃСЊ С„Р°Р№Р» РІ СЌРєСЃРєР»СЋР·РёРІРЅРѕРј СЂРµР¶РёРјРµ, РІРјРµСЃС‚Рѕ shared.
   )
 ;
 
@@ -54,6 +54,6 @@ REQUIRE OPEN-FILE-SHARED-DELETE ~ac/lib/win/file/share-delete.f
 
 ( -- discussion
 
-  Может быть, в именах вместо '-SOCK' использовать '-SOCKET'?
-  см. ~pinka/model/protocol/http/write-basic.f.xml
+  РњРѕР¶РµС‚ Р±С‹С‚СЊ, РІ РёРјРµРЅР°С… РІРјРµСЃС‚Рѕ '-SOCK' РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ '-SOCKET'?
+  СЃРј. ~pinka/model/protocol/http/write-basic.f.xml
 )

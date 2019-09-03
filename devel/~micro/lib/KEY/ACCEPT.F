@@ -17,28 +17,28 @@ REQUIRE WINCONST lib/win/const.f
 ;
 
 : GotoXY ( x y -- )
-\ установка координаты курсора в консоли.
+\ СѓСЃС‚Р°РЅРѕРІРєР° РєРѕРѕСЂРґРёРЅР°С‚С‹ РєСѓСЂСЃРѕСЂР° РІ РєРѕРЅСЃРѕР»Рё.
   COORD H-STDOUT SetConsoleCursorPosition ERR THROW
 ;
 
 CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
 
 : WhereXY ( -- x y )
-\ определение координаты курсора
+\ РѕРїСЂРµРґРµР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РєСѓСЂСЃРѕСЂР°
   CONSOLE_SCREEN_BUFFER_INFO H-STDOUT GetConsoleScreenBufferInfo DROP
   CONSOLE_SCREEN_BUFFER_INFO 4 + DUP W@ SWAP 2+ W@ ;
 
 CREATE CONSOLE_CURSOR_INFO 8 ALLOT
 
 : HideCursor
-\ Спрятать курсор
+\ РЎРїСЂСЏС‚Р°С‚СЊ РєСѓСЂСЃРѕСЂ
   CONSOLE_CURSOR_INFO H-STDIN STREAM-FILE GetConsoleCursorInfo DROP
   0 CONSOLE_CURSOR_INFO 4 + !
   CONSOLE_CURSOR_INFO H-STDIN STREAM-FILE SetConsoleCursorInfo DROP
 ;
 
 : ShowCursor
-\ Показать курсор
+\ РџРѕРєР°Р·Р°С‚СЊ РєСѓСЂСЃРѕСЂ
   CONSOLE_CURSOR_INFO H-STDIN STREAM-FILE GetConsoleCursorInfo DROP
   1 CONSOLE_CURSOR_INFO 4 + !
   CONSOLE_CURSOR_INFO H-STDIN STREAM-FILE SetConsoleCursorInfo DROP
@@ -64,8 +64,8 @@ CREATE CONSOLE_CURSOR_INFO 8 ALLOT
 ;
 
 : ACCEPTShowStringFull ( sx sy addr u len x -- sx sy addr u len x )
-\ отображение строки. За строкой добавляются пробелы до максимальной длины
-\ строки (u)
+\ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃС‚СЂРѕРєРё. Р—Р° СЃС‚СЂРѕРєРѕР№ РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ РїСЂРѕР±РµР»С‹ РґРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РґР»РёРЅС‹
+\ СЃС‚СЂРѕРєРё (u)
   HideCursor
   5 PICK 5 PICK GotoXY
   3 PICK 2 PICK TYPE
@@ -75,7 +75,7 @@ CREATE CONSOLE_CURSOR_INFO 8 ALLOT
 ;
 
 : ACCEPTInsChar ( addr u len x ch -- addr u len+1 x+1 | addr u len x )
-\ Вставка символа
+\ Р’СЃС‚Р°РІРєР° СЃРёРјРІРѕР»Р°
   3 PICK 3 PICK <> IF
     4 PICK 2 PICK + DUP 1+ ( addr u len x ch addr+x addr+x+1 )
     4 PICK 4 PICK - MOVE
@@ -89,7 +89,7 @@ CREATE CONSOLE_CURSOR_INFO 8 ALLOT
 ;
 
 : ACCEPTBackspace ( addr u len x -- addr u len-1 x-1 | addr u len x )
-\ Обработка Backspase
+\ РћР±СЂР°Р±РѕС‚РєР° Backspase
   DUP IF
     3 PICK 1 PICK + DUP 1- ( addr u len x addr+x addr+x-1 )
     3 PICK 3 PICK - MOVE
@@ -101,38 +101,38 @@ CREATE CONSOLE_CURSOR_INFO 8 ALLOT
 ;
 
 : ACCEPTLeft ( sx sy addr u len x )
-\ пермещение курсора влево
+\ РїРµСЂРјРµС‰РµРЅРёРµ РєСѓСЂСЃРѕСЂР° РІР»РµРІРѕ
   DUP IF 1- ACCEPTPosCursor ELSE BEEP THEN
 ;
 
 : ACCEPTRight ( sx sy addr u len x )
-\ пермещение курсора вправо
+\ РїРµСЂРјРµС‰РµРЅРёРµ РєСѓСЂСЃРѕСЂР° РІРїСЂР°РІРѕ
   DUP 2 PICK <> IF 1+ ACCEPTPosCursor ELSE BEEP THEN
 ;
 
 : ACCEPTDel
-\ Обработка клавиши Delete
+\ РћР±СЂР°Р±РѕС‚РєР° РєР»Р°РІРёС€Рё Delete
   DUP 2 PICK <> IF 1+ ACCEPTBackspace ELSE BEEP THEN
 ;
 
 : ACCEPTEsc
-\ очистка строки
+\ РѕС‡РёСЃС‚РєР° СЃС‚СЂРѕРєРё
   2DROP 0 0 ACCEPTShowStringFull
 ;
 
-\ Определение history. Простой буфер со строками фиксированной максимальной длиной
-80 CONSTANT ACCEPTHStrLen   \ Максимальная длина строки в history. в неё входит
-\ один байт для длины строки. Не может быть больше 256
-50 CONSTANT ACCEPTHStrings  \ Число строк в history
+\ РћРїСЂРµРґРµР»РµРЅРёРµ history. РџСЂРѕСЃС‚РѕР№ Р±СѓС„РµСЂ СЃРѕ СЃС‚СЂРѕРєР°РјРё С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕР№ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РґР»РёРЅРѕР№
+80 CONSTANT ACCEPTHStrLen   \ РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅР° СЃС‚СЂРѕРєРё РІ history. РІ РЅРµС‘ РІС…РѕРґРёС‚
+\ РѕРґРёРЅ Р±Р°Р№С‚ РґР»СЏ РґР»РёРЅС‹ СЃС‚СЂРѕРєРё. РќРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 256
+50 CONSTANT ACCEPTHStrings  \ Р§РёСЃР»Рѕ СЃС‚СЂРѕРє РІ history
 \ CREATE ACCEPTHistory ACCEPTHStrLen ACCEPTHStrings * ALLOT
 0 VALUE ACCEPTHistory
-VARIABLE ACCEPTHEnd \ № последней строки
-VARIABLE ACCEPTHCur \ № текущей просматриваемой строки
+VARIABLE ACCEPTHEnd \ в„– РїРѕСЃР»РµРґРЅРµР№ СЃС‚СЂРѕРєРё
+VARIABLE ACCEPTHCur \ в„– С‚РµРєСѓС‰РµР№ РїСЂРѕСЃРјР°С‚СЂРёРІР°РµРјРѕР№ СЃС‚СЂРѕРєРё
 
 : ACCEPT>H ( addr u -- )
-\ кладём строку в history. если её длина больше максимально дозволенной,
-\ она укорачивается. строка кладётся в строку №0 в history, остальные
-\ сдвигаются вниз, последняя теряется.
+\ РєР»Р°РґС‘Рј СЃС‚СЂРѕРєСѓ РІ history. РµСЃР»Рё РµС‘ РґР»РёРЅР° Р±РѕР»СЊС€Рµ РјР°РєСЃРёРјР°Р»СЊРЅРѕ РґРѕР·РІРѕР»РµРЅРЅРѕР№,
+\ РѕРЅР° СѓРєРѕСЂР°С‡РёРІР°РµС‚СЃСЏ. СЃС‚СЂРѕРєР° РєР»Р°РґС‘С‚СЃСЏ РІ СЃС‚СЂРѕРєСѓ в„–0 РІ history, РѕСЃС‚Р°Р»СЊРЅС‹Рµ
+\ СЃРґРІРёРіР°СЋС‚СЃСЏ РІРЅРёР·, РїРѕСЃР»РµРґРЅСЏСЏ С‚РµСЂСЏРµС‚СЃСЏ.
   ACCEPTHEnd @ -1 = 0= IF          
     ACCEPTHistory DUP
     ACCEPTHEnd @ 1+ ACCEPTHStrings 1- MIN
@@ -146,8 +146,8 @@ VARIABLE ACCEPTHCur \ № текущей просматриваемой строки
 ;
 
 : ACCEPTH> ( addr u1 n -- u2 )
-\ берём строку №n в addr. если длина взятой строки больше u1, то она обрубается
-\ до u1. возвращается длина взятой строки.
+\ Р±РµСЂС‘Рј СЃС‚СЂРѕРєСѓ в„–n РІ addr. РµСЃР»Рё РґР»РёРЅР° РІР·СЏС‚РѕР№ СЃС‚СЂРѕРєРё Р±РѕР»СЊС€Рµ u1, С‚Рѕ РѕРЅР° РѕР±СЂСѓР±Р°РµС‚СЃСЏ
+\ РґРѕ u1. РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РґР»РёРЅР° РІР·СЏС‚РѕР№ СЃС‚СЂРѕРєРё.
   ACCEPTHStrLen * ACCEPTHistory +   ( addr u1 haddr )
   DUP C@ ROT MIN                    ( addr haddr u2 )
   DUP 2SWAP ( u2 u2 addr haddr )
@@ -157,7 +157,7 @@ VARIABLE ACCEPTHCur \ № текущей просматриваемой строки
 ;
 
 : ACCEPTUp ( sx sy addr u len x )
-\ обработка клавиши Up
+\ РѕР±СЂР°Р±РѕС‚РєР° РєР»Р°РІРёС€Рё Up
   ACCEPTHCur @ DUP ACCEPTHEnd @ < IF
     1+ ACCEPTHCur !
     2OVER ACCEPTHCur @ ACCEPTH> NIP NIP DUP
@@ -168,7 +168,7 @@ VARIABLE ACCEPTHCur \ № текущей просматриваемой строки
 ;
 
 : ACCEPTDown
-\ обработка клавиши Down
+\ РѕР±СЂР°Р±РѕС‚РєР° РєР»Р°РІРёС€Рё Down
   ACCEPTHCur @ DUP 0 > IF
     1- ACCEPTHCur !
     2OVER ACCEPTHCur @ ACCEPTH> NIP NIP DUP
@@ -179,8 +179,8 @@ VARIABLE ACCEPTHCur \ № текущей просматриваемой строки
 ;
 
 VECT ACCEPTUnknownEvent ( sx sy addr u len x u -- sx sy addr u len x enter )
-\ Вызывается, если событие консоли не опознано ACCEPT-ом.
-\ u - результат EKEY-а
+\ Р’С‹Р·С‹РІР°РµС‚СЃСЏ, РµСЃР»Рё СЃРѕР±С‹С‚РёРµ РєРѕРЅСЃРѕР»Рё РЅРµ РѕРїРѕР·РЅР°РЅРѕ ACCEPT-РѕРј.
+\ u - СЂРµР·СѓР»СЊС‚Р°С‚ EKEY-Р°
 : ACCEPTUnknownEvent1
   DROP 0
 ;
@@ -188,14 +188,14 @@ VECT ACCEPTUnknownEvent ( sx sy addr u len x u -- sx sy addr u len x enter )
 WINAPI: WaitForSingleObject KERNEL32.DLL
 
 : ACCEPT1 ( addr u -- u )
-\ Чтение строки с клавиатуры, возвращается число введённых символов
-\ Числа в стеке: sx, sy - координаты начала строки
-\ addr, u - адрес и максимальная (заданная) длина строки
-\ len - текущая длина строки
-\ x - положение курсора
-\ enter - =1, если нажат Enter
-\ Не комментирую, так как вроде и так всё прозрачно.
-\ !!! Строка не должна уходить за край экрана.
+\ Р§С‚РµРЅРёРµ СЃС‚СЂРѕРєРё СЃ РєР»Р°РІРёР°С‚СѓСЂС‹, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ С‡РёСЃР»Рѕ РІРІРµРґС‘РЅРЅС‹С… СЃРёРјРІРѕР»РѕРІ
+\ Р§РёСЃР»Р° РІ СЃС‚РµРєРµ: sx, sy - РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°С‡Р°Р»Р° СЃС‚СЂРѕРєРё
+\ addr, u - Р°РґСЂРµСЃ Рё РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ (Р·Р°РґР°РЅРЅР°СЏ) РґР»РёРЅР° СЃС‚СЂРѕРєРё
+\ len - С‚РµРєСѓС‰Р°СЏ РґР»РёРЅР° СЃС‚СЂРѕРєРё
+\ x - РїРѕР»РѕР¶РµРЅРёРµ РєСѓСЂСЃРѕСЂР°
+\ enter - =1, РµСЃР»Рё РЅР°Р¶Р°С‚ Enter
+\ РќРµ РєРѕРјРјРµРЅС‚РёСЂСѓСЋ, С‚Р°Рє РєР°Рє РІСЂРѕРґРµ Рё С‚Р°Рє РІСЃС‘ РїСЂРѕР·СЂР°С‡РЅРѕ.
+\ !!! РЎС‚СЂРѕРєР° РЅРµ РґРѕР»Р¶РЅР° СѓС…РѕРґРёС‚СЊ Р·Р° РєСЂР°Р№ СЌРєСЂР°РЅР°.
   79 MIN
   -1 ACCEPTHCur !
   WhereXY 2SWAP ( sx sy addr u )
@@ -212,10 +212,10 @@ WINAPI: WaitForSingleObject KERNEL32.DLL
           VK_BACK OF ACCEPTBackspace 0 ENDOF
           VK_RETURN OF 1 ENDOF
           VK_ESCAPE OF ACCEPTEsc 0 ENDOF
-         ( 7 OF 0 ENDOF )     \ если эти комментарии убрать, то можно будет
-         ( 9 OF 0 ENDOF )     \ вставлять в строку символы с кодами <32
-         ( ACCEPTInsChar )    \ как Ctrl+<a..z>
-          DROP                \ тогда это надо закомментарить
+         ( 7 OF 0 ENDOF )     \ РµСЃР»Рё СЌС‚Рё РєРѕРјРјРµРЅС‚Р°СЂРёРё СѓР±СЂР°С‚СЊ, С‚Рѕ РјРѕР¶РЅРѕ Р±СѓРґРµС‚
+         ( 9 OF 0 ENDOF )     \ РІСЃС‚Р°РІР»СЏС‚СЊ РІ СЃС‚СЂРѕРєСѓ СЃРёРјРІРѕР»С‹ СЃ РєРѕРґР°РјРё <32
+         ( ACCEPTInsChar )    \ РєР°Рє Ctrl+<a..z>
+          DROP                \ С‚РѕРіРґР° СЌС‚Рѕ РЅР°РґРѕ Р·Р°РєРѕРјРјРµРЅС‚Р°СЂРёС‚СЊ
           0 0
         ENDCASE
       THEN

@@ -2,7 +2,7 @@ REQUIRE ParseMime              ~ac/lib/lin/mime/mime.f
 REQUIRE StripLwsp              ~ac/lib/string/mime-decode.f 
 \ REQUIRE UNICODE>UTF8           ~ac/lib/win/com/com.f
 REQUIRE iso-8859-5>UNICODE     ~ac/lib/lin/iconv/iconv.f 
-WARNING @ WARNING 0! S" ~ac/lib/win/utf8.f" INCLUDED WARNING ! \ в Windows более всеядный декодер UTF8, чем в ICONV !
+WARNING @ WARNING 0! S" ~ac/lib/win/utf8.f" INCLUDED WARNING ! \ РІ Windows Р±РѕР»РµРµ РІСЃРµСЏРґРЅС‹Р№ РґРµРєРѕРґРµСЂ UTF8, С‡РµРј РІ ICONV !
 REQUIRE replace-str            ~pinka/samples/2005/lib/replace-str.f 
 
 \ ================================= subject decoding ==================
@@ -24,7 +24,7 @@ REQUIRE { lib/ext/locals.f
   0 ?DO DUP C@ [CHAR] , =
   IF BL OVER C! THEN 1+ LOOP DROP
 ;
-\ ====== Вычленение имени и Email из From разных форматов ==
+\ ====== Р’С‹С‡Р»РµРЅРµРЅРёРµ РёРјРµРЅРё Рё Email РёР· From СЂР°Р·РЅС‹С… С„РѕСЂРјР°С‚РѕРІ ==
 
 : SOURCE/
   SOURCE SWAP >IN @ + SWAP >IN @ - 0 MAX
@@ -38,7 +38,7 @@ REQUIRE { lib/ext/locals.f
 ;
 
 WARNING @ WARNING 0!
-: Strip< ( addr u -- addr2 u2 ) \ см. также версию в conv.f
+: Strip< ( addr u -- addr2 u2 ) \ СЃРј. С‚Р°РєР¶Рµ РІРµСЂСЃРёСЋ РІ conv.f
   DUP IF ['] (Strip<) EVALUATE-WITH THEN
 ;
 WARNING !
@@ -126,7 +126,7 @@ CREATE _Quo CHAR " C,
 
 
 : Is8Bit ( addr u -- flag )
-  2DUP S" =?" SEARCH NIP NIP IF 2DROP FALSE EXIT THEN \ уже закодировано
+  2DUP S" =?" SEARCH NIP NIP IF 2DROP FALSE EXIT THEN \ СѓР¶Рµ Р·Р°РєРѕРґРёСЂРѕРІР°РЅРѕ
   0 ?DO DUP I + C@ 127 > IF DROP TRUE UNLOOP EXIT THEN LOOP
   DROP FALSE
 ;
@@ -136,7 +136,7 @@ USER uStripCRLFtemp
     13 PARSE DUP
   WHILE
     uStripCRLFtemp @ STR+
-    >IN 1+! >IN 1+! \ пропустить LF и TAB
+    >IN 1+! >IN 1+! \ РїСЂРѕРїСѓСЃС‚РёС‚СЊ LF Рё TAB
 \    S"  " uStripCRLFtemp @ STR+
   REPEAT 2DROP
 ;
@@ -156,7 +156,7 @@ USER uStripCRLFtemp
   ELSE
      S" -8" SEARCH NIP NIP
      IF base64 OVER >R " =?UTF-8?B?{s}?=" STR@ R> FREE DROP
-     ELSE ( addr u ) \ если в заголовке кодировка не указана, попробуем найти её в первой mime-части
+     ELSE ( addr u ) \ РµСЃР»Рё РІ Р·Р°РіРѕР»РѕРІРєРµ РєРѕРґРёСЂРѕРІРєР° РЅРµ СѓРєР°Р·Р°РЅР°, РїРѕРїСЂРѕР±СѓРµРј РЅР°Р№С‚Рё РµС‘ РІ РїРµСЂРІРѕР№ mime-С‡Р°СЃС‚Рё
         S" 1" mp GetMimePartMp S" Content-Type" ROT FindMimeHeader  2DUP
         S" indows-1251" SEARCH NIP NIP
         IF 2DROP base64 OVER >R " =?windows-1251?B?{s}?=" STR@ R> FREE DROP
@@ -168,7 +168,7 @@ USER uStripCRLFtemp
   THEN
 ;
 : Add1251Encoding { a u \ s buf -- a2 u2 }
-  \ входная строка в Windows-1251, закодировать в ней кириллицу для почтовых заголовков
+  \ РІС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР° РІ Windows-1251, Р·Р°РєРѕРґРёСЂРѕРІР°С‚СЊ РІ РЅРµР№ РєРёСЂРёР»Р»РёС†Сѓ РґР»СЏ РїРѕС‡С‚РѕРІС‹С… Р·Р°РіРѕР»РѕРІРєРѕРІ
   u 0= IF a u EXIT THEN
   a u Is8Bit 0= IF a u EXIT THEN
   "" -> s "" -> buf
@@ -232,7 +232,7 @@ CREATE CRLF.CRLF 13 C, 10 C, CHAR . C, 13 C, 10 C,
   0 ?DO DUP I + C@ 154 = ( OVER I + 1+ C@ 13 = AND) IF BL OVER I + C! THEN LOOP DROP
 ;
 : CRCR>BLCR ( addr u -- )
-\ исправление 1С-ного форматирования xml-файлов
+\ РёСЃРїСЂР°РІР»РµРЅРёРµ 1РЎ-РЅРѕРіРѕ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ xml-С„Р°Р№Р»РѕРІ
   0 ?DO DUP I + W@ 0x0D0D = IF 0x0D20 OVER I + W! THEN LOOP DROP
 ;
 : CR>BR
@@ -252,11 +252,11 @@ CREATE CRLF.CRLF 13 C, 10 C, CHAR . C, 13 C, 10 C,
 CREATE dbCRLFCRLF 13 C, 10 C, 13 C, 10 C,
 
 : debase64_3 ( addr u -- addr1 u1 ) { \ i }
-\ версия, игнорирующая пробельные символы внутри исходной строки
-\ и игнорирующая баг энкодера google
-\ и игнорирующая невозможные в base64 символы (баг OE6 или MDaemon)
+\ РІРµСЂСЃРёСЏ, РёРіРЅРѕСЂРёСЂСѓСЋС‰Р°СЏ РїСЂРѕР±РµР»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹ РІРЅСѓС‚СЂРё РёСЃС…РѕРґРЅРѕР№ СЃС‚СЂРѕРєРё
+\ Рё РёРіРЅРѕСЂРёСЂСѓСЋС‰Р°СЏ Р±Р°Рі СЌРЅРєРѕРґРµСЂР° google
+\ Рё РёРіРЅРѕСЂРёСЂСѓСЋС‰Р°СЏ РЅРµРІРѕР·РјРѕР¶РЅС‹Рµ РІ base64 СЃРёРјРІРѕР»С‹ (Р±Р°Рі OE6 РёР»Рё MDaemon)
 
-\ отрезаем левые приписки после base64-блока, которые иногда добавляются форвардерами почты
+\ РѕС‚СЂРµР·Р°РµРј Р»РµРІС‹Рµ РїСЂРёРїРёСЃРєРё РїРѕСЃР»Рµ base64-Р±Р»РѕРєР°, РєРѕС‚РѕСЂС‹Рµ РёРЅРѕРіРґР° РґРѕР±Р°РІР»СЏСЋС‚СЃСЏ С„РѕСЂРІР°СЂРґРµСЂР°РјРё РїРѕС‡С‚С‹
   2DUP dbCRLFCRLF 4 SEARCH IF NIP - ELSE 2DROP THEN
 
   DUP 0= IF 2DROP 4 ALLOCATE THROW abase ! abase @ 0 EXIT THEN
@@ -276,7 +276,7 @@ CREATE dbCRLFCRLF 13 C, 10 C, 13 C, 10 C,
     THEN
   LOOP
   NIP ?DUP
-  IF \ баг энкодера google - не добавлены == в конце
+  IF \ Р±Р°Рі СЌРЅРєРѕРґРµСЂР° google - РЅРµ РґРѕР±Р°РІР»РµРЅС‹ == РІ РєРѕРЅС†Рµ
     8 RSHIFT DUP abase @ lbase @ + DUP >R 1+ C!
     8 RSHIFT R> C!
     2 lbase +!
@@ -286,7 +286,7 @@ CREATE dbCRLFCRLF 13 C, 10 C, 13 C, 10 C,
 ' debase64_3 TO debase64
 
 USER _LASTMSGHTML
-USER uMessageBaseUrl \ устанавливается вызывающим кодом, если нужно переместить ссылки
+USER uMessageBaseUrl \ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РІС‹Р·С‹РІР°СЋС‰РёРј РєРѕРґРѕРј, РµСЃР»Рё РЅСѓР¶РЅРѕ РїРµСЂРµРјРµСЃС‚РёС‚СЊ СЃСЃС‹Р»РєРё
 USER uMessageMID
 
 : MessagePartName { mp -- a u }
@@ -317,10 +317,10 @@ USER uMessageMID
   ELSE S" " THEN
 ;
 : __IsUtf8 ( addr u -- flag )
-  \ Хак, но как-то надо читать нечитабельные письма...
+  \ РҐР°Рє, РЅРѕ РєР°Рє-С‚Рѕ РЅР°РґРѕ С‡РёС‚Р°С‚СЊ РЅРµС‡РёС‚Р°Р±РµР»СЊРЅС‹Рµ РїРёСЃСЊРјР°...
 
   0 ?DO DUP I + C@ DUP 0x80 0xC0 WITHIN
-        OVER 0xA8 <> AND OVER 0xB8 <> AND \ Ёё
+        OVER 0xA8 <> AND OVER 0xB8 <> AND \ РЃС‘
         OVER 0xAB <> AND OVER 0xBB <> AND \ <<>>
         OVER 0x93 <> AND OVER 0x94 <> AND \ ""
         OVER 0x96 <> AND OVER 0x97 <> AND \ --
@@ -356,9 +356,9 @@ VARIABLE vCalendarRenderer
 
 : MessageHtml { mp s \ tf_dq tf_db tf_pl istext -- addr u }
 
-\ Внимание! При не-windows-1251 кодировках сообщение перекодируется на
-\ месте (но кодировка в заголовке не меняется), поэтому дважды для одного mp
-\ вызывать MessageHtml нельзя, надо использовать LastMsgHtml (см. ниже).
+\ Р’РЅРёРјР°РЅРёРµ! РџСЂРё РЅРµ-windows-1251 РєРѕРґРёСЂРѕРІРєР°С… СЃРѕРѕР±С‰РµРЅРёРµ РїРµСЂРµРєРѕРґРёСЂСѓРµС‚СЃСЏ РЅР°
+\ РјРµСЃС‚Рµ (РЅРѕ РєРѕРґРёСЂРѕРІРєР° РІ Р·Р°РіРѕР»РѕРІРєРµ РЅРµ РјРµРЅСЏРµС‚СЃСЏ), РїРѕСЌС‚РѕРјСѓ РґРІР°Р¶РґС‹ РґР»СЏ РѕРґРЅРѕРіРѕ mp
+\ РІС‹Р·С‹РІР°С‚СЊ MessageHtml РЅРµР»СЊР·СЏ, РЅР°РґРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ LastMsgHtml (СЃРј. РЅРёР¶Рµ).
 
 \  mp GetFrom DUP IF 2DUP S" unknown@email" COMPARE
 \                    IF 2SWAP " <h4>{s} [{s}]</h4>" s S+ ELSE 2DROP 2DROP THEN
@@ -387,7 +387,7 @@ VARIABLE vCalendarRenderer
            COMPARE-U 0= IF dequotep_ns OVER -> tf_dq THEN
            S" Content-Transfer-Encoding" mp FindMimeHeader S" base64"
            COMPARE-U 0= IF debase64 OVER -> tf_db THEN
-\           2DUP _>BL ( отключено: портит unicode-букву "К" )
+\           2DUP _>BL ( РѕС‚РєР»СЋС‡РµРЅРѕ: РїРѕСЂС‚РёС‚ unicode-Р±СѓРєРІСѓ "Рљ" )
            mp mpCharsetAddr @ mp mpCharsetLen @ ?DUP
            IF CHARSET-DECODERS-WL SEARCH-WORDLIST IF EXECUTE THEN
            ELSE DROP
@@ -434,7 +434,7 @@ VARIABLE vCalendarRenderer
            THEN
            s STR+
            ( tf_dq ?DUP IF FREE DROP THEN) tf_db ?DUP IF FREE DROP THEN
-           \ dequotep возвращает бывш.str5-строку, а не ALLOCATEd-буфер, поэтому тут нельзя делать FREE!
+           \ dequotep РІРѕР·РІСЂР°С‰Р°РµС‚ Р±С‹РІС€.str5-СЃС‚СЂРѕРєСѓ, Р° РЅРµ ALLOCATEd-Р±СѓС„РµСЂ, РїРѕСЌС‚РѕРјСѓ С‚СѓС‚ РЅРµР»СЊР·СЏ РґРµР»Р°С‚СЊ FREE!
            tf_pl ?DUP IF STRFREE THEN
          ELSE uSkipAttach @ 0=
             IF
@@ -460,9 +460,9 @@ VARIABLE vCalendarRenderer
 ;
 : MessageHtml2 { mp s \ tf_dq tf_db tf_pl istext -- addr u }
 
-\ Внимание! При не-windows-1251 кодировках сообщение перекодируется на
-\ месте (но кодировка в заголовке не меняется), поэтому дважды для одного mp
-\ вызывать MessageHtml нельзя, надо использовать LastMsgHtml (см. ниже).
+\ Р’РЅРёРјР°РЅРёРµ! РџСЂРё РЅРµ-windows-1251 РєРѕРґРёСЂРѕРІРєР°С… СЃРѕРѕР±С‰РµРЅРёРµ РїРµСЂРµРєРѕРґРёСЂСѓРµС‚СЃСЏ РЅР°
+\ РјРµСЃС‚Рµ (РЅРѕ РєРѕРґРёСЂРѕРІРєР° РІ Р·Р°РіРѕР»РѕРІРєРµ РЅРµ РјРµРЅСЏРµС‚СЃСЏ), РїРѕСЌС‚РѕРјСѓ РґРІР°Р¶РґС‹ РґР»СЏ РѕРґРЅРѕРіРѕ mp
+\ РІС‹Р·С‹РІР°С‚СЊ MessageHtml РЅРµР»СЊР·СЏ, РЅР°РґРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ LastMsgHtml (СЃРј. РЅРёР¶Рµ).
 
 \  mp GetFrom DUP IF 2DUP S" unknown@email" COMPARE
 \                    IF 2SWAP " <span class='msg_from_name'>{s}</span><span class='msg_from_email'>{s}</span>" s S+ ELSE 2DROP 2DROP THEN
@@ -489,7 +489,7 @@ VARIABLE vCalendarRenderer
            COMPARE-U 0= IF dequotep_ns OVER -> tf_dq THEN
            S" Content-Transfer-Encoding" mp FindMimeHeader S" base64"
            COMPARE-U 0= IF debase64 OVER -> tf_db THEN
-\           2DUP _>BL ( отключено: портит unicode-букву "К" )
+\           2DUP _>BL ( РѕС‚РєР»СЋС‡РµРЅРѕ: РїРѕСЂС‚РёС‚ unicode-Р±СѓРєРІСѓ "Рљ" )
            mp mpCharsetAddr @ mp mpCharsetLen @ ?DUP
            IF CHARSET-DECODERS-WL SEARCH-WORDLIST IF EXECUTE THEN
            ELSE DROP
@@ -501,7 +501,7 @@ VARIABLE vCalendarRenderer
 \           IF CR>BR " <pre class='plain'>{s}</pre>" DUP -> tf_pl STR@ THEN
            s STR+
            ( tf_dq ?DUP IF FREE DROP THEN) tf_db ?DUP IF FREE DROP THEN
-           \ dequotep возвращает бывш.str5-строку, а не ALLOCATEd-буфер, поэтому тут нельзя делать FREE!
+           \ dequotep РІРѕР·РІСЂР°С‰Р°РµС‚ Р±С‹РІС€.str5-СЃС‚СЂРѕРєСѓ, Р° РЅРµ ALLOCATEd-Р±СѓС„РµСЂ, РїРѕСЌС‚РѕРјСѓ С‚СѓС‚ РЅРµР»СЊР·СЏ РґРµР»Р°С‚СЊ FREE!
            tf_pl ?DUP IF STRFREE THEN
          ELSE mp mpTypeAddr @ mp mpTypeLen @ s STR+ THEN
     THEN
@@ -523,7 +523,7 @@ VARIABLE vCalendarRenderer
   DROP WFILE
 ;
 : ForEachAtt { mp xt \ tf_dq tf_db -- }
-\ Выполнить xt ( da du na nu mp1 -- ) для всех вложений сообщения mp
+\ Р’С‹РїРѕР»РЅРёС‚СЊ xt ( da du na nu mp1 -- ) РґР»СЏ РІСЃРµС… РІР»РѕР¶РµРЅРёР№ СЃРѕРѕР±С‰РµРЅРёСЏ mp
 
   BEGIN
     mp mpIsMultipart @ mp mpIsMessage OR mp mpParts @ AND
@@ -531,8 +531,8 @@ VARIABLE vCalendarRenderer
     ELSE 
        mp mpCdispAddr @ mp mpCdispLen @ S" attachment" COMPARE-U 0=
        mp mpTypeAddr @ mp mpTypeLen @ S" text" COMPARE-U OR
-       \ если Content-Disposition="attachment" или Content-Type не текст
-       \ то обрабатываем как вложение - выполняем для него xt
+       \ РµСЃР»Рё Content-Disposition="attachment" РёР»Рё Content-Type РЅРµ С‚РµРєСЃС‚
+       \ С‚Рѕ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј РєР°Рє РІР»РѕР¶РµРЅРёРµ - РІС‹РїРѕР»РЅСЏРµРј РґР»СЏ РЅРµРіРѕ xt
        IF
          mp mpBodyAddr @ mp mpBodyLen @
 
@@ -550,7 +550,7 @@ VARIABLE vCalendarRenderer
          ( da du ) mp MessagePartName mp  xt EXECUTE
 
          ( tf_dq ?DUP IF FREE DROP THEN) tf_db ?DUP IF FREE DROP THEN
-         \ dequotep возвращает бывш.str5-строку, а не ALLOCATEd-буфер, поэтому тут нельзя делать FREE!
+         \ dequotep РІРѕР·РІСЂР°С‰Р°РµС‚ Р±С‹РІС€.str5-СЃС‚СЂРѕРєСѓ, Р° РЅРµ ALLOCATEd-Р±СѓС„РµСЂ, РїРѕСЌС‚РѕРјСѓ С‚СѓС‚ РЅРµР»СЊР·СЏ РґРµР»Р°С‚СЊ FREE!
        THEN
     THEN
     mp mpNextPart @ DUP -> mp 0=

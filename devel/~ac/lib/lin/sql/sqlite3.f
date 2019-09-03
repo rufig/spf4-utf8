@@ -1,5 +1,5 @@
-( ~ac: 23.08.2005 перенесено из ~ac/lib/win/odbc/sqlite3.f 
-   для переопределения через "SO NEW", без WINAPI.
+( ~ac: 23.08.2005 РїРµСЂРµРЅРµСЃРµРЅРѕ РёР· ~ac/lib/win/odbc/sqlite3.f 
+   РґР»СЏ РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёСЏ С‡РµСЂРµР· "SO NEW", Р±РµР· WINAPI.
    
   $Id$
 )
@@ -68,15 +68,15 @@ ALSO SO NEW: /usr/local/lib/libsqlite3.so
          sqh 1 sqlite3_errmsg ASCIIZ> DB3_DEBUG @ IF 2DUP TYPE CR THEN
          " {s}" STR@ ER-U ! ER-A !
          sqh 1 sqlite3_errcode DUP 1 = IF DROP -2 ELSE 30000 + THEN ( ior )
-	 DUP 30000 = IF DROP EXIT THEN \ и sqlite3_errmsg говорит "not an error"
+	 DUP 30000 = IF DROP EXIT THEN \ Рё sqlite3_errmsg РіРѕРІРѕСЂРёС‚ "not an error"
          THROW
       THEN
-\  ior THROW ( ior почти всегда 1 в случае ошибки)
+\  ior THROW ( ior РїРѕС‡С‚Рё РІСЃРµРіРґР° 1 РІ СЃР»СѓС‡Р°Рµ РѕС€РёР±РєРё)
 ;
-: (db3_version) ( -- n ) \ например 3006003
+: (db3_version) ( -- n ) \ РЅР°РїСЂРёРјРµСЂ 3006003
   0 sqlite3_libversion_number
 ;
-: db3_version ( -- n ) \ возвратит номер версии или -2010, если dll нет
+: db3_version ( -- n ) \ РІРѕР·РІСЂР°С‚РёС‚ РЅРѕРјРµСЂ РІРµСЂСЃРёРё РёР»Рё -2010, РµСЃР»Рё dll РЅРµС‚
   ['] (db3_version) CATCH DUP 0= IF DROP THEN
 ;
 : db3_version_str ( -- addr u )
@@ -118,10 +118,10 @@ ALSO SO NEW: /usr/local/lib/libsqlite3.so
 : db3_coli ( n ppStmt -- int )
   2 sqlite3_column_int
 ;
-: db3_coli64 ( n ppStmt -- d ) \ результат в формате для "D."
+: db3_coli64 ( n ppStmt -- d ) \ СЂРµР·СѓР»СЊС‚Р°С‚ РІ С„РѕСЂРјР°С‚Рµ РґР»СЏ "D."
   2 sqlite3_column_int64 _C-EXEC-HW @
 ;
-: db3_field_num { addr1 u1 ppStmt -- n } \ номер поля с заданным именем
+: db3_field_num { addr1 u1 ppStmt -- n } \ РЅРѕРјРµСЂ РїРѕР»СЏ СЃ Р·Р°РґР°РЅРЅС‹Рј РёРјРµРЅРµРј
   ppStmt db3_cols 0 ?DO
     I ppStmt db3_colname addr1 u1 COMPARE-U 0=
     IF I UNLOOP EXIT THEN
@@ -145,12 +145,12 @@ ALSO SO NEW: /usr/local/lib/libsqlite3.so
 ;
 : sqlite3_prepare2
   ['] sqlite3_prepare1 CATCH
-  ?DUP IF NIP NIP NIP NIP NIP NIP THEN \ добавим аппаратные exceptions в коды возврата
+  ?DUP IF NIP NIP NIP NIP NIP NIP THEN \ РґРѕР±Р°РІРёРј Р°РїРїР°СЂР°С‚РЅС‹Рµ exceptions РІ РєРѕРґС‹ РІРѕР·РІСЂР°С‚Р°
 ;
 : db3_prepare { addr u sqh \ pzTail ppStmt waitcnt -- pzTail ppStmt }
   DB3_DEBUG @ IF CR ." DB3_PREP====================" sqh . CR addr u TYPE CR THEN
 
-  BEGIN \ ждем освобождения доступа к БД
+  BEGIN \ Р¶РґРµРј РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РґРѕСЃС‚СѓРїР° Рє Р‘Р”
     ^ pzTail ^ ppStmt u addr sqh 5 sqlite3_prepare2 DUP SQLITE_BUSY = \ waitcnt DB3_MAX_WAIT @ < AND
   WHILE
     DB3_DEBUG @ IF ." DB3_PREP_WAIT" ppStmt . THEN
@@ -160,9 +160,9 @@ ALSO SO NEW: /usr/local/lib/libsqlite3.so
 
   S" DB3_PREPARE" sqh db3_error?
   ppStmt
-  0= IF 30112 THROW THEN \ при подаче пустой команды sqlite не возвращает
-                         \ код ошибки, но и ppStmt оставляет нулевым,
-                         \ что в дальнейшем приводит к exception
+  0= IF 30112 THROW THEN \ РїСЂРё РїРѕРґР°С‡Рµ РїСѓСЃС‚РѕР№ РєРѕРјР°РЅРґС‹ sqlite РЅРµ РІРѕР·РІСЂР°С‰Р°РµС‚
+                         \ РєРѕРґ РѕС€РёР±РєРё, РЅРѕ Рё ppStmt РѕСЃС‚Р°РІР»СЏРµС‚ РЅСѓР»РµРІС‹Рј,
+                         \ С‡С‚Рѕ РІ РґР°Р»СЊРЅРµР№С€РµРј РїСЂРёРІРѕРґРёС‚ Рє exception
   pzTail ppStmt
   DB3_DEBUG @ IF CR ." DB3_PREP_OK====================" sqh . CR THEN
   DB3_STMT_CNT 1+!
@@ -196,9 +196,9 @@ USER db3_exec_CNT
 USER db3_exec_TICKS
 
 : db3_exec { addr u par xt sqh \ pzTail ppStmt i tick waitcnt -- }
-\ выполнить SQL-запрос(ы) из addr u,
-\ вызывая для каждого результата функцию xt с параметрами i par ppStmt
-\ в запросах биндятся макроподстановки :name и $name
+\ РІС‹РїРѕР»РЅРёС‚СЊ SQL-Р·Р°РїСЂРѕСЃ(С‹) РёР· addr u,
+\ РІС‹Р·С‹РІР°СЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂРµР·СѓР»СЊС‚Р°С‚Р° С„СѓРЅРєС†РёСЋ xt СЃ РїР°СЂР°РјРµС‚СЂР°РјРё i par ppStmt
+\ РІ Р·Р°РїСЂРѕСЃР°С… Р±РёРЅРґСЏС‚СЃСЏ РјР°РєСЂРѕРїРѕРґСЃС‚Р°РЅРѕРІРєРё :name Рё $name
   u 0= IF EXIT THEN
   sqh 0= IF ." Sqh=0; db3_exec=" addr u TYPE CR EXIT THEN
   db3_exec_CNT 1+! ms@ -> tick
@@ -210,7 +210,7 @@ USER db3_exec_TICKS
     TRUE 0 -> i
     BEGIN
       IF
-        BEGIN \ ждем освобождения доступа к БД
+        BEGIN \ Р¶РґРµРј РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РґРѕСЃС‚СѓРїР° Рє Р‘Р”
           ppStmt 1 sqlite3_step DUP SQLITE_BUSY = \ waitcnt DB3_MAX_WAIT @ < AND
         WHILE
           DB3_DEBUG @ IF CR ." DB3_STEP_WAIT(" sqh . ppStmt . addr u TYPE ." )" CR THEN
@@ -229,7 +229,7 @@ USER db3_exec_TICKS
       ELSE FALSE THEN
     WHILE
       i 1+ -> i
-      i par ppStmt xt EXECUTE \ возвращает флаг продолжения
+      i par ppStmt xt EXECUTE \ РІРѕР·РІСЂР°С‰Р°РµС‚ С„Р»Р°Рі РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ
       addr u + C@ 0<> IF ." DB3 command corrupted (execute)." CR THEN
     REPEAT
 
@@ -258,16 +258,16 @@ USER db3_exec_TICKS
 : 3DROP0 2DROP DROP 0 ;
 
 : db3_exec_ { addr u sqh \ res -- }
-  \ упрощенная форма вызова exec для CREATE, INSERT и т.п.
+  \ СѓРїСЂРѕС‰РµРЅРЅР°СЏ С„РѕСЂРјР° РІС‹Р·РѕРІР° exec РґР»СЏ CREATE, INSERT Рё С‚.Рї.
   addr u ^ res ['] 3DROP0 sqh db3_exec
 ;
 : db3_insert_id ( sqh -- id ) \ ROWID, OID, or _ROWID_
-  \ id первичного ключа последней вставки
-  \ если еще ничего не вставлялось, то 0
+  \ id РїРµСЂРІРёС‡РЅРѕРіРѕ РєР»СЋС‡Р° РїРѕСЃР»РµРґРЅРµР№ РІСЃС‚Р°РІРєРё
+  \ РµСЃР»Рё РµС‰Рµ РЅРёС‡РµРіРѕ РЅРµ РІСЃС‚Р°РІР»СЏР»РѕСЃСЊ, С‚Рѕ 0
   1 sqlite3_last_insert_rowid
 ;
 : (db3_cdr) { ppStmt \ waitcnt -- ppStmt | 0 }
-  BEGIN \ ждем освобождения доступа к БД
+  BEGIN \ Р¶РґРµРј РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РґРѕСЃС‚СѓРїР° Рє Р‘Р”
     ppStmt 1 sqlite3_step DUP SQLITE_BUSY = \ waitcnt DB3_MAX_WAIT @ < AND
   WHILE
     DB3_DEBUG @ IF ." DB3_CDR_WAIT" ppStmt . THEN
@@ -286,9 +286,9 @@ USER db3_exec_TICKS
   db3_prepare NIP DUP db3_bind db3_cdr
 ;
 : db3_enum { addr u par xt sqh \ i -- }
-\ выполнить SQL-запрос из addr u,
-\ вызывая для каждого результата функцию xt с параметрами i par ppStmt
-\ в запросах биндятся макроподстановки :name и $name
+\ РІС‹РїРѕР»РЅРёС‚СЊ SQL-Р·Р°РїСЂРѕСЃ РёР· addr u,
+\ РІС‹Р·С‹РІР°СЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂРµР·СѓР»СЊС‚Р°С‚Р° С„СѓРЅРєС†РёСЋ xt СЃ РїР°СЂР°РјРµС‚СЂР°РјРё i par ppStmt
+\ РІ Р·Р°РїСЂРѕСЃР°С… Р±РёРЅРґСЏС‚СЃСЏ РјР°РєСЂРѕРїРѕРґСЃС‚Р°РЅРѕРІРєРё :name Рё $name
   sqh 0= IF ." Sqh=0; db3_enum=" addr u TYPE CR EXIT THEN
   addr u sqh db3_car ?DUP
   IF
@@ -298,7 +298,7 @@ USER db3_exec_TICKS
     WHILE
       DUP
       i 1+ -> i
-      i par ROT xt EXECUTE \ возвращает флаг продолжения
+      i par ROT xt EXECUTE \ РІРѕР·РІСЂР°С‰Р°РµС‚ С„Р»Р°Рі РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ
       IF db3_cdr ELSE db3_fin 0 THEN
     REPEAT DROP
   THEN
@@ -398,19 +398,19 @@ USER _db3_get_64 4 USER-ALLOT
   _db3_get_64 2@
 ;
 : db3_thread_cleanup ( -- )
-\  1 1 sqlite3_soft_heap_limit DROP \ недоступно
-  0 sqlite3_thread_cleanup DROP     \ ничего не делает...
+\  1 1 sqlite3_soft_heap_limit DROP \ РЅРµРґРѕСЃС‚СѓРїРЅРѕ
+  0 sqlite3_thread_cleanup DROP     \ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµС‚...
 ;
 : (db3_enable_extensions) ( sqh -- )
   TRUE SWAP 2 sqlite3_enable_load_extension DROP
 ;
-: db3_enable_extensions ( sqh -- ) \ попадаются .so без расширений
+: db3_enable_extensions ( sqh -- ) \ РїРѕРїР°РґР°СЋС‚СЃСЏ .so Р±РµР· СЂР°СЃС€РёСЂРµРЅРёР№
   ['] (db3_enable_extensions) CATCH IF ." can't enable sqlite extensions" CR DROP THEN
 ;
 : db3_changes ( sqh -- n ) 1 sqlite3_changes ; \ for ~dandy
 
 : db3_table_col_type { cnamea cnameu tnamea tnameu sqh \ ai pk nn cs dt -- typea typeu }
-\ возвращает тип заданного поля заданной таблицы (не view!) в открытой БД
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РёРї Р·Р°РґР°РЅРЅРѕРіРѕ РїРѕР»СЏ Р·Р°РґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†С‹ (РЅРµ view!) РІ РѕС‚РєСЂС‹С‚РѕР№ Р‘Р”
   ^ ai ^ pk ^ nn ^ cs ^ dt cnamea tnamea 0 sqh 9 sqlite3_table_column_metadata DROP
   dt ?DUP IF ASCIIZ> ELSE S" " THEN
 ;
@@ -427,12 +427,12 @@ USER _db3_get_64 4 USER-ALLOT
   1 1 sqlite3_enable_shared_cache DROP
 ;
 : (db3_backup_to) { addr u sqh \ sd b -- }
-\ записать копию БД из хэндла sqh в db3-файл с именем addr u
+\ Р·Р°РїРёСЃР°С‚СЊ РєРѕРїРёСЋ Р‘Р” РёР· С…СЌРЅРґР»Р° sqh РІ db3-С„Р°Р№Р» СЃ РёРјРµРЅРµРј addr u
   addr u db3_open -> sd
   S" main" DROP sqh S" main" DROP sd 4 sqlite3_backup_init -> b
   b 0= IF 5 S" sqlite3_backup_init" sd db3_error? THEN
 
-  BEGIN \ ждем освобождения доступа к БД
+  BEGIN \ Р¶РґРµРј РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ РґРѕСЃС‚СѓРїР° Рє Р‘Р”
     -1 b 2 sqlite3_backup_step 
     DUP SQLITE_BUSY =
   WHILE
@@ -454,7 +454,7 @@ USER _db3_get_64 4 USER-ALLOT
   addr u sqh ['] (db3_backup_to) CATCH ?DUP
   IF NIP NIP NIP
      ." db3_backup failed: " DUP . addr u TYPE CR
-     30008 = \ запись в read-only БД или несоответствие page_size (в новых sqlite изменили с 1К на 4К)
+     30008 = \ Р·Р°РїРёСЃСЊ РІ read-only Р‘Р” РёР»Рё РЅРµСЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ page_size (РІ РЅРѕРІС‹С… sqlite РёР·РјРµРЅРёР»Рё СЃ 1Рљ РЅР° 4Рљ)
      IF addr u DELETE-FILE ." deleted: " . CR
 	addr u sqh ['] (db3_backup_to) CATCH ?DUP
         IF ." second attempt failed too: " . CR DROP 2DROP THEN
@@ -471,8 +471,8 @@ PREVIOUS PREVIOUS PREVIOUS
 ;
 
 
-\EOF примеры:
-: kl \ можно подставлять в SQL-команду как :kl или $kl для авто-биндинга
+\EOF РїСЂРёРјРµСЂС‹:
+: kl \ РјРѕР¶РЅРѕ РїРѕРґСЃС‚Р°РІР»СЏС‚СЊ РІ SQL-РєРѕРјР°РЅРґСѓ РєР°Рє :kl РёР»Рё $kl РґР»СЏ Р°РІС‚Рѕ-Р±РёРЅРґРёРЅРіР°
   S" Kalinin%"
 ;
 : kldump { i par ppStmt -- flag }
@@ -487,7 +487,7 @@ PREVIOUS PREVIOUS PREVIOUS
   " update City set Population=Population+1 where id={n}" STR@ sqh db3_exec_ sqh db3_changes ." +" .
   sqh db3_close
 ; TEST
-\EOF примеры:
+\EOF РїСЂРёРјРµСЂС‹:
 : TEST { \ sqh }
   S" \spf4\devel\~ac\lib\ns\world.db3" db3_open -> sqh
   S" select id, 5 from City where name like 'Kalinin%'" sqh db3_get_id2 . .
@@ -499,9 +499,9 @@ PREVIOUS PREVIOUS PREVIOUS
   S" CREATE TABLE Items (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);begin"
   sqh db3_exec_
   sqh db3_insert_id .
-  S" INSERT INTO Items (Name) VALUES ('Тест1')" sqh db3_exec_
+  S" INSERT INTO Items (Name) VALUES ('РўРµСЃС‚1')" sqh db3_exec_
   sqh db3_insert_id .
-  S" INSERT INTO Items (Name) VALUES ('Тест2');commit" sqh db3_exec_
+  S" INSERT INTO Items (Name) VALUES ('РўРµСЃС‚2');commit" sqh db3_exec_
   sqh db3_insert_id .
   sqh db3_close
 ; TEST

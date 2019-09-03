@@ -1,4 +1,4 @@
-\ Работа с буфером обмена. Не так то это просто... было.
+\ Р Р°Р±РѕС‚Р° СЃ Р±СѓС„РµСЂРѕРј РѕР±РјРµРЅР°. РќРµ С‚Р°Рє С‚Рѕ СЌС‚Рѕ РїСЂРѕСЃС‚Рѕ... Р±С‹Р»Рѕ.
 
 REQUIRE ADD-CONST-VOC ~day\wincons\wc.f
 REQUIRE { ~ac\lib\locals.f
@@ -22,8 +22,8 @@ WINAPI: GlobalUnlock    KERNEL32.DLL
      GlobalFree IF GetLastError ELSE 0 THEN
 ;
 
-\ Перед использованием этой памяти используйте GlobalLock
-\ После - GlobalUnlock
+\ РџРµСЂРµРґ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј СЌС‚РѕР№ РїР°РјСЏС‚Рё РёСЃРїРѕР»СЊР·СѓР№С‚Рµ GlobalLock
+\ РџРѕСЃР»Рµ - GlobalUnlock
 : GLOBAL-COPY { addr u \ h p -- h }
      u 1+ GLOBAL-ALLOC THROW -> h
      h GlobalLock -> p
@@ -34,7 +34,7 @@ WINAPI: GlobalUnlock    KERNEL32.DLL
 ;
       
 : StringToCB ( addr u)
-\ Копировать строку в буфер обмена
+\ РљРѕРїРёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РІ Р±СѓС„РµСЂ РѕР±РјРµРЅР°
    0 OpenClipboard DROP
    EmptyClipboard DROP
    GLOBAL-COPY
@@ -43,7 +43,7 @@ WINAPI: GlobalUnlock    KERNEL32.DLL
    CloseClipboard DROP
 ;
 
-\ c-addr потом уничтожить через FREE!!!
+\ c-addr РїРѕС‚РѕРј СѓРЅРёС‡С‚РѕР¶РёС‚СЊ С‡РµСЂРµР· FREE!!!
 : CBString ( -- c-addr u)
    0 OpenClipboard DROP
    CF_TEXT

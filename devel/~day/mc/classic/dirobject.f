@@ -1,6 +1,6 @@
-( Спасибо 1001bytes за обращение моего внимания на этот пример в w32f
+( РЎРїР°СЃРёР±Рѕ 1001bytes Р·Р° РѕР±СЂР°С‰РµРЅРёРµ РјРѕРµРіРѕ РІРЅРёРјР°РЅРёСЏ РЅР° СЌС‚РѕС‚ РїСЂРёРјРµСЂ РІ w32f
 
-  Пример из справки из раздела ООП к Win32Forth 4.1.
+  РџСЂРёРјРµСЂ РёР· СЃРїСЂР°РІРєРё РёР· СЂР°Р·РґРµР»Р° РћРћРџ Рє Win32Forth 4.1.
 )
 REQUIRE { lib\ext\locals.f
 REQUIRE CLASS: ~day\mc\microclass.f
@@ -47,13 +47,13 @@ WINAPI: FindClose      KERNEL32.DLL
                 ;
 
 
-  M: CloseFind ( - f)        \ завершить поиски
+  M: CloseFind ( - f)        \ Р·Р°РІРµСЂС€РёС‚СЊ РїРѕРёСЃРєРё
                 vFindHandle @
                 FindClose 0=
                 -1 vFindHandle !
                 ;
 
-  M: ShowFile  ( -- )          \ показать последний найденный
+  M: ShowFile  ( -- )          \ РїРѕРєР°Р·Р°С‚СЊ РїРѕСЃР»РµРґРЅРёР№ РЅР°Р№РґРµРЅРЅС‹Р№
                 cFileName ASCIIZ> TYPE
                 ;
 
@@ -67,7 +67,7 @@ WINAPI: FindClose      KERNEL32.DLL
 
 
   WITH DirObject  /DirObject OBJECT VALUE aFile
-      \ делать объект класса DirObject
+      \ РґРµР»Р°С‚СЊ РѕР±СЉРµРєС‚ РєР»Р°СЃСЃР° DirObject
 
   : SIMPLEDIR ( FIELD )
         S" c:\*" aFile FindFirst

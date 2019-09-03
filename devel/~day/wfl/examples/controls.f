@@ -12,8 +12,8 @@ CDialog SUBCLASS CTestDialog
        CEventButton  OBJ eventBtn
 
 
-\ послылаем уведомления обратно дочерним окнам
-\ этим пользуется например URLLabel
+\ РїРѕСЃР»С‹Р»Р°РµРј СѓРІРµРґРѕРјР»РµРЅРёСЏ РѕР±СЂР°С‚РЅРѕ РґРѕС‡РµСЂРЅРёРј РѕРєРЅР°Рј
+\ СЌС‚РёРј РїРѕР»СЊР·СѓРµС‚СЃСЏ РЅР°РїСЂРёРјРµСЂ URLLabel
 REFLECT_NOTFICATIONS
 
 ( it is not called as HYPE method, just as FORTH word, so 

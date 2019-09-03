@@ -1,34 +1,34 @@
 \ 05.Apr.2004  (p) ruvim@forth.org.ru
-\ сравнение строки и маски, содержащей метасимволы (wildcards)  * ?
-\ Сделал по другому старую либу ~pinka\lib\mask.f
-\ ( на что сподвигнул меня ~pig  ;-)
+\ СЃСЂР°РІРЅРµРЅРёРµ СЃС‚СЂРѕРєРё Рё РјР°СЃРєРё, СЃРѕРґРµСЂР¶Р°С‰РµР№ РјРµС‚Р°СЃРёРјРІРѕР»С‹ (wildcards)  * ?
+\ РЎРґРµР»Р°Р» РїРѕ РґСЂСѓРіРѕРјСѓ СЃС‚Р°СЂСѓСЋ Р»РёР±Сѓ ~pinka\lib\mask.f
+\ ( РЅР° С‡С‚Рѕ СЃРїРѕРґРІРёРіРЅСѓР» РјРµРЅСЏ ~pig  ;-)
 
-\ Данная библиотека использует возможности парсера SPF4
+\ Р”Р°РЅРЅР°СЏ Р±РёР±Р»РёРѕС‚РµРєР° РёСЃРїРѕР»СЊР·СѓРµС‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїР°СЂСЃРµСЂР° SPF4
 \ $Id$
 
-\ слово LIKE и ULIKE ( a u  a-mask u-mask -- flag )
-\  сопоставляет  строку a u  с маской,
-\  возвращает TRUE при успехе
-\  и FALSE, если сопоставление невозможно.
+\ СЃР»РѕРІРѕ LIKE Рё ULIKE ( a u  a-mask u-mask -- flag )
+\  СЃРѕРїРѕСЃС‚Р°РІР»СЏРµС‚  СЃС‚СЂРѕРєСѓ a u  СЃ РјР°СЃРєРѕР№,
+\  РІРѕР·РІСЂР°С‰Р°РµС‚ TRUE РїСЂРё СѓСЃРїРµС…Рµ
+\  Рё FALSE, РµСЃР»Рё СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ.
 \  Wildcards:
-\  *  - любое количество любых символов
-\  ?  - любой символ
-\  \  - префикс "квотирования" специальных символов:
+\  *  - Р»СЋР±РѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р»СЋР±С‹С… СЃРёРјРІРѕР»РѕРІ
+\  ?  - Р»СЋР±РѕР№ СЃРёРјРІРѕР»
+\  \  - РїСЂРµС„РёРєСЃ "РєРІРѕС‚РёСЂРѕРІР°РЅРёСЏ" СЃРїРµС†РёР°Р»СЊРЅС‹С… СЃРёРјРІРѕР»РѕРІ:
 \       \\ -> \
 \       \* -> *
 \       \? -> ?
-\       \q -> " ( предложение ~pig )
-\  Особенности: для ускорения работы бэктрекинг сведен к минимуму 
-\  и сделан через обычный цикл; используется SEARCH и COMPARE
+\       \q -> " ( РїСЂРµРґР»РѕР¶РµРЅРёРµ ~pig )
+\  РћСЃРѕР±РµРЅРЅРѕСЃС‚Рё: РґР»СЏ СѓСЃРєРѕСЂРµРЅРёСЏ СЂР°Р±РѕС‚С‹ Р±СЌРєС‚СЂРµРєРёРЅРі СЃРІРµРґРµРЅ Рє РјРёРЅРёРјСѓРјСѓ 
+\  Рё СЃРґРµР»Р°РЅ С‡РµСЂРµР· РѕР±С‹С‡РЅС‹Р№ С†РёРєР»; РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ SEARCH Рё COMPARE
 
 REQUIRE SALLOC      ~pinka/lib/ext/alloc.f 
 REQUIRE PARSE-AREA@ ~pinka/lib/ext/parse.f
 REQUIRE UPPERCASE   ~ac/lib/string/uppercase.f 
 
 : SEARCH&SKIP ( a u  a-subs u-subs -- a2 u2 true | a u false )
-\ искать в строке  a u  подстроку  a-subs u-subs
-\ если найдена, вернуть часть строки после найденного образа и true
-\ иначе вернуть  a u false.
+\ РёСЃРєР°С‚СЊ РІ СЃС‚СЂРѕРєРµ  a u  РїРѕРґСЃС‚СЂРѕРєСѓ  a-subs u-subs
+\ РµСЃР»Рё РЅР°Р№РґРµРЅР°, РІРµСЂРЅСѓС‚СЊ С‡Р°СЃС‚СЊ СЃС‚СЂРѕРєРё РїРѕСЃР»Рµ РЅР°Р№РґРµРЅРЅРѕРіРѕ РѕР±СЂР°Р·Р° Рё true
+\ РёРЅР°С‡Рµ РІРµСЂРЅСѓС‚СЊ  a u false.
     DUP >R   SEARCH         IF
     SWAP R@ +  
     SWAP R@ -       TRUE    ELSE
@@ -37,9 +37,9 @@ REQUIRE UPPERCASE   ~ac/lib/string/uppercase.f
     RDROP
 ;
 : MATCH-SIMPLE ( a u apat upat -- a1 u1 flag )
-\ сопоставить  apat upat  c  a upat
-\ если совпадает, вернуть  a+upat u-upat true,
-\ иначе  a u  false
+\ СЃРѕРїРѕСЃС‚Р°РІРёС‚СЊ  apat upat  c  a upat
+\ РµСЃР»Рё СЃРѕРІРїР°РґР°РµС‚, РІРµСЂРЅСѓС‚СЊ  a+upat u-upat true,
+\ РёРЅР°С‡Рµ  a u  false
   DUP >R 
   2OVER ROT U< IF 2DROP RDROP FALSE EXIT THEN
   R@ TUCK COMPARE IF RDROP FALSE EXIT THEN
@@ -58,7 +58,7 @@ CHAR \ VALUE quote-char
   DROP FALSE
 ;
 : NextPat ( -- a u )
-\ дает подстроку из шаблона   (и скипает ее)
+\ РґР°РµС‚ РїРѕРґСЃС‚СЂРѕРєСѓ РёР· С€Р°Р±Р»РѕРЅР°   (Рё СЃРєРёРїР°РµС‚ РµРµ)
   GetChar AND IF CharAddr COUNT DUP 1+ >IN +! EXIT THEN
   CharAddr 0
 \  CharAddr EndOfChunk IF 0 ELSE COUNT  DUP 1+ >IN +! THEN
@@ -68,7 +68,7 @@ CHAR \ VALUE quote-char
   CharAddr 1+ C@  TRUE
 ;
 : QMatch ( a u -- a1 u1 f )
-\ сопоставляет с шаблоном, содержащим '?'
+\ СЃРѕРїРѕСЃС‚Р°РІР»СЏРµС‚ СЃ С€Р°Р±Р»РѕРЅРѕРј, СЃРѕРґРµСЂР¶Р°С‰РёРј '?'
   BEGIN
     NextPat DUP IF
       MATCH-SIMPLE 0= IF FALSE EXIT THEN
@@ -82,13 +82,13 @@ CHAR \ VALUE quote-char
   REPEAT THEN TRUE
 ;
 : QMatch2 ( a u -- a1 u1 f )
-\ при неуспехе  счетчики оставляет неизменными
+\ РїСЂРё РЅРµСѓСЃРїРµС…Рµ  СЃС‡РµС‚С‡РёРєРё РѕСЃС‚Р°РІР»СЏРµС‚ РЅРµРёР·РјРµРЅРЅС‹РјРё
   2DUP PARSE-AREA@ 2>R
   QMatch IF 2SWAP 2DROP RDROP RDROP TRUE EXIT THEN
   2DROP 2R> SOURCE! FALSE
 ;
 : Process(*) ( a u -- a1 u1 flag )
-\ ищет по под-шаблону
+\ РёС‰РµС‚ РїРѕ РїРѕРґ-С€Р°Р±Р»РѕРЅСѓ
   NextPat DUP 0= IF 2DROP TRUE EXIT THEN
   2>R
   BEGIN ( a u )
@@ -114,7 +114,7 @@ CHAR \ VALUE quote-char
 ;
 
 : store-char ( a p c -- a1 p1 )
-\ p - ссылка на счетчик
+\ p - СЃСЃС‹Р»РєР° РЅР° СЃС‡РµС‚С‡РёРє
   >R
   DUP 0= IF ( DROP  0) OVER C!  DUP 1+ SWAP THEN
   SWAP R> OVER C! 1+ SWAP
@@ -133,8 +133,8 @@ CHAR \ VALUE quote-char
   THEN
 ;
 : translate-mask ( -- a u )
-\ подстроки символов транслируются в строки со счетчиками
-\ а спец-символы предваряются кодом 0.
+\ РїРѕРґСЃС‚СЂРѕРєРё СЃРёРјРІРѕР»РѕРІ С‚СЂР°РЅСЃР»РёСЂСѓСЋС‚СЃСЏ РІ СЃС‚СЂРѕРєРё СЃРѕ СЃС‡РµС‚С‡РёРєР°РјРё
+\ Р° СЃРїРµС†-СЃРёРјРІРѕР»С‹ РїСЂРµРґРІР°СЂСЏСЋС‚СЃСЏ РєРѕРґРѕРј 0.
   PAD 0
   BEGIN ( a p )
     GetChar
@@ -148,8 +148,8 @@ CHAR \ VALUE quote-char
   PAD TUCK -
 ;
 : LIKE-MASK1  ( a1 u1 -- flag ) 
-\ только within EVALUATE-WITH
-\ в PARSE-AREA - маска
+\ С‚РѕР»СЊРєРѕ within EVALUATE-WITH
+\ РІ PARSE-AREA - РјР°СЃРєР°
   translate-mask SOURCE!
   (LIKE-MASK) NIP NIP
 ;

@@ -1,4 +1,4 @@
-\ Отладочные дамперы / примеры листателей.
+\ РћС‚Р»Р°РґРѕС‡РЅС‹Рµ РґР°РјРїРµСЂС‹ / РїСЂРёРјРµСЂС‹ Р»РёСЃС‚Р°С‚РµР»РµР№.
 
 REQUIRE MapiLogon ~ac/lib/win/mapi/exmapi.f 
 
@@ -33,7 +33,7 @@ CR CR ." ==========================" row PR_MESSAGE_CLASS MapiRowStr@ IF TYPE TH
         msg PR_HTML_BODY  MapiProp@ ." html=" . . CR \ ( ANSI>OEM) TYPE CR
         msg PR_TRANSPORT_MESSAGE_HEADERS MapiProp@ ." headers=" TYPE CR
 \        msg MapiRtfBody@ ." rtf=" TYPE CR
-        msg uMapiMessage ! \ нужен для сохранения аттача
+        msg uMapiMessage ! \ РЅСѓР¶РµРЅ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ Р°С‚С‚Р°С‡Р°
         msg ['] MapiListAtt MapiEnumAtt
      THEN
   THEN
@@ -50,7 +50,7 @@ USER cbEntryID
       DUP @ DUP 0xFFFF AND PT_STRING8 = 
           IF U. CELL+ CELL+ @ ASCIIZ> ANSI>OEM TYPE CR
           ELSE 
-             DUP 0xFFFF AND 0xA = \ не печатаем свойства, чье значение "ошибка"
+             DUP 0xFFFF AND 0xA = \ РЅРµ РїРµС‡Р°С‚Р°РµРј СЃРІРѕР№СЃС‚РІР°, С‡СЊРµ Р·РЅР°С‡РµРЅРёРµ "РѕС€РёР±РєР°"
              IF 2DROP
              ELSE
                DUP PR_ENTRYID =

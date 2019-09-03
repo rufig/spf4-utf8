@@ -54,8 +54,8 @@ ALSO ZOP CONTEXT @ PREVIOUS CONSTANT ZOP-WID
   POSTPONE ;
   R> IF IMMEDIATE THEN
 ;
-( 'W:' äåëàåò êîä äëÿ ñëîâ íåìåäëåííîãî èñïîëíåíèÿ
-  - òîëüêî äëÿ ðåæèìà êîìïèëÿöèè..
+( 'W:' Ð´ÐµÐ»Ð°ÐµÑ‚ ÐºÐ¾Ð´ Ð´Ð»Ñ ÑÐ»Ð¾Ð² Ð½ÐµÐ¼ÐµÐ´Ð»ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¸ÑÐ¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ
+  - Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ Ñ€ÐµÐ¶Ð¸Ð¼Ð° ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ð¸..
 )
 
 ALSO ZOP DEFINITIONS PREVIOUS
@@ -115,7 +115,7 @@ ALSO ZOP DEFINITIONS PREVIOUS
 : (DOES2)
   2R> >R >ZS
 ;
-\ (DOES1) ãîäèòñÿ øòàòíûé
+\ (DOES1) Ð³Ð¾Ð´Ð¸Ñ‚ÑÑ ÑˆÑ‚Ð°Ñ‚Ð½Ñ‹Ð¹
 
 ALSO ZOP
 : DOES>

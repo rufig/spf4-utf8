@@ -49,7 +49,7 @@ predMove ! ;
 
 : change-game ( flag -- )  IF game 1+! ELSE -1 game +! THEN ;
 
-: make-move ( flag -- lost )  change-game  5 game @ - ABS 5 =  ; \ èëè =0 èëè =10 
+: make-move ( flag -- lost )  change-game  5 game @ - ABS 5 =  ; \ Ð¸Ð»Ð¸ =0 Ð¸Ð»Ð¸ =10 
 
 : red-make-move ( -- )
 red-move CR in-the-red-corner TYPE ." :" DUP .
@@ -77,7 +77,7 @@ moves-made @ 5 MOD 0= IF game @ red-board THEN ;
 : box ( -- )
 moves-made 0!
 
-\ Ñóäüÿ áðîñàåò ìîíåòêó, êîìó äåëàòü ïåðâûé õîä:
+\ Ð¡ÑƒÐ´ÑŒÑ Ð±Ñ€Ð¾ÑÐ°ÐµÑ‚ Ð¼Ð¾Ð½ÐµÑ‚ÐºÑƒ, ÐºÐ¾Ð¼Ñƒ Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ñ…Ð¾Ð´:
 32 CHOOSE 15 > first-strike !
 
 first-strike @ IF red-make-move THEN

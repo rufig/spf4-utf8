@@ -4,9 +4,9 @@ NEEDS ~day\wfl\wfl.f
 NEEDS ~day\wfl\controls\scintilla\scintilla.f
 NEEDS ~ac\lib\win\date\unixtime.f
 
-\ TODO: íà ïðîáåëå è enter setUndoPoint
-\ TODO: âíèçó âûâîä ïîñëå çàïóñêà ñî ñïëèòòåðîì
-\ TODO: ïîäñâåòêà ñèíòàêñèñà
+\ TODO: Ð½Ð° Ð¿Ñ€Ð¾Ð±ÐµÐ»Ðµ Ð¸ enter setUndoPoint
+\ TODO: Ð²Ð½Ð¸Ð·Ñƒ Ð²Ñ‹Ð²Ð¾Ð´ Ð¿Ð¾ÑÐ»Ðµ Ð·Ð°Ð¿ÑƒÑÐºÐ° ÑÐ¾ ÑÐ¿Ð»Ð¸Ñ‚Ñ‚ÐµÑ€Ð¾Ð¼
+\ TODO: Ð¿Ð¾Ð´ÑÐ²ÐµÑ‚ÐºÐ° ÑÐ¸Ð½Ñ‚Ð°ÐºÑÐ¸ÑÐ°
 
 : ID: CREATE DUP , 1+ DOES> @ ;
 

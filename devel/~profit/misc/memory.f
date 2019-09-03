@@ -1,6 +1,6 @@
 \ http://fforum.winglion.ru//viewtopic.php?p=4724#4724
-\ Ñïîð î çàáîðå ïàìÿòè
-\ mOleg áûë ïðàâ, ÿ -- íåò.
+\ Ð¡Ð¿Ð¾Ñ€ Ð¾ Ð·Ð°Ð±Ð¾Ñ€Ðµ Ð¿Ð°Ð¼ÑÑ‚Ð¸
+\ mOleg Ð±Ñ‹Ð» Ð¿Ñ€Ð°Ð², Ñ -- Ð½ÐµÑ‚.
 
 :NONAME
 1024 DUP * ( Mb ) 100 * DUP >R ALLOCATE THROW DUP

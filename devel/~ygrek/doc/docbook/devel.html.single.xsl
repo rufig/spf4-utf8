@@ -4,7 +4,7 @@
 
   <xsl:include href="devel.basic.xsl"/>
 
-  <!-- Ñîçäàâàòü èíäåêñ -->
+  <!-- Ð¡Ð¾Ð·Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð¸Ð½Ð´ÐµÐºÑ -->
   <xsl:param name="generate.index" select="0"></xsl:param>
 
 </xsl:stylesheet>

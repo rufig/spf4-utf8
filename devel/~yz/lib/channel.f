@@ -1,5 +1,5 @@
-\ Широковещательные каналы
-\ Ю. Жиловец, 14.06.2004
+\ РЁРёСЂРѕРєРѕРІРµС‰Р°С‚РµР»СЊРЅС‹Рµ РєР°РЅР°Р»С‹
+\ Р®. Р–РёР»РѕРІРµС†, 14.06.2004
 
 REQUIRE " ~yz/lib/common.f
 REQUIRE { lib/ext/locals.f
@@ -46,13 +46,13 @@ WINAPI: InitializeSecurityDescriptor ADVAPI32.DLL
 WINAPI: SetSecurityDescriptorDacl    ADVAPI32.DLL
 
 : fill-channel { ch \ [ 20 CELLS ] sd [ 3 CELLS ] sa -- ch/0 }
-  \ Готовим дескриптор безопасности, разрешающий общий доступ
+  \ Р“РѕС‚РѕРІРёРј РґРµСЃРєСЂРёРїС‚РѕСЂ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё, СЂР°Р·СЂРµС€Р°СЋС‰РёР№ РѕР±С‰РёР№ РґРѕСЃС‚СѓРї
   1 ( SECURITY_DESCRIPTOR_REVISION ) sd InitializeSecurityDescriptor DROP
   FALSE 0 TRUE sd SetSecurityDescriptorDacl DROP
   3 CELLS sa !
   sd sa 1 CELLS!
   FALSE sa 2 CELLS!
-  \ Создаем общие объекты
+  \ РЎРѕР·РґР°РµРј РѕР±С‰РёРµ РѕР±СЉРµРєС‚С‹
   ch " event" object-name FALSE ( non-signal)
   TRUE ( manual reset) sa CreateEventA
   DUP 0= IF EXIT THEN ch :chEvent !

@@ -48,7 +48,7 @@ WINAPI: CertGetEnhancedKeyUsage             CRYPT32.DLL
 ;
 : GetCertificateString { cert iss name nstr \ mem -- addr u }
   512 ALLOCATE THROW -> mem
-  512 mem ^ nstr iss ( èëè 1, åñëè issuer)
+  512 mem ^ nstr iss ( Ð¸Ð»Ð¸ 1, ÐµÑÐ»Ð¸ issuer)
   name
   cert CertGetNameStringA mem SWAP 1- 0 MAX
 ;
@@ -83,8 +83,8 @@ CREATE SIGN_PARA 72 , X509_ASN_ENCODING PKCS_7_ASN_ENCODING OR ,
 HERE 0 , (  CERT_CONTEXT )
 ALG_ID_MD5 , \ 0 ( CRYPT_OBJID_BLOB ) ,
 0 ,
-1 , ( cMsgCert - ñêîëüêî ñåðòèôèêàòîâ âêëþ÷àòü â ñîîáùåíèå )
-DUP , ( rgpMsgCert - ìàññèâ óêàçàòåëåé íà âêëþ÷àåìûå ñåðòèôèêàòû )
+1 , ( cMsgCert - ÑÐºÐ¾Ð»ÑŒÐºÐ¾ ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ð² Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ‚ÑŒ Ð² ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ )
+DUP , ( rgpMsgCert - Ð¼Ð°ÑÑÐ¸Ð² ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÐµÐ¹ Ð½Ð° Ð²ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼Ñ‹Ðµ ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ñ‹ )
 1 ,  , 0 , 0 , 0 , 0 ,
 0 , 0 , 0 , 0 ,
 
@@ -119,20 +119,20 @@ DUP , ( rgpMsgCert - ìàññèâ óêàçàòåëåé íà âêëþ÷àåìûå ñåðòèôèêàòû )
   SIGN_PARA CryptSignMessage 0 = IF GetLastError EXIT THEN
   mem size 0
 ;
-: CompareCert ( cert1 cert2 -- flag ) \ 0 îçíà÷àåò "ðàâíû", êàê â COMPARE
+: CompareCert ( cert1 cert2 -- flag ) \ 0 Ð¾Ð·Ð½Ð°Ñ‡Ð°ÐµÑ‚ "Ñ€Ð°Ð²Ð½Ñ‹", ÐºÐ°Ðº Ð² COMPARE
   3 CELLS + @ SWAP 3 CELLS + @
   X509_ASN_ENCODING PKCS_7_ASN_ENCODING OR
   CertCompareCertificate 0=
 ;
-: IsMsgSignedBy ( addr u cert -- flag ) \ true = äà, ïîäïèñàíî ýòèì ñåðòèôèêàòîì
+: IsMsgSignedBy ( addr u cert -- flag ) \ true = Ð´Ð°, Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ°Ð½Ð¾ ÑÑ‚Ð¸Ð¼ ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ð¼
   >R VerifySignature IF RDROP FALSE EXIT THEN
   >R 2DROP
   2R> CompareCert 0=
 ;
 : EnumCertExtensions { context xt \ size mem -- }
 \ xt: cert addr u --
-\ Ìàññèâ ðàñøèðåíèé:
-\ 322EE4   01 00 00 00  EC 2E 32 00  F0 2E 32 00  31 2E 33 2E ....ü.2.¨.2.1.3.
+\ ÐœÐ°ÑÑÐ¸Ð² Ñ€Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð¸Ð¹:
+\ 322EE4   01 00 00 00  EC 2E 32 00  F0 2E 32 00  31 2E 33 2E ....ÑŒ.2.Ð.2.1.3.
 \ 322EF4   36 2E 31 2E  34 2E 31 2E  31 38 34 37  34 2E 31 2E 6.1.4.1.18474.1.
 \ 322F04   33 2E 31 30  00 00 00 00  00 00 00 00  00 00 00 00 3.10............
   1000 DUP -> size ALLOCATE THROW -> mem

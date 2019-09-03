@@ -1,4 +1,4 @@
-\ POST-çàïðîñû ñ ïîìîùüþ CURL.
+\ POST-Ð·Ð°Ð¿Ñ€Ð¾ÑÑ‹ Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ CURL.
 \ $Id$
 
 REQUIRE GET-FILE      ~ac/lib/lin/curl/curl.f
@@ -14,13 +14,13 @@ ALSO libcurl.so.3
 ALSO libcurl.so.4
 
 : POST-FILE-VIAPROXY { adata udata act uct addr u paddr pu \ h data slist coo -- str }
-\ åñëè ïðîêñè paddr pu - íåïóñòàÿ ñòðîêà, òî ÿâíî èñïîëüçóåòñÿ ýòîò ïðîêñè
-\ curl óìååò èñïîëüçîâàòü ïåðåìåííûå îêðóæåíèÿ http_proxy, ftp_proxy
-\ ïîýòîìó ìîæíî íå çàäàâàòü ïðîêñè ÿâíî.
-\ adata udata - ïåðåäàâàåìûå ÷åðåç POST äàííûå.
+\ ÐµÑÐ»Ð¸ Ð¿Ñ€Ð¾ÐºÑÐ¸ paddr pu - Ð½ÐµÐ¿ÑƒÑÑ‚Ð°Ñ ÑÑ‚Ñ€Ð¾ÐºÐ°, Ñ‚Ð¾ ÑÐ²Ð½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ ÑÑ‚Ð¾Ñ‚ Ð¿Ñ€Ð¾ÐºÑÐ¸
+\ curl ÑƒÐ¼ÐµÐµÑ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð¾ÐºÑ€ÑƒÐ¶ÐµÐ½Ð¸Ñ http_proxy, ftp_proxy
+\ Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð¼Ð¾Ð¶Ð½Ð¾ Ð½Ðµ Ð·Ð°Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾ÐºÑÐ¸ ÑÐ²Ð½Ð¾.
+\ adata udata - Ð¿ÐµÑ€ÐµÐ´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ðµ Ñ‡ÐµÑ€ÐµÐ· POST Ð´Ð°Ð½Ð½Ñ‹Ðµ.
 
-\ act uct - content-type; åñëè uct=0, òî îñòàåòñÿ default application/x-www-form-urlencoded
-\ åñëè äàííûå POST'à íå òåêñòîâûå, à äâîè÷íûå, òî CURL îòïðàâèò íå âñ¸
+\ act uct - content-type; ÐµÑÐ»Ð¸ uct=0, Ñ‚Ð¾ Ð¾ÑÑ‚Ð°ÐµÑ‚ÑÑ default application/x-www-form-urlencoded
+\ ÐµÑÐ»Ð¸ Ð´Ð°Ð½Ð½Ñ‹Ðµ POST'Ð° Ð½Ðµ Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ðµ, Ð° Ð´Ð²Ð¾Ð¸Ñ‡Ð½Ñ‹Ðµ, Ñ‚Ð¾ CURL Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ Ð½Ðµ Ð²ÑÑ‘
 
 \  "" -> data
   "" uCurlRes !
@@ -32,7 +32,7 @@ ALSO libcurl.so.4
 
   pu IF paddr CURLOPT_PROXY h 3 curl_easy_setopt DROP THEN
 
-\  65000 CURLOPT_BUFFERSIZE h 3 curl_easy_setopt DROP ( íå ñòàâèòñÿ áîëüøå, ÷åì CURL_MAX_WRITE_SIZE)
+\  65000 CURLOPT_BUFFERSIZE h 3 curl_easy_setopt DROP ( Ð½Ðµ ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑÑ Ð±Ð¾Ð»ÑŒÑˆÐµ, Ñ‡ÐµÐ¼ CURL_MAX_WRITE_SIZE)
 
   ['] CURL_CALLBACK CURLOPT_WRITEFUNCTION h 3 curl_easy_setopt DROP
 \  ^ data CURLOPT_WRITEDATA h 3 curl_easy_setopt DROP
@@ -74,12 +74,12 @@ USER HEADER_CB
 ; 16 CALLBACK: CURL_HEADER_CALLBACK
 
 : POST-CUSTOM-VIAPROXY { amethod umethod aheader uheader adata udata act uct addr u paddr pu \ h data slist coo -- str }
-\ åñëè ïðîêñè paddr pu - íåïóñòàÿ ñòðîêà, òî ÿâíî èñïîëüçóåòñÿ ýòîò ïðîêñè
-\ curl óìååò èñïîëüçîâàòü ïåðåìåííûå îêðóæåíèÿ http_proxy, ftp_proxy
-\ ïîýòîìó ìîæíî íå çàäàâàòü ïðîêñè ÿâíî.
-\ adata udata - ïåðåäàâàåìûå ÷åðåç POST (èëè èíîé ìåòîò ñ òåëîì) äàííûå.
-\ act uct - content-type; åñëè uct=0, òî îñòàåòñÿ default application/x-www-form-urlencoded
-\ åñëè äàííûå POST'à íå òåêñòîâûå, à äâîè÷íûå, òî CURL îòïðàâèò âñ¸, áëàãîäàðÿ CURLOPT_POSTFIELDSIZE_LARGE
+\ ÐµÑÐ»Ð¸ Ð¿Ñ€Ð¾ÐºÑÐ¸ paddr pu - Ð½ÐµÐ¿ÑƒÑÑ‚Ð°Ñ ÑÑ‚Ñ€Ð¾ÐºÐ°, Ñ‚Ð¾ ÑÐ²Ð½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ ÑÑ‚Ð¾Ñ‚ Ð¿Ñ€Ð¾ÐºÑÐ¸
+\ curl ÑƒÐ¼ÐµÐµÑ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð¾ÐºÑ€ÑƒÐ¶ÐµÐ½Ð¸Ñ http_proxy, ftp_proxy
+\ Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð¼Ð¾Ð¶Ð½Ð¾ Ð½Ðµ Ð·Ð°Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾ÐºÑÐ¸ ÑÐ²Ð½Ð¾.
+\ adata udata - Ð¿ÐµÑ€ÐµÐ´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ðµ Ñ‡ÐµÑ€ÐµÐ· POST (Ð¸Ð»Ð¸ Ð¸Ð½Ð¾Ð¹ Ð¼ÐµÑ‚Ð¾Ñ‚ Ñ Ñ‚ÐµÐ»Ð¾Ð¼) Ð´Ð°Ð½Ð½Ñ‹Ðµ.
+\ act uct - content-type; ÐµÑÐ»Ð¸ uct=0, Ñ‚Ð¾ Ð¾ÑÑ‚Ð°ÐµÑ‚ÑÑ default application/x-www-form-urlencoded
+\ ÐµÑÐ»Ð¸ Ð´Ð°Ð½Ð½Ñ‹Ðµ POST'Ð° Ð½Ðµ Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ðµ, Ð° Ð´Ð²Ð¾Ð¸Ñ‡Ð½Ñ‹Ðµ, Ñ‚Ð¾ CURL Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ Ð²ÑÑ‘, Ð±Ð»Ð°Ð³Ð¾Ð´Ð°Ñ€Ñ CURLOPT_POSTFIELDSIZE_LARGE
 
 \  "" -> data
   "" uCurlRes !
@@ -134,7 +134,7 @@ USER HEADER_CB
 PREVIOUS PREVIOUS PREVIOUS PREVIOUS
 
 : POST-FILE ( adata udata act uct addr u -- str )
-  \ áåç ïðîêñè èëè ñ çàäàííûì â ïåðåìåííîé îêðóæåíèÿ http_proxy
+  \ Ð±ÐµÐ· Ð¿Ñ€Ð¾ÐºÑÐ¸ Ð¸Ð»Ð¸ Ñ Ð·Ð°Ð´Ð°Ð½Ð½Ñ‹Ð¼ Ð² Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ Ð¾ÐºÑ€ÑƒÐ¶ÐµÐ½Ð¸Ñ http_proxy
   2DUP FILE ?DUP
   IF 2SWAP 2DROP 2SWAP 2DROP 2SWAP 2DROP OVER >R sALLOT R> FREE THROW
   ELSE DROP S" " POST-FILE-VIAPROXY THEN
@@ -143,4 +143,4 @@ PREVIOUS PREVIOUS PREVIOUS PREVIOUS
 \EOF
 S" <test>test</test>" S" Content-Type: text/xml" S" http://www.forth.org.ru/test.e" S" http://localhost:3128/" POST-FILE-VIAPROXY STR@ TYPE
 REQUIRE >UTF8 ~ac/lib/win/com/com.f
-\ S" status=òåñòèðóþ curl" >UTF8 S" " S" http://rufig:spforth@twitter.com/statuses/update.xml" POST-FILE STR@ TYPE
+\ S" status=Ñ‚ÐµÑÑ‚Ð¸Ñ€ÑƒÑŽ curl" >UTF8 S" " S" http://rufig:spforth@twitter.com/statuses/update.xml" POST-FILE STR@ TYPE

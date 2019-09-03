@@ -1,4 +1,4 @@
-\ Управление встроенным браузером. Примеры см. в ~ac/lib/win/window/browser.f
+\ РЈРїСЂР°РІР»РµРЅРёРµ РІСЃС‚СЂРѕРµРЅРЅС‹Рј Р±СЂР°СѓР·РµСЂРѕРј. РџСЂРёРјРµСЂС‹ СЃРј. РІ ~ac/lib/win/window/browser.f
 
 REQUIRE CLSID,  ~ac/lib/win/com/com.f
 
@@ -51,7 +51,7 @@ Interface;
 
 \ IID_IDispatch
 \ Interface: IID_DispHTMLDocument {3050f55f-98b5-11cf-bb82-00aa00bdce0b}
-\ то же в другой обертке...
+\ С‚Рѕ Р¶Рµ РІ РґСЂСѓРіРѕР№ РѕР±РµСЂС‚РєРµ...
 \ Interface;
 
 \ MinGW\include\mshtml.h 

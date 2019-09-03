@@ -1,4 +1,4 @@
-\ 06.Apr.2004  перенес код из hash-table.f
+\ 06.Apr.2004  РїРµСЂРµРЅРµСЃ РєРѕРґ РёР· hash-table.f
 
 : SALLOC ( a u -- a1 )
   DUP ALLOCATE THROW DUP >R SWAP CMOVE R>

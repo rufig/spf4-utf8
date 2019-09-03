@@ -3,25 +3,25 @@
   <xsl:output encoding="windows-1251" method="xml" indent="yes"/>
 
   <xsl:template match="forthsourcecode">
-  <xsl:for-each select="module">          <!-- Для каждого файла-->
-  <section>                               <!-- Раздел-->
+  <xsl:for-each select="module">          <!-- Р”Р»СЏ РєР°Р¶РґРѕРіРѕ С„Р°Р№Р»Р°-->
+  <section>                               <!-- Р Р°Р·РґРµР»-->
     <xsl:attribute name="id">
       <xsl:value-of select="@name"/>
     </xsl:attribute>
 
     <title>
-      <xsl:value-of select="@name"/>      <!-- Имя файла-->
+      <xsl:value-of select="@name"/>      <!-- РРјСЏ С„Р°Р№Р»Р°-->
     </title>
 
     <section id="toc-section">
       <title>
-      Описание
+      РћРїРёСЃР°РЅРёРµ
       </title>
       <xsl:call-template name="print-comments"/>
     </section>
 
-    <xsl:for-each select="colon">         <!-- Для каждого определения через двоеточие-->
-    <xsl:if test="@vocabulary='FORTH'">   <!-- Только те что экспортируются в общий словарь-->
+    <xsl:for-each select="colon">         <!-- Р”Р»СЏ РєР°Р¶РґРѕРіРѕ РѕРїСЂРµРґРµР»РµРЅРёСЏ С‡РµСЂРµР· РґРІРѕРµС‚РѕС‡РёРµ-->
+    <xsl:if test="@vocabulary='FORTH'">   <!-- РўРѕР»СЊРєРѕ С‚Рµ С‡С‚Рѕ СЌРєСЃРїРѕСЂС‚РёСЂСѓСЋС‚СЃСЏ РІ РѕР±С‰РёР№ СЃР»РѕРІР°СЂСЊ-->
 
     <section>
       <xsl:attribute name="id">
@@ -30,7 +30,7 @@
 
       <indexterm type="word">
         <primary>
-          <xsl:value-of select="@name"/>  <!-- Индекс по имени слова-->
+          <xsl:value-of select="@name"/>  <!-- РРЅРґРµРєСЃ РїРѕ РёРјРµРЅРё СЃР»РѕРІР°-->
         </primary>
         <!--primaryie>
           <xsl:value-of select="parent::module/@name"/>
@@ -38,11 +38,11 @@
       </indexterm>
 
       <title>
-        <xsl:value-of select="@name"/>    <!-- Имя слова-->
+        <xsl:value-of select="@name"/>    <!-- РРјСЏ СЃР»РѕРІР°-->
       </title>
 
       <para>
-        <xsl:value-of select="@params"/>  <!-- Стековая нотация-->
+        <xsl:value-of select="@params"/>  <!-- РЎС‚РµРєРѕРІР°СЏ РЅРѕС‚Р°С†РёСЏ-->
       </para>
 
       <xsl:variable name="FirstComment">
@@ -79,7 +79,7 @@
   <!-- *********************************************************** -->
 
   <xsl:template name="print-comments">
-      <xsl:for-each select="comment">          <!-- Описание (из либы)-->
+      <xsl:for-each select="comment">          <!-- РћРїРёСЃР°РЅРёРµ (РёР· Р»РёР±С‹)-->
         <xsl:value-of select="."/>
         <xsl:if test="position()!=last()">
           <sbr/>                             <!-- THIS BREAKS VALIDATION !!! -->
@@ -90,7 +90,7 @@
 
   <!-- *********************************************************** -->
 
-  <!-- Подготавливает шаблоны для описания параметров -->
+  <!-- РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµС‚ С€Р°Р±Р»РѕРЅС‹ РґР»СЏ РѕРїРёСЃР°РЅРёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ -->
 
   <xsl:template name = "allstack" >
     <xsl:param name = "S"/>
@@ -105,8 +105,8 @@
 
   <!-- *********************************************************** -->
 
-  <!-- Функция проверяет что у нас есть параметры которые следает описать
-       и в случае успеха вызывает allstak-norm
+  <!-- Р¤СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚ С‡С‚Рѕ Сѓ РЅР°СЃ РµСЃС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ РєРѕС‚РѕСЂС‹Рµ СЃР»РµРґР°РµС‚ РѕРїРёСЃР°С‚СЊ
+       Рё РІ СЃР»СѓС‡Р°Рµ СѓСЃРїРµС…Р° РІС‹Р·С‹РІР°РµС‚ allstak-norm
   -->
 
   <xsl:template name = "allstack-norm-try" >
@@ -174,7 +174,7 @@
 
             <xsl:if test="$Word!='(' and $Word!='{'">
 
-                <varlistentry>                      <!-- Описание параметров - шаблон -->
+                <varlistentry>                      <!-- РћРїРёСЃР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ - С€Р°Р±Р»РѕРЅ -->
                   <term>
                     <xsl:value-of select="$Word"/>
                   </term>

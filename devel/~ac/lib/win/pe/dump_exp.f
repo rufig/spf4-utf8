@@ -1,6 +1,6 @@
-\ Äàìïåð ñåêöèè ýêñïîðòà (ñì. äåëîñîôòîâûé PE-äàìïåð è MIPS-äèçàñì MIPSDIS 98ã) äëÿ ïðîâåðêè
-\ ñàìîäåëüíûõ ñïèñêîâ ýêñïîðòèðóåìûõ ïðîöåäóð ôîðòà. 
-\ Ðàíüøå ïðîâîäíèê Windows ñàì ïîêàçûâàë ñïèñêè ýêñïîðòà dll, íî â ýòîì âåêå óæå íåò :)
+\ Ð”Ð°Ð¼Ð¿ÐµÑ€ ÑÐµÐºÑ†Ð¸Ð¸ ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð° (ÑÐ¼. Ð´ÐµÐ»Ð¾ÑÐ¾Ñ„Ñ‚Ð¾Ð²Ñ‹Ð¹ PE-Ð´Ð°Ð¼Ð¿ÐµÑ€ Ð¸ MIPS-Ð´Ð¸Ð·Ð°ÑÐ¼ MIPSDIS 98Ð³) Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸
+\ ÑÐ°Ð¼Ð¾Ð´ÐµÐ»ÑŒÐ½Ñ‹Ñ… ÑÐ¿Ð¸ÑÐºÐ¾Ð² ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐµÐ¼Ñ‹Ñ… Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€ Ñ„Ð¾Ñ€Ñ‚Ð°. 
+\ Ð Ð°Ð½ÑŒÑˆÐµ Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð½Ð¸Ðº Windows ÑÐ°Ð¼ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°Ð» ÑÐ¿Ð¸ÑÐºÐ¸ ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð° dll, Ð½Ð¾ Ð² ÑÑ‚Ð¾Ð¼ Ð²ÐµÐºÐµ ÑƒÐ¶Ðµ Ð½ÐµÑ‚ :)
 
 REQUIRE /PE-HEADER            ~ac/lib/win/pe/pe_header.f 
 REQUIRE /ExportDirectoryTable ~ac/lib/win/pe/pe_export.f 
@@ -11,7 +11,7 @@ REQUIRE {                     lib/ext/locals.f
   addr u R/O OPEN-FILE-SHARED THROW -> h
   PAD 0x40 h READ-FILE THROW DROP
   BASE @ -> bas HEX
-  PAD 0x3C + @  \ ñìåùåíèå äî PE
+  PAD 0x3C + @  \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð´Ð¾ PE
   DUP -> pe_offs
   S>D h REPOSITION-FILE THROW
 
@@ -20,8 +20,8 @@ REQUIRE {                     lib/ext/locals.f
   PAD TotalExportDataSize @ -> exp_size
   PAD #InterestingRVA/Sizes @ -> rvas
   PAD #Objects W@ -> sects
-  pe_offs Magic \ ñìåùåíèå äî îïöèîíàëüíîãî çàãîëîâêà
-  PAD NTHDRsize W@ \ ðàçìåð îïöèîíàëüíîãî çàãîëîâêà
+  pe_offs Magic \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð´Ð¾ Ð¾Ð¿Ñ†Ð¸Ð¾Ð½Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ°
+  PAD NTHDRsize W@ \ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¾Ð¿Ñ†Ð¸Ð¾Ð½Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ°
   + S>D h REPOSITION-FILE THROW
 
   PAD sects /ObjectTable *  h READ-FILE THROW DROP
@@ -30,18 +30,18 @@ REQUIRE {                     lib/ext/locals.f
     o ASCIIZ> TYPE SPACE
     o OT.RVA @ . o OT.VirtualSize @ .
     exp o OT.RVA @ DUP o OT.VirtualSize @ + WITHIN DUP .
-    IF o OT.RVA @ -> erva  o OT.VirtualSize @ -> esize \ ïàðàìåòðû ñåêöèè, â êîòîðîé export table (exp), íå îáÿçàòåëüíî ñ íà÷àëà
+    IF o OT.RVA @ -> erva  o OT.VirtualSize @ -> esize \ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ ÑÐµÐºÑ†Ð¸Ð¸, Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ export table (exp), Ð½Ðµ Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ñ Ð½Ð°Ñ‡Ð°Ð»Ð°
        o OT.PhisicalOffset @ -> ef_offs  o OT.PhisicalSize @ -> ef_size
     THEN
     CR
   LOOP
 
-  exp erva - ( ñìåùåíèå â ñåêöèè) ef_offs + S>D h REPOSITION-FILE THROW
+  exp erva - ( ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ Ð² ÑÐµÐºÑ†Ð¸Ð¸) ef_offs + S>D h REPOSITION-FILE THROW
   HERE exp_size h READ-FILE THROW DROP
 \  S" exp.bin" R/W CREATE-FILE THROW -> f
 \  HERE exp_size f WRITE-FILE THROW
 \  f CLOSE-FILE THROW
-  HERE ED.NameRVA @ exp - HERE + ASCIIZ> TYPE CR \ óáåäèëèñü, ÷òî ïðàâèëüíî íàøëè òàáëèöó
+  HERE ED.NameRVA @ exp - HERE + ASCIIZ> TYPE CR \ ÑƒÐ±ÐµÐ´Ð¸Ð»Ð¸ÑÑŒ, Ñ‡Ñ‚Ð¾ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾ Ð½Ð°ÑˆÐ»Ð¸ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ
 
   HERE ED.AddressTableEntries @ . HERE ED.NumberOfNamePointers @ . CR
   HERE ED.OrdinalBase @ . CR
@@ -49,8 +49,8 @@ REQUIRE {                     lib/ext/locals.f
     HERE ED.NamePointerRVA @ exp - HERE +
     I CELLS + @ ( rva) exp - HERE + ASCIIZ> TYPE SPACE
     HERE ED.OrdinalTableRVA @ exp - HERE +
-    I 2* + W@ 1+ ( íîìåð) DUP ." #" . HERE ED.OrdinalBase @ - CELLS \ ñìåùåíèå
-    HERE ED.ExportAddressTableRVA @ exp - HERE + + @ \ rva - ëèáî ýêñïîðòèðóåìûé ñèìâîë, ëèáî óêàçàòåëü íà ôîðâàðäåð
+    I 2* + W@ 1+ ( Ð½Ð¾Ð¼ÐµÑ€) DUP ." #" . HERE ED.OrdinalBase @ - CELLS \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ
+    HERE ED.ExportAddressTableRVA @ exp - HERE + + @ \ rva - Ð»Ð¸Ð±Ð¾ ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐµÐ¼Ñ‹Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð», Ð»Ð¸Ð±Ð¾ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ñ„Ð¾Ñ€Ð²Ð°Ñ€Ð´ÐµÑ€
     DUP exp DUP exp_size + WITHIN IF exp - HERE + ASCIIZ> ." ->" TYPE SPACE ELSE . THEN
 CR
   LOOP

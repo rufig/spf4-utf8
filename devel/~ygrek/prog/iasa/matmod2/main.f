@@ -1,5 +1,5 @@
-\ Система дифуров первого порядка
-\ Математическое моделирование
+\ РЎРёСЃС‚РµРјР° РґРёС„СѓСЂРѕРІ РїРµСЂРІРѕРіРѕ РїРѕСЂСЏРґРєР°
+\ РњР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ
 \ (c) yGREK Heretix mailto:heretix@yandex.ru
 \ 08.Mar.2005
 
@@ -17,8 +17,8 @@ profiles.f
 : runRK
   xn FTO fn ['] func_x TO difur-func RungeKutta
   yn FTO fn ['] func_y TO difur-func RungeKutta 
-   FDUP 0e F< IF FDROP 0e THEN FTO yn \ ограничения по нулям не забыли
-   FDUP 0e F< IF FDROP 0e THEN FTO xn \ чтобы для yn использовать старые xn
+   FDUP 0e F< IF FDROP 0e THEN FTO yn \ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РїРѕ РЅСѓР»СЏРј РЅРµ Р·Р°Р±С‹Р»Рё
+   FDUP 0e F< IF FDROP 0e THEN FTO xn \ С‡С‚РѕР±С‹ РґР»СЏ yn РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃС‚Р°СЂС‹Рµ xn
 
   tn step F+ FTO tn
 ;
@@ -28,7 +28,7 @@ PREVIOUS
 : RUN { \ w s1 s d }
    GLWindow :new -> w
    0 w :create
-   S" Мат моделирование - Модель Фергюльста" w :setText
+   S" РњР°С‚ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ - РњРѕРґРµР»СЊ Р¤РµСЂРіСЋР»СЊСЃС‚Р°" w :setText
    w :maximize
 
    GLPlot2D :new -> s

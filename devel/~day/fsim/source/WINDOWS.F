@@ -1,5 +1,5 @@
 ALSO FORTH DEFINITIONS PREVIOUS
-\ работа с окнами
+\ СЂР°Р±РѕС‚Р° СЃ РѕРєРЅР°РјРё
 \ S" font.f" INCLUDED
 
 DECIMAL
@@ -30,17 +30,17 @@ WINAPI: GetSysColor      USER32.DLL
 WINAPI: LoadCursorA       USER32.DLL
 WINAPI: CreateSolidBrush GDI32.DLL
 
-0   VALUE Значения
+0   VALUE Р—РЅР°С‡РµРЅРёСЏ
 600 VALUE wnd.x
 400 VALUE wnd.y
 100 VALUE wnd.cx
 100 VALUE wnd.cy
 
-\ ----------------------------------------------------------------- константы
+\ ----------------------------------------------------------------- РєРѕРЅСЃС‚Р°РЅС‚С‹
 
 HEX
-IMAGE-BASE CONSTANT HINST  \ Instance текущего приложения
-       0 CONSTANT HCON   \ hwnd главного окна приложения
+IMAGE-BASE CONSTANT HINST  \ Instance С‚РµРєСѓС‰РµРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ
+       0 CONSTANT HCON   \ hwnd РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
        4 CONSTANT CELL
        2 CONSTANT CS_HREDRAW
        1 CONSTANT CS_VREDRAW
@@ -79,7 +79,7 @@ CELL -- MSG.pt
 CONSTANT /MSG
 
 
-\ win-структура для регистрации класса окна - WNDCLASS
+\ win-СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ СЂРµРіРёСЃС‚СЂР°С†РёРё РєР»Р°СЃСЃР° РѕРєРЅР° - WNDCLASS
 0
 CELL -- WNDCLASS.cbSize
 CELL -- WNDCLASS.style
@@ -104,17 +104,17 @@ CONSTANT /WNDCLASS
 : TextOut- ( addr u x y DC -- )
   >R SWAP 2>R SWAP 2R> R> TextOutA DROP
 ;
-\ --------------------------- обработка сообщений ---------------------
+\ --------------------------- РѕР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёР№ ---------------------
 
 0 VALUE hdc
--1 VALUE Точки
+-1 VALUE РўРѕС‡РєРё
 0 VALUE MyFont
 
-VECT  Отрисовка
-' SetPixel TO Отрисовка
+VECT  РћС‚СЂРёСЃРѕРІРєР°
+' SetPixel TO РћС‚СЂРёСЃРѕРІРєР°
 
-: РисоватьЛиниями ['] LineTo TO Отрисовка FALSE TO Точки ;
-: РисоватьТочками ['] SetPixel TO Отрисовка TRUE TO Точки ;
+: Р РёСЃРѕРІР°С‚СЊР›РёРЅРёСЏРјРё ['] LineTo TO РћС‚СЂРёСЃРѕРІРєР° FALSE TO РўРѕС‡РєРё ;
+: Р РёСЃРѕРІР°С‚СЊРўРѕС‡РєР°РјРё ['] SetPixel TO РћС‚СЂРёСЃРѕРІРєР° TRUE TO РўРѕС‡РєРё ;
 
 : MoveTo ( hdc x y -- )
    >R 0 ROT ROT R>
@@ -122,29 +122,29 @@ VECT  Отрисовка
    MoveToEx DROP
 ;
 
-0 VALUE Нуль
-: УстановитьПеро
-   hdc Xmin Нуль MoveTo
+0 VALUE РќСѓР»СЊ
+: РЈСЃС‚Р°РЅРѕРІРёС‚СЊРџРµСЂРѕ
+   hdc Xmin РќСѓР»СЊ MoveTo
 ;
 
-: РисоватьГрафик ( -- )
-     УстановитьПеро
-     ЧислоТиков 0
+: Р РёСЃРѕРІР°С‚СЊР“СЂР°С„РёРє ( -- )
+     РЈСЃС‚Р°РЅРѕРІРёС‚СЊРџРµСЂРѕ
+     Р§РёСЃР»РѕРўРёРєРѕРІ 0
      DO
-       Точки IF 0 THEN  \ color
-       0 I Значения ВзятьЭлемент РасчетY F>DS    \ y
-       I DS>F ДлинаКванта F* РасчетX F>DS                       \ x
+       РўРѕС‡РєРё IF 0 THEN  \ color
+       0 I Р—РЅР°С‡РµРЅРёСЏ Р’Р·СЏС‚СЊР­Р»РµРјРµРЅС‚ Р Р°СЃС‡РµС‚Y F>DS    \ y
+       I DS>F Р”Р»РёРЅР°РљРІР°РЅС‚Р° F* Р Р°СЃС‡РµС‚X F>DS                       \ x
        hdc                                       \ hdc
-       Отрисовка DROP
+       РћС‚СЂРёСЃРѕРІРєР° DROP
      LOOP
 ;
 
 
-0 VALUE ШагСетки
-3 VALUE ШиринаРиски
+0 VALUE РЁР°РіРЎРµС‚РєРё
+3 VALUE РЁРёСЂРёРЅР°Р РёСЃРєРё
 
-: РисоватьОсьX
-    .E РасчетY F--DS TO Нуль
+: Р РёСЃРѕРІР°С‚СЊРћСЃСЊX
+    .E Р Р°СЃС‡РµС‚Y F--DS TO РќСѓР»СЊ
     hdc Xmin F--DS  MoveTo
     F>DS           \ y
     Xmax           \ x
@@ -152,35 +152,35 @@ VECT  Отрисовка
     LineTo DROP
 ;
 
-: РисоватьОсьY
+: Р РёСЃРѕРІР°С‚СЊРћСЃСЊY
     hdc Xmin Ymin MoveTo
     Ymax 
     Xmin 
     hdc   LineTo DROP
 ;
-: РисоватьОси
-   РисоватьОсьX
-   РисоватьОсьY
+: Р РёСЃРѕРІР°С‚СЊРћСЃРё
+   Р РёСЃРѕРІР°С‚СЊРћСЃСЊX
+   Р РёСЃРѕРІР°С‚СЊРћСЃСЊY
 ;
 
 
-: ШагРисокX ( -- F: r )
-    КонВремяГрафика НачВремяГрафика F- 
-    ЧислоРисокX 1- DS>F F/ 
+: РЁР°РіР РёСЃРѕРєX ( -- F: r )
+    РљРѕРЅР’СЂРµРјСЏР“СЂР°С„РёРєР° РќР°С‡Р’СЂРµРјСЏР“СЂР°С„РёРєР° F- 
+    Р§РёСЃР»РѕР РёСЃРѕРєX 1- DS>F F/ 
 ;
 
-: ШагРисокY ( -- F: r )
-    МаксАмплитуда МинАмплитуда F- 
-    ЧислоРисокY 1- DS>F F/
+: РЁР°РіР РёСЃРѕРєY ( -- F: r )
+    РњР°РєСЃРђРјРїР»РёС‚СѓРґР° РњРёРЅРђРјРїР»РёС‚СѓРґР° F- 
+    Р§РёСЃР»РѕР РёСЃРѕРєY 1- DS>F F/
 ;
-: РисоватьРискуX ( x l -- )
+: Р РёСЃРѕРІР°С‚СЊР РёСЃРєСѓX ( x l -- )
      2DUP 
-     Нуль SWAP -
+     РќСѓР»СЊ SWAP -
      hdc ROT ROT MoveTo
-     Нуль +
+     РќСѓР»СЊ +
      SWAP hdc LineTo DROP
 ;
-: РисоватьРискуY ( y l -- )
+: Р РёСЃРѕРІР°С‚СЊР РёСЃРєСѓY ( y l -- )
      2DUP 
      Xmin SWAP -
      hdc ROT ROT SWAP MoveTo
@@ -194,70 +194,70 @@ S" ~day\fsim\source\Cs.f" INCLUDED
 0 VALUE Size1
 
 : #M
-   ЗнаковПослеТочки 0 
+   Р—РЅР°РєРѕРІРџРѕСЃР»РµРўРѕС‡РєРё 0 
    DO  #  LOOP
 ;
 
-: ФормироватьСтроку ( F: r D: n -- )
-  ЗнаковПослеТочки 0 >
+: Р¤РѕСЂРјРёСЂРѕРІР°С‚СЊРЎС‚СЂРѕРєСѓ ( F: r D: n -- )
+  Р—РЅР°РєРѕРІРџРѕСЃР»РµРўРѕС‡РєРё 0 >
   IF
-     ЗнаковПослеТочки F10X
+     Р—РЅР°РєРѕРІРџРѕСЃР»РµРўРѕС‡РєРё F10X
      F* F>DS DUP ABS 0 <# #M  [CHAR] . HOLD #> Size A>cs
      DUP 0<  >R
-     ЗнаковПослеТочки F10X
+     Р—РЅР°РєРѕРІРџРѕСЃР»РµРўРѕС‡РєРё F10X
      F>DS / ABS 0 <#  #S R> SIGN #> Size1 A>cs
      Size Size1 cs+!
   ELSE
      
   THEN      
 ;
-: ПечататьРазмерY ( F: r D: n -- )
-     ФормироватьСтроку
+: РџРµС‡Р°С‚Р°С‚СЊР Р°Р·РјРµСЂY ( F: r D: n -- )
+     Р¤РѕСЂРјРёСЂРѕРІР°С‚СЊРЎС‚СЂРѕРєСѓ
      Size1 COUNT ROT
      Xmin 40 -
      SWAP 6 -       \ x y
      hdc
      TextOut- 
 ;
-: ПечататьРазмерX ( F: r D: n -- )
-     ФормироватьСтроку
+: РџРµС‡Р°С‚Р°С‚СЊР Р°Р·РјРµСЂX ( F: r D: n -- )
+     Р¤РѕСЂРјРёСЂРѕРІР°С‚СЊРЎС‚СЂРѕРєСѓ
      Size1 COUNT ROT 8 -
-     Нуль 5 +
+     РќСѓР»СЊ 5 +
      hdc
      TextOut- 
 ;
-: РисоватьРискиX
-     ШагРисокX
-     ЧислоРисокX 0 
+: Р РёСЃРѕРІР°С‚СЊР РёСЃРєРёX
+     РЁР°РіР РёСЃРѕРєX
+     Р§РёСЃР»РѕР РёСЃРѕРєX 0 
      DO
        FDUP I DS>F F*
-       НачВремяГрафика F+ FDUP
-       РасчетX F>DS DUP ШиринаРиски
-       РисоватьРискуX
-       ПечататьРазмерX
+       РќР°С‡Р’СЂРµРјСЏР“СЂР°С„РёРєР° F+ FDUP
+       Р Р°СЃС‡РµС‚X F>DS DUP РЁРёСЂРёРЅР°Р РёСЃРєРё
+       Р РёСЃРѕРІР°С‚СЊР РёСЃРєСѓX
+       РџРµС‡Р°С‚Р°С‚СЊР Р°Р·РјРµСЂX
      LOOP
      FDROP
 ;
-: РисоватьРискиY
-     ШагРисокY
-     ЧислоРисокY 0 
+: Р РёСЃРѕРІР°С‚СЊР РёСЃРєРёY
+     РЁР°РіР РёСЃРѕРєY
+     Р§РёСЃР»РѕР РёСЃРѕРєY 0 
      DO
        FDUP I DS>F F* 
-       МинАмплитуда  F+ FDUP
-       РасчетY F>DS DUP ШиринаРиски
-       РисоватьРискуY
-       ПечататьРазмерY
+       РњРёРЅРђРјРїР»РёС‚СѓРґР°  F+ FDUP
+       Р Р°СЃС‡РµС‚Y F>DS DUP РЁРёСЂРёРЅР°Р РёСЃРєРё
+       Р РёСЃРѕРІР°С‚СЊР РёСЃРєСѓY
+       РџРµС‡Р°С‚Р°С‚СЊР Р°Р·РјРµСЂY
      LOOP
      FDROP
 ;
 
-: РисоватьРиски
-     РисоватьРискиX
-     РисоватьРискиY
+: Р РёСЃРѕРІР°С‚СЊР РёСЃРєРё
+     Р РёСЃРѕРІР°С‚СЊР РёСЃРєРёX
+     Р РёСЃРѕРІР°С‚СЊР РёСЃРєРёY
 ;
 
-: ПечататьНадпись
-    S" Переходный процесс:"  30 5 hdc 
+: РџРµС‡Р°С‚Р°С‚СЊРќР°РґРїРёСЃСЊ
+    S" РџРµСЂРµС…РѕРґРЅС‹Р№ РїСЂРѕС†РµСЃСЃ:"  30 5 hdc 
     TextOut-
     LengthDescr
     IF
@@ -267,7 +267,7 @@ S" ~day\fsim\source\Cs.f" INCLUDED
 ;
     
 
-: ПодготовитьПоле
+: РџРѕРґРіРѕС‚РѕРІРёС‚СЊРџРѕР»Рµ
     wnd.y 37 - TO Ymax
     wnd.x 40 - TO Xmax
     50 TO Xmin
@@ -283,10 +283,10 @@ S" ~day\fsim\source\Cs.f" INCLUDED
      MyFont hdc SelectObject DROP
      0xFFFFFF
      hdc SetBkColor DROP
-     РисоватьОси
-     ПечататьНадпись
-     РисоватьГрафик
-     РисоватьРиски
+     Р РёСЃРѕРІР°С‚СЊРћСЃРё
+     РџРµС‡Р°С‚Р°С‚СЊРќР°РґРїРёСЃСЊ
+     Р РёСЃРѕРІР°С‚СЊР“СЂР°С„РёРє
+     Р РёСЃРѕРІР°С‚СЊР РёСЃРєРё
      HERE hwnd EndPaint DROP 0
      EXIT
    THEN
@@ -296,7 +296,7 @@ S" ~day\fsim\source\Cs.f" INCLUDED
      DUP 16 RSHIFT TO wnd.y
      [ HEX ] 0000FFFF AND [ DECIMAL ]
      TO wnd.x
-     ПодготовитьПоле
+     РџРѕРґРіРѕС‚РѕРІРёС‚СЊРџРѕР»Рµ
      0 EXIT
    THEN
    msg WM_DESTROY =
@@ -322,7 +322,7 @@ CREATE MSG1 28 ALLOT
 ;
 
 : RegisterClass- ( class-id -- )
-  RegisterClassExA 0= IF TRUE ABORT" Класс не регистрируется!" THEN
+  RegisterClassExA 0= IF TRUE ABORT" РљР»Р°СЃСЃ РЅРµ СЂРµРіРёСЃС‚СЂРёСЂСѓРµС‚СЃСЏ!" THEN
 ;
 
 : CreateWindow- ( class-id -- hwnd )
@@ -339,14 +339,14 @@ CREATE MSG1 28 ALLOT
    0
    R>
    0                                                
-   CreateWindowExA DUP 0= ABORT" Окно не создается!"
+   CreateWindowExA DUP 0= ABORT" РћРєРЅРѕ РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ!"
 ;
 
 HERE DUP /WNDCLASS ALLOT /WNDCLASS ERASE VALUE MyWndClass
 
 : InitClass ( s-addr u addr -- )
 
-  >R  \ указатель на структуру для регистрации класса в Windows
+  >R  \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂСѓРєС‚СѓСЂСѓ РґР»СЏ СЂРµРіРёСЃС‚СЂР°С†РёРё РєР»Р°СЃСЃР° РІ Windows
   /WNDCLASS R@ WNDCLASS.cbSize !
   CS_HREDRAW CS_VREDRAW OR 
                              R@ WNDCLASS.style         !
@@ -363,9 +363,9 @@ HERE DUP /WNDCLASS ALLOT /WNDCLASS ERASE VALUE MyWndClass
 ;
 
 
-: СоздатьОкно ( id -- )
+: РЎРѕР·РґР°С‚СЊРћРєРЅРѕ ( id -- )
   S" DefForthClass" MyWndClass InitClass
-  TO Значения
+  TO Р—РЅР°С‡РµРЅРёСЏ
   10 0csCreate TO Size
   10 0csCreate TO Size1
   ANSI_VAR_FONT GetStockObject TO MyFont

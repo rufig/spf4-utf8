@@ -1,13 +1,13 @@
 
 \ 14.Apr.2001 
-\ добавление ensemble{}^
+\ РґРѕР±Р°РІР»РµРЅРёРµ ensemble{}^
 \            Ensemble-ForEach
 \            Ensamble-Volume
-\ * EnsembleD-ForEach итерирует по _значениям_ (было по адресам значений)
+\ * EnsembleD-ForEach РёС‚РµСЂРёСЂСѓРµС‚ РїРѕ _Р·РЅР°С‡РµРЅРёСЏРј_ (Р±С‹Р»Рѕ РїРѕ Р°РґСЂРµСЃР°Рј Р·РЅР°С‡РµРЅРёР№)
 
 
 \ 06.07.2000  ruv
-\ EnsemleD  - ключ двойной длины.  also see: ensemble.f
+\ EnsemleD  - РєР»СЋС‡ РґРІРѕР№РЅРѕР№ РґР»РёРЅС‹.  also see: ensemble.f
 
 REQUIRE  {        ~ac\lib\locals.f
 REQUIRE  InVoc{   ~ac\lib\transl\vocab.f
@@ -77,7 +77,7 @@ Public{
   SWAP /el * + 8 +
 ;
 
-: .ensembleD ( Ens -- )    \ для отладки
+: .ensembleD ( Ens -- )    \ РґР»СЏ РѕС‚Р»Р°РґРєРё
   DUP base SWAP
   'elemcount @  0 ?DO   CR 
       I OVER [] SWAP . .  I OVER v[] .
@@ -85,7 +85,7 @@ Public{
 ;
 
 : find_place  ( dkey  l r  mas -- j )  \ l <= j <= r \ l_0 = count
-\ возвращает место элемента с таким же ключом или большим.
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ РјРµСЃС‚Рѕ СЌР»РµРјРµРЅС‚Р° СЃ С‚Р°РєРёРј Р¶Рµ РєР»СЋС‡РѕРј РёР»Рё Р±РѕР»СЊС€РёРј.
   { lkey hkey  l r   mas }
   BEGIN
     r l - 2 < IF
@@ -118,9 +118,9 @@ Public{
   Ens 'elemcount @   Ens 'elemcountmax @  = IF EXIT THEN
   lkey hkey  0  Ens 'elemcount @   Ens base   find_place -> n
   n Ens 'elemcount @  < IF
-      n  Ens base  []   lkey hkey D= IF EXIT THEN \ не обновляет значение.
-      n  Ens base  []^  DUP /el +  \ откуда, куда
-      Ens 'elemcount @  n - /el *  \ сколько
+      n  Ens base  []   lkey hkey D= IF EXIT THEN \ РЅРµ РѕР±РЅРѕРІР»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ.
+      n  Ens base  []^  DUP /el +  \ РѕС‚РєСѓРґР°, РєСѓРґР°
+      Ens 'elemcount @  n - /el *  \ СЃРєРѕР»СЊРєРѕ
       MOVE
   THEN
   lkey hkey   n  Ens base   []!
@@ -133,8 +133,8 @@ Public{
   lkey hkey  0  Ens 'elemcount @  Ens base  find_place -> n
   n Ens 'elemcount @  =    IF EXIT THEN
   n  Ens base  []   lkey hkey D<> IF EXIT THEN
-  n  Ens base  []^  DUP /el +  SWAP \ откуда, куда
-  Ens 'elemcount @  n - 1-  /el *    \ сколько
+  n  Ens base  []^  DUP /el +  SWAP \ РѕС‚РєСѓРґР°, РєСѓРґР°
+  Ens 'elemcount @  n - 1-  /el *    \ СЃРєРѕР»СЊРєРѕ
   MOVE
   -1 Ens 'elemcount  +!
 ;
@@ -147,20 +147,20 @@ Public{
   n  Ens base v[]  TRUE
 ;
 
-: ensembleD{}^  ( dkey Ens \ n -- a  ) \ делает вставку пустого, если нету.
+: ensembleD{}^  ( dkey Ens \ n -- a  ) \ РґРµР»Р°РµС‚ РІСЃС‚Р°РІРєСѓ РїСѓСЃС‚РѕРіРѕ, РµСЃР»Рё РЅРµС‚Сѓ.
   { lkey hkey Ens \ n }
 
   lkey hkey  0  Ens 'elemcount @   Ens base   find_place -> n
   n Ens 'elemcount @  < IF 
-      n  Ens base  []   lkey hkey D= IF \ нашелся.
+      n  Ens base  []   lkey hkey D= IF \ РЅР°С€РµР»СЃСЏ.
         n  Ens base  v[]^   EXIT
       THEN
       Ens 'elemcount @   Ens 'elemcountmax @  = IF 0 EXIT THEN
 
-      n  Ens base  []^  DUP /el +  \ откуда, куда
-      Ens 'elemcount @  n - /el *  \ сколько
+      n  Ens base  []^  DUP /el +  \ РѕС‚РєСѓРґР°, РєСѓРґР°
+      Ens 'elemcount @  n - /el *  \ СЃРєРѕР»СЊРєРѕ
       MOVE
-  ELSE \ не нашелся
+  ELSE \ РЅРµ РЅР°С€РµР»СЃСЏ
       Ens 'elemcount @   Ens 'elemcountmax @  = IF 0 EXIT THEN
   THEN
   Ens 'elemcount  1+!

@@ -4,7 +4,7 @@
 \ [UNDEFINED] HEAP-GLOBAL [IF] [THEN]
 
 \ REQUIRE HEAP-ID! ~pinka\spf\mem.f
-( òðåáóåò ìåõàíèçìà HEAP-ID -- ðàñøèðåíèå ÿäðà )
+( Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ Ð¼ÐµÑ…Ð°Ð½Ð¸Ð·Ð¼Ð° HEAP-ID -- Ñ€Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð¸Ðµ ÑÐ´Ñ€Ð° )
 
 : NEW-HEAP ( -- h ior )
   0 8000 0 HeapCreate DUP ERR
@@ -24,7 +24,7 @@
 : EXECUTE-SEPARATE ( ... xt -- ... )
   NEW-HEAP THROW DUP >R
   ['] WITH-HEAP CATCH
-  R> DEL-HEAP   SWAP THROW THROW \ âíà÷àëå îò CATCH
+  R> DEL-HEAP   SWAP THROW THROW \ Ð²Ð½Ð°Ñ‡Ð°Ð»Ðµ Ð¾Ñ‚ CATCH
 ;
 
 : WITH-HEAP-CATCH   ( xt heap -- 0 | ior )  \ xt WITHIN HEAP heap 
@@ -34,5 +34,5 @@
 : EXECUTE-SEPARATE-CATCH ( i*x  xt -- j*x 0 | i*x  ior )
   NEW-HEAP ?DUP IF NIP EXIT THEN DUP >R
   WITH-HEAP-CATCH
-  R> DEL-HEAP OVER IF DROP ELSE NIP THEN \ ïðåäïî÷òåíèå ior îò âûçîâà xt
+  R> DEL-HEAP OVER IF DROP ELSE NIP THEN \ Ð¿Ñ€ÐµÐ´Ð¿Ð¾Ñ‡Ñ‚ÐµÐ½Ð¸Ðµ ior Ð¾Ñ‚ Ð²Ñ‹Ð·Ð¾Ð²Ð° xt
 ;

@@ -1,8 +1,8 @@
 \ $Id$
-\ unix timestamp â äàòó
-\ è íàîáîðîò
+\ unix timestamp Ð² Ð´Ð°Ñ‚Ñƒ
+\ Ð¸ Ð½Ð°Ð¾Ð±Ð¾Ñ€Ð¾Ñ‚
 \
-\ URL â òåìó - http://vsg.cape.com/~pbaum/date/date0.htm
+\ URL Ð² Ñ‚ÐµÐ¼Ñƒ - http://vsg.cape.com/~pbaum/date/date0.htm
 
 MODULE: FSL
  H-STDOUT
@@ -21,30 +21,30 @@ REQUIRE { lib/ext/locals.f
 REQUIRE DateTime#GMT ~ac/lib/win/date/date-int.f
 REQUIRE /TEST ~profit/lib/testing.f
 
-\ Julian day íà÷àëà ýïîõè unix 
+\ Julian day Ð½Ð°Ñ‡Ð°Ð»Ð° ÑÐ¿Ð¾Ñ…Ð¸ unix 
 : unix_epoch_j ( -- j_double ) 1 1 1970 FSL::JDAY ;
 
-\ ïðåîáðàçîâàòü timestamp â äàòó
+\ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÑŒ timestamp Ð² Ð´Ð°Ñ‚Ñƒ
 : Num>DateTime ( n -- s m h d m1 y )
-   60 /MOD \ ñåêóíäû
-   60 /MOD \ ìèíóòû
-   24 /MOD \ ÷àñû
+   60 /MOD \ ÑÐµÐºÑƒÐ½Ð´Ñ‹
+   60 /MOD \ Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹
+   24 /MOD \ Ñ‡Ð°ÑÑ‹
    S>D unix_epoch_j D+ FSL::JDATE ;
 
-\ ïðåîáðàçîâàòü äàòó â timestamp
+\ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÑŒ Ð´Ð°Ñ‚Ñƒ Ð² timestamp
 : DateTime>Num ( s m h d m1 y -- n )
   FSL::JDAY unix_epoch_j D- D>S 60 60 * 24 * * SWAP
   3600 * + SWAP
   60 * + + ;
 
-\ èçâëå÷ü òîëüêî âðåìÿ èç timestamp
+\ Ð¸Ð·Ð²Ð»ÐµÑ‡ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð²Ñ€ÐµÐ¼Ñ Ð¸Ð· timestamp
 : Num>Time ( n -- s m h ) 60 /MOD 60 /MOD 24 /MOD DROP ;
 
-\ äàòó â ÷èñëî äíåé
+\ Ð´Ð°Ñ‚Ñƒ Ð² Ñ‡Ð¸ÑÐ»Ð¾ Ð´Ð½ÐµÐ¹
 : DateTime>Days ( s m h d m1 y -- days ) FSL::JDAY D>S NIP NIP NIP ;
 
-\ Ïðåäñòàâèòü äàòó êàê ñòðîêó â áóôåðå PAD
-\ ïîäðàçóìåâàåòñÿ GMT âðåìÿ
+\ ÐŸÑ€ÐµÐ´ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð´Ð°Ñ‚Ñƒ ÐºÐ°Ðº ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð±ÑƒÑ„ÐµÑ€Ðµ PAD
+\ Ð¿Ð¾Ð´Ñ€Ð°Ð·ÑƒÐ¼ÐµÐ²Ð°ÐµÑ‚ÑÑ GMT Ð²Ñ€ÐµÐ¼Ñ
 : DateTime>PAD ( s m h d m1 y -- a u ) <# DateTime#GMT 0 0 #> ;
 
 \ convert timestamp with local time to timestamp with GMT time
@@ -59,7 +59,7 @@ REQUIRE TESTCASES ~ygrek/lib/testcase.f
 
 TESTCASES timestamp-datetime conversions
 
-(( unix_epoch_j -> 2440588 0 )) \ íà ñàìîì äåëå 2440587.5
+(( unix_epoch_j -> 2440588 0 )) \ Ð½Ð° ÑÐ°Ð¼Ð¾Ð¼ Ð´ÐµÐ»Ðµ 2440587.5
 (( 1000000 Num>DateTime DateTime>Num -> 1000000 ))
 (( 795792721 Num>DateTime -> 1 32 13 21 3 1995 ))
 (( 1 32 13 21 3 1995 DateTime>Num -> 795792721 ))

@@ -5,9 +5,9 @@ MODULE: COFFRESOURCES
 0 VALUE start
 
 : lseek ( offset --)
-  S>D h REPOSITION-FILE ABORT" éË®°™† ¢¢Æ§†-¢Î¢Æ§†" ;
+  S>D h REPOSITION-FILE ABORT" –û—à–∏–±–∫–∞ –≤–≤–æ–¥–∞-–≤—ã–≤–æ–¥–∞" ;
 : read ( adr # --)
-  h READ-FILE ABORT" éË®°™† ¢¢Æ§†-¢Î¢Æ§†" DROP ;
+  h READ-FILE ABORT" –û—à–∏–±–∫–∞ –≤–≤–æ–¥–∞-–≤—ã–≤–æ–¥–∞" DROP ;
 : wordat ( offset -- w)
   lseek 0 >R  RP@ 2 read R> ;
 : cellat ( offset -- n)
@@ -16,20 +16,20 @@ MODULE: COFFRESOURCES
 : find-rsrc ( offset -- offset)
   BEGIN #sections WHILE
     DUP cellat 0x7273722E ( .rsr) = OVER CELL+ cellat 0x00000063 ( s\0\0\0) 
-    = AND IF EXIT THEN \ ≠†Ë´® ·•™Ê®Ó
-    40 + ( §´®≠† ß†£Æ´Æ¢™† ·•™Ê®®) 
+    = AND IF EXIT THEN \ –Ω–∞—à–ª–∏ —Å–µ–∫—Ü–∏—é
+    40 + ( –¥–ª–∏–Ω–∞ –∑–∞–≥–æ–ª–æ–≤–∫–∞ —Å–µ–∫—Ü–∏–∏) 
     #sections 1- TO #sections
   REPEAT 
-  ABORT" Ç ‰†©´• Æ‚·„‚·‚¢„•‚ ·•™Ê®Ô .rsrc" ;
+  ABORT" –í —Ñ–∞–π–ª–µ –æ—Ç—Å—É—Ç—Å—Ç–≤—É–µ—Ç —Å–µ–∫—Ü–∏—è .rsrc" ;
 
 : relocate ( adr xt -- ) 
-\ Ø‡®¨•≠®‚Ï ™Æ ¢·•¨ Ì´•¨•≠‚†¨ ™†‚†´Æ£† adr ·´Æ¢Æ xt
+\ –ø—Ä–∏–º–µ–Ω–∏—Ç—å –∫–æ –≤—Å–µ–º —ç–ª–µ–º–µ–Ω—Ç–∞–º –∫–∞—Ç–∞–ª–æ–≥–∞ adr —Å–ª–æ–≤–æ xt
   >R
-  DUP 12 + W@ ( ®¨•≠Æ¢†≠≠Î• ß†Ø®·®) OVER 14 + W@ ( ≠•®¨•≠Æ¢†≠≠Î• ß†Ø®·®) +
+  DUP 12 + W@ ( –∏–º–µ–Ω–æ–≤–∞–Ω–Ω—ã–µ –∑–∞–ø–∏—Å–∏) OVER 14 + W@ ( –Ω–µ–∏–º–µ–Ω–æ–≤–∞–Ω–Ω—ã–µ –∑–∞–ø–∏—Å–∏) +
   SWAP 16 + SWAP
   BEGIN ( adr #) DUP WHILE
     OVER CELL+ @ 0x7FFFFFFF AND start + R@ EXECUTE
-  SWAP 2 CELLS + ( §´®≠† ß†Ø®·®) SWAP 1-
+  SWAP 2 CELLS + ( –¥–ª–∏–Ω–∞ –∑–∞–ø–∏—Å–∏) SWAP 1-
   REPEAT 2DROP
   RDROP
 ;
@@ -41,14 +41,14 @@ MODULE: COFFRESOURCES
 EXPORT
 
 : COFFRESOURCES: ( ->eol; -- )
-  1 WORD COUNT R/O OPEN-FILE ABORT" î†©´ ‡•·„‡·Æ¢ ≠• ≠†©§•≠" TO h
-  2 wordat TO #sections \ Á®·´Æ ·•™Ê®© ¢ ‰†©´•
-  20 ( §´®≠† ß†£Æ´Æ¢™†) 16 wordat ( §´®≠† ¢·ØÆ¨Æ£†‚•´Ï≠Æ£Æ ß†£Æ´Æ¢™†) +
-  find-rsrc DUP 20 + cellat ( ≠†Á†´Æ ·•™Ê®® ¢ ‰†©´•) >R
-  16 + cellat ( §´®≠† ·•™Ê®® ‡•·„‡·Æ¢)
+  1 WORD COUNT R/O OPEN-FILE ABORT" –§–∞–π–ª —Ä–µ—Å—É—Ä—Å–æ–≤ –Ω–µ –Ω–∞–π–¥–µ–Ω" TO h
+  2 wordat TO #sections \ —á–∏—Å–ª–æ —Å–µ–∫—Ü–∏–π –≤ —Ñ–∞–π–ª–µ
+  20 ( –¥–ª–∏–Ω–∞ –∑–∞–≥–æ–ª–æ–≤–∫–∞) 16 wordat ( –¥–ª–∏–Ω–∞ –≤—Å–ø–æ–º–æ–≥–∞—Ç–µ–ª—å–Ω–æ–≥–æ –∑–∞–≥–æ–ª–æ–≤–∫–∞) +
+  find-rsrc DUP 20 + cellat ( –Ω–∞—á–∞–ª–æ —Å–µ–∫—Ü–∏–∏ –≤ —Ñ–∞–π–ª–µ) >R
+  16 + cellat ( –¥–ª–∏–Ω–∞ —Å–µ–∫—Ü–∏–∏ —Ä–µ—Å—É—Ä—Å–æ–≤)
   HERE DUP TO start IMAGE-BASE - RESOURCES-RVA ! R> lseek
   DUP ALLOT DUP RESOURCES-SIZE ! start SWAP read
-  start ['] relocate1 relocate \ §Æ°†¢®‚Ï ™Æ ¢·•¨ †§‡•·†¨ ‡•·„‡·Æ¢ RESOURCES-RVA
+  start ['] relocate1 relocate \ –¥–æ–±–∞–≤–∏—Ç—å –∫–æ –≤—Å–µ–º –∞–¥—Ä–µ—Å–∞–º —Ä–µ—Å—É—Ä—Å–æ–≤ RESOURCES-RVA
   h CLOSE-FILE DROP
 ;
 

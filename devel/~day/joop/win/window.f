@@ -122,7 +122,7 @@ CLASS: Window <SUPER Object
 ;
 
 : obj! { handle self -- }
-\ Çàïèñûâàåò self â GWL_USERDATA
+\ Ð—Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÑ‚ self Ð² GWL_USERDATA
     handle self <handle !
     self GWL_USERDATA handle SetWindowLongA DROP
 ;

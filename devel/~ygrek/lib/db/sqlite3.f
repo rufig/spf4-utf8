@@ -1,29 +1,29 @@
 \ $Id$
 \
-\ bac4th èòåðàòîðû äëÿ SQLite
+\ bac4th Ð¸Ñ‚ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ñ‹ Ð´Ð»Ñ SQLite
 
 REQUIRE db3_open ~ac/lib/lin/sql/sqlite3.f
 REQUIRE PRO ~profit/lib/bac4th.f
 REQUIRE STATIC ~profit/lib/static.f
 REQUIRE /TEST ~profit/lib/testing.f
 
-\ îá¸ðòêà íàä db3_enum
+\ Ð¾Ð±Ñ‘Ñ€Ñ‚ÐºÐ° Ð½Ð°Ð´ db3_enum
 : sql.enum { a u xt db | rrr }
-   \ xt: i par ppStmt -- ? \ ? - ôëàã ïðîäîëæåíèÿ
+   \ xt: i par ppStmt -- ? \ ? - Ñ„Ð»Ð°Ð³ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶ÐµÐ½Ð¸Ñ
    a u rrr xt db db3_enum ; 
    \ ['] CATCH ?DUP IF ." !!!" S" sql.enum" db db3_error? 2DROP 2DROP DROP THEN
 
-\ ïåðåáîð sql-rows
-\ ñ âåðõíåãî óðîâíÿ äîëæåí ïðèõîäèòü ôëàã ïðîäîëæåíèÿ
+\ Ð¿ÐµÑ€ÐµÐ±Ð¾Ñ€ sql-rows
+\ Ñ Ð²ÐµÑ€Ñ…Ð½ÐµÐ³Ð¾ ÑƒÑ€Ð¾Ð²Ð½Ñ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð¿Ñ€Ð¸Ñ…Ð¾Ð´Ð¸Ñ‚ÑŒ Ñ„Ð»Ð°Ð³ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶ÐµÐ½Ð¸Ñ
 : sql.enum=> ( a u db --> i par pp \ <-- ? ) R> SWAP sql.enum ;
 
-\ ñáðîñ íà ñòåê âñåõ ïîëåé çàïèñè pp (êàæäîå ïîëå êàê ñòðîêà a u)
+\ ÑÐ±Ñ€Ð¾Ñ Ð½Ð° ÑÑ‚ÐµÐº Ð²ÑÐµÑ… Ð¿Ð¾Ð»ÐµÐ¹ Ð·Ð°Ð¿Ð¸ÑÐ¸ pp (ÐºÐ°Ð¶Ð´Ð¾Ðµ Ð¿Ð¾Ð»Ðµ ÐºÐ°Ðº ÑÑ‚Ñ€Ð¾ÐºÐ° a u)
 : pp.data { pp -- i*x }
    pp db3_cols 0 DO
     pp db3_cols 1- I - pp db3_col 
    LOOP ;
 
-\ èòåðàòîð ïî ïîëÿì çàïèñè
+\ Ð¸Ñ‚ÐµÑ€Ð°Ñ‚Ð¾Ñ€ Ð¿Ð¾ Ð¿Ð¾Ð»ÑÐ¼ Ð·Ð°Ð¿Ð¸ÑÐ¸
 : pp.data=> ( pp --> a u \ <-- a u )
    PRO
    STATIC pp
@@ -32,7 +32,7 @@ REQUIRE /TEST ~profit/lib/testing.f
     I pp @ db3_col CONT 2DROP
    LOOP ;
 
-\ âûäà÷à âñåõ pp ïî sql çàïðîñó, áîëåå óäîáíûé àíàëîã sql.enum=>
+\ Ð²Ñ‹Ð´Ð°Ñ‡Ð° Ð²ÑÐµÑ… pp Ð¿Ð¾ sql Ð·Ð°Ð¿Ñ€Ð¾ÑÑƒ, Ð±Ð¾Ð»ÐµÐµ ÑƒÐ´Ð¾Ð±Ð½Ñ‹Ð¹ Ð°Ð½Ð°Ð»Ð¾Ð³ sql.enum=>
 : sql.pp=> ( sql-a sql-u db --> pp \ <-- pp )
   PRO
    sql.enum=>
@@ -41,8 +41,8 @@ REQUIRE /TEST ~profit/lib/testing.f
    DROP
    TRUE ;
 
-\ Îòêðûòü ôàéë áàçû a u
-\ Ïðè îòêàòå - çàêðûòü
+\ ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» Ð±Ð°Ð·Ñ‹ a u
+\ ÐŸÑ€Ð¸ Ð¾Ñ‚ÐºÐ°Ñ‚Ðµ - Ð·Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ
 : db.open=> ( a u --> db \ <-- db )
    PRO db3_open CONT db3_close ;
 

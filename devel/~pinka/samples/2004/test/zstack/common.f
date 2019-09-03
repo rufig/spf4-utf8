@@ -3,7 +3,7 @@
 REQUIRE [UNDEFINED]  lib\include\tools.f
 
 : TRANSLATE-WL ( ... a u wid -- ... true|false )
-\ транслировать слово с именем  a u из словаря wid
+\ С‚СЂР°РЅСЃР»РёСЂРѕРІР°С‚СЊ СЃР»РѕРІРѕ СЃ РёРјРµРЅРµРј  a u РёР· СЃР»РѕРІР°СЂСЏ wid
   SEARCH-WORDLIST  DUP IF
     STATE @ =  IF
     COMPILE,   ELSE 

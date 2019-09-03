@@ -1,10 +1,10 @@
-\ Контролы Windows
+\ РљРѕРЅС‚СЂРѕР»С‹ Windows
 
 REQUIRE Window  ~day\joop\win\window.f
 
 \ from AC
 
-USER CC_INIT \ однократная инициализация CommonControls
+USER CC_INIT \ РѕРґРЅРѕРєСЂР°С‚РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ CommonControls
 CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
 
 : InitCommonControls
@@ -31,7 +31,7 @@ pvar: <font
 
 CLASS: Control <SUPER Window
         
-        CELL VAR OnClick \ Событие
+        CELL VAR OnClick \ РЎРѕР±С‹С‚РёРµ
         CELL VAR style 
         CELL VAR addStyle
         CELL VAR exStyle
@@ -58,7 +58,7 @@ CLASS: Control <SUPER Window
     self :type DROP
     exStyle @
     CreateWindow self obj!
-    hParent @ HANDLE>OBJ <font @ \ Установить фонт родителя
+    hParent @ HANDLE>OBJ <font @ \ РЈСЃС‚Р°РЅРѕРІРёС‚СЊ С„РѕРЅС‚ СЂРѕРґРёС‚РµР»СЏ
     <handle @ self :setFont
 ;
 
@@ -145,20 +145,20 @@ CLASS: ListBox <SUPER Control
     DROP 0 LB_ADDSTRING handle @ SendMessageA DROP
 ;
 
-\ Если нет выбранных, то возвращает -1
+\ Р•СЃР»Рё РЅРµС‚ РІС‹Р±СЂР°РЅРЅС‹С…, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚ -1
 : :current ( -- u )
     0 0 LB_GETCURSEL handle @ SendMessageA  DUP LB_ERR =
     IF DROP -1 THEN
 ;
 
-\ Возвращает число оставшихся элементов или -1 если
-\ исходный индех был неправилен
+\ Р’РѕР·РІСЂР°С‰Р°РµС‚ С‡РёСЃР»Рѕ РѕСЃС‚Р°РІС€РёС…СЃСЏ СЌР»РµРјРµРЅС‚РѕРІ РёР»Рё -1 РµСЃР»Рё
+\ РёСЃС…РѕРґРЅС‹Р№ РёРЅРґРµС… Р±С‹Р» РЅРµРїСЂР°РІРёР»РµРЅ
 : :delete ( u1 -- u2 )
     0 SWAP LB_DELETESTRING handle @ SendMessageA
     DUP LB_ERR = IF DROP -1 THEN    
 ;
 
-\ Дает индекс элемента на котором щелкнули мышью
+\ Р”Р°РµС‚ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј С‰РµР»РєРЅСѓР»Рё РјС‹С€СЊСЋ
 : :itemFromPoint ( -- u )
     0. >R >R RP@
     GetCursorPos DROP RP@ handle @ ScreenToClient DROP
@@ -208,14 +208,14 @@ CLASS: ScrollBar <SUPER Control
 
 pvar: <pos
 
-WM_USER 1 + CONSTANT PBM_SETRANGE        \ установить новые значения от и до
-WM_USER 2 + CONSTANT PBM_SETPOS          \ установить новую позицию в %
-WM_USER 3 + CONSTANT PBM_DELTAPOS        \ продвигает линию на n позиций
-WM_USER 4 + CONSTANT PBM_SETSTEP         \ устанавливает приращение шага По умолчанию = 10
-WM_USER 5 + CONSTANT PBM_STEPIT          \ увеличивает на 1 текущее приращение
+WM_USER 1 + CONSTANT PBM_SETRANGE        \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅРѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РѕС‚ Рё РґРѕ
+WM_USER 2 + CONSTANT PBM_SETPOS          \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅРѕРІСѓСЋ РїРѕР·РёС†РёСЋ РІ %
+WM_USER 3 + CONSTANT PBM_DELTAPOS        \ РїСЂРѕРґРІРёРіР°РµС‚ Р»РёРЅРёСЋ РЅР° n РїРѕР·РёС†РёР№
+WM_USER 4 + CONSTANT PBM_SETSTEP         \ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїСЂРёСЂР°С‰РµРЅРёРµ С€Р°РіР° РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ = 10
+WM_USER 5 + CONSTANT PBM_STEPIT          \ СѓРІРµР»РёС‡РёРІР°РµС‚ РЅР° 1 С‚РµРєСѓС‰РµРµ РїСЂРёСЂР°С‰РµРЅРёРµ
 WM_USER 6 + CONSTANT PBM_SETRANGE32
-WM_USER 7 + CONSTANT PBM_GETRANGE        \ получить значения от и до
-WM_USER 8 + CONSTANT PBM_GETPOS          \ получить позицию
+WM_USER 7 + CONSTANT PBM_GETRANGE        \ РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РѕС‚ Рё РґРѕ
+WM_USER 8 + CONSTANT PBM_GETPOS          \ РїРѕР»СѓС‡РёС‚СЊ РїРѕР·РёС†РёСЋ
 
 CLASS: ProgressBar <SUPER Control
 

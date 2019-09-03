@@ -9,5 +9,5 @@ REQUIRE _TEXT	~pi/lib/wincon/text.f
 6 6 length 6 - height 6 - 10 10 RRect
 S" disketa.bmp" 10 10 Image
 0x00FFFF ColorText
-10 30 S" Это дискета" Print
+10 30 S" Р­С‚Рѕ РґРёСЃРєРµС‚Р°" Print
 ConRefresh

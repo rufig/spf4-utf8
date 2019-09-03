@@ -1,4 +1,4 @@
-\ Получаем имя компьютера
+\ РџРѕР»СѓС‡Р°РµРј РёРјСЏ РєРѕРјРїСЊСЋС‚РµСЂР°
 WINAPI: GetComputerNameA        KERNEL32.DLL
 VARIABLE _maxsize
 1024 _maxsize !

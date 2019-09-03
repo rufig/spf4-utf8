@@ -1,10 +1,10 @@
-\ Клиент автоматизации. Второй вариант.
-\ Ю. Жиловец, 27.03.2002
+\ РљР»РёРµРЅС‚ Р°РІС‚РѕРјР°С‚РёР·Р°С†РёРё. Р’С‚РѕСЂРѕР№ РІР°СЂРёР°РЅС‚.
+\ Р®. Р–РёР»РѕРІРµС†, 27.03.2002
 
-\ Разногласия с оптимизатором в слове FOREACH
-\ устранены М. Гаcсаненко и Д. Якимовым
+\ Р Р°Р·РЅРѕРіР»Р°СЃРёСЏ СЃ РѕРїС‚РёРјРёР·Р°С‚РѕСЂРѕРј РІ СЃР»РѕРІРµ FOREACH
+\ СѓСЃС‚СЂР°РЅРµРЅС‹ Рњ. Р“Р°cСЃР°РЅРµРЅРєРѕ Рё Р”. РЇРєРёРјРѕРІС‹Рј
 
-\ + строки - имена свойств и методов { }
+\ + СЃС‚СЂРѕРєРё - РёРјРµРЅР° СЃРІРѕР№СЃС‚РІ Рё РјРµС‚РѕРґРѕРІ { }
 
 REQUIRE {          lib/ext/locals.f
 REQUIRE IID_NULL   ~yz/lib/uuid.f
@@ -91,8 +91,8 @@ USER-CREATE excepinfo excepinfo-len USER-ALLOT
 
 USER-VALUE LAST-TYPE
 
-\ Отводим место под arglist, потом для 30 вариантов
-\ Не верю, что какой-нибудь метод требует больше, чем 30 аргументов
+\ РћС‚РІРѕРґРёРј РјРµСЃС‚Рѕ РїРѕРґ arglist, РїРѕС‚РѕРј РґР»СЏ 30 РІР°СЂРёР°РЅС‚РѕРІ
+\ РќРµ РІРµСЂСЋ, С‡С‚Рѕ РєР°РєРѕР№-РЅРёР±СѓРґСЊ РјРµС‚РѕРґ С‚СЂРµР±СѓРµС‚ Р±РѕР»СЊС€Рµ, С‡РµРј 30 Р°СЂРіСѓРјРµРЅС‚РѕРІ
 30 variant-len * arglist-len + == alist-len
 
 : new-arglist ( -- )
@@ -175,7 +175,7 @@ USER-VALUE LAST-TYPE
 ;
 
 
-\ ---- компилируем в словарь [[wordlist]]
+\ ---- РєРѕРјРїРёР»РёСЂСѓРµРј РІ СЃР»РѕРІР°СЂСЊ [[wordlist]]
 
 ALSO [[wordlist]] CONTEXT ! DEFINITIONS
 
@@ -183,7 +183,7 @@ ALSO [[wordlist]] CONTEXT ! DEFINITIONS
   last-name last-object @ PROP@
 ;
 
-\ это слово выполняется, если не было =
+\ СЌС‚Рѕ СЃР»РѕРІРѕ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ, РµСЃР»Рё РЅРµ Р±С‹Р»Рѕ =
 : ]] ( order... / -- val/dval / )
   SET-ORDER
   STATE @ IF
@@ -203,7 +203,7 @@ ALSO [[wordlist]] CONTEXT ! DEFINITIONS
 ; IMMEDIATE
 
 : { ( ... -- )
-  \ временно вернем старый порядок поиска, но добавим к нему словарь [[wordlist]]
+  \ РІСЂРµРјРµРЅРЅРѕ РІРµСЂРЅРµРј СЃС‚Р°СЂС‹Р№ РїРѕСЂСЏРґРѕРє РїРѕРёСЃРєР°, РЅРѕ РґРѕР±Р°РІРёРј Рє РЅРµРјСѓ СЃР»РѕРІР°СЂСЊ [[wordlist]]
   SET-ORDER ALSO [[wordlist]] CONTEXT !
 ; IMMEDIATE
 
@@ -223,7 +223,7 @@ ALSO [[wordlist]] CONTEXT ! DEFINITIONS
 ;
 
 : ( ( order... -- )
-  \ вернем старый порядок поиска, но добавим к нему словарь (wordlist)
+  \ РІРµСЂРЅРµРј СЃС‚Р°СЂС‹Р№ РїРѕСЂСЏРґРѕРє РїРѕРёСЃРєР°, РЅРѕ РґРѕР±Р°РІРёРј Рє РЅРµРјСѓ СЃР»РѕРІР°СЂСЊ (wordlist)
   SET-ORDER ALSO (wordlist) CONTEXT !
   STATE @ IF
     POSTPONE (()
@@ -238,7 +238,7 @@ ALSO [[wordlist]] CONTEXT ! DEFINITIONS
   one-name arglist @ :names !
 ;
 : = \ order... -- 
-  \ вернем старый порядок поиска, но добавим к нему словарь (wordlist)
+  \ РІРµСЂРЅРµРј СЃС‚Р°СЂС‹Р№ РїРѕСЂСЏРґРѕРє РїРѕРёСЃРєР°, РЅРѕ РґРѕР±Р°РІРёРј Рє РЅРµРјСѓ СЃР»РѕРІР°СЂСЊ (wordlist)
   SET-ORDER ALSO (wordlist) CONTEXT !
   STATE @ IF
     POSTPONE (=)
@@ -252,9 +252,9 @@ ALSO [[wordlist]] CONTEXT ! DEFINITIONS
 
 PREVIOUS DEFINITIONS
 
-\ ---- кончили компилировать в [[wordlist]]
+\ ---- РєРѕРЅС‡РёР»Рё РєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РІ [[wordlist]]
 
-\ ---- компилируем в словарь (wordlist)
+\ ---- РєРѕРјРїРёР»РёСЂСѓРµРј РІ СЃР»РѕРІР°СЂСЊ (wordlist)
 
 ALSO (wordlist) CONTEXT ! DEFINITIONS
 
@@ -270,7 +270,7 @@ ALSO (wordlist) CONTEXT ! DEFINITIONS
     ())
   THEN
   PREVIOUS GET-ORDER
-  \ сделаем видимым только [[wordlist]]
+  \ СЃРґРµР»Р°РµРј РІРёРґРёРјС‹Рј С‚РѕР»СЊРєРѕ [[wordlist]]
   [[wordlist]] CONTEXT !
 ; IMMEDIATE
 
@@ -322,7 +322,7 @@ ALSO (wordlist) CONTEXT ! DEFINITIONS
   _empty TO LAST-TYPE
 ;
 
-\ это слово выполняется, если было =
+\ СЌС‚Рѕ СЃР»РѕРІРѕ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ, РµСЃР»Рё Р±С‹Р»Рѕ =
 : ]] 
   STATE @ IF
     POSTPONE (=]])
@@ -334,7 +334,7 @@ ALSO (wordlist) CONTEXT ! DEFINITIONS
 
 PREVIOUS DEFINITIONS
 
-\ ---- кончили компилировать в (wordlist)
+\ ---- РєРѕРЅС‡РёР»Рё РєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РІ (wordlist)
 
 : ([[) ( obj -- )
   DUP first-object ! last-object !
@@ -346,7 +346,7 @@ PREVIOUS DEFINITIONS
   ELSE
     ([[)
   THEN
-  \ сделаем видимым только [[wordlist]]
+  \ СЃРґРµР»Р°РµРј РІРёРґРёРјС‹Рј С‚РѕР»СЊРєРѕ [[wordlist]]
   GET-ORDER  [[wordlist]] CONTEXT !
 ; IMMEDIATE
 
@@ -357,7 +357,7 @@ PREVIOUS DEFINITIONS
   result :var-type @ _unk =
   result clear-variant ;
 
-\ на стеке возвратов во время цикла хранятся:
+\ РЅР° СЃС‚РµРєРµ РІРѕР·РІСЂР°С‚РѕРІ РІРѕ РІСЂРµРјСЏ С†РёРєР»Р° С…СЂР°РЅСЏС‚СЃСЏ:
 \ LEAVE-addr, enumerator, variant
 
 : (get-enumerator) ( obj -- 0 / ienum ienum)
@@ -406,7 +406,7 @@ PREVIOUS DEFINITIONS
 
 : NEXT ( compile: adr1 adr2 adr3 " fore" -- ; -- )
   ?COMP
-  CELL" FORE" <> ABORT" NEXT без FOREACH"
+  CELL" FORE" <> ABORT" NEXT Р±РµР· FOREACH"
   POSTPONE R@
   POSTPONE clear-variant
   BRANCH,

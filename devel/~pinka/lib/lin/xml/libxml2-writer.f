@@ -1,12 +1,12 @@
 \ Nov.2012 ruv
 \ $Id$
-( Обертка поверх libxml2, 
-  вывод XML
+( РћР±РµСЂС‚РєР° РїРѕРІРµСЂС… libxml2, 
+  РІС‹РІРѕРґ XML
 )
 
 REQUIRE [UNDEFINED]         lib/include/tools.f
 REQUIRE STHROW              ~pinka/spf/sthrow.f
-REQUIRE AsQName             ~pinka/samples/2006/syntax/qname.f \ однословные строки в виде `abc
+REQUIRE AsQName             ~pinka/samples/2006/syntax/qname.f \ РѕРґРЅРѕСЃР»РѕРІРЅС‹Рµ СЃС‚СЂРѕРєРё РІ РІРёРґРµ `abc
 REQUIRE lib.libxml2         ~pinka/lib/lin/xml/libxml2-lib.f
 
 : (* BEGIN PARSE-NAME DUP IF `*) EQUAL ELSE 2DROP REFILL 0= THEN UNTIL ; IMMEDIATE

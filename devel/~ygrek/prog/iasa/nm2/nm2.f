@@ -140,22 +140,22 @@ PAINTSTRUCT::/SIZE ALLOCATE THROW VALUE ps
 ;
 
 PROC: paint
-   W: srccopy 0 0 memDC maxY maxX 0 0 windc BitBlt DROP \ из памяти на экран
+   W: srccopy 0 0 memDC maxY maxX 0 0 windc BitBlt DROP \ РёР· РїР°РјСЏС‚Рё РЅР° СЌРєСЂР°РЅ
 PROC;
 
 
 : CreateMyWindow
  0 create-window TO win
   win TO winmain
-  " Численные методы Лаба 2. yGREK heretix  КА-21 ИПСА" win -text!
+  " Р§РёСЃР»РµРЅРЅС‹Рµ РјРµС‚РѕРґС‹ Р›Р°Р±Р° 2. yGREK heretix  РљРђ-21 РРџРЎРђ" win -text!
   paint win -painter!
   win winmaximize
   win winshow
 ;
 
 : CreateMemDC 
-   \ образ экрана в памяти и будем все операции рисования делать
-   \ только в memDC
+   \ РѕР±СЂР°Р· СЌРєСЂР°РЅР° РІ РїР°РјСЏС‚Рё Рё Р±СѓРґРµРј РІСЃРµ РѕРїРµСЂР°С†РёРё СЂРёСЃРѕРІР°РЅРёСЏ РґРµР»Р°С‚СЊ
+   \ С‚РѕР»СЊРєРѕ РІ memDC
    W: sm_cxscreen GetSystemMetrics TO maxX
    W: sm_cyscreen GetSystemMetrics TO maxY
    winmain -hwnd@ GetDC TO hDC

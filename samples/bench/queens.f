@@ -1,5 +1,5 @@
 \ QUEENS.F
-\ á†§†Á† Æ 8-® ‰•‡ßÔÂ
+\ –ó–∞–¥–∞—á–∞ –æ 8-–∏ —Ñ–µ—Ä–∑—è—Ö
 \ Al.Chepyzhenko
 
 : CARRAY ( n )        CHARS CREATE ALLOT
@@ -53,7 +53,7 @@
       IF
           DUP 7 <
           IF   DUP 1+ RECURSE
-\          ELSE èÖóÄíú     \ !!!!!!!!!!!!!
+\          ELSE –ü–ï–ß–ê–¢–¨     \ !!!!!!!!!!!!!
           THEN
       THEN
   LOOP

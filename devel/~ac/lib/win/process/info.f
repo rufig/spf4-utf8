@@ -1,5 +1,5 @@
-\ Альтернатива/дополнение для enumproc.f - добавлена обработка к-ва хэндлов и полного пути процессов.
-\ См. примеры в конце файла.
+\ РђР»СЊС‚РµСЂРЅР°С‚РёРІР°/РґРѕРїРѕР»РЅРµРЅРёРµ РґР»СЏ enumproc.f - РґРѕР±Р°РІР»РµРЅР° РѕР±СЂР°Р±РѕС‚РєР° Рє-РІР° С…СЌРЅРґР»РѕРІ Рё РїРѕР»РЅРѕРіРѕ РїСѓС‚Рё РїСЂРѕС†РµСЃСЃРѕРІ.
+\ РЎРј. РїСЂРёРјРµСЂС‹ РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р°.
 
 REQUIRE {              ~ac/lib/locals.f
 REQUIRE ForEachProcess ~ac/lib/win/process/enumproc.f
@@ -8,9 +8,9 @@ REQUIRE WinVer         ~ac/lib/win/winver.f
 
 WINAPI: NtQuerySystemInformation NTDLL.DLL
 WINAPI: OpenProcess              KERNEL32.DLL
-WINAPI: GetProcessImageFileNameA PSAPI.DLL \ минимум WinXP, возвращает путь с device name
-WINAPI: GetModuleFileNameExA     PSAPI.DLL \ минимум Win2000, дает пути только для процессов текущего пользователя
-WINAPI: QueryFullProcessImageNameA KERNEL32.DLL \ минимум Vista/2008
+WINAPI: GetProcessImageFileNameA PSAPI.DLL \ РјРёРЅРёРјСѓРј WinXP, РІРѕР·РІСЂР°С‰Р°РµС‚ РїСѓС‚СЊ СЃ device name
+WINAPI: GetModuleFileNameExA     PSAPI.DLL \ РјРёРЅРёРјСѓРј Win2000, РґР°РµС‚ РїСѓС‚Рё С‚РѕР»СЊРєРѕ РґР»СЏ РїСЂРѕС†РµСЃСЃРѕРІ С‚РµРєСѓС‰РµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+WINAPI: QueryFullProcessImageNameA KERNEL32.DLL \ РјРёРЅРёРјСѓРј Vista/2008
 
  0
  4 -- nqsi.NextEntryOffset
@@ -18,11 +18,11 @@ WINAPI: QueryFullProcessImageNameA KERNEL32.DLL \ минимум Vista/2008
 12 -- nqsi.Reserved2
  4 -- nqsi.UniqueProcessId
  4 -- nqsi.Reserved3
- 4 -- nqsi.HandleCount      \ "Дескрипторы" в taskmgr
+ 4 -- nqsi.HandleCount      \ "Р”РµСЃРєСЂРёРїС‚РѕСЂС‹" РІ taskmgr
  4 -- nqsi.Reserved4
 44 -- nqsi.Reserved5
  4 -- nqsi.PeakPagefileUsage
- 4 -- nqsi.PrivatePageCount \ "Выделенная память" (в байтах) в taskmgr
+ 4 -- nqsi.PrivatePageCount \ "Р’С‹РґРµР»РµРЅРЅР°СЏ РїР°РјСЏС‚СЊ" (РІ Р±Р°Р№С‚Р°С…) РІ taskmgr
 48 -- nqsi.Reserved6
 CONSTANT /SYSTEM_PROCESS_INFORMATION
 
@@ -30,12 +30,12 @@ CONSTANT /SYSTEM_PROCESS_INFORMATION
 USER NQSI_ERR
 
 : ForEachProcess2 { par xt \ r pi pid a u hc mem fi it h n fn -- pid }
-\ для каждого процесса выполнить xt со следующими параметрами:
-\ ( a u mem hc pid par -- flag ) a u - путь и имя файла процесса, mem - выделенная память,
-\ hc - к-во хэндлов, pid - ID процесса, par - пользовательский параметр (напр. аккумулятор),
-\ xt возвращает flag продолжения
-\ a u на момент вызова находятся в PAD ! ( для упрощения работы с GetProcessInfo :)
-\ возврат: pid - процесс, на котором завершился перебор (pid=0 возможен), или -1, если пройдены все
+\ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїСЂРѕС†РµСЃСЃР° РІС‹РїРѕР»РЅРёС‚СЊ xt СЃРѕ СЃР»РµРґСѓСЋС‰РёРјРё РїР°СЂР°РјРµС‚СЂР°РјРё:
+\ ( a u mem hc pid par -- flag ) a u - РїСѓС‚СЊ Рё РёРјСЏ С„Р°Р№Р»Р° РїСЂРѕС†РµСЃСЃР°, mem - РІС‹РґРµР»РµРЅРЅР°СЏ РїР°РјСЏС‚СЊ,
+\ hc - Рє-РІРѕ С…СЌРЅРґР»РѕРІ, pid - ID РїСЂРѕС†РµСЃСЃР°, par - РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РїР°СЂР°РјРµС‚СЂ (РЅР°РїСЂ. Р°РєРєСѓРјСѓР»СЏС‚РѕСЂ),
+\ xt РІРѕР·РІСЂР°С‰Р°РµС‚ flag РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ
+\ a u РЅР° РјРѕРјРµРЅС‚ РІС‹Р·РѕРІР° РЅР°С…РѕРґСЏС‚СЃСЏ РІ PAD ! ( РґР»СЏ СѓРїСЂРѕС‰РµРЅРёСЏ СЂР°Р±РѕС‚С‹ СЃ GetProcessInfo :)
+\ РІРѕР·РІСЂР°С‚: pid - РїСЂРѕС†РµСЃСЃ, РЅР° РєРѕС‚РѕСЂРѕРј Р·Р°РІРµСЂС€РёР»СЃСЏ РїРµСЂРµР±РѕСЂ (pid=0 РІРѕР·РјРѕР¶РµРЅ), РёР»Рё -1, РµСЃР»Рё РїСЂРѕР№РґРµРЅС‹ РІСЃРµ
   -1 -> n
   ^ r 512 1024 * DUP ALLOCATE THROW DUP -> pi SystemProcessInformation NtQuerySystemInformation DUP NQSI_ERR !
   0= r 0 > AND
@@ -50,14 +50,14 @@ USER NQSI_ERR
           pid 0 0x0410 OpenProcess DUP 0= IF DROP pid 0 0x1000 OpenProcess THEN
           DUP
           IF -> h
-             WinVer 50 = ( Win2000) IF 900 fi 0 h GetModuleFileNameExA fi SWAP THEN \ только текущий пользователь
-             WinVer 51 60 WITHIN ( XP) IF 900 fi h GetProcessImageFileNameA >R fi ASCIIZ> R> MIN THEN \ под WinXP баг: функция возвращает удвоенную (unicode?) длину строки
+             WinVer 50 = ( Win2000) IF 900 fi 0 h GetModuleFileNameExA fi SWAP THEN \ С‚РѕР»СЊРєРѕ С‚РµРєСѓС‰РёР№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
+             WinVer 51 60 WITHIN ( XP) IF 900 fi h GetProcessImageFileNameA >R fi ASCIIZ> R> MIN THEN \ РїРѕРґ WinXP Р±Р°Рі: С„СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚ СѓРґРІРѕРµРЅРЅСѓСЋ (unicode?) РґР»РёРЅСѓ СЃС‚СЂРѕРєРё
              WinVer 59 > ( Vista/2008/W7) IF 900 -> fn ^ fn fi 0 h QueryFullProcessImageNameA IF fi fn ELSE S" " THEN THEN
              h CLOSE-FILE THROW
           ELSE DROP ( GetLastError ." err=" .) S" " THEN -> u -> a
       DUP nqsi.HandleCount @ -> hc
       DUP nqsi.PrivatePageCount @ -> mem
-      -> it ( разрешим xt менять стек, не сбивая итератор )
+      -> it ( СЂР°Р·СЂРµС€РёРј xt РјРµРЅСЏС‚СЊ СЃС‚РµРє, РЅРµ СЃР±РёРІР°СЏ РёС‚РµСЂР°С‚РѕСЂ )
          a u mem hc pid par xt EXECUTE
       IF it DUP nqsi.NextEntryOffset @ DUP IF + ELSE 2DROP 0 THEN
       ELSE pid -> n 0 THEN
@@ -70,7 +70,7 @@ USER NQSI_ERR
   = IF FALSE
     ELSE 2DROP 2DROP TRUE THEN
 ;
-: GetProcessInfo ( pid -- a u mem hc ) \ a u в PAD
+: GetProcessInfo ( pid -- a u mem hc ) \ a u РІ PAD
   ['] (GetProcessInfo) ForEachProcess2
   -1 = IF S" process-not-found" 0 0 THEN
 ;
@@ -81,21 +81,21 @@ USER NQSI_ERR
   ['] (GetProcessInfoByName) ForEachProcess2
   -1 = IF DROP S" process-not-found" 0 0 0 THEN
 ;
-: ProcessEx. ( -- ) \ расширение Process. из enumproc.f ( ' ProcessEx. ForEachProcess )
+: ProcessEx. ( -- ) \ СЂР°СЃС€РёСЂРµРЅРёРµ Process. РёР· enumproc.f ( ' ProcessEx. ForEachProcess )
   DUP P32.th32ProcessID @ .
   DUP P32.szExeFile ASCIIZ> TYPE SPACE
   DUP P32.cntThreads @ .
       P32.th32ProcessID @ GetProcessInfo . . TYPE CR
 ;
 
-\EOF примеры:
-\ распечатать первые 10 процессов с нумерацией:
+\EOF РїСЂРёРјРµСЂС‹:
+\ СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ РїРµСЂРІС‹Рµ 10 РїСЂРѕС†РµСЃСЃРѕРІ СЃ РЅСѓРјРµСЂР°С†РёРµР№:
 10 PAD :NONAME ( ... a u mem hc pid par -- flag ) DUP 1+! @ . . . . TYPE 1- DUP CR ; ForEachProcess2 . DROP CR CR
 
-\ получить информацию о процессе с pid=788
+\ РїРѕР»СѓС‡РёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РїСЂРѕС†РµСЃСЃРµ СЃ pid=788
 788 GetProcessInfo . . TYPE CR
 S" *acWEB.exe" GetProcessInfoByName . . . TYPE CR CR
 
-\ распечатать информацию о всех процессах
+\ СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІСЃРµС… РїСЂРѕС†РµСЃСЃР°С…
 ' ProcessEx. ForEachProcess
 WinVer .

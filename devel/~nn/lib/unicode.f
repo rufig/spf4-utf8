@@ -13,7 +13,7 @@
 
 : AZ>UNICODE DUP IF ASCIIZ> S>UNICODE DROP THEN ;
 
-: UASCIIZ> ( addr -- addr u ) \ ¢†‡®†≠‚ ASCIIZ> §´Ô Unicode
+: UASCIIZ> ( addr -- addr u ) \ –≤–∞—Ä–∏–∞–Ω—Ç ASCIIZ> –¥–ª—è Unicode
   0 OVER
   BEGIN
     DUP W@ 0<>

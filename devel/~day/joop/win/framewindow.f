@@ -1,10 +1,10 @@
 
-\ 23.Jun.2001 Sat 00:21 Ruv  Исправил зевок в W: WM_PAINT
-\  было    handle @ EndPaint DROP
-\  надо    ps[ handle @ EndPaint DROP
-\  в NONAME для WNDPROC: (WIN-GATE) исправлено
-\  было    dep DEPTH - 0= IF 0 THEN
-\  надо    DEPTH dep - 0= IF 0 THEN
+\ 23.Jun.2001 Sat 00:21 Ruv  РСЃРїСЂР°РІРёР» Р·РµРІРѕРє РІ W: WM_PAINT
+\  Р±С‹Р»Рѕ    handle @ EndPaint DROP
+\  РЅР°РґРѕ    ps[ handle @ EndPaint DROP
+\  РІ NONAME РґР»СЏ WNDPROC: (WIN-GATE) РёСЃРїСЂР°РІР»РµРЅРѕ
+\  Р±С‹Р»Рѕ    dep DEPTH - 0= IF 0 THEN
+\  РЅР°РґРѕ    DEPTH dep - 0= IF 0 THEN
 
 REQUIRE Window   ~day\joop\win\window.f
 REQUIRE WinClass  ~day\joop\win\winclass.f
@@ -61,7 +61,7 @@ CONSTANT /MSG
          lparam wparam uint hwnd
          DefWindowProcA
        THEN
-     ELSE \ Ищем и вызываем обработчик
+     ELSE \ РС‰РµРј Рё РІС‹Р·С‹РІР°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРє
        uint OVER [CHAR] W SearchWM
        IF
            lparam wparam uint hwnd DUP HANDLE>OBJ :fillMessage           
@@ -109,14 +109,14 @@ WNDPROC: DisableWindowInTask
     LOOP
 ;
 
-USER-VALUE dc \ для WM_PAINT
+USER-VALUE dc \ РґР»СЏ WM_PAINT
 
 pvar: <lparam
 pvar: <font
 
 CLASS: FrameWindow <SUPER Window
 
- /MSG VAR      vMSG    \ размер структуры оконных сообщений    
+ /MSG VAR      vMSG    \ СЂР°Р·РјРµСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹ РѕРєРѕРЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№    
  CELL VAR      vClose
  CELL VAR      menu
 
@@ -220,15 +220,15 @@ W: WM_PAINT { \ ps[ /PS ] }
 
 W: WM_COMMAND
      lparam @ ?DUP
-     IF \ контрол
+     IF \ РєРѕРЅС‚СЂРѕР»
        HANDLE>OBJ
        wparam @ HIWORD SWAP
        [CHAR] C ->WM
-     ELSE \ меню
+     ELSE \ РјРµРЅСЋ
        handle @ GetMenu 0<>
-       IF \ есть меню
+       IF \ РµСЃС‚СЊ РјРµРЅСЋ
          wparam @ LOWORD ?DUP
-         IF \ у пункта меню есть сообщение окну
+         IF \ Сѓ РїСѓРЅРєС‚Р° РјРµРЅСЋ РµСЃС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕРєРЅСѓ
             self [CHAR] M ->WM
          THEN
        THEN 
@@ -242,7 +242,7 @@ W: WM_NCCREATE
 
 W: WM_CLOSE
    handle @ GetParent DUP IsWindow
-   IF TRUE SWAP EnableWindow DROP ELSE DROP THEN \ Чтобы по ShowModal не моргало
+   IF TRUE SWAP EnableWindow DROP ELSE DROP THEN \ Р§С‚РѕР±С‹ РїРѕ ShowModal РЅРµ РјРѕСЂРіР°Р»Рѕ
    own :hide
    TRUE vClose !
    0
@@ -259,7 +259,7 @@ W: WM_CLOSE
    h TrackPopupMenu self [CHAR] M ->WM
 ;
 
-\ Чтобы создать свое меню - перегрузите
+\ Р§С‚РѕР±С‹ СЃРѕР·РґР°С‚СЊ СЃРІРѕРµ РјРµРЅСЋ - РїРµСЂРµРіСЂСѓР·РёС‚Рµ
 : :createMenu ( -- h)
    0
 ;
@@ -287,16 +287,16 @@ W: WM_CONTEXTMENU
     font :create
 ;
 
-\ Максимум 64 открытых окон приложения
+\ РњР°РєСЃРёРјСѓРј 64 РѕС‚РєСЂС‹С‚С‹С… РѕРєРѕРЅ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 : :showModal { \ stack aw -- u }
     GetActiveWindow -> aw
     own :show
     Stack :new -> stack
-    stack DisableTaskWindows \ Отключить все окна и запомнить их состояние
+    stack DisableTaskWindows \ РћС‚РєР»СЋС‡РёС‚СЊ РІСЃРµ РѕРєРЅР° Рё Р·Р°РїРѕРјРЅРёС‚СЊ РёС… СЃРѕСЃС‚РѕСЏРЅРёРµ
     TRUE handle @ EnableWindow DROP    
     own :run
-    stack EnableTaskWindows \ восстановить состояние окон
+    stack EnableTaskWindows \ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РѕРєРѕРЅ
     stack :free
     aw SetActiveWindow DROP        
     ModalResult @

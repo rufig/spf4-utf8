@@ -34,7 +34,7 @@ CREATE POINT 0 , 0 ,
   || w ||
   0 FORTH-WORDLIST ListboxFromVoc -> w
   ['] TEST-WND-PROC w WindowSubclass
-  S" Список слов форт-системы" S" ico\mail10.ico" 1997 w TrayIconCreate
+  S" РЎРїРёСЃРѕРє СЃР»РѕРІ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹" S" ico\mail10.ico" 1997 w TrayIconCreate
   200 400 w WindowSize
   0 w ListboxDeleteItem
   w MessageLoop

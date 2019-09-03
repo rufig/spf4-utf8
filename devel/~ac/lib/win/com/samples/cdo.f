@@ -14,7 +14,7 @@ WARNING !
   ses :: Outbox @ 
   DROP :: Messages @
   DROP -> mess
-  arg(  Z" Это тестовая тема" _str Z" Тестовое сообщение" _str )arg  mess :: Add >
+  arg(  Z" Р­С‚Рѕ С‚РµСЃС‚РѕРІР°СЏ С‚РµРјР°" _str Z" РўРµСЃС‚РѕРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ" _str )arg  mess :: Add >
   DROP -> mes
   mes :: Recipients @
   DROP -> rcpt

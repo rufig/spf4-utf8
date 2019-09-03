@@ -6,9 +6,9 @@ REQUIRE AsLaterSintax ~pinka\samples\2006\syntax\later.core.f
 
 ' AsLaterSintax enqueueNOTFOUND
 
-\ Позднее (динамическое) связывание, синтаксис: translator.message
-\ translator -- это интерфейс типа общий транслятор ( addr u -- i*x ) к некому объекту.
-\ Пример:  EVALUATE.test
+\ РџРѕР·РґРЅРµРµ (РґРёРЅР°РјРёС‡РµСЃРєРѕРµ) СЃРІСЏР·С‹РІР°РЅРёРµ, СЃРёРЅС‚Р°РєСЃРёСЃ: translator.message
+\ translator -- СЌС‚Рѕ РёРЅС‚РµСЂС„РµР№СЃ С‚РёРїР° РѕР±С‰РёР№ С‚СЂР°РЅСЃР»СЏС‚РѕСЂ ( addr u -- i*x ) Рє РЅРµРєРѕРјСѓ РѕР±СЉРµРєС‚Сѓ.
+\ РџСЂРёРјРµСЂ:  EVALUATE.test
 
 \EOF
 \ Example

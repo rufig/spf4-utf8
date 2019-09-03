@@ -1,4 +1,4 @@
-\ èçâëå÷åíèå äàò âàëèäíîñòè ñåðòèôèêàòà èç êîíòåêñòà çàãðóæåííîãî ñåðòèôèêàòà
+\ Ð¸Ð·Ð²Ð»ÐµÑ‡ÐµÐ½Ð¸Ðµ Ð´Ð°Ñ‚ Ð²Ð°Ð»Ð¸Ð´Ð½Ð¾ÑÑ‚Ð¸ ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð° Ð¸Ð· ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð° Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ð¾Ð³Ð¾ ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð°
 
 0
 CELL -- cctx.dwCertEncodingType
@@ -20,7 +20,7 @@ CELL -- ci.dwVersion
    8 -- ci.IssuerUniqueId     \ bit.blob
    8 -- ci.SubjectUniqueId
    4 -- ci.cExtension
-   0 -- ci.rgExtension        \ ìàññèâ óêàçàòåëåé íà CERT_EXTENSION
+   0 -- ci.rgExtension        \ Ð¼Ð°ÑÑÐ¸Ð² ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÐµÐ¹ Ð½Ð° CERT_EXTENSION
 CONSTANT /CERT_INFO
 
 : CertNotBeforeFiletime ( cert -- filetime ) \ UTC
@@ -29,4 +29,4 @@ CONSTANT /CERT_INFO
 : CertNotAfterFiletime ( cert -- filetime ) \ UTC
   cctx.pCertInfo @ ci.NotAfter 2@ SWAP
 ;
-\ Ïðåîáðàçîâàíèÿ ñì. â REQUIRE FILETIME>TIME&DATE ~ac/lib/win/file/filetime.f 
+\ ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ ÑÐ¼. Ð² REQUIRE FILETIME>TIME&DATE ~ac/lib/win/file/filetime.f 

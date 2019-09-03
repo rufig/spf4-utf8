@@ -1,6 +1,6 @@
-( 26.01.2000 Черезов А. )
+( 26.01.2000 Р§РµСЂРµР·РѕРІ Рђ. )
 
-( Работа с диалогами Windows )
+( Р Р°Р±РѕС‚Р° СЃ РґРёР°Р»РѕРіР°РјРё Windows )
 
 REQUIRE ||             ~ac/lib/temps.f
 REQUIRE CW_USEDEFAULT  ~ac/lib/win/window/winconst.f
@@ -13,7 +13,7 @@ WINAPI: GetDlgItemTextA         USER32.DLL
   2SWAP SWAP 2SWAP GetDlgItemTextA
 ;
 \ ----------------------------------------------------------------------
-\ функция окна диалога
+\ С„СѓРЅРєС†РёСЏ РѕРєРЅР° РґРёР°Р»РѕРіР°
 
 : (DlgWndProc)     ( lparam wparam uint hwnd -- flag )
   || lparam wparam uint hwnd || (( lparam wparam uint hwnd ))

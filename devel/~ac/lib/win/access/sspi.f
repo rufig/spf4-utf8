@@ -1,4 +1,4 @@
-\ функции поддержки локальной и дистанционной авторизации через SSPI
+\ С„СѓРЅРєС†РёРё РїРѕРґРґРµСЂР¶РєРё Р»РѕРєР°Р»СЊРЅРѕР№ Рё РґРёСЃС‚Р°РЅС†РёРѕРЅРЅРѕР№ Р°РІС‚РѕСЂРёР·Р°С†РёРё С‡РµСЂРµР· SSPI
 
 REQUIRE {        lib/ext/locals.f
 REQUIRE >UNICODE ~ac/lib/lin/iconv/iconv.f 
@@ -25,7 +25,7 @@ WINAPI: FreeCredentialsHandle      secur32.dll
 0x00000000 CONSTANT SECURITY_NETWORK_DREP
 0x00090312 CONSTANT SEC_I_CONTINUE_NEEDED
 
-0x8009030C CONSTANT SEC_E_LOGON_DENIED \ возврат из второго AcceptSecurityContext при неверном имени или пароле
+0x8009030C CONSTANT SEC_E_LOGON_DENIED \ РІРѕР·РІСЂР°С‚ РёР· РІС‚РѕСЂРѕРіРѕ AcceptSecurityContext РїСЂРё РЅРµРІРµСЂРЅРѕРј РёРјРµРЅРё РёР»Рё РїР°СЂРѕР»Рµ
 
 USER uclientOutput
 : SspiClientOutput ( -- addr )

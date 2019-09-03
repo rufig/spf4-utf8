@@ -43,7 +43,7 @@ WM_USER CONSTANT WM_WA_IPC
 500 VALUE  wa-ms  \ 1-200 -  100 sec
 
 : winap-vol-up! ( n -- )
-\ увеличить плавно громкость от 0 до n, n=0-255
+\ СѓРІРµР»РёС‡РёС‚СЊ РїР»Р°РІРЅРѕ РіСЂРѕРјРєРѕСЃС‚СЊ РѕС‚ 0 РґРѕ n, n=0-255
   get-wa 0= IF DROP EXIT THEN
   0 ?DO
     I wa-vol!

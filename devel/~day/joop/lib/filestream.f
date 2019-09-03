@@ -1,5 +1,5 @@
-\ Скелет для дргугих потоков - sockets, buffered files, com ports...
-\ Вот только :copyFrom надо доделать
+\ РЎРєРµР»РµС‚ РґР»СЏ РґСЂРіСѓРіРёС… РїРѕС‚РѕРєРѕРІ - sockets, buffered files, com ports...
+\ Р’РѕС‚ С‚РѕР»СЊРєРѕ :copyFrom РЅР°РґРѕ РґРѕРґРµР»Р°С‚СЊ
 
 REQUIRE Stream ~day\joop\lib\stream.f
 

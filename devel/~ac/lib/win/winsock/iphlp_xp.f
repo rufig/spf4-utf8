@@ -3,8 +3,8 @@ REQUIRE ForEachTcpConnection ~ac/lib/win/winsock/iphlp.f
 WINAPI: AllocateAndGetUdpExTableFromStack IPHLPAPI.DLL ( PMIB_UDPTABLE_EX*,BOOL,HANDLE,DWORD,DWORD);
 WINAPI: AllocateAndGetTcpExTableFromStack IPHLPAPI.DLL ( PMIB_TCPTABLE_EX*,BOOL,HANDLE,DWORD,DWORD);
 
-\ 2 0 GetProcessHeap ... по версии Kumar Gaurav Khanna 
-\ 2 2 GetProcessHeap ... по версии Russinovich
+\ 2 0 GetProcessHeap ... РїРѕ РІРµСЂСЃРёРё Kumar Gaurav Khanna 
+\ 2 2 GetProcessHeap ... РїРѕ РІРµСЂСЃРёРё Russinovich
 
 (
 typedef struct _MIB_TCPTABLE_EX

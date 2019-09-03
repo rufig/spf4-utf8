@@ -31,7 +31,7 @@ W: WM_TIMER  { \ deskdc deskwnd }
     SRCCOPY    
     ZOOMY ZOOMX
     CURXY 2@ ZOOMX 2/ - 0 MAX SWAP ZOOMY 2/ - 0 MAX
-    GetDesktopCoord ZOOMY - ROT MIN \ Проверка границ
+    GetDesktopCoord ZOOMY - ROT MIN \ РџСЂРѕРІРµСЂРєР° РіСЂР°РЅРёС†
     SWAP ZOOMX - ROT MIN
     deskdc
     PAD handle @ GetClientRect DROP

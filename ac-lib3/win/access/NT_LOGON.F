@@ -1,5 +1,5 @@
-( Авторизация пользователей на сервере WinNT/2000 А.Ч. 
-  07.Mar.1997, дополнения 24.Mar.2000 )
+( РђРІС‚РѕСЂРёР·Р°С†РёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РЅР° СЃРµСЂРІРµСЂРµ WinNT/2000 Рђ.Р§. 
+  07.Mar.1997, РґРѕРїРѕР»РЅРµРЅРёСЏ 24.Mar.2000 )
 
 WINAPI: LogonUserA              ADVAPI32.DLL
 WINAPI: ImpersonateLoggedOnUser ADVAPI32.DLL
@@ -8,7 +8,7 @@ WINAPI: RevertToSelf            ADVAPI32.DLL
 0 CONSTANT LOGON32_PROVIDER_DEFAULT
 4 CONSTANT LOGON32_LOGON_BATCH
 3 CONSTANT LOGON32_LOGON_NETWORK
-8 CONSTANT LOGON32_LOGON_NETWORK_CLEARTEXT \ начиная с Win2000
+8 CONSTANT LOGON32_LOGON_NETWORK_CLEARTEXT \ РЅР°С‡РёРЅР°СЏ СЃ Win2000
 
 USER TOKEN
 USER uAuthServer

@@ -1,21 +1,21 @@
-\ Working Set - набор страниц виртуального адресного пространства процесса,
-\ находящихся в физической памяти.
+\ Working Set - РЅР°Р±РѕСЂ СЃС‚СЂР°РЅРёС† РІРёСЂС‚СѓР°Р»СЊРЅРѕРіРѕ Р°РґСЂРµСЃРЅРѕРіРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РїСЂРѕС†РµСЃСЃР°,
+\ РЅР°С…РѕРґСЏС‰РёС…СЃСЏ РІ С„РёР·РёС‡РµСЃРєРѕР№ РїР°РјСЏС‚Рё.
 
 REQUIRE GetCurrentProcess ~ac/lib/win/process/pipes.f
 WINAPI: GetProcessMemoryInfo PSAPI.DLL
 \ WINAPI: QueryWorkingSet      PSAPI.DLL
 WINAPI: EmptyWorkingSet      PSAPI.DLL
 
-0                                      \ названия в Task Manager:
+0                                      \ РЅР°Р·РІР°РЅРёСЏ РІ Task Manager:
 CELL -- pmc.cb
-CELL -- pmc.PageFaultCount             \ ошибки страниц
+CELL -- pmc.PageFaultCount             \ РѕС€РёР±РєРё СЃС‚СЂР°РЅРёС†
 CELL -- pmc.PeakWorkingSetSize
-CELL -- pmc.WorkingSetSize             \ память
+CELL -- pmc.WorkingSetSize             \ РїР°РјСЏС‚СЊ
 CELL -- pmc.QuotaPeakPagedPoolUsage
-CELL -- pmc.QuotaPagedPoolUsage        \ выгружаемый пул ( 18Кб при старте)
+CELL -- pmc.QuotaPagedPoolUsage        \ РІС‹РіСЂСѓР¶Р°РµРјС‹Р№ РїСѓР» ( 18РљР± РїСЂРё СЃС‚Р°СЂС‚Рµ)
 CELL -- pmc.QuotaPeakNonPagedPoolUsage
-CELL -- pmc.QuotaNonPagedPoolUsage     \ невыгружаемый пул (обычно меньше 1Кб)
-CELL -- pmc.PagefileUsage              \ выделенная память (максимальное число в таблице)
+CELL -- pmc.QuotaNonPagedPoolUsage     \ РЅРµРІС‹РіСЂСѓР¶Р°РµРјС‹Р№ РїСѓР» (РѕР±С‹С‡РЅРѕ РјРµРЅСЊС€Рµ 1РљР±)
+CELL -- pmc.PagefileUsage              \ РІС‹РґРµР»РµРЅРЅР°СЏ РїР°РјСЏС‚СЊ (РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РІ С‚Р°Р±Р»РёС†Рµ)
 CELL -- pmc.PeakPagefileUsage
 CONSTANT /PROCESS_MEMORY_COUNTERS
 

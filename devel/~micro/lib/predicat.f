@@ -2,9 +2,9 @@ REQUIRE >MEM ~micro/lib/stack/mem.f
 REQUIRE NEXT-WORD ~micro/lib/parser/word.f
 
 : P: ( +len params -- )
-\ Создаёт массив xt.
-\ Дополнительно резервируется +len CELLS.
-\ params - число входных параметров каждому слову.
+\ РЎРѕР·РґР°С‘С‚ РјР°СЃСЃРёРІ xt.
+\ Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ СЂРµР·РµСЂРІРёСЂСѓРµС‚СЃСЏ +len CELLS.
+\ params - С‡РёСЃР»Рѕ РІС…РѕРґРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РєР°Р¶РґРѕРјСѓ СЃР»РѕРІСѓ.
 \ BYTE -- PARAMS
 \ BYTE -- MAXLEN
 \ BYTE -- LEN

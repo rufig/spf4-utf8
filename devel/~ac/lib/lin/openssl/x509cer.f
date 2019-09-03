@@ -17,8 +17,8 @@ ALSO /usr/local/lib/libssl.so.1.1
 ;
 
 : X509MkCert { cna cnu ea eu oua ouu oa ou la lu ca cu serial days \ pk x rsa name -- x pk }
-\ Ñîçäàòü ñàìîïîäïèñàííûé X.509-ñåðòèôèêàò ñ çàäàííûìè ïàðàìåòðàìè ñóáúåêòà
-\ Ïðè èñïîëüçîâàíèè íå-ascii-ñèìâîëîâ âõîäíûå ñòðîêè äîëæíû áûòü â UTF8.
+\ Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ ÑÐ°Ð¼Ð¾Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ°Ð½Ð½Ñ‹Ð¹ X.509-ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚ Ñ Ð·Ð°Ð´Ð°Ð½Ð½Ñ‹Ð¼Ð¸ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ð¼Ð¸ ÑÑƒÐ±ÑŠÐµÐºÑ‚Ð°
+\ ÐŸÑ€Ð¸ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ð¸ Ð½Ðµ-ascii-ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ð²Ñ…Ð¾Ð´Ð½Ñ‹Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð´Ð¾Ð»Ð¶Ð½Ñ‹ Ð±Ñ‹Ñ‚ÑŒ Ð² UTF8.
 
   0 EVP_PKEY_new -> pk
   0 X509_new -> x
@@ -43,7 +43,7 @@ ALSO /usr/local/lib/libssl.so.1.1
   ea eu   S" emailAddress" name X509AddNameEntry \ emailAddress
   cna cnu S" CN"           name X509AddNameEntry \ commonName
 
-  name x 2 X509_set_issuer_name DROP \ ñàìîïîäïèñü
+  name x 2 X509_set_issuer_name DROP \ ÑÐ°Ð¼Ð¾Ð¿Ð¾Ð´Ð¿Ð¸ÑÑŒ
 
   S" critical,CA:FALSE" NID_basic_constraints x X509AddExt \ EE
   S" keyEncipherment,dataEncipherment,keyAgreement" NID_key_usage x X509AddExt
@@ -52,11 +52,11 @@ ALSO /usr/local/lib/libssl.so.1.1
   S" serverAuth,clientAuth" NID_ext_key_usage x X509AddExt
   S" Self signed certificate for Eserv SSL/TLS" NID_netscape_comment x X509AddExt
 
-\ CA-ðàñøèðåíèÿ
+\ CA-Ñ€Ð°ÑÑˆÐ¸Ñ€ÐµÐ½Ð¸Ñ
 \  S" critical,CA:TRUE,pathlen:10" NID_basic_constraints x X509AddExt \ CA
 \  S" critical,keyCertSign,cRLSign,digitalSignature" NID_key_usage x X509AddExt
 \  cna cnu " URI:http://{s}/CaAuth.crl" STR@ NID_crl_distribution_points x X509AddExt
-\  S" sslCA" NID_netscape_cert_type x X509AddExt \ CA-ñåðòèôèêàò îáû÷íî íå ñòàâÿò íà ñåðâåð
+\  S" sslCA" NID_netscape_cert_type x X509AddExt \ CA-ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚ Ð¾Ð±Ñ‹Ñ‡Ð½Ð¾ Ð½Ðµ ÑÑ‚Ð°Ð²ÑÑ‚ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€
 \  cna cnu " http://{s}/CaPolicy.html" STR@ NID_netscape_ca_policy_url x X509AddExt
 \  cna cnu " http://{s}/CaAuth.crl" STR@ NID_netscape_revocation_url x X509AddExt
 
@@ -76,7 +76,7 @@ ALSO /usr/local/lib/libssl.so.1.1
   x addr u  " {s}_cer.txt" STR@ ['] X509Cert2TXT X2PEMs
 ;
 : X509ServerPEM { x pk addr u \ f -- }
-\ ñåðòèôèêàò è çàêðûòûé êëþ÷ â îäíîì ôàéëå - ãîòîâî äëÿ èñïîëüçîâàíèÿ íà ñåðâåðå
+\ ÑÐµÑ€Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚ Ð¸ Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ñ‹Ð¹ ÐºÐ»ÑŽÑ‡ Ð² Ð¾Ð´Ð½Ð¾Ð¼ Ñ„Ð°Ð¹Ð»Ðµ - Ð³Ð¾Ñ‚Ð¾Ð²Ð¾ Ð´Ð»Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ
   x pk addr u X509ExpCert
   addr u " {s}.pem" STR@ R/W CREATE-FILE THROW -> f
   f WRITE-FILE THROW

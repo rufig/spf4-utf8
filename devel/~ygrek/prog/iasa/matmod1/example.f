@@ -1,5 +1,5 @@
-\ Дифуры первого порядка
-\ Математическое моделирование
+\ Р”РёС„СѓСЂС‹ РїРµСЂРІРѕРіРѕ РїРѕСЂСЏРґРєР°
+\ РњР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ
 \ (c) yGREK Heretix mailto:heretix@yandex.ru
 \ 06.Mar.2005
 
@@ -17,7 +17,7 @@ ALSO Model2
 : RUN { \ w s1 s d }
    GLWindow :new -> w
    0 w :create
-   S" Мат моделирование - Модель Фергюльста" w :setText
+   S" РњР°С‚ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ - РњРѕРґРµР»СЊ Р¤РµСЂРіСЋР»СЊСЃС‚Р°" w :setText
    w :maximize
 
    GLPlot2D :new -> s
@@ -45,8 +45,8 @@ ALSO Model2
 ;
 
 ( : main 
-0 IF \ всё равно exe не работает :( 
-  HERE IMAGE-BASE - 10000 + TO IMAGE-SIZE \ Вместо 10000 свое значение
+0 IF \ РІСЃС‘ СЂР°РІРЅРѕ exe РЅРµ СЂР°Р±РѕС‚Р°РµС‚ :( 
+  HERE IMAGE-BASE - 10000 + TO IMAGE-SIZE \ Р’РјРµСЃС‚Рѕ 10000 СЃРІРѕРµ Р·РЅР°С‡РµРЅРёРµ
   ['] RUN MAINX !
   TRUE TO ?GUI
   S" joopengl.exe" SAVE BYE

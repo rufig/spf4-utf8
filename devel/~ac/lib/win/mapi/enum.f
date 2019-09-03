@@ -3,12 +3,12 @@ REQUIRE PT_STRING8     ~ac/lib/win/mapi/const.f
 REQUIRE IID_IMAPISession ~ac/lib/win/mapi/interfaces.f
 
 : MapiRowProp@ { row pt \ addr nprop prow -- val1 val2 true  | false }
-\ вернуть истину и значение свойства, если такое свойство в записи есть
+\ РІРµСЂРЅСѓС‚СЊ РёСЃС‚РёРЅСѓ Рё Р·РЅР°С‡РµРЅРёРµ СЃРІРѕР№СЃС‚РІР°, РµСЃР»Рё С‚Р°РєРѕРµ СЃРІРѕР№СЃС‚РІРѕ РІ Р·Р°РїРёСЃРё РµСЃС‚СЊ
   row CELL+ @ -> nprop row CELL+ CELL+ @ -> addr
   nprop 0 ?DO
     addr I 16 * + -> prow
     prow @ pt =
-    IF prow CELL+ CELL+ CELL+ @  prow CELL+ CELL+ @ \ addr u для binary или 0 addr для строки
+    IF prow CELL+ CELL+ CELL+ @  prow CELL+ CELL+ @ \ addr u РґР»СЏ binary РёР»Рё 0 addr РґР»СЏ СЃС‚СЂРѕРєРё
        UNLOOP TRUE EXIT
     THEN
   LOOP FALSE
@@ -20,7 +20,7 @@ REQUIRE IID_IMAPISession ~ac/lib/win/mapi/interfaces.f
   ELSE FALSE THEN
 ;
 : MapiRow@ { rs pt val1 val2 -- row }
-\ найти в наборе записей запись с заданным значением свойства
+\ РЅР°Р№С‚Рё РІ РЅР°Р±РѕСЂРµ Р·Р°РїРёСЃРµР№ Р·Р°РїРёСЃСЊ СЃ Р·Р°РґР°РЅРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј СЃРІРѕР№СЃС‚РІР°
   rs
   DUP CELL+ SWAP @ 0 ?DO
     DUP I 12 * +
@@ -33,8 +33,8 @@ REQUIRE IID_IMAPISession ~ac/lib/win/mapi/interfaces.f
   LOOP DROP 0
 ;
 : MapiProp@ { cobj pr \ np arr val -- x1 x2 }
-\ см. также HrGetOneProp
-  1 -> np  \ ^ np указатель на массив свойств вида CREATE RootProp 1 , PR_IPM_SUBTREE_ENTRYID ,
+\ СЃРј. С‚Р°РєР¶Рµ HrGetOneProp
+  1 -> np  \ ^ np СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ СЃРІРѕР№СЃС‚РІ РІРёРґР° CREATE RootProp 1 , PR_IPM_SUBTREE_ENTRYID ,
   ^ arr ^ val 0 ^ np cobj ::GetProps 
   DUP MAPI_W_ERRORS_RETURNED = IF DROP 0 0 EXIT THEN THROW
   val IF arr CELL+ CELL+ CELL+ @ arr CELL+ CELL+ @ 
@@ -43,13 +43,13 @@ REQUIRE IID_IMAPISession ~ac/lib/win/mapi/interfaces.f
       ELSE 0 0 THEN
 ;
 : MapiProp! { x1 x2 cobj pr \ obj -- }
-  cobj -> obj 0 -> cobj \ структура props на стеке возвратов
+  cobj -> obj 0 -> cobj \ СЃС‚СЂСѓРєС‚СѓСЂР° props РЅР° СЃС‚РµРєРµ РІРѕР·РІСЂР°С‚РѕРІ
   pr 0xFFFF AND PT_STRING8 =
   IF x1 -> x2 0 -> x1 THEN
   0 ^ pr 1 obj ::SetProps THROW
 ;
 : MapiForEach { rs xt -- }
-\ выполнить xt для каждого элемента набора записей
+\ РІС‹РїРѕР»РЅРёС‚СЊ xt РґР»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№
   rs
   DUP CELL+ SWAP @ 0 ?DO
     DUP I 12 * + xt EXECUTE

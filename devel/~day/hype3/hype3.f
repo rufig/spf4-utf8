@@ -66,7 +66,7 @@ VARIABLE PREVIOUS-CURRENT
 ;
 
 : ALIGN-CUSTOM ( n -- )
-\ выравивает CLASS@ на n
+\ РІС‹СЂР°РІРёРІР°РµС‚ CLASS@ РЅР° n
    OBJ-SIZE SWAP 2DUP MOD 
    DUP IF - + CLASS@ .size ! ELSE 2DROP DROP THEN
 ;
@@ -512,7 +512,7 @@ ALSO HypeSupport DEFINITIONS
 
 SET-CURRENT PREVIOUS
 
-\ с with{ не работает subclassing !!!
+\ СЃ with{ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ subclassing !!!
 : with{ ( " class" -- )
     ' EXECUTE .wl @
     ALSO HYPE

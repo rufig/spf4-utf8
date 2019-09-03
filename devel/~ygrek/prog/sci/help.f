@@ -1,4 +1,4 @@
-\ Справка к сп-форту. После подключения наберите HELP
+\ ╨б╨┐╤А╨░╨▓╨║╨░ ╨║ ╤Б╨┐-╤Д╨╛╤А╤В╤Г. ╨Я╨╛╤Б╨╗╨╡ ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П ╨╜╨░╨▒╨╡╤А╨╕╤В╨╡ HELP
 
 REQUIRE [IF] lib\include\tools.f
 
@@ -57,7 +57,7 @@ USER ?Topic
    S" help.fhlp" +ModuleDirName
    ['] INCLUDE-PROBE CATCH IF DROP THEN DROP
    ?HelpFound @ 0=
-   IF \ Попробуем capital letters
+   IF \ ╨Я╨╛╨┐╤А╨╛╨▒╤Г╨╡╨╝ capital letters
      HelpWord-A @ HelpWord-U @ TO-UPPER
      NIP HelpWord-U !
      S" help.fhlp" +ModuleDirName

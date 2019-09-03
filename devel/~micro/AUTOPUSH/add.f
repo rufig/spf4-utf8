@@ -4,8 +4,8 @@ REQUIRE WINCONST lib/win/const.f
 WINAPI: PostMessageA user32.dll
 
 : PushWindowWait ( x y h -- )
-\ ­ ¦ âì ­  ®ª­® h ¢ â®çª¥ (x,y) ®â­®á¨â¥«ì­® ¥£® ¢¥àå­¥£® «¥¢®£® ã£« 
-\ ¦¤ âì § ¢¥àè¥­¨ï ®¡à ¡®âª¨ ­ ¦ â¨ï
+\ Ð½Ð°Ð¶Ð°Ñ‚ÑŒ Ð½Ð° Ð¾ÐºÐ½Ð¾ h Ð² Ñ‚Ð¾Ñ‡ÐºÐµ (x,y) Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ ÐµÐ³Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ³Ð¾ Ð»ÐµÐ²Ð¾Ð³Ð¾ ÑƒÐ³Ð»Ð°
+\ Ð¶Ð´Ð°Ñ‚ÑŒ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ Ð½Ð°Ð¶Ð°Ñ‚Ð¸Ñ
   >R
   16 LSHIFT OR 0 2DUP
   WM_LBUTTONDOWN R@ SendMessageA DROP
@@ -13,7 +13,7 @@ WINAPI: PostMessageA user32.dll
 ;
 
 : PushWindow ( x y h -- )
-\ ­ ¦ âì ­  ®ª­® h ¢ â®çª¥ (x,y) ®â­®á¨â¥«ì­® ¥£® ¢¥àå­¥£® «¥¢®£® ã£« 
+\ Ð½Ð°Ð¶Ð°Ñ‚ÑŒ Ð½Ð° Ð¾ÐºÐ½Ð¾ h Ð² Ñ‚Ð¾Ñ‡ÐºÐµ (x,y) Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ ÐµÐ³Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ³Ð¾ Ð»ÐµÐ²Ð¾Ð³Ð¾ ÑƒÐ³Ð»Ð°
   >R
   16 LSHIFT OR 0 2DUP
   WM_LBUTTONDOWN R@ PostMessageA DROP

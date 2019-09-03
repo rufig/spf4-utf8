@@ -8,10 +8,10 @@
 (  
    ----- IMAGE-BASE
    0x1000 .reserved \ uninitialized data
-   0x1000 .idata \ - импортируемые функции
+   0x1000 .idata \ - РёРјРїРѕСЂС‚РёСЂСѓРµРјС‹Рµ С„СѓРЅРєС†РёРё
    ----- IMAGE-BEGIN  \ ORG-ADDR
-   .text \ основное хранилище форт-системы
-     первая команда: CALL INIT 
+   .text \ РѕСЃРЅРѕРІРЅРѕРµ С…СЂР°РЅРёР»РёС‰Рµ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹
+     РїРµСЂРІР°СЏ РєРѕРјР°РЅРґР°: CALL INIT 
    ----- IMAGE-END    \ HERE
 )
 
@@ -110,7 +110,7 @@ BASE !
  0 ,                        \ 4 -- LoaderFlags
  10 ,                       \ 4 -- NumberOfRvaAndSizes \ = IMAGE_NUMBEROF_DIRECTORY_ENTRIES
 
- \ IMAGE_DATA_DIRECTORY - всего 16 entries ( IMAGE_NUMBEROF_DIRECTORY_ENTRIES )
+ \ IMAGE_DATA_DIRECTORY - РІСЃРµРіРѕ 16 entries ( IMAGE_NUMBEROF_DIRECTORY_ENTRIES )
  0 ,                        \ ( 00) 4 -- ExportTableRVA       ( offs 0F8)
  0 ,                        \       4 -- TotalExportDataSize
  IMAGE-BEGIN 1000 - >RVA ,  \ ( 01) 4 -- ImportTableRVA       ( offs 100)
@@ -139,7 +139,7 @@ BASE !
  0 ,                        \       4 -- TotalIATDataSize
  0 ,                        \ ( 13) 4 -- DelayImportTableRVA
  0 ,                        \       4 -- TotalDelayImportDataSize
- \ 14 описали, дальше просто ALLOT
+ \ 14 РѕРїРёСЃР°Р»Рё, РґР°Р»СЊС€Рµ РїСЂРѕСЃС‚Рѕ ALLOT
  0 , 0 , 0 , 0 ,            \ 2 8 * -- ReservedSections
  
 \ /IMAGE_OPTIONAL_HEADER
@@ -211,7 +211,7 @@ BASE !
 BASE @ 2 BASE !
  \ 10987654321098765432109876543210
    11100000000000000000000001100000 ( 0xE0000060 )
- \ 11000000000000000000000000100000 ( 0xC0000020 )  - spf4. как оно работает?
+ \ 11000000000000000000000000100000 ( 0xC0000020 )  - spf4. РєР°Рє РѕРЅРѕ СЂР°Р±РѕС‚Р°РµС‚?
  \ spf3:                            ( 0xE0000060 )
  ,                          \ 4 -- Characteristics   \ 60000020h=readable excutable code (E0000060h=-"-+writeable data)
 BASE !
@@ -221,29 +221,29 @@ BASE !
  HERE OVER - ERASE
 
 HERE EXE-HEADER -   CONSTANT /EXE-HEADER
-\ /EXE-HEADER  EXE-HEADER D4 + !  \ SizeOfHeaders \ смещение данных первой секции.
+\ /EXE-HEADER  EXE-HEADER D4 + !  \ SizeOfHeaders \ СЃРјРµС‰РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂРІРѕР№ СЃРµРєС†РёРё.
 
 /EXE-HEADER . CR
 
 : save ( a u -- )
   W/O CREATE-FILE THROW >R
 \  ERASED-CNT 0!
-  EXE-HEADER /EXE-HEADER  R@ WRITE-FILE THROW  \ заголовок
-  \ IMAGE-BEGIN 1000 - 200  R@ WRITE-FILE THROW  \ первая секция - таблица импорта
+  EXE-HEADER /EXE-HEADER  R@ WRITE-FILE THROW  \ Р·Р°РіРѕР»РѕРІРѕРє
+  \ IMAGE-BEGIN 1000 - 200  R@ WRITE-FILE THROW  \ РїРµСЂРІР°СЏ СЃРµРєС†РёСЏ - С‚Р°Р±Р»РёС†Р° РёРјРїРѕСЂС‚Р°
 
   ModuleName R/O OPEN-FILE-SHARED THROW >R
   HERE 400 R@ READ-FILE THROW 400 < THROW
   R> CLOSE-FILE THROW
 
-  HERE 200 +           200  R@ WRITE-FILE THROW  \ первая секция - таблица импорта
+  HERE 200 +           200  R@ WRITE-FILE THROW  \ РїРµСЂРІР°СЏ СЃРµРєС†РёСЏ - С‚Р°Р±Р»РёС†Р° РёРјРїРѕСЂС‚Р°
 
   IMAGE-BEGIN IMAGE-END OVER - 
-  1FF + 200 / 200 *       R@ WRITE-FILE THROW  \ вторая секция - код.
+  1FF + 200 / 200 *       R@ WRITE-FILE THROW  \ РІС‚РѕСЂР°СЏ СЃРµРєС†РёСЏ - РєРѕРґ.
   R> CLOSE-FILE THROW
 \  ERASED-CNT 1+!
 ;
 \ S" test.exe" save BYE
 
-( нельзя писать инициализированную загрузчиком таблицу импорта )
+( РЅРµР»СЊР·СЏ РїРёСЃР°С‚СЊ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅСѓСЋ Р·Р°РіСЂСѓР·С‡РёРєРѕРј С‚Р°Р±Р»РёС†Сѓ РёРјРїРѕСЂС‚Р° )
 
 

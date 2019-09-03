@@ -1,27 +1,27 @@
-\ Простейший способ получить полноценный встроенный IE
-\ под контролем своего приложения.
-\ Основные слова ( urla urlu ) Browser и BrowserThread.
-\ Либо NewBrowserWindow+AtlMainLoop. См. примеры в конце.
+\ РџСЂРѕСЃС‚РµР№С€РёР№ СЃРїРѕСЃРѕР± РїРѕР»СѓС‡РёС‚СЊ РїРѕР»РЅРѕС†РµРЅРЅС‹Р№ РІСЃС‚СЂРѕРµРЅРЅС‹Р№ IE
+\ РїРѕРґ РєРѕРЅС‚СЂРѕР»РµРј СЃРІРѕРµРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+\ РћСЃРЅРѕРІРЅС‹Рµ СЃР»РѕРІР° ( urla urlu ) Browser Рё BrowserThread.
+\ Р›РёР±Рѕ NewBrowserWindow+AtlMainLoop. РЎРј. РїСЂРёРјРµСЂС‹ РІ РєРѕРЅС†Рµ.
 
-\ Окончательная победа над клавишей TAB:
-\ см.ниже IOleInPlaceActiveObject::TranslateAccelerator
-   \ Утверждается, что этот хак с TAB'ом описан здесь:
+\ РћРєРѕРЅС‡Р°С‚РµР»СЊРЅР°СЏ РїРѕР±РµРґР° РЅР°Рґ РєР»Р°РІРёС€РµР№ TAB:
+\ СЃРј.РЅРёР¶Рµ IOleInPlaceActiveObject::TranslateAccelerator
+   \ РЈС‚РІРµСЂР¶РґР°РµС‚СЃСЏ, С‡С‚Рѕ СЌС‚РѕС‚ С…Р°Рє СЃ TAB'РѕРј РѕРїРёСЃР°РЅ Р·РґРµСЃСЊ:
    \ http://www.microsoft.com/0499/faq/faq0499.asp
-   \ но этот URL MS удалили, приходится списывать у других :)
-   \ Я только приспособил его к AtlAx.
-\ Предлагается к подключению внутрь ~day/wfl.
+   \ РЅРѕ СЌС‚РѕС‚ URL MS СѓРґР°Р»РёР»Рё, РїСЂРёС…РѕРґРёС‚СЃСЏ СЃРїРёСЃС‹РІР°С‚СЊ Сѓ РґСЂСѓРіРёС… :)
+   \ РЇ С‚РѕР»СЊРєРѕ РїСЂРёСЃРїРѕСЃРѕР±РёР» РµРіРѕ Рє AtlAx.
+\ РџСЂРµРґР»Р°РіР°РµС‚СЃСЏ Рє РїРѕРґРєР»СЋС‡РµРЅРёСЋ РІРЅСѓС‚СЂСЊ ~day/wfl.
 
-\ + 07.07.2008 еще раз обработка событий.
+\ + 07.07.2008 РµС‰Рµ СЂР°Р· РѕР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёР№.
 
-\ + 18.07.2008 по умолчанию подключаемся к клавиатурным и мышиным событиям
-\   основной страницы; обработчик ищет слова onkeypress onclick onactivate 
-\   ondeactivate onfocusout onhelp onmouseover onmouseout при возникновении
-\   соответствующих событий и передает им объект с интерфейсом IHTMLEventObj
+\ + 18.07.2008 РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РїРѕРґРєР»СЋС‡Р°РµРјСЃСЏ Рє РєР»Р°РІРёР°С‚СѓСЂРЅС‹Рј Рё РјС‹С€РёРЅС‹Рј СЃРѕР±С‹С‚РёСЏРј
+\   РѕСЃРЅРѕРІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹; РѕР±СЂР°Р±РѕС‚С‡РёРє РёС‰РµС‚ СЃР»РѕРІР° onkeypress onclick onactivate 
+\   ondeactivate onfocusout onhelp onmouseover onmouseout РїСЂРё РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРё
+\   СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёС… СЃРѕР±С‹С‚РёР№ Рё РїРµСЂРµРґР°РµС‚ РёРј РѕР±СЉРµРєС‚ СЃ РёРЅС‚РµСЂС„РµР№СЃРѕРј IHTMLEventObj
 
-\ + 19.07.2008 все-таки добавил subclassing ['] BR-WND-PROC h WindowSubclass
-\   т.к. Windows НЕ ставит сообщения WM_CLOSE в очередь, а шлет их напрямую
-\   оконной процедуре. А без WM_CLOSE невозможно перехватить/предотвратить/
-\   модифицировать закрытие окна (обычно требуется в чат-клиентах).
+\ + 19.07.2008 РІСЃРµ-С‚Р°РєРё РґРѕР±Р°РІРёР» subclassing ['] BR-WND-PROC h WindowSubclass
+\   С‚.Рє. Windows РќР• СЃС‚Р°РІРёС‚ СЃРѕРѕР±С‰РµРЅРёСЏ WM_CLOSE РІ РѕС‡РµСЂРµРґСЊ, Р° С€Р»РµС‚ РёС… РЅР°РїСЂСЏРјСѓСЋ
+\   РѕРєРѕРЅРЅРѕР№ РїСЂРѕС†РµРґСѓСЂРµ. Рђ Р±РµР· WM_CLOSE РЅРµРІРѕР·РјРѕР¶РЅРѕ РїРµСЂРµС…РІР°С‚РёС‚СЊ/РїСЂРµРґРѕС‚РІСЂР°С‚РёС‚СЊ/
+\   РјРѕРґРёС„РёС†РёСЂРѕРІР°С‚СЊ Р·Р°РєСЂС‹С‚РёРµ РѕРєРЅР° (РѕР±С‹С‡РЅРѕ С‚СЂРµР±СѓРµС‚СЃСЏ РІ С‡Р°С‚-РєР»РёРµРЅС‚Р°С…).
 
 REQUIRE {                lib/ext/locals.f
 REQUIRE COMPARE-U        ~ac/lib/string/compare-u.f
@@ -35,44 +35,44 @@ REQUIRE IID_IWebBrowserEvents2 ~ac/lib/win/com/browser_events.f
 REQUIRE IID_IHTMLDocument3 ~ac/lib/win/com/ihtmldocument.f 
 REQUIRE IID_IHTMLElementCollection ~ac/lib/win/com/ihtmlelement.f 
 
-\ только для BrowserThread:
+\ С‚РѕР»СЊРєРѕ РґР»СЏ BrowserThread:
 REQUIRE STR@             ~ac/lib/str5.f
 
 WINAPI: AtlAxWinInit     ATL.dll
 WINAPI: AtlAxGetControl  ATL.dll
 
-VARIABLE BrTransp \ если не ноль, то задает уровень прозрачности браузеров
-VARIABLE BrEventsHandler \ если не ноль, то при встраивании браузера подключаем
-                         \ обработчик его событий (только в по-поточных Browser)
+VARIABLE BrTransp \ РµСЃР»Рё РЅРµ РЅРѕР»СЊ, С‚Рѕ Р·Р°РґР°РµС‚ СѓСЂРѕРІРµРЅСЊ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚Рё Р±СЂР°СѓР·РµСЂРѕРІ
+VARIABLE BrEventsHandler \ РµСЃР»Рё РЅРµ РЅРѕР»СЊ, С‚Рѕ РїСЂРё РІСЃС‚СЂР°РёРІР°РЅРёРё Р±СЂР°СѓР·РµСЂР° РїРѕРґРєР»СЋС‡Р°РµРј
+                         \ РѕР±СЂР°Р±РѕС‚С‡РёРє РµРіРѕ СЃРѕР±С‹С‚РёР№ (С‚РѕР»СЊРєРѕ РІ РїРѕ-РїРѕС‚РѕС‡РЅС‹С… Browser)
 SPF.IWebBrowserEvents2 BrEventsHandler !
-VARIABLE BrCreateHidden \ если не ноль, то окно создается невидимым
+VARIABLE BrCreateHidden \ РµСЃР»Рё РЅРµ РЅРѕР»СЊ, С‚Рѕ РѕРєРЅРѕ СЃРѕР·РґР°РµС‚СЃСЏ РЅРµРІРёРґРёРјС‹Рј
 
 
-\ Не очень понятная штука: внутри нашего окна не приходят события 'onkeyup'
-\ поэтому в js-скриптах, которые на них завязаны ("живой поиск", например),
-\ приходится подключать тот же js-обработчик и на 'onkeypress'.
-\ Это не зависит от того, перехватываем ли мы фортом 'onkeypress' (см. attachEvent'ы ниже).
+\ РќРµ РѕС‡РµРЅСЊ РїРѕРЅСЏС‚РЅР°СЏ С€С‚СѓРєР°: РІРЅСѓС‚СЂРё РЅР°С€РµРіРѕ РѕРєРЅР° РЅРµ РїСЂРёС…РѕРґСЏС‚ СЃРѕР±С‹С‚РёСЏ 'onkeyup'
+\ РїРѕСЌС‚РѕРјСѓ РІ js-СЃРєСЂРёРїС‚Р°С…, РєРѕС‚РѕСЂС‹Рµ РЅР° РЅРёС… Р·Р°РІСЏР·Р°РЅС‹ ("Р¶РёРІРѕР№ РїРѕРёСЃРє", РЅР°РїСЂРёРјРµСЂ),
+\ РїСЂРёС…РѕРґРёС‚СЃСЏ РїРѕРґРєР»СЋС‡Р°С‚СЊ С‚РѕС‚ Р¶Рµ js-РѕР±СЂР°Р±РѕС‚С‡РёРє Рё РЅР° 'onkeypress'.
+\ Р­С‚Рѕ РЅРµ Р·Р°РІРёСЃРёС‚ РѕС‚ С‚РѕРіРѕ, РїРµСЂРµС…РІР°С‚С‹РІР°РµРј Р»Рё РјС‹ С„РѕСЂС‚РѕРј 'onkeypress' (СЃРј. attachEvent'С‹ РЅРёР¶Рµ).
 
 : TranslateBrowserAccelerator { mem iWebBrowser2 \ oleip -- flag }
-  \ сначала проверим, не является ли клавиша браузерным акселератором
+  \ СЃРЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂРёРј, РЅРµ СЏРІР»СЏРµС‚СЃСЏ Р»Рё РєР»Р°РІРёС€Р° Р±СЂР°СѓР·РµСЂРЅС‹Рј Р°РєСЃРµР»РµСЂР°С‚РѕСЂРѕРј
   mem CELL+ @ WM_KEYDOWN =
   IF
     ^ oleip IID_IOleInPlaceActiveObject iWebBrowser2 ::QueryInterface 0= oleip 0 <> AND
     IF
-      mem oleip ::TranslateAccelerator \ возвращает 1 для wm_char'ных
-                                       \ событий, которые нужно обрабатывать дальше
+      mem oleip ::TranslateAccelerator \ РІРѕР·РІСЂР°С‰Р°РµС‚ 1 РґР»СЏ wm_char'РЅС‹С…
+                                       \ СЃРѕР±С‹С‚РёР№, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РґР°Р»СЊС€Рµ
     ELSE TRUE THEN
   ELSE TRUE THEN
-     \ 1, если не акселератор
-     \ -1 или если не удалось проверить или вообще не клавиша
-     \ т.е. здесь = true, если нужно обработать в обычном порядке
-  0= \ инвертируем флаг для имитации TranslateAcceleratorA
+     \ 1, РµСЃР»Рё РЅРµ Р°РєСЃРµР»РµСЂР°С‚РѕСЂ
+     \ -1 РёР»Рё РµСЃР»Рё РЅРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕРІРµСЂРёС‚СЊ РёР»Рё РІРѕРѕР±С‰Рµ РЅРµ РєР»Р°РІРёС€Р°
+     \ С‚.Рµ. Р·РґРµСЃСЊ = true, РµСЃР»Рё РЅСѓР¶РЅРѕ РѕР±СЂР°Р±РѕС‚Р°С‚СЊ РІ РѕР±С‹С‡РЅРѕРј РїРѕСЂСЏРґРєРµ
+  0= \ РёРЅРІРµСЂС‚РёСЂСѓРµРј С„Р»Р°Рі РґР»СЏ РёРјРёС‚Р°С†РёРё TranslateAcceleratorA
 ;
 
 : WindowGetMessage { mem wnd -- flag }
-\ детектируем необходимость завершения цикла MessageLoop
-\ без собственной WndProc
-\ +19.07.2008: собственную WndProc BR-WND-PROC пришлось таки добавить
+\ РґРµС‚РµРєС‚РёСЂСѓРµРј РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ Р·Р°РІРµСЂС€РµРЅРёСЏ С†РёРєР»Р° MessageLoop
+\ Р±РµР· СЃРѕР±СЃС‚РІРµРЅРЅРѕР№ WndProc
+\ +19.07.2008: СЃРѕР±СЃС‚РІРµРЅРЅСѓСЋ WndProc BR-WND-PROC РїСЂРёС€Р»РѕСЃСЊ С‚Р°РєРё РґРѕР±Р°РІРёС‚СЊ
   wnd IsWindow
   IF
     0 0 0 mem GetMessageA 0 >
@@ -87,17 +87,17 @@ VARIABLE BrCreateHidden \ если не ноль, то окно создается невидимым
 ;
 
 VECT vPreprocessMessage ( msg -- flag )
-\ Возможность "отнять" у окна браузера некоторые события
-\ или обработать/транслировать по-своему, до основного обработчика.
-\ Если возвращает TRUE, то сообщение считается обработанным и далее не пускается.
+\ Р’РѕР·РјРѕР¶РЅРѕСЃС‚СЊ "РѕС‚РЅСЏС‚СЊ" Сѓ РѕРєРЅР° Р±СЂР°СѓР·РµСЂР° РЅРµРєРѕС‚РѕСЂС‹Рµ СЃРѕР±С‹С‚РёСЏ
+\ РёР»Рё РѕР±СЂР°Р±РѕС‚Р°С‚СЊ/С‚СЂР°РЅСЃР»РёСЂРѕРІР°С‚СЊ РїРѕ-СЃРІРѕРµРјСѓ, РґРѕ РѕСЃРЅРѕРІРЅРѕРіРѕ РѕР±СЂР°Р±РѕС‚С‡РёРєР°.
+\ Р•СЃР»Рё РІРѕР·РІСЂР°С‰Р°РµС‚ TRUE, С‚Рѕ СЃРѕРѕР±С‰РµРЅРёРµ СЃС‡РёС‚Р°РµС‚СЃСЏ РѕР±СЂР°Р±РѕС‚Р°РЅРЅС‹Рј Рё РґР°Р»РµРµ РЅРµ РїСѓСЃРєР°РµС‚СЃСЏ.
 
-VECT vContextMenu ( msg -- ) \ ' DROP TO vContextMenu \ запретит конт.меню
+VECT vContextMenu ( msg -- ) \ ' DROP TO vContextMenu \ Р·Р°РїСЂРµС‚РёС‚ РєРѕРЅС‚.РјРµРЅСЋ
 VECT vMenu ( msg -- )        ' DROP TO vMenu
 
 : PreprocessMessage1 ( msg -- flag )
   DUP CELL+ @ WM_RBUTTONUP =
   IF ['] vContextMenu BEHAVIOR ['] NOOP = IF DROP FALSE EXIT THEN
-     \ по умолчанию разрешить собственное конт.меню браузера и javascript'ов
+     \ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ СЂР°Р·СЂРµС€РёС‚СЊ СЃРѕР±СЃС‚РІРµРЅРЅРѕРµ РєРѕРЅС‚.РјРµРЅСЋ Р±СЂР°СѓР·РµСЂР° Рё javascript'РѕРІ
      vContextMenu TRUE
   ELSE DUP CELL+ @ WM_COMMAND =
        IF vMenu TRUE
@@ -119,12 +119,12 @@ VECT vOnAtlMessageDispatchErr
 
 : AtlMessageLoop  { wnd iWebBrowser2 \ mem -- }
 
-\ Этот обработчик рассчитан на ОДНО браузерное окно,
-\ com-интерфейс которого и хэндл контейнерного окна переданы в качестве 
-\ параметров. Но вычитывает он всю очередь потока (0 в GetMessage), т.к.
-\ иначе не отображаются дочерние окна - собственно браузер.
-\ Если нужно несколько браузерных окон - см. BrowserThread
-\ либо AtlMainLoop ниже.
+\ Р­С‚РѕС‚ РѕР±СЂР°Р±РѕС‚С‡РёРє СЂР°СЃСЃС‡РёС‚Р°РЅ РЅР° РћР”РќРћ Р±СЂР°СѓР·РµСЂРЅРѕРµ РѕРєРЅРѕ,
+\ com-РёРЅС‚РµСЂС„РµР№СЃ РєРѕС‚РѕСЂРѕРіРѕ Рё С…СЌРЅРґР» РєРѕРЅС‚РµР№РЅРµСЂРЅРѕРіРѕ РѕРєРЅР° РїРµСЂРµРґР°РЅС‹ РІ РєР°С‡РµСЃС‚РІРµ 
+\ РїР°СЂР°РјРµС‚СЂРѕРІ. РќРѕ РІС‹С‡РёС‚С‹РІР°РµС‚ РѕРЅ РІСЃСЋ РѕС‡РµСЂРµРґСЊ РїРѕС‚РѕРєР° (0 РІ GetMessage), С‚.Рє.
+\ РёРЅР°С‡Рµ РЅРµ РѕС‚РѕР±СЂР°Р¶Р°СЋС‚СЃСЏ РґРѕС‡РµСЂРЅРёРµ РѕРєРЅР° - СЃРѕР±СЃС‚РІРµРЅРЅРѕ Р±СЂР°СѓР·РµСЂ.
+\ Р•СЃР»Рё РЅСѓР¶РЅРѕ РЅРµСЃРєРѕР»СЊРєРѕ Р±СЂР°СѓР·РµСЂРЅС‹С… РѕРєРѕРЅ - СЃРј. BrowserThread
+\ Р»РёР±Рѕ AtlMainLoop РЅРёР¶Рµ.
 
   /MSG ALLOCATE THROW -> mem
   BEGIN
@@ -134,7 +134,7 @@ VECT vOnAtlMessageDispatchErr
     IF
       mem iWebBrowser2 TranslateBrowserAccelerator 0=
       IF
-        \ тут можно проверить своим TranslateAccelerator, если есть свои окна
+        \ С‚СѓС‚ РјРѕР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ СЃРІРѕРёРј TranslateAccelerator, РµСЃР»Рё РµСЃС‚СЊ СЃРІРѕРё РѕРєРЅР°
         mem ['] AtlMessageDispatch CATCH ?DUP IF mem vOnAtlMessageDispatchErr THEN
       THEN
     THEN
@@ -155,7 +155,7 @@ VECT vNavigationFrame
 VARIABLE AtlInitCnt
 
 : BrowserSetIcon1 { addr u h -- }
-\ можно в зависимости от урла выбирать иконку, но в stub'е не используется
+\ РјРѕР¶РЅРѕ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СѓСЂР»Р° РІС‹Р±РёСЂР°С‚СЊ РёРєРѕРЅРєСѓ, РЅРѕ РІ stub'Рµ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
   1 LoadIconResource16 GCL_HICON h SetClassLongA DROP
 ;
 VECT vBrowserSetIcon ' BrowserSetIcon1 TO vBrowserSetIcon
@@ -180,38 +180,38 @@ VECT vBrowserSetMenu ' BrowserSetMenu1 TO vBrowserSetMenu
     ELSE ." Can't get browser" DUP . 0 SWAP THEN
   ELSE ." AtlAxGetControl error" DUP . 0 SWAP THEN
 ;
-USER uBrowserInterface \ для случая "одно окно на поток" здесь копия из объекта
+USER uBrowserInterface \ РґР»СЏ СЃР»СѓС‡Р°СЏ "РѕРґРЅРѕ РѕРєРЅРѕ РЅР° РїРѕС‚РѕРє" Р·РґРµСЃСЊ РєРѕРїРёСЏ РёР· РѕР±СЉРµРєС‚Р°
 USER uBrowserWindow
 
-/COM_OBJ \ указатель на VTABLE нашего обработчика WebBrowserEvents2, и др.служ.
+/COM_OBJ \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° VTABLE РЅР°С€РµРіРѕ РѕР±СЂР°Р±РѕС‚С‡РёРєР° WebBrowserEvents2, Рё РґСЂ.СЃР»СѓР¶.
 CELL -- b.BrowserThread
 CELL -- b.BrowserWindow
 CELL -- b.BrowserInterface
-CELL -- b.BrowserMainDocument \ IDispatch, у которого можно спросить IHTMLDocument,2,3
+CELL -- b.BrowserMainDocument \ IDispatch, Сѓ РєРѕС‚РѕСЂРѕРіРѕ РјРѕР¶РЅРѕ СЃРїСЂРѕСЃРёС‚СЊ IHTMLDocument,2,3
 CELL -- b.HtmlDoc2
 CELL -- b.HtmlDoc3
 CELL -- b.HtmlWin2
-\ остальное можно спросить у браузера
+\ РѕСЃС‚Р°Р»СЊРЅРѕРµ РјРѕР¶РЅРѕ СЃРїСЂРѕСЃРёС‚СЊ Сѓ Р±СЂР°СѓР·РµСЂР°
 CONSTANT /BROWSER
 
 VECT vOnWindowPosChanged :NONAME 2DROP 2DROP FALSE ; TO vOnWindowPosChanged
 VECT vOnClose :NONAME DROP FALSE ; TO vOnClose
 
 : MinimizeOnClose ( wnd -- )
-\ при ' MinimizeOnClose TO vOnClose попытка закрытия окна приведет
-\ к его сворачиванию (минимизации)
+\ РїСЂРё ' MinimizeOnClose TO vOnClose РїРѕРїС‹С‚РєР° Р·Р°РєСЂС‹С‚РёСЏ РѕРєРЅР° РїСЂРёРІРµРґРµС‚
+\ Рє РµРіРѕ СЃРІРѕСЂР°С‡РёРІР°РЅРёСЋ (РјРёРЅРёРјРёР·Р°С†РёРё)
   >R 0 SC_MINIMIZE WM_SYSCOMMAND R> PostMessageA DROP
 ;
 : (BR-WND-PROC1) { lparam wparam msg wnd \ [ 4 CELLS ] rect -- lresult }
 
-  msg WM_NCDESTROY = IF 0 EXIT THEN \ упадет при закрытии, если не обработать
+  msg WM_NCDESTROY = IF 0 EXIT THEN \ СѓРїР°РґРµС‚ РїСЂРё Р·Р°РєСЂС‹С‚РёРё, РµСЃР»Рё РЅРµ РѕР±СЂР°Р±РѕС‚Р°С‚СЊ
 
   msg WM_CLOSE = IF wnd vOnClose IF FALSE EXIT THEN THEN
 
   msg WM_WINDOWPOSCHANGED = IF lparam wparam msg wnd vOnWindowPosChanged IF FALSE EXIT THEN THEN
 
   msg WM_ERASEBKGND = IF
-\ отладка
+\ РѕС‚Р»Р°РґРєР°
 \    rect wnd GetClientRect DROP
 \    14 ( highlight brush)
 \    rect wparam FillRect DROP
@@ -231,7 +231,7 @@ CW_USEDEFAULT VALUE bwWidth
             0 VALUE bwHeight
 
 : BrowserWindow { addr u style parent_hwnd \ h bro b -- hwnd }
-\ создать окно браузера и загрузить URL addr u в него.
+\ СЃРѕР·РґР°С‚СЊ РѕРєРЅРѕ Р±СЂР°СѓР·РµСЂР° Рё Р·Р°РіСЂСѓР·РёС‚СЊ URL addr u РІ РЅРµРіРѕ.
   AtlInitCnt @ 0= IF AtlAxWinInit 0= IF 0x200A EXIT THEN AtlInitCnt 1+! THEN
   0 0 0 parent_hwnd bwHeight bwWidth bwY bwX style addr S" AtlAxWin" DROP 0
   CreateWindowExA -> h
@@ -249,11 +249,11 @@ CW_USEDEFAULT VALUE bwWidth
   bro uBrowserInterface !
 
   BrEventsHandler @ ?DUP
-  IF /BROWSER SWAP NewComObj -> b \ в обработчиках событий надо как-то окна отличать...
+  IF /BROWSER SWAP NewComObj -> b \ РІ РѕР±СЂР°Р±РѕС‚С‡РёРєР°С… СЃРѕР±С‹С‚РёР№ РЅР°РґРѕ РєР°Рє-С‚Рѕ РѕРєРЅР° РѕС‚Р»РёС‡Р°С‚СЊ...
      TlsIndex@ b b.BrowserThread !
      h         b b.BrowserWindow !
      bro       b b.BrowserInterface !
-     b IID_IWebBrowserEvents2 bro ConnectInterface \ поэтому создаем отдельные объекты
+     b IID_IWebBrowserEvents2 bro ConnectInterface \ РїРѕСЌС‚РѕРјСѓ СЃРѕР·РґР°РµРј РѕС‚РґРµР»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹
   THEN
   h
 ;
@@ -266,9 +266,9 @@ VARIABLE BSTEP-DEBUG
 
   3 BSTEP ! BS.
   addr u WS_OVERLAPPEDWINDOW \ WS_VSCROLL OR \ WS_HSCROLL OR
-                             \ включение WS_VSCROLL приводит к игнорированию
-                             \ команды установки иконки окна через GCL_HICON h SetClassLongA
-                             \ почему?
+                             \ РІРєР»СЋС‡РµРЅРёРµ WS_VSCROLL РїСЂРёРІРѕРґРёС‚ Рє РёРіРЅРѕСЂРёСЂРѕРІР°РЅРёСЋ
+                             \ РєРѕРјР°РЅРґС‹ СѓСЃС‚Р°РЅРѕРІРєРё РёРєРѕРЅРєРё РѕРєРЅР° С‡РµСЂРµР· GCL_HICON h SetClassLongA
+                             \ РїРѕС‡РµРјСѓ?
   0 BrowserWindow -> h
   4 BSTEP ! BS.
   h 0= IF 0x200B EXIT THEN
@@ -283,11 +283,11 @@ VARIABLE BSTEP-DEBUG
   0
 ;
 : AtlMainLoop  { hwnd \ mem -- }
-\ Этот обработчик подходит в качестве главного оконного цикла.
-\ Может обслуживать сразу несколько браузерных окон в одном потоке,
-\ находя их контроллеры среди предков.
-\ Хэндл "главного окна" hwnd, нужен только для того чтобы узнать,
-\ когда можно завершаться...
+\ Р­С‚РѕС‚ РѕР±СЂР°Р±РѕС‚С‡РёРє РїРѕРґС…РѕРґРёС‚ РІ РєР°С‡РµСЃС‚РІРµ РіР»Р°РІРЅРѕРіРѕ РѕРєРѕРЅРЅРѕРіРѕ С†РёРєР»Р°.
+\ РњРѕР¶РµС‚ РѕР±СЃР»СѓР¶РёРІР°С‚СЊ СЃСЂР°Р·Сѓ РЅРµСЃРєРѕР»СЊРєРѕ Р±СЂР°СѓР·РµСЂРЅС‹С… РѕРєРѕРЅ РІ РѕРґРЅРѕРј РїРѕС‚РѕРєРµ,
+\ РЅР°С…РѕРґСЏ РёС… РєРѕРЅС‚СЂРѕР»Р»РµСЂС‹ СЃСЂРµРґРё РїСЂРµРґРєРѕРІ.
+\ РҐСЌРЅРґР» "РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°" hwnd, РЅСѓР¶РµРЅ С‚РѕР»СЊРєРѕ РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ СѓР·РЅР°С‚СЊ,
+\ РєРѕРіРґР° РјРѕР¶РЅРѕ Р·Р°РІРµСЂС€Р°С‚СЊСЃСЏ...
 
   /MSG ALLOCATE THROW -> mem
   BEGIN
@@ -313,9 +313,9 @@ VARIABLE BSTEP-DEBUG
 ;
 
 : NewBrowserWindow { addr u \ h -- h }
-\ Cоздать браузерное окно c урлом addr u и вернуть его хэндл
-\ для дальнейшей обработки. 
-\ После создания всех окон можно запустить цикл AtlMainLoop.
+\ CРѕР·РґР°С‚СЊ Р±СЂР°СѓР·РµСЂРЅРѕРµ РѕРєРЅРѕ c СѓСЂР»РѕРј addr u Рё РІРµСЂРЅСѓС‚СЊ РµРіРѕ С…СЌРЅРґР»
+\ РґР»СЏ РґР°Р»СЊРЅРµР№С€РµР№ РѕР±СЂР°Р±РѕС‚РєРё. 
+\ РџРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ РІСЃРµС… РѕРєРѕРЅ РјРѕР¶РЅРѕ Р·Р°РїСѓСЃС‚РёС‚СЊ С†РёРєР» AtlMainLoop.
   addr u WS_OVERLAPPEDWINDOW \ WS_VSCROLL OR \ WS_HSCROLL OR
   0 BrowserWindow
   BrCreateHidden @ 0= IF DUP WindowShow THEN
@@ -326,7 +326,7 @@ VARIABLE BSTEP-DEBUG
 ; TASK: (BrowserThread)
 
 : BrowserThread ( addr u -- )
-\ Запуск браузера в отдельном потоке.
+\ Р—Р°РїСѓСЃРє Р±СЂР°СѓР·РµСЂР° РІ РѕС‚РґРµР»СЊРЅРѕРј РїРѕС‚РѕРєРµ.
   1 BSTEP !
   >STR (BrowserThread) START DROP
 ;
@@ -344,62 +344,62 @@ VECT vBrowserMainThreadError
 ; TASK: (BrowserMainThread)
 
 : BrowserMainThread ( addr u -- )
-\ Запуск браузера в отдельном потоке.
-\ При закрытии его окна программа завершится.
+\ Р—Р°РїСѓСЃРє Р±СЂР°СѓР·РµСЂР° РІ РѕС‚РґРµР»СЊРЅРѕРј РїРѕС‚РѕРєРµ.
+\ РџСЂРё Р·Р°РєСЂС‹С‚РёРё РµРіРѕ РѕРєРЅР° РїСЂРѕРіСЂР°РјРјР° Р·Р°РІРµСЂС€РёС‚СЃСЏ.
   1 BSTEP ! BS.
   >STR (BrowserMainThread) START DROP
 ;
 
-\ вызывается при завершении загрузки основного документа
-\ для выполнения произвольной дополнительной обработки
-\ oid здесь - указатель на структуру /BROWSER (выше), т.е. экземпляр класса SPF.IWebBrowserEvents2
+\ РІС‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё Р·Р°РІРµСЂС€РµРЅРёРё Р·Р°РіСЂСѓР·РєРё РѕСЃРЅРѕРІРЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°
+\ РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ РїСЂРѕРёР·РІРѕР»СЊРЅРѕР№ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РѕР±СЂР°Р±РѕС‚РєРё
+\ oid Р·РґРµСЃСЊ - СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂСѓРєС‚СѓСЂСѓ /BROWSER (РІС‹С€Рµ), С‚.Рµ. СЌРєР·РµРјРїР»СЏСЂ РєР»Р°СЃСЃР° SPF.IWebBrowserEvents2
 VECT vOnDocumentComplete ( urla urlu obj -- )
 :NONAME DROP 2DROP ; TO vOnDocumentComplete
 
 VECT vOnFrameDocumentComplete ( urla urlu obj -- )
 :NONAME DROP 2DROP ; TO vOnFrameDocumentComplete
 
-\ вызывается после инициализации окна/документа, но до выполнения скриптов
-\ (и до OnDocumentComplete, который после скриптов)
+\ РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РѕРєРЅР°/РґРѕРєСѓРјРµРЅС‚Р°, РЅРѕ РґРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРёРїС‚РѕРІ
+\ (Рё РґРѕ OnDocumentComplete, РєРѕС‚РѕСЂС‹Р№ РїРѕСЃР»Рµ СЃРєСЂРёРїС‚РѕРІ)
 VECT vOnNavigateComplete ( urla urlu obj -- )
 :NONAME DROP 2DROP ; TO vOnNavigateComplete
 
-\ Переопределим некоторые обработчики событий от браузера:
+\ РџРµСЂРµРѕРїСЂРµРґРµР»РёРј РЅРµРєРѕС‚РѕСЂС‹Рµ РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕР±С‹С‚РёР№ РѕС‚ Р±СЂР°СѓР·РµСЂР°:
 
 GET-CURRENT SPF.IWebBrowserEvents2 SpfClassWid SET-CURRENT
 
 ID: DISPID_DOCUMENTCOMPLETE 259 { urla urlu bro \ obj tls doc doc2 doc3 win2 elcol el b boo -- }
     \ =onload
-    COM-DEBUG @ IF ." @DocumentComplete! doc=" bro . THEN \ IWebBrowser2 загруженного фрейма
+    COM-DEBUG @ IF ." @DocumentComplete! doc=" bro . THEN \ IWebBrowser2 Р·Р°РіСЂСѓР¶РµРЅРЅРѕРіРѕ С„СЂРµР№РјР°
     uOID @ -> obj
     TlsIndex@ -> tls
     obj b.BrowserThread @ TlsIndex!
     obj uOID !
     bro uBrowserInterface @ = 
-    IF \ если документ содержит фреймы, то его DocumentComplete наступает уже после загрузки фреймов
-       ^ doc bro ::get_Document DROP \ результат зависит от версии браузера
+    IF \ РµСЃР»Рё РґРѕРєСѓРјРµРЅС‚ СЃРѕРґРµСЂР¶РёС‚ С„СЂРµР№РјС‹, С‚Рѕ РµРіРѕ DocumentComplete РЅР°СЃС‚СѓРїР°РµС‚ СѓР¶Рµ РїРѕСЃР»Рµ Р·Р°РіСЂСѓР·РєРё С„СЂРµР№РјРѕРІ
+       ^ doc bro ::get_Document DROP \ СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РІРёСЃРёС‚ РѕС‚ РІРµСЂСЃРёРё Р±СЂР°СѓР·РµСЂР°
 \       doc . CR
        doc obj b.BrowserMainDocument !
        ^ doc3 IID_IHTMLDocument3 doc ::QueryInterface 0= doc3 0 <> AND
        IF doc3 obj b.HtmlDoc3 !
-\ примеры:
+\ РїСЂРёРјРµСЂС‹:
 \         ^ elcol S" DIV" >BSTR doc3 ::getElementsByTagName . elcol . CR
 \         ^ len elcol ::get_length . ." len=" len . CR
 
-\ вызываем ::item тремя способами
+\ РІС‹Р·С‹РІР°РµРј ::item С‚СЂРµРјСЏ СЃРїРѕСЃРѕР±Р°РјРё
 \         ^ el  0 0 0 VT_I4  0 S" login-form" >BSTR 0 VT_BSTR
 \         elcol ::item . el . 
 \         3 VT_I4 1 S" item" elcol CNEXEC -> el
 \         S" login-form" >VBSTR 1 S" item" elcol CNEXEC -> el
 \         el IF
-\            ^ el IID_IHTMLElement el ::QueryInterface THROW \ т.к. item возвращает что-то другое
+\            ^ el IID_IHTMLElement el ::QueryInterface THROW \ С‚.Рє. item РІРѕР·РІСЂР°С‰Р°РµС‚ С‡С‚Рѕ-С‚Рѕ РґСЂСѓРіРѕРµ
 \            S" innerText" el CP@ TYPE CR
 
-\ подключаемся к событиям  выбранного элемента
+\ РїРѕРґРєР»СЋС‡Р°РµРјСЃСЏ Рє СЃРѕР±С‹С‚РёСЏРј  РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 \            obj VT_DISPATCH 1 S" onkeypress" el CP!
 \            0 obj 0 VT_DISPATCH el ::put_onkeypress THROW
 \            THEN
-\ или всего документа (http://msdn.microsoft.com/en-us/library/ms533051(VS.85).aspx)
+\ РёР»Рё РІСЃРµРіРѕ РґРѕРєСѓРјРµРЅС‚Р° (http://msdn.microsoft.com/en-us/library/ms533051(VS.85).aspx)
             ^ boo obj S" onkeypress" >BSTR doc3 ::attachEvent THROW
             ^ boo obj S" onclick" >BSTR doc3 ::attachEvent THROW
             ^ boo obj S" onactivate" >BSTR doc3 ::attachEvent THROW
@@ -409,16 +409,16 @@ ID: DISPID_DOCUMENTCOMPLETE 259 { urla urlu bro \ obj tls doc doc2 doc3 win2 elc
             ^ boo obj S" onmouseover" >BSTR doc3 ::attachEvent THROW
             ^ boo obj S" onmouseout" >BSTR doc3 ::attachEvent THROW
 
-\            ^ boo obj S" onblur" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" oncontextmenu" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" oncopy" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" ondrop" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" onerror" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" onfocus" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" onmouseenter" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" onmouseleave" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" onsubmit" >BSTR doc3 ::attachEvent THROW \ не приходит
-\            ^ boo obj S" onunload" >BSTR doc3 ::attachEvent THROW \ не приходит
+\            ^ boo obj S" onblur" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" oncontextmenu" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" oncopy" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" ondrop" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" onerror" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" onfocus" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" onmouseenter" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" onmouseleave" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" onsubmit" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
+\            ^ boo obj S" onunload" >BSTR doc3 ::attachEvent THROW \ РЅРµ РїСЂРёС…РѕРґРёС‚
        THEN
 
        ^ doc2 IID_IHTMLDocument2 doc ::QueryInterface 0= doc2 0 <> AND
@@ -431,7 +431,7 @@ ID: DISPID_DOCUMENTCOMPLETE 259 { urla urlu bro \ obj tls doc doc2 doc3 win2 elc
 \       IF ." ---" THEN
 
        doc2 IF
-\ примеры, каждое действие двумя способами:
+\ РїСЂРёРјРµСЂС‹, РєР°Р¶РґРѕРµ РґРµР№СЃС‚РІРёРµ РґРІСѓРјСЏ СЃРїРѕСЃРѕР±Р°РјРё:
 \         uCRes doc2 ::get_title THROW uCRes @ UASCIIZ> UNICODE> TYPE CR
 \         S" title" doc2 CP@ TYPE CR
 \         S" New TITLE" >BSTR doc2 ::put_title THROW
@@ -439,9 +439,9 @@ ID: DISPID_DOCUMENTCOMPLETE 259 { urla urlu bro \ obj tls doc doc2 doc3 win2 elc
 \         S" <H1>TEST</H1>" >SARR doc2 ::write ." wr=" .
 \         S" <H1>TEST</H1>" >VBSTR 1 S" write" doc2 CNEXEC .
 
-\ и вперемешку:
+\ Рё РІРїРµСЂРµРјРµС€РєСѓ:
 \          doc S" title" doc2 CP@
-\          " {s} (документ doc={n})" STR@ >BSTR doc2 ::put_title THROW
+\          " {s} (РґРѕРєСѓРјРµРЅС‚ doc={n})" STR@ >BSTR doc2 ::put_title THROW
        THEN
        urla urlu obj vOnDocumentComplete
     ELSE urla urlu obj vOnFrameDocumentComplete THEN
@@ -449,15 +449,15 @@ ID: DISPID_DOCUMENTCOMPLETE 259 { urla urlu bro \ obj tls doc doc2 doc3 win2 elc
     tls TlsIndex!
 ;
 ID: DISPID_NAVIGATECOMPLETE2    252 { urla urlu bro \ obj tls doc doc2 doc3 win2 elcol el b boo -- }
-    \ Вызывается после инициализации окна/документа, но до выполнения скриптов,
-    \ самое время поставить обработчики onerror
+    \ Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РѕРєРЅР°/РґРѕРєСѓРјРµРЅС‚Р°, РЅРѕ РґРѕ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРёРїС‚РѕРІ,
+    \ СЃР°РјРѕРµ РІСЂРµРјСЏ РїРѕСЃС‚Р°РІРёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРєРё onerror
     COM-DEBUG @ IF ." @NavigateComplete2! win/frame=" bro . urla urlu TYPE CR THEN
     uOID @ -> obj
     TlsIndex@ -> tls
     obj b.BrowserThread @
     COM-DEBUG @ IF ." @NavigateComplete2! b.BrowserThread=" DUP . CR THEN
     TlsIndex!
-\ будем ставить обработчик для всех фреймов
+\ Р±СѓРґРµРј СЃС‚Р°РІРёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРє РґР»СЏ РІСЃРµС… С„СЂРµР№РјРѕРІ
 \    bro uBrowserInterface @ = 
 \    IF 
        ^ doc bro ::get_Document DROP
@@ -465,7 +465,7 @@ ID: DISPID_NAVIGATECOMPLETE2    252 { urla urlu bro \ obj tls doc doc2 doc3 win2
        ^ doc3 IID_IHTMLDocument3 doc ::QueryInterface 0= doc3 0 <> AND
        IF doc3 obj b.HtmlDoc3 !
           ^ boo obj S" onerror" >BSTR doc3 ::attachEvent THROW
-          \ в природе IHTMLDocument3::onerror не встречается (?)
+          \ РІ РїСЂРёСЂРѕРґРµ IHTMLDocument3::onerror РЅРµ РІСЃС‚СЂРµС‡Р°РµС‚СЃСЏ (?)
        THEN
 
        ^ doc2 IID_IHTMLDocument2 doc ::QueryInterface 0= doc2 0 <> AND
@@ -473,7 +473,7 @@ ID: DISPID_NAVIGATECOMPLETE2    252 { urla urlu bro \ obj tls doc doc2 doc3 win2
           ^ win2 doc2 ::get_parentWindow DROP
           win2 obj b.HtmlWin2 !
           obj VT_DISPATCH 1 S" onerror" win2 CP!
-          \ вызывается при ошибках в скриптах
+          \ РІС‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РѕС€РёР±РєР°С… РІ СЃРєСЂРёРїС‚Р°С…
        THEN
 \    THEN
        urla urlu obj vOnNavigateComplete
@@ -508,12 +508,12 @@ ID: BR_EVENT 0 ( ... -- ) { \ e el }
 ;
 SET-CURRENT
 
-\ полезные утилиты
+\ РїРѕР»РµР·РЅС‹Рµ СѓС‚РёР»РёС‚С‹
 
 : GetSiteShortcutIcon { obj \ doc3 elcol len el -- icona iconu }
-\ получить url иконки сайта; 
-\ возвращает тот url, который в <link rel='shortcut icon'...>,
-\ т.е. может быть не полным url'ом
+\ РїРѕР»СѓС‡РёС‚СЊ url РёРєРѕРЅРєРё СЃР°Р№С‚Р°; 
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РѕС‚ url, РєРѕС‚РѕСЂС‹Р№ РІ <link rel='shortcut icon'...>,
+\ С‚.Рµ. РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµ РїРѕР»РЅС‹Рј url'РѕРј
   obj b.HtmlDoc3 @ -> doc3
   ^ elcol S" LINK" >BSTR doc3 ::getElementsByTagName THROW
   ^ len elcol ::get_length THROW
@@ -527,14 +527,14 @@ SET-CURRENT
   LOOP
 ;
 : GetSiteIconUrl { urla urlu obj -- urla1 urlu1 }
-\ получить полный URL иконки fаvicon.ico
+\ РїРѕР»СѓС‡РёС‚СЊ РїРѕР»РЅС‹Р№ URL РёРєРѕРЅРєРё fР°vicon.ico
   obj GetSiteShortcutIcon
   S" http://" SEARCH 0=
   IF
     OVER C@ [CHAR] / =
     IF \ S" domain" obj b.HtmlDoc2 @ CP@ " http://{s}{s}"
        S" URL" obj b.HtmlDoc2 @ CP@ CUT-PATH 1- " {s}{s}"
-    ELSE \ относительный путь
+    ELSE \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РїСѓС‚СЊ
       urla urlu CUT-PATH " {s}{s}"
     THEN STR@
   THEN
@@ -542,9 +542,9 @@ SET-CURRENT
 WINAPI: URLDownloadToCacheFileA URLMON.DLL
 
 : LoadFile { addr u \ mem -- filea fileu ior }
-\ Удобнее curl'ового GET-FILE тем, что пишет сразу во временный файл,
-\ который можно использовать в LoadIcon.
-\ И не нужно отдельно заботиться о прокси.
+\ РЈРґРѕР±РЅРµРµ curl'РѕРІРѕРіРѕ GET-FILE С‚РµРј, С‡С‚Рѕ РїРёС€РµС‚ СЃСЂР°Р·Сѓ РІРѕ РІСЂРµРјРµРЅРЅС‹Р№ С„Р°Р№Р»,
+\ РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ LoadIcon.
+\ Р РЅРµ РЅСѓР¶РЅРѕ РѕС‚РґРµР»СЊРЅРѕ Р·Р°Р±РѕС‚РёС‚СЊСЃСЏ Рѕ РїСЂРѕРєСЃРё.
   1000 ALLOCATE THROW -> mem
   0 0 1000 mem addr 0 URLDownloadToCacheFileA ?DUP 
   IF S" " ROT mem FREE THROW EXIT THEN
@@ -562,19 +562,19 @@ WINAPI: URLDownloadToCacheFileA URLMON.DLL
      THEN
   ELSE 2DROP THEN
 ;
-: error ( sMsg,sUrl,sLine -- ) { e -- } \ см. BR_EVENT выше
+: error ( sMsg,sUrl,sLine -- ) { e -- } \ СЃРј. BR_EVENT РІС‹С€Рµ
   ." Window.error= " TYPE ."  at " TYPE ."  line=" . CR
-  TRUE VT_BOOL 1 S" returnValue" e CP! \ не выводить в виде окна ошибки IE
+  TRUE VT_BOOL 1 S" returnValue" e CP! \ РЅРµ РІС‹РІРѕРґРёС‚СЊ РІ РІРёРґРµ РѕРєРЅР° РѕС€РёР±РєРё IE
 ;
 
 \EOF
-\ Эти окна не отвлекают основной поток, работают сами по себе.
+\ Р­С‚Рё РѕРєРЅР° РЅРµ РѕС‚РІР»РµРєР°СЋС‚ РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє, СЂР°Р±РѕС‚Р°СЋС‚ СЃР°РјРё РїРѕ СЃРµР±Рµ.
 \ TRUE COM-DEBUG !
 
 ' MinimizeOnClose TO vOnClose
 ' SetIconOnDocumentComplete TO vOnDocumentComplete
 
-: keypress { ev e -- } \ см. BR_EVENT выше
+: keypress { ev e -- } \ СЃРј. BR_EVENT РІС‹С€Рµ
   S" keyCode" e CP@ ." keyCode=" .
   S" title" uOID @ b.HtmlDoc2 @ CP@ TYPE CR
 ;
@@ -583,8 +583,8 @@ S" http://127.0.0.1:89/index.html" BrowserThread
 S" http://127.0.0.1:89/email/" BrowserThread
 
 \EOF
-\ Пример обработки нескольких взаимоподчиненных браузерных окон одним циклом.
-\ Одно главное окно и два полупрозрачных подчиненных "модальных" перед ним.
+\ РџСЂРёРјРµСЂ РѕР±СЂР°Р±РѕС‚РєРё РЅРµСЃРєРѕР»СЊРєРёС… РІР·Р°РёРјРѕРїРѕРґС‡РёРЅРµРЅРЅС‹С… Р±СЂР°СѓР·РµСЂРЅС‹С… РѕРєРѕРЅ РѕРґРЅРёРј С†РёРєР»РѕРј.
+\ РћРґРЅРѕ РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ Рё РґРІР° РїРѕР»СѓРїСЂРѕР·СЂР°С‡РЅС‹С… РїРѕРґС‡РёРЅРµРЅРЅС‹С… "РјРѕРґР°Р»СЊРЅС‹С…" РїРµСЂРµРґ РЅРёРј.
 : TEST1 { \ h }
   S" http://127.0.0.1:89/index.html" NewBrowserWindow -> h
   128 BrTransp !

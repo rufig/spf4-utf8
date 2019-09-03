@@ -1,5 +1,5 @@
 \ $Id$
-\ Äîïîëíèòåëüíûå îïåðàöèè íàä ñòðîêàìè ñ èñïîëüçîâàíèåì ðåãóëÿðíûõ âûðàæåíèé
+\ Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð½Ð°Ð´ ÑÑ‚Ñ€Ð¾ÐºÐ°Ð¼Ð¸ Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸ÐµÐ¼ Ñ€ÐµÐ³ÑƒÐ»ÑÑ€Ð½Ñ‹Ñ… Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸Ð¹
 
 REQUIRE re_match? ~ygrek/lib/re/re.f
 REQUIRE replace-str- ~pinka/samples/2005/lib/replace-str.f
@@ -62,8 +62,8 @@ REQUIRE replace-str- ~pinka/samples/2005/lib/replace-str.f
   a u CONT ;
 [THEN]
 
-\ âîçâðàùàåò ñïèñîê ñòðîê
-\ îñâîáîæäàòü òàê: ['] STRFREE list::free-with
+\ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ ÑÐ¿Ð¸ÑÐ¾Ðº ÑÑ‚Ñ€Ð¾Ðº
+\ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°Ñ‚ÑŒ Ñ‚Ð°Ðº: ['] STRFREE list::free-with
 : re_search_all ( a u re -- list ) %[ START{ re_search-> >STR % }EMERGE ]% ;
 
 : re_split ( a u re -- list ) %[ START{ re_split-> >STR % }EMERGE ]% ;

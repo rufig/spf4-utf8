@@ -1,7 +1,7 @@
 \ 13.Jul.2001 Fri 20:30  Ruv
-\ оригинал - ~ac\lib\win\window\notify_icon.f 
-\ расширил для возможности управлять несколькими иконками в терее одновременно.
-\ Изменил имена.
+\ РѕСЂРёРіРёРЅР°Р» - ~ac\lib\win\window\notify_icon.f 
+\ СЂР°СЃС€РёСЂРёР» РґР»СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё СѓРїСЂР°РІР»СЏС‚СЊ РЅРµСЃРєРѕР»СЊРєРёРјРё РёРєРѕРЅРєР°РјРё РІ С‚РµСЂРµРµ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ.
+\ РР·РјРµРЅРёР» РёРјРµРЅР°.
 
 REQUIRE Window    ~ac/lib/win/window/window.f
 REQUIRE LoadIcon  ~ac/lib/win/window/image.f
@@ -113,7 +113,7 @@ PREVIOUS
 0 VALUE w
 : test
 S" STATIC" 0 0 Window TO w
-S" Это пример" S" MODEM16.ICO" 1997  w Create-TrayIcon 
+S" Р­С‚Рѕ РїСЂРёРјРµСЂ" S" MODEM16.ICO" 1997  w Create-TrayIcon 
  KEY DROP Delete-TrayIcon
 ;
 \ )

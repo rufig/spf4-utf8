@@ -4,11 +4,11 @@ REQUIRE CBMP24 ~ygrek/lib/spec/bmp.f
 REQUIRE CGLImage ~profit/lib/wfl/openGL/GLImage.f
 REQUIRE " ~ac/lib/str5.f
 
-\ укажите путь до показываемой картинки
-\ путь либо относительный от запускаемого SPF
-\ либо абсолютный
+\ СѓРєР°Р¶РёС‚Рµ РїСѓС‚СЊ РґРѕ РїРѕРєР°Р·С‹РІР°РµРјРѕР№ РєР°СЂС‚РёРЅРєРё
+\ РїСѓС‚СЊ Р»РёР±Рѕ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РѕС‚ Р·Р°РїСѓСЃРєР°РµРјРѕРіРѕ SPF
+\ Р»РёР±Рѕ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№
 : picture S" ALLUSERSPROFILE" ENVIRONMENT? IF " {s}\Application Data\Microsoft\User Account Pictures\Default Pictures\frog.bmp" STR@ ELSE 2 THROW THEN ;
-\ Картинка должна быть в формате BMP 24bit
+\ РљР°СЂС‚РёРЅРєР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РІ С„РѕСЂРјР°С‚Рµ BMP 24bit
  
 0 VALUE list1
 0 VALUE canvas

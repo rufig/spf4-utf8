@@ -15,7 +15,7 @@ WARNING !
   arg() app :: GoHome
 \  arg( Z" http://www.eserv.ru/" _str )arg app :: Navigate
   KEY DROP
-  Z" Удивительная вещь :)" _str app :: StatusText !
+  Z" РЈРґРёРІРёС‚РµР»СЊРЅР°СЏ РІРµС‰СЊ :)" _str app :: StatusText !
   COM-destroy
 ;
 

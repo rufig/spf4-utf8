@@ -1,4 +1,4 @@
-( openssl брать на openssl.org, gnutls win32 на http://josefsson.org/gnutls4win/ )
+( openssl Р±СЂР°С‚СЊ РЅР° openssl.org, gnutls win32 РЅР° http://josefsson.org/gnutls4win/ )
 
 REQUIRE {             ~ac/lib/locals.f
 REQUIRE CreateSocket  ~ac/lib/win/winsock/sockets.f
@@ -11,10 +11,10 @@ VARIABLE SSLE_LIB
 VARIABLE TLSLIB
 VECT dSslWaitIdle :NONAME 20 PAUSE ; TO dSslWaitIdle
 
-USER uSslSinceSocketRead \ Сколько времени прошло с момента запуска чтения.
-                         \ SslRead только обнуляет счетчик, а его использование
-                         \ предусмотрено в режиме неблокирующих сокетов, когда
-                         \ таймауты автоматически не работают.
+USER uSslSinceSocketRead \ РЎРєРѕР»СЊРєРѕ РІСЂРµРјРµРЅРё РїСЂРѕС€Р»Рѕ СЃ РјРѕРјРµРЅС‚Р° Р·Р°РїСѓСЃРєР° С‡С‚РµРЅРёСЏ.
+                         \ SslRead С‚РѕР»СЊРєРѕ РѕР±РЅСѓР»СЏРµС‚ СЃС‡РµС‚С‡РёРє, Р° РµРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ
+                         \ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅРѕ РІ СЂРµР¶РёРјРµ РЅРµР±Р»РѕРєРёСЂСѓСЋС‰РёС… СЃРѕРєРµС‚РѕРІ, РєРѕРіРґР°
+                         \ С‚Р°Р№РјР°СѓС‚С‹ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РЅРµ СЂР°Р±РѕС‚Р°СЋС‚.
 
 : LoadLibEx ( addr u -- h )
   DROP LOAD_WITH_ALTERED_SEARCH_PATH 0 ROT LoadLibraryExA
@@ -58,7 +58,7 @@ VARIABLE SSLAPLINK
 
 : SSLAPI:
   >IN @ CREATE >IN ! 
-  HERE SSLAPLINK @ , SSLAPLINK ! ( связь )
+  HERE SSLAPLINK @ , SSLAPLINK ! ( СЃРІСЏР·СЊ )
   0 , 
   BL WORD ", 0 C,
   DOES> CELL+ DUP @ ?DUP IF NIP API-CALL EXIT THEN
@@ -69,7 +69,7 @@ VARIABLE SSLAPLINK
 ;
 : SSLEAPI:
   >IN @ CREATE >IN ! 
-  HERE SSLAPLINK @ , SSLAPLINK ! ( связь )
+  HERE SSLAPLINK @ , SSLAPLINK ! ( СЃРІСЏР·СЊ )
   0 , 
   BL WORD ", 0 C,
   DOES> CELL+ DUP @ ?DUP IF NIP API-CALL EXIT THEN
@@ -132,13 +132,13 @@ SSLAPI: SSL_CTX_Free
 
 \ SSLAPI: SSL_CTX_sess_accept_renegotiate
 
-\ с 0.9.8j: SNI
+\ СЃ 0.9.8j: SNI
 \  SSL_set_tlsext_host_name = SSL_ctrl(s,SSL_CTRL_SET_TLSEXT_HOSTNAME,TLSEXT_NAMETYPE_host_name,(char *)name)
 
 SSLAPI: SSL_get_servername \ (const SSL *s, const int type) ;
 \ SSLAPI: SSL_get_servername_type \ (const SSL *s) ;
 
-\ на практике компрессию в SSL/TLS никто не использует
+\ РЅР° РїСЂР°РєС‚РёРєРµ РєРѕРјРїСЂРµСЃСЃРёСЋ РІ SSL/TLS РЅРёРєС‚Рѕ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚
 \ SSLAPI: SSL_COMP_add_compression_method
 \ SSLEAPI: COMP_zlib
 
@@ -184,7 +184,7 @@ VARIABLE vSSL_INIT
 ;
 USER uSSL_CONTEXT
 USER uCertType
-USER uSslServer \ сервер получает здесь имя хоста, указанное в tlsext в ClientHello
+USER uSslServer \ СЃРµСЂРІРµСЂ РїРѕР»СѓС‡Р°РµС‚ Р·РґРµСЃСЊ РёРјСЏ С…РѕСЃС‚Р°, СѓРєР°Р·Р°РЅРЅРѕРµ РІ tlsext РІ ClientHello
 VECT vSslServer ' NOOP TO vSslServer
 VECT vSslSniHostName ' 2DROP TO vSslSniHostName
 
@@ -227,7 +227,7 @@ VECT vSslSniHostName ' 2DROP TO vSslSniHostName
   0 SSL_OP_NO_SSLv2 SSL_OP_NO_SSLv3 OR  SSL_CTRL_OPTIONS c SSL_CTX_ctrl DROP 2DROP 2DROP
   S" HIGH:!aNULL:!MD5:!RC4" DROP c SSL_CTX_set_cipher_list NIP NIP DROP
 
-\ сертификаты и ключи, используемые в соединении
+\ СЃРµСЂС‚РёС„РёРєР°С‚С‹ Рё РєР»СЋС‡Рё, РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РІ СЃРѕРµРґРёРЅРµРЅРёРё
   pemu
   IF
     type pema c SSL_CTX_use_certificate_file NIP NIP NIP 1 <> THROW
@@ -246,7 +246,7 @@ VECT vSslSniHostName ' 2DROP TO vSslSniHostName
   SSL_CTX_new DUP 0= THROW NIP
   -> c
 
-\ сертификаты и ключи, используемые в соединении
+\ СЃРµСЂС‚РёС„РёРєР°С‚С‹ Рё РєР»СЋС‡Рё, РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РІ СЃРѕРµРґРёРЅРµРЅРёРё
   pemu
   IF
     type pema c SSL_CTX_use_certificate_file NIP NIP NIP 1 <> THROW
@@ -264,16 +264,16 @@ VECT vSslSniHostName ' 2DROP TO vSslSniHostName
   THEN
   0 mode context SSL_CTX_set_verify 2DROP 2DROP
 
-\ эти CA передаются сервером в запросе сертификата, и клиент может
-\ автоматически выдавать нужный сертификат, без выдачи окошка со списком юзеру
+\ СЌС‚Рё CA РїРµСЂРµРґР°СЋС‚СЃСЏ СЃРµСЂРІРµСЂРѕРј РІ Р·Р°РїСЂРѕСЃРµ СЃРµСЂС‚РёС„РёРєР°С‚Р°, Рё РєР»РёРµРЅС‚ РјРѕР¶РµС‚
+\ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РІС‹РґР°РІР°С‚СЊ РЅСѓР¶РЅС‹Р№ СЃРµСЂС‚РёС„РёРєР°С‚, Р±РµР· РІС‹РґР°С‡Рё РѕРєРѕС€РєР° СЃРѕ СЃРїРёСЃРєРѕРј СЋР·РµСЂСѓ
 \  pema SSL_load_client_CA_file NIP
 \  ?DUP IF context SSL_CTX_set_client_CA_list NIP NIP . THEN
 ;
 
 \ fixme:
 : SslRenegotiate { ssl \ s_server_auth_session_id_context -- }
-  \ запросить клиентский сертификат во время уже установленной сессии
-  \ (когда уже известен клиентский запрос, например)
+  \ Р·Р°РїСЂРѕСЃРёС‚СЊ РєР»РёРµРЅС‚СЃРєРёР№ СЃРµСЂС‚РёС„РёРєР°С‚ РІРѕ РІСЂРµРјСЏ СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ СЃРµСЃСЃРёРё
+  \ (РєРѕРіРґР° СѓР¶Рµ РёР·РІРµСЃС‚РµРЅ РєР»РёРµРЅС‚СЃРєРёР№ Р·Р°РїСЂРѕСЃ, РЅР°РїСЂРёРјРµСЂ)
 
   0 SSL_VERIFY_FAIL_IF_NO_PEER_CERT ( SSL_VERIFY_PEER OR)
   ssl SSL_set_verify 2DROP 2DROP
@@ -292,7 +292,7 @@ VECT vSslSniHostName ' 2DROP TO vSslSniHostName
   \        berr_exit("SSL renegotiation error");
 ;
 : SslGetVerifyResults { conn \ cert name mem -- cert addr u ior } \ ior=X509_V_OK=0
-\ addr нужно после использования освобождать
+\ addr РЅСѓР¶РЅРѕ РїРѕСЃР»Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РѕСЃРІРѕР±РѕР¶РґР°С‚СЊ
   conn SSL_get_peer_certificate NIP -> cert
   cert
   IF
@@ -305,7 +305,7 @@ VECT vSslSniHostName ' 2DROP TO vSslSniHostName
     conn SSL_get_verify_result NIP
   ELSE 0 S" " 1 THEN
 ;
-USER uSslHost   \ здесь задается имя хоста, передаваемое в tlsext ClientHello при исходящих соединениях
+USER uSslHost   \ Р·РґРµСЃСЊ Р·Р°РґР°РµС‚СЃСЏ РёРјСЏ С…РѕСЃС‚Р°, РїРµСЂРµРґР°РІР°РµРјРѕРµ РІ tlsext ClientHello РїСЂРё РёСЃС…РѕРґСЏС‰РёС… СЃРѕРµРґРёРЅРµРЅРёСЏС…
 
 : SetSslHost ( addr -- )
   uSslHost !
@@ -313,7 +313,7 @@ USER uSslHost   \ здесь задается имя хоста, передаваемое в tlsext ClientHello пр
 : SslObjConnect ( socket context -- conn_obj ) \ connection
   SSL_new DUP 0= THROW NIP
   >R
-  uSslHost @ ?DUP IF TLSEXT_NAMETYPE_host_name SSL_CTRL_SET_TLSEXT_HOSTNAME R@ SSL_ctrl ( 1, если поддерживается) DROP 2DROP 2DROP THEN
+  uSslHost @ ?DUP IF TLSEXT_NAMETYPE_host_name SSL_CTRL_SET_TLSEXT_HOSTNAME R@ SSL_ctrl ( 1, РµСЃР»Рё РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ) DROP 2DROP 2DROP THEN
   R@ SSL_set_fd 0= THROW 2DROP
   BEGIN
     R@ SSL_connect DUP 1 <>
@@ -346,7 +346,7 @@ USER uSslHost   \ здесь задается имя хоста, передаваемое в tlsext ClientHello пр
   WHILE
     conn_obj SSL_get_error DUP 3 <> IF 2DROP EXIT THEN
     DROP 2DROP
-\    dSslWaitIdle \ если внутри SslRead:dSslWaitIdle используется SslWrite, то может получиться бесконечная рекурсия dSslWaitIdle
+\    dSslWaitIdle \ РµСЃР»Рё РІРЅСѓС‚СЂРё SslRead:dSslWaitIdle РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ SslWrite, С‚Рѕ РјРѕР¶РµС‚ РїРѕР»СѓС‡РёС‚СЊСЃСЏ Р±РµСЃРєРѕРЅРµС‡РЅР°СЏ СЂРµРєСѓСЂСЃРёСЏ dSslWaitIdle
   REPEAT
 ;
 : SslRead { addr u conn_obj -- n }

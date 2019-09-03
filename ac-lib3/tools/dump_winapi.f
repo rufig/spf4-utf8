@@ -3,7 +3,7 @@
   BEGIN
     DUP
   WHILE
-    DUP CELL- CELL- @ ASCIIZ> TYPE ." :" \ такое расположение удобно для сортировки
+    DUP CELL- CELL- @ ASCIIZ> TYPE ." :" \ С‚Р°РєРѕРµ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ СѓРґРѕР±РЅРѕ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
     DUP CELL- CELL- CELL - @ . ." :"
     DUP CELL- @ ASCIIZ> TYPE
     CR

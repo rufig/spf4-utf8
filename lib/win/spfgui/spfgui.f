@@ -7,58 +7,58 @@ REQUIRE WINCONST lib\win\const.f
 REQUIRE CASE     lib\ext\case.f
 REQUIRE /MSG     lib\win\spfgui\dtyps.f
 
-IMAGE-BASE CONSTANT HINST  \ Instance текущего приложения
+IMAGE-BASE CONSTANT HINST  \ Instance С‚РµРєСѓС‰РµРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 
 : CREATE-AUTOEVENT ( -- handle ior )
-\ создает объект event
+\ СЃРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ event
   0 0 0 0 CreateEventA DUP
   0= IF GetLastError ELSE 0 THEN
 ;
 : SET-EVENT ( handle -- ior )
-\ освобождает объект  event
+\ РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РѕР±СЉРµРєС‚  event
   SetEvent 0= IF GetLastError ELSE 0 THEN
 ;
 
 : WAIT ( handle timeout -- flag ior )
-\ возвращает истину, если объект освобожден другим потоком
-\ (либо он освободился сам собой при завершении др.потока)
-\ и после этого занят текущим
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ РёСЃС‚РёРЅСѓ, РµСЃР»Рё РѕР±СЉРµРєС‚ РѕСЃРІРѕР±РѕР¶РґРµРЅ РґСЂСѓРіРёРј РїРѕС‚РѕРєРѕРј
+\ (Р»РёР±Рѕ РѕРЅ РѕСЃРІРѕР±РѕРґРёР»СЃСЏ СЃР°Рј СЃРѕР±РѕР№ РїСЂРё Р·Р°РІРµСЂС€РµРЅРёРё РґСЂ.РїРѕС‚РѕРєР°)
+\ Рё РїРѕСЃР»Рµ СЌС‚РѕРіРѕ Р·Р°РЅСЏС‚ С‚РµРєСѓС‰РёРј
   SWAP WaitForSingleObject DUP WAIT_FAILED =
   IF GetLastError ELSE DUP WAIT_OBJECT_0 = SWAP WAIT_ABANDONED = OR 0 THEN
 ;
 
 MODULE: GUI-CONSOLE \ -------------------------------------------
 
-     0 VALUE TYPE-MESSAGE        \ Windows message окну для TYPE строки
-     0 VALUE ACCEPT-MESSAGE      \ Сообщение для включения каретки
-     0 VALUE TYPE-A              \ адрес этой строки
-     0 VALUE TYPE-U              \ ее длина
-     0 VALUE KEY_EVENT_GUI       \ event на KEY
-     0 VALUE START_EVENT         \ event на запуск форт системы
-    00 VALUE CON_BUFFER_PREPARED \ event на ACCEPT
-    00 VALUE tib                 \ доп.буфер для ACCEPT
-    00 VALUE >in                 \ размер этого буфера
-     8 CONSTANT TAB-VAL          \ величина табуляции
-     0 VALUE Myhwnd   \ hwnd главного окна приложения
+     0 VALUE TYPE-MESSAGE        \ Windows message РѕРєРЅСѓ РґР»СЏ TYPE СЃС‚СЂРѕРєРё
+     0 VALUE ACCEPT-MESSAGE      \ РЎРѕРѕР±С‰РµРЅРёРµ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ РєР°СЂРµС‚РєРё
+     0 VALUE TYPE-A              \ Р°РґСЂРµСЃ СЌС‚РѕР№ СЃС‚СЂРѕРєРё
+     0 VALUE TYPE-U              \ РµРµ РґР»РёРЅР°
+     0 VALUE KEY_EVENT_GUI       \ event РЅР° KEY
+     0 VALUE START_EVENT         \ event РЅР° Р·Р°РїСѓСЃРє С„РѕСЂС‚ СЃРёСЃС‚РµРјС‹
+    00 VALUE CON_BUFFER_PREPARED \ event РЅР° ACCEPT
+    00 VALUE tib                 \ РґРѕРї.Р±СѓС„РµСЂ РґР»СЏ ACCEPT
+    00 VALUE >in                 \ СЂР°Р·РјРµСЂ СЌС‚РѕРіРѕ Р±СѓС„РµСЂР°
+     8 CONSTANT TAB-VAL          \ РІРµР»РёС‡РёРЅР° С‚Р°Р±СѓР»СЏС†РёРё
+     0 VALUE Myhwnd   \ hwnd РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
 
-   255 VALUE bSize               \ размер одной строки в буфере текста
-    0  VALUE LruBuf              \ буфер history (last recently used)
-     8 VALUE LruNum              \ число запоминаемых сообщений lru
-   255 VALUE LruLen              \ размер одной строки буфера lru
-   100 VALUE cxClient            \ координаты client области окна
+   255 VALUE bSize               \ СЂР°Р·РјРµСЂ РѕРґРЅРѕР№ СЃС‚СЂРѕРєРё РІ Р±СѓС„РµСЂРµ С‚РµРєСЃС‚Р°
+    0  VALUE LruBuf              \ Р±СѓС„РµСЂ history (last recently used)
+     8 VALUE LruNum              \ С‡РёСЃР»Рѕ Р·Р°РїРѕРјРёРЅР°РµРјС‹С… СЃРѕРѕР±С‰РµРЅРёР№ lru
+   255 VALUE LruLen              \ СЂР°Р·РјРµСЂ РѕРґРЅРѕР№ СЃС‚СЂРѕРєРё Р±СѓС„РµСЂР° lru
+   100 VALUE cxClient            \ РєРѕРѕСЂРґРёРЅР°С‚С‹ client РѕР±Р»Р°СЃС‚Рё РѕРєРЅР°
    100 VALUE cyClient
-    80 VALUE cxBuffer            \ размеры отображаемого буфера (экрана)
+    80 VALUE cxBuffer            \ СЂР°Р·РјРµСЂС‹ РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕРіРѕ Р±СѓС„РµСЂР° (СЌРєСЂР°РЅР°)
     24 VALUE cyBuffer
-     0 VALUE cxChar              \ ширина/высота символа
+     0 VALUE cxChar              \ С€РёСЂРёРЅР°/РІС‹СЃРѕС‚Р° СЃРёРјРІРѕР»Р°
      0 VALUE cyChar
-     0 VALUE pBuffer             \ буфер текста
-     0 VALUE xCaret              \ текущая позиция x курсора в буфере текста
-     0 VALUE yCaret              \ аналогично для y
+     0 VALUE pBuffer             \ Р±СѓС„РµСЂ С‚РµРєСЃС‚Р°
+     0 VALUE xCaret              \ С‚РµРєСѓС‰Р°СЏ РїРѕР·РёС†РёСЏ x РєСѓСЂСЃРѕСЂР° РІ Р±СѓС„РµСЂРµ С‚РµРєСЃС‚Р°
+     0 VALUE yCaret              \ Р°РЅР°Р»РѕРіРёС‡РЅРѕ РґР»СЏ y
 
 VARIABLE  CurrFromLru
 
-: OBJECT  ( длина  -- адр.нач )
+: OBJECT  ( РґР»РёРЅР°  -- Р°РґСЂ.РЅР°С‡ )
   HERE \ len here
   OVER \ len here len
   ALLOT \ len here
@@ -67,7 +67,7 @@ VARIABLE  CurrFromLru
 
  /MSG        OBJECT MSG1
  /TEXTMETRIC OBJECT tm
- /winclass   OBJECT ТЕСТ_
+ /winclass   OBJECT РўР•РЎРў_
  /PS         OBJECT ps
  /PARAMS     OBJECT params
 
@@ -126,7 +126,7 @@ VARIABLE  CurrFromLru
 : HIWORD ( lpar -- hiword ) 16 RSHIFT ;
 
 \ *\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\***
-\ **\\\\\ оконная функция \\\\\\\\\\\\\**
+\ **\\\\\ РѕРєРѕРЅРЅР°СЏ С„СѓРЅРєС†РёСЏ \\\\\\\\\\\\\**
 \ ***\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 0 VALUE lpar
 0 VALUE wpar
@@ -136,7 +136,7 @@ VARIABLE  CurrFromLru
 
 : OutCurrentLine ( hwnd -- )
       DUP >R GetDC TO  hdc
-      \ Как бы этого избежать...
+      \ РљР°Рє Р±С‹ СЌС‚РѕРіРѕ РёР·Р±РµР¶Р°С‚СЊ...
       0x4DCD5C 0x2000000 OR hdc SetTextColor DROP
       0 hdc SetBkColor DROP
       SYSTEM_FIXED_FONT GetStockObject  hdc SelectObject  DROP
@@ -172,7 +172,7 @@ VARIABLE  CurrFromLru
         ENDOF
 
         0x09 OF  \ tab
-        \ выровняем на границу TAB-VAL
+        \ РІС‹СЂРѕРІРЅСЏРµРј РЅР° РіСЂР°РЅРёС†Сѓ TAB-VAL
         xCaret TAB-VAL MOD
         IF
           xCaret TAB-VAL 1- +
@@ -383,7 +383,7 @@ VARIABLE  CurrFromLru
       0 PostQuitMessage
       BYE
    ENDOF
-     \ не обработано
+     \ РЅРµ РѕР±СЂР°Р±РѕС‚Р°РЅРѕ
      lpar wpar msg hwnd DefWindowProcA  SWAP
  ENDCASE
 ;
@@ -412,12 +412,12 @@ DECIMAL
 
 : TYPE-GUI ( addr u -- )
     H-STDOUT 0 >
-    IF TYPE1 EXIT THEN \ Если пишем в файл например...
+    IF TYPE1 EXIT THEN \ Р•СЃР»Рё РїРёС€РµРј РІ С„Р°Р№Р» РЅР°РїСЂРёРјРµСЂ...
     H-STDLOG IF 2DUP TO-LOG THEN
     ANSI><OEM
-\ В винде операции с кареткой разрешены только из того же потока,
-\ где создано окно, поэтому из главного процесса кареткой оперировать
-\ нельзя (TYPE) и необходимо посылать свое сообщение TYPE-MESSAGE
+\ Р’ РІРёРЅРґРµ РѕРїРµСЂР°С†РёРё СЃ РєР°СЂРµС‚РєРѕР№ СЂР°Р·СЂРµС€РµРЅС‹ С‚РѕР»СЊРєРѕ РёР· С‚РѕРіРѕ Р¶Рµ РїРѕС‚РѕРєР°,
+\ РіРґРµ СЃРѕР·РґР°РЅРѕ РѕРєРЅРѕ, РїРѕСЌС‚РѕРјСѓ РёР· РіР»Р°РІРЅРѕРіРѕ РїСЂРѕС†РµСЃСЃР° РєР°СЂРµС‚РєРѕР№ РѕРїРµСЂРёСЂРѕРІР°С‚СЊ
+\ РЅРµР»СЊР·СЏ (TYPE) Рё РЅРµРѕР±С…РѕРґРёРјРѕ РїРѕСЃС‹Р»Р°С‚СЊ СЃРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ TYPE-MESSAGE
     TO TYPE-U
     TO TYPE-A
     0 0 TYPE-MESSAGE Myhwnd SendMessageA DROP
@@ -441,35 +441,35 @@ EXPORT \ ---------------------------------------
   CurrFromLru 0!
   S" TYPE-MESSAGE" DROP RegisterWindowMessageA TO TYPE-MESSAGE
   S" ACCEPT-MESSAGE" DROP RegisterWindowMessageA TO ACCEPT-MESSAGE
- \ заполнение структуры
-  /winclass                   ТЕСТ_ окна.размер_структ !
+ \ Р·Р°РїРѕР»РЅРµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹
+  /winclass                   РўР•РЎРў_ РѕРєРЅР°.СЂР°Р·РјРµСЂ_СЃС‚СЂСѓРєС‚ !
   CS_HREDRAW CS_VREDRAW OR
   CS_OWNDC OR  
-                              ТЕСТ_ окна.стиль         !
-  [']  ConsoleWndProc         ТЕСТ_ окна.процедура     !
-  0                           ТЕСТ_ окна.класс+        !
-  0                           ТЕСТ_ окна.окно+         !
-  HINST                       ТЕСТ_ окна.экземпляр     !
-  1 HINST LoadIconA           ТЕСТ_ окна.икон          !
-  IDC_ARROW 0 LoadCursorA     ТЕСТ_ окна.курсор        !
-  BLACK_BRUSH GetStockObject  ТЕСТ_ окна.фон           !
-  0                           ТЕСТ_ окна.меню          !
-  S" SP-FORTH 4.0 GUI console ver. 0.5" DROP       ТЕСТ_ окна.имя           !
-  1 HINST  LoadIconA          ТЕСТ_ окна.икон+         !
+                              РўР•РЎРў_ РѕРєРЅР°.СЃС‚РёР»СЊ         !
+  [']  ConsoleWndProc         РўР•РЎРў_ РѕРєРЅР°.РїСЂРѕС†РµРґСѓСЂР°     !
+  0                           РўР•РЎРў_ РѕРєРЅР°.РєР»Р°СЃСЃ+        !
+  0                           РўР•РЎРў_ РѕРєРЅР°.РѕРєРЅРѕ+         !
+  HINST                       РўР•РЎРў_ РѕРєРЅР°.СЌРєР·РµРјРїР»СЏСЂ     !
+  1 HINST LoadIconA           РўР•РЎРў_ РѕРєРЅР°.РёРєРѕРЅ          !
+  IDC_ARROW 0 LoadCursorA     РўР•РЎРў_ РѕРєРЅР°.РєСѓСЂСЃРѕСЂ        !
+  BLACK_BRUSH GetStockObject  РўР•РЎРў_ РѕРєРЅР°.С„РѕРЅ           !
+  0                           РўР•РЎРў_ РѕРєРЅР°.РјРµРЅСЋ          !
+  S" SP-FORTH 4.0 GUI console ver. 0.5" DROP       РўР•РЎРў_ РѕРєРЅР°.РёРјСЏ           !
+  1 HINST  LoadIconA          РўР•РЎРў_ РѕРєРЅР°.РёРєРѕРЅ+         !
 
-  ТЕСТ_  RegisterClassExA  0= ABORT" #Class was not registered!"
+  РўР•РЎРў_  RegisterClassExA  0= ABORT" #Class was not registered!"
 
-  0                             \ параметры создания
-  HINST                         \ описатель экземпляра программы
-  0                             \ описатель меню
-  0                             \ описатель родительского окна
+  0                             \ РїР°СЂР°РјРµС‚СЂС‹ СЃРѕР·РґР°РЅРёСЏ
+  HINST                         \ РѕРїРёСЃР°С‚РµР»СЊ СЌРєР·РµРјРїР»СЏСЂР° РїСЂРѕРіСЂР°РјРјС‹
+  0                             \ РѕРїРёСЃР°С‚РµР»СЊ РјРµРЅСЋ
+  0                             \ РѕРїРёСЃР°С‚РµР»СЊ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕРєРЅР°
   0 0                           \ window height, width
   0 0                       \ vertical, horizontal position
   WS_CAPTION  WS_SYSMENU OR WS_THICKFRAME OR WS_MINIMIZEBOX OR
   WS_MAXIMIZEBOX OR  WS_POPUP OR
   \ WS_VISIBLE OR      \ style
                                 \ address of window name
-  ТЕСТ_     окна.имя  @  DUP    \ address of registered class name
+  РўР•РЎРў_     РѕРєРЅР°.РёРјСЏ  @  DUP    \ address of registered class name
   0                             \ extended window style
 
   CreateWindowExA
@@ -482,11 +482,11 @@ EXPORT \ ---------------------------------------
   0 cyClient cxClient 100 100 hwnd MoveWindow DROP
 
   Myhwnd UpdateWindow  DROP
-  5 Myhwnd ShowWindow  DROP        \ вывести окно на экран
+  5 Myhwnd ShowWindow  DROP        \ РІС‹РІРµСЃС‚Рё РѕРєРЅРѕ РЅР° СЌРєСЂР°РЅ
   TITLE
   ." Use ESC to clear the window, Ctrl-c or Ctrl-break to exit" CR 
   START_EVENT SET-EVENT
-  MessageLoop                      \ войти в цикл обработки сообщений
+  MessageLoop                      \ РІРѕР№С‚Рё РІ С†РёРєР» РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№
 ;
 
 ' CE-CON-MAIN TASK: Thread1

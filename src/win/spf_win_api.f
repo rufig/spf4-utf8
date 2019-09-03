@@ -1,21 +1,21 @@
 \ $Id$
 
-( Процедуры времени выполнения для WINAPI и WNDPROC
-  Windows-зависимые слова.
+( РџСЂРѕС†РµРґСѓСЂС‹ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ РґР»СЏ WINAPI Рё WNDPROC
+  Windows-Р·Р°РІРёСЃРёРјС‹Рµ СЃР»РѕРІР°.
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Преобразование из 16-разрядного в 32-разрядный код - 1995-96гг
-  Ревизия - сентябрь 1999
+  РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РёР· 16-СЂР°Р·СЂСЏРґРЅРѕРіРѕ РІ 32-СЂР°Р·СЂСЏРґРЅС‹Р№ РєРѕРґ - 1995-96РіРі
+  Р РµРІРёР·РёСЏ - СЃРµРЅС‚СЏР±СЂСЊ 1999
 )
 
 VARIABLE AOLL
 VARIABLE AOGPA
 0 VALUE ST-RES
 
-\ обработчики ненахождения ф-ии/либы
+\ РѕР±СЂР°Р±РѕС‚С‡РёРєРё РЅРµРЅР°С…РѕР¶РґРµРЅРёСЏ С„-РёРё/Р»РёР±С‹
 VECT PROC-ERROR
 VECT LIB-ERROR
 
-CODE AO_INI \ в EAX структура WINAPI:
+CODE AO_INI \ РІ EAX СЃС‚СЂСѓРєС‚СѓСЂР° WINAPI:
       MOV  EBX, EAX
       MOV  EAX, 4 [EBX]
       PUSH EAX
@@ -37,14 +37,14 @@ A; HERE 4 - ' AOGPA EXECUTE !
       JZ   @@2
       RET
       
-@@2:  MOV   EAX, EBX \ здесь нам уже дела нет до EAX
+@@2:  MOV   EAX, EBX \ Р·РґРµСЃСЊ РЅР°Рј СѓР¶Рµ РґРµР»Р° РЅРµС‚ РґРѕ EAX
       JMP ' PROC-ERROR \ can't find a proc
 @@1:  MOV   EAX, EBX      
       JMP ' LIB-ERROR \ can't find a library
 END-CODE
 
 CODE API-CALL ( ... extern-addr -- x )
-\ вызов внешней функции (API или метода объекта через COM)
+\ РІС‹Р·РѕРІ РІРЅРµС€РЅРµР№ С„СѓРЅРєС†РёРё (API РёР»Рё РјРµС‚РѕРґР° РѕР±СЉРµРєС‚Р° С‡РµСЂРµР· COM)
 
       PUSH EDI
       PUSH EBP
@@ -77,7 +77,7 @@ CODE _WINAPI-CODE
       JNZ  SHORT @@1
       MOV  EAX, EBX
       CALL ' AO_INI
-      JZ  SHORT @@2 \ чего-то не нашли
+      JZ  SHORT @@2 \ С‡РµРіРѕ-С‚Рѕ РЅРµ РЅР°С€Р»Рё
       MOV [EBX], EAX
 @@1:  JMP ' API-CALL \ call ret
 @@2:  RET
@@ -90,7 +90,7 @@ CODE _WNDPROC-CODE
      SUB  ESP, # 3968
 A;   HERE 4 - ' ST-RES 9 + EXECUTE
      PUSH EBP
-     MOV  EBP, 4 [EAX] ( адрес возврата из CALLBACK )
+     MOV  EBP, 4 [EAX] ( Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° РёР· CALLBACK )
      PUSH EBP
      MOV  EBP, EAX
      ADD  EBP, # 12
@@ -99,7 +99,7 @@ A;   HERE 4 - ' ST-RES 9 + EXECUTE
      PUSH EDX
      PUSH ESI
      PUSH EDI
-     MOV  EAX, [EAX] ( адрес адреса форт-процедуры )
+     MOV  EAX, [EAX] ( Р°РґСЂРµСЃ Р°РґСЂРµСЃР° С„РѕСЂС‚-РїСЂРѕС†РµРґСѓСЂС‹ )
      MOV  EBX, [EAX]
      MOV  EAX, -4 [EBP]
      CALL EBX
@@ -112,8 +112,8 @@ A;   HERE 4 - ' ST-RES 9 + EXECUTE
      POP  EBX
      MOV  EAX, ESP
      MOV  ESP, EBP
-     MOV  EBP, 4 [EAX] \ сохраненный EBP
-     MOV  EAX, [EAX]   \ адрес возврата из CALLBACK
+     MOV  EBP, 4 [EAX] \ СЃРѕС…СЂР°РЅРµРЅРЅС‹Р№ EBP
+     MOV  EAX, [EAX]   \ Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° РёР· CALLBACK
      XCHG EAX, [ESP]
      RET
 END-CODE
@@ -121,8 +121,8 @@ END-CODE
 
 ' _WNDPROC-CODE TO WNDPROC-CODE
 
-VECT FORTH-INSTANCE>  \ эти процедуры будут выполняться на входе
-VECT <FORTH-INSTANCE  \ и выходе в WNDPROC-процедуры (инициализация TlsIndex)
+VECT FORTH-INSTANCE>  \ СЌС‚Рё РїСЂРѕС†РµРґСѓСЂС‹ Р±СѓРґСѓС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РЅР° РІС…РѕРґРµ
+VECT <FORTH-INSTANCE  \ Рё РІС‹С…РѕРґРµ РІ WNDPROC-РїСЂРѕС†РµРґСѓСЂС‹ (РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ TlsIndex)
 
 ' FORTH-INSTANCE> TO TC-FORTH-INSTANCE>
 ' <FORTH-INSTANCE TO TC-<FORTH-INSTANCE

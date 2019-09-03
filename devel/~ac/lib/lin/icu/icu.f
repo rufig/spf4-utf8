@@ -1,8 +1,8 @@
-\ Åùå îäíà áèáëèîòåêà äëÿ i18n, èç IBM, ñì. http://site.icu-project.org/
-\ Òðåáóþòñÿ icu*.dll èëè .so, ñì. http://icu-project.org/download/4.2.html#ICU4C
-\ Î÷åíü ìíîãî ïîëåçíûõ âîçìîæíîñòåé (êîíâåðòàöèÿ, ïîèñê, ñðàâíåíèå, regexp,
-\ ñðàâíåíèå è ôîðìàòèðîâàíèå äàò, idn, è ò.ï.), íî êîëîññàëüíûé ðàçìåð dll...
-\ Äëÿ ôóíêöèé êîíâåðòàöèè - êàê ìèíèìóì icuuc42.dll è icudt42.dll (17Ìá â ñóììå!)
+\ Ð•Ñ‰Ðµ Ð¾Ð´Ð½Ð° Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð´Ð»Ñ i18n, Ð¸Ð· IBM, ÑÐ¼. http://site.icu-project.org/
+\ Ð¢Ñ€ÐµÐ±ÑƒÑŽÑ‚ÑÑ icu*.dll Ð¸Ð»Ð¸ .so, ÑÐ¼. http://icu-project.org/download/4.2.html#ICU4C
+\ ÐžÑ‡ÐµÐ½ÑŒ Ð¼Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÐµÐ·Ð½Ñ‹Ñ… Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ÑÑ‚ÐµÐ¹ (ÐºÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ñ, Ð¿Ð¾Ð¸ÑÐº, ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ðµ, regexp,
+\ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ðµ Ð¸ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð´Ð°Ñ‚, idn, Ð¸ Ñ‚.Ð¿.), Ð½Ð¾ ÐºÐ¾Ð»Ð¾ÑÑÐ°Ð»ÑŒÐ½Ñ‹Ð¹ Ñ€Ð°Ð·Ð¼ÐµÑ€ dll...
+\ Ð”Ð»Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¹ ÐºÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ð¸ - ÐºÐ°Ðº Ð¼Ð¸Ð½Ð¸Ð¼ÑƒÐ¼ icuuc42.dll Ð¸ icudt42.dll (17ÐœÐ± Ð² ÑÑƒÐ¼Ð¼Ðµ!)
 
 REQUIRE SO            ~ac/lib/ns/so-xt.f
 REQUIRE STR@          ~ac/lib/str5.f
@@ -10,7 +10,7 @@ REQUIRE STR@          ~ac/lib/str5.f
 ALSO SO NEW: icuuc42.dll
 ALSO SO NEW: libicuuc.so.42
 
-\ API êîíâåðòàöèè http://icu-project.org/apiref/icu4c/ucnv_8h.html
+\ API ÐºÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ð¸ http://icu-project.org/apiref/icu4c/ucnv_8h.html
 
 : ICCONV { a u cpfa cpfu cpta cptu \ ior oa ou -- oa ou }
   u 4 * CELL+ DUP -> ou ALLOCATE THROW -> oa
@@ -22,11 +22,11 @@ PREVIOUS
 PREVIOUS
 
 \EOF
-\ òåñò
-S" òåñòtest" S" cp1251" S" UTF-8" ICCONV
+\ Ñ‚ÐµÑÑ‚
+S" Ñ‚ÐµÑÑ‚test" S" cp1251" S" UTF-8" ICCONV
 S" UTF-8" S" cp1251" ICCONV ANSI>OEM TYPE CR
 
-\ ïðîâåðêà ñîâìåñòèìîñòè ñ ICONV
+\ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° ÑÐ¾Ð²Ð¼ÐµÑÑ‚Ð¸Ð¼Ð¾ÑÑ‚Ð¸ Ñ ICONV
 REQUIRE ICONV ~ac/lib/lin/iconv/iconv.f 
-S" òåñòtest" S" cp1251" S" UTF-8" ICCONV
+S" Ñ‚ÐµÑÑ‚test" S" cp1251" S" UTF-8" ICCONV
 S" UTF-8" S" cp1251" ICONV ANSI>OEM TYPE CR

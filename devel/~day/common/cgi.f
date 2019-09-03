@@ -11,7 +11,7 @@ REQUIRE { lib\ext\locals.f
   a FREE THROW
 ;  
 
-\ размер облаcти addr должен быть не менее 256
+\ СЂР°Р·РјРµСЂ РѕР±Р»Р°cС‚Рё addr РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµ РјРµРЅРµРµ 256
 
 : GET-QUERY ( addr -- u )
    POST? @
@@ -24,8 +24,8 @@ REQUIRE { lib\ext\locals.f
 
 USER Count
 
-\ Пишет в PAD расшифрованную строку как строку со счетчиком
-\ Понимает незашифрованный текст наряду с зашифрованным
+\ РџРёС€РµС‚ РІ PAD СЂР°СЃС€РёС„СЂРѕРІР°РЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ РєР°Рє СЃС‚СЂРѕРєСѓ СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј
+\ РџРѕРЅРёРјР°РµС‚ РЅРµР·Р°С€РёС„СЂРѕРІР°РЅРЅС‹Р№ С‚РµРєСЃС‚ РЅР°СЂСЏРґСѓ СЃ Р·Р°С€РёС„СЂРѕРІР°РЅРЅС‹Рј
 
 : CONVERT% ( addr u -- addr2 u2 )
     BASE @ >R HEX Count 0!
@@ -56,7 +56,7 @@ USER Count
 
 CREATE QUERY-BUF 256 ALLOT
 
-\ формирует запрос в QUERY-BUF
+\ С„РѕСЂРјРёСЂСѓРµС‚ Р·Р°РїСЂРѕСЃ РІ QUERY-BUF
 
 : FORM-QUERY
     QUERY-LEN 0=
@@ -98,7 +98,7 @@ CREATE QUERY-BUF 256 ALLOT
 ;
 
 
-\ Если не нашли, то u2=0
+\ Р•СЃР»Рё РЅРµ РЅР°С€Р»Рё, С‚Рѕ u2=0
 : GET-VALUE ( c-addr u -- c-addr2 u2 )
   FORM-QUERY
   QUERY-BUF QUERY-LEN
@@ -119,7 +119,7 @@ CREATE QUERY-BUF 256 ALLOT
   BL ROT ROT SKIP-LEFT
 ;
 
-\ Форт парсер html
+\ Р¤РѕСЂС‚ РїР°СЂСЃРµСЂ html
 
 : PARSE%
   BEGIN

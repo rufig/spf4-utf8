@@ -12,7 +12,7 @@ REQUIRE create-object ~yz/lib/automation.f
  COM-init DROP
 
  " Shell.Application" create-object 
- IF " Не могу запустить объект Shell.Application" .ansiz BYE THEN
+ IF " РќРµ РјРѕРіСѓ Р·Р°РїСѓСЃС‚РёС‚СЊ РѕР±СЉРµРєС‚ Shell.Application" .ansiz BYE THEN
  TO shell
 
  arg( 17 _int )arg shell :: NameSpace > 
@@ -21,7 +21,7 @@ REQUIRE create-object ~yz/lib/automation.f
  arg() folder :: Items >
  DROP
 
- " Объект" 20 Z.R  " Имя" 25 Z.R  " Размер" 12 Z.R " Свободно" 12 Z.R CR
+ " РћР±СЉРµРєС‚" 20 Z.R  " РРјСЏ" 25 Z.R  " Р Р°Р·РјРµСЂ" 12 Z.R " РЎРІРѕР±РѕРґРЅРѕ" 12 Z.R CR
  69 0 DO c: - EMIT LOOP CR
  FOREACH
    OBJ-I DROP TO item

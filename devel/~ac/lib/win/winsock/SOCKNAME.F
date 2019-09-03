@@ -1,5 +1,5 @@
 ( Andrey Cherezov )
-\ ñòàðàÿ áèáëèîòåêà äëÿ ðàáîòû ñ UDP è äîáàâëåíèÿ ê TCP
+\ ÑÑ‚Ð°Ñ€Ð°Ñ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð´Ð»Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ UDP Ð¸ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ðº TCP
 
 REQUIRE CreateSocket ~ac/lib/win/winsock/sockets.f
 REQUIRE {            ~ac/lib/locals.f
@@ -13,7 +13,7 @@ USER-CREATE sockIP&Port_buf 32 USER-ALLOT
 USER-CREATE sin_buf /sockaddr_in CELL+ 2* USER-ALLOT
 
 : sockIP&Port ( socket -- IP port )
-\ IP=0, åñëè êëèåíò óæå îòêëþ÷èëñÿ!
+\ IP=0, ÐµÑÐ»Ð¸ ÐºÐ»Ð¸ÐµÐ½Ñ‚ ÑƒÐ¶Ðµ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡Ð¸Ð»ÑÑ!
   { s \ nlen nam }
 \  32 ALLOCATE THROW -> nam
   sockIP&Port_buf -> nam

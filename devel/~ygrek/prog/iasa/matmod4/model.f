@@ -1,4 +1,4 @@
-( Модель колебаний
+( ╨Ь╨╛╨┤╨╡╨╗╤М ╨║╨╛╨╗╨╡╨▒╨░╨╜╨╕╨╣
   x''+2*delta*x'+w0*w0*x = f0*cos[w*t]
 
   y=x'
@@ -9,8 +9,8 @@
 VOCABULARY Model
 ALSO Model DEFINITIONS
 
-1e FVALUE delta \ Коэфициент затухания
-1.4e FVALUE w0 \ Собственная частота ?
+1e FVALUE delta \ ╨Ъ╨╛╤Н╤Д╨╕╤Ж╨╕╨╡╨╜╤В ╨╖╨░╤В╤Г╤Е╨░╨╜╨╕╤П
+1.4e FVALUE w0 \ ╨б╨╛╨▒╤Б╤В╨▓╨╡╨╜╨╜╨░╤П ╤З╨░╤Б╤В╨╛╤В╨░ ?
 1e FVALUE f0 \ 
 0.1e FVALUE w \
 

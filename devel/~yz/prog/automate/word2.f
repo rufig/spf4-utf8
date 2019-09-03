@@ -1,5 +1,5 @@
-\ Ю. Жиловец, http://www.forth.org.ru/~yz
-\ Пример использования библиотеки Automate в режиме интерпретации
+\ Р®. Р–РёР»РѕРІРµС†, http://www.forth.org.ru/~yz
+\ РџСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ Р±РёР±Р»РёРѕС‚РµРєРё Automate РІ СЂРµР¶РёРјРµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё
 
 REQUIRE [[ ~yz/lib/automate.f
 
@@ -16,17 +16,17 @@ ComInit DROP
   word [[ Visible =  TRUE ]]
   word [[ Documents Add ]] release
   word [[ ActiveDocument Content ]] TO content
-  content [[ InsertAfter ( " Я чувствую," ) ]]
+  content [[ InsertAfter ( " РЇ С‡СѓРІСЃС‚РІСѓСЋ," ) ]]
   500 PAUSE
   content [[ InsertParagraphAfter ]]
-  content [[ { S" InsertAfter" } ( " Как мной управляют" ) ]]
+  content [[ { S" InsertAfter" } ( " РљР°Рє РјРЅРѕР№ СѓРїСЂР°РІР»СЏСЋС‚" ) ]]
   500 PAUSE
   content [[ InsertParagraphAfter ]]
-  content [[ InsertAfter ( " мистические силы..." ) ]]
+  content [[ InsertAfter ( " РјРёСЃС‚РёС‡РµСЃРєРёРµ СЃРёР»С‹..." ) ]]
   500 PAUSE
   content [[ Font Size = 20 ]]
   800 PAUSE
-  word [[ ActiveDocument SaveAs ( " c:/мистические силы.doc" ) * ]]
+  word [[ ActiveDocument SaveAs ( " c:/РјРёСЃС‚РёС‡РµСЃРєРёРµ СЃРёР»С‹.doc" ) * ]]
   content release
   word [[ Quit ]]
   word release

@@ -23,7 +23,7 @@ REQUIRE :: ~ac/lib/win/com/samples/automation+.f
         OBJ-I DROP :: EmailAddress @
         STYPE CR
     NEXT
-  ELSE ." Соединиться Messenger'ом надо сначала" THEN
+  ELSE ." РЎРѕРµРґРёРЅРёС‚СЊСЃСЏ Messenger'РѕРј РЅР°РґРѕ СЃРЅР°С‡Р°Р»Р°" THEN
   COM-destroy
 ;
 

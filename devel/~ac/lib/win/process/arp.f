@@ -1,8 +1,8 @@
-\ Простой пример перебора списка ARP-записей
-\ вместо использования iphlpapi:GetIpNetTable
-\ запускается arp и парсится его вывод.
+\ РџСЂРѕСЃС‚РѕР№ РїСЂРёРјРµСЂ РїРµСЂРµР±РѕСЂР° СЃРїРёСЃРєР° ARP-Р·Р°РїРёСЃРµР№
+\ РІРјРµСЃС‚Рѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ iphlpapi:GetIpNetTable
+\ Р·Р°РїСѓСЃРєР°РµС‚СЃСЏ arp Рё РїР°СЂСЃРёС‚СЃСЏ РµРіРѕ РІС‹РІРѕРґ.
 
-( примеры использования см. в конце файла )
+( РїСЂРёРјРµСЂС‹ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЃРј. РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р° )
 
 REQUIRE ChildAppErr ~ac/lib/win/process/child_app.f
 REQUIRE PipeLine    ~ac/lib/win/process/pipeline.f
@@ -24,10 +24,10 @@ USER uArpIface
   SOURCE S" 224.0.0." SEARCH NIP NIP IF EXIT THEN \ multicast
   SOURCE S" 239.255.255.250" SEARCH NIP NIP IF EXIT THEN \ upnp broadcast
   SOURCE S" 0.0.0.0" SEARCH NIP NIP IF EXIT THEN \ def
-  SOURCE S" ff-ff-ff-ff-ff-ff" SEARCH NIP NIP IF EXIT THEN \ подсеть
+  SOURCE S" ff-ff-ff-ff-ff-ff" SEARCH NIP NIP IF EXIT THEN \ РїРѕРґСЃРµС‚СЊ
 
-  SOURCE S" -" SEARCH NIP NIP 0= IF EXIT THEN \ нет mac-адреса, т.е. нелокальный
-                                              \ раскомментировать, если надо показать эту толстую таблицу...
+  SOURCE S" -" SEARCH NIP NIP 0= IF EXIT THEN \ РЅРµС‚ mac-Р°РґСЂРµСЃР°, С‚.Рµ. РЅРµР»РѕРєР°Р»СЊРЅС‹Р№
+                                              \ СЂР°СЃРєРѕРјРјРµРЅС‚РёСЂРѕРІР°С‚СЊ, РµСЃР»Рё РЅР°РґРѕ РїРѕРєР°Р·Р°С‚СЊ СЌС‚Сѓ С‚РѕР»СЃС‚СѓСЋ С‚Р°Р±Р»РёС†Сѓ...
 
   NextWord 2DUP S" ." SEARCH NIP NIP 0= IF 2DROP EXIT THEN
   2DUP " <tr><td class='ip'>{s}</td>" uARP @ S+
@@ -53,7 +53,7 @@ USER uArpIface
   \  -1 OVER WaitForSingleObject DROP CLOSE-FILE THROW
   CLOSE-FILE DROP 
 
-  ( здесь запись в stdin потомку)
+  ( Р·РґРµСЃСЊ Р·Р°РїРёСЃСЊ РІ stdin РїРѕС‚РѕРјРєСѓ)
 
   StdinWH @ CLOSE-FILE THROW
 
@@ -69,8 +69,8 @@ USER uArpIface
 ;
 : ArpHtml ( -- addr u )
   " <table class='sortable' id='sp_table' cellpadding='0' cellspacing='0'>
-<thead><tr class='sp_head'><th class='ip'>IP</th><th class='mac'>MAC</th><th class='host'>Имя</th>
-<th class='type'>Тип</th><th class='if'>Интерфейс</th></tr></thead>
+<thead><tr class='sp_head'><th class='ip'>IP</th><th class='mac'>MAC</th><th class='host'>РРјСЏ</th>
+<th class='type'>РўРёРї</th><th class='if'>РРЅС‚РµСЂС„РµР№СЃ</th></tr></thead>
 <tbody>"
   uARP !
   ['] (ArpHtml) CATCH ?DUP IF ." arp_err=" . THEN
@@ -78,6 +78,6 @@ USER uArpIface
   uARP @ STR@
 ;
 
-\EOF довольно медленно из-за GetHostIP
+\EOF РґРѕРІРѕР»СЊРЅРѕ РјРµРґР»РµРЅРЅРѕ РёР·-Р·Р° GetHostIP
 SocketsStartup DROP
 ArpHtml TYPE CR

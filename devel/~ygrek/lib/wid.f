@@ -1,6 +1,6 @@
 REQUIRE CONT ~profit/lib/bac4th.f
 
-\ Ãåíåðèðóåò nfa âñåõ ñëîâ èç ñïèñêà wid
+\ Ð“ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÑ‚ nfa Ð²ÑÐµÑ… ÑÐ»Ð¾Ð² Ð¸Ð· ÑÐ¿Ð¸ÑÐºÐ° wid
 : NFA=> ( wid --> nfa )
   PRO
   @
@@ -14,8 +14,8 @@ REQUIRE CONT ~profit/lib/bac4th.f
 
 : VOC> ( xt -- wid ) ALSO EXECUTE CONTEXT @ PREVIOUS ;
 
-\ Îïðåäåëèòü èäåíòèôèêàòîð ñëîâàðÿ
-\ Åñëè vocname íå ñëîâàðü - ðåçóëüòàò íå îïðåäåëåí
+\ ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€ ÑÐ»Ð¾Ð²Ð°Ñ€Ñ
+\ Ð•ÑÐ»Ð¸ vocname Ð½Ðµ ÑÐ»Ð¾Ð²Ð°Ñ€ÑŒ - Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð½Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½
 : [WID] ( "vocname" -- wid ) ' VOC> POSTPONE LITERAL ; IMMEDIATE
 
 \EOF
@@ -23,8 +23,8 @@ REQUIRE CONT ~profit/lib/bac4th.f
 \ REQUIRE [IF] ib/include/tools.f
 
 : search-nfa2 ( a u wid -- 0 | nfa ) 
-\ íàéòè ñëîâàðíóþ ñòàòüþ äëÿ çàäàííîãî ñëîâà â ñïèñêå wid
-\ âåðíóòü åãî NFA
+\ Ð½Ð°Ð¹Ñ‚Ð¸ ÑÐ»Ð¾Ð²Ð°Ñ€Ð½ÑƒÑŽ ÑÑ‚Ð°Ñ‚ÑŒÑŽ Ð´Ð»Ñ Ð·Ð°Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ ÑÐ»Ð¾Ð²Ð° Ð² ÑÐ¿Ð¸ÑÐºÐµ wid
+\ Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÐµÐ³Ð¾ NFA
   START{
     CUT:
     NFA=> 

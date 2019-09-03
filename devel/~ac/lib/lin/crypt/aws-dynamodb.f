@@ -1,4 +1,4 @@
-\ Пример работы с Amazon AWS DynamoDB.
+\ РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ СЃ Amazon AWS DynamoDB.
 
 REQUIRE STR@        ~ac/lib/str5.f
 REQUIRE HMAC-SHA1   ~ac/lib/lin/crypt/gcrypt.f

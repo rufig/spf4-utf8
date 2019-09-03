@@ -60,7 +60,7 @@ With Help of
           region00="forResWord" region10="forResWord"
           region01="dpOpenStruct" region11="dpCloseStruct"
    />
-   <!-- åñëè áëîêè ïåðåñåêàþòñÿ, êàê [IF] è IF, òî ðàáîòàåò òîëüêî îäèí èç íèõ.. -->
+   <!-- ÐµÑÐ»Ð¸ Ð±Ð»Ð¾ÐºÐ¸ Ð¿ÐµÑ€ÐµÑÐµÐºÐ°ÑŽÑ‚ÑÑ, ÐºÐ°Ðº [IF] Ð¸ IF, Ñ‚Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¾Ð´Ð¸Ð½ Ð¸Ð· Ð½Ð¸Ñ….. -->
 
    <!--
    <block start="/^|\s\$\s+(\S+)/i" end="/^|\s(\$)(\s|$)?=/i" scheme="forth"

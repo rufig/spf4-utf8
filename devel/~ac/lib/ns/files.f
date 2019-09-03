@@ -1,4 +1,4 @@
-\ Файловый NS в отличие от других в этом каталоге, работает только с Windows
+\ Р¤Р°Р№Р»РѕРІС‹Р№ NS РІ РѕС‚Р»РёС‡РёРµ РѕС‚ РґСЂСѓРіРёС… РІ СЌС‚РѕРј РєР°С‚Р°Р»РѕРіРµ, СЂР°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ СЃ Windows
 
 REQUIRE FIND-FILES-R      ~ac/lib/win/file/findfile-r.f 
 REQUIRE ForEachDirWRstr   ~ac/lib/ns/iter.f
@@ -30,9 +30,9 @@ REQUIRE FileExists        ~ac/lib/win/file/file-exists.f
   dwFileAttributes @ FILE_ATTRIBUTE_DIRECTORY AND 0<>
 ;
 : FULLPATH { s oid -- s }
-\ из имен узлов файловой системы собирается полный путь
+\ РёР· РёРјРµРЅ СѓР·Р»РѕРІ С„Р°Р№Р»РѕРІРѕР№ СЃРёСЃС‚РµРјС‹ СЃРѕР±РёСЂР°РµС‚СЃСЏ РїРѕР»РЅС‹Р№ РїСѓС‚СЊ
   oid OBJ-NAME@
-  OVER @ ABS 0x4000 < \ см. ниже
+  OVER @ ABS 0x4000 < \ СЃРј. РЅРёР¶Рµ
   IF DROP cFileName ASCIIZ>
      s oid PAR@ ?DUP IF RECURSE THEN ( addr u s )
      " \" OVER S+ STR+
@@ -41,13 +41,13 @@ REQUIRE FileExists        ~ac/lib/win/file/file-exists.f
 ;
 : CAR { oid \ data id item s pa -- item }
   TEMP-WORDLIST -> item
-  ( HERE) PAD /WIN32_FIND_DATA item OBJ-NAME! \ внимание, "имя" бинарное!
+  ( HERE) PAD /WIN32_FIND_DATA item OBJ-NAME! \ РІРЅРёРјР°РЅРёРµ, "РёРјСЏ" Р±РёРЅР°СЂРЅРѕРµ!
   [ GET-CURRENT ] LITERAL item CLASS!
   oid item PAR!
   item OBJ-NAME@ DROP -> data
   data /WIN32_FIND_DATA ERASE
-  data oid OBJ-NAME@  \ либо имя каталога, либо WIN32_FIND_DATA
-  OVER @ ABS 0x4000 < \ если там dwFileAttributes, а не начало имени (хак)...
+  data oid OBJ-NAME@  \ Р»РёР±Рѕ РёРјСЏ РєР°С‚Р°Р»РѕРіР°, Р»РёР±Рѕ WIN32_FIND_DATA
+  OVER @ ABS 0x4000 < \ РµСЃР»Рё С‚Р°Рј dwFileAttributes, Р° РЅРµ РЅР°С‡Р°Р»Рѕ РёРјРµРЅРё (С…Р°Рє)...
   IF 2DROP "" DUP -> pa oid FULLPATH STR@ THEN
   " {s}\*.*" DUP -> s 
   STR@ \ 2DUP ." [" TYPE ." ]" CR
@@ -66,21 +66,21 @@ REQUIRE FileExists        ~ac/lib/win/file/file-exists.f
   ELSE item1 OBJ-DATA@ FindClose DROP item1 FREE-WORDLIST 0 THEN
 ;
 : SHEADER ( addr u -- )
-\ Создать файл [или лучше каталог?] с именем addr u в текущем DIR-узел "компиляции"
+\ РЎРѕР·РґР°С‚СЊ С„Р°Р№Р» [РёР»Рё Р»СѓС‡С€Рµ РєР°С‚Р°Р»РѕРі?] СЃ РёРјРµРЅРµРј addr u РІ С‚РµРєСѓС‰РµРј DIR-СѓР·РµР» "РєРѕРјРїРёР»СЏС†РёРё"
   GET-CURRENT OBJ-NAME@ " {s}\{s}" DUP >R
   STR@ 2DUP R/W CREATE-FILE THROW >R
   TEMP-WORDLIST >R
   R@ OBJ-NAME!
   FIL-WL R@ CLASS!
   R> R> SWAP >R
-  R@ OBJ-DATA! \ хэндл
+  R@ OBJ-DATA! \ С…СЌРЅРґР»
   GET-CURRENT R@ PAR!
   R> SET-CURRENT
   R> STRFREE
 ;
 : SEARCH-WORDLIST { c-addr u oid \ f -- 0 | xt 1 | xt -1 }
 
-\ сначала ищем в методах класса
+\ СЃРЅР°С‡Р°Р»Р° РёС‰РµРј РІ РјРµС‚РѕРґР°С… РєР»Р°СЃСЃР°
   c-addr u [ GET-CURRENT ] LITERAL SEARCH-WORDLIST ?DUP IF EXIT THEN
 
   c-addr u oid OBJ-NAME@ " {s}\{s}" DUP -> f STR@ 2DUP
@@ -101,7 +101,7 @@ ALSO DIR NEW: c:
 WINDOWS system32 drivers etc hosts 
 ORDER CONTEXT @ CLASS.
 CONTEXT @ OBJ-NAME@ R/O OPEN-FILE THROW DUP . CLOSE-FILE THROW CR
-\ Приведет к печати:
+\ РџСЂРёРІРµРґРµС‚ Рє РїРµС‡Р°С‚Рё:
 \ Context: c:\WINDOWS\system32\drivers\etc\hosts FORTH
 \ Current: FORTH
 \ FIL2036
@@ -110,8 +110,8 @@ PREVIOUS
 ALSO c: DEFINITIONS PREVIOUS CREATE TEST_FILE.TXT
 ORDER
 GET-CURRENT CLASS. GET-CURRENT OBJ-DATA@ DUP . CLOSE-FILE THROW CR
-\ Создаст файл c:\TEST_FILE.TXT (вместо "словарной статьи")
-\ и приведет к печати:
+\ РЎРѕР·РґР°СЃС‚ С„Р°Р№Р» c:\TEST_FILE.TXT (РІРјРµСЃС‚Рѕ "СЃР»РѕРІР°СЂРЅРѕР№ СЃС‚Р°С‚СЊРё")
+\ Рё РїСЂРёРІРµРґРµС‚ Рє РїРµС‡Р°С‚Рё:
 \ Context: FORTH
 \ Current: c:\TEST_FILE.TXT
 \ FIL2036

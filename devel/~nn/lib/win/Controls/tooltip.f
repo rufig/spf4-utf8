@@ -36,7 +36,7 @@ M: Create ( a u owner toolbar -- )
     => handle @ uId !
     Create
     S>ZALLOC lpszText !
-    handle @ \ ?DUP 	<-- Èñïðàâèë 29.03.05ã. Àáäðàõèìîâ È.À.
+    handle @ \ ?DUP 	<-- Ð˜ÑÐ¿Ñ€Ð°Ð²Ð¸Ð» 29.03.05Ð³. ÐÐ±Ð´Ñ€Ð°Ñ…Ð¸Ð¼Ð¾Ð² Ð˜.Ð.
     IF 
         SWP_NOMOVE SWP_NOSIZE OR SWP_NOACTIVATE OR
         0 0 0 0 HWND_TOPMOST handle @

@@ -1,8 +1,8 @@
 \ 2001
 
 : ParseFileName ( -- a u )
-\ разобрать имя файла  из входного потока. 
-\ имя может быть в кавычках ( "filename").
+\ СЂР°Р·РѕР±СЂР°С‚СЊ РёРјСЏ С„Р°Р№Р»Р°  РёР· РІС…РѕРґРЅРѕРіРѕ РїРѕС‚РѕРєР°. 
+\ РёРјСЏ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІ РєР°РІС‹С‡РєР°С… ( "filename").
 
     BL SKIP
     SOURCE DROP >IN @ + C@  DUP [CHAR] " = IF >IN 1+! ELSE DROP BL THEN
@@ -28,7 +28,7 @@
   0 ( -- 0 0 )
 ;
 : NextSubstring2 ( <char1>ccc<char2> -- addr u)
-\ отдает подстроку вместе с обрамляющими кавычками
+\ РѕС‚РґР°РµС‚ РїРѕРґСЃС‚СЂРѕРєСѓ РІРјРµСЃС‚Рµ СЃ РѕР±СЂР°РјР»СЏСЋС‰РёРјРё РєР°РІС‹С‡РєР°РјРё
   NextSubstring DUP IF
   OVER 1- C@
   IsCharSubs IF 
@@ -53,7 +53,7 @@ CHAR ;  VALUE FieldDelimiter
   -TRAILING  UnQuoted
 ;
 : NextField2 ( -- a u )
-\ в кавычках может быть и разделитель полей
+\ РІ РєР°РІС‹С‡РєР°С… РјРѕР¶РµС‚ Р±С‹С‚СЊ Рё СЂР°Р·РґРµР»РёС‚РµР»СЊ РїРѕР»РµР№
   SkipDelimiters
   GetChar DROP IsCharSubs         IF
   NextSubstring

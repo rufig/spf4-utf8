@@ -1,4 +1,4 @@
-\ Аллокирование локального массива             Максимов М.О.
+\ РђР»Р»РѕРєРёСЂРѕРІР°РЅРёРµ Р»РѕРєР°Р»СЊРЅРѕРіРѕ РјР°СЃСЃРёРІР°             РњР°РєСЃРёРјРѕРІ Рњ.Рћ.
 REQUIRE [IF] ~MAK\CompIF1.f
 REQUIRE [IFNDEF] ~nn\lib\ifdef.f
 REQUIRE   { ~mak\locals4.f
@@ -7,7 +7,7 @@ REQUIRE   $! ~mak\place.f
 : L_LOCALALLOC    ( n1 -- a1 )          \ allocate n1 bytes of return stack
                                         \ return a1 the address of the array
                                         \ if no locals, setup stack frame
-\ может быть только последним, но работает быстрее
+\ РјРѕР¶РµС‚ Р±С‹С‚СЊ С‚РѕР»СЊРєРѕ РїРѕСЃР»РµРґРЅРёРј, РЅРѕ СЂР°Р±РѕС‚Р°РµС‚ Р±С‹СЃС‚СЂРµРµ
  RP@ CELL+ @ ['] (LocalsExit) =
  IF DUP  RP@ - NEGATE RP!
     DUP  RP@ +

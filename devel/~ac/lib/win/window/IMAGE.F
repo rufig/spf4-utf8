@@ -3,7 +3,7 @@ REQUIRE ||             ~ac/lib/temps.f
 WINAPI: LoadImageA    USER32.DLL
 WINAPI: LoadIconA     USER32.DLL
 WINAPI: DestroyIcon   USER32.DLL
-WINAPI: DeleteObject  GDI32.DLL  \ для bitmap
+WINAPI: DeleteObject  GDI32.DLL  \ РґР»СЏ bitmap
 WINAPI: DestroyCursor USER32.DLL
 
 BASE @ HEX
@@ -21,16 +21,16 @@ BASE !
   LR_LOADFROMFILE 16 16 IMAGE_ICON a 0 LoadImageA
 ;
 : LoadIconResource16 ( id -- h )
-\ id - идентификатор ресурса GROUP_ICON, а не ICON
+\ id - РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРµСЃСѓСЂСЃР° GROUP_ICON, Р° РЅРµ ICON
   || id || (( id ))
   0 16 16 IMAGE_ICON id IMAGE-BASE LoadImageA
 ;
 : LoadIconResource32 ( id -- h )
-\ id - идентификатор ресурса GROUP_ICON
+\ id - РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРµСЃСѓСЂСЃР° GROUP_ICON
   || id || (( id ))
   0 32 32 IMAGE_ICON id IMAGE-BASE LoadImageA
 ;
-: LoadBitmap ( addr u -- h ) \ для вставки в меню, поэтому с LR_LOADMAP3DCOLORS
+: LoadBitmap ( addr u -- h ) \ РґР»СЏ РІСЃС‚Р°РІРєРё РІ РјРµРЅСЋ, РїРѕСЌС‚РѕРјСѓ СЃ LR_LOADMAP3DCOLORS
   || a u || (( a u ))
   LR_LOADFROMFILE LR_LOADTRANSPARENT OR LR_LOADMAP3DCOLORS OR 
   0 0 IMAGE_BITMAP a 0 LoadImageA

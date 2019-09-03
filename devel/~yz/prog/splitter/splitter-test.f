@@ -6,14 +6,14 @@ REQUIRE splitter ~yz/lib/splitter.f
   GRID
     
     GRID
-      " Вертикальный" label |
+      " Р’РµСЂС‚РёРєР°Р»СЊРЅС‹Р№" label |
       ===
       multiedit -xspan -yspan |
     GRID;
 
     GRID
       GRID
-        " Горизонтальный" label |
+        " Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№" label |
         ===
         multiedit -xspan -yspan |
       GRID;
@@ -25,7 +25,7 @@ REQUIRE splitter ~yz/lib/splitter.f
 
     splitter 0 -xmargin 0 -ymargin -xspan -yspan |
   GRID; winmain -grid!
-  " Разделители" winmain -text!
+  " Р Р°Р·РґРµР»РёС‚РµР»Рё" winmain -text!
   300 300 winmain winresize
   winmain wincenter
   winmain winshow

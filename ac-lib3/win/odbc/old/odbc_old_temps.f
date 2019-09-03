@@ -1,7 +1,7 @@
-( 17.08.1999 Черезов А. )
+( 17.08.1999 Р§РµСЂРµР·РѕРІ Рђ. )
 
-( Работа с базами данных ODBC, замена библиотеки s.txt двухлетней давности.
-  + обновление 19.08.1999
+( Р Р°Р±РѕС‚Р° СЃ Р±Р°Р·Р°РјРё РґР°РЅРЅС‹С… ODBC, Р·Р°РјРµРЅР° Р±РёР±Р»РёРѕС‚РµРєРё s.txt РґРІСѓС…Р»РµС‚РЅРµР№ РґР°РІРЅРѕСЃС‚Рё.
+  + РѕР±РЅРѕРІР»РµРЅРёРµ 19.08.1999
 )
 
 REQUIRE || ~ac/lib/temps.f
@@ -74,7 +74,7 @@ CONSTANT /ODBC
   fodbc /ODBC ERASE
   fodbc odbcEnv SQLAllocEnv SQL_OK?
   IF 
-     SQL_IS_INTEGER SQL_OV_ODBC2 SQL_ATTR_ODBC_VERSION fodbc odbcEnv @ SQLSetEnvAttr DROP \ без этого новый ODBC работать не хочет
+     SQL_IS_INTEGER SQL_OV_ODBC2 SQL_ATTR_ODBC_VERSION fodbc odbcEnv @ SQLSetEnvAttr DROP \ Р±РµР· СЌС‚РѕРіРѕ РЅРѕРІС‹Р№ ODBC СЂР°Р±РѕС‚Р°С‚СЊ РЅРµ С…РѕС‡РµС‚
      fodbc odbcConn  fodbc odbcEnv @ SQLAllocConnect SQL_OK? fodbc SWAP
   ELSE fodbc FALSE THEN
 ;

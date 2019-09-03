@@ -1,24 +1,24 @@
 \ $Id$
 \
-\ Дополнение слов в консоли SPF
+\ Р”РѕРїРѕР»РЅРµРЅРёРµ СЃР»РѕРІ РІ РєРѕРЅСЃРѕР»Рё SPF
 \
-\ Перебор вариантов дополнения - Tab
-\ История ввода - стрелки вниз/вверх
-\ Очистить текущий ввод - Esc
-\ Навигация - Home, End, стрелки влево/вправо
-\ Удаление - Bksp, Del
-\ Вставка из буфера обмена - Ctrl-V, Shift-Ins
+\ РџРµСЂРµР±РѕСЂ РІР°СЂРёР°РЅС‚РѕРІ РґРѕРїРѕР»РЅРµРЅРёСЏ - Tab
+\ РСЃС‚РѕСЂРёСЏ РІРІРѕРґР° - СЃС‚СЂРµР»РєРё РІРЅРёР·/РІРІРµСЂС…
+\ РћС‡РёСЃС‚РёС‚СЊ С‚РµРєСѓС‰РёР№ РІРІРѕРґ - Esc
+\ РќР°РІРёРіР°С†РёСЏ - Home, End, СЃС‚СЂРµР»РєРё РІР»РµРІРѕ/РІРїСЂР°РІРѕ
+\ РЈРґР°Р»РµРЅРёРµ - Bksp, Del
+\ Р’СЃС‚Р°РІРєР° РёР· Р±СѓС„РµСЂР° РѕР±РјРµРЅР° - Ctrl-V, Shift-Ins
 \
-\ Просто подключите эту либу и всё.
+\ РџСЂРѕСЃС‚Рѕ РїРѕРґРєР»СЋС‡РёС‚Рµ СЌС‚Сѓ Р»РёР±Сѓ Рё РІСЃС‘.
 
 REQUIRE [IF] lib/include/tools.f
 
-\ повторная загрузка не нужна
+\ РїРѕРІС‚РѕСЂРЅР°СЏ Р·Р°РіСЂСѓР·РєР° РЅРµ РЅСѓР¶РЅР°
 C" ACCEPT-Autocompletion" FIND NIP [IF] \EOF [THEN]
 
 MODULE: ACCEPT-Autocompletion
 
-\ Прячем все либы внутрь т.к. могут быть конфликты неприятные
+\ РџСЂСЏС‡РµРј РІСЃРµ Р»РёР±С‹ РІРЅСѓС‚СЂСЊ С‚.Рє. РјРѕРіСѓС‚ Р±С‹С‚СЊ РєРѕРЅС„Р»РёРєС‚С‹ РЅРµРїСЂРёСЏС‚РЅС‹Рµ
 
 REQUIRE /STRING lib/include/string.f
 REQUIRE AT-XY ~day/common/console.f
@@ -30,15 +30,15 @@ REQUIRE CBString ~day/lib/clipboard.f
 
 WINAPI: GetConsoleScreenBufferInfo KERNEL32.DLL
 
-0 VALUE _addr \ адрес буфера для ACCEPT
-0 VALUE _n1 \ длина буфера для ACCEPT
-0 VALUE _in \ длина текста
-0 VALUE _last \ позиция последнего символа введённого руками (не автодополнением)
-0 VALUE _y \ номер строки на консоли
-0 VALUE _x \ номер колонки
-0 VALUE in-history \ состояние перебора истории
-0 VALUE history \ список строк истории
-0 VALUE _cursor \ позиция в строке на которую указывает видимый курсор
+0 VALUE _addr \ Р°РґСЂРµСЃ Р±СѓС„РµСЂР° РґР»СЏ ACCEPT
+0 VALUE _n1 \ РґР»РёРЅР° Р±СѓС„РµСЂР° РґР»СЏ ACCEPT
+0 VALUE _in \ РґР»РёРЅР° С‚РµРєСЃС‚Р°
+0 VALUE _last \ РїРѕР·РёС†РёСЏ РїРѕСЃР»РµРґРЅРµРіРѕ СЃРёРјРІРѕР»Р° РІРІРµРґС‘РЅРЅРѕРіРѕ СЂСѓРєР°РјРё (РЅРµ Р°РІС‚РѕРґРѕРїРѕР»РЅРµРЅРёРµРј)
+0 VALUE _y \ РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё РЅР° РєРѕРЅСЃРѕР»Рё
+0 VALUE _x \ РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+0 VALUE in-history \ СЃРѕСЃС‚РѕСЏРЅРёРµ РїРµСЂРµР±РѕСЂР° РёСЃС‚РѕСЂРёРё
+0 VALUE history \ СЃРїРёСЃРѕРє СЃС‚СЂРѕРє РёСЃС‚РѕСЂРёРё
+0 VALUE _cursor \ РїРѕР·РёС†РёСЏ РІ СЃС‚СЂРѕРєРµ РЅР° РєРѕС‚РѕСЂСѓСЋ СѓРєР°Р·С‹РІР°РµС‚ РІРёРґРёРјС‹Р№ РєСѓСЂСЃРѕСЂ
 
 : history-file S" spf.history" +ModuleDirName ;
 
@@ -49,16 +49,16 @@ CONSTANT /history
 CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
 
 : AT-XY? ( -- x y )
-\ определение координат курсора
+\ РѕРїСЂРµРґРµР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ РєСѓСЂСЃРѕСЂР°
   CONSOLE_SCREEN_BUFFER_INFO H-STDOUT GetConsoleScreenBufferInfo DROP
   CONSOLE_SCREEN_BUFFER_INFO 4 + DUP W@ SWAP 2+ W@ ;
 
 : CLEAR-LINE ( x y -- )
-\ очистить строку
+\ РѕС‡РёСЃС‚РёС‚СЊ СЃС‚СЂРѕРєСѓ
    16 LSHIFT OR 0 >R RP@ SWAP MAX-XY NIP BL H-STDOUT FillConsoleOutputCharacterA R> 2DROP ;
 
 : scanback ( addr u -- a' u' )
-\ найти начало слова (сканирование назад по строке)
+\ РЅР°Р№С‚Рё РЅР°С‡Р°Р»Рѕ СЃР»РѕРІР° (СЃРєР°РЅРёСЂРѕРІР°РЅРёРµ РЅР°Р·Р°Рґ РїРѕ СЃС‚СЂРѕРєРµ)
   2DUP
   BEGIN
     1-
@@ -69,13 +69,13 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
 ;
 
 : SUBSTART ( a u a1 u1 -- 0 | -1 )
-\ подстрока с начала строки
+\ РїРѕРґСЃС‚СЂРѕРєР° СЃ РЅР°С‡Р°Р»Р° СЃС‚СЂРѕРєРё
    2>R OVER 2R> ROT >R
    ( a u a1 u1 ) ( R: a ) \ %)
    SEARCH NIP IF R> <> ELSE DROP RDROP -1 THEN ;
 
 : CDR-BY-NAME-START ( a u nfa1|0 -- a u nfa2|0 )
-\ найти следующее слово в списке слов начинающееся на a u
+\ РЅР°Р№С‚Рё СЃР»РµРґСѓСЋС‰РµРµ СЃР»РѕРІРѕ РІ СЃРїРёСЃРєРµ СЃР»РѕРІ РЅР°С‡РёРЅР°СЋС‰РµРµСЃСЏ РЅР° a u
  BEGIN  ( a u NFA | a u 0 )
    DUP
  WHILE  ( a u NFA )
@@ -86,7 +86,7 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
 ;
 
 : put ( a u -- in )
-\ поместить строку начиная от _last
+\ РїРѕРјРµСЃС‚РёС‚СЊ СЃС‚СЂРѕРєСѓ РЅР°С‡РёРЅР°СЏ РѕС‚ _last
    _last OVER + _n1 > IF 2DROP _in EXIT THEN
    >R _addr _last scanback DROP R> 2DUP + >R CMOVE
    R> _addr - ;
@@ -136,7 +136,7 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
      _in TO _last
    THEN
 
-   DUP 27 = IF \ Esc - очистить ввод
+   DUP 27 = IF \ Esc - РѕС‡РёСЃС‚РёС‚СЊ РІРІРѕРґ
      0 TO in-history
      0 TO _cursor
      0 TO _in
@@ -153,15 +153,15 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
    _cursor 1+ TO _cursor
    _in TO _last
 
-   EXIT \ эксперименатльная фича %)
+   EXIT \ СЌРєСЃРїРµСЂРёРјРµРЅР°С‚Р»СЊРЅР°СЏ С„РёС‡Р° %)
 
    \ ?AUTOCOMPLETION 0= IF EXIT THEN
-   \ если на вводе готовое слово - ничего не делаем
+   \ РµСЃР»Рё РЅР° РІРІРѕРґРµ РіРѕС‚РѕРІРѕРµ СЃР»РѕРІРѕ - РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°РµРј
    nfa-of-input IF DROP EXIT THEN
-   \ иначе ищем дополнение
-   CONTEXT @ @ completion DUP 0= IF DROP EXIT THEN \ если их нет - выходим
-   DUP CDR completion IF DROP EXIT THEN \ если их больше одного - тоже выходим
-   \ иначе подставляем сразу!
+   \ РёРЅР°С‡Рµ РёС‰РµРј РґРѕРїРѕР»РЅРµРЅРёРµ
+   CONTEXT @ @ completion DUP 0= IF DROP EXIT THEN \ РµСЃР»Рё РёС… РЅРµС‚ - РІС‹С…РѕРґРёРј
+   DUP CDR completion IF DROP EXIT THEN \ РµСЃР»Рё РёС… Р±РѕР»СЊС€Рµ РѕРґРЅРѕРіРѕ - С‚РѕР¶Рµ РІС‹С…РѕРґРёРј
+   \ РёРЅР°С‡Рµ РїРѕРґСЃС‚Р°РІР»СЏРµРј СЃСЂР°Р·Сѓ!
    COUNT put TO _in
    _in TO _cursor ;
 
@@ -205,14 +205,14 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
    DROP ;
 
 : accept-one ( c -1|0 -- ? )
-\ обработка одного символа
+\ РѕР±СЂР°Р±РѕС‚РєР° РѕРґРЅРѕРіРѕ СЃРёРјРІРѕР»Р°
    IF DUP accept-ascii 13 <> ELSE accept-scan TRUE THEN ;
 
 : \STRING ( a u n -- a+u-n n ) OVER MIN >R + R@ - R> ;
 : MAX-X MAX-XY DROP 1- ;
 
 : display ( ? -- )
-\ показать буфер
+\ РїРѕРєР°Р·Р°С‚СЊ Р±СѓС„РµСЂ
 \   LT LTL @ TO-LOG _y .TO-LOG _in .TO-LOG
    _x _y AT-XY
    _x _y CLEAR-LINE
@@ -225,9 +225,9 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
 ;
 
 : skey ( -- c -1|0 )
-\ получить событие с клавиатуры
-\ -1 - код ASCII
-\  0 - скан код
+\ РїРѕР»СѓС‡РёС‚СЊ СЃРѕР±С‹С‚РёРµ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+\ -1 - РєРѕРґ ASCII
+\  0 - СЃРєР°РЅ РєРѕРґ
    BEGIN
     EKEY
     EKEY>CHAR IF TRUE EXIT THEN
@@ -238,10 +238,10 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
 
 : List=> ( list -- ) R> SWAP ForEach ;
 : add-history ( s -- ) history AllocateNodeEnd .val ! ;
-: dump-history ( -- ) \ всю историю в файл заново
-   \ очистить файл
+: dump-history ( -- ) \ РІСЃСЋ РёСЃС‚РѕСЂРёСЋ РІ С„Р°Р№Р» Р·Р°РЅРѕРІРѕ
+   \ РѕС‡РёСЃС‚РёС‚СЊ С„Р°Р№Р»
    history-file R/W CREATE-FILE THROW CLOSE-FILE THROW
-   \ записать весь список
+   \ Р·Р°РїРёСЃР°С‚СЊ РІРµСЃСЊ СЃРїРёСЃРѕРє
    LAMBDA{ .val @ STR@ history-file ATTACH-LINE-CATCH DROP } history ForEach ;
 
 : load-history
@@ -252,7 +252,7 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
    STR@ >STR add-history
   }EMERGE
   history listSize 0= IF
-   "" add-history \ всегда есть один элемент в списке!
+   "" add-history \ РІСЃРµРіРґР° РµСЃС‚СЊ РѕРґРёРЅ СЌР»РµРјРµРЅС‚ РІ СЃРїРёСЃРєРµ!
   THEN ;
 
 : htype history List=> .val @ STR@ CR TYPE ;
@@ -289,7 +289,7 @@ CREATE CONSOLE_SCREEN_BUFFER_INFO 22 ALLOT
     dump-history
   ELSE
    DROP
-   _addr _in >STR add-history \ добавили в историю
+   _addr _in >STR add-history \ РґРѕР±Р°РІРёР»Рё РІ РёСЃС‚РѕСЂРёСЋ
    _addr _in history-file ATTACH-LINE-CATCH DROP
   THEN
   _in

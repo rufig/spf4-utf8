@@ -1,5 +1,5 @@
 \ 28-10-2007 ~mOleg
-\ тестируем скорость работы алгоритма
+\ С‚РµСЃС‚РёСЂСѓРµРј СЃРєРѕСЂРѕСЃС‚СЊ СЂР°Р±РѕС‚С‹ Р°Р»РіРѕСЂРёС‚РјР°
 
  REQUIRE ?DEFINED       devel\~moleg\lib\util\ifdef.f
 ?DEFINED similar CR .( use: spd.bat sample.f |enter ) BYE

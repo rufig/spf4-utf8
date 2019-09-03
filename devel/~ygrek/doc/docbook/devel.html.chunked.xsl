@@ -4,13 +4,13 @@
 
   <xsl:include href="devel.basic.xsl"/>
 
-  <!-- Óñêîðåíèå -->
+  <!-- Ð£ÑÐºÐ¾Ñ€ÐµÐ½Ð¸Ðµ -->
   <xsl:param name="chunk.fast" select="1"></xsl:param>
 
-  <!-- Êàòàëîã äëÿ ñîõðàíåíèÿ html ôàéëîâ -->
+  <!-- ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ html Ñ„Ð°Ð¹Ð»Ð¾Ð² -->
   <xsl:param name="base.dir" select="'chunked/'"></xsl:param>
 
-  <!-- Èìÿ ôàéëà-êîðíÿ -->
+  <!-- Ð˜Ð¼Ñ Ñ„Ð°Ð¹Ð»Ð°-ÐºÐ¾Ñ€Ð½Ñ -->
   <xsl:param name="root.filename" select="'index'"></xsl:param>
 
   <xsl:param name="chunk.section.depth" select="1"></xsl:param>

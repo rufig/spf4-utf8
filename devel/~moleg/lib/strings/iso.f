@@ -1,23 +1,23 @@
 \ 2008-03-19 ~mOleg
-\ —opyright [C] 2008 mOleg mininoleg@yahoo.com
-\ ‡·ÓÚ‡ Ò iso ÒËÏ‚ÓÎ‡ÏË
+\ –°opyright [C] 2008 mOleg mininoleg@yahoo.com
+\ —Ä–∞–±–æ—Ç–∞ —Å iso —Å–∏–º–≤–æ–ª–∞–º–∏
 
  REQUIRE ?DEFINED  devel\~moleg\lib\util\ifdef.f
  REQUIRE B@        devel\~mOleg\lib\util\bytes.f
  REQUIRE /chartype devel\~mOleg\lib\strings\chars.f
 
-\ ÏÂÚÓ‰˚ ‡·ÓÚ˚ Ò ISO ÒËÏ‚ÓÎ‡ÏË:
+\ –º–µ—Ç–æ–¥—ã —Ä–∞–±–æ—Ç—ã —Å ISO —Å–∏–º–≤–æ–ª–∞–º–∏:
 : CHAR@ ( addr --> char ) B@ ;
 : CHAR! ( char addr --> ) B! ;
 : CHAR# ( addr --> # ) DROP 1 ;
-\ : CHAR+ ( addr --> addr ) 1 + ; \ ÛÊÂ ÂÒÚ¸ ‚ —œ‘
+\ : CHAR+ ( addr --> addr ) 1 + ; \ —É–∂–µ –µ—Å—Ç—å –≤ –°–ü–§
 : <CHAR ( addr --> addr ) 1 - ;
 
-\ ‚ÂÌÛÚ¸ ‡‰ÂÒ‡ ÒÎÓ‚, ‡·ÓÚ‡˛˘Ëı Ò ÒËÏ‚ÓÎ‡ÏË
+\ –≤–µ—Ä–Ω—É—Ç—å –∞–¥—Ä–µ—Å–∞ —Å–ª–æ–≤, —Ä–∞–±–æ—Ç–∞—é—â–∏—Ö —Å —Å–∏–º–≤–æ–ª–∞–º–∏
 : ISO> ( --> '@ '! '+ 'char# )
        ['] CHAR@  ['] CHAR!  ['] CHAR+  ['] CHAR# ['] <CHAR ;
 
-?DEFINED test{ \EOF -- ÚÂÒÚÓ‚‡ˇ ÒÂÍˆËˇ -----------------------------------------
+?DEFINED test{ \EOF -- —Ç–µ—Å—Ç–æ–≤–∞—è —Å–µ–∫—Ü–∏—è -----------------------------------------
 
 test{
       ISO> INPUT-STREAM

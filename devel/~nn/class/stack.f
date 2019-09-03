@@ -2,7 +2,7 @@ REQUIRE CLASS: ~nn/class/class.f
 
 CLASS: Stack
 
-        CELL FIELD data \ Начальный адрес стека
+        CELL FIELD data \ РќР°С‡Р°Р»СЊРЅС‹Р№ Р°РґСЂРµСЃ СЃС‚РµРєР°
         CELL FIELD num
 
 CONSTR: init

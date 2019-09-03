@@ -1,5 +1,5 @@
-\ Float-библиотека для spf375.exe ver. 2.33
-\ Слова высокого уровня
+\ Float-Р±РёР±Р»РёРѕС‚РµРєР° РґР»СЏ spf375.exe ver. 2.33
+\ РЎР»РѕРІР° РІС‹СЃРѕРєРѕРіРѕ СѓСЂРѕРІРЅСЏ
 \ [c] Dmitry Yakimov [ftech@tula.net]
 
 \ Hi level words
@@ -7,17 +7,17 @@
 
 \ ~day\float\floatkern.f
 USER-CREATE FLOAT-PAD ( -- c-addr ) \ 94 CORE EXT
- \ c-addr - адрес области для формирования строкового представления float 
- \ числа 
+ \ c-addr - Р°РґСЂРµСЃ РѕР±Р»Р°СЃС‚Рё РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ СЃС‚СЂРѕРєРѕРІРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ float 
+ \ С‡РёСЃР»Р° 
 0xFF USER-ALLOT
 
 USER FFORM
 USER FFORM-EXP
-USER ?PRINT-EXP       \ печать с экспонентой или без нее
+USER ?PRINT-EXP       \ РїРµС‡Р°С‚СЊ СЃ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№ РёР»Рё Р±РµР· РЅРµРµ
 USER F-SIZE
-USER PAST-COMMA \ число знаков после точки
-USER ?IS-COMMA  \ появилась точка или нет
-USER CountBuf \ счетчик в буфере
+USER PAST-COMMA \ С‡РёСЃР»Рѕ Р·РЅР°РєРѕРІ РїРѕСЃР»Рµ С‚РѕС‡РєРё
+USER ?IS-COMMA  \ РїРѕСЏРІРёР»Р°СЃСЊ С‚РѕС‡РєР° РёР»Рё РЅРµС‚
+USER CountBuf \ СЃС‡РµС‚С‡РёРє РІ Р±СѓС„РµСЂРµ
 
 : ?IE GETFPUSW 1 AND 0<> ;
 : ?ZE GETFPUSW 4 AND 0<> ;
@@ -137,9 +137,9 @@ DECIMAL
   THEN
 ;
 
-\ Идем до первой не цифры, точку пропускаем
+\ РРґРµРј РґРѕ РїРµСЂРІРѕР№ РЅРµ С†РёС„СЂС‹, С‚РѕС‡РєСѓ РїСЂРѕРїСѓСЃРєР°РµРј
 
-: FRAC>F ( addr u -- F: r )              \ использует 2 регистра FPU
+: FRAC>F ( addr u -- F: r )              \ РёСЃРїРѕР»СЊР·СѓРµС‚ 2 СЂРµРіРёСЃС‚СЂР° FPU
   .e
   OVER + SWAP
   DO
@@ -156,7 +156,7 @@ DECIMAL
 
 : >FLOAT-ABS  ( addr u -- F: r D:  bool )
    GETFPUCW >R UP-MODE 
-   2DUP GET-EXP DROP         \  addr u u2 - экспонента
+   2DUP GET-EXP DROP         \  addr u u2 - СЌРєСЃРїРѕРЅРµРЅС‚Р°
    ROT ROT FRAC>F             \ u2
    ?IS-COMMA @ 0= IF PAST-COMMA 1+! THEN
    PAST-COMMA @ - F10X  F*  ?OF ?IE OR 
@@ -170,10 +170,10 @@ DECIMAL
 
 \ Simple BNF parser ( ver. 2.2)
 
-\ Сдвинуть позицию в строке вправо на число присутствующих символов, но не
-\ больше чем MIN(u, max)
+\ РЎРґРІРёРЅСѓС‚СЊ РїРѕР·РёС†РёСЋ РІ СЃС‚СЂРѕРєРµ РІРїСЂР°РІРѕ РЅР° С‡РёСЃР»Рѕ РїСЂРёСЃСѓС‚СЃС‚РІСѓСЋС‰РёС… СЃРёРјРІРѕР»РѕРІ, РЅРѕ РЅРµ
+\ Р±РѕР»СЊС€Рµ С‡РµРј MIN(u, max)
 
-\ Если сдвигов было меньше чем min то выдаем 0, иначе -1.
+\ Р•СЃР»Рё СЃРґРІРёРіРѕРІ Р±С‹Р»Рѕ РјРµРЅСЊС€Рµ С‡РµРј min С‚Рѕ РІС‹РґР°РµРј 0, РёРЅР°С‡Рµ -1.
 \ : RP+@ () RP@
 
 : CHECK-SET ( addr u max min addr2 u2 -- addr2 u2 bool )
@@ -187,7 +187,7 @@ DECIMAL
       3 CELLS RP+@       
       ROT 
       >R RP@ 1 SEARCH RDROP NIP NIP
-      0= IF     \ первый несовпавший символ
+      0= IF     \ РїРµСЂРІС‹Р№ РЅРµСЃРѕРІРїР°РІС€РёР№ СЃРёРјРІРѕР»
            DROP SWAP
            R@ - SWAP R@ + SWAP 
            2R> 1+ < RDROP RDROP EXIT
@@ -222,7 +222,7 @@ DECIMAL
     1   1 <EXP>     >R
     1   0 <SIGN>    >R
     4   0 <DIGITS>  >R
-    NIP 0= \ После всего этого должен быть конец строки
+    NIP 0= \ РџРѕСЃР»Рµ РІСЃРµРіРѕ СЌС‚РѕРіРѕ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕРЅРµС† СЃС‚СЂРѕРєРё
     2R> 2R> 2R> R> AND
     AND AND AND AND AND
     AND
@@ -265,7 +265,7 @@ DECIMAL
     R> SETFPUCW
 ;
 
-\ Дает размер строки знаков после запятой float числа
+\ Р”Р°РµС‚ СЂР°Р·РјРµСЂ СЃС‚СЂРѕРєРё Р·РЅР°РєРѕРІ РїРѕСЃР»Рµ Р·Р°РїСЏС‚РѕР№ float С‡РёСЃР»Р°
 : #EXP ( -- n ) ( r -- r )  FDUP F0=  IF PRECISION  ELSE
    FDUP FABS FLOG FLOOR F>D DROP THEN
 ;
@@ -364,13 +364,13 @@ HEX
 DECIMAL
 
 : fnormalize-big ( F: r -- F: r1 u ) \ *
-\ на выходе: x.xxxxxx
+\ РЅР° РІС‹С…РѕРґРµ: x.xxxxxx
    UP-MODE
    FDUP F[LOG]
    F>DS DUP 0<> IF DUP 1- F10X F/ ELSE 1+ THEN
 ;
 
-\ на выходе: x.xxxxxx
+\ РЅР° РІС‹С…РѕРґРµ: x.xxxxxx
 : fnormalize-small ( F: r -- r1 u ) \ *
   0 
   BEGIN
@@ -388,8 +388,8 @@ DECIMAL
       THEN
 ;         
 
-\ выводим число, пришедшее как x.xxxxxx
-\ Если <1 то выводим точку
+\ РІС‹РІРѕРґРёРј С‡РёСЃР»Рѕ, РїСЂРёС€РµРґС€РµРµ РєР°Рє x.xxxxxx
+\ Р•СЃР»Рё <1 С‚Рѕ РІС‹РІРѕРґРёРј С‚РѕС‡РєСѓ
 
 : fprint-frac ( F: r D: u -- )
   TRUNC-MODE 
@@ -412,13 +412,13 @@ DECIMAL
   FDROP
 ;
 
-\ Вывести целую часть числа
+\ Р’С‹РІРµСЃС‚Рё С†РµР»СѓСЋ С‡Р°СЃС‚СЊ С‡РёСЃР»Р°
 : fprint-high ( F: r -- )
     fnormalize-big
     fprint-frac
 ;
 
-\ выводим число в формате без экспоненты
+\ РІС‹РІРѕРґРёРј С‡РёСЃР»Рѕ РІ С„РѕСЂРјР°С‚Рµ Р±РµР· СЌРєСЃРїРѕРЅРµРЅС‚С‹
 : fprint-noexp ( F: r -- )
     TRUNC-MODE
     FLOAT<1
@@ -440,7 +440,7 @@ DECIMAL
 
 : FD> FD< INVERT ;
 
-\ выводим число в формате с экспонентой
+\ РІС‹РІРѕРґРёРј С‡РёСЃР»Рѕ РІ С„РѕСЂРјР°С‚Рµ СЃ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
 : fprint-exp ( F: r -- )
    1 FD< 
    IF FDUP F0= IF 0 ELSE fnormalize-small -1 * THEN
@@ -608,7 +608,7 @@ DECIMAL
 : FVALUE FCONSTANT ;
 
 : ?LITERAL4 ( c-addr -- ... )
-  ( расширенный вариант ?LITERAL1: )
+  ( СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ РІР°СЂРёР°РЅС‚ ?LITERAL1: )
   DUP COUNT
   2 MIN S" 0x" COMPARE 0= 
   IF HEX-LITERAL EXIT THEN
@@ -616,7 +616,7 @@ DUP COUNT >FLOAT IF EXIT THEN
  ['] ?LITERAL1 CATCH THROW
 ;
 : ?SLITERAL4 ( c-addr u -- ... )
-  ( расширенный вариант ?SLITERAL1: )
+  ( СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ РІР°СЂРёР°РЅС‚ ?SLITERAL1: )
   2DUP 2 MIN S" 0x" COMPARE 0= 
   IF HEX-SLITERAL EXIT THEN
 2DUP >FLOAT IF EXIT THEN

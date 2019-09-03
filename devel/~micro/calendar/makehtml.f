@@ -76,11 +76,11 @@ MODULE: html
     DUP TO Year
     <html> CR
     <head> CR
-    <title> ." Календарь на " DUP . ." год" </title> CR
+    <title> ." РљР°Р»РµРЅРґР°СЂСЊ РЅР° " DUP . ." РіРѕРґ" </title> CR
     .' <meta name="GENERATOR" content="SPF 3.75">' CR
     </head> CR
     .' <body bgcolor="#FFFFFF">' CR
-    .' <p align="center"><font size="5">Календарь на ' . ." год</font>" CR
+    .' <p align="center"><font size="5">РљР°Р»РµРЅРґР°СЂСЊ РЅР° ' . ." РіРѕРґ</font>" CR
   ;
 
   : End
@@ -96,7 +96,7 @@ MODULE: html
     </table> CR
   ;
 
-  CREATE DOWNames C" пнвтсрчтптсбвс" ",
+  CREATE DOWNames C" РїРЅРІС‚СЃСЂС‡С‚РїС‚СЃР±РІСЃ" ",
   : DOWName ( n -- addr u )
     2 * DOWNames 1+ + 2
   ;

@@ -1,4 +1,4 @@
-\ Таймер
+\ РўР°Р№РјРµСЂ
 
 REQUIRE /SYSTEMTIME lib/include/facil.f
 

@@ -1,5 +1,5 @@
-\ Êëèåíò äëÿ ñåðâèñîâ cymru http://www.team-cymru.org/
-\ È ïðèìåð ðàáîòû ñ DNS :)
+\ ÐšÐ»Ð¸ÐµÐ½Ñ‚ Ð´Ð»Ñ ÑÐµÑ€Ð²Ð¸ÑÐ¾Ð² cymru http://www.team-cymru.org/
+\ Ð˜ Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ DNS :)
 
 REQUIRE GetRRs      ~ac/lib/win/winsock/dns_q.f
 REQUIRE >ENDIAN<    ~ac/lib/win/winsock/endian.f

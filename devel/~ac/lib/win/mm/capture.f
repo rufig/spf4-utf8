@@ -67,7 +67,7 @@ Interface: IID_ICreateDevEnum {29840822-5B84-11D0-BD3B-00A0C911CE86}
 Interface;
 
 IID_IEnumVariant
- \ òå æå ìåòîäû, ïîýòîìó èìèòèðóåì íàñëåäîâàíèå
+ \ Ñ‚Ðµ Ð¶Ðµ Ð¼ÐµÑ‚Ð¾Ð´Ñ‹, Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð¸Ð¼Ð¸Ñ‚Ð¸Ñ€ÑƒÐµÐ¼ Ð½Ð°ÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ðµ
 Interface: IID_IEnumMoniker {00000102-0000-0000-C000-000000000046}
 Interface;
 
@@ -396,7 +396,7 @@ CONSTANT /VIDEOINFOHEADER
   pCreateDevEnum
 ;
 : SampleGrabberInit { \ pSampleGrabberFilter -- pSampleGrabberFilter }
-  \ òðåáóåòñÿ DX8, qedit.dll
+  \ Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ DX8, qedit.dll
   ^ pSampleGrabberFilter IID_IBaseFilter CLSCTX_INPROC_SERVER 0
   S" {C1F400A0-3F08-11d3-9F0B-006008039E37}" >UNICODE String>CLSID THROW \ CLSID_SampleGrabber
   CoCreateInstance THROW

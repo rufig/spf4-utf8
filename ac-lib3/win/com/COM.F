@@ -1,5 +1,5 @@
-( работа с COM/DCOM, OLE, ActiveX )
-( А.Черезов 4.02.2000 )
+( СЂР°Р±РѕС‚Р° СЃ COM/DCOM, OLE, ActiveX )
+( Рђ.Р§РµСЂРµР·РѕРІ 4.02.2000 )
 
 WINAPI: CoInitializeEx        OLE32.DLL
 WINAPI: CoUninitialize        OLE32.DLL
@@ -38,21 +38,21 @@ USER UnicodeBuf
   2DUP + 0 SWAP W!
 ;
 : UNICODE> ( addr u -- addr2 u2 )
-\ на входе - длина в байтах, а WideCharToMultiByte хочет к-во символов
+\ РЅР° РІС…РѕРґРµ - РґР»РёРЅР° РІ Р±Р°Р№С‚Р°С…, Р° WideCharToMultiByte С…РѕС‡РµС‚ Рє-РІРѕ СЃРёРјРІРѕР»РѕРІ
   2 /
-  1+ \ 0 в конце тоже считаем, т.к. он есть в результ.строке
+  1+ \ 0 РІ РєРѕРЅС†Рµ С‚РѕР¶Рµ СЃС‡РёС‚Р°РµРј, С‚.Рє. РѕРЅ РµСЃС‚СЊ РІ СЂРµР·СѓР»СЊС‚.СЃС‚СЂРѕРєРµ
   >R >R 0 0 R> R>
   DUP CELL+ ALLOCATE DROP UnicodeBuf ! \ 0 0 addr len
   SWAP >R                        \ 0 0 len
   DUP CELL+ UnicodeBuf @         \ 0 0 len len+4 mem
-  ROT ( можно поствить DROP -1 для авторасчета длины) 
+  ROT ( РјРѕР¶РЅРѕ РїРѕСЃС‚РІРёС‚СЊ DROP -1 РґР»СЏ Р°РІС‚РѕСЂР°СЃС‡РµС‚Р° РґР»РёРЅС‹) 
   R>                             \ 0 0 len+4 mem len addr
   0 ( flags) 0 ( CP_ACP)
   WideCharToMultiByte
   UnicodeBuf @ 
   SWAP 1-
 ;
-: UASCIIZ> ( addr -- addr u ) \ вариант ASCIIZ> для Unicode
+: UASCIIZ> ( addr -- addr u ) \ РІР°СЂРёР°РЅС‚ ASCIIZ> РґР»СЏ Unicode
   0 OVER
   BEGIN
     DUP W@ 0<>
@@ -90,13 +90,13 @@ USER UnicodeBuf
   R@ HERE 16 DUP ALLOT MOVE R> FREE THROW
 ;
 : ComGetForthGUID ( addr -- )
-  S" {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}" \ используется во всех тестах
+  S" {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}" \ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІРѕ РІСЃРµС… С‚РµСЃС‚Р°С…
   >UNICODE OVER >R
   String>CLSID THROW DUP >R SWAP 16 MOVE R> FREE THROW R> FREE THROW
 ;
 : InvokeMethod ( parameters interface_pointer method_number -- result )
-  \ interface_pointer, он же oid, будет передаваться первым параметром неявно
-  \ как в C++
+  \ interface_pointer, РѕРЅ Р¶Рµ oid, Р±СѓРґРµС‚ РїРµСЂРµРґР°РІР°С‚СЊСЃСЏ РїРµСЂРІС‹Рј РїР°СЂР°РјРµС‚СЂРѕРј РЅРµСЏРІРЅРѕ
+  \ РєР°Рє РІ C++
   CELLS OVER @ + @ API-CALL
 ;
 
@@ -112,11 +112,11 @@ VARIABLE INTERFACES
   CREATE 
     HERE SWAP
     BL WORD COUNT CLSID, 
-    DUP ,               \ предок
-    Methods#            \ к-во методов предка
-    DUP ,               \ свои методы (к-во)
-    LATEST ,            \ своё имя
-    HERE INTERFACES @ , INTERFACES ! \ связываемся в список
+    DUP ,               \ РїСЂРµРґРѕРє
+    Methods#            \ Рє-РІРѕ РјРµС‚РѕРґРѕРІ РїСЂРµРґРєР°
+    DUP ,               \ СЃРІРѕРё РјРµС‚РѕРґС‹ (Рє-РІРѕ)
+    LATEST ,            \ СЃРІРѕС‘ РёРјСЏ
+    HERE INTERFACES @ , INTERFACES ! \ СЃРІСЏР·С‹РІР°РµРјСЃСЏ РІ СЃРїРёСЃРѕРє
 ;
 
 : Interface; 2DROP ;
@@ -125,15 +125,15 @@ VARIABLE METHODS
 
 : Method: ( interface_id n "name" -- interface_id n+1 )
   CREATE 
-    DUP , 1+    \ номер метода в VTBL
+    DUP , 1+    \ РЅРѕРјРµСЂ РјРµС‚РѕРґР° РІ VTBL
     2DUP SWAP Methods#!
-    OVER ,      \ ссылка на интерфейс, в котором определен метод
-    LATEST ,    \ имя метода
-    HERE METHODS @ , METHODS ! \ связываемся в список
+    OVER ,      \ СЃСЃС‹Р»РєР° РЅР° РёРЅС‚РµСЂС„РµР№СЃ, РІ РєРѕС‚РѕСЂРѕРј РѕРїСЂРµРґРµР»РµРЅ РјРµС‚РѕРґ
+    LATEST ,    \ РёРјСЏ РјРµС‚РѕРґР°
+    HERE METHODS @ , METHODS ! \ СЃРІСЏР·С‹РІР°РµРјСЃСЏ РІ СЃРїРёСЃРѕРє
   DOES> @ InvokeMethod
 ;
 
-\ S" WordPad.Document.1" CreateObject THROW -> WPDOC  WPDOC ::Release - удаление объекта (и останов его сервера wordpad.exe)
+\ S" WordPad.Document.1" CreateObject THROW -> WPDOC  WPDOC ::Release - СѓРґР°Р»РµРЅРёРµ РѕР±СЉРµРєС‚Р° (Рё РѕСЃС‚Р°РЅРѕРІ РµРіРѕ СЃРµСЂРІРµСЂР° wordpad.exe)
 
 \ IDispatch interface
 
@@ -159,7 +159,7 @@ Interface: IID_IDispatch {00020400-0000-0000-C000-000000000046}
   Method: ::GetTypeInfo      ( ppTInfo lcid iTInfo oid -- hresult )
   Method: ::GetIDsOfNames    ( rgDispId lcid cNames rgszNames riid oid -- hresult )
   Method: ::Invoke           ( puArgErr pExcepInfo pVarResult pDispParams wFlags lcid riid dispIdMember oid -- hresult )
-\  Method: ::RemoteInvoke ( где я это взял? 8-O убрал 3.03.2002 ~ac)
+\  Method: ::RemoteInvoke ( РіРґРµ СЏ СЌС‚Рѕ РІР·СЏР»? 8-O СѓР±СЂР°Р» 3.03.2002 ~ac)
 Interface;
 
 \ IID_IUnknown
@@ -171,30 +171,30 @@ Interface;
 \   Method: ::ReleaseMarshalData
 \   Method: ::DisconnectObject
 \ Interface;
-\ не нужно реализовать интерфейс IMarshal, тогда Windows сам с ним справится :)
+\ РЅРµ РЅСѓР¶РЅРѕ СЂРµР°Р»РёР·РѕРІР°С‚СЊ РёРЅС‚РµСЂС„РµР№СЃ IMarshal, С‚РѕРіРґР° Windows СЃР°Рј СЃ РЅРёРј СЃРїСЂР°РІРёС‚СЃСЏ :)
 
-( при создании объекта Win2000 также пытается запросить интерфейсы
-  IStdMarshalInfo, IExternalConnection, и неизвестный с первым байтом 1B..)
+( РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р° Win2000 С‚Р°РєР¶Рµ РїС‹С‚Р°РµС‚СЃСЏ Р·Р°РїСЂРѕСЃРёС‚СЊ РёРЅС‚РµСЂС„РµР№СЃС‹
+  IStdMarshalInfo, IExternalConnection, Рё РЅРµРёР·РІРµСЃС‚РЅС‹Р№ СЃ РїРµСЂРІС‹Рј Р±Р°Р№С‚РѕРј 1B..)
 
 : CreateObject ( addr u -- oid ior ) 
-  \ addr u - имя программы, создающей требуемые объекты
-  \ например S" WordPad.Document.1" CreateObject THROW -> WPDOC
+  \ addr u - РёРјСЏ РїСЂРѕРіСЂР°РјРјС‹, СЃРѕР·РґР°СЋС‰РµР№ С‚СЂРµР±СѓРµРјС‹Рµ РѕР±СЉРµРєС‚С‹
+  \ РЅР°РїСЂРёРјРµСЂ S" WordPad.Document.1" CreateObject THROW -> WPDOC
   OVER C@ [CHAR] { = >R
   >UNICODE 
   R> IF   String>CLSID ?DUP IF EXIT THEN
      ELSE ProgID>CLSID ?DUP IF EXIT THEN THEN
   0 >R RP@ SWAP >R
-  IID_IUnknown  \ для ActiveX удобнее было бы сразу просить IDispatch, но он не у всех есть
+  IID_IUnknown  \ РґР»СЏ ActiveX СѓРґРѕР±РЅРµРµ Р±С‹Р»Рѕ Р±С‹ СЃСЂР°Р·Сѓ РїСЂРѕСЃРёС‚СЊ IDispatch, РЅРѕ РѕРЅ РЅРµ Сѓ РІСЃРµС… РµСЃС‚СЊ
   CLSCTX_SERVER
   0 \ outer
   R>
-  CoCreateInstance ( это вызывает на сервере IClassFactory.CreateInstance)
+  CoCreateInstance ( СЌС‚Рѕ РІС‹Р·С‹РІР°РµС‚ РЅР° СЃРµСЂРІРµСЂРµ IClassFactory.CreateInstance)
   R> SWAP
 ;
 : CreateClass ( addr u -- oid ior )
   >UNICODE ProgID>CLSID ?DUP IF EXIT THEN
   0 >R RP@ SWAP >R
-  IID_IUnknown  \ для создания объектов удобнее было бы сразу просить IClassFactory, но он не у всех есть
+  IID_IUnknown  \ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ СѓРґРѕР±РЅРµРµ Р±С‹Р»Рѕ Р±С‹ СЃСЂР°Р·Сѓ РїСЂРѕСЃРёС‚СЊ IClassFactory, РЅРѕ РѕРЅ РЅРµ Сѓ РІСЃРµС… РµСЃС‚СЊ
   0
   CLSCTX_SERVER
   R>
@@ -214,11 +214,11 @@ Interface;
 ;
 : InvokeNamedMethod ( params idisp addr u -- results )
   2>R DUP 2R> GetIdOfName THROW ( params idisp n )
-  65535 AND \ если запрашиваемое имя - не метода, а property, то там еще флаги
-  6 + InvokeMethod \ 6 - номер последнего метода в IDispatch
+  65535 AND \ РµСЃР»Рё Р·Р°РїСЂР°С€РёРІР°РµРјРѕРµ РёРјСЏ - РЅРµ РјРµС‚РѕРґР°, Р° property, С‚Рѕ С‚Р°Рј РµС‰Рµ С„Р»Р°РіРё
+  6 + InvokeMethod \ 6 - РЅРѕРјРµСЂ РїРѕСЃР»РµРґРЅРµРіРѕ РјРµС‚РѕРґР° РІ IDispatch
 ;
 
-\ вызов метода по имени:
+\ РІС‹Р·РѕРІ РјРµС‚РѕРґР° РїРѕ РёРјРµРЅРё:
 \ GetIDsOfNames(IID_NULL, &pszName, 1, LOCALE_SYSTEM_DEFAULT, &dispid)
 \ pdisp->Invoke(dispid, IID_NULL, LOCALE_SYSTEM_DEFAULT, wFlags, &dispparams, pvRet, pexcepinfo, pnArgErr);
 

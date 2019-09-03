@@ -26,7 +26,7 @@ CFrameWindow SUBCLASS CMainWindow
 
        CColorStatic OBJ label
 
-\ послылаем уведомления обратно дочерним окнам
+\ РїРѕСЃР»С‹Р»Р°РµРј СѓРІРµРґРѕРјР»РµРЅРёСЏ РѕР±СЂР°С‚РЅРѕ РґРѕС‡РµСЂРЅРёРј РѕРєРЅР°Рј
 REFLECT_NOTFICATIONS
 
 W: WM_DESTROY ( -- n )

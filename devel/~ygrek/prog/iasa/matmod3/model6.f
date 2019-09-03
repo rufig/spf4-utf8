@@ -1,14 +1,14 @@
-( Модель хищник-жертва Вольтерра
+( ╨Ь╨╛╨┤╨╡╨╗╤М ╤Е╨╕╤Й╨╜╨╕╨║-╨╢╨╡╤А╤В╨▓╨░ ╨Т╨╛╨╗╤М╤В╨╡╤А╤А╨░
   x'=[A1*y-B1]*x
   y'=[A2-B2*x]*y
 )
 VOCABULARY Model6
 ALSO Model6 DEFINITIONS
 
-1e FVALUE Ax \ Норма поедания
-1e FVALUE Ay \ Скорость прироста
-2e FVALUE Bx \ Природная смертность
-1e FVALUE By \ Норма поедания
+1e FVALUE Ax \ ╨Э╨╛╤А╨╝╨░ ╨┐╨╛╨╡╨┤╨░╨╜╨╕╤П
+1e FVALUE Ay \ ╨б╨║╨╛╤А╨╛╤Б╤В╤М ╨┐╤А╨╕╤А╨╛╤Б╤В╨░
+2e FVALUE Bx \ ╨Я╤А╨╕╤А╨╛╨┤╨╜╨░╤П ╤Б╨╝╨╡╤А╤В╨╜╨╛╤Б╤В╤М
+1e FVALUE By \ ╨Э╨╛╤А╨╝╨░ ╨┐╨╛╨╡╨┤╨░╨╜╨╕╤П
 
 1e FVALUE x0   1e FVALUE y0
 
@@ -44,7 +44,7 @@ ALSO Model6
   xn FTO fn ['] func_x TO difur-func RungeKutta
    FDUP 0e F< IF FDROP 0e THEN FTO xn 
   yn FTO fn ['] func_y TO difur-func RungeKutta 
-   FDUP 0e F< IF FDROP 0e THEN FTO yn \ ограничения по нулям не забыли
+   FDUP 0e F< IF FDROP 0e THEN FTO yn \ ╨╛╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╤П ╨┐╨╛ ╨╜╤Г╨╗╤П╨╝ ╨╜╨╡ ╨╖╨░╨▒╤Л╨╗╨╕
 
   tn step F+ FTO tn
 ;

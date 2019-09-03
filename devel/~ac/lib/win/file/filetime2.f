@@ -12,7 +12,7 @@ REQUIRE DAYS-OLD                ~ac/lib/win/file/filetime.f
 (
 REQUIRE FIND-FILES-R              ~ac/lib/win/file/findfile-r.f
 
-\ ïå÷àòü "âîçðàñòà" ôàéëîâ â ÷àñàõ
+\ Ð¿ÐµÑ‡Ð°Ñ‚ÑŒ "Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚Ð°" Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð² Ñ‡Ð°ÑÐ°Ñ…
 : TT IF FIND-FILES-RL @ CELLS SPACES cFileName ASCIIZ> TYPE CR 2DROP
      ELSE DROP
           2DUP TYPE SPACE

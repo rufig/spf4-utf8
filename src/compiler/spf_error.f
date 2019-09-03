@@ -1,9 +1,9 @@
-( Обработка ошибок.
+( РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє.
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Ревизия: Cентябрь 1999
+  Р РµРІРёР·РёСЏ: CРµРЅС‚СЏР±СЂСЊ 1999
 )
 
-VECT ERROR      \ обработчик ошибок (ABORT)
+VECT ERROR      \ РѕР±СЂР°Р±РѕС‚С‡РёРє РѕС€РёР±РѕРє (ABORT)
 VECT (ABORT")
 USER ER-A
 USER ER-U
@@ -21,36 +21,36 @@ USER ER-U
 CONSTANT /err-data
 
 USER-CREATE ERR-DATA [T] /err-data [I] TC-USER-ALLOT
-\ область, содержащая местоположение строки и саму строку
+\ РѕР±Р»Р°СЃС‚СЊ, СЃРѕРґРµСЂР¶Р°С‰Р°СЏ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ СЃС‚СЂРѕРєРё Рё СЃР°РјСѓ СЃС‚СЂРѕРєСѓ
 
 : SEEN-ERR? ( -- flag )
   ERR-DATA err.notseen C@ 0=
 ;
 : SEEN-ERR  ( -- )
-\ установить флаг, что видели ошибку.
+\ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С„Р»Р°Рі, С‡С‚Рѕ РІРёРґРµР»Рё РѕС€РёР±РєСѓ.
   0 ERR-DATA err.notseen C!
 ;
 : NOTSEEN-ERR  ( -- )
-\ установить флаг, что не видели ошибку.
+\ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С„Р»Р°Рі, С‡С‚Рѕ РЅРµ РІРёРґРµР»Рё РѕС€РёР±РєСѓ.
   -1 ERR-DATA err.notseen C!
 ;
-: ERR-NUMBER ( -- ior ) \ номер ошибки
+: ERR-NUMBER ( -- ior ) \ РЅРѕРјРµСЂ РѕС€РёР±РєРё
   ERR-DATA err.number @
 ;
-: ERR-LINE# ( -- num ) \ номер траслируемой строки
+: ERR-LINE# ( -- num ) \ РЅРѕРјРµСЂ С‚СЂР°СЃР»РёСЂСѓРµРјРѕР№ СЃС‚СЂРѕРєРё
   ERR-DATA err.line# @
 ;
-: ERR-IN#   ( -- num ) \ указатель разобранной части >IN
+: ERR-IN#   ( -- num ) \ СѓРєР°Р·Р°С‚РµР»СЊ СЂР°Р·РѕР±СЂР°РЅРЅРѕР№ С‡Р°СЃС‚Рё >IN
   ERR-DATA err.in#   @
 ;
-: ERR-LINE  ( -- a u ) \ строка SOURCE в момент ошибки
+: ERR-LINE  ( -- a u ) \ СЃС‚СЂРѕРєР° SOURCE РІ РјРѕРјРµРЅС‚ РѕС€РёР±РєРё
   ERR-DATA err.line COUNT
 ;
-: ERR-FILE  ( -- a u ) \ имя траслируемого файла
+: ERR-FILE  ( -- a u ) \ РёРјСЏ С‚СЂР°СЃР»РёСЂСѓРµРјРѕРіРѕ С„Р°Р№Р»Р°
   ERR-DATA err.file COUNT
 ;
 : ERR-STRING ( -- a u )
-\ формирует строку для LAST-WORD  по ERR-DATA
+\ С„РѕСЂРјРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ РґР»СЏ LAST-WORD  РїРѕ ERR-DATA
   BASE @ DECIMAL
   <#
   ERR-LINE HOLDS
@@ -68,7 +68,7 @@ USER-CREATE ERR-DATA [T] /err-data [I] TC-USER-ALLOT
   0 0 #> ROT BASE !
 ;
 
-\ Заменяет при печати нулевые символы пробелами
+\ Р—Р°РјРµРЅСЏРµС‚ РїСЂРё РїРµС‡Р°С‚Рё РЅСѓР»РµРІС‹Рµ СЃРёРјРІРѕР»С‹ РїСЂРѕР±РµР»Р°РјРё
 : TYPE0 ( a n -- )
   OVER + SWAP ?DO
     I C@ ?DUP 0= IF BL THEN EMIT
@@ -98,9 +98,9 @@ USER-CREATE ERR-DATA [T] /err-data [I] TC-USER-ALLOT
 ;
 
 : SAVE-ERR ( err-num -- )
-\ сохранить текущую PARSE-AREA (строка by SOURCE ) 
-\ и параметры входного потока CURFILE, CURSTR  в область ERR-DATA
-\ Цель - дальнейшая индикация  места,  вызвавшего исключение.
+\ СЃРѕС…СЂР°РЅРёС‚СЊ С‚РµРєСѓС‰СѓСЋ PARSE-AREA (СЃС‚СЂРѕРєР° by SOURCE ) 
+\ Рё РїР°СЂР°РјРµС‚СЂС‹ РІС…РѕРґРЅРѕРіРѕ РїРѕС‚РѕРєР° CURFILE, CURSTR  РІ РѕР±Р»Р°СЃС‚СЊ ERR-DATA
+\ Р¦РµР»СЊ - РґР°Р»СЊРЅРµР№С€Р°СЏ РёРЅРґРёРєР°С†РёСЏ  РјРµСЃС‚Р°,  РІС‹Р·РІР°РІС€РµРіРѕ РёСЃРєР»СЋС‡РµРЅРёРµ.
 
   ERR-DATA err.number !
   CURSTR @   ERR-DATA err.line# !

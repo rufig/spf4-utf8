@@ -1,6 +1,6 @@
 \ 11.Dec.2003
  
-\ Subject: [Spf-dev] новые либы
+\ Subject: [Spf-dev] РЅРѕРІС‹Рµ Р»РёР±С‹
 \ From: Dmitry Yakimov <ftech@tula.net>
 \ Message-ID: <76202600223.20031204235513@tula.net>
 \ To: spf-dev@lists.sourceforge.net
@@ -10,9 +10,9 @@
 \ Dmitry Yakimov (ftech@tula.net)
 
 : HASH ( addr u u1 -- u2 )   
-\ addr u - строка
-\ если u1 не 0 хэш будет в интервале 0 ... u1-1
-\ если u1=0 хэш в интервале 0 ... 2^32-1
+\ addr u - СЃС‚СЂРѕРєР°
+\ РµСЃР»Рё u1 РЅРµ 0 С…СЌС€ Р±СѓРґРµС‚ РІ РёРЅС‚РµСЂРІР°Р»Рµ 0 ... u1-1
+\ РµСЃР»Рё u1=0 С…СЌС€ РІ РёРЅС‚РµСЂРІР°Р»Рµ 0 ... 2^32-1
 
    OVER 1 < IF 2DROP DROP 0 EXIT THEN
    ROT ROT

@@ -1,5 +1,5 @@
-\ Аналог ~ygrek/lib/2value.f
-\ Вот только не 2TO , а просто TO
+\ РђРЅР°Р»РѕРі ~ygrek/lib/2value.f
+\ Р’РѕС‚ С‚РѕР»СЊРєРѕ РЅРµ 2TO , Р° РїСЂРѕСЃС‚Рѕ TO
 REQUIRE /TEST ~profit/lib/testing.f
 
 : _2CONSTANT-CODE R@ @ R> 9 + @ ;

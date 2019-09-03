@@ -1,6 +1,6 @@
 \ $Id$
 \ IRC bot
-\ Требуемые библиотеки :
+\ РўСЂРµР±СѓРµРјС‹Рµ Р±РёР±Р»РёРѕС‚РµРєРё :
 \ sqlite3.dll - http://sqlite.org/download.html
 \ libexslt.dll libxslt.dll libxml2.dll iconv.dll zlib1.dll - http://zlatkovic.com/pub/libxml/
 \ libcurl.dll - http://curl.haxx.se/latest.cgi?curl=win32-devel-ssl
@@ -126,8 +126,8 @@ MODULE: BOT-COMMANDS-HELP
 
 MODULE: BOT-COMMANDS-NOTFOUND
  : NOTFOUND
-    nickname STR@ COMPARE-U 0= IF EXIT THEN \ игнорируем упоминания нашего никнейма
-    -1 THROW ; \ иначе завершаем разбор строки
+    nickname STR@ COMPARE-U 0= IF EXIT THEN \ РёРіРЅРѕСЂРёСЂСѓРµРј СѓРїРѕРјРёРЅР°РЅРёСЏ РЅР°С€РµРіРѕ РЅРёРєРЅРµР№РјР°
+    -1 THROW ; \ РёРЅР°С‡Рµ Р·Р°РІРµСЂС€Р°РµРј СЂР°Р·Р±РѕСЂ СЃС‚СЂРѕРєРё
 ;MODULE
 
 : CHECK-MSG-ME ( -- ? )
@@ -153,14 +153,14 @@ MODULE: BOT-COMMANDS-NOTFOUND
    ONLY BOT-COMMANDS
    ALSO BOT-COMMANDS-NOTFOUND
    current-msg-text " current msg : {s}" slog::trace
-   current-msg-text ['] EVALUATE CATCH IF S" current msg failed (it is ok)" log::trace 2DROP THEN \ тут отваливание - нормальная ситуация
+   current-msg-text ['] EVALUATE CATCH IF S" current msg failed (it is ok)" log::trace 2DROP THEN \ С‚СѓС‚ РѕС‚РІР°Р»РёРІР°РЅРёРµ - РЅРѕСЂРјР°Р»СЊРЅР°СЏ СЃРёС‚СѓР°С†РёСЏ
    SET-ORDER
 
    ?check ;
 
 list::nil VALUE xt-on-privmsg
 \ xt: ( -- ? )
-\ ? - xt обработал сообщение, остановить обработку
+\ ? - xt РѕР±СЂР°Р±РѕС‚Р°Р» СЃРѕРѕР±С‰РµРЅРёРµ, РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РѕР±СЂР°Р±РѕС‚РєСѓ
 
 : seconds 1000 * ;
 : minutes 60 * seconds ;

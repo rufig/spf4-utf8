@@ -224,23 +224,23 @@ VALUE: gCSSa gCSSu prevH ?WasText gINa gINu gPATHa gPATHu H-INDEX PREV-OUT-H H-P
 
 \EOF
 
-S" project.hhp" start-project \ должна быть первой строчкой
-S" Index.hhk" start-index \ если нужен индекс
-S" toc.hhc" start-toc \ если нужна таблица содержания
+S" project.hhp" start-project \ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РїРµСЂРІРѕР№ СЃС‚СЂРѕС‡РєРѕР№
+S" Index.hhk" start-index \ РµСЃР»Рё РЅСѓР¶РµРЅ РёРЅРґРµРєСЃ
+S" toc.hhc" start-toc \ РµСЃР»Рё РЅСѓР¶РЅР° С‚Р°Р±Р»РёС†Р° СЃРѕРґРµСЂР¶Р°РЅРёСЏ
 
-S" index.ru.htm" project-start-file \ указать начальный файл
-S" SPF help" project-title \ указать заголовок (почему-то не работает..)
-project-full-search \ полнотекстовый поиск
-S" spf_help_ru.chm" project-out-file \ выходной файл
+S" index.ru.htm" project-start-file \ СѓРєР°Р·Р°С‚СЊ РЅР°С‡Р°Р»СЊРЅС‹Р№ С„Р°Р№Р»
+S" SPF help" project-title \ СѓРєР°Р·Р°С‚СЊ Р·Р°РіРѕР»РѕРІРѕРє (РїРѕС‡РµРјСѓ-С‚Рѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚..)
+project-full-search \ РїРѕР»РЅРѕС‚РµРєСЃС‚РѕРІС‹Р№ РїРѕРёСЃРє
+S" spf_help_ru.chm" project-out-file \ РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
- S" index.ru.htm" S" Home" add-file \ добавить файл вручную
+ S" index.ru.htm" S" Home" add-file \ РґРѕР±Р°РІРёС‚СЊ С„Р°Р№Р» РІСЂСѓС‡РЅСѓСЋ
 
 
-S" docs/help/SPForth.fhlp" S" qwe\" S" Some name" S" fhlp.css" convertm \ добавить все секции из fhlp
+S" docs/help/SPForth.fhlp" S" qwe\" S" Some name" S" fhlp.css" convertm \ РґРѕР±Р°РІРёС‚СЊ РІСЃРµ СЃРµРєС†РёРё РёР· fhlp
 
 end-toc
 end-index
-end-project \ не забыть закрыть!
+end-project \ РЅРµ Р·Р°Р±С‹С‚СЊ Р·Р°РєСЂС‹С‚СЊ!
 
 .( Done)
 BYE

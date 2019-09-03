@@ -1,5 +1,5 @@
-\ ž. †¨«®¢¥æ (www.forth.org.ru/~yz)
-\ ­¥ª®â®àë¥ ¬¥áâ  ­ ¯¨á ­ë ¯®¤ ¢¯¥ç â«¥­¨¥¬ ®â ª®¤  €­¤à¥ï —¥à¥§®¢  
+\ Ð®. Ð–Ð¸Ð»Ð¾Ð²ÐµÑ† (www.forth.org.ru/~yz)
+\ Ð½ÐµÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¼ÐµÑÑ‚Ð° Ð½Ð°Ð¿Ð¸ÑÐ°Ð½Ñ‹ Ð¿Ð¾Ð´ Ð²Ð¿ÐµÑ‡Ð°Ñ‚Ð»ÐµÐ½Ð¸ÐµÐ¼ Ð¾Ñ‚ ÐºÐ¾Ð´Ð° ÐÐ½Ð´Ñ€ÐµÑ Ð§ÐµÑ€ÐµÐ·Ð¾Ð²Ð° 
 \ (www.forth.org.ru/~ac/lib/com.f)
 \ 18.12.2000
 
@@ -28,10 +28,10 @@ WINAPI: CLSIDFromProgID  OLE32.DLL
 : prog>clsid ( z a -- ?)
   SWAP >unicodebuf DUP >R CLSIDFromProgID R> FREEMEM ;
 
-\ ä®à¬ â ¨­â¥àä¥©á 
+\ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ°
 \ + 0	16	CLSID
-\ +16	 4	ª®«¨ç¥áâ¢® ¬¥â®¤®¢
-: interface ( à®¤.¨­â¥àä¥©á -- 'methods# ; ->bl)
+\ +16	 4	ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð²
+: interface ( Ñ€Ð¾Ð´.Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹Ñ -- 'methods# ; ->bl)
   CREATE 
   BL WORD COUNT PAD CZMOVE  PAD clsid,
   clsid-len + @ HERE SWAP , ;

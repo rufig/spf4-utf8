@@ -1,5 +1,5 @@
 \ $Id$
-\ Список собеседников в канале
+\ РЎРїРёСЃРѕРє СЃРѕР±РµСЃРµРґРЅРёРєРѕРІ РІ РєР°РЅР°Р»Рµ
 
 REQUIRE list-make ~ygrek/lib/list/make.f
 REQUIRE LAMBDA{ ~pinka/lib/lambda.f

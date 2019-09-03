@@ -1,5 +1,5 @@
 \ $Id$
-\ Представление структуры RE в виде dot диаграммы
+\ РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ RE РІ РІРёРґРµ dot РґРёР°РіСЂР°РјРјС‹
 
 REQUIRE ANSI-FILE lib/include/ansi-file.f
 REQUIRE re_match? ~ygrek/lib/re/re.f
@@ -36,8 +36,8 @@ MODULE: regexp
 
 EXPORT
 
-\ представить RE в виде dot-диаграммы в файле a u
-\ a1 u1 - символьное представление регэкспа (для надписи)
+\ РїСЂРµРґСЃС‚Р°РІРёС‚СЊ RE РІ РІРёРґРµ dot-РґРёР°РіСЂР°РјРјС‹ РІ С„Р°Р№Р»Рµ a u
+\ a1 u1 - СЃРёРјРІРѕР»СЊРЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ СЂРµРіСЌРєСЃРїР° (РґР»СЏ РЅР°РґРїРёСЃРё)
 : dottify ( a1 u1 re a u -- )
    dot{
     DOT-CR S" rankdir=LR;" DOT-TYPE
@@ -45,18 +45,18 @@ EXPORT
     DUP find-finalstate { last }
     ( nfa ) dot-draw
 
-    \ 0 - стартовая вершина
+    \ 0 - СЃС‚Р°СЂС‚РѕРІР°СЏ РІРµСЂС€РёРЅР°
     S" 0" S" box" DOT-SHAPE
     S" 0" 2SWAP DOT-LABEL
 
-    \ last - финальная вершина
+    \ last - С„РёРЅР°Р»СЊРЅР°СЏ РІРµСЂС€РёРЅР°
     " {#last}"
     DUP STR@ S" box" DOT-SHAPE
         STRFREE
 
    }dot ;
 
-\ ? - флаг успеха
+\ ? - С„Р»Р°Рі СѓСЃРїРµС…Р°
 : dotto: ( a u "name" -- ? )
    2DUP
    ['] BUILD-REGEX CATCH

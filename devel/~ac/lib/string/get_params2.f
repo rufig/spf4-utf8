@@ -1,4 +1,4 @@
-\ Дополнение CONVERT% возможностью раскодирования %u-unicode
+\ Р”РѕРїРѕР»РЅРµРЅРёРµ CONVERT% РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊСЋ СЂР°СЃРєРѕРґРёСЂРѕРІР°РЅРёСЏ %u-unicode
 
 REQUIRE CONVERT%      ~ac/lib/string/get_params.f 
 REQUIRE UNICODE>UTF8  ~ac/lib/win/com/com.f
@@ -16,7 +16,7 @@ USER _convUnicode
     IF DROP a i + 1+ C@ [CHAR] u <>
        IF
          0 0 a i + CHAR+ 2 >NUMBER NIP
-         IF 2DROP [CHAR] _ \ входной текст неправильно кодирован
+         IF 2DROP [CHAR] _ \ РІС…РѕРґРЅРѕР№ С‚РµРєСЃС‚ РЅРµРїСЂР°РІРёР»СЊРЅРѕ РєРѕРґРёСЂРѕРІР°РЅ
          ELSE D>S THEN i 2+ -> i
        ELSE
          0 0 a i + 2+  4 >NUMBER 2DROP D>S i 5 + -> i

@@ -70,5 +70,5 @@ NIF_MESSAGE NIF_ICON OR NIF_TIP OR IconData uFlags !
   mem NIM_MODIFY Shell_NotifyIcon DROP
 ;
 
-\ S" Это пример" S" ico\mail10.ico" 1997 S" STATIC" 0 0 Window TrayIconCreate KEY DROP TrayIconDelete
+\ S" Р­С‚Рѕ РїСЂРёРјРµСЂ" S" ico\mail10.ico" 1997 S" STATIC" 0 0 Window TrayIconCreate KEY DROP TrayIconDelete
 

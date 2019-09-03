@@ -58,14 +58,14 @@ WNDPROC: DisableWindowInTask
 
 ENDWITH
 
-USER-VALUE dc \ для WM_PAINT
+USER-VALUE dc \ РґР»СЏ WM_PAINT
 
 \ pvar: <lparam
 \ pvar: <font
 
 CLASS: FrameWindow <SUPER Window
 
- /MSG FIELD    vMSG    \ размер структуры оконных сообщений
+ /MSG FIELD    vMSG    \ СЂР°Р·РјРµСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹ РѕРєРѕРЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
       var vClose
       var vModalResult
       var vHeap
@@ -152,7 +152,7 @@ M: ProcessMessages ( -- )
   UNTIL
 ;
 
-\ idle обязательно наследовать по INHERIT, причем в конце метода
+\ idle РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РЅР°СЃР»РµРґРѕРІР°С‚СЊ РїРѕ INHERIT, РїСЂРёС‡РµРј РІ РєРѕРЅС†Рµ РјРµС‚РѕРґР°
 M: Idle ( -- )   WaitMessage DROP ;
 
 M: HandleMessage ( -- )
@@ -215,15 +215,15 @@ W: WM_PAINT
 W: WM_COMMAND
 \ [ DEBUG? ] [IF]   lparam @ . wparam @ . CR [THEN]
      lparam @ 0= wparam @ DUP 0<> SWAP HIWORD 0= AND OR
-     IF \ меню
+     IF \ РјРµРЅСЋ
        handle @ GetMenu 0<>
-       IF \ есть меню
+       IF \ РµСЃС‚СЊ РјРµРЅСЋ
          wparam @ LOWORD ?DUP
-         IF \ у пункта меню есть сообщение окну
+         IF \ Сѓ РїСѓРЅРєС‚Р° РјРµРЅСЋ РµСЃС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕРєРЅСѓ
             this [CHAR] M ->WM
          THEN
        THEN
-     ELSE \ контрол
+     ELSE \ РєРѕРЅС‚СЂРѕР»
 \       GWL_STYLE OVER GetWindowLongA HEX . DECIMAL CR
 \  [ DEBUG? ] [IF] ." WM_COMMAND2:" HEX handle @ . lparam @ . wparam @ . DECIMAL CR [THEN]
        wparam @ HIWORD
@@ -248,7 +248,7 @@ VM: OnExit ;
 W: WM_CLOSE
    OnExit
    handle @ GetParent DUP IsWindow
-   IF TRUE SWAP EnableWindow DROP ELSE DROP THEN \ Чтобы по ShowModal не моргало
+   IF TRUE SWAP EnableWindow DROP ELSE DROP THEN \ Р§С‚РѕР±С‹ РїРѕ ShowModal РЅРµ РјРѕСЂРіР°Р»Рѕ
    Hide
    TRUE vClose !
    0
@@ -290,7 +290,7 @@ M: Create { owner -- }
     CreatePopup vPopupMenu !
 ;
 
-\ Максимум 64 открытых окон приложения
+\ РњР°РєСЃРёРјСѓРј 64 РѕС‚РєСЂС‹С‚С‹С… РѕРєРѕРЅ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 M: ShowModal { \ stack aw -- u }
 \      ." handle = " handle @ . CR
@@ -300,10 +300,10 @@ GLOBAL
     GetActiveWindow TO aw
     Show
     Stack NEW TO stack
-    stack DisableTaskWindows \ Отключить все окна и запомнить их состояние
+    stack DisableTaskWindows \ РћС‚РєР»СЋС‡РёС‚СЊ РІСЃРµ РѕРєРЅР° Рё Р·Р°РїРѕРјРЅРёС‚СЊ РёС… СЃРѕСЃС‚РѕСЏРЅРёРµ
     TRUE handle @ EnableWindow DROP
     Run
-    stack EnableTaskWindows \ восстановить состояние окон
+    stack EnableTaskWindows \ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РѕРєРѕРЅ
     stack DELETE
     hParent @ ?DUP 0= IF aw THEN SetActiveWindow DROP
     vModalResult @
@@ -325,7 +325,7 @@ DESTR: free
     free
 ;
 : obj! { h obj -- }
-\ Записывает self в GWL_USERDATA
+\ Р—Р°РїРёСЃС‹РІР°РµС‚ self РІ GWL_USERDATA
     h obj => handle !
     obj GWL_USERDATA h SetWindowLongA DROP
 ;
@@ -368,7 +368,7 @@ DESTR: free
        ELSE
          lparam wparam uint hwnd  DefWindowProcA
        THEN
-     ELSE \ Ищем и вызываем обработчик
+     ELSE \ РС‰РµРј Рё РІС‹Р·С‹РІР°РµРј РѕР±СЂР°Р±РѕС‚С‡РёРє
 \       ." Object. " DUP h. CR
        uint OVER [CHAR] W SearchWM
        IF

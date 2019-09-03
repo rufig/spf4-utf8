@@ -31,7 +31,7 @@ REQUIRE TIMEZONE ~ygrek/lib/linux/timezone.f
 " ~ygrek/lib/net/irc/basic.f" VALUE realname
 " spf" VALUE nickname
 "" VALUE password
-" #forth" VALUE _current \ активный канал
+" #forth" VALUE _current \ Р°РєС‚РёРІРЅС‹Р№ РєР°РЅР°Р»
 "" VALUE proxy \ SOCKS5 proxy " domain:port"
 0 VALUE proxy-port
 
@@ -58,7 +58,7 @@ TRUE VALUE ?LOGMSG
 
 MODULE: IRC-CONN
 
-0 VALUE socketline \ соединение с IRC сервером
+0 VALUE socketline \ СЃРѕРµРґРёРЅРµРЅРёРµ СЃ IRC СЃРµСЂРІРµСЂРѕРј
 CREATE-CRIT lock
 
 \ : BAD CR TYPE RTRACE ABORT ;
@@ -132,9 +132,9 @@ VECT ON-RECEIVE ( a u -- )
 : S-SAY-TO ( a u target u2 -- ) `PRIVMSG SAY-MSG ;
 : S-NOTICE-TO ( text-a u1 target-a u2 -- ) `NOTICE SAY-MSG ;
 : S-SAY ( a u -- ) current-channel S-SAY-TO ;
-\ ответить в контекст общения
+\ РѕС‚РІРµС‚РёС‚СЊ РІ РєРѕРЅС‚РµРєСЃС‚ РѕР±С‰РµРЅРёСЏ
 : S-REPLY ( a u -- ) current-msg-target S-SAY-TO ;
-\ ответить в контекст общения нотисом
+\ РѕС‚РІРµС‚РёС‚СЊ РІ РєРѕРЅС‚РµРєСЃС‚ РѕР±С‰РµРЅРёСЏ РЅРѕС‚РёСЃРѕРј
 : S-NOTICE-REPLY ( a u -- ) current-msg-target S-NOTICE-TO ;
 
 : STR-SAY DUP STR@ S-SAY STRFREE ;

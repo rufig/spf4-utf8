@@ -1,4 +1,4 @@
-( Контроль расходования ресурсов ОС форт-системой )
+( РљРѕРЅС‚СЂРѕР»СЊ СЂР°СЃС…РѕРґРѕРІР°РЅРёСЏ СЂРµСЃСѓСЂСЃРѕРІ РћРЎ С„РѕСЂС‚-СЃРёСЃС‚РµРјРѕР№ )
 ( Andrey Cherezov, 02.05.2001, 23.03.2007 )
 
 REQUIRE CREATE-MUTEX lib/win/mutex.f 
@@ -103,5 +103,5 @@ DUMP-RES
 CLOSE-FILE . CR
 DUMP-RES
 DUP CLOSE-FILE . CR
-CLOSE-FILE . CR \ ошибка 6
+CLOSE-FILE . CR \ РѕС€РёР±РєР° 6
 DUMP-RES

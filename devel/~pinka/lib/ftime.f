@@ -1,32 +1,32 @@
 \ diffsec ( thi1 tlo1 thi2 tlo2 -- sec )
-\ дает разность между моментами времени: t2-t1  в секундах.
-( Если разность более ~136 лет, возможно переполнение,
-  т.к. в 32 бита вмещается только число секунд в 136 годах.
-  NowFTime [и FILETIME] отсчитывает интервал от 1601 года.
+\ РґР°РµС‚ СЂР°Р·РЅРѕСЃС‚СЊ РјРµР¶РґСѓ РјРѕРјРµРЅС‚Р°РјРё РІСЂРµРјРµРЅРё: t2-t1  РІ СЃРµРєСѓРЅРґР°С….
+( Р•СЃР»Рё СЂР°Р·РЅРѕСЃС‚СЊ Р±РѕР»РµРµ ~136 Р»РµС‚, РІРѕР·РјРѕР¶РЅРѕ РїРµСЂРµРїРѕР»РЅРµРЅРёРµ,
+  С‚.Рє. РІ 32 Р±РёС‚Р° РІРјРµС‰Р°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ С‡РёСЃР»Рѕ СЃРµРєСѓРЅРґ РІ 136 РіРѕРґР°С….
+  NowFTime [Рё FILETIME] РѕС‚СЃС‡РёС‚С‹РІР°РµС‚ РёРЅС‚РµСЂРІР°Р» РѕС‚ 1601 РіРѕРґР°.
 )
 
 \ 15.Apr.2001  ruv
-\ 16. поменял порядок значений на стеке... 
-\       чтобы 2! ( thi tlo ) записывало в формате FILETIME 
+\ 16. РїРѕРјРµРЅСЏР» РїРѕСЂСЏРґРѕРє Р·РЅР°С‡РµРЅРёР№ РЅР° СЃС‚РµРєРµ... 
+\       С‡С‚РѕР±С‹ 2! ( thi tlo ) Р·Р°РїРёСЃС‹РІР°Р»Рѕ РІ С„РѕСЂРјР°С‚Рµ FILETIME 
 \ 25.Jul.2001 Wed 12:37 
-\ * diffsec берет разность по модулю.
+\ * diffsec Р±РµСЂРµС‚ СЂР°Р·РЅРѕСЃС‚СЊ РїРѕ РјРѕРґСѓР»СЋ.
 \ + SecondsToTimeDate ( sec -- sec min hr day mt year )
 \ + TimeDateToSeconds ( sec min hr day mt year -- sec )
 
 \ 20.Oct.2001 Sat 21:40
-\ однако, опять поменял порядок ;)
+\ РѕРґРЅР°РєРѕ, РѕРїСЏС‚СЊ РїРѕРјРµРЅСЏР» РїРѕСЂСЏРґРѕРє ;)
 \ + !FTime @FTime  ( tlo thi )
 
 \ 13.Nov.2001 Tue 21:07
-\ * NowFTime дает UTC (как и нативная  дата файлов )
+\ * NowFTime РґР°РµС‚ UTC (РєР°Рє Рё РЅР°С‚РёРІРЅР°СЏ  РґР°С‚Р° С„Р°Р№Р»РѕРІ )
 \ + >UTC  UTC> ( tlo thi -- tlo1 thi1 )
 \ + TimeDateToFTime ( sec min hr day mt year -- tlo thi )
 \ + FTimeToTimeDate ( tlo thi -- sec min hr day mt year )
 
 \ 12.Mar.2002 Tue 02:50
-\ * NowFTime \ использовал GetSystemTimeAsFileTime,
-\              вместо GetSystemTime и SystemTimeToFileTime
-\              слово стало работать в 10 раз быстрей.
+\ * NowFTime \ РёСЃРїРѕР»СЊР·РѕРІР°Р» GetSystemTimeAsFileTime,
+\              РІРјРµСЃС‚Рѕ GetSystemTime Рё SystemTimeToFileTime
+\              СЃР»РѕРІРѕ СЃС‚Р°Р»Рѕ СЂР°Р±РѕС‚Р°С‚СЊ РІ 10 СЂР°Р· Р±С‹СЃС‚СЂРµР№.
 \ 20.Jul.2002 Sat 14:00 TimeDate instead of DateTime
 \ 26.May.2003 Mon 19:20 + addsec
 
@@ -67,7 +67,7 @@ REQUIRE [UNDEFINED] lib\include\tools.f
 
 ?WINAPI: GetSystemTimeAsFileTime KERNEL32.DLL
 ( LPFILETIME:lpSystemTimeAsFileTime \ pointer to a file time structure  
-   -- VOID )    \ возвращает ячейку какой-то фигни.
+   -- VOID )    \ РІРѕР·РІСЂР°С‰Р°РµС‚ СЏС‡РµР№РєСѓ РєР°РєРѕР№-С‚Рѕ С„РёРіРЅРё.
 
 ?WINAPI: SystemTimeToFileTime KERNEL32.DLL
 (   lpFileTime   \ LPFILETIME   \ address of buffer for converted file time 
@@ -112,13 +112,13 @@ CONSTANT /SYSTEMTIME     [THEN]
 ;
 
 : diffsec ( tlo1 thi1 tlo2 thi2 -- sec )
-\ дает разность по модулю между моментами времени: t1-t2  в секундах.
+\ РґР°РµС‚ СЂР°Р·РЅРѕСЃС‚СЊ РїРѕ РјРѕРґСѓР»СЋ РјРµР¶РґСѓ РјРѕРјРµРЅС‚Р°РјРё РІСЂРµРјРµРЅРё: t1-t2  РІ СЃРµРєСѓРЅРґР°С….
   ( D- ) DNEGATE D+ DABS
-  10000000 UM/MOD NIP  \ из десятых долей микросекунд в секунды
+  10000000 UM/MOD NIP  \ РёР· РґРµСЃСЏС‚С‹С… РґРѕР»РµР№ РјРёРєСЂРѕСЃРµРєСѓРЅРґ РІ СЃРµРєСѓРЅРґС‹
 ; \ 10 000 000
 
 : addsec ( tlo1 thi1  sec -- tlo2 thi2 )
-\ дает увеличенное ftime, на sec 
+\ РґР°РµС‚ СѓРІРµР»РёС‡РµРЅРЅРѕРµ ftime, РЅР° sec 
   10000000 UM* D+
 ;
 
@@ -157,7 +157,7 @@ TO ?C-JMP        [THEN]
 
 
 : NowFTime ( -- tlo thi ) \ expressed in Coordinated Universal Time (UTC). 
-\ дает текущий момент времени ( ~ в формате FILETIME)
+\ РґР°РµС‚ С‚РµРєСѓС‰РёР№ РјРѕРјРµРЅС‚ РІСЂРµРјРµРЅРё ( ~ РІ С„РѕСЂРјР°С‚Рµ FILETIME)
   0. SP@ ( filet )
   GetSystemTimeAsFileTime DROP SWAP
 ;
@@ -174,12 +174,12 @@ TO ?C-JMP        [THEN]
   SWAP
 ;
 
-( может лучше было бы не привязываться к thi tlo на стеке ?
-  Т.е. работа только с адресами значений типа FILETIME.
+( РјРѕР¶РµС‚ Р»СѓС‡С€Рµ Р±С‹Р»Рѕ Р±С‹ РЅРµ РїСЂРёРІСЏР·С‹РІР°С‚СЊСЃСЏ Рє thi tlo РЅР° СЃС‚РµРєРµ ?
+  Рў.Рµ. СЂР°Р±РѕС‚Р° С‚РѕР»СЊРєРѕ СЃ Р°РґСЂРµСЃР°РјРё Р·РЅР°С‡РµРЅРёР№ С‚РёРїР° FILETIME.
 )
 
 \ =======================================================
-\ Слова для перевода интервалов времени, выраженных в секундах.
+\ РЎР»РѕРІР° РґР»СЏ РїРµСЂРµРІРѕРґР° РёРЅС‚РµСЂРІР°Р»РѕРІ РІСЂРµРјРµРЅРё, РІС‹СЂР°Р¶РµРЅРЅС‹С… РІ СЃРµРєСѓРЅРґР°С….
 
 : SecondsToTimeDate ( sec -- sec min hr day mt year )
   0 60 UM/MOD

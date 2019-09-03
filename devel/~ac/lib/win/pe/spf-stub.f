@@ -1,15 +1,15 @@
-\ На заре SPF3 (95-96гг) шаблон PE-заголовка spf брал не из себя самого,
-\ а из отдельного файла spf-stub.exe.
-\ Здесь программа генерации этого spf-stub по состоянию на апрель 1996г.
-\ Только закомментирована запись "SP-Forth 3.0" в конце RVA/Sizes заголовка,
-\ чтобы работало и в текущих версиях Windows.
-\ Структура заголовка пригодилась в связи с добавлением секции экспорта
-\ в SPF4, поэтому и этот файл решил положить в lib в качестве справки.
+\ РќР° Р·Р°СЂРµ SPF3 (95-96РіРі) С€Р°Р±Р»РѕРЅ PE-Р·Р°РіРѕР»РѕРІРєР° spf Р±СЂР°Р» РЅРµ РёР· СЃРµР±СЏ СЃР°РјРѕРіРѕ,
+\ Р° РёР· РѕС‚РґРµР»СЊРЅРѕРіРѕ С„Р°Р№Р»Р° spf-stub.exe.
+\ Р—РґРµСЃСЊ РїСЂРѕРіСЂР°РјРјР° РіРµРЅРµСЂР°С†РёРё СЌС‚РѕРіРѕ spf-stub РїРѕ СЃРѕСЃС‚РѕСЏРЅРёСЋ РЅР° Р°РїСЂРµР»СЊ 1996Рі.
+\ РўРѕР»СЊРєРѕ Р·Р°РєРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅР° Р·Р°РїРёСЃСЊ "SP-Forth 3.0" РІ РєРѕРЅС†Рµ RVA/Sizes Р·Р°РіРѕР»РѕРІРєР°,
+\ С‡С‚РѕР±С‹ СЂР°Р±РѕС‚Р°Р»Рѕ Рё РІ С‚РµРєСѓС‰РёС… РІРµСЂСЃРёСЏС… Windows.
+\ РЎС‚СЂСѓРєС‚СѓСЂР° Р·Р°РіРѕР»РѕРІРєР° РїСЂРёРіРѕРґРёР»Р°СЃСЊ РІ СЃРІСЏР·Рё СЃ РґРѕР±Р°РІР»РµРЅРёРµРј СЃРµРєС†РёРё СЌРєСЃРїРѕСЂС‚Р°
+\ РІ SPF4, РїРѕСЌС‚РѕРјСѓ Рё СЌС‚РѕС‚ С„Р°Р№Р» СЂРµС€РёР» РїРѕР»РѕР¶РёС‚СЊ РІ lib РІ РєР°С‡РµСЃС‚РІРµ СЃРїСЂР°РІРєРё.
 
 S" LIB\EXT\SPF-ASM.F" INCLUDED
 HEX
 
-\ структура PE-HEADER
+\ СЃС‚СЂСѓРєС‚СѓСЂР° PE-HEADER
  0
  4 -- Signature \ PE/0/0
  2 -- CPUtype   \ 14Ch - 386
@@ -71,13 +71,13 @@ HEX
  4 -- TotalTLSSize
 CONSTANT /PE-HEADER
 
-\ структура - таблица объектов (идёт вслед за PE-header)
+\ СЃС‚СЂСѓРєС‚СѓСЂР° - С‚Р°Р±Р»РёС†Р° РѕР±СЉРµРєС‚РѕРІ (РёРґС‘С‚ РІСЃР»РµРґ Р·Р° PE-header)
  0
  8 -- OT.ObjectName        \ CODE\0\0\0\0
- 4 -- OT.VirtualSize       \ сколько памяти отводится объекту при загруке
- 4 -- OT.RVA               \ относительный виртуальный адрес
- 4 -- OT.PhisicalSize      \ физический размер объекта в файле
- 4 -- OT.PhisicalOffset    \ смещение в exe-файле
+ 4 -- OT.VirtualSize       \ СЃРєРѕР»СЊРєРѕ РїР°РјСЏС‚Рё РѕС‚РІРѕРґРёС‚СЃСЏ РѕР±СЉРµРєС‚Сѓ РїСЂРё Р·Р°РіСЂСѓРєРµ
+ 4 -- OT.RVA               \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ Р°РґСЂРµСЃ
+ 4 -- OT.PhisicalSize      \ С„РёР·РёС‡РµСЃРєРёР№ СЂР°Р·РјРµСЂ РѕР±СЉРµРєС‚Р° РІ С„Р°Р№Р»Рµ
+ 4 -- OT.PhisicalOffset    \ СЃРјРµС‰РµРЅРёРµ РІ exe-С„Р°Р№Р»Рµ
  4 -- OT.Res1              \ pointer to relocations
  4 -- OT.Res2              \ pointer to line numbers
  2 -- OT.Res3              \ number of relocations
@@ -86,17 +86,17 @@ CONSTANT /PE-HEADER
 CONSTANT /ObjectTable
 
 
-\ Структура записей в каталоге импорта .idata (опытным путем)
+\ РЎС‚СЂСѓРєС‚СѓСЂР° Р·Р°РїРёСЃРµР№ РІ РєР°С‚Р°Р»РѕРіРµ РёРјРїРѕСЂС‚Р° .idata (РѕРїС‹С‚РЅС‹Рј РїСѓС‚РµРј)
 0
-4 -- ID.ImportLookupTableRVA  \ указатель на таблицу адресов имён имп.процедур
+4 -- ID.ImportLookupTableRVA  \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚Р°Р±Р»РёС†Сѓ Р°РґСЂРµСЃРѕРІ РёРјС‘РЅ РёРјРї.РїСЂРѕС†РµРґСѓСЂ
 4 -- ID.TimeDateStamp
 2 -- ID.MajorVersion
 2 -- ID.MinorVersion
-4 -- ID.NameRVA               \ указатель на имя DLL
-4 -- ID.ImportAddressTableRVA \ указатель на таблицу адресов процедур
+4 -- ID.NameRVA               \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РёРјСЏ DLL
+4 -- ID.ImportAddressTableRVA \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚Р°Р±Р»РёС†Сѓ Р°РґСЂРµСЃРѕРІ РїСЂРѕС†РµРґСѓСЂ
 CONSTANT /ImportDirectory
 
-\ -------------------------- пример ---------------------------------
+\ -------------------------- РїСЂРёРјРµСЂ ---------------------------------
 
 CREATE ImportDirectory
        HERE /ImportDirectory 2 * DUP ALLOT ERASE
@@ -169,35 +169,35 @@ HERE /PE-HEADER DUP ALLOT ERASE
       1000 PE-HEADER ImportTableRVA !
   /ID-SIZE PE-HEADER TotalImportDataSize !
 
-HERE /ObjectTable 8 + DUP ALLOT ERASE  \ без этого не работает
+HERE /ObjectTable 8 + DUP ALLOT ERASE  \ Р±РµР· СЌС‚РѕРіРѕ РЅРµ СЂР°Р±РѕС‚Р°РµС‚
 
 \ S" SP-Forth 3.0 (C) Cherezov A." HERE OVER - SWAP MOVE
-\ начиная с Win2000 эти адреса использутся :)
+\ РЅР°С‡РёРЅР°СЏ СЃ Win2000 СЌС‚Рё Р°РґСЂРµСЃР° РёСЃРїРѕР»СЊР·СѓС‚СЃСЏ :)
 
 HERE PE-HEADER -  18 -  PE-HEADER NTHDRsize W!
-\ 18 =  0 Magic, т.е. смещение начала опционального заголовка
+\ 18 =  0 Magic, С‚.Рµ. СЃРјРµС‰РµРЅРёРµ РЅР°С‡Р°Р»Р° РѕРїС†РёРѕРЅР°Р»СЊРЅРѕРіРѕ Р·Р°РіРѕР»РѕРІРєР°
 
 \ --------------------------------------------------------
 
 HERE DUP /ObjectTable DUP ALLOT ERASE DUP S" .idata" ROT OT.ObjectName SWAP MOVE       \ CODE\0\0\0\0
-/ID-SIZE OVER OT.VirtualSize !      \ сколько памяти отводится объекту при загруке
- 1000 OVER OT.RVA !              \ относительный виртуальный адрес
+/ID-SIZE OVER OT.VirtualSize !      \ СЃРєРѕР»СЊРєРѕ РїР°РјСЏС‚Рё РѕС‚РІРѕРґРёС‚СЃСЏ РѕР±СЉРµРєС‚Сѓ РїСЂРё Р·Р°РіСЂСѓРєРµ
+ 1000 OVER OT.RVA !              \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ Р°РґСЂРµСЃ
   200 OVER OT.PhisicalSize !     \
-  200 OVER OT.PhisicalOffset !   \ смещение в exe-файле
+  200 OVER OT.PhisicalOffset !   \ СЃРјРµС‰РµРЅРёРµ РІ exe-С„Р°Р№Р»Рµ
  C0000040 OVER OT.ObjectFlags !  \ 60000020h=readable excutable code (E0000060h=-"-+writeable data)
 DROP
 
 HERE DUP /ObjectTable DUP ALLOT ERASE DUP S" .text" ROT OT.ObjectName SWAP MOVE       \ CODE\0\0\0\0
- 1000 OVER OT.VirtualSize !      \ сколько памяти отводится объекту при загруке
- 2000 OVER OT.RVA !              \ относительный виртуальный адрес
+ 1000 OVER OT.VirtualSize !      \ СЃРєРѕР»СЊРєРѕ РїР°РјСЏС‚Рё РѕС‚РІРѕРґРёС‚СЃСЏ РѕР±СЉРµРєС‚Сѓ РїСЂРё Р·Р°РіСЂСѓРєРµ
+ 2000 OVER OT.RVA !              \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ Р°РґСЂРµСЃ
   200 OVER OT.PhisicalSize !     \
-  400 OVER OT.PhisicalOffset !   \ смещение в exe-файле
+  400 OVER OT.PhisicalOffset !   \ СЃРјРµС‰РµРЅРёРµ РІ exe-С„Р°Р№Р»Рµ
  E0000060 OVER OT.ObjectFlags !  \ 60000020h=readable excutable code (E0000060h=-"-+writeable data)
 OT.VirtualSize
 
 HERE EXE-HEADER - CONSTANT /EXE-HEADER
 \ -----------------
-VARIABLE ADDROFUSER32       \ временные переменные (нужны для ручной сборки модуля)
+VARIABLE ADDROFUSER32       \ РІСЂРµРјРµРЅРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ (РЅСѓР¶РЅС‹ РґР»СЏ СЂСѓС‡РЅРѕР№ СЃР±РѕСЂРєРё РјРѕРґСѓР»СЏ)
 VARIABLE ADDROFMESSAGEBOX
 VARIABLE ADDROFOK
 VARIABLE ADDROFALL
@@ -223,7 +223,7 @@ INIT-ASM
     PUSH # 0
     PUSH # 300000       \ Z" OK"
      A; HERE 4 - ADDROFOK !
-    PUSH # 400000       \ Z" Всё работает!"
+    PUSH # 400000       \ Z" Р’СЃС‘ СЂР°Р±РѕС‚Р°РµС‚!"
      A; HERE 4 - ADDROFALL !
     PUSH # 0
 
@@ -235,10 +235,10 @@ HEX
 HERE OVER - 402000 +  ADDROFUSER32 @ !     S" USER32.DLL"    HERE SWAP DUP ALLOT MOVE 0 C,
 HERE OVER - 402000 +  ADDROFMESSAGEBOX @ ! S" MessageBoxA"   HERE SWAP DUP ALLOT MOVE 0 C,
 HERE OVER - 402000 +  ADDROFOK @ !         S" SPF-STUB"       HERE SWAP DUP ALLOT MOVE 0 C,
-HERE OVER - 402000 +  ADDROFALL @ !        S" Это шаблон EXE-файла формата PE," HERE SWAP DUP ALLOT MOVE 0D C,
-                                           S" используемый СП-Фортом 3.07 для"   HERE SWAP DUP ALLOT MOVE 0D C,
-                                           S" формирования выполнимых файлов."  HERE SWAP DUP ALLOT MOVE 0D C, 0D C,
-                                           S" Copyright (C) 1995-96 Черезов А.Ю." HERE SWAP DUP ALLOT MOVE 0 C,
+HERE OVER - 402000 +  ADDROFALL @ !        S" Р­С‚Рѕ С€Р°Р±Р»РѕРЅ EXE-С„Р°Р№Р»Р° С„РѕСЂРјР°С‚Р° PE," HERE SWAP DUP ALLOT MOVE 0D C,
+                                           S" РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РЎРџ-Р¤РѕСЂС‚РѕРј 3.07 РґР»СЏ"   HERE SWAP DUP ALLOT MOVE 0D C,
+                                           S" С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РІС‹РїРѕР»РЅРёРјС‹С… С„Р°Р№Р»РѕРІ."  HERE SWAP DUP ALLOT MOVE 0D C, 0D C,
+                                           S" Copyright (C) 1995-96 Р§РµСЂРµР·РѕРІ Рђ.Р®." HERE SWAP DUP ALLOT MOVE 0 C,
 
 HERE CONSTANT TEST-MSG-END
      CONSTANT TEST-MSG-BEGIN

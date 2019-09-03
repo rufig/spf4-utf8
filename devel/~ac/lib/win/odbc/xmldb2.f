@@ -1,13 +1,13 @@
 ( ~ac 14.07.2003 )
-( Функция SqlQueryXml [ S" query" -- "xml-result" ] применяется
-  для формирования XML-текстов на основе выборок из баз данных.
-  Далее можно XML+XSLT конвертировать в HTML.
-  Функция встроена в текущую версию ForthScripter [text/xml и компрессия
-  работает автоматически]
+( Р¤СѓРЅРєС†РёСЏ SqlQueryXml [ S" query" -- "xml-result" ] РїСЂРёРјРµРЅСЏРµС‚СЃСЏ
+  РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ XML-С‚РµРєСЃС‚РѕРІ РЅР° РѕСЃРЅРѕРІРµ РІС‹Р±РѕСЂРѕРє РёР· Р±Р°Р· РґР°РЅРЅС‹С….
+  Р”Р°Р»РµРµ РјРѕР¶РЅРѕ XML+XSLT РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ РІ HTML.
+  Р¤СѓРЅРєС†РёСЏ РІСЃС‚СЂРѕРµРЅР° РІ С‚РµРєСѓС‰СѓСЋ РІРµСЂСЃРёСЋ ForthScripter [text/xml Рё РєРѕРјРїСЂРµСЃСЃРёСЏ
+  СЂР°Р±РѕС‚Р°РµС‚ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё]
 
-  S" select * from table" SqlQueryXml даст на выходе XML-форматированные строки
+  S" select * from table" SqlQueryXml РґР°СЃС‚ РЅР° РІС‹С…РѕРґРµ XML-С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅС‹Рµ СЃС‚СЂРѕРєРё
   <Row N="1"><Email>ac@eserv.ru</Email><Msgs>191650</Msgs><Size>10</Size></Row>
-  пример см. в конце файла
+  РїСЂРёРјРµСЂ СЃРј. РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р°
 )
 
 REQUIRE ConnectFile ~ac/lib/win/odbc/odbc2.f
@@ -37,7 +37,7 @@ VARIABLE SqlQ
   s
 ;
 USER uDisableEscaping
-: disable-output-escaping \ как в XSLT :) но de-escape не делает
+: disable-output-escaping \ РєР°Рє РІ XSLT :) РЅРѕ de-escape РЅРµ РґРµР»Р°РµС‚
   TRUE uDisableEscaping !
 ;
 USER &escape_tmp
@@ -60,9 +60,9 @@ USER &escape_tmp
 : &escape
   2DUP Z>BL \ mysql|odbc bug
   uDisableEscaping @ IF EXIT THEN
-  2DUP S" &" SEARCH NIP NIP 0= IF EXIT THEN \ если нет &, то не трогаем
-  2DUP S" &amp;" SEARCH NIP NIP IF EXIT THEN \ если уже &amp;, то не трогаем
-  2DUP S" &lt;" SEARCH NIP NIP IF EXIT THEN \ если &lt;, то не трогаем
+  2DUP S" &" SEARCH NIP NIP 0= IF EXIT THEN \ РµСЃР»Рё РЅРµС‚ &, С‚Рѕ РЅРµ С‚СЂРѕРіР°РµРј
+  2DUP S" &amp;" SEARCH NIP NIP IF EXIT THEN \ РµСЃР»Рё СѓР¶Рµ &amp;, С‚Рѕ РЅРµ С‚СЂРѕРіР°РµРј
+  2DUP S" &lt;" SEARCH NIP NIP IF EXIT THEN \ РµСЃР»Рё &lt;, С‚Рѕ РЅРµ С‚СЂРѕРіР°РµРј
   "" &escape_tmp !
   ['] &escape1 EVALUATE-WITH
   &escape_tmp @ STR@
@@ -97,14 +97,14 @@ USER uDisableDeblob
   u 2 < IF addr u EXIT THEN
   u 0 ?DO
     addr I +    C@ 16 DIGIT
-                      0= IF addr u UNLOOP DeBlobDebug @ IF ." DeBlobResult: " 2DUP TYPE CR CR THEN EXIT THEN \ mysql обманул, это не blob, а например кириллица...
+                      0= IF addr u UNLOOP DeBlobDebug @ IF ." DeBlobResult: " 2DUP TYPE CR CR THEN EXIT THEN \ mysql РѕР±РјР°РЅСѓР», СЌС‚Рѕ РЅРµ blob, Р° РЅР°РїСЂРёРјРµСЂ РєРёСЂРёР»Р»РёС†Р°...
                       4 LSHIFT
     addr I + 1+ C@ 16 DIGIT 
                       0= IF DROP addr u UNLOOP DeBlobDebug @ IF ." DeBlobResult: " 2DUP TYPE CR CR THEN EXIT THEN
                       OR
     addr I 2/ + C!
   2 +LOOP addr u 2/
-  2DUP S" " 1+ \ ищем нулевые байты
+  2DUP S" " 1+ \ РёС‰РµРј РЅСѓР»РµРІС‹Рµ Р±Р°Р№С‚С‹
   SEARCH NIP NIP
   IF " <![CDATA[{s}]]>" STR@ THEN
   DeBlobDebug @ IF ." DeBlobResult: " 2DUP TYPE CR CR THEN

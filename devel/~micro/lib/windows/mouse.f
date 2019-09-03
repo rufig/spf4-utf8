@@ -1,4 +1,4 @@
-\ Работа с мышью
+\ ╨а╨░╨▒╨╛╤В╨░ ╤Б ╨╝╤Л╤И╤М╤О
 
 WINAPI: GetCursorPos user32.dll
 WINAPI: SetCursorPos user32.dll

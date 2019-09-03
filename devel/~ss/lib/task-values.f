@@ -1,13 +1,13 @@
 (   
-    Глобальные переменные потока. Обёртка Task Local Storage
+    Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ РїРѕС‚РѕРєР°. РћР±С‘СЂС‚РєР° Task Local Storage
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    В отличии от USER-VALUE в SPF4, содержимое ячеек TASK-VALUE 
-  совпадает для всех вложенных CALLBACK: в текущем потоке.
-    Либа написана под впечатлением ~af/lib/QuickWNDPROC.f
-    Если task-values.f используется в SPF-DLL, то позаботьтесь
-  об освобождении TLS в DLL_PROCESS_DETACH - вызовите FREE-TASK-VALUES.
+    Р’ РѕС‚Р»РёС‡РёРё РѕС‚ USER-VALUE РІ SPF4, СЃРѕРґРµСЂР¶РёРјРѕРµ СЏС‡РµРµРє TASK-VALUE 
+  СЃРѕРІРїР°РґР°РµС‚ РґР»СЏ РІСЃРµС… РІР»РѕР¶РµРЅРЅС‹С… CALLBACK: РІ С‚РµРєСѓС‰РµРј РїРѕС‚РѕРєРµ.
+    Р›РёР±Р° РЅР°РїРёСЃР°РЅР° РїРѕРґ РІРїРµС‡Р°С‚Р»РµРЅРёРµРј ~af/lib/QuickWNDPROC.f
+    Р•СЃР»Рё task-values.f РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ SPF-DLL, С‚Рѕ РїРѕР·Р°Р±РѕС‚СЊС‚РµСЃСЊ
+  РѕР± РѕСЃРІРѕР±РѕР¶РґРµРЅРёРё TLS РІ DLL_PROCESS_DETACH - РІС‹Р·РѕРІРёС‚Рµ FREE-TASK-VALUES.
 
-  Шишминцев Сергей [mailto:ss@forth.org.ru]
+  РЁРёС€РјРёРЅС†РµРІ РЎРµСЂРіРµР№ [mailto:ss@forth.org.ru]
   2006.02.23
 
   $Id$
@@ -50,13 +50,13 @@ WINAPI: TlsGetValue KERNEL32.DLL
   TLS-ALLOC THROW DUP ,   \ index
       OVER SWAP TLS! THROW
   ['] _TOTASK-VALUE-CODE COMPILE,
-    ,  \ начальное значения
+    ,  \ РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёСЏ
   TASK-VALUES HERE TO TASK-VALUES
-    ,  \ связанный список переменных
+    ,  \ СЃРІСЏР·Р°РЅРЅС‹Р№ СЃРїРёСЃРѕРє РїРµСЂРµРјРµРЅРЅС‹С…
 ;
 
 : INIT-TASK-VALUES
-   \ выделяет память и устанавливет начальное значение для всех переменных.
+   \ РІС‹РґРµР»СЏРµС‚ РїР°РјСЏС‚СЊ Рё СѓСЃС‚Р°РЅР°РІР»РёРІРµС‚ РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РІСЃРµС… РїРµСЂРµРјРµРЅРЅС‹С….
   TASK-VALUES
   BEGIN DUP WHILE >R
     R@ CELL- @  \ S: default
@@ -67,7 +67,7 @@ WINAPI: TlsGetValue KERNEL32.DLL
   R> @ REPEAT DROP
 ;
 
-: RESET-TASK-VALUES \ устанавливает начальное значение для всех переменных.
+: RESET-TASK-VALUES \ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РІСЃРµС… РїРµСЂРµРјРµРЅРЅС‹С….
   TASK-VALUES
   BEGIN DUP WHILE >R
     R@ CELL- @  \ S: default
@@ -76,7 +76,7 @@ WINAPI: TlsGetValue KERNEL32.DLL
   R> @ REPEAT DROP
 ;
 
-: FREE-TASK-VALUES \ свобождает TLS.
+: FREE-TASK-VALUES \ СЃРІРѕР±РѕР¶РґР°РµС‚ TLS.
 \  It is expected that DLLs call this [TlsFree] function 
 \  (if at all) only during DLL_PROCESS_DETACH.  (from MSDN)
   TASK-VALUES
@@ -104,7 +104,7 @@ GetCurrentThreadId TO THREAD-ID
 
 \EOF
 1000 TASK-VALUE TASK-HANDLER
-INIT-TASK-VALUES  ( <- THREAD-ID обнулён!) THREAD-ID . 
+INIT-TASK-VALUES  ( <- THREAD-ID РѕР±РЅСѓР»С‘РЅ!) THREAD-ID . 
 GetCurrentThreadId TO THREAD-ID OK
 TASK-HANDLER .
 1024 TO TASK-HANDLER

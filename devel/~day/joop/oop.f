@@ -1,6 +1,6 @@
 \ 09.Mar.2002 Sat 20:25  ruv
-\ подправил на предмет ONLY FORTH DEFINITIONS
-\ и нутро в отдельный словарь  OO_Support
+\ РїРѕРґРїСЂР°РІРёР» РЅР° РїСЂРµРґРјРµС‚ ONLY FORTH DEFINITIONS
+\ Рё РЅСѓС‚СЂРѕ РІ РѕС‚РґРµР»СЊРЅС‹Р№ СЃР»РѕРІР°СЂСЊ  OO_Support
 
 ( Yet another oop extention for sp-forth - just oop :)
 ( Dmitry Yakimov 2000 [c] )
@@ -29,7 +29,7 @@ CELL -- .name       \ link to class name
 CELL -- .variables  \ wid of variables
 CONSTANT /class
 
-\ При компиляции класса ORDER: 
+\ РџСЂРё РєРѕРјРїРёР»СЏС†РёРё РєР»Р°СЃСЃР° ORDER: 
 \ CONTEXT: wid_of_vars FORTH
 \ CURRENT: wid_of_methods
 
@@ -87,8 +87,8 @@ DEFINITIONS
 [ELSE]
 \ ---
 \ =========================
-\ связывание!  основа:
-\  ( "имя"/идентификатор  класс/объект  --  xt/подпрограмма true | false )
+\ СЃРІСЏР·С‹РІР°РЅРёРµ!  РѕСЃРЅРѕРІР°:
+\  ( "РёРјСЏ"/РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ  РєР»Р°СЃСЃ/РѕР±СЉРµРєС‚  --  xt/РїРѕРґРїСЂРѕРіСЂР°РјРјР° true | false )
 
 CREATE $Unknown  S" :unknown" S", 0 C,
 
@@ -162,8 +162,8 @@ DEFINITIONS
           DUP C@ 1- SWAP 2 + SWAP
           ROT sendVariable    
 ;
-( глобальное имя public-переменной  имеет произвольный односимвольный префикс
-  по сравнениню с локальным именем этой переменной
+( РіР»РѕР±Р°Р»СЊРЅРѕРµ РёРјСЏ public-РїРµСЂРµРјРµРЅРЅРѕР№  РёРјРµРµС‚ РїСЂРѕРёР·РІРѕР»СЊРЅС‹Р№ РѕРґРЅРѕСЃРёРјРІРѕР»СЊРЅС‹Р№ РїСЂРµС„РёРєСЃ
+  РїРѕ СЃСЂР°РІРЅРµРЅРёРЅСЋ СЃ Р»РѕРєР°Р»СЊРЅС‹Рј РёРјРµРЅРµРј СЌС‚РѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
 )
 
 EXPORT  
@@ -194,7 +194,7 @@ EXPORT
 
 ALSO ClassContext DEFINITIONS
 
-: [C] \ Установить current словарем текущего класса
+: [C] \ РЈСЃС‚Р°РЅРѕРІРёС‚СЊ current СЃР»РѕРІР°СЂРµРј С‚РµРєСѓС‰РµРіРѕ РєР»Р°СЃСЃР°
    _CURCLASS @ .methods @ SET-CURRENT
 ;
 
@@ -215,8 +215,8 @@ ALSO ClassContext DEFINITIONS
 ; IMMEDIATE
 
 
-\ addr указывает на область данных переменной-экземпляра
-\ oid - текущий экземпляр
+\ addr СѓРєР°Р·С‹РІР°РµС‚ РЅР° РѕР±Р»Р°СЃС‚СЊ РґР°РЅРЅС‹С… РїРµСЂРµРјРµРЅРЅРѕР№-СЌРєР·РµРјРїР»СЏСЂР°
+\ oid - С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 : _OBJ ( oid addr)
    DUP CELL+ @ :new
    SWAP @ ROT + ! 
@@ -233,10 +233,10 @@ ALSO ClassContext DEFINITIONS
 : _FREE-ARR ( addr)
    FREE THROW
 ;
-( массив ARR - распределяется в хипе.
- - несовместимость, если объект создается по :newLit
- в области текущего хранилища HERE
- Аналогично с OBJ
+( РјР°СЃСЃРёРІ ARR - СЂР°СЃРїСЂРµРґРµР»СЏРµС‚СЃСЏ РІ С…РёРїРµ.
+ - РЅРµСЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚СЊ, РµСЃР»Рё РѕР±СЉРµРєС‚ СЃРѕР·РґР°РµС‚СЃСЏ РїРѕ :newLit
+ РІ РѕР±Р»Р°СЃС‚Рё С‚РµРєСѓС‰РµРіРѕ С…СЂР°РЅРёР»РёС‰Р° HERE
+ РђРЅР°Р»РѕРіРёС‡РЅРѕ СЃ OBJ
  - ruv
 )
 
@@ -278,7 +278,7 @@ ALSO ClassContext DEFINITIONS
      _NVAR +!
      ['] 2DROP ,
      ['] DROP ,
-     [C]  \ сделать словарь methods класса CURRENT -словарем.
+     [C]  \ СЃРґРµР»Р°С‚СЊ СЃР»РѕРІР°СЂСЊ methods РєР»Р°СЃСЃР° CURRENT -СЃР»РѕРІР°СЂРµРј.
    DOES> @ self +
 ;
 
@@ -298,7 +298,7 @@ ALSO ClassContext DEFINITIONS
    _CURCLASS @ >R
    ' >BODY
    DUP .size @ _NVAR !
-   DUP .methods @ @ R@ .methods @ !  \ подцепляю списк
+   DUP .methods @ @ R@ .methods @ !  \ РїРѕРґС†РµРїР»СЏСЋ СЃРїРёСЃРє
    DUP .variables @ @ R@ .variables @ !
    R> .parent !
 ;
@@ -335,7 +335,7 @@ WARNING @ WARNING 0!
 ;
 
 : __:
-( чтобы лишние варнинги не выводил )
+( С‡С‚РѕР±С‹ Р»РёС€РЅРёРµ РІР°СЂРЅРёРЅРіРё РЅРµ РІС‹РІРѕРґРёР» )
   WARNING @ >R
   >IN @ >R NextWord R> >IN !
   SFIND IF  DUP 1+ @ + message_does = IF WARNING 0! THEN ELSE 2DROP THEN 
@@ -390,7 +390,7 @@ EXPORT
 \    R> CONTEXT !
 
 \    NextWord GET-CURRENT SEARCH-WORDLIST
-     \ тоже не хорошо, т.к. в CURRENT может быть какой-нить Private
+     \ С‚РѕР¶Рµ РЅРµ С…РѕСЂРѕС€Рѕ, С‚.Рє. РІ CURRENT РјРѕР¶РµС‚ Р±С‹С‚СЊ РєР°РєРѕР№-РЅРёС‚СЊ Private
     NextWord
     CurrClass .methods @ SEARCH-WORDLIST
     0= IF -321 THROW THEN
@@ -401,10 +401,10 @@ EXPORT
 : >CLASS ' >BODY .methods @ CONTEXT ! ;
 
 : M:: ( c "WM_..." -- )
-  \ определить обработчик сообщения
-  \ c - символ типа сообщения
+  \ РѕРїСЂРµРґРµР»РёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёСЏ
+  \ c - СЃРёРјРІРѕР» С‚РёРїР° СЃРѕРѕР±С‰РµРЅРёСЏ
   BASE @ >R 
-  NextWord EVALUATE HEX \ Для того чтобы Windows константы искались
+  NextWord EVALUATE HEX \ Р”Р»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ Windows РєРѕРЅСЃС‚Р°РЅС‚С‹ РёСЃРєР°Р»РёСЃСЊ
   0 <# # # # #  # # # # ROT HOLD BL HOLD [CHAR] : HOLD #>
   EVALUATE
   R> BASE !
@@ -414,7 +414,7 @@ EXPORT
 : C: [CHAR] C M:: ; \ WM_COMMAND 
 : N: [CHAR] N M:: ; \ WM_NOTIFY  
 : P: [CHAR] P M:: ; \ WM_PARENTNOTIFY
-: M: [CHAR] M M:: ; \ меню
+: M: [CHAR] M M:: ; \ РјРµРЅСЋ
 
 : SearchWM ( mess_id oid c -- xt -1 | 0)
   ROT BASE @ >R HEX
@@ -424,7 +424,7 @@ EXPORT
 ;
 
 : ->WM ( mess_id oid c)
-\ Послать заданное сообщение объекту
+\ РџРѕСЃР»Р°С‚СЊ Р·Р°РґР°РЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕР±СЉРµРєС‚Сѓ
   OVER >R SearchWM
   IF R> ExecuteMethod
   ELSE R> DROP
@@ -456,7 +456,7 @@ CLASS: Object
      self class len
 ;
 
-\ метод - заглушка
+\ РјРµС‚РѕРґ - Р·Р°РіР»СѓС€РєР°
 : :init
 ;
 
@@ -483,7 +483,7 @@ CLASS: Object
        DUP
      WHILE
        DUP NAME> >BODY
-       DUP @ self + @ \ получили экземпляр
+       DUP @ self + @ \ РїРѕР»СѓС‡РёР»Рё СЌРєР·РµРјРїР»СЏСЂ
        SWAP 3 CELLS + @ EXECUTE
        CDR
      REPEAT DROP 
@@ -515,11 +515,11 @@ CLASS: Object
 ;
 
 : :methods
-\ распечатать методы класса
+\ СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ РјРµС‚РѕРґС‹ РєР»Р°СЃСЃР°
    self class .methods @ NLIST
 ;
 : :variables
-\ распечатать переменные класса
+\ СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ РєР»Р°СЃСЃР°
   self class .variables @ NLIST
 ;  
 

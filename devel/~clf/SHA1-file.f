@@ -4,9 +4,9 @@ REQUIRE /STRING lib/include/string.f
 : 3DROP 2DROP DROP ;
 
 \ COMP.LANG.FORTH    > SHA-1 FILE HASHER
-\ нр:		JZAKIYA - опнялнрп опнтхкъ
-\ дюрю:		бр. 16 ъмб. 2001 11:48
-\ щкейрпнммюъ онврю: 		JZAK...@MAIL.COM
+\ п╫я─:		JZAKIYA - п╬п©п╫я▐п╩п╫я─п© п╬п©п╫я┌я┘п╨я┼
+\ п╢я▌я─я▌:		п╠я─. 16 я┼п╪п╠. 2001 11:48
+\ я┴п╨п╣п╧я─п©п╫п╪п╪я▌я┼ п╬п╫п╡я─я▌: 		JZAK...@MAIL.COM
 
 0 [IF]
 

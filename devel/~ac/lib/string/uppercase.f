@@ -1,14 +1,14 @@
-\ МНБЮЪ БЕПЯХЪ ЯДЕКЮМЮ ~ygrek
+\ п°п²п▒п╝п╙ п▒п∙п÷п╞п╔п╙ п╞п■п∙п п╝п°п╝ ~ygrek
 
 \ : CHAR-UPPERCASE ( c -- c1 )
 \   DUP [CHAR] a [CHAR] z 1+ WITHIN
-\   OVER [CHAR] Ю [CHAR] Ъ 1+ WITHIN OR IF 32 - THEN ;
+\   OVER [CHAR] п╝ [CHAR] п╙ 1+ WITHIN OR IF 32 - THEN ;
 
-\ ЕЫЕ МНБЕЕ ~ruv
+\ п∙п╚п∙ п°п²п▒п∙п∙ ~ruv
 
 : CHAR-UPPERCASE ( c -- c1 )
   DUP [CHAR] a [CHAR] z 1+ WITHIN IF 32 - EXIT THEN
-  DUP [CHAR] Ю [CHAR] Ъ 1+ WITHIN IF 32 - THEN
+  DUP [CHAR] п╝ [CHAR] п╙ 1+ WITHIN IF 32 - THEN
 ;
 
 : UPPERCASE ( addr1 u1 -- )
@@ -22,6 +22,6 @@ REQUIRE TESTCASES ~ygrek/lib/testcase.f
 
 TESTCASES UPPERCASE
  (( S" qwerty" 2DUP UPPERCASE S" QWERTY" COMPARE -> 0 ))
- : test-str S" !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}:+%юабцдефгхийклмнопярстужвьызшэщчъЮАБЦДЕФГХИЙКЛМНОПЯРСТУЖВЬЫЗШЭЩЧЪ" ;
- : must-str S" !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}:+%юабцдефгхийклмнопярстужвьызшэщчъюабцдефгхийклмнопярстужвьызшэщчъ" ;
+ : test-str S" !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}:+%я▌п╟п╠я├п╢п╣я└пЁя┘п╦п╧п╨п╩п╪п╫п╬п©я▐я─я│я┌я┐п╤п╡я▄я▀п╥я┬я█я┴я┤я┼п╝п░п▒п╕п■п∙п╓п⌠п╔п≤п≥п п⌡п°п²п·п÷п╞п═п║п╒пёп√п▓п╛п╚п≈п╗п╜п╘п╖п╙" ;
+ : must-str S" !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}:+%я▌п╟п╠я├п╢п╣я└пЁя┘п╦п╧п╨п╩п╪п╫п╬п©я▐я─я│я┌я┐п╤п╡я▄я▀п╥я┬я█я┴я┤я┼я▌п╟п╠я├п╢п╣я└пЁя┘п╦п╧п╨п╩п╪п╫п╬п©я▐я─я│я┌я┐п╤п╡я▄я▀п╥я┬я█я┴я┤я┼" ;
  (( test-str 2DUP UPPERCASE must-str COMPARE -> 0 )) END-TESTCASES

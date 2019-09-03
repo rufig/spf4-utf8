@@ -13,12 +13,12 @@ USER StderrWH
   DUP DUP-HANDLE-INHERITED THROW SWAP CLOSE-FILE THROW
 ;
 : CreateStdPipes ( -- i o e )
-\ Создать пайпы для передачи дочернему процессу в качестве stdin/out/err
-\ и вернуть их хэндлы.
-\ Хэндлы родительских концов труб остаются в переменных:
-\ StdinWH (туда пишется то, что попадет дочке в stdin),
-\ StdoutRH (оттуда читать ответ дочки)
-\ StderrRH (оттуда читать ошибки дочки)
+\ РЎРѕР·РґР°С‚СЊ РїР°Р№РїС‹ РґР»СЏ РїРµСЂРµРґР°С‡Рё РґРѕС‡РµСЂРЅРµРјСѓ РїСЂРѕС†РµСЃСЃСѓ РІ РєР°С‡РµСЃС‚РІРµ stdin/out/err
+\ Рё РІРµСЂРЅСѓС‚СЊ РёС… С…СЌРЅРґР»С‹.
+\ РҐСЌРЅРґР»С‹ СЂРѕРґРёС‚РµР»СЊСЃРєРёС… РєРѕРЅС†РѕРІ С‚СЂСѓР± РѕСЃС‚Р°СЋС‚СЃСЏ РІ РїРµСЂРµРјРµРЅРЅС‹С…:
+\ StdinWH (С‚СѓРґР° РїРёС€РµС‚СЃСЏ С‚Рѕ, С‡С‚Рѕ РїРѕРїР°РґРµС‚ РґРѕС‡РєРµ РІ stdin),
+\ StdoutRH (РѕС‚С‚СѓРґР° С‡РёС‚Р°С‚СЊ РѕС‚РІРµС‚ РґРѕС‡РєРё)
+\ StderrRH (РѕС‚С‚СѓРґР° С‡РёС‚Р°С‚СЊ РѕС€РёР±РєРё РґРѕС‡РєРё)
 
   0 0 StdinWH StdinRH CreatePipe ERR THROW
   0 0 StdoutWH StdoutRH CreatePipe ERR THROW
@@ -54,14 +54,14 @@ USER StderrWH
   pi FREE DROP
   i CLOSE-FILE THROW
   o i <> IF o CLOSE-FILE THROW THEN
-  e i <> e o <> AND IF e CLOSE-FILE THROW THEN \ на входе может быть один и тот же хэндл, напр. NUL'а
+  e i <> e o <> AND IF e CLOSE-FILE THROW THEN \ РЅР° РІС…РѕРґРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕРґРёРЅ Рё С‚РѕС‚ Р¶Рµ С…СЌРЅРґР», РЅР°РїСЂ. NUL'Р°
   res
 ;
 : ChildApp ( input-handle output-handle a u -- p-handle ior )
   2>R DUP 2R> ChildAppErr
 ;
 : ChildAppWaitDir ( input-handle output-handle err-handle S" application.exe" S" curr_directory" wait -- exit_code ior )
-\ то же, что и StartAppWaitDir, но с указанием хэндлов
+\ С‚Рѕ Р¶Рµ, С‡С‚Рѕ Рё StartAppWaitDir, РЅРѕ СЃ СѓРєР°Р·Р°РЅРёРµРј С…СЌРЅРґР»РѕРІ
   { i o e a u da du w \ pi si c }
   5 CELLS      ALLOCATE THROW -> pi   pi 5 CELLS ERASE
   /STARTUPINFO ALLOCATE THROW -> si   si /STARTUPINFO ERASE
@@ -93,7 +93,7 @@ USER StderrWH
 
   i CLOSE-FILE THROW
   o i <> IF o CLOSE-FILE THROW THEN
-  e i <> e o <> AND IF e CLOSE-FILE THROW THEN \ на входе может быть один и тот же хэндл, напр. NUL'а
+  e i <> e o <> AND IF e CLOSE-FILE THROW THEN \ РЅР° РІС…РѕРґРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕРґРёРЅ Рё С‚РѕС‚ Р¶Рµ С…СЌРЅРґР», РЅР°РїСЂ. NUL'Р°
 ;
 
 
@@ -110,8 +110,8 @@ pipeline.f
   S" WORDS" StdinWH @ WRITE-FILE THROW
   CRLF StdinWH @ WRITE-FILE THROW
 
-\ вторая команда может не прочитаться в spf, т.к. READ-LINE заточен на
-\ чтение файлов, а не пайпов:
+\ РІС‚РѕСЂР°СЏ РєРѕРјР°РЅРґР° РјРѕР¶РµС‚ РЅРµ РїСЂРѕС‡РёС‚Р°С‚СЊСЃСЏ РІ spf, С‚.Рє. READ-LINE Р·Р°С‚РѕС‡РµРЅ РЅР°
+\ С‡С‚РµРЅРёРµ С„Р°Р№Р»РѕРІ, Р° РЅРµ РїР°Р№РїРѕРІ:
 
   S" 5 5 + ." StdinWH @ WRITE-FILE THROW
   CRLF StdinWH @ WRITE-FILE THROW

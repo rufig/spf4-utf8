@@ -129,8 +129,8 @@ VECT INCLUDED$
   TIB FREE THROW
   FROM_SOURCE-ID
   ." ZZ=" DUP .
- CLOSE-FILE THROW ( îøèáêà çàêðûòèÿ ôàéëà )
-  H-STDOUT CLOSE-FILE THROW ( îøèáêà çàêðûòèÿ ôàéëà )
+ CLOSE-FILE THROW ( Ð¾ÑˆÐ¸Ð±ÐºÐ° Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð° )
+  H-STDOUT CLOSE-FILE THROW ( Ð¾ÑˆÐ¸Ð±ÐºÐ° Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð° )
   R> BASE ! R> TO H-STDOUT
   R> CURSTR ! R> BLK ! R> TO SOURCE-ID R> #TIB ! R> >IN ! R> TO TIB
 ;

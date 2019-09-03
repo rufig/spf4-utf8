@@ -1,4 +1,4 @@
-\ Сервисы для WinNT
+\ РЎРµСЂРІРёСЃС‹ РґР»СЏ WinNT
 
 WINAPI: StartServiceCtrlDispatcherA ADVAPI32.DLL
 WINAPI: CreateServiceA              ADVAPI32.DLL
@@ -9,7 +9,7 @@ WINAPI: OpenServiceA                ADVAPI32.DLL
 WINAPI: DeleteService               ADVAPI32.DLL
 WINAPI: CloseServiceHandle          ADVAPI32.DLL
 
-0    \ структура состояния сервиса
+0    \ СЃС‚СЂСѓРєС‚СѓСЂР° СЃРѕСЃС‚РѕСЏРЅРёСЏ СЃРµСЂРІРёСЃР°
 4 -- dwServiceType
 4 -- dwCurrentState
 4 -- dwControlsAccepted

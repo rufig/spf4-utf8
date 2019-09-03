@@ -1,61 +1,61 @@
-( Реализация классов. Ver 3.04  24.11.2000
- Свойства:
- 1. Полное отсутствие портабельности.
- 2. Инкапсуляция.
- 3. Наследование по одной линии.
- 4. Полностью статическое связывание
- 5. Виртуальные методы
- 6. Поддержка полей-объектов
+( Р РµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃРѕРІ. Ver 3.04  24.11.2000
+ РЎРІРѕР№СЃС‚РІР°:
+ 1. РџРѕР»РЅРѕРµ РѕС‚СЃСѓС‚СЃС‚РІРёРµ РїРѕСЂС‚Р°Р±РµР»СЊРЅРѕСЃС‚Рё.
+ 2. РРЅРєР°РїСЃСѓР»СЏС†РёСЏ.
+ 3. РќР°СЃР»РµРґРѕРІР°РЅРёРµ РїРѕ РѕРґРЅРѕР№ Р»РёРЅРёРё.
+ 4. РџРѕР»РЅРѕСЃС‚СЊСЋ СЃС‚Р°С‚РёС‡РµСЃРєРѕРµ СЃРІСЏР·С‹РІР°РЅРёРµ
+ 5. Р’РёСЂС‚СѓР°Р»СЊРЅС‹Рµ РјРµС‚РѕРґС‹
+ 6. РџРѕРґРґРµСЂР¶РєР° РїРѕР»РµР№-РѕР±СЉРµРєС‚РѕРІ
 
-        Применение
+        РџСЂРёРјРµРЅРµРЅРёРµ
         ~~~~~~~~~~
-Определение класса:
-    CLASS: class-name     \ начало определения класса
-      <size-of-field> FIELD field-name  \ определение полей
+РћРїСЂРµРґРµР»РµРЅРёРµ РєР»Р°СЃСЃР°:
+    CLASS: class-name     \ РЅР°С‡Р°Р»Рѕ РѕРїСЂРµРґРµР»РµРЅРёСЏ РєР»Р°СЃСЃР°
+      <size-of-field> FIELD field-name  \ РѕРїСЂРµРґРµР»РµРЅРёРµ РїРѕР»РµР№
       ...
-      RECORD: struct-name   \ определение структур
+      RECORD: struct-name   \ РѕРїСЂРµРґРµР»РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂ
         <size-of-field> FIELD str-fld-name
         <another-class-name> OBJ obj-fld-name
         <another-class-name> PTR ptr-fld-name
         ...
-      ;RECORD /struct-name  \ это имя можно использовать как размер класса
+      ;RECORD /struct-name  \ СЌС‚Рѕ РёРјСЏ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РєР°Рє СЂР°Р·РјРµСЂ РєР»Р°СЃСЃР°
 
-      CONSTR: constructor-name ... ;    \ конструктор
-      DESTR: destructor-name ... ;      \ деструктор
-      M: method-name ... ;              \ метод
-    ;CLASS                  \ завершение определения класса
+      CONSTR: constructor-name ... ;    \ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+      DESTR: destructor-name ... ;      \ РґРµСЃС‚СЂСѓРєС‚РѕСЂ
+      M: method-name ... ;              \ РјРµС‚РѕРґ
+    ;CLASS                  \ Р·Р°РІРµСЂС€РµРЅРёРµ РѕРїСЂРµРґРµР»РµРЅРёСЏ РєР»Р°СЃСЃР°
     ...
-    class-name REOPEN     \ доопределение класса
+    class-name REOPEN     \ РґРѕРѕРїСЂРµРґРµР»РµРЅРёРµ РєР»Р°СЃСЃР°
     ...
-    ;CLASS                  \ завершение доопределения
+    ;CLASS                  \ Р·Р°РІРµСЂС€РµРЅРёРµ РґРѕРѕРїСЂРµРґРµР»РµРЅРёСЏ
     ...
 
-Определение подкласса:
+РћРїСЂРµРґРµР»РµРЅРёРµ РїРѕРґРєР»Р°СЃСЃР°:
     CLASS: subclass-name <SUPER class-name
-    \ или
+    \ РёР»Рё
     class-name SUBCLASS: subclass-name
         <size-of-field> FIELD subclass-field-name
         CONSTR: constructor-name ...
-            constructor-name    \ вызов конструктора надкласса
-            ... ;               \ имена совпадают не случайно.
+            constructor-name    \ РІС‹Р·РѕРІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РЅР°РґРєР»Р°СЃСЃР°
+            ... ;               \ РёРјРµРЅР° СЃРѕРІРїР°РґР°СЋС‚ РЅРµ СЃР»СѓС‡Р°Р№РЅРѕ.
         ...
         M: subclass-method-name ... ;
         M: method-name ... method-name ... ;
     ;CLASS
 
-Создание объектов и манипуляции с ними:
-    class-name OBJECT: object-name  \ создание статического объекта
-    \ или
+РЎРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚РѕРІ Рё РјР°РЅРёРїСѓР»СЏС†РёРё СЃ РЅРёРјРё:
+    class-name OBJECT: object-name  \ СЃРѕР·РґР°РЅРёРµ СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±СЉРµРєС‚Р°
+    \ РёР»Рё
     0 VALUE p-obj
-    class-name NEW TO p-obj         \ создание динамического объекта
+    class-name NEW TO p-obj         \ СЃРѕР·РґР°РЅРёРµ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РѕР±СЉРµРєС‚Р°
     ...
-    object-name field-name @ ...    \ обращение к полю
-    object-name method-name ...     \ обращение к методу
+    object-name field-name @ ...    \ РѕР±СЂР°С‰РµРЅРёРµ Рє РїРѕР»СЋ
+    object-name method-name ...     \ РѕР±СЂР°С‰РµРЅРёРµ Рє РјРµС‚РѕРґСѓ
     p-obj ->CLASS class-name field-name @ ...
     p-obj ->CLASS class-name method-name ...
-    p-obj DELETE    \ удаление динамического объекта
+    p-obj DELETE    \ СѓРґР°Р»РµРЅРёРµ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РѕР±СЉРµРєС‚Р°
     ...
-    WITH class-name     \ установка контекста класса и всех его родителей
+    WITH class-name     \ СѓСЃС‚Р°РЅРѕРІРєР° РєРѕРЅС‚РµРєСЃС‚Р° РєР»Р°СЃСЃР° Рё РІСЃРµС… РµРіРѕ СЂРѕРґРёС‚РµР»РµР№
         p-obj => field-name @ ...
         p-obj => method-name ...
     ENDWITH
@@ -66,10 +66,10 @@
     object1 subclass-method-name ...
     object1 method-name ...
 
-Предопределенные поля:
-    PARENT       - ссылка на класс объекта
-    SELF         - адрес самого объекта
-                   внутри определений также можно использовать this
+РџСЂРµРґРѕРїСЂРµРґРµР»РµРЅРЅС‹Рµ РїРѕР»СЏ:
+    PARENT       - СЃСЃС‹Р»РєР° РЅР° РєР»Р°СЃСЃ РѕР±СЉРµРєС‚Р°
+    SELF         - Р°РґСЂРµСЃ СЃР°РјРѕРіРѕ РѕР±СЉРµРєС‚Р°
+                   РІРЅСѓС‚СЂРё РѕРїСЂРµРґРµР»РµРЅРёР№ С‚Р°РєР¶Рµ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ this
 )
 
 \ HERE
@@ -86,25 +86,25 @@ VOCABULARY OOP
 ALSO OOP DEFINITIONS
 
 0
-CELL -- .WID       \ wid класса
-CELL -- .SUPER     \ родительский класс
-CELL -- .SIZE      \ размер экземпляра
-CELL -- .CONSTR    \ конструктор
-CELL -- .DESTR     \ деструктор
-CELL -- .VMT       \ таблица вирт. методов
-CELL -- .#VM       \ размер таблицы
-CELL -- .OBJS      \ список полей-объектов класса (для инициализации)
+CELL -- .WID       \ wid РєР»Р°СЃСЃР°
+CELL -- .SUPER     \ СЂРѕРґРёС‚РµР»СЊСЃРєРёР№ РєР»Р°СЃСЃ
+CELL -- .SIZE      \ СЂР°Р·РјРµСЂ СЌРєР·РµРјРїР»СЏСЂР°
+CELL -- .CONSTR    \ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+CELL -- .DESTR     \ РґРµСЃС‚СЂСѓРєС‚РѕСЂ
+CELL -- .VMT       \ С‚Р°Р±Р»РёС†Р° РІРёСЂС‚. РјРµС‚РѕРґРѕРІ
+CELL -- .#VM       \ СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹
+CELL -- .OBJS      \ СЃРїРёСЃРѕРє РїРѕР»РµР№-РѕР±СЉРµРєС‚РѕРІ РєР»Р°СЃСЃР° (РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё)
 VALUE /CLASS
 
 CONTEXT @
 FORTH DEFINITIONS
 
 CREATE SUPERCLASS
-    ,               \ wid класса
+    ,               \ wid РєР»Р°СЃСЃР°
     0 ,             \ parent class
-    0 ,             \ размер экземпляра
-    0 ,             \ конструктор
-    0 ,             \ деструктор
+    0 ,             \ СЂР°Р·РјРµСЂ СЌРєР·РµРјРїР»СЏСЂР°
+    0 ,             \ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    0 ,             \ РґРµСЃС‚СЂСѓРєС‚РѕСЂ
     0 ,             \ vmt
     0 ,             \ #vm
     0 ,             \ objs
@@ -116,14 +116,14 @@ OOP DEFINITIONS
 126 CONSTANT M-TAG
 127 CONSTANT REC-TAG
 
-\ Адрес структуры создаваемого класса
+\ РђРґСЂРµСЃ СЃС‚СЂСѓРєС‚СѓСЂС‹ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ РєР»Р°СЃСЃР°
 SUPERCLASS VALUE CURR
 
-USER-VALUE this             \ Адрес текущего экземпляра
+USER-VALUE this             \ РђРґСЂРµСЃ С‚РµРєСѓС‰РµРіРѕ СЌРєР·РµРјРїР»СЏСЂР°
 
 
 : >EXT-ENTRY >BODY ;
-: ext-field-entry R> 1+ @ + ;  \ обращение к переменной класса снаружи
+: ext-field-entry R> 1+ @ + ;  \ РѕР±СЂР°С‰РµРЅРёРµ Рє РїРµСЂРµРјРµРЅРЅРѕР№ РєР»Р°СЃСЃР° СЃРЅР°СЂСѓР¶Рё
 
 : FIELD
     CREATE
@@ -137,7 +137,7 @@ USER-VALUE this             \ Адрес текущего экземпляра
 : char 1 FIELD ;
 : chars FIELD ;
 
-: CFIELD ( class -- )  \ поле-объект
+: CFIELD ( class -- )  \ РїРѕР»Рµ-РѕР±СЉРµРєС‚
     .SIZE @ FIELD ;
 
 CELL NEGATE FIELD SELF
@@ -172,7 +172,7 @@ CELL        FIELD PARENT
 
 FORTH DEFINITIONS
 ALSO OOP
-: REOPEN ( class -- ...)    \ возобновить определение класса
+: REOPEN ( class -- ...)    \ РІРѕР·РѕР±РЅРѕРІРёС‚СЊ РѕРїСЂРµРґРµР»РµРЅРёРµ РєР»Р°СЃСЃР°
     >CURR
     WARNING @ WARNING 0!
     GET-ORDER GET-CURRENT 0 ( #vm) CL-TAG ( this is a tag)
@@ -197,7 +197,7 @@ OOP DEFINITIONS
 ;
 : ;CLASS ?CLASS VMT SET-CURRENT SET-ORDER WARNING ! CURR> ;
 
-: SUPER ( class -- )        \ наследование
+: SUPER ( class -- )        \ РЅР°СЃР»РµРґРѕРІР°РЅРёРµ
     CURR >R >R ;CLASS
     R> DUP R@ .SUPER !
     .SIZE R@ .SIZE 5 CELLS CMOVE
@@ -278,7 +278,7 @@ CELL -- obj.offset
 CELL -- obj.init
 CONSTANT /OBJ
 
-USER-VALUE jthis            \ Адрес экземпляра, который объемлет текущий
+USER-VALUE jthis            \ РђРґСЂРµСЃ СЌРєР·РµРјРїР»СЏСЂР°, РєРѕС‚РѕСЂС‹Р№ РѕР±СЉРµРјР»РµС‚ С‚РµРєСѓС‰РёР№
 
 : OBJ@  R> obj.offset @ this + ;
 
@@ -303,8 +303,8 @@ M: CONSTR PARENT @ .CONSTR @ ?EXECUTE ;
 M: DESTR  PARENT @ .DESTR @ ?EXECUTE ;
 : CONSTR: M: LAST-M CURR .CONSTR ! ; IMMEDIATE
 : DESTR:  M: LAST-M CURR .DESTR ! ; IMMEDIATE
-M: >PARENT PARENT @ @ +ORDER ;    \ установить контекст класса
-M: SIZE PARENT @ .SIZE @ ;    \ размер экземпляра (без parent)
+M: >PARENT PARENT @ @ +ORDER ;    \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєРѕРЅС‚РµРєСЃС‚ РєР»Р°СЃСЃР°
+M: SIZE PARENT @ .SIZE @ ;    \ СЂР°Р·РјРµСЂ СЌРєР·РµРјРїР»СЏСЂР° (Р±РµР· parent)
 
 
 
@@ -402,11 +402,11 @@ PREVIOUS
 \              R> => CONSTR
                R> NEWHERE DROP
             DOES>
-                CONTEXT >R  \ Запоминаем текущее положение. Только SPF
+                CONTEXT >R  \ Р—Р°РїРѕРјРёРЅР°РµРј С‚РµРєСѓС‰РµРµ РїРѕР»РѕР¶РµРЅРёРµ. РўРѕР»СЊРєРѕ SPF
                 DUP >BODY @ GENEALOGY
                 STATE @ IF COMPILE, ELSE EXECUTE THEN
                 POSTPONE =>
-                R> TO CONTEXT \ Востанавливаем
+                R> TO CONTEXT \ Р’РѕСЃС‚Р°РЅР°РІР»РёРІР°РµРј
         ENDWITH
     ;
 

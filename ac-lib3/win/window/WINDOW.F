@@ -1,6 +1,6 @@
-( 27.08.1999 Черезов А. )
+( 27.08.1999 Р§РµСЂРµР·РѕРІ Рђ. )
 
-( Работа с окнами Windows )
+( Р Р°Р±РѕС‚Р° СЃ РѕРєРЅР°РјРё Windows )
 
 REQUIRE ||             ~ac/lib/temps.f
 REQUIRE CW_USEDEFAULT  ~ac/lib/win/window/winconst.f
@@ -32,9 +32,9 @@ WINAPI: InitCommonControlsEx COMCTL32.DLL
 VARIABLE DEBUG
 
 \ ----------------------------------------------
-\ Внутренние дела библиотеки, не вызывать эти слова напрямую
+\ Р’РЅСѓС‚СЂРµРЅРЅРёРµ РґРµР»Р° Р±РёР±Р»РёРѕС‚РµРєРё, РЅРµ РІС‹Р·С‹РІР°С‚СЊ СЌС‚Рё СЃР»РѕРІР° РЅР°РїСЂСЏРјСѓСЋ
 
-VARIABLE CC_INIT \ однократная инициализация CommonControls
+VARIABLE CC_INIT \ РѕРґРЅРѕРєСЂР°С‚РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ CommonControls
 CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
 
 : InitControls
@@ -46,108 +46,108 @@ CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
 ;
 
 \ ----------------------------------------------
-\ Основные функции библиотеки
+\ РћСЃРЅРѕРІРЅС‹Рµ С„СѓРЅРєС†РёРё Р±РёР±Р»РёРѕС‚РµРєРё
 
-: Window ( class-a class-u style parent-hwnd -- hwnd )  \ 0 - ошибка
-         \ создать окно указанного класса в качестве дочернего для parent
-         \ если parent=0, то отдельное неподчиненное окно
+: Window ( class-a class-u style parent-hwnd -- hwnd )  \ 0 - РѕС€РёР±РєР°
+         \ СЃРѕР·РґР°С‚СЊ РѕРєРЅРѕ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР° РІ РєР°С‡РµСЃС‚РІРµ РґРѕС‡РµСЂРЅРµРіРѕ РґР»СЏ parent
+         \ РµСЃР»Рё parent=0, С‚Рѕ РѕС‚РґРµР»СЊРЅРѕРµ РЅРµРїРѕРґС‡РёРЅРµРЅРЅРѕРµ РѕРєРЅРѕ
   || ca cu style par || (( ca cu style par ))
   InitControls
   0 0 0 par CW_USEDEFAULT CW_USEDEFAULT CW_USEDEFAULT CW_USEDEFAULT
   style par IF WS_CHILD OR THEN
   0 ca 0 CreateWindowExA
 ;
-\ Пример: S" RichEdit" WS_OVERLAPPEDWINDOW 0 Window
+\ РџСЂРёРјРµСЂ: S" RichEdit" WS_OVERLAPPEDWINDOW 0 Window
 
 
 : WindowDelete ( hwnd -- )
-               \ удалить окно
+               \ СѓРґР°Р»РёС‚СЊ РѕРєРЅРѕ
   DestroyWindow DROP
 ;
 
 
 : WindowPos ( x y hwnd -- )
-            \ установить позицию окна
+            \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕР·РёС†РёСЋ РѕРєРЅР°
   || x y hwnd || (( x y hwnd ))
   SWP_NOZORDER SWP_NOSIZE OR 0 0 y x 0 hwnd SetWindowPos DROP
 ;
 
 
 : WindowSize ( dx dy hwnd -- )
-             \ установить размеры окна
+             \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЂР°Р·РјРµСЂС‹ РѕРєРЅР°
   || dx dy hwnd || (( dx dy hwnd ))
   SWP_NOZORDER SWP_NOMOVE OR dy dx 0 0 0 hwnd SetWindowPos DROP
 ;
 
 
 : WindowToTop ( hwnd -- )
-              \ выпихнуть окно поверх других 
-              \ но не влияет на активность окон и другие приложения
+              \ РІС‹РїРёС…РЅСѓС‚СЊ РѕРєРЅРѕ РїРѕРІРµСЂС… РґСЂСѓРіРёС… 
+              \ РЅРѕ РЅРµ РІР»РёСЏРµС‚ РЅР° Р°РєС‚РёРІРЅРѕСЃС‚СЊ РѕРєРѕРЅ Рё РґСЂСѓРіРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ
   BringWindowToTop DROP
 ;
 
 
 : WindowActivate ( hwnd -- )
-                 \ активизировать окно
+                 \ Р°РєС‚РёРІРёР·РёСЂРѕРІР°С‚СЊ РѕРєРЅРѕ
   SetActiveWindow DROP
 ;
 
 
 : WindowToForeground ( hwnd -- )
-                     \ наиболее активная форма выдвижения окна :)
-                     \ рекомендуется только для критических сообщений
-                     \ но в Windows 2000 равно SetActiveWindow+FlashWindowEx
+                     \ РЅР°РёР±РѕР»РµРµ Р°РєС‚РёРІРЅР°СЏ С„РѕСЂРјР° РІС‹РґРІРёР¶РµРЅРёСЏ РѕРєРЅР° :)
+                     \ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РґР»СЏ РєСЂРёС‚РёС‡РµСЃРєРёС… СЃРѕРѕР±С‰РµРЅРёР№
+                     \ РЅРѕ РІ Windows 2000 СЂР°РІРЅРѕ SetActiveWindow+FlashWindowEx
   SetForegroundWindow DROP
 ;
 
 : WindowShow ( hwnd -- )
-             \ показать окно
+             \ РїРѕРєР°Р·Р°С‚СЊ РѕРєРЅРѕ
   SW_SHOW SWAP ShowWindow DROP
 ;
 
 
 : WindowHide ( hwnd -- )
-             \ спрятать окно (сделать невидимым, но не уничтожить)
+             \ СЃРїСЂСЏС‚Р°С‚СЊ РѕРєРЅРѕ (СЃРґРµР»Р°С‚СЊ РЅРµРІРёРґРёРјС‹Рј, РЅРѕ РЅРµ СѓРЅРёС‡С‚РѕР¶РёС‚СЊ)
   SW_HIDE SWAP ShowWindow DROP
 ;
 
 : WindowEnable ( hwnd -- )
-             \ разрешить окно
+             \ СЂР°Р·СЂРµС€РёС‚СЊ РѕРєРЅРѕ
   1 SWAP EnableWindow DROP
 ;
 
 
 : WindowDisable ( hwnd -- )
-             \ запретить окно (не может получить фокус ввода)
+             \ Р·Р°РїСЂРµС‚РёС‚СЊ РѕРєРЅРѕ (РЅРµ РјРѕР¶РµС‚ РїРѕР»СѓС‡РёС‚СЊ С„РѕРєСѓСЃ РІРІРѕРґР°)
   0 SWAP EnableWindow DROP
 ;
 
 : WindowMinimize ( hwnd -- )
-                 \ свернуть окно
+                 \ СЃРІРµСЂРЅСѓС‚СЊ РѕРєРЅРѕ
   CloseWindow DROP
 ;
 
 
 : WindowRestore ( hwnd -- )
-                \ развернуть окно назад
+                \ СЂР°Р·РІРµСЂРЅСѓС‚СЊ РѕРєРЅРѕ РЅР°Р·Р°Рґ
   SW_RESTORE SWAP ShowWindow DROP
 ;
 
 
 : WindowStyle ( ws hwnd -- )
-              \ установить стиль окна
-              \ не всякий стиль можно установить после создания окна :(
+              \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЃС‚РёР»СЊ РѕРєРЅР°
+              \ РЅРµ РІСЃСЏРєРёР№ СЃС‚РёР»СЊ РјРѕР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ РѕРєРЅР° :(
   GWL_STYLE SWAP SetWindowLongA DROP
 ;
 
 
 : WindowExStyle ( ws hwnd -- )
-                \ установить дополнительный стиль окна
+                \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ СЃС‚РёР»СЊ РѕРєРЅР°
   GWL_EXSTYLE SWAP SetWindowLongA DROP
 ;
 
 : MessageLoop ( wnd -- )
-              \ обработка сообщений, поступающих в очередь окна
+              \ РѕР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёР№, РїРѕСЃС‚СѓРїР°СЋС‰РёС… РІ РѕС‡РµСЂРµРґСЊ РѕРєРЅР°
   || wnd mem || (( wnd ))
   /MSG ALLOCATE THROW -> mem
   BEGIN
@@ -173,7 +173,7 @@ CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
   GWL_USERDATA SWAP GetWindowLongA CallWindowProcA
 ;
 
-( Пример 
+( РџСЂРёРјРµСЂ 
 : TEST
   || h ||
 

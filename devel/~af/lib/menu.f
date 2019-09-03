@@ -1,4 +1,4 @@
-\ Высокоуровневая поддержка меню
+\ Р’С‹СЃРѕРєРѕСѓСЂРѕРІРЅРµРІР°СЏ РїРѕРґРґРµСЂР¶РєР° РјРµРЅСЋ
 
 REQUIRE WinNT?	~ac/lib/win/winver.f
 REQUIRE :M	~af/lib/nwordlist.f

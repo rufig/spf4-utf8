@@ -1,12 +1,12 @@
-\ Простой пример перебора списка IP-соединений
-\ вместо использования iphlpapi:GetTcpTable (как в Eserv/3)
-\ запускается netstat и парсится его вывод.
-\ Дополнительный плюс - меньшая зависимость от версии ОС -
-\ на Win2000, в котором нет последнего поля (pid), должен
-\ выдать "System" вместо реальных процессов.
-\ fixme: но наверное там и опции "-o" в netstat нет :)
+\ РџСЂРѕСЃС‚РѕР№ РїСЂРёРјРµСЂ РїРµСЂРµР±РѕСЂР° СЃРїРёСЃРєР° IP-СЃРѕРµРґРёРЅРµРЅРёР№
+\ РІРјРµСЃС‚Рѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ iphlpapi:GetTcpTable (РєР°Рє РІ Eserv/3)
+\ Р·Р°РїСѓСЃРєР°РµС‚СЃСЏ netstat Рё РїР°СЂСЃРёС‚СЃСЏ РµРіРѕ РІС‹РІРѕРґ.
+\ Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ РїР»СЋСЃ - РјРµРЅСЊС€Р°СЏ Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ РѕС‚ РІРµСЂСЃРёРё РћРЎ -
+\ РЅР° Win2000, РІ РєРѕС‚РѕСЂРѕРј РЅРµС‚ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»СЏ (pid), РґРѕР»Р¶РµРЅ
+\ РІС‹РґР°С‚СЊ "System" РІРјРµСЃС‚Рѕ СЂРµР°Р»СЊРЅС‹С… РїСЂРѕС†РµСЃСЃРѕРІ.
+\ fixme: РЅРѕ РЅР°РІРµСЂРЅРѕРµ С‚Р°Рј Рё РѕРїС†РёРё "-o" РІ netstat РЅРµС‚ :)
 
-( примеры использования см. в конце файла )
+( РїСЂРёРјРµСЂС‹ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЃРј. РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р° )
 
 REQUIRE ChildAppErr ~ac/lib/win/process/child_app.f
 REQUIRE PipeLine    ~ac/lib/win/process/pipeline.f
@@ -88,7 +88,7 @@ USER uNetStatDebug
   \  -1 OVER WaitForSingleObject DROP CLOSE-FILE THROW
   CLOSE-FILE DROP 
 
-  ( здесь запись в stdin потомку)
+  ( Р·РґРµСЃСЊ Р·Р°РїРёСЃСЊ РІ stdin РїРѕС‚РѕРјРєСѓ)
 
   StdinWH @ CLOSE-FILE THROW
 
@@ -104,8 +104,8 @@ USER uNetStatDebug
 ;
 : NetStatHtml<  ( -- )
   " <table class='sortable' id='sp_table' cellpadding='0' cellspacing='0'>
-<thead><tr class='sp_head'><th class='proto'>Прот</th><th class='pid'>pid</th><th class='process'>Процесс</th>
-<th class='state'>Состояние</th><th class='ip'>IP</th><th class='port'>П</th><th class='rip'>IP</th><th class='rport'>П</th></tr></thead>
+<thead><tr class='sp_head'><th class='proto'>РџСЂРѕС‚</th><th class='pid'>pid</th><th class='process'>РџСЂРѕС†РµСЃСЃ</th>
+<th class='state'>РЎРѕСЃС‚РѕСЏРЅРёРµ</th><th class='ip'>IP</th><th class='port'>Рџ</th><th class='rip'>IP</th><th class='rport'>Рџ</th></tr></thead>
 <tbody>"
   uNS !
 ;
@@ -117,7 +117,7 @@ USER uNetStatDebug
   uNSpid !
   ['] (NetStatHtml) CATCH ?DUP IF ." ns_err=" . 2DROP THEN
 ;
-: NetStatHtml ( ta tu pid -- addr u ) \ при pid=-1 - все
+: NetStatHtml ( ta tu pid -- addr u ) \ РїСЂРё pid=-1 - РІСЃРµ
   NetStatHtml<
   >NetStatHtml<
   >NetStatHtml
@@ -135,7 +135,7 @@ USER uNetStatDebug
 
 \EOF
 
-\ фильтр по состоянию соединения
+\ С„РёР»СЊС‚СЂ РїРѕ СЃРѕСЃС‚РѕСЏРЅРёСЋ СЃРѕРµРґРёРЅРµРЅРёСЏ
 S" " TRUE NetStatHtml TYPE CR
 S" ESTABLISHED" TRUE NetStatHtml TYPE CR
 S" LISTENING" TRUE NetStatHtml TYPE CR
@@ -143,19 +143,19 @@ S" TIME_WAIT" TRUE NetStatHtml TYPE CR
 S" CLOSE_WAIT" TRUE NetStatHtml TYPE CR
 S" UDP" TRUE NetStatHtml TYPE CR
 
-\ по портам:
+\ РїРѕ РїРѕСЂС‚Р°Рј:
 NetStatHtml<   S" :25 " TRUE >NetStatHtml<  S" :110 " TRUE >NetStatHtml<  S" :143 " TRUE >NetStatHtml< >NetStatHtml TYPE CR
-\ или то же без кавычек:
+\ РёР»Рё С‚Рѕ Р¶Рµ Р±РµР· РєР°РІС‹С‡РµРє:
 NetStatHtml<   25 NetStatAddPort  110 NetStatAddPort  143 NetStatAddPort  >NetStatHtml TYPE CR
 
-\ для заданного процесса:
+\ РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РїСЂРѕС†РµСЃСЃР°:
 S" " S" *Eproxy.exe" GetProcessInfoByName NIP NIP NIP NIP NetStatHtml TYPE CR
 
-\ для набора процессов:
+\ РґР»СЏ РЅР°Р±РѕСЂР° РїСЂРѕС†РµСЃСЃРѕРІ:
 NetStatHtml<
   S" " S" *acSMTP.exe" GetProcessInfoByName NIP NIP NIP NIP >NetStatHtml<
   S" " S" *smtpsend4.exe" GetProcessInfoByName NIP NIP NIP NIP >NetStatHtml<
 >NetStatHtml TYPE CR
 
-\ то же, короче:
+\ С‚Рѕ Р¶Рµ, РєРѕСЂРѕС‡Рµ:
 NetStatHtml< S" acSMTP.exe" NetStatAddProc S" smtpsend4.exe" NetStatAddProc >NetStatHtml TYPE CR

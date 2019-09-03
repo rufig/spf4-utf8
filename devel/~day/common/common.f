@@ -2,7 +2,7 @@
 : [b] 2 BASE ! ; IMMEDIATE
 : [d] DECIMAL  ; IMMEDIATE
  
-\ комментарий
+\ РєРѕРјРјРµРЅС‚Р°СЂРёР№
 : \*
    BEGIN
      BEGIN
@@ -35,7 +35,7 @@
 
 : [THEN] ;  IMMEDIATE
 
-\ Очень понятное и простое слово
+\ РћС‡РµРЅСЊ РїРѕРЅСЏС‚РЅРѕРµ Рё РїСЂРѕСЃС‚РѕРµ СЃР»РѕРІРѕ
 : #define
   CREATE
      0 PARSE EVALUATE ,

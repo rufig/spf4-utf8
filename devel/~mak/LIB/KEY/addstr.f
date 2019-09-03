@@ -1,7 +1,7 @@
-\                                            Максимов М.О. 
+\                                            РњР°РєСЃРёРјРѕРІ Рњ.Рћ. 
 REQUIRE $+!  ~mak\place.f
 
-0x100 04 LSHIFT CONSTANT $_SIZE \ 16 промежуточных значений
+0x100 04 LSHIFT CONSTANT $_SIZE \ 16 РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹С… Р·РЅР°С‡РµРЅРёР№
 $_SIZE 1- CONSTANT $_MASKA
 
 CREATE $_BUFF $_SIZE ALLOT

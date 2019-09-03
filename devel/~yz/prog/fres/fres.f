@@ -1,18 +1,18 @@
 \ FRES 1.02 09.03.2007
-\ преобразует стандартый файл .RES в удобный для загрузки формат,
-\ который представляет собой ничто иное, как соответствующий кусок
-\ сегмента ресурсов: три уровня дерева плюс сами ресурсы.
-\ единственная разница: ссылки на ресурсы отмеряются от начала файла.
-\ Ю. Жиловец, http://www.forth.org.ru/~yz
+\ ╨┐╤А╨╡╨╛╨▒╤А╨░╨╖╤Г╨╡╤В ╤Б╤В╨░╨╜╨┤╨░╤А╤В╤Л╨╣ ╤Д╨░╨╣╨╗ .RES ╨▓ ╤Г╨┤╨╛╨▒╨╜╤Л╨╣ ╨┤╨╗╤П ╨╖╨░╨│╤А╤Г╨╖╨║╨╕ ╤Д╨╛╤А╨╝╨░╤В,
+\ ╨║╨╛╤В╨╛╤А╤Л╨╣ ╨┐╤А╨╡╨┤╤Б╤В╨░╨▓╨╗╤П╨╡╤В ╤Б╨╛╨▒╨╛╨╣ ╨╜╨╕╤З╤В╨╛ ╨╕╨╜╨╛╨╡, ╨║╨░╨║ ╤Б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╤Г╤О╤Й╨╕╨╣ ╨║╤Г╤Б╨╛╨║
+\ ╤Б╨╡╨│╨╝╨╡╨╜╤В╨░ ╤А╨╡╤Б╤Г╤А╤Б╨╛╨▓: ╤В╤А╨╕ ╤Г╤А╨╛╨▓╨╜╤П ╨┤╨╡╤А╨╡╨▓╨░ ╨┐╨╗╤О╤Б ╤Б╨░╨╝╨╕ ╤А╨╡╤Б╤Г╤А╤Б╤Л.
+\ ╨╡╨┤╨╕╨╜╤Б╤В╨▓╨╡╨╜╨╜╨░╤П ╤А╨░╨╖╨╜╨╕╤Ж╨░: ╤Б╤Б╤Л╨╗╨║╨╕ ╨╜╨░ ╤А╨╡╤Б╤Г╤А╤Б╤Л ╨╛╤В╨╝╨╡╤А╤П╤О╤В╤Б╤П ╨╛╤В ╨╜╨░╤З╨░╨╗╨░ ╤Д╨░╨╣╨╗╨░.
+\ ╨о. ╨Ц╨╕╨╗╨╛╨▓╨╡╤Ж, http://www.forth.org.ru/~yz
 \ ------------------------------------------
-\ Недоделки.
-\ Поскольку функции работы с атомами (в W95/98) не понимают юникодовских строк,
-\ пришлось преобразовывать таковые в обычные строки, а потом назад.
-\ Соответственно, имена ресурсов и их типов должны ограничиваться символама ASCII.
+\ ╨Э╨╡╨┤╨╛╨┤╨╡╨╗╨║╨╕.
+\ ╨Я╨╛╤Б╨║╨╛╨╗╤М╨║╤Г ╤Д╤Г╨╜╨║╤Ж╨╕╨╕ ╤А╨░╨▒╨╛╤В╤Л ╤Б ╨░╤В╨╛╨╝╨░╨╝╨╕ (╨▓ W95/98) ╨╜╨╡ ╨┐╨╛╨╜╨╕╨╝╨░╤О╤В ╤О╨╜╨╕╨║╨╛╨┤╨╛╨▓╤Б╨║╨╕╤Е ╤Б╤В╤А╨╛╨║,
+\ ╨┐╤А╨╕╤И╨╗╨╛╤Б╤М ╨┐╤А╨╡╨╛╨▒╤А╨░╨╖╨╛╨▓╤Л╨▓╨░╤В╤М ╤В╨░╨║╨╛╨▓╤Л╨╡ ╨▓ ╨╛╨▒╤Л╤З╨╜╤Л╨╡ ╤Б╤В╤А╨╛╨║╨╕, ╨░ ╨┐╨╛╤В╨╛╨╝ ╨╜╨░╨╖╨░╨┤.
+\ ╨б╨╛╨╛╤В╨▓╨╡╤В╤Б╤В╨▓╨╡╨╜╨╜╨╛, ╨╕╨╝╨╡╨╜╨░ ╤А╨╡╤Б╤Г╤А╤Б╨╛╨▓ ╨╕ ╨╕╤Е ╤В╨╕╨┐╨╛╨▓ ╨┤╨╛╨╗╨╢╨╜╤Л ╨╛╨│╤А╨░╨╜╨╕╤З╨╕╨▓╨░╤В╤М╤Б╤П ╤Б╨╕╨╝╨▓╨╛╨╗╨░╨╝╨░ ASCII.
 \ ------------------------------------------
-\ Версии
-\ 1.01 (15.12.2001) Исправлена ошибка: ресурсы с именами компилировались под NT неправильно
-\ 1.02 (09.03.2007) WINAPI: вместо ~yz/lib/api.f
+\ ╨Т╨╡╤А╤Б╨╕╨╕
+\ 1.01 (15.12.2001) ╨Ш╤Б╨┐╤А╨░╨▓╨╗╨╡╨╜╨░ ╨╛╤И╨╕╨▒╨║╨░: ╤А╨╡╤Б╤Г╤А╤Б╤Л ╤Б ╨╕╨╝╨╡╨╜╨░╨╝╨╕ ╨║╨╛╨╝╨┐╨╕╨╗╨╕╤А╨╛╨▓╨░╨╗╨╕╤Б╤М ╨┐╨╛╨┤ NT ╨╜╨╡╨┐╤А╨░╨▓╨╕╨╗╤М╨╜╨╛
+\ 1.02 (09.03.2007) WINAPI: ╨▓╨╝╨╡╤Б╤В╨╛ ~yz/lib/api.f
 \ ------------------------------------------
 REQUIRE "       ~yz/lib/common.f
 REQUIRE (|      ~yz/lib/printf.f
@@ -25,11 +25,11 @@ CREATE output-file 256 ALLOT
 : err  ." FRES: " .ASCIIZ CR BYE ;
 : ?err ( ? z --) SWAP IF err ELSE DROP THEN ;
 
-: my-error ( ERR-NUM -> ) \ показать расшифровку ошибки
+: my-error ( ERR-NUM -> ) \ ╨┐╨╛╨║╨░╨╖╨░╤В╤М ╤А╨░╤Б╤И╨╕╤Д╤А╨╛╨▓╨║╤Г ╨╛╤И╨╕╨▒╨║╨╕
   DUP -2 = IF DROP 
                 ER-A @ ER-U @ PAD CZMOVE PAD err
            THEN
-  DUP 2 <| " Ошибка #%d (0x%06X)" |) err
+  DUP 2 <| " ╨Ю╤И╨╕╨▒╨║╨░ #%d (0x%06X)" |) err
 ;
 \ ------------------------------------------
 0xF0000000 == numflag
@@ -53,11 +53,11 @@ WINAPI: UnmapViewOfFile KERNEL32.DLL
 VARIABLE file-ptr
 
 : map-input-file
-  input-file DUP ZLEN R/O OPEN-FILE " Входной файл не найден" ?err TO fh
+  input-file DUP ZLEN R/O OPEN-FILE " ╨Т╤Е╨╛╨┤╨╜╨╛╨╣ ╤Д╨░╨╣╨╗ ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜" ?err TO fh
   0 0 0 2 ( page_readonly) 0 fh CreateFileMappingA ?DUP 0= 
-    " Не могу отобразить файл в памяти" ?err TO maph
+    " ╨Э╨╡ ╨╝╨╛╨│╤Г ╨╛╤В╨╛╨▒╤А╨░╨╖╨╕╤В╤М ╤Д╨░╨╣╨╗ ╨▓ ╨┐╨░╨╝╤П╤В╨╕" ?err TO maph
   0 0 0 4 ( file_map_read) maph MapViewOfFile ?DUP 0= 
-    " Не могу отобразить файл в памяти" ?err TO file ;
+    " ╨Э╨╡ ╨╝╨╛╨│╤Г ╨╛╤В╨╛╨▒╤А╨░╨╖╨╕╤В╤М ╤Д╨░╨╣╨╗ ╨▓ ╨┐╨░╨╝╤П╤В╨╕" ?err TO file ;
 
 : unmap-input-file
   file UnmapViewOfFile DROP
@@ -65,11 +65,11 @@ VARIABLE file-ptr
   fh CLOSE-FILE DROP ;
 
 : map-output-file
-  output-file DUP ZLEN R/W CREATE-FILE " Не могу создать выходной файл" ?err TO ofh
+  output-file DUP ZLEN R/W CREATE-FILE " ╨Э╨╡ ╨╝╨╛╨│╤Г ╤Б╨╛╨╖╨┤╨░╤В╤М ╨▓╤Л╤Е╨╛╨┤╨╜╨╛╨╣ ╤Д╨░╨╣╨╗" ?err TO ofh
   0 input-file-size 2* 0 4 ( page_readwrite) 0 ofh CreateFileMappingA ?DUP 0= 
-    " Не могу отобразить выходной файл в памяти" ?err TO omaph
+    " ╨Э╨╡ ╨╝╨╛╨│╤Г ╨╛╤В╨╛╨▒╤А╨░╨╖╨╕╤В╤М ╨▓╤Л╤Е╨╛╨┤╨╜╨╛╨╣ ╤Д╨░╨╣╨╗ ╨▓ ╨┐╨░╨╝╤П╤В╨╕" ?err TO omaph
   0 0 0 2 ( file_map_write) omaph MapViewOfFile ?DUP 0= 
-    " Не могу отобразить выходной файл в памяти" ?err TO ofile 
+    " ╨Э╨╡ ╨╝╨╛╨│╤Г ╨╛╤В╨╛╨▒╤А╨░╨╖╨╕╤В╤М ╨▓╤Л╤Е╨╛╨┤╨╜╨╛╨╣ ╤Д╨░╨╣╨╗ ╨▓ ╨┐╨░╨╝╤П╤В╨╕" ?err TO ofile 
   ofile file-ptr ! ;
 
 : unmap-output-file
@@ -87,17 +87,17 @@ WINAPI: GetAtomNameA KERNEL32.DLL
   600 file-ptr @ 2+ R> HERE 0 0 MultiByteToWideChar DUP file-ptr @ W!
   2* 2+ file-ptr +! ;
 : ?align-file ( -- )
-  \ пользуемся тем, что все, записываемое в файл, уже выравнено на границу слова
+  \ ╨┐╨╛╨╗╤М╨╖╤Г╨╡╨╝╤Б╤П ╤В╨╡╨╝, ╤З╤В╨╛ ╨▓╤Б╨╡, ╨╖╨░╨┐╨╕╤Б╤Л╨▓╨░╨╡╨╝╨╛╨╡ ╨▓ ╤Д╨░╨╣╨╗, ╤Г╨╢╨╡ ╨▓╤Л╤А╨░╨▓╨╜╨╡╨╜╨╛ ╨╜╨░ ╨│╤А╨░╨╜╨╕╤Ж╤Г ╤Б╨╗╨╛╨▓╨░
   file-ptr @ ofile - CELL MOD IF 0 W>> THEN ;
 \ ------------------------------------------
-\ Корень дерева
+\ ╨Ъ╨╛╤А╨╡╨╜╤М ╨┤╨╡╤А╨╡╨▓╨░
 0
-CELL -- :begin    \ должно быть = :next = 0
+CELL -- :begin    \ ╨┤╨╛╨╗╨╢╨╜╨╛ ╨▒╤Л╤В╤М = :next = 0
 CELL -- :treeref
 CELL -- :names
 CELL -- :ords
 == root#
-\ узел дерева
+\ ╤Г╨╖╨╡╨╗ ╨┤╨╡╤А╨╡╨▓╨░
 0 
 CELL -- :next
 CELL -- :strref
@@ -105,10 +105,10 @@ CELL -- :nextname
 CELL -- :id
 CELL -- :son
 == node#
-\ лист дерева
+\ ╨╗╨╕╤Б╤В ╨┤╨╡╤А╨╡╨▓╨░
 0
 CELL -- :adr
-CELL -- :leafref \ должно быть = :treeref
+CELL -- :leafref \ ╨┤╨╛╨╗╨╢╨╜╨╛ ╨▒╤Л╤В╤М = :treeref
 CELL -- :dataref
 CELL -- :nextleaf
 CELL -- :size
@@ -127,9 +127,9 @@ WINAPI: AddAtomA KERNEL32.DLL
 : get-son { tree id newproc \ -- son }
   tree :begin @ ?DUP IF
     BEGIN
-      DUP :id @ id = IF ( нашли) :son @ EXIT THEN
+      DUP :id @ id = IF ( ╨╜╨░╤И╨╗╨╕) :son @ EXIT THEN
       :next DUP @ ?DUP IF PRESS 0 ELSE -1 THEN
-    UNTIL \ не нашли: создаем новый узел и новое дерево к нему
+    UNTIL \ ╨╜╨╡ ╨╜╨░╤И╨╗╨╕: ╤Б╨╛╨╖╨┤╨░╨╡╨╝ ╨╜╨╛╨▓╤Л╨╣ ╤Г╨╖╨╡╨╗ ╨╕ ╨╜╨╛╨▓╨╛╨╡ ╨┤╨╡╤А╨╡╨▓╨╛ ╨║ ╨╜╨╡╨╝╤Г
   ELSE
     tree :begin
   THEN
@@ -149,7 +149,7 @@ WINAPI: AddAtomA KERNEL32.DLL
 
 : >id ( adr -- id)
   DUP W@ 0xFFFF = IF 
-    2+ W@ setnumflag \ чтобы можно было отличить от строк
+    2+ W@ setnumflag \ ╤З╤В╨╛╨▒╤Л ╨╝╨╛╨╢╨╜╨╛ ╨▒╤Л╨╗╨╛ ╨╛╤В╨╗╨╕╤З╨╕╤В╤М ╨╛╤В ╤Б╤В╤А╨╛╨║
   ELSE
     unicode>buf DUP AddAtomA SWAP FREEMEM
   THEN ;
@@ -162,7 +162,7 @@ WINAPI: AddAtomA KERNEL32.DLL
   datasize R> :size !
 ;  
 \ ------------------------------------------
-\ простая обменная сортировка. Списки короткие, хватит и такой
+\ ╨┐╤А╨╛╤Б╤В╨░╤П ╨╛╨▒╨╝╨╡╨╜╨╜╨░╤П ╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨║╨░. ╨б╨┐╨╕╤Б╨║╨╕ ╨║╨╛╤А╨╛╤В╨║╨╕╨╡, ╤Е╨▓╨░╤В╨╕╤В ╨╕ ╤В╨░╨║╨╛╨╣
 : sort { tree lt \ start min minnode -- }
   tree :begin @ TO start
   BEGIN start :next @ WHILE
@@ -177,8 +177,8 @@ WINAPI: AddAtomA KERNEL32.DLL
       THEN
       :next @
     ?DUP 0= UNTIL
-    start minnode <> IF \ меняем местами данные
-      \ это безопасно, поскольку относительных ссылок там нет
+    start minnode <> IF \ ╨╝╨╡╨╜╤П╨╡╨╝ ╨╝╨╡╤Б╤В╨░╨╝╨╕ ╨┤╨░╨╜╨╜╤Л╨╡
+      \ ╤Н╤В╨╛ ╨▒╨╡╨╖╨╛╨┐╨░╤Б╨╜╨╛, ╨┐╨╛╤Б╨║╨╛╨╗╤М╨║╤Г ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╤Л╤Е ╤Б╤Б╤Л╨╗╨╛╨║ ╤В╨░╨╝ ╨╜╨╡╤В
       start CELL+ HERE node# CELL - DUP >R CMOVE
       minnode CELL+ start CELL+ R@ CMOVE
       HERE minnode CELL+ R> CMOVE
@@ -186,11 +186,11 @@ WINAPI: AddAtomA KERNEL32.DLL
     start :next @ TO start
   REPEAT
 ;
-\ обойти дерево, выполнив в каждом узле операцию xt
+\ ╨╛╨▒╨╛╨╣╤В╨╕ ╨┤╨╡╤А╨╡╨▓╨╛, ╨▓╤Л╨┐╨╛╨╗╨╜╨╕╨▓ ╨▓ ╨║╨░╨╢╨┤╨╛╨╝ ╤Г╨╖╨╗╨╡ ╨╛╨┐╨╡╤А╨░╤Ж╨╕╤О xt
 \ xt ( node -- )
 : traverse-tree ( tree xt --)
   >R
-  :begin @ ?DUP IF \ дерево непустое?
+  :begin @ ?DUP IF \ ╨┤╨╡╤А╨╡╨▓╨╛ ╨╜╨╡╨┐╤Г╤Б╤В╨╛╨╡?
     BEGIN
       DUP R@ EXECUTE
       :next @ ?DUP
@@ -198,13 +198,13 @@ WINAPI: AddAtomA KERNEL32.DLL
   THEN
   RDROP
 ;
-\ выполнить для дерева операцию xt1, а потом обойти дерево с операцией xt
+\ ╨▓╤Л╨┐╨╛╨╗╨╜╨╕╤В╤М ╨┤╨╗╤П ╨┤╨╡╤А╨╡╨▓╨░ ╨╛╨┐╨╡╤А╨░╤Ж╨╕╤О xt1, ╨░ ╨┐╨╛╤В╨╛╨╝ ╨╛╨▒╨╛╨╣╤В╨╕ ╨┤╨╡╤А╨╡╨▓╨╛ ╤Б ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╡╨╣ xt
 \ xt ( node -- )
 \ xt1 ( tree -- )
 : do-it-and-traverse-tree ( tree xt xt1 --)
   >R OVER R> EXECUTE traverse-tree ;
 
-\ обойти дерево с операцией xt, потом выполнить над ним операцию xt1
+\ ╨╛╨▒╨╛╨╣╤В╨╕ ╨┤╨╡╤А╨╡╨▓╨╛ ╤Б ╨╛╨┐╨╡╤А╨░╤Ж╨╕╨╡╨╣ xt, ╨┐╨╛╤В╨╛╨╝ ╨▓╤Л╨┐╨╛╨╗╨╜╨╕╤В╤М ╨╜╨░╨┤ ╨╜╨╕╨╝ ╨╛╨┐╨╡╤А╨░╤Ж╨╕╤О xt1
 \ xt ( node -- )
 \ xt1 ( tree -- )
 \ : traverse-tree-and-do-it ( tree xt xt1 --)
@@ -217,13 +217,13 @@ WINAPI: lstrcmp KERNEL32.DLL
 
 : ord/uni< ( o/u1 o/u2 -- ?)
   2DUP OR name? IF
-    \ это два атома, изображающие строки
+    \ ╤Н╤В╨╛ ╨┤╨▓╨░ ╨░╤В╨╛╨╝╨░, ╨╕╨╖╨╛╨▒╤А╨░╨╢╨░╤О╤Й╨╕╨╡ ╤Б╤В╤А╨╛╨║╨╕
     HERE atom>str HERE 300 + atom>str
     HERE HERE 300 + lstrcmp 0<
   ELSE
-    \ хватит и простого сравнения. Если это два числа, то U< их упорядочивает.
-    \ а если число и атом, то атомы гарантированно меньше чисел с установленным
-    \ старшим битом, что и требуется
+    \ ╤Е╨▓╨░╤В╨╕╤В ╨╕ ╨┐╤А╨╛╤Б╤В╨╛╨│╨╛ ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤П. ╨Х╤Б╨╗╨╕ ╤Н╤В╨╛ ╨┤╨▓╨░ ╤З╨╕╤Б╨╗╨░, ╤В╨╛ U< ╨╕╤Е ╤Г╨┐╨╛╤А╤П╨┤╨╛╤З╨╕╨▓╨░╨╡╤В.
+    \ ╨░ ╨╡╤Б╨╗╨╕ ╤З╨╕╤Б╨╗╨╛ ╨╕ ╨░╤В╨╛╨╝, ╤В╨╛ ╨░╤В╨╛╨╝╤Л ╨│╨░╤А╨░╨╜╤В╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛ ╨╝╨╡╨╜╤М╤И╨╡ ╤З╨╕╤Б╨╡╨╗ ╤Б ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╤Л╨╝
+    \ ╤Б╤В╨░╤А╤И╨╕╨╝ ╨▒╨╕╤В╨╛╨╝, ╤З╤В╨╛ ╨╕ ╤В╤А╨╡╨▒╤Г╨╡╤В╤Б╤П
     U<
   THEN ;
 
@@ -244,12 +244,12 @@ WINAPI: lstrcmp KERNEL32.DLL
   type-tree ['] sort-name-tree ['] ord/uni-sort do-it-and-traverse-tree 
 ;
 \ ------------------------------------------
-\ обойти дерево, выполнить в каждом узле xt ( node -- ) и уничтожить этот узел
-\ потом уничтожить дерево
+\ ╨╛╨▒╨╛╨╣╤В╨╕ ╨┤╨╡╤А╨╡╨▓╨╛, ╨▓╤Л╨┐╨╛╨╗╨╜╨╕╤В╤М ╨▓ ╨║╨░╨╢╨┤╨╛╨╝ ╤Г╨╖╨╗╨╡ xt ( node -- ) ╨╕ ╤Г╨╜╨╕╤З╤В╨╛╨╢╨╕╤В╤М ╤Н╤В╨╛╤В ╤Г╨╖╨╡╨╗
+\ ╨┐╨╛╤В╨╛╨╝ ╤Г╨╜╨╕╤З╤В╨╛╨╢╨╕╤В╤М ╨┤╨╡╤А╨╡╨▓╨╛
 : last-traverse-tree ( tree xt -- )
   OVER >R
   >R
-  :begin @ ?DUP IF \ дерево непустое?
+  :begin @ ?DUP IF \ ╨┤╨╡╤А╨╡╨▓╨╛ ╨╜╨╡╨┐╤Г╤Б╤В╨╛╨╡?
     BEGIN
       DUP R@ EXECUTE
       DUP >R
@@ -268,10 +268,10 @@ WINAPI: lstrcmp KERNEL32.DLL
 : chop-tree 
   type-tree ['] chop-type-son last-traverse-tree ;
 \ ------------------------------------------
-: ?offset>> ( to -- ) \ записать текущее смещение в файле по адресу to<>0
+: ?offset>> ( to -- ) \ ╨╖╨░╨┐╨╕╤Б╨░╤В╤М ╤В╨╡╨║╤Г╤Й╨╡╨╡ ╤Б╨╝╨╡╤Й╨╡╨╜╨╕╨╡ ╨▓ ╤Д╨░╨╣╨╗╨╡ ╨┐╨╛ ╨░╨┤╤А╨╡╤Б╤Г to<>0
   ?DUP IF file-ptr @ ofile - 0x80000000 OR SWAP ! THEN ;
 
-: ?offset0>> ( to -- ) \ записать текущее смещение в файле по адресу to<>0
+: ?offset0>> ( to -- ) \ ╨╖╨░╨┐╨╕╤Б╨░╤В╤М ╤В╨╡╨║╤Г╤Й╨╡╨╡ ╤Б╨╝╨╡╤Й╨╡╨╜╨╕╨╡ ╨▓ ╤Д╨░╨╣╨╗╨╡ ╨┐╨╛ ╨░╨┤╤А╨╡╤Б╤Г to<>0
   ?DUP IF file-ptr @ ofile - SWAP ! THEN ;
 
 VARIABLE name-begin
@@ -281,32 +281,32 @@ VARIABLE leaf-begin
 VARIABLE last-leaf
 
 \ struct _IMAGE_RESOURCE_DIRECTORY_ENTRY {
-\   ULONG   Name;
-\   ULONG   OffsetToData; }
+\ ┬а ULONG┬а┬а Name;
+\ ┬а ULONG┬а┬а OffsetToData; }
 : write-entries ( node -- )
   >R
   R@ :id @ name? IF
-    \ это строка. запишем ее позже
+    \ ╤Н╤В╨╛ ╤Б╤В╤А╨╛╨║╨░. ╨╖╨░╨┐╨╕╤И╨╡╨╝ ╨╡╨╡ ╨┐╨╛╨╖╨╢╨╡
     file-ptr @ R@ :strref !
     R@ last-name @ !
     R@ :nextname last-name !
     CELL" NAME" >>
   ELSE
-   \ это число
+   \ ╤Н╤В╨╛ ╤З╨╕╤Б╨╗╨╛
     R@ :id @ clnumflag >>
   THEN
-  \ ссылку на поддерево запишем позже
+  \ ╤Б╤Б╤Л╨╗╨║╤Г ╨╜╨░ ╨┐╨╛╨┤╨┤╨╡╤А╨╡╨▓╨╛ ╨╖╨░╨┐╨╕╤И╨╡╨╝ ╨┐╨╛╨╖╨╢╨╡
   file-ptr @ R> :son @ :treeref !
   CELL" DOWN" >>
 ;  
 
 \ struct _IMAGE_RESOURCE_DIRECTORY {
-\    ULONG   Characteristics;
-\    ULONG   TimeDateStamp;
-\    USHORT  MajorVersion;
-\    USHORT  MinorVersion;
-\    USHORT  NumberOfNamedEntries;
-\    USHORT  NumberOfIdEntries; }
+\    ULONG┬а┬а Characteristics;
+\    ULONG┬а┬а TimeDateStamp;
+\ ┬а┬а USHORT┬а MajorVersion;
+\ ┬а┬а USHORT┬а MinorVersion;
+\ ┬а┬а USHORT┬а NumberOfNamedEntries;
+\ ┬а┬а USHORT┬а NumberOfIdEntries; }
 : write-dir ( tree -- )
   DUP :treeref @ ?offset>>
   0 >> 0 >> 0 >>
@@ -368,10 +368,10 @@ VARIABLE last-leaf
   ?align-file ;
 
 \ struct _IMAGE_RESOURCE_DATA_ENTRY {
-\   ULONG   OffsetToData;
-\   ULONG   Size;
-\   ULONG   CodePage;
-\   ULONG   Reserved; }
+\ ┬а ULONG┬а┬а OffsetToData;
+\ ┬а ULONG┬а┬а Size;
+\ ┬а ULONG┬а┬а CodePage;
+\ ┬а ULONG┬а┬а Reserved; }
 : write-leafs ( -- )
   leaf-begin @ ?DUP 0= IF EXIT THEN 
   BEGIN
@@ -422,7 +422,7 @@ VARIABLE last-leaf
 \    DWORD HeaderSize; 
 \    [Ordinal or name TYPE]; 
 \    [Ordinal or name NAME];
-\    ? word для выравнивания
+\    ? word ╨┤╨╗╤П ╨▓╤Л╤А╨░╨▓╨╜╨╕╨▓╨░╨╜╨╕╤П
 \    DWORD DataVersion; 
 \    WORD MemoryFlags; 
 \    WORD LanguageId; 
@@ -434,7 +434,7 @@ VARIABLE last-leaf
   fh FILE-SIZE 2DROP DUP TO input-file-size file + TO file-end
   file TO ptr
   BEGIN ptr file-end < WHILE
-  \ пропускаем сомнительную запись с DataSize=0, которую компилятор ставит первой
+  \ ╨┐╤А╨╛╨┐╤Г╤Б╨║╨░╨╡╨╝ ╤Б╨╛╨╝╨╜╨╕╤В╨╡╨╗╤М╨╜╤Г╤О ╨╖╨░╨┐╨╕╤Б╤М ╤Б DataSize=0, ╨║╨╛╤В╨╛╤А╤Г╤О ╨║╨╛╨╝╨┐╨╕╨╗╤П╤В╨╛╤А ╤Б╤В╨░╨▓╨╕╤В ╨┐╨╡╤А╨▓╨╛╨╣
     ptr @ IF 
       ptr 2 CELLS+ ( type) DUP ord/uni-beyond ( name)
       DUP ord/uni-beyond align-dword CELL+ 2+ DUP W@ ( lang id)
@@ -443,10 +443,10 @@ VARIABLE last-leaf
     ptr @ ptr CELL+ @ + align-dword ^ ptr +!
   REPEAT ;
 \ ------------------------------------------
-: ?next ( "name" или name<BL> -- a # / 0)
+: ?next ( "name" ╨╕╨╗╨╕ name<BL> -- a # / 0)
   PeekChar c: " = IF c: " ELSE BL THEN WORD
   DUP C@ 0= IF DROP 0 EXIT THEN
-  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( убрал кавычки, если есть)
+  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( ╤Г╨▒╤А╨░╨╗ ╨║╨░╨▓╤Л╤З╨║╨╕, ╨╡╤Б╨╗╨╕ ╨╡╤Б╤В╤М)
 ;
 
 : -ext { a n -- a #1 }
@@ -467,11 +467,11 @@ VARIABLE last-leaf
   ['] my-error TO ERROR
   -1 TO SOURCE-ID 
   GetCommandLineA ASCIIZ> SOURCE!
-  ?next 2DROP  \ убрали имя файла
+  ?next 2DROP  \ ╤Г╨▒╤А╨░╨╗╨╕ ╨╕╨╝╤П ╤Д╨░╨╣╨╗╨░
   ?next 
   ?DUP 0= IF
-    ." FRES 1.01  Преобразует стандартный файл ресурсов .RES в формат .FRES" CR
-    ." Вызов: FRES вхфайл [выхфайл]" CR
+    ." FRES 1.01  ╨Я╤А╨╡╨╛╨▒╤А╨░╨╖╤Г╨╡╤В ╤Б╤В╨░╨╜╨┤╨░╤А╤В╨╜╤Л╨╣ ╤Д╨░╨╣╨╗ ╤А╨╡╤Б╤Г╤А╤Б╨╛╨▓ .RES ╨▓ ╤Д╨╛╤А╨╝╨░╤В .FRES" CR
+    ." ╨Т╤Л╨╖╨╛╨▓: FRES ╨▓╤Е╤Д╨░╨╣╨╗ [╨▓╤Л╤Е╤Д╨░╨╣╨╗]" CR
     BYE
   THEN
   ( a #) input-file CZMOVE

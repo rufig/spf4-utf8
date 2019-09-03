@@ -21,7 +21,7 @@ CLASS: OpenDialog <SUPER Object
           CELL VAR   lpstrCustomFilter
           CELL VAR   nMaxCustFilter
           CELL VAR   nFilterIndex
-      max-path ARR   lpstrFile   \ óêàçàòåëü íà äèíàìè÷åñêèé ìàññèâ!
+      max-path ARR   lpstrFile   \ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð¼Ð°ÑÑÐ¸Ð²!
           CELL VAR   nMaxFile
           CELL VAR   lpstrFileTitle
           CELL VAR   nMaxFileTitle

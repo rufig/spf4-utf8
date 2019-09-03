@@ -1,8 +1,8 @@
-\ û. Ü®´Æ¢•Ê (www.forth.org.ru/~yz)
+\ –Æ. –ñ–∏–ª–æ–≤–µ—Ü (www.forth.org.ru/~yz)
 \ 21.01.2001
 
-\ ä´Ô≠„·Ï Æ‰Æ‡¨®‚Ï ¢·• ¢ ¢®§• ¨Æ§„´Ô, ™†™ ‚Æ´Ï™Æ ™Æ¨†≠§† ØÆ ·‚†≠§†‡‚®ß†Ê®®
-\ Ø‡®§•‚ ™ ™Æ≠·•≠·„·„
+\ –ö–ª—è–Ω—É—Å—å –æ—Ñ–æ—Ä–º–∏—Ç—å –≤—Å–µ –≤ –≤–∏–¥–µ –º–æ–¥—É–ª—è, –∫–∞–∫ —Ç–æ–ª—å–∫–æ –∫–æ–º–∞–Ω–¥–∞ –ø–æ —Å—Ç–∞–Ω–¥–∞—Ä—Ç–∏–∑–∞—Ü–∏–∏
+\ –ø—Ä–∏–¥–µ—Ç –∫ –∫–æ–Ω—Å–µ–Ω—Å—É—Å—É
 
 REQUIRE  IID_NULL ~yz/lib/combase.f
 REQUIRE  {        lib/ext/locals.f
@@ -86,7 +86,7 @@ unknown-id == dispid_unknown
 8 -- :var-value
 == variant-len
 
-( ß≠†Á•≠®Ô ØÆß†®¨·‚¢Æ¢†≠Î ®ß wintypes.h)
+( –∑–Ω–∞—á–µ–Ω–∏—è –ø–æ–∑–∞–∏–º—Å—Ç–≤–æ–≤–∞–Ω—ã –∏–∑ wintypes.h)
  0 == _empty
  1 == _null
 17 == _char     _char   == _ui1
@@ -170,14 +170,14 @@ CELL -- :names#
   variant-len +LOOP
   R> FREEMEM ;
 
-: make-namelist ( -- ) \ ≠† ·†¨Æ¨ §•´• ·Æß§†•‚ "·Ø®·Æ™" ®ß Æ§≠Æ© ÔÁ•©™®
-  \ ®¨•≠Æ¢†≠≠Î• †‡£„¨•≠‚Î §•´†‚Ï ≠• ÂÆÁ„ - ¢Æß≠® ¨≠Æ£Æ, † ØÆ´ÏßÎ ≠®™†™Æ©
+: make-namelist ( -- ) \ –Ω–∞ —Å–∞–º–æ–º –¥–µ–ª–µ —Å–æ–∑–¥–∞–µ—Ç "—Å–ø–∏—Å–æ–∫" –∏–∑ –æ–¥–Ω–æ–π —è—á–µ–π–∫–∏
+  \ –∏–º–µ–Ω–æ–≤–∞–Ω–Ω—ã–µ –∞—Ä–≥—É–º–µ–Ω—Ç—ã –¥–µ–ª–∞—Ç—å –Ω–µ —Ö–æ—á—É - –≤–æ–∑–Ω–∏ –º–Ω–æ–≥–æ, –∞ –ø–æ–ª—å–∑—ã –Ω–∏–∫–∞–∫–æ–π
   CELL GETMEM ;
 
 : make-arglist ( -- arglist)
   arglist-len GETMEM DUP arglist-len ERASE ;
 : drop-arglist ( arglist --)
-  DUP :args# @ 0= ( Ø„·‚Æ© ·Ø®·Æ™ †‡£„¨•≠‚Æ¢?) IF DROP EXIT THEN 
+  DUP :args# @ 0= ( –ø—É—Å—Ç–æ–π —Å–ø–∏—Å–æ–∫ –∞—Ä–≥—É–º–µ–Ω—Ç–æ–≤?) IF DROP EXIT THEN 
   DUP :names @ ?DUP IF FREEMEM THEN
   DUP :args @ OVER :args# @ drop-varlist 
   FREEMEM ;
@@ -221,9 +221,9 @@ CELL -- :retvalue
 USER-CREATE excepinfo excepinfo-len USER-ALLOT
 
 : OLE-ERROR ( -- description errcode)
-\ Ø‡•§ØÆ´†£†Ó, Á‚Æ ÆË®°™† §Æ´¶≠† ¢Æß¢‡†È†‚Ï·Ô ·‡†ß„, °•ß ¢·Ô™®Â ®ß¢‡†È•≠®©
-\ · Æ‚´Æ¶•≠≠Î¨® ¢ÎßÆ¢†¨®. ç†·™Æ´Ï™Æ Ô ØÆ≠Ô´, Æ‚´Æ¶•≠≠Î• ¢ÎßÆ¢Î ‡†°Æ‚†Ó‚ 
-\ ‚Æ´Ï™Æ · Æ°Í•™‚†¨®, ≠†ÂÆ§ÔÈ®¨®·Ô ¢ ‚Æ¨ ¶• Ø‡ÆÊ•··•.
+\ –ø—Ä–µ–¥–ø–æ–ª–∞–≥–∞—é, —á—Ç–æ –æ—à–∏–±–∫–∞ –¥–æ–ª–∂–Ω–∞ –≤–æ–∑–≤—Ä–∞—â–∞—Ç—å—Å—è —Å—Ä–∞–∑—É, –±–µ–∑ –≤—Å—è–∫–∏—Ö –∏–∑–≤—Ä–∞—â–µ–Ω–∏–π
+\ —Å –æ—Ç–ª–æ–∂–µ–Ω–Ω—ã–º–∏ –≤—ã–∑–æ–≤–∞–º–∏. –ù–∞—Å–∫–æ–ª—å–∫–æ —è –ø–æ–Ω—è–ª, –æ—Ç–ª–æ–∂–µ–Ω–Ω—ã–µ –≤—ã–∑–æ–≤—ã —Ä–∞–±–æ—Ç–∞—é—Ç 
+\ —Ç–æ–ª—å–∫–æ —Å –æ–±—ä–µ–∫—Ç–∞–º–∏, –Ω–∞—Ö–æ–¥—è—â–∏–º–∏—Å—è –≤ —Ç–æ–º –∂–µ –ø—Ä–æ—Ü–µ—Å—Å–µ.
   excepinfo :bstrDescription @ DUP IF unicode>buf THEN
   excepinfo :retvalue @ excepinfo :wCode W@ +
   excepinfo :bstrSource SysFreeString DROP
@@ -312,7 +312,7 @@ USER-CREATE excepinfo excepinfo-len USER-ALLOT
 
 -4 == dispid_newenum
 
-\ ≠† ·‚•™• ¢Æß¢‡†‚Æ¢ ¢Æ ¢‡•¨Ô Ê®™´† Â‡†≠Ô‚·Ô:
+\ –Ω–∞ —Å—Ç–µ–∫–µ –≤–æ–∑–≤—Ä–∞—Ç–æ–≤ –≤–æ –≤—Ä–µ–º—è —Ü–∏–∫–ª–∞ —Ö—Ä–∞–Ω—è—Ç—Å—è:
 \ LEAVE-addr, enumerator, variant
 
 : OBJ-I ( -- val type)
@@ -340,7 +340,7 @@ USER-CREATE excepinfo excepinfo-len USER-ALLOT
 : (next)  ( var enum -- 0 ok / 1 no more) 
   >R >R 0 R> 1 R> ::Next ;
 
-\ ËÒıÓ‰Ì‡ˇ ‚ÂÒËˇ ~yz
+\ —à—ë—ó—é—Ñ—ç—Ä¬† —Ç—Ö–Å—ë—à¬† ~yz
 \ : FOREACH ( compile: -- a1 a2 a3 10; obj -- )
 \   ?COMP
 \   POSTPONE (get-enumerator)
@@ -358,7 +358,7 @@ USER-CREATE excepinfo excepinfo-len USER-ALLOT
 \   10
 \ ; IMMEDIATE
 
-\ ‚ÂÒËˇ ~day 22.06.2001:
+\ —Ç—Ö–Å—ë—à¬† ~day 22.06.2001:
 
 : (MLIT,) R> DUP CELL+ >R @ ;
 :  MLIT, POSTPONE (MLIT,) , ;
@@ -383,7 +383,7 @@ USER-CREATE excepinfo excepinfo-len USER-ALLOT
 
 : NEXT ( compile: a1 a2 a2 10 -- ; -- )
   ?COMP
-  10 <> ABORT" NEXT °•ß FOREACH" 
+  10 <> ABORT" NEXT –±–µ–∑ FOREACH" 
   POSTPONE R@
   POSTPONE VariantClear
   POSTPONE DROP
@@ -481,8 +481,8 @@ VECT ?OLE-ERROR
   AGAIN ;
 
 : (::) ( [val type] idisp z -- [val type] 0 / where err)
-  str ZMOVE  ( ·Æ°´†ß≠®‚•´Ï≠Æ °Î´Æ °Î ‡†°Æ‚†‚Ï · Ø•‡•§†≠≠Æ© ·‚‡Æ™Æ©)
-  ( ≠®™„§† •• ≠• ™ÆØ®‡„Ô, ≠Æ, „¢Î, ·‚†≠§†‡‚ ß†Ø‡•È†•‚) 
+  str ZMOVE  ( —Å–æ–±–ª–∞–∑–Ω–∏—Ç–µ–ª—å–Ω–æ –±—ã–ª–æ –±—ã —Ä–∞–±–æ—Ç–∞—Ç—å —Å –ø–µ—Ä–µ–¥–∞–Ω–Ω–æ–π —Å—Ç—Ä–æ–∫–æ–π)
+  ( –Ω–∏–∫—É–¥–∞ –µ–µ –Ω–µ –∫–æ–ø–∏—Ä—É—è, –Ω–æ, —É–≤—ã, —Å—Ç–∞–Ω–¥–∞—Ä—Ç –∑–∞–ø—Ä–µ—â–∞–µ—Ç) 
   str pos !
   DUP ::AddRef DROP object !  -1 location !  
   call 0!  indices 0!  last-prop 0!
@@ -523,8 +523,8 @@ VECT ?OLE-ERROR
 
 : ?ole-error ( ... 0 / where err)
   ?DUP 0= IF EXIT THEN
-  ." ÇÎßÆ¢ " c: " EMIT str .ansiz c: " EMIT CR
-  ." Ä‡£„¨•≠‚ " SWAP . ."  éË®°™† " 
+  ." –í—ã–∑–æ–≤ " c: " EMIT str .ansiz c: " EMIT CR
+  ." –ê—Ä–≥—É–º–µ–Ω—Ç " SWAP . ."  –û—à–∏–±–∫–∞ " 
   DUP 0x80020009 ( disp_e_exception) = IF
   DROP OLE-ERROR .H ?DUP IF DUP .ansiz FREEMEM THEN CR
   ELSE 

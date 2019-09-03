@@ -20,8 +20,8 @@ EXPORT
   FALSE
 ;
 : READOUT-SOURCE ( addr u1 -- addr u2 )
-\ Чтение бинарных данных из входного потока 
-\ То, что уже взял REFILL, тут недоступно.
+\ Р§С‚РµРЅРёРµ Р±РёРЅР°СЂРЅС‹С… РґР°РЅРЅС‹С… РёР· РІС…РѕРґРЅРѕРіРѕ РїРѕС‚РѕРєР° 
+\ РўРѕ, С‡С‚Рѕ СѓР¶Рµ РІР·СЏР» REFILL, С‚СѓС‚ РЅРµРґРѕСЃС‚СѓРїРЅРѕ.
   SOURCE-ID 0 > IF READOUT EXIT THEN
   SOURCE-ID 0= IF READOUT-STDIN EXIT THEN
   DROP 0
@@ -36,7 +36,7 @@ EXPORT
   R> RESTORE-SOURCE
 ;
 
-' RECEIVE-WITH \ используется в DECODE-ERROR, поэтому надо и старый вариант пофиксить
+' RECEIVE-WITH \ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ DECODE-ERROR, РїРѕСЌС‚РѕРјСѓ РЅР°РґРѕ Рё СЃС‚Р°СЂС‹Р№ РІР°СЂРёР°РЅС‚ РїРѕС„РёРєСЃРёС‚СЊ
 
 : RECEIVE-WITH  ( i*x source xt -- j*x ior )
   SAVE-SOURCE N>R
@@ -50,7 +50,7 @@ EXPORT
 
 ' RECEIVE-WITH SWAP REPLACE-WORD
 
-\ RECEIVE-WITH-XT  остается старое, ему буфер без пользы
+\ RECEIVE-WITH-XT  РѕСЃС‚Р°РµС‚СЃСЏ СЃС‚Р°СЂРѕРµ, РµРјСѓ Р±СѓС„РµСЂ Р±РµР· РїРѕР»СЊР·С‹
 
 : (?SET-SOURCE) ( a u true -- true || false -- false )
   IF SOURCE! CURSTR 1+! <PRE> TRUE EXIT THEN FALSE

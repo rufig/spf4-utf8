@@ -1,13 +1,13 @@
-\ ïðîñòåéøàÿ ðåàëèçàöèÿ äåêîäèðîâàíèÿ êèðèëëè÷åñêèõ èì¸í IMAP-ïàïîê,
-( òàì èñïîëüçóåòñÿ ìîäèôèöèðîâàííûé âàðèàíò UTF-7, ñì. rfc2060 )
-\ à òî óæ î÷åíü íåóäîáíî ëîãè ÷èòàòü :)
+\ Ð¿Ñ€Ð¾ÑÑ‚ÐµÐ¹ÑˆÐ°Ñ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð´ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ ÐºÐ¸Ñ€Ð¸Ð»Ð»Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¸Ð¼Ñ‘Ð½ IMAP-Ð¿Ð°Ð¿Ð¾Ðº,
+( Ñ‚Ð°Ð¼ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ð¼Ð¾Ð´Ð¸Ñ„Ð¸Ñ†Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚ UTF-7, ÑÐ¼. rfc2060 )
+\ Ð° Ñ‚Ð¾ ÑƒÐ¶ Ð¾Ñ‡ÐµÐ½ÑŒ Ð½ÐµÑƒÐ´Ð¾Ð±Ð½Ð¾ Ð»Ð¾Ð³Ð¸ Ñ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ :)
 
 REQUIRE {             lib/ext/locals.f
 REQUIRE STR@          ~ac/lib/str5.f
 REQUIRE base64        ~ac/lib/string/conv.f
 REQUIRE BUNICODE>     ~ac/lib/lin/iconv/iconv.f
 
-: />, ( addr u -- ) \ â IMAP-base64-êîäèðîâàíèè èñïîëüçóåòñÿ "," âìåñòî "/"
+: />, ( addr u -- ) \ Ð² IMAP-base64-ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ð¸ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ "," Ð²Ð¼ÐµÑÑ‚Ð¾ "/"
   0 ?DO DUP C@ [CHAR] / =
   IF [CHAR] , OVER C! THEN 1+ LOOP DROP
 ;
@@ -34,7 +34,7 @@ REQUIRE BUNICODE>     ~ac/lib/lin/iconv/iconv.f
 
 \ S" &BE8- &BDIERwQ1BEAEMA- &BDIEOAQ0BDUEOw- rack'&BD4EMg- &BD8EPg- 3 &BEAEQwQxBDsETw-/&BDA- &BEEENQQzBD4ENAQ9BE8- &BD8EPg- 5, &BD0EPg- &BD4ERwQ1BD0ETA- &BDEEPgQ7BEwESAQ4BDU-" 2DUP TYPE CR UTF7-IMAP> ANSI>OEM TYPE CR
 
-: _Is8Bit ( addr u -- flag ) \ îòëè÷àåòñÿ îò òîãî, ÷òî â mime-decode.f
+: _Is8Bit ( addr u -- flag ) \ Ð¾Ñ‚Ð»Ð¸Ñ‡Ð°ÐµÑ‚ÑÑ Ð¾Ñ‚ Ñ‚Ð¾Ð³Ð¾, Ñ‡Ñ‚Ð¾ Ð² mime-decode.f
   0 ?DO DUP I + C@ 127 > IF DROP TRUE UNLOOP EXIT THEN LOOP
   DROP FALSE
 ;

@@ -1,4 +1,4 @@
-DIS-OPT \ для СП-Форта ниже 4.10
+DIS-OPT \ РґР»СЏ РЎРџ-Р¤РѕСЂС‚Р° РЅРёР¶Рµ 4.10
 REQUIRE button ~yz/lib/winctl.f
 SET-OPT
 
@@ -32,10 +32,10 @@ MESSAGES;
 GROUP mm
 
 PROC: dia
-  " Пример диалога" MODAL...
+  " РџСЂРёРјРµСЂ РґРёР°Р»РѕРіР°" MODAL...
     GRID 
       mm start-group
-      1 " Мене" radio | 2 " Текел" radio | 3 " Фарес" radio |
+      1 " РњРµРЅРµ" radio | 2 " РўРµРєРµР»" radio | 3 " Р¤Р°СЂРµСЃ" radio |
       ===
       multiedit (/ -name e -size 120 25 /) -middle | 
       " >>" button (/ -command adds /) | 
@@ -53,15 +53,15 @@ PROC: dia
       ===
       filler 40 -width |
       "    Ok   " ['] dialog-ok ok-button -right | 
-      " Отмена" cancel-button |
+      " РћС‚РјРµРЅР°" cancel-button |
     GRID; SHOW
     dialog-termination W: idcancel = IF 
-      ." Диалог был отменен" CR
+      ." Р”РёР°Р»РѕРі Р±С‹Р» РѕС‚РјРµРЅРµРЅ" CR
     ELSE
-      mm @ -1 = IF ." Ничего не выбрано" ELSE ." Выбор: " mm @ . THEN CR
-      ." В комбинированном списке " 
-      c -selected@ -1 = IF  ." ничего не выбрано"
-      ELSE ." выбрано: " HERE c -selected@ c fromcombo HERE .ASCIIZ THEN
+      mm @ -1 = IF ." РќРёС‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ" ELSE ." Р’С‹Р±РѕСЂ: " mm @ . THEN CR
+      ." Р’ РєРѕРјР±РёРЅРёСЂРѕРІР°РЅРЅРѕРј СЃРїРёСЃРєРµ " 
+      c -selected@ -1 = IF  ." РЅРёС‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ"
+      ELSE ." РІС‹Р±СЂР°РЅРѕ: " HERE c -selected@ c fromcombo HERE .ASCIIZ THEN
       CR
     THEN
   ...MODAL
@@ -74,9 +74,9 @@ KEYTABLE;
 : run
   WINDOWS...
   0 dialog-window TO winmain
-  " Элементы управления" winmain -text!
+  " Р­Р»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ" winmain -text!
   winmain create-status
-  " Нажмите пробел, чтобы увидеть диалоговое окно..." 0 winmain set-status
+  " РќР°Р¶РјРёС‚Рµ РїСЂРѕР±РµР», С‡С‚РѕР±С‹ СѓРІРёРґРµС‚СЊ РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ..." 0 winmain set-status
   winmain winshow
   ...WINDOWS
   BYE

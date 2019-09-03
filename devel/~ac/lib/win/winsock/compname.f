@@ -1,9 +1,9 @@
 WINAPI: GetComputerNameExA KERNEL32.DLL
 
-0 CONSTANT ComputerNameNetBIOS \ имя хоста прописными
-1 CONSTANT ComputerNameDnsHostname \ имя хоста строчными
-2 CONSTANT ComputerNameDnsDomain \ имя домена строчными (если настроен, иначе пусто)
-3 CONSTANT ComputerNameDnsFullyQualified \ имя хоста и домена строчными
+0 CONSTANT ComputerNameNetBIOS \ РёРјСЏ С…РѕСЃС‚Р° РїСЂРѕРїРёСЃРЅС‹РјРё
+1 CONSTANT ComputerNameDnsHostname \ РёРјСЏ С…РѕСЃС‚Р° СЃС‚СЂРѕС‡РЅС‹РјРё
+2 CONSTANT ComputerNameDnsDomain \ РёРјСЏ РґРѕРјРµРЅР° СЃС‚СЂРѕС‡РЅС‹РјРё (РµСЃР»Рё РЅР°СЃС‚СЂРѕРµРЅ, РёРЅР°С‡Рµ РїСѓСЃС‚Рѕ)
+3 CONSTANT ComputerNameDnsFullyQualified \ РёРјСЏ С…РѕСЃС‚Р° Рё РґРѕРјРµРЅР° СЃС‚СЂРѕС‡РЅС‹РјРё
 4 CONSTANT ComputerNamePhysicalNetBIOS
 5 CONSTANT ComputerNamePhysicalDnsHostname
 6 CONSTANT ComputerNamePhysicalDnsDomain

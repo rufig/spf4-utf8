@@ -1,5 +1,5 @@
-\ 01.Nov.2003 Sat 15:07 ruv   \ определение HASH
-\ портированно из  ~pinka\hash\search-wordlist.f ( originally 16.11.2000)
+\ 01.Nov.2003 Sat 15:07 ruv   \ РѕРїСЂРµРґРµР»РµРЅРёРµ HASH
+\ РїРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕ РёР·  ~pinka\hash\search-wordlist.f ( originally 16.11.2000)
 
 32 CONSTANT CELL-BITS@
 CELL-BITS@ 1- CONSTANT CELL-BITS@'

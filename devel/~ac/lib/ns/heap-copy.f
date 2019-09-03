@@ -1,7 +1,7 @@
-\ HEAP-COPY для SPF/Linux
+\ HEAP-COPY РґР»СЏ SPF/Linux
 
 : HEAP-COPY ( addr u -- addr1 )
-\ скопировать строку в хип и вернуть её адрес в хипе
+\ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РІ С…РёРї Рё РІРµСЂРЅСѓС‚СЊ РµС‘ Р°РґСЂРµСЃ РІ С…РёРїРµ
   DUP 0< IF 8 THROW THEN
   DUP 1+ ALLOCATE THROW DUP >R
   SWAP DUP >R MOVE

@@ -1,7 +1,7 @@
 REQUIRE 2CONSTANT lib/include/double.f
 REQUIRE TESTCASES ~ygrek/lib/testcase.f
 
-\ Тест на глюк N 1778916: 16-битность SEARCH ?..
+\ РўРµСЃС‚ РЅР° РіР»СЋРє N 1778916: 16-Р±РёС‚РЅРѕСЃС‚СЊ SEARCH ?..
 \ http://sourceforge.net/tracker/index.php?func=detail&aid=1778916&group_id=17919&atid=117919
 
 TESTCASES SEARCH test

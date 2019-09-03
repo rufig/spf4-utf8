@@ -1,8 +1,8 @@
-( Целевой компилятор для компиляции SP-Forth v3.7x
+( Р¦РµР»РµРІРѕР№ РєРѕРјРїРёР»СЏС‚РѕСЂ РґР»СЏ РєРѕРјРїРёР»СЏС†РёРё SP-Forth v3.7x
   Copyright [C] 1992-2000 A.Cherezov ac@forth.org
 
-  Компиляция в виртуальные адреса
-  Ю. Жиловец, 1.05.2007
+  РљРѕРјРїРёР»СЏС†РёСЏ РІ РІРёСЂС‚СѓР°Р»СЊРЅС‹Рµ Р°РґСЂРµСЃР°
+  Р®. Р–РёР»РѕРІРµС†, 1.05.2007
 )
 
 \ ----------------------------------------------------
@@ -37,7 +37,7 @@ TARGET-POSIX [IF]
   S" src/tc-dl.f" INCLUDED
 [ELSE]
   HEX 
-  IMAGE-BASE 1034 + CONSTANT AddrOfLoadLibrary      \ адреса процедур в spf-stub.exe
+  IMAGE-BASE 1034 + CONSTANT AddrOfLoadLibrary      \ Р°РґСЂРµСЃР° РїСЂРѕС†РµРґСѓСЂ РІ spf-stub.exe
   IMAGE-BASE 1038 + CONSTANT AddrOfGetProcAddress
   DECIMAL
 [THEN]
@@ -96,7 +96,7 @@ VARIABLE SAVED-CURRENT
 ;
 
 VARIABLE TC-WINAPLINK
-VARIABLE TC-USER-OFFS 16 TC-USER-OFFS ! \ 16 байт зарезервировано
+VARIABLE TC-USER-OFFS 16 TC-USER-OFFS ! \ 16 Р±Р°Р№С‚ Р·Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅРѕ
 
 : TC-USER-ALLOT ( n -- )
   TC-USER-OFFS +!
@@ -122,7 +122,7 @@ ONLY FORTH DEFINITIONS
 HEX
 
 : ALIGN-NOP ( n -- )
-\ выровнять на n и заполнить NOP
+\ РІС‹СЂРѕРІРЅСЏС‚СЊ РЅР° n Рё Р·Р°РїРѕР»РЅРёС‚СЊ NOP
   DP @ DUP ROT 2DUP
   MOD ?DUP IF - + ELSE DROP THEN
   OVER - DUP ALLOT 90 FILL
@@ -157,10 +157,10 @@ TRUE TO ?C-JMP
 M\ ' DROP TO DTST
 
 : TC-CALL, ( addr -- )
-  \ так компилируется вызов слова в СП-Форте 3.0
+  \ С‚Р°Рє РєРѕРјРїРёР»РёСЂСѓРµС‚СЃСЏ РІС‹Р·РѕРІ СЃР»РѕРІР° РІ РЎРџ-Р¤РѕСЂС‚Рµ 3.0
   ?SET
   SetOP
-  0E8 C,              \ машинная команда CALL
+  0E8 C,              \ РјР°С€РёРЅРЅР°СЏ РєРѕРјР°РЅРґР° CALL
   DP @ CELL+ - ,
   DP @ TO LAST-HERE
 ;
@@ -198,13 +198,13 @@ M\ ' DROP TO DTST
   084 TO J_COD
   ???BR-OPT
   SetJP  SetOP
-  J_COD    \  JX без 0x0F
-  0x0F     \  кусок от JX
+  J_COD    \  JX Р±РµР· 0x0F
+  0x0F     \  РєСѓСЃРѕРє РѕС‚ JX
   C, C,
   DUP IF DP @ CELL+ - THEN , DP @ TO LAST-HERE
 ;
 
-: TC-BRANCH, ( ADDR -> ) \ скомпилировать инструкцию ADDR JMP
+: TC-BRANCH, ( ADDR -> ) \ СЃРєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РёРЅСЃС‚СЂСѓРєС†РёСЋ ADDR JMP
   ?SET SetOP SetJP E9 C,
   DP @ CELL+ - ,    DP @ TO LAST-HERE
 ;
@@ -229,20 +229,20 @@ M\ ' DROP TO DTST
 DECIMAL
 
 : TC-LITERAL \ 94 CORE
-\ Интерпретация: семантика неопределена.
-\ Компиляция: ( x -- )
-\ Добавить семантику времени выполнения, данную ниже, к текущему определению.
-\ Время выполнения: ( -- x )
-\ Положить x на стек.
+\ РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ: СЃРµРјР°РЅС‚РёРєР° РЅРµРѕРїСЂРµРґРµР»РµРЅР°.
+\ РљРѕРјРїРёР»СЏС†РёСЏ: ( x -- )
+\ Р”РѕР±Р°РІРёС‚СЊ СЃРµРјР°РЅС‚РёРєСѓ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ, РґР°РЅРЅСѓСЋ РЅРёР¶Рµ, Рє С‚РµРєСѓС‰РµРјСѓ РѕРїСЂРµРґРµР»РµРЅРёСЋ.
+\ Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ: ( -- x )
+\ РџРѕР»РѕР¶РёС‚СЊ x РЅР° СЃС‚РµРє.
   STATE @ IF TC-LIT, THEN
 ; IMMEDIATE
 
 : TC-2LITERAL \ 94 DOUBLE
-\ Интерпретация: семантика неопределена.
-\ Компиляция: ( x1 x2 -- )
-\ Добавить семантику времени выполнения, данную ниже, к текущему определению.
-\ Время выполнения: ( -- x1 x2 )
-\ Положить пару ячеек x1 x2 на стек.
+\ РРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ: СЃРµРјР°РЅС‚РёРєР° РЅРµРѕРїСЂРµРґРµР»РµРЅР°.
+\ РљРѕРјРїРёР»СЏС†РёСЏ: ( x1 x2 -- )
+\ Р”РѕР±Р°РІРёС‚СЊ СЃРµРјР°РЅС‚РёРєСѓ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ, РґР°РЅРЅСѓСЋ РЅРёР¶Рµ, Рє С‚РµРєСѓС‰РµРјСѓ РѕРїСЂРµРґРµР»РµРЅРёСЋ.
+\ Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ: ( -- x1 x2 )
+\ РџРѕР»РѕР¶РёС‚СЊ РїР°СЂСѓ СЏС‡РµРµРє x1 x2 РЅР° СЃС‚РµРє.
   STATE @ IF TC-DLIT, THEN
 ; IMMEDIATE
 
@@ -253,7 +253,7 @@ DECIMAL
 ;
 
 : TC-?SLITERAL ( c-addr u -> ... )
-  \ преобразовать строку в число
+  \ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РІ С‡РёСЃР»Рѕ
   2DUP 2 MIN S" 0x" COMPARE 0= 
   IF HEX-TC-LITERAL EXIT THEN
 
@@ -277,14 +277,14 @@ VARIABLE _VOC-LIST ' _VOC-LIST TO VOC-LIST
     SWAP ROT SWAP
 ;
 
-: S", ( addr u -- ) \ компиляция строки, заданной addr u, в виде строки со счетчиком
+: S", ( addr u -- ) \ РєРѕРјРїРёР»СЏС†РёСЏ СЃС‚СЂРѕРєРё, Р·Р°РґР°РЅРЅРѕР№ addr u, РІ РІРёРґРµ СЃС‚СЂРѕРєРё СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј
   DUP C, DP @ SWAP DUP ALLOT CMOVE
 ;
 
-: +SWORD ( addr u wid -> ) \ добавление заголовка статьи с именем,
-         \ заданным строкой addr u, к списку, заданному wid.
-         \ Формирует только поля имени и связи с
-         \ отведением памяти по ALLOT.
+: +SWORD ( addr u wid -> ) \ РґРѕР±Р°РІР»РµРЅРёРµ Р·Р°РіРѕР»РѕРІРєР° СЃС‚Р°С‚СЊРё СЃ РёРјРµРЅРµРј,
+         \ Р·Р°РґР°РЅРЅС‹Рј СЃС‚СЂРѕРєРѕР№ addr u, Рє СЃРїРёСЃРєСѓ, Р·Р°РґР°РЅРЅРѕРјСѓ wid.
+         \ Р¤РѕСЂРјРёСЂСѓРµС‚ С‚РѕР»СЊРєРѕ РїРѕР»СЏ РёРјРµРЅРё Рё СЃРІСЏР·Рё СЃ
+         \ РѕС‚РІРµРґРµРЅРёРµРј РїР°РјСЏС‚Рё РїРѕ ALLOT.
   HERE LAST !
   HERE 2SWAP S", SWAP DUP @ , !
 ;
@@ -303,7 +303,7 @@ ALIGN-BYTES-CONSTANT ALIGN-BYTES !
   THEN
   CURRENT @ +SWORD
   ALIGN
-  HERE SWAP ! ( заполнили cfa )
+  HERE SWAP ! ( Р·Р°РїРѕР»РЅРёР»Рё cfa )
 ;
 
 : HEADER
@@ -316,16 +316,16 @@ ALSO ASSEMBLER ALSO ASM-HIDDEN
 ;
 PREVIOUS PREVIOUS
 
-VOCABULARY TC     \ слова, работающие в режиме интерпретации при ЦК
-VOCABULARY TC-IMM \ immediate-слова для режима компиляции при ЦК,
-                  \ вынесены в отдельный словарь, т.к. их нельзя
-                  \ переопределять словами из TC-WL
+VOCABULARY TC     \ СЃР»РѕРІР°, СЂР°Р±РѕС‚Р°СЋС‰РёРµ РІ СЂРµР¶РёРјРµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё РїСЂРё Р¦Рљ
+VOCABULARY TC-IMM \ immediate-СЃР»РѕРІР° РґР»СЏ СЂРµР¶РёРјР° РєРѕРјРїРёР»СЏС†РёРё РїСЂРё Р¦Рљ,
+                  \ РІС‹РЅРµСЃРµРЅС‹ РІ РѕС‚РґРµР»СЊРЅС‹Р№ СЃР»РѕРІР°СЂСЊ, С‚.Рє. РёС… РЅРµР»СЊР·СЏ
+                  \ РїРµСЂРµРѕРїСЂРµРґРµР»СЏС‚СЊ СЃР»РѕРІР°РјРё РёР· TC-WL
 
 ALSO TC DEFINITIONS PREVIOUS
 
 : CODE  TRUE StartColonHelp [T] CODE-ORIG CONTEXT @ PREVIOUS CONTEXT ! ;
 
-: CODE1 \ для словаря не TC-WL
+: CODE1 \ РґР»СЏ СЃР»РѕРІР°СЂСЏ РЅРµ TC-WL
    CODE-ORIG
 ;
 
@@ -343,7 +343,7 @@ ALSO TC DEFINITIONS PREVIOUS
   CREATE-CODE COMPILE,
   ,
 ;
-: USER ( "<spaces>name" -- ) \ локальные переменные потока
+: USER ( "<spaces>name" -- ) \ Р»РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ РїРѕС‚РѕРєР°
   [T] HEADER [I]
   USER-CODE COMPILE,
   TC-USER-ALIGNED SWAP ,
@@ -393,11 +393,11 @@ ALSO TC DEFINITIONS PREVIOUS
 
 : WORDLIST
   HERE VOC-LIST @ , VOC-LIST !
-  HERE 0 , \ здесь будет указатель на имя последнего слова списка
-       0 , \ здесь будет указатель на имя списка для именованых
-       0 , \ wid словаря-предка
-       0 , \ класс словаря = wid словаря, определяющего свойства данного
-       0 , \ reserved, для расширений
+  HERE 0 , \ Р·РґРµСЃСЊ Р±СѓРґРµС‚ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РёРјСЏ РїРѕСЃР»РµРґРЅРµРіРѕ СЃР»РѕРІР° СЃРїРёСЃРєР°
+       0 , \ Р·РґРµСЃСЊ Р±СѓРґРµС‚ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РёРјСЏ СЃРїРёСЃРєР° РґР»СЏ РёРјРµРЅРѕРІР°РЅС‹С…
+       0 , \ wid СЃР»РѕРІР°СЂСЏ-РїСЂРµРґРєР°
+       0 , \ РєР»Р°СЃСЃ СЃР»РѕРІР°СЂСЏ = wid СЃР»РѕРІР°СЂСЏ, РѕРїСЂРµРґРµР»СЏСЋС‰РµРіРѕ СЃРІРѕР№СЃС‚РІР° РґР°РЅРЅРѕРіРѕ
+       0 , \ reserved, РґР»СЏ СЂР°СЃС€РёСЂРµРЅРёР№
 ;
 
 : --
@@ -418,7 +418,7 @@ S" src/tc-dl-tc.f" INCLUDED
 
 ALSO TC
 
-: WINAPI: ( "ИмяПроцедуры" "ИмяБиблиотеки" -- )
+: WINAPI: ( "РРјСЏРџСЂРѕС†РµРґСѓСЂС‹" "РРјСЏР‘РёР±Р»РёРѕС‚РµРєРё" -- )
   >IN @ [T] HEADER [I]  >IN !
   WINAPI-CODE COMPILE,
   HERE >R
@@ -426,11 +426,11 @@ ALSO TC
   0 , \ address of library name
   0 , \ address of function name
   -1 , \ # of parameters
-  HERE TC-WINAPLINK @ , TC-WINAPLINK ! ( связь )
+  HERE TC-WINAPLINK @ , TC-WINAPLINK ! ( СЃРІСЏР·СЊ )
   HERE DUP R@ CELL+ CELL+ !
-  PARSE-NAME HERE SWAP DUP ALLOT MOVE 0 C, \ имя функции
+  PARSE-NAME HERE SWAP DUP ALLOT MOVE 0 C, \ РёРјСЏ С„СѓРЅРєС†РёРё
   HERE DUP R> CELL+ !
-  PARSE-NAME HERE SWAP DUP ALLOT MOVE 0 C, \ имя библиотеки
+  PARSE-NAME HERE SWAP DUP ALLOT MOVE 0 C, \ РёРјСЏ Р±РёР±Р»РёРѕС‚РµРєРё
   LoadLibraryA DUP 0= ABORT" Library not found"
   GetProcAddress 0= ABORT" Procedure not found"
 ;
@@ -439,9 +439,9 @@ PREVIOUS
 
 [THEN]
 
-(  Отличие от WNDPROC - на выходе не вызываем USER-EXIT, 
-   потому что при завершении процесса нет необходимости вызывать AT-THREAD-FINISHING,
-   AT-PROCESS-FINISHING вызовется в BYE в конце INIT
+(  РћС‚Р»РёС‡РёРµ РѕС‚ WNDPROC - РЅР° РІС‹С…РѕРґРµ РЅРµ РІС‹Р·С‹РІР°РµРј USER-EXIT, 
+   РїРѕС‚РѕРјСѓ С‡С‚Рѕ РїСЂРё Р·Р°РІРµСЂС€РµРЅРёРё РїСЂРѕС†РµСЃСЃР° РЅРµС‚ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РІС‹Р·С‹РІР°С‚СЊ AT-THREAD-FINISHING,
+   AT-PROCESS-FINISHING РІС‹Р·РѕРІРµС‚СЃСЏ РІ BYE РІ РєРѕРЅС†Рµ INIT
    ~day  )
 
 TARGET-POSIX [IF]
@@ -517,13 +517,13 @@ PREVIOUS TC DEFINITIONS PREVIOUS
 : :  [T] : ALSO TC-IMM ;
 
 (
- Во время компиляции "двоеточечного" определения в ЦК порядок поиска
- представляет собой такой пирог:
+ Р’Рѕ РІСЂРµРјСЏ РєРѕРјРїРёР»СЏС†РёРё "РґРІРѕРµС‚РѕС‡РµС‡РЅРѕРіРѕ" РѕРїСЂРµРґРµР»РµРЅРёСЏ РІ Р¦Рљ РїРѕСЂСЏРґРѕРє РїРѕРёСЃРєР°
+ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ С‚Р°РєРѕР№ РїРёСЂРѕРі:
 
-  TC-IMM    \ imm-слова управления, которые опасно переопределять
-  TC-WL     \ создаваемый целевой список слов, он же в CURRENT
-  TC        \ словарь определяющих слов ЦК - ":", CREATE, CONSTANT, etc
-  FORTH     \ основной словарь инструментальной форт-системы
+  TC-IMM    \ imm-СЃР»РѕРІР° СѓРїСЂР°РІР»РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ РѕРїР°СЃРЅРѕ РїРµСЂРµРѕРїСЂРµРґРµР»СЏС‚СЊ
+  TC-WL     \ СЃРѕР·РґР°РІР°РµРјС‹Р№ С†РµР»РµРІРѕР№ СЃРїРёСЃРѕРє СЃР»РѕРІ, РѕРЅ Р¶Рµ РІ CURRENT
+  TC        \ СЃР»РѕРІР°СЂСЊ РѕРїСЂРµРґРµР»СЏСЋС‰РёС… СЃР»РѕРІ Р¦Рљ - ":", CREATE, CONSTANT, etc
+  FORTH     \ РѕСЃРЅРѕРІРЅРѕР№ СЃР»РѕРІР°СЂСЊ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Р»СЊРЅРѕР№ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹
 )
 
 ALSO TC-IMM DEFINITIONS PREVIOUS
@@ -559,7 +559,7 @@ ALSO TC-IMM DEFINITIONS PREVIOUS
 
 : C"   \ 94 CORE EXT
   [CHAR] " WORD DUP COUNT NIP 1+
-  DUP ALLOCATE THROW DUP >R SWAP CMOVE R>   \ WORD кладёт строку в HERE :(
+  DUP ALLOCATE THROW DUP >R SWAP CMOVE R>   \ WORD РєР»Р°РґС‘С‚ СЃС‚СЂРѕРєСѓ РІ HERE :(
   STATE @
   IF DUP [ ALSO TC-IMM ] [COMPILE] CLITERAL [ PREVIOUS ] FREE THROW THEN
 
@@ -614,7 +614,7 @@ C" SHERE-TAB-CUR" FIND NIP
 ; IMMEDIATE
 
 : UNTIL \ 94
-  ?COMP 3 <> IF -2004 THROW THEN \ ABORT" UNTIL без BEGIN !"
+  ?COMP 3 <> IF -2004 THROW THEN \ ABORT" UNTIL Р±РµР· BEGIN !"
   TC-?BRANCH,
   0xFFFFFF80  DP @ 4 - @  U<
   IF  DP @ 5 - W@ 0x3F0 + DP @ 6 - W!   -4 ALLOT
@@ -639,9 +639,9 @@ C" SHERE-TAB-CUR" FIND NIP
 : THEN  ?COMP  TC>RESOLVE ; IMMEDIATE
 
 : REPEAT 
-\ Продолжить выполнение с позиции, заданной dest.
+\ РџСЂРѕРґРѕР»Р¶РёС‚СЊ РІС‹РїРѕР»РЅРµРЅРёРµ СЃ РїРѕР·РёС†РёРё, Р·Р°РґР°РЅРЅРѕР№ dest.
   ?COMP
-  3 <> IF -2005 THROW THEN \ ABORT" REPEAT без BEGIN !"
+  3 <> IF -2005 THROW THEN \ ABORT" REPEAT Р±РµР· BEGIN !"
   DUP DP @ 2+ - DUP
   SHORT?
   IF SetJP 0xEB C, C, DROP
@@ -746,7 +746,7 @@ HEX
 : THROW
      STATE @ IF
      OPT_INIT OP0 @ C@ 0xB8 = 0 AND
-     IF  0xE9 C,              \ машинная команда JMP
+     IF  0xE9 C,              \ РјР°С€РёРЅРЅР°СЏ РєРѕРјР°РЅРґР° JMP
          THROW-CODE  DP @ CELL+ - ,
 \          DP @ TO LAST-HERE
          EXIT 
@@ -770,12 +770,12 @@ TARGET-POSIX [IF]
 S" src/tc-dl-imm.f" INCLUDED
 [THEN]
 
-HERE 10000 + 10000 / 10000 * 2000 + DP !    \ выравнивание
+HERE 10000 + 10000 / 10000 * 2000 + DP !    \ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ
 DECIMAL
 
 IMAGE-START virtual-address
 
-\ *** поехали! ***
+\ *** РїРѕРµС…Р°Р»Рё! ***
 ONLY FORTH DEFINITIONS ALSO TC
 
 ' TC-?SLITERAL TO ?SLITERAL

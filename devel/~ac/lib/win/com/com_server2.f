@@ -1,6 +1,6 @@
 WARNING 0!
-\ --------- пример ActiveX-сервера ----------------
-\ см. исходный вариант samples\com-sample4.f
+\ --------- РїСЂРёРјРµСЂ ActiveX-СЃРµСЂРІРµСЂР° ----------------
+\ СЃРј. РёСЃС…РѕРґРЅС‹Р№ РІР°СЂРёР°РЅС‚ samples\com-sample4.f
 
 REQUIRE Class:  ~ac/lib/win/com/com_server.f
 REQUIRE params@ ~ac/lib/win/com/variant.f 
@@ -13,16 +13,16 @@ VECT vSPF.Application
 VECT vSPF.IDispatch
 
 
-\ ===================== базовый класс IUnknown ========================
+\ ===================== Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ IUnknown ========================
 IID_IUnknown
 Class: SPF.IUnknown {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}
 
 : ::QueryInterface ( ppvObject iid oid - hresult )
   SP@ 12 + S0 !
   COM-DEBUG @ IF Class. SPACE THEN
-  OVER 0= IF 2DROP DROP E_NOINTERFACE EXIT THEN \ ну, мало ли...
+  OVER 0= IF 2DROP DROP E_NOINTERFACE EXIT THEN \ РЅСѓ, РјР°Р»Рѕ Р»Рё...
   DUP (AddRef) DROP
-  2DUP ComClassIID 16 SWAP 16 COMPARE 0= IF NIP SWAP ! 0 EXIT THEN \ и так этот интерфейс
+  2DUP ComClassIID 16 SWAP 16 COMPARE 0= IF NIP SWAP ! 0 EXIT THEN \ Рё С‚Р°Рє СЌС‚РѕС‚ РёРЅС‚РµСЂС„РµР№СЃ
   OVER 16 IID_IUnknown 16 COMPARE 0= 
           IF COM-DEBUG @ IF ." QI:Unknown," THEN 2DROP SPF.IUnknown SWAP ! 0 EXIT THEN
   OVER 16 IID_IClassFactory 16 COMPARE 0= 
@@ -33,7 +33,7 @@ Class: SPF.IUnknown {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}
           IF COM-DEBUG @ IF ." QI:IForth," THEN 2DROP vSPF.Application SWAP ! 0 EXIT THEN
   COM-DEBUG @ IF ." QI:EXT:" THEN
   OVER CLSID>String THROW UNICODE>
-  SFIND IF ( ppvObject iid oid ) EXECUTE EXIT THEN \ для нереализованных здесь интерфейсов
+  SFIND IF ( ppvObject iid oid ) EXECUTE EXIT THEN \ РґР»СЏ РЅРµСЂРµР°Р»РёР·РѕРІР°РЅРЅС‹С… Р·РґРµСЃСЊ РёРЅС‚РµСЂС„РµР№СЃРѕРІ
   COM-DEBUG @ IF TYPE ." ;" ELSE 2DROP THEN
   (Release) DROP
   DROP 0!
@@ -41,9 +41,9 @@ Class: SPF.IUnknown {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}
 ; METHOD
 
 : ::AddRef ( oid -- cnt )
-\ Можно было бы на каждый ::QueryInterface создавать объект (выделять в хипе)
-\ со ссылкой на интерфейс вместо возврата глобального (общего) указателя, 
-\ и тогда число ссылок хранить в нем, но для базового использования это лишнее.
+\ РњРѕР¶РЅРѕ Р±С‹Р»Рѕ Р±С‹ РЅР° РєР°Р¶РґС‹Р№ ::QueryInterface СЃРѕР·РґР°РІР°С‚СЊ РѕР±СЉРµРєС‚ (РІС‹РґРµР»СЏС‚СЊ РІ С…РёРїРµ)
+\ СЃРѕ СЃСЃС‹Р»РєРѕР№ РЅР° РёРЅС‚РµСЂС„РµР№СЃ РІРјРµСЃС‚Рѕ РІРѕР·РІСЂР°С‚Р° РіР»РѕР±Р°Р»СЊРЅРѕРіРѕ (РѕР±С‰РµРіРѕ) СѓРєР°Р·Р°С‚РµР»СЏ, 
+\ Рё С‚РѕРіРґР° С‡РёСЃР»Рѕ СЃСЃС‹Р»РѕРє С…СЂР°РЅРёС‚СЊ РІ РЅРµРј, РЅРѕ РґР»СЏ Р±Р°Р·РѕРІРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЌС‚Рѕ Р»РёС€РЅРµРµ.
   COM-DEBUG @ IF CR Class. THEN
   (AddRef)
   COM-DEBUG @ IF ." ar=" DUP . THEN
@@ -59,12 +59,12 @@ Class;
 
 \ ===================== IClassFactory ===================================
 IID_IClassFactory
-Class: SPF.Application {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961} \ свой clsid общий
+Class: SPF.Application {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961} \ СЃРІРѕР№ clsid РѕР±С‰РёР№
 Extends SPF.IUnknown
 
 
 : ::CreateInstance ( ppvObject riid pUnkOuter oid -- hresult )
-\ См. комментарий к ::AddRef выше.
+\ РЎРј. РєРѕРјРјРµРЅС‚Р°СЂРёР№ Рє ::AddRef РІС‹С€Рµ.
   COM-DEBUG @ IF Class. THEN
   DROP DROP DROP ( ForthIForth) SPF.Application SWAP ! 0
 ; METHOD
@@ -94,16 +94,16 @@ USER uOID
 VECT vExecuteByID
 
 : DropXtParams ( ... idxt -- )
-  \ при вызове неизвестного id, например необрабатываемых events
-  \ просто снимаем параметры и выходим, иначе можно уронить вызывающего
+  \ РїСЂРё РІС‹Р·РѕРІРµ РЅРµРёР·РІРµСЃС‚РЅРѕРіРѕ id, РЅР°РїСЂРёРјРµСЂ РЅРµРѕР±СЂР°Р±Р°С‚С‹РІР°РµРјС‹С… events
+  \ РїСЂРѕСЃС‚Рѕ СЃРЅРёРјР°РµРј РїР°СЂР°РјРµС‚СЂС‹ Рё РІС‹С…РѕРґРёРј, РёРЅР°С‡Рµ РјРѕР¶РЅРѕ СѓСЂРѕРЅРёС‚СЊ РІС‹Р·С‹РІР°СЋС‰РµРіРѕ
   uSPInvoke @ SP!  
 ; \ ' DropXtParams TO vExecuteByID
 
 : IINVOKE ( ... oid addr u -- ... )
-\ Выполнить метод с именем addr u для объекта oid
-\ Здесь OID - не COM-oid (указатель на указатель на VTABLE),
-\ а фортовый WID:
-\ это упрощенная реализация INVOKE из ~ac/lib/ns/ns.f, без поиска по предкам.
+\ Р’С‹РїРѕР»РЅРёС‚СЊ РјРµС‚РѕРґ СЃ РёРјРµРЅРµРј addr u РґР»СЏ РѕР±СЉРµРєС‚Р° oid
+\ Р—РґРµСЃСЊ OID - РЅРµ COM-oid (СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СѓРєР°Р·Р°С‚РµР»СЊ РЅР° VTABLE),
+\ Р° С„РѕСЂС‚РѕРІС‹Р№ WID:
+\ СЌС‚Рѕ СѓРїСЂРѕС‰РµРЅРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ INVOKE РёР· ~ac/lib/ns/ns.f, Р±РµР· РїРѕРёСЃРєР° РїРѕ РїСЂРµРґРєР°Рј.
   ROT ( addr u oid )
   DUP 0= ABORT" Invalid IINVOKE call"
   CLASS@ DUP 0= IF DROP FORTH-WORDLIST THEN ( addr u class-oid )
@@ -115,7 +115,7 @@ VECT vExecuteByID
   uOID @ SpfClassWid S" EXECUTE-BY-ID" IINVOKE
 ; ' ExecuteByID1 TO vExecuteByID
 
-: EXECUTE-BY-ID ( ... idxt -- res ) \ реализация по умолчанию
+: EXECUTE-BY-ID ( ... idxt -- res ) \ СЂРµР°Р»РёР·Р°С†РёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
   >R
   uOID @ SpfClassWid @
   BEGIN
@@ -194,15 +194,15 @@ DROP
      THEN
   SP@ uSPInvoke @ -   COM-DEBUG @ IF ." DD=" DUP . THEN
   DUP -4 = IF DROP
-              3 R@ ! ( uFlags @ 3 = IF @ THEN) \ бейсик не делает разницы между method и property_get
+              3 R@ ! ( uFlags @ 3 = IF @ THEN) \ Р±РµР№СЃРёРє РЅРµ РґРµР»Р°РµС‚ СЂР°Р·РЅРёС†С‹ РјРµР¶РґСѓ method Рё property_get
               R> 2 CELLS + ! 0 EXIT
-           THEN \ число
+           THEN \ С‡РёСЃР»Рѕ
   DUP -8 = IF DROP
               uFlags @ DISPATCH_PROPERTYPUT AND 
-              IF ! RDROP 0 EXIT THEN \ присвоение переменной форта
+              IF ! RDROP 0 EXIT THEN \ РїСЂРёСЃРІРѕРµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ С„РѕСЂС‚Р°
               8 R@ ! >BSTR R> 2 CELLS + ! 0 EXIT
-           THEN \ строка
-  0 = IF RDROP 0 EXIT THEN \ нет результатов
+           THEN \ СЃС‚СЂРѕРєР°
+  0 = IF RDROP 0 EXIT THEN \ РЅРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
   uSPInvoke @ SP! RDROP 
   DISP_E_BADPARAMCOUNT COM-DEBUG @ IF ." res=DISP_E_BADPARAMCOUNT" CR THEN
 ; METHOD

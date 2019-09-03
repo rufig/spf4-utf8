@@ -2,12 +2,12 @@
 
 REQUIRE list+ ~pinka\lib\list.f
 
-: list-bottom ( hlist -- node )  \ by viewing - последнее при просмотре списка
-  BEGIN DUP @ DUP WHILE NIP REPEAT DROP \ node=hlist, если список пуст
+: list-bottom ( hlist -- node )  \ by viewing - РїРѕСЃР»РµРґРЅРµРµ РїСЂРё РїСЂРѕСЃРјРѕС‚СЂРµ СЃРїРёСЃРєР°
+  BEGIN DUP @ DUP WHILE NIP REPEAT DROP \ node=hlist, РµСЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚
 ;
 : catanation-lists ( h1 h2 -- ) \ h2 ->    h1 h2 <- top
   list-bottom SWAP @ SWAP !
-  ( если h1 и h2 пересекаются, возможен цикл )
+  ( РµСЃР»Рё h1 Рё h2 РїРµСЂРµСЃРµРєР°СЋС‚СЃСЏ, РІРѕР·РјРѕР¶РµРЅ С†РёРєР» )
 ;
 \ equivalent to  h2 list-bottom h1 list+
 
@@ -19,7 +19,7 @@ REQUIRE list+ ~pinka\lib\list.f
   0 SWAP @
   BEGIN DUP WHILE SWAP 1+ OVER @ REPEAT DROP
 ;
-: reverse-list-small ( list -- ) \ можно и для статических узлов
+: reverse-list-small ( list -- ) \ РјРѕР¶РЅРѕ Рё РґР»СЏ СЃС‚Р°С‚РёС‡РµСЃРєРёС… СѓР·Р»РѕРІ
   DUP >R @list R> SWAP
   BEGIN DUP WHILE >R OVER SWAP ! R> 1- REPEAT
   DROP 0!
@@ -32,7 +32,7 @@ REQUIRE list+ ~pinka\lib\list.f
     2SWAP !
   REPEAT ( prev 0 )
   DROP R> !
-  \ так надежней, т.к. не всякий список на стек выложишь ;)
+  \ С‚Р°Рє РЅР°РґРµР¶РЅРµР№, С‚.Рє. РЅРµ РІСЃСЏРєРёР№ СЃРїРёСЃРѕРє РЅР° СЃС‚РµРє РІС‹Р»РѕР¶РёС€СЊ ;)
 ;
 2 CELLS CONSTANT /simple_list-node
 : list_allot+ ( value hlist -- )
@@ -40,7 +40,7 @@ REQUIRE list+ ~pinka\lib\list.f
   CELL+ !  R> R> list+
 ;
 : -list_allot+  ( value hlist -- )
-  HERE SWAP list-bottom !  \ добавляю узел вниз
+  HERE SWAP list-bottom !  \ РґРѕР±Р°РІР»СЏСЋ СѓР·РµР» РІРЅРёР·
   0 ,  ,
 ;
 
@@ -68,7 +68,7 @@ REQUIRE list+ ~pinka\lib\list.f
 : list_entry-node ( value hlist -- node )
   SWAP >R
   BEGIN @ DUP WHILE DUP CELL+ @ R@ = UNTIL THEN RDROP
-  \ node=0, если не найдено
+  \ node=0, РµСЃР»Рё РЅРµ РЅР°Р№РґРµРЅРѕ
 ;
 
 
@@ -82,7 +82,7 @@ USER-VALUE ItNode
   2R> TO ItEntry TO ItNode
 ;
 
-USER-VALUE -HoldEnum? \ не остановить итерацию?
+USER-VALUE -HoldEnum? \ РЅРµ РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РёС‚РµСЂР°С†РёСЋ?
 
 : HoldEnum FALSE TO -HoldEnum? ;
 

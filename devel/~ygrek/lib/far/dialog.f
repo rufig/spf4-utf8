@@ -2,7 +2,7 @@
 
 \ $Id$
 
-\ Полностью копия с WinLib by ~yz 
+\ РџРѕР»РЅРѕСЃС‚СЊСЋ РєРѕРїРёСЏ СЃ WinLib by ~yz 
 \ http://www.forth.org.ru/~yz/lib/winlib.f
 
 REQUIRE ACCERT( lib/ext/debug/accert.f
@@ -36,15 +36,15 @@ MODULE: TFarDialogItemArray
   : get ( n addr -- addr' ) SWAP TFarDialogItem::/SIZE * + ;
 ;MODULE
 
-0 VALUE Items \ Указатель на массив структур TFarDialogItem
+0 VALUE Items \ РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ СЃС‚СЂСѓРєС‚СѓСЂ TFarDialogItem
 AUS TFarDialogItemArray Items
 
-0 VALUE ItemsNumber \ Количество этих структур
+0 VALUE ItemsNumber \ РљРѕР»РёС‡РµСЃС‚РІРѕ СЌС‚РёС… СЃС‚СЂСѓРєС‚СѓСЂ
 
-0 VALUE winmain \ Главный Диалог
+0 VALUE winmain \ Р“Р»Р°РІРЅС‹Р№ Р”РёР°Р»РѕРі
 0 VALUE current-window
 
-\ полученные параметры функции
+\ РїРѕР»СѓС‡РµРЅРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ С„СѓРЅРєС†РёРё
 USER-VALUE hdlg
 USER-VALUE message
 USER-VALUE param2
@@ -57,26 +57,26 @@ VECT del-grid
 
 
 \ ----------------------------------------
-\ Свойства диалога
+\ РЎРІРѕР№СЃС‚РІР° РґРёР°Р»РѕРіР°
 0 table window
-  item -hdlg		\ дескриптор диалога
-  item -pre		\ выполняется до стандартной оконной процедуры
-  item -dlgproc		\ оконная процедура
-  item -messages	\ список обработчиков сообщений по умолчанию
-  item -dflags		\ флаги 
-  item -itemnotify	\ обработчики DN_* сообщений элементов диалога
-\  item -color 		\ цвет букв
-\  item -bgcolor set	\ цвет фона
-  item -xsize		\ размер элемента по горизонтали
-  item -ysize		\ размер элемента по вертикали
-  item -grid set 	\ решетка окна
-  item -gridresize     	\ процедура изменения размеров решетки
-  item -param  		\ параметр
+  item -hdlg		\ РґРµСЃРєСЂРёРїС‚РѕСЂ РґРёР°Р»РѕРіР°
+  item -pre		\ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РґРѕ СЃС‚Р°РЅРґР°СЂС‚РЅРѕР№ РѕРєРѕРЅРЅРѕР№ РїСЂРѕС†РµРґСѓСЂС‹
+  item -dlgproc		\ РѕРєРѕРЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
+  item -messages	\ СЃРїРёСЃРѕРє РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ СЃРѕРѕР±С‰РµРЅРёР№ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+  item -dflags		\ С„Р»Р°РіРё 
+  item -itemnotify	\ РѕР±СЂР°Р±РѕС‚С‡РёРєРё DN_* СЃРѕРѕР±С‰РµРЅРёР№ СЌР»РµРјРµРЅС‚РѕРІ РґРёР°Р»РѕРіР°
+\  item -color 		\ С†РІРµС‚ Р±СѓРєРІ
+\  item -bgcolor set	\ С†РІРµС‚ С„РѕРЅР°
+  item -xsize		\ СЂР°Р·РјРµСЂ СЌР»РµРјРµРЅС‚Р° РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+  item -ysize		\ СЂР°Р·РјРµСЂ СЌР»РµРјРµРЅС‚Р° РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+  item -grid set 	\ СЂРµС€РµС‚РєР° РѕРєРЅР°
+  item -gridresize     	\ РїСЂРѕС†РµРґСѓСЂР° РёР·РјРµРЅРµРЅРёСЏ СЂР°Р·РјРµСЂРѕРІ СЂРµС€РµС‚РєРё
+  item -param  		\ РїР°СЂР°РјРµС‚СЂ
 endtable
 
 
 \ --------------------------------------
-\ Диалоговая функция по умолчанию
+\ Р”РёР°Р»РѕРіРѕРІР°СЏ С„СѓРЅРєС†РёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
 MESSAGES: default-dispatch
 
@@ -107,7 +107,7 @@ XLIST common-dialog-proclist
   ACCERT2( CR    ." hdlg=" hdlg . ." message=" message . ." param1=" param1 . ." param2=" param2 . )
   winmain TO thiswin
   thiswin 0= IF
-    \ окно еще не сформировано
+    \ РѕРєРЅРѕ РµС‰Рµ РЅРµ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРѕ
     ACCERT2( CR ." Not init" )
     param2 param1 message hdlg FARAPI. DefDlgProc @ API-CALL EXIT
   THEN
@@ -127,7 +127,7 @@ XLIST common-dialog-proclist
 \      THEN
     THEN
   THEN
-  IF  \ кто-то обработал сообщение
+  IF  \ РєС‚Рѕ-С‚Рѕ РѕР±СЂР°Р±РѕС‚Р°Р» СЃРѕРѕР±С‰РµРЅРёРµ
     ACCERT2( CR ." RETURN-VALUE" )
     return-value
   ELSE
@@ -140,7 +140,7 @@ XLIST common-dialog-proclist
 
 
 \ --------------------------------------
-\ Инициализация либы
+\ РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Р»РёР±С‹
 
 FALSE VALUE ?INIT
 
@@ -190,7 +190,7 @@ FALSE VALUE ?INIT
 ;
 
 \ --------------------------------------
-\ поехали
+\ РїРѕРµС…Р°Р»Рё
 
 : RUNDIALOG ( -- )
 

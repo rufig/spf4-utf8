@@ -24,8 +24,8 @@ WINAPI: GetVersion KERNEL32.DLL
   THEN
   DUP -1 = IF
     GetVersion BASE @ HEX SWAP U. BASE !
-    ." : ≠•®ß¢•·‚≠†Ô †¢‚Æ‡„ ¢•‡·®Ô Windows." CR
-    ." ÇÆß¨Æ¶≠† ≠•¢•‡≠†Ô ‡†°Æ‚† EXC-DUMP" CR
+    ." : –Ω–µ–∏–∑–≤–µ—Å—Ç–Ω–∞—è –∞–≤—Ç–æ—Ä—É –≤–µ—Ä—Å–∏—è Windows." CR
+    ." –í–æ–∑–º–æ–∂–Ω–∞ –Ω–µ–≤–µ—Ä–Ω–∞—è —Ä–∞–±–æ—Ç–∞ EXC-DUMP" CR
     184
   THEN
   TO EXC-REGS

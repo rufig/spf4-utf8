@@ -1,4 +1,4 @@
-\ структура PE-HEADER (из spf-stub.f 96го года с изменениями из pecoff_v8.docx)
+\ СЃС‚СЂСѓРєС‚СѓСЂР° PE-HEADER (РёР· spf-stub.f 96РіРѕ РіРѕРґР° СЃ РёР·РјРµРЅРµРЅРёСЏРјРё РёР· pecoff_v8.docx)
  0
  4 -- Signature \ PE/0/0
  2 -- CPUtype   \ 14Ch - 386
@@ -6,7 +6,7 @@
  4 -- TimeDateStamp
  4 -- PointerToSymbolTable \ Res1
  4 -- NumberOfSymbols \ Res2
- 2 -- NTHDRsize \ размер опционального заголовка, который начинается ниже с Magic
+ 2 -- NTHDRsize \ СЂР°Р·РјРµСЂ РѕРїС†РёРѕРЅР°Р»СЊРЅРѕРіРѕ Р·Р°РіРѕР»РѕРІРєР°, РєРѕС‚РѕСЂС‹Р№ РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅРёР¶Рµ СЃ Magic
  2 -- Flags
 
  2 -- Magic \ 0x10b	PE32	0x20b	PE32+
@@ -73,7 +73,7 @@
  4 -- ThreadLocalStorageRVA
  4 -- TotalTLSSize
 
-\ SPF знает только 10 указанных выше RvaAndSizes
+\ SPF Р·РЅР°РµС‚ С‚РѕР»СЊРєРѕ 10 СѓРєР°Р·Р°РЅРЅС‹С… РІС‹С€Рµ RvaAndSizes
 
  8 -- LoadConfigTable
  8 -- BoundImport
@@ -83,13 +83,13 @@
  8 -- Res11 \ Reserved, must be zero
 CONSTANT /PE-HEADER
 
-\ структура - таблица объектов (идёт вслед за PE-header) -- из spf_stub.f 96го года,
+\ СЃС‚СЂСѓРєС‚СѓСЂР° - С‚Р°Р±Р»РёС†Р° РѕР±СЉРµРєС‚РѕРІ (РёРґС‘С‚ РІСЃР»РµРґ Р·Р° PE-header) -- РёР· spf_stub.f 96РіРѕ РіРѕРґР°,
  0
  8 -- OT.ObjectName        \ CODE\0\0\0\0 An 8-byte, null-padded UTF-8 encoded string. If the string is exactly 8 characters long, there is no terminating null. For longer names, this field contains a slash (/) that is followed by an ASCII representation of a decimal number that is an offset into the string table. Executable images do not use a string table and do not support section names longer than 8 characters. Long names in object files are truncated if they are emitted to an executable file.
- 4 -- OT.VirtualSize       \ сколько памяти отводится объекту при загруке
- 4 -- OT.RVA               \ относительный виртуальный адрес
- 4 -- OT.PhisicalSize      \ физический размер объекта в файле
- 4 -- OT.PhisicalOffset    \ смещение в exe-файле
+ 4 -- OT.VirtualSize       \ СЃРєРѕР»СЊРєРѕ РїР°РјСЏС‚Рё РѕС‚РІРѕРґРёС‚СЃСЏ РѕР±СЉРµРєС‚Сѓ РїСЂРё Р·Р°РіСЂСѓРєРµ
+ 4 -- OT.RVA               \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ Р°РґСЂРµСЃ
+ 4 -- OT.PhisicalSize      \ С„РёР·РёС‡РµСЃРєРёР№ СЂР°Р·РјРµСЂ РѕР±СЉРµРєС‚Р° РІ С„Р°Р№Р»Рµ
+ 4 -- OT.PhisicalOffset    \ СЃРјРµС‰РµРЅРёРµ РІ exe-С„Р°Р№Р»Рµ
  4 -- OT.Res1              \ pointer to relocations
  4 -- OT.Res2              \ pointer to line numbers
  2 -- OT.Res3              \ number of relocations

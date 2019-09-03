@@ -1,9 +1,9 @@
-( Конвертация строк между разными кодовыми таблицами
+( РљРѕРЅРІРµСЂС‚Р°С†РёСЏ СЃС‚СЂРѕРє РјРµР¶РґСѓ СЂР°Р·РЅС‹РјРё РєРѕРґРѕРІС‹РјРё С‚Р°Р±Р»РёС†Р°РјРё
 
-  Для компиляции нужны следующие dll:
-  iconv.dll - либо GNU libiconv [800Kb],
-              либо win_iconv [32Kb] by Yukihiro Nakadaira
-  См. http://www.gtk.org/download-windows.html
+  Р”Р»СЏ РєРѕРјРїРёР»СЏС†РёРё РЅСѓР¶РЅС‹ СЃР»РµРґСѓСЋС‰РёРµ dll:
+  iconv.dll - Р»РёР±Рѕ GNU libiconv [800Kb],
+              Р»РёР±Рѕ win_iconv [32Kb] by Yukihiro Nakadaira
+  РЎРј. http://www.gtk.org/download-windows.html
 )  
   
 WARNING @ WARNING 0!
@@ -21,19 +21,19 @@ OS_WINDOWS [IF]
 [THEN]
 
 : 0x98>BL ( addr u -- )
-  \ libiconv - борец за чистоту русского языка :)
-  \ в кодировке cp1251 на месте 0x98 - дырка
+  \ libiconv - Р±РѕСЂРµС† Р·Р° С‡РёСЃС‚РѕС‚Сѓ СЂСѓСЃСЃРєРѕРіРѕ СЏР·С‹РєР° :)
+  \ РІ РєРѕРґРёСЂРѕРІРєРµ cp1251 РЅР° РјРµСЃС‚Рµ 0x98 - РґС‹СЂРєР°
   0 ?DO DUP C@ 0x98 = IF BL OVER C! THEN 1+ LOOP DROP
 ;
 : ICONV { a u cpfa cpfu cpta cptu \ ico oa ou aa su sa -- oa ou }
-\ преобразовать строку a u из кодировки cpfa cpfu в cpta cptu,
-\ например: S" тест" S" CP1251" S" UTF-8" ICONV
-\ возвращает результат oa ou; oa освобождать вызывающему по FREE
-  u -> su  a -> sa \ при невозможности конвертации libiconv портит a u
+\ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ a u РёР· РєРѕРґРёСЂРѕРІРєРё cpfa cpfu РІ cpta cptu,
+\ РЅР°РїСЂРёРјРµСЂ: S" С‚РµСЃС‚" S" CP1251" S" UTF-8" ICONV
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ oa ou; oa РѕСЃРІРѕР±РѕР¶РґР°С‚СЊ РІС‹Р·С‹РІР°СЋС‰РµРјСѓ РїРѕ FREE
+  u -> su  a -> sa \ РїСЂРё РЅРµРІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РєРѕРЅРІРµСЂС‚Р°С†РёРё libiconv РїРѕСЂС‚РёС‚ a u
   u 4 * CELL+ DUP -> ou ALLOCATE THROW DUP -> oa -> aa  
   cpfa cpta 2 libiconv_open -> ico
   ^ ou ^ oa ^ u ^ a ico 5 libiconv
-  IF ( ошибка перекодирования, оставляем исходную строку )
+  IF ( РѕС€РёР±РєР° РїРµСЂРµРєРѕРґРёСЂРѕРІР°РЅРёСЏ, РѕСЃС‚Р°РІР»СЏРµРј РёСЃС…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ )
     sa aa su 1+ MOVE aa su
   ELSE
     aa oa OVER -
@@ -72,10 +72,10 @@ OS_WINDOWS [IF]
 [THEN]
 
 : iso-8859-5>UNICODE ( addr u -- addr2 u2 )
-\ специально для чтения писем ~yz :)
+\ СЃРїРµС†РёР°Р»СЊРЅРѕ РґР»СЏ С‡С‚РµРЅРёСЏ РїРёСЃРµРј ~yz :)
   S" ISO-8859-5" S" UTF-16LE" ICONV
 ;
-: UCS4> ( addr u -- addr2 u2 ) \ используется в IDNA
+: UCS4> ( addr u -- addr2 u2 ) \ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ IDNA
   S" UTF-32LE" S" CP1251" ICONV
 ;
 : >UCS4 ( addr u -- addr2 u2 )
@@ -84,7 +84,7 @@ OS_WINDOWS [IF]
 PREVIOUS
 
 [UNDEFINED] UASCIIZ> [IF]
-: UASCIIZ> ( addr -- addr u ) \ вариант ASCIIZ> для Unicode
+: UASCIIZ> ( addr -- addr u ) \ РІР°СЂРёР°РЅС‚ ASCIIZ> РґР»СЏ Unicode
   0 OVER
   BEGIN
     DUP W@ 0<>
@@ -94,7 +94,7 @@ PREVIOUS
 ;
 [THEN]
 
-: 4ASCIIZ> ( addr -- addr u ) \ вариант ASCIIZ> для UCS-4
+: 4ASCIIZ> ( addr -- addr u ) \ РІР°СЂРёР°РЅС‚ ASCIIZ> РґР»СЏ UCS-4
   0 OVER
   BEGIN
     DUP @ 0<>
@@ -104,6 +104,6 @@ PREVIOUS
 ;
 
 \EOF
-S" тест-123-abc" S" CP1251" S" UTF-8" ICONV 2DUP TYPE CR DROP FREE THROW
-S" тест-123-abc" >UNICODE 2DUP DUMP CR UNICODE> ANSI>OEM TYPE CR
-S" тест-123-abc" >UTF8 UTF8>UNICODE UNICODE> ANSI>OEM TYPE CR
+S" С‚РµСЃС‚-123-abc" S" CP1251" S" UTF-8" ICONV 2DUP TYPE CR DROP FREE THROW
+S" С‚РµСЃС‚-123-abc" >UNICODE 2DUP DUMP CR UNICODE> ANSI>OEM TYPE CR
+S" С‚РµСЃС‚-123-abc" >UTF8 UTF8>UNICODE UNICODE> ANSI>OEM TYPE CR

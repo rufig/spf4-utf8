@@ -1,24 +1,24 @@
-\ Расстановочные таблицы
-\ Ю. Жиловец, 18.12.2002, с добавлениями А. Черезова
-\ Добавления Рувима Пинки и Игоря Панасенко
+\ Р Р°СЃСЃС‚Р°РЅРѕРІРѕС‡РЅС‹Рµ С‚Р°Р±Р»РёС†С‹
+\ Р®. Р–РёР»РѕРІРµС†, 18.12.2002, СЃ РґРѕР±Р°РІР»РµРЅРёСЏРјРё Рђ. Р§РµСЂРµР·РѕРІР°
+\ Р”РѕР±Р°РІР»РµРЅРёСЏ Р СѓРІРёРјР° РџРёРЅРєРё Рё РРіРѕСЂСЏ РџР°РЅР°СЃРµРЅРєРѕ
 
 REQUIRE MGETMEM ~yz/lib/gmem.f
 
 MODULE: HASH-TABLES
 
-\ Формат таблицы:
-\ +0	cell	Число списков
-\ +4 	n cells	Начала списков записей
+\ Р¤РѕСЂРјР°С‚ С‚Р°Р±Р»РёС†С‹:
+\ +0	cell	Р§РёСЃР»Рѕ СЃРїРёСЃРєРѕРІ
+\ +4 	n cells	РќР°С‡Р°Р»Р° СЃРїРёСЃРєРѕРІ Р·Р°РїРёСЃРµР№
 
-\ Формат записи
+\ Р¤РѕСЂРјР°С‚ Р·Р°РїРёСЃРё
 
 EXPORT
 
 0 
-CELL -- :hashlink   \ Указатель на следующую запись / 0
-CELL -- :hashkey    \ указатель на строку - ключ
-CELL -- :hashvalue  \ Указатель на значение
-1    -- :hashfree   \ 0 - число, <>0 строка
+CELL -- :hashlink   \ РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ Р·Р°РїРёСЃСЊ / 0
+CELL -- :hashkey    \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂРѕРєСѓ - РєР»СЋС‡
+CELL -- :hashvalue  \ РЈРєР°Р·Р°С‚РµР»СЊ РЅР° Р·РЅР°С‡РµРЅРёРµ
+1    -- :hashfree   \ 0 - С‡РёСЃР»Рѕ, <>0 СЃС‚СЂРѕРєР°
 == #rec
 
 ;MODULE
@@ -26,7 +26,7 @@ CELL -- :hashvalue  \ Указатель на значение
 MODULE: HASH-TABLES
 
 : make-hash ( n -- )
-  \ очистит хэш-таблицу ALLOCATE
+  \ РѕС‡РёСЃС‚РёС‚ С…СЌС€-С‚Р°Р±Р»РёС†Сѓ ALLOCATE
   DUP 1+ CELLS MGETMEM 2DUP ! PRESS ;
 
 : (HASH) ( akey nkey n2 -- )
@@ -40,9 +40,9 @@ MODULE: HASH-TABLES
   BEGIN
     ( akey nkey prev rec)
     2>R ( akey nkey)
-    2DUP R@ :hashkey @ COUNT COMPARE 0= IF ( нашли ключ) 2DROP 2R> ( ." found" s.) EXIT THEN
+    2DUP R@ :hashkey @ COUNT COMPARE 0= IF ( РЅР°С€Р»Рё РєР»СЋС‡) 2DROP 2R> ( ." found" s.) EXIT THEN
     R> RDROP  ( akey nkey rec)
-    DUP :hashlink @ ?DUP 0= IF ( не нашли ключ) PRESS PRESS 0 ( ." notfound" s.) EXIT THEN
+    DUP :hashlink @ ?DUP 0= IF ( РЅРµ РЅР°С€Р»Рё РєР»СЋС‡) PRESS PRESS 0 ( ." notfound" s.) EXIT THEN
   AGAIN ;
 
 : traverse-hash ( xt hash -- )
@@ -60,7 +60,7 @@ MODULE: HASH-TABLES
 : del-rec ( rec -- link)
   DUP :hashkey @ MFREEMEM DUP del-value DUP :hashlink @ SWAP MFREEMEM ;
 
-: del-all-recs ( hash -- )    \ освобождает все записи в таблице
+: del-all-recs ( hash -- )    \ РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РІСЃРµ Р·Р°РїРёСЃРё РІ С‚Р°Р±Р»РёС†Рµ
   ['] del-rec SWAP traverse-hash ;
 
 : (rec-in-hash) ( akey nkey hash -- rec)
@@ -131,7 +131,7 @@ EXPORT
 : big-hash   ( -- hash ) 256  make-hash ;
 : large-hash ( -- hash ) 1024 make-hash ;
 
-: clear-hash ( hash -- )    \ очищает хэш, не удаляя основную таблицу
+: clear-hash ( hash -- )    \ РѕС‡РёС‰Р°РµС‚ С…СЌС€, РЅРµ СѓРґР°Р»СЏСЏ РѕСЃРЅРѕРІРЅСѓСЋ С‚Р°Р±Р»РёС†Сѓ
   DUP del-all-recs DUP @ CELLS SWAP CELL+ SWAP ERASE ;
 
 : del-hash ( hash -- )

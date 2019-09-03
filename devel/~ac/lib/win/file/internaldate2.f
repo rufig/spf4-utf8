@@ -1,11 +1,11 @@
-\ То же, но без открытия файла, т.е. подходит и для каталогов
-\ и прочих неоткрываемых объектов.
+\ РўРѕ Р¶Рµ, РЅРѕ Р±РµР· РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°, С‚.Рµ. РїРѕРґС…РѕРґРёС‚ Рё РґР»СЏ РєР°С‚Р°Р»РѕРіРѕРІ
+\ Рё РїСЂРѕС‡РёС… РЅРµРѕС‚РєСЂС‹РІР°РµРјС‹С… РѕР±СЉРµРєС‚РѕРІ.
 
 REQUIRE FILE-INTERNALDATE    ~ac/lib/win/file/internaldate.f 
 REQUIRE GET-FILETIME-WRITE-S ~ac/lib/win/file/fileprop.f 
 REQUIRE FILETIME>UNIXTIME    ~ac/lib/win/date/unixtime.f
 
-: FILETIME-INTERNALDATE ( filetime -- addr u ) \ filetime в utc
+: FILETIME-INTERNALDATE ( filetime -- addr u ) \ filetime РІ utc
   2>R <<# Zone# BL HOLD
   2R> UTC>LOCAL FILETIME>TIME&DATE >R 2>R
   SWAP ROT Time# BL HOLD
@@ -13,12 +13,12 @@ REQUIRE FILETIME>UNIXTIME    ~ac/lib/win/date/unixtime.f
   DateM>S HOLDS [CHAR] - HOLD #N## #>
 ;
 : FILENAME-INTERNALDATE2 ( filea fileu -- addr u )
-\ месяц букв.сокр, локальное время с указанием зоны
+\ РјРµСЃСЏС† Р±СѓРєРІ.СЃРѕРєСЂ, Р»РѕРєР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ СЃ СѓРєР°Р·Р°РЅРёРµРј Р·РѕРЅС‹
 \ 09-Oct-2008 04:37:21 +0300
-\ используется в частности в IMAP
+\ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ С‡Р°СЃС‚РЅРѕСЃС‚Рё РІ IMAP
   GET-FILETIME-WRITE-S FILETIME-INTERNALDATE
 ;
-: FILETIME-UDATE ( filetime -- addr u ) \ filetime в utc
+: FILETIME-UDATE ( filetime -- addr u ) \ filetime РІ utc
   2>R <<# \ Zone# BL HOLD
   2R> FILETIME>TIME&DATE >R 2>R
   SWAP ROT Time# BL HOLD
@@ -26,9 +26,9 @@ REQUIRE FILETIME>UNIXTIME    ~ac/lib/win/date/unixtime.f
   SWAP #N## [CHAR] - HOLD #N #>
 ;
 : FILENAME-UDATE2 ( filea fileu -- addr u )
-\ числовой формат в UTC/GMT-зоне (без указания)
+\ С‡РёСЃР»РѕРІРѕР№ С„РѕСЂРјР°С‚ РІ UTC/GMT-Р·РѕРЅРµ (Р±РµР· СѓРєР°Р·Р°РЅРёСЏ)
 \ 2008-10-09 01:37:21
-\ используется в частности в SQL
+\ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ С‡Р°СЃС‚РЅРѕСЃС‚Рё РІ SQL
   GET-FILETIME-WRITE-S FILETIME-UDATE
 ;
 : FILENAME-UNIXTIME ( filea fileu -- unixtime )

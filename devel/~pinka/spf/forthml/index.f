@@ -1,19 +1,19 @@
 \ 18.Feb.2007
 \ $Id$
-( Транслятор ForthML [как расширение к SPF4]
+( РўСЂР°РЅСЃР»СЏС‚РѕСЂ ForthML [РєР°Рє СЂР°СЃС€РёСЂРµРЅРёРµ Рє SPF4]
 
-Использование
+РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ
   S" url-of.f.xml" EMBODY [ i*x c-addrz u -- j*x ]
-  -- создает объект по указанной модели в текущем контексте
+  -- СЃРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ РїРѕ СѓРєР°Р·Р°РЅРЅРѕР№ РјРѕРґРµР»Рё РІ С‚РµРєСѓС‰РµРј РєРѕРЅС‚РµРєСЃС‚Рµ
 
 
-Ограничения
-  -- пока транслятор не многопоточен.
+РћРіСЂР°РЅРёС‡РµРЅРёСЏ
+  -- РїРѕРєР° С‚СЂР°РЅСЃР»СЏС‚РѕСЂ РЅРµ РјРЅРѕРіРѕРїРѕС‚РѕС‡РµРЅ.
 )
 
 
 REQUIRE [UNDEFINED]     lib/include/tools.f
-REQUIRE AsQName         ~pinka/samples/2006/syntax/qname.f \ понятие однословных строк в виде `abc
+REQUIRE AsQName         ~pinka/samples/2006/syntax/qname.f \ РїРѕРЅСЏС‚РёРµ РѕРґРЅРѕСЃР»РѕРІРЅС‹С… СЃС‚СЂРѕРє РІ РІРёРґРµ `abc
 REQUIRE CORE_OF_REFILL  ~pinka/spf/fix-refill.f
 REQUIRE SET-STDOUT      ~pinka/spf/stdio.f
 REQUIRE Require         ~pinka/lib/ext/requ.f
@@ -31,17 +31,17 @@ REQUIRE lexicon.basics-aligned ~pinka/lib/ext/basics.f
 [THEN]
 
 REQUIRE CREATE-CS       ~pinka/lib/multi/Critical.f 
-\ все, теперь без портирования синхронизации под линукс не пойдет
+\ РІСЃРµ, С‚РµРїРµСЂСЊ Р±РµР· РїРѕСЂС‚РёСЂРѕРІР°РЅРёСЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё РїРѕРґ Р»РёРЅСѓРєСЃ РЅРµ РїРѕР№РґРµС‚
 
 
-Require ULT             aliases.f \ набор синонимов
+Require ULT             aliases.f \ РЅР°Р±РѕСЂ СЃРёРЅРѕРЅРёРјРѕРІ
 
-\ лексикон кодогенератора, управляющий стек, управление списками слов:
+\ Р»РµРєСЃРёРєРѕРЅ РєРѕРґРѕРіРµРЅРµСЂР°С‚РѕСЂР°, СѓРїСЂР°РІР»СЏСЋС‰РёР№ СЃС‚РµРє, СѓРїСЂР°РІР»РµРЅРёРµ СЃРїРёСЃРєР°РјРё СЃР»РѕРІ:
 REQUIRE CODEGEN-WL      ~pinka/spf/compiler/index.f
 
 
 
-\ привязка к libxml2 и XMLDOM -- в отдельный словарь XMLDOM-WL
+\ РїСЂРёРІСЏР·РєР° Рє libxml2 Рё XMLDOM -- РІ РѕС‚РґРµР»СЊРЅС‹Р№ СЃР»РѕРІР°СЂСЊ XMLDOM-WL
 
 CODEGEN-WL ALSO!
 
@@ -62,20 +62,20 @@ PREVIOUS
 
 
 \ -----
-\ Внутренности реализации в список forthml-hidden
+\ Р’РЅСѓС‚СЂРµРЅРЅРѕСЃС‚Рё СЂРµР°Р»РёР·Р°С†РёРё РІ СЃРїРёСЃРѕРє forthml-hidden
 
 CODEGEN-WL ALSO!  XMLDOM-WL  ALSO!
 `forthml-hidden WORDLIST-NAMED PUSH-DEVELOP
 
-VARIABLE cnode-a \ текущий узел XML-документа
+VARIABLE cnode-a \ С‚РµРєСѓС‰РёР№ СѓР·РµР» XML-РґРѕРєСѓРјРµРЅС‚Р°
 
-Include cdomnode.immutable.f  \ DOM-доступ к текущему узлу, обход XML-дерева
+Include cdomnode.immutable.f  \ DOM-РґРѕСЃС‚СѓРї Рє С‚РµРєСѓС‰РµРјСѓ СѓР·Р»Сѓ, РѕР±С…РѕРґ XML-РґРµСЂРµРІР°
 
 DROP-DEVELOP PREVIOUS PREVIOUS
 
 
-?C-JMP TRUE TO ?C-JMP  \ включение хвостовой оптимизации: [CALL XXX][RET] --> [JMP XXX]
-                       \ актуально для цепочки обработчиков.
+?C-JMP TRUE TO ?C-JMP  \ РІРєР»СЋС‡РµРЅРёРµ С…РІРѕСЃС‚РѕРІРѕР№ РѕРїС‚РёРјРёР·Р°С†РёРё: [CALL XXX][RET] --> [JMP XXX]
+                       \ Р°РєС‚СѓР°Р»СЊРЅРѕ РґР»СЏ С†РµРїРѕС‡РєРё РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ.
 ( prev-flag )
 
 
@@ -102,19 +102,19 @@ FORTH-WORDLIST XMLDOM-WL CODEGEN-WL forthml-hidden  4 SET-ORDER  DEFINITIONS
   ['] EVALUATE-PLAIN-TC FOR-FILENAME-CONTENT
 ;
 
-`ttext-index.auto.f INCLUDED-PLAIN-TC \ в виде простейшего форт-текста
-\ предоставляет T-PLAIN -- слово для трансляции текста,
-\ ядро для трансляции xml-дерева, переменные состояния M и STATE
+`ttext-index.auto.f INCLUDED-PLAIN-TC \ РІ РІРёРґРµ РїСЂРѕСЃС‚РµР№С€РµРіРѕ С„РѕСЂС‚-С‚РµРєСЃС‚Р°
+\ РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ T-PLAIN -- СЃР»РѕРІРѕ РґР»СЏ С‚СЂР°РЅСЃР»СЏС†РёРё С‚РµРєСЃС‚Р°,
+\ СЏРґСЂРѕ РґР»СЏ С‚СЂР°РЅСЃР»СЏС†РёРё xml-РґРµСЂРµРІР°, РїРµСЂРµРјРµРЅРЅС‹Рµ СЃРѕСЃС‚РѕСЏРЅРёСЏ M Рё STATE
 
 
-..: AT-PROCESS-STARTING init-document-context ;.. \ для  model/trans/document-context2.f.xml
-                        init-document-context \ входит в работу и здесь же
+..: AT-PROCESS-STARTING init-document-context ;.. \ РґР»СЏ  model/trans/document-context2.f.xml
+                        init-document-context \ РІС…РѕРґРёС‚ РІ СЂР°Р±РѕС‚Сѓ Рё Р·РґРµСЃСЊ Р¶Рµ
 
 
 VARIABLE _T-PAT  ' T-SLIT _T-PAT !
-: T-PAT _T-PAT @ EXECUTE ; \ используется при <get-name/>
+: T-PAT _T-PAT @ EXECUTE ; \ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїСЂРё <get-name/>
 
-`~pinka/fml/forthml-core.auto.f Included \ базовый набор слов (правил) ForthML
+`~pinka/fml/forthml-core.auto.f Included \ Р±Р°Р·РѕРІС‹Р№ РЅР°Р±РѕСЂ СЃР»РѕРІ (РїСЂР°РІРёР») ForthML
 
 
 \ ---
@@ -122,13 +122,13 @@ VARIABLE _T-PAT  ' T-SLIT _T-PAT !
 `diagnose-error.f Included \ redefine EMBODY to save error location (spf4 specific)
 
 
-: _EMBODY FIND-FULLNAME2 EMBODY ; \ учитывает и путь текуще-подключаемого файла
+: _EMBODY FIND-FULLNAME2 EMBODY ; \ СѓС‡РёС‚С‹РІР°РµС‚ Рё РїСѓС‚СЊ С‚РµРєСѓС‰Рµ-РїРѕРґРєР»СЋС‡Р°РµРјРѕРіРѕ С„Р°Р№Р»Р°
 
-\ лексикон ForthML первого уровня:
+\ Р»РµРєСЃРёРєРѕРЅ ForthML РїРµСЂРІРѕРіРѕ СѓСЂРѕРІРЅСЏ:
 `~pinka/fml/src/rules-common.f.xml _EMBODY
 `~pinka/fml/src/rules-forth.f.xml  _EMBODY
 
-\ Остальное можно загрузить проще:
+\ РћСЃС‚Р°Р»СЊРЅРѕРµ РјРѕР¶РЅРѕ Р·Р°РіСЂСѓР·РёС‚СЊ РїСЂРѕС‰Рµ:
 `index.L2.f.xml _EMBODY
 `index.L3.f.xml _EMBODY
 
@@ -143,7 +143,7 @@ DROP-WARNING  DROP-CURRENT
 
 
 SET-ORDER SET-CURRENT
-TO ?C-JMP  \ оставлять включенным нельзя, т.к. дает глюки для r-чувствительных слов.
+TO ?C-JMP  \ РѕСЃС‚Р°РІР»СЏС‚СЊ РІРєР»СЋС‡РµРЅРЅС‹Рј РЅРµР»СЊР·СЏ, С‚.Рє. РґР°РµС‚ РіР»СЋРєРё РґР»СЏ r-С‡СѓРІСЃС‚РІРёС‚РµР»СЊРЅС‹С… СЃР»РѕРІ.
 
 
 REQUIRE enqueueNOTFOUND  ~pinka/spf/notfound-ext.f
@@ -165,6 +165,6 @@ REQUIRE enqueueNOTFOUND  ~pinka/spf/notfound-ext.f
 
 REQUIRE --workdir  ~pinka/lib/options-stdio.f
 
-\ Итого, объектного кода:
-\   библиотеки, расширения и выравнивания -- 36 Кб
-\   транслятор ForthML с навесками -- 47 Кб
+\ РС‚РѕРіРѕ, РѕР±СЉРµРєС‚РЅРѕРіРѕ РєРѕРґР°:
+\   Р±РёР±Р»РёРѕС‚РµРєРё, СЂР°СЃС€РёСЂРµРЅРёСЏ Рё РІС‹СЂР°РІРЅРёРІР°РЅРёСЏ -- 36 РљР±
+\   С‚СЂР°РЅСЃР»СЏС‚РѕСЂ ForthML СЃ РЅР°РІРµСЃРєР°РјРё -- 47 РљР±

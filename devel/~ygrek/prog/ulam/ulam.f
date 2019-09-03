@@ -1,4 +1,4 @@
-( Салфетка Улама
+( РЎР°Р»С„РµС‚РєР° РЈР»Р°РјР°
 
   yGREK heretix  
   heretix@yandex.ru
@@ -6,10 +6,10 @@
 )
 
 \ 11.Jun.2005  ~ygrek
-\ Теперь работает и под WinNT
+\ РўРµРїРµСЂСЊ СЂР°Р±РѕС‚Р°РµС‚ Рё РїРѕРґ WinNT
 
 \ 18.Jun.2005 ~ygrek
-\ Считает в потоке
+\ РЎС‡РёС‚Р°РµС‚ РІ РїРѕС‚РѕРєРµ
 
 REQUIRE GetDC  ~ygrek/lib/data/windows.f
 WARNING 0!
@@ -40,8 +40,8 @@ VECT number
 ;
 
 : CreateMemDC  
-   \ образ экрана в памяти и будем все операции рисования делать
-   \ только в memDC
+   \ РѕР±СЂР°Р· СЌРєСЂР°РЅР° РІ РїР°РјСЏС‚Рё Рё Р±СѓРґРµРј РІСЃРµ РѕРїРµСЂР°С†РёРё СЂРёСЃРѕРІР°РЅРёСЏ РґРµР»Р°С‚СЊ
+   \ С‚РѕР»СЊРєРѕ РІ memDC
    W: sm_cxscreen GetSystemMetrics TO maxX
    W: sm_cyscreen GetSystemMetrics TO maxY
    hDC CreateCompatibleDC TO memDC
@@ -94,64 +94,64 @@ VECT number
 
 : message ( i -- z )
    4 MOD
-   DUP 0 = IF DROP " Считаю" EXIT THEN
-   DUP 1 = IF DROP " Считаю Считаю" EXIT THEN
-   DUP 2 = IF DROP " Считаю Считаю Считаю" EXIT THEN
+   DUP 0 = IF DROP " РЎС‡РёС‚Р°СЋ" EXIT THEN
+   DUP 1 = IF DROP " РЎС‡РёС‚Р°СЋ РЎС‡РёС‚Р°СЋ" EXIT THEN
+   DUP 2 = IF DROP " РЎС‡РёС‚Р°СЋ РЎС‡РёС‚Р°СЋ РЎС‡РёС‚Р°СЋ" EXIT THEN
    DROP
-   " Считаю Считаю Считаю Считаю"
+   " РЎС‡РёС‚Р°СЋ РЎС‡РёС‚Р°СЋ РЎС‡РёС‚Р°СЋ РЎС‡РёС‚Р°СЋ"
 ;
 
 :NONAME ( win -- )
   done 0!
-  limit 2/ 2 DO \ бежим по числам до половины
+  limit 2/ 2 DO \ Р±РµР¶РёРј РїРѕ С‡РёСЃР»Р°Рј РґРѕ РїРѕР»РѕРІРёРЅС‹
    I 2 *
-   BEGIN \ бежим по всем кратным
+   BEGIN \ Р±РµР¶РёРј РїРѕ РІСЃРµРј РєСЂР°С‚РЅС‹Рј
     DUP limit <
    WHILE
     DUP ( num )
-    number black pixel \ и ставим на их место чёрную точку
+    number black pixel \ Рё СЃС‚Р°РІРёРј РЅР° РёС… РјРµСЃС‚Рѕ С‡С‘СЂРЅСѓСЋ С‚РѕС‡РєСѓ
     I +
    REPEAT
    DROP
    DUP I message 0 ROT set-status
   LOOP
-  TRUE done !  \ флажок - посчитали
-  DUP force-redraw \ отрисовали
-  >R " Готово." 0 R> set-status \ сообщили
+  TRUE done !  \ С„Р»Р°Р¶РѕРє - РїРѕСЃС‡РёС‚Р°Р»Рё
+  DUP force-redraw \ РѕС‚СЂРёСЃРѕРІР°Р»Рё
+  >R " Р“РѕС‚РѕРІРѕ." 0 R> set-status \ СЃРѕРѕР±С‰РёР»Рё
 ; TASK: calculate
 
 
 \ -----------------------------------
 
 PROC: quit
-  " Выход" 0 win set-status
+  " Р’С‹С…РѕРґ" 0 win set-status
   winmain W: wm_close ?send DROP
 PROC;
 
 PROC: paint 
- done @ 0= IF EXIT THEN \ если ещё недосчитали то не будем обгрызки выводить
- W: srccopy 0 0 memDC maxY maxX 0 0 hDC BitBlt DROP \ из памяти на экран
+ done @ 0= IF EXIT THEN \ РµСЃР»Рё РµС‰С‘ РЅРµРґРѕСЃС‡РёС‚Р°Р»Рё С‚Рѕ РЅРµ Р±СѓРґРµРј РѕР±РіСЂС‹Р·РєРё РІС‹РІРѕРґРёС‚СЊ
+ W: srccopy 0 0 memDC maxY maxX 0 0 hDC BitBlt DROP \ РёР· РїР°РјСЏС‚Рё РЅР° СЌРєСЂР°РЅ
 PROC;
 
 PROC: draw { \ e_num e_start buf -- }
-   " Настройки" 0 win set-status
+   " РќР°СЃС‚СЂРѕР№РєРё" 0 win set-status
    10 ALLOCATE THROW TO buf
-   " Настройки" MODAL...
+   " РќР°СЃС‚СЂРѕР№РєРё" MODAL...
      GRID
        filler 200 1 this ctlresize | 
       ===
-       " Всего точек: " label -xfixed |
+       " Р’СЃРµРіРѕ С‚РѕС‡РµРє: " label -xfixed |
        edit -xspan 
        this TO e_num 
        10 this limit-edit |
       ===
-       " Начинать с: " label -xfixed |
+       " РќР°С‡РёРЅР°С‚СЊ СЃ: " label -xfixed |
        edit -xspan
        this TO e_start 
        10 this limit-edit |
       ===
       "    Ok   " ['] dialog-ok ok-button -right | 
-      " Отмена" cancel-button |
+      " РћС‚РјРµРЅР°" cancel-button |
      GRID; 
       limit S>D <# #S #> DROP e_num -text!
       start S>D <# #S #> DROP e_start -text!
@@ -171,23 +171,23 @@ PROC: draw { \ e_num e_start buf -- }
 PROC;
 
 PROC: about { \ e -- }
- " Инфа" MODAL...
+ " РРЅС„Р°" MODAL...
   GRID
    multiedit 
    400 200 this ctlresize 
    this TO e 
    this windisable |
   GRID;
-   " Называется точно не помню или 'Салфетка Улама' \r\n или 'Улитка Улама'. Смысл в том что числовая ось \r\n рисуется не по прямой, а по спирали.\r\n Простые числа отмечаются белыми точками,\r\n составные чёрными. И, ради чего это делалось,\r\n получается геометрический узор с явно заметными \r\n кусками прямых из белых точек. Наслаждайтесь.\r\n\r\n(c) yGREK heretix 20.03.2005 \r\n http://www.forth.org.ru/~ygrek"
+   " РќР°Р·С‹РІР°РµС‚СЃСЏ С‚РѕС‡РЅРѕ РЅРµ РїРѕРјРЅСЋ РёР»Рё 'РЎР°Р»С„РµС‚РєР° РЈР»Р°РјР°' \r\n РёР»Рё 'РЈР»РёС‚РєР° РЈР»Р°РјР°'. РЎРјС‹СЃР» РІ С‚РѕРј С‡С‚Рѕ С‡РёСЃР»РѕРІР°СЏ РѕСЃСЊ \r\n СЂРёСЃСѓРµС‚СЃСЏ РЅРµ РїРѕ РїСЂСЏРјРѕР№, Р° РїРѕ СЃРїРёСЂР°Р»Рё.\r\n РџСЂРѕСЃС‚С‹Рµ С‡РёСЃР»Р° РѕС‚РјРµС‡Р°СЋС‚СЃСЏ Р±РµР»С‹РјРё С‚РѕС‡РєР°РјРё,\r\n СЃРѕСЃС‚Р°РІРЅС‹Рµ С‡С‘СЂРЅС‹РјРё. Р, СЂР°РґРё С‡РµРіРѕ СЌС‚Рѕ РґРµР»Р°Р»РѕСЃСЊ,\r\n РїРѕР»СѓС‡Р°РµС‚СЃСЏ РіРµРѕРјРµС‚СЂРёС‡РµСЃРєРёР№ СѓР·РѕСЂ СЃ СЏРІРЅРѕ Р·Р°РјРµС‚РЅС‹РјРё \r\n РєСѓСЃРєР°РјРё РїСЂСЏРјС‹С… РёР· Р±РµР»С‹С… С‚РѕС‡РµРє. РќР°СЃР»Р°Р¶РґР°Р№С‚РµСЃСЊ.\r\n\r\n(c) yGREK heretix 20.03.2005 \r\n http://www.forth.org.ru/~ygrek"
    e -text!
   SHOW
  ...MODAL
 PROC;
 
 MENU: winmenu
-  draw MENUITEM  &Рисовать
-  about MENUITEM &Инфа
-  quit MENUITEM &Выход
+  draw MENUITEM  &Р РёСЃРѕРІР°С‚СЊ
+  about MENUITEM &РРЅС„Р°
+  quit MENUITEM &Р’С‹С…РѕРґ
 MENU;
 
 \ -------------------------------------
@@ -199,7 +199,7 @@ MENU;
   0 create-window TO win
   " Arial Cyr" 12 create-font default-font
   win TO winmain
-  " Салфетка Улама" win -text!
+  " РЎР°Р»С„РµС‚РєР° РЈР»Р°РјР°" win -text!
   paint win -painter!
   winmenu win attach-menubar
   win create-status
@@ -207,7 +207,7 @@ MENU;
   CreateMemDC
   win winmaximize
   win winshow
- \ Инициализация по умолчанию
+ \ РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
   maxX 2/ TO cx 
   maxY 2/ TO cy
   100000 TO limit

@@ -1,26 +1,26 @@
 \ 11-11-2007 ~mOleg
 \ Copyright [C] 2007 mOleg mininoleg@yahoo.com
-\ ïðèìåð ðåøåíèÿ çàäà÷êè ñ ôîðóìà
+\ Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ Ð·Ð°Ð´Ð°Ñ‡ÐºÐ¸ Ñ Ñ„Ð¾Ñ€ÑƒÐ¼Ð°
 \ http://fforum.winglion.ru/viewtopic.php?t=1022&start=0&postdays=0&postorder=asc&highlight=
 
  REQUIRE FOR            devel\~mOleg\lib\util\for-next.f
  REQUIRE B@             devel\~mOleg\lib\util\bytes.f
 
-\ ïðîèçâåñòè ðåâåðñ áèò óêàçàííîãî áàéòà
+\ Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÑÑ‚Ð¸ Ñ€ÐµÐ²ÐµÑ€Ñ Ð±Ð¸Ñ‚ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð±Ð°Ð¹Ñ‚Ð°
 : revbyte ( b --> b )
           0 8 FOR 2* OVER 1 AND OR
                   SWAP 2/ SWAP
               TILL NIP ;
 
-\ ìàññèâ ñ èíâåðòèðîâàííûìè áàéòàìè
+\ Ð¼Ð°ÑÑÐ¸Ð² Ñ Ð¸Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¼Ð¸ Ð±Ð°Ð¹Ñ‚Ð°Ð¼Ð¸
 CREATE brarr  256 FOR 256 R@ - revbyte B, TILL
 
-\ ïðîèçâåñòè ðåâåðñ ÿ÷åéêè
+\ Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÑÑ‚Ð¸ Ñ€ÐµÐ²ÐµÑ€Ñ ÑÑ‡ÐµÐ¹ÐºÐ¸
 : revcell ( u --> u )
           0 4 FOR 8 LSHIFT
                   OVER 0xFF AND brarr + B@ OR
                   SWAP 8 RSHIFT SWAP
               TILL NIP ;
 
-\ äëÿ ìàññèâà addr # ïðîèçâåñòè áèòîâûé ðåâåðñ
+\ Ð´Ð»Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð° addr # Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÑÑ‚Ð¸ Ð±Ð¸Ñ‚Ð¾Ð²Ñ‹Ð¹ Ñ€ÐµÐ²ÐµÑ€Ñ
 : revarr ( addr # --> ) FOR DUP @ revcell OVER ! CELL + TILL DROP ;

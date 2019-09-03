@@ -1,6 +1,6 @@
-\ ×àñòî òðåáóþùèåñÿ îïðåäåëåíèÿ, asciiz-ñòðîêè
-\ Âåðñèÿ 1.10
-\ Þ. Æèëîâåö, http://www.forth.org.ru/~yz
+\ Ð§Ð°ÑÑ‚Ð¾ Ñ‚Ñ€ÐµÐ±ÑƒÑŽÑ‰Ð¸ÐµÑÑ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ñ, asciiz-ÑÑ‚Ñ€Ð¾ÐºÐ¸
+\ Ð’ÐµÑ€ÑÐ¸Ñ 1.10
+\ Ð®. Ð–Ð¸Ð»Ð¾Ð²ÐµÑ†, http://www.forth.org.ru/~yz
 
 REQUIRE [UNDEFINED] lib/include/tools.f
 REQUIRE =OF ~yz/lib/mycase.f
@@ -99,8 +99,8 @@ VARIABLE toadr  VARIABLE fromadr VARIABLE counter
 
 : .H  BASE @ HEX SWAP ." 0x" U. BASE ! ;
 
-\ óãëóáëÿåò ñòåê íà n çíà÷åíèé. Òðåáóåòñÿ äëÿ ïðîöåäóð ñ ïàðàìåòðàìè, 
-\ îïèñûâàåìûìè ÷åðåç WNDPROC
+\ ÑƒÐ³Ð»ÑƒÐ±Ð»ÑÐµÑ‚ ÑÑ‚ÐµÐº Ð½Ð° n Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹. Ð¢Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€ Ñ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ð¼Ð¸, 
+\ Ð¾Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÐ¼Ñ‹Ð¼Ð¸ Ñ‡ÐµÑ€ÐµÐ· WNDPROC
 : PARAMS ( n --) CELLS S0 +! ;
 
 \ ------------------------------------
@@ -112,7 +112,7 @@ WINAPI: FormatMessageA   KERNEL32.DLL
 
 : dll-error ( -- n) GetLastError ;
 : error-text ( err -- a)
-  \ âûäåëåííûé áóôåð ïîäëåæèò îñâîáîæäåíèþ
+  \ Ð²Ñ‹Ð´ÐµÐ»ÐµÐ½Ð½Ñ‹Ð¹ Ð±ÑƒÑ„ÐµÑ€ Ð¿Ð¾Ð´Ð»ÐµÐ¶Ð¸Ñ‚ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´ÐµÐ½Ð¸ÑŽ
  >R 512 DUP GETMEM ( 512 a) DUP >R SWAP 0 SWAP R> 0 R> 0 0x1000 ( format_message_from_system)
  FormatMessageA DROP
 ;
@@ -126,18 +126,18 @@ WINAPI: WideCharToMultiByte   KERNEL32.DLL
 
 : >unicode ( z a -- )
   SWAP DUP >R ZLEN 1+ 2* SWAP -1 R> 0 0 MultiByteToWideChar DROP ; 
-: >unicodebuf ( z -- a) \ çàïèñûâàåò ñòðîêó â âûäåëåííûé áóôåð è âîçâðàùàåò
- \ åãî àäðåñ. Áóôåð ïîäëåæèò îñâîáîæäåíèþ
+: >unicodebuf ( z -- a) \ Ð·Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÑ‚ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð²Ñ‹Ð´ÐµÐ»ÐµÐ½Ð½Ñ‹Ð¹ Ð±ÑƒÑ„ÐµÑ€ Ð¸ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚
+ \ ÐµÐ³Ð¾ Ð°Ð´Ñ€ÐµÑ. Ð‘ÑƒÑ„ÐµÑ€ Ð¿Ð¾Ð´Ð»ÐµÐ¶Ð¸Ñ‚ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´ÐµÐ½Ð¸ÑŽ
   DUP >R ZLEN 1+ 2* DUP GETMEM ( # a) SWAP OVER  
   -1 R> 0 0 MultiByteToWideChar DROP ;
 
 : unicode> ( a z --)
   SWAP >R >R 0 0 256 R> -1 R> 0 0 WideCharToMultiByte DROP ;
 
-: unicode>buf ( a -- z) \ çàïèñûâàåò ñòðîêó â âûäåëåííûé áóôåð è âîçâðàùàåò
- \ åãî àäðåñ. Áóôåð ïîäëåæèò îñâîáîæäåíèþ
+: unicode>buf ( a -- z) \ Ð·Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÑ‚ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð² Ð²Ñ‹Ð´ÐµÐ»ÐµÐ½Ð½Ñ‹Ð¹ Ð±ÑƒÑ„ÐµÑ€ Ð¸ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚
+ \ ÐµÐ³Ð¾ Ð°Ð´Ñ€ÐµÑ. Ð‘ÑƒÑ„ÐµÑ€ Ð¿Ð¾Ð´Ð»ÐµÐ¶Ð¸Ñ‚ Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´ÐµÐ½Ð¸ÑŽ
   >R 
-  0 0 0 0 -1 R@ 0 0 WideCharToMultiByte ( ïîëó÷èëè äëèíó ñòðîêè)
+  0 0 0 0 -1 R@ 0 0 WideCharToMultiByte ( Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¸ Ð´Ð»Ð¸Ð½Ñƒ ÑÑ‚Ñ€Ð¾ÐºÐ¸)
   1+ DUP GETMEM ( # a) SWAP OVER 0 0 2SWAP 
   -1 R> 0 0 WideCharToMultiByte DROP ;
 

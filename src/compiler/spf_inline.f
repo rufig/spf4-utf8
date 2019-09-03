@@ -8,7 +8,7 @@ HEX
 : ?DUP   STATE @
                  IF  HERE TO :-SET
                       ['] C-?DUP  INLINE,
-                     HERE TO :-SET \ нужно как в THEN
+                     HERE TO :-SET \ РЅСѓР¶РЅРѕ РєР°Рє РІ THEN
                  ELSE ?DUP
                  THEN ;   IMMEDIATE
 

@@ -129,7 +129,7 @@ CELL -- rect.right
 CELL -- rect.bottom
 CONSTANT /RECT
 
-\ временно, взамен неработающей RFREE
+\ РІСЂРµРјРµРЅРЅРѕ, РІР·Р°РјРµРЅ РЅРµСЂР°Р±РѕС‚Р°СЋС‰РµР№ RFREE
 : _RFREE ( u)
    2 LSHIFT
    R> SWAP RP@ +
@@ -137,7 +137,7 @@ CONSTANT /RECT
 ;
 
 : GetDesktopSize ( -- x y)
-\ Получить размер десктопа
+\ РџРѕР»СѓС‡РёС‚СЊ СЂР°Р·РјРµСЂ РґРµСЃРєС‚РѕРїР°
     4 RALLOT DUP
     GetDesktopWindow
     GetClientRect DROP

@@ -1,6 +1,6 @@
 \ MARKER WC
-\ Использование Win32 констант из wincon.dll. Эта дэ-эл-элина поставляется с дистрибутивом Win32Forth.
-\ Либо можно загрузить wincon.dll тут http://www.forth.org.ru/~ilya/Lib/wincon.dll
+\ РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ Win32 РєРѕРЅСЃС‚Р°РЅС‚ РёР· wincon.dll. Р­С‚Р° РґСЌ-СЌР»-СЌР»РёРЅР° РїРѕСЃС‚Р°РІР»СЏРµС‚СЃСЏ СЃ РґРёСЃС‚СЂРёР±СѓС‚РёРІРѕРј Win32Forth.
+\ Р›РёР±Рѕ РјРѕР¶РЅРѕ Р·Р°РіСЂСѓР·РёС‚СЊ wincon.dll С‚СѓС‚ http://www.forth.org.ru/~ilya/Lib/wincon.dll
 .( Loading WINCON extension...)
 ALSO FORTH DEFINITIONS
 DECIMAL

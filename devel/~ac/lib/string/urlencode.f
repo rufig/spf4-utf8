@@ -1,17 +1,17 @@
-\ URLENCODE - конвертация строки в "Percent-encoding"-представление, принятое в HTTP
-\ для кодирования URL'ов, параметров QUERY_STRING и тел POST-запросов application/x-www-form-urlencoded.
-\ Функция симметрична URI-DECODE, которая (в версии acWEB/src/proto/http/uri-decode.f)
-\ тоже понимает UTF-8.
+\ URLENCODE - РєРѕРЅРІРµСЂС‚Р°С†РёСЏ СЃС‚СЂРѕРєРё РІ "Percent-encoding"-РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ, РїСЂРёРЅСЏС‚РѕРµ РІ HTTP
+\ РґР»СЏ РєРѕРґРёСЂРѕРІР°РЅРёСЏ URL'РѕРІ, РїР°СЂР°РјРµС‚СЂРѕРІ QUERY_STRING Рё С‚РµР» POST-Р·Р°РїСЂРѕСЃРѕРІ application/x-www-form-urlencoded.
+\ Р¤СѓРЅРєС†РёСЏ СЃРёРјРјРµС‚СЂРёС‡РЅР° URI-DECODE, РєРѕС‚РѕСЂР°СЏ (РІ РІРµСЂСЃРёРё acWEB/src/proto/http/uri-decode.f)
+\ С‚РѕР¶Рµ РїРѕРЅРёРјР°РµС‚ UTF-8.
 
-( Для кодирования POST-запросов лучше не использовать, т.к. там нет причин
-  передавать кодированные строки, можно слать открытым текстом.
-  Если все же используется, то надо заметить, что BL заменяется на %20, как в URL,
-  а не на "+", как раньше было принято в POST. Новым скриптерам без разницы.
+( Р”Р»СЏ РєРѕРґРёСЂРѕРІР°РЅРёСЏ POST-Р·Р°РїСЂРѕСЃРѕРІ Р»СѓС‡С€Рµ РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ, С‚.Рє. С‚Р°Рј РЅРµС‚ РїСЂРёС‡РёРЅ
+  РїРµСЂРµРґР°РІР°С‚СЊ РєРѕРґРёСЂРѕРІР°РЅРЅС‹Рµ СЃС‚СЂРѕРєРё, РјРѕР¶РЅРѕ СЃР»Р°С‚СЊ РѕС‚РєСЂС‹С‚С‹Рј С‚РµРєСЃС‚РѕРј.
+  Р•СЃР»Рё РІСЃРµ Р¶Рµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, С‚Рѕ РЅР°РґРѕ Р·Р°РјРµС‚РёС‚СЊ, С‡С‚Рѕ BL Р·Р°РјРµРЅСЏРµС‚СЃСЏ РЅР° %20, РєР°Рє РІ URL,
+  Р° РЅРµ РЅР° "+", РєР°Рє СЂР°РЅСЊС€Рµ Р±С‹Р»Рѕ РїСЂРёРЅСЏС‚Рѕ РІ POST. РќРѕРІС‹Рј СЃРєСЂРёРїС‚РµСЂР°Рј Р±РµР· СЂР°Р·РЅРёС†С‹.
 )
 
 REQUIRE >UTF8 ~ac/lib/lin/iconv/iconv.f 
 
-: IsUrlUnreservedChar ( char -- flag ) \ в среднем быстрее, чем CharInSet из Eserv
+: IsUrlUnreservedChar ( char -- flag ) \ РІ СЃСЂРµРґРЅРµРј Р±С‹СЃС‚СЂРµРµ, С‡РµРј CharInSet РёР· Eserv
   DUP 97 123 WITHIN IF DROP TRUE EXIT THEN \ a-z
   DUP 65  91 WITHIN IF DROP TRUE EXIT THEN \ A-Z
   DUP 48  58 WITHIN IF DROP TRUE EXIT THEN \ 0-9
@@ -19,11 +19,11 @@ REQUIRE >UTF8 ~ac/lib/lin/iconv/iconv.f
   DUP [CHAR] _ = IF DROP TRUE EXIT THEN
   DUP [CHAR] . = IF DROP TRUE EXIT THEN
   DUP [CHAR] ~ = IF DROP TRUE EXIT THEN
-  DUP [CHAR] / = IF DROP TRUE EXIT THEN \ js не кодирует
+  DUP [CHAR] / = IF DROP TRUE EXIT THEN \ js РЅРµ РєРѕРґРёСЂСѓРµС‚
   DROP FALSE
 ;
-: UTF8URLENCODE { a u \ mem o b -- a2 u2 } \ исходная строка предполагается в UTF-8-кодировке
-  \ результат в allocated-буфере; портится область <# #>
+: UTF8URLENCODE { a u \ mem o b -- a2 u2 } \ РёСЃС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР° РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ РІ UTF-8-РєРѕРґРёСЂРѕРІРєРµ
+  \ СЂРµР·СѓР»СЊС‚Р°С‚ РІ allocated-Р±СѓС„РµСЂРµ; РїРѕСЂС‚РёС‚СЃСЏ РѕР±Р»Р°СЃС‚СЊ <# #>
 
   u 3 * 1 + ALLOCATE THROW -> mem
   BASE @ -> b HEX
@@ -36,12 +36,12 @@ REQUIRE >UTF8 ~ac/lib/lin/iconv/iconv.f
   b BASE !
   mem o
 ;
-: URLENCODE ( a u -- a2 u2 ) \ исходная строка предполагается в Windows-1251-кодировке
+: URLENCODE ( a u -- a2 u2 ) \ РёСЃС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР° РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ РІ Windows-1251-РєРѕРґРёСЂРѕРІРєРµ
   >UTF8
   UTF8URLENCODE
 ;
 : IsUrlUnreservedChar2 ( char -- flag )
-  \ в отличие от IsUrlUnreservedChar кодирует и "/"
+  \ РІ РѕС‚Р»РёС‡РёРµ РѕС‚ IsUrlUnreservedChar РєРѕРґРёСЂСѓРµС‚ Рё "/"
   DUP 97 123 WITHIN IF DROP TRUE EXIT THEN \ a-z
   DUP 65  91 WITHIN IF DROP TRUE EXIT THEN \ A-Z
   DUP 48  58 WITHIN IF DROP TRUE EXIT THEN \ 0-9
@@ -49,11 +49,11 @@ REQUIRE >UTF8 ~ac/lib/lin/iconv/iconv.f
   DUP [CHAR] _ = IF DROP TRUE EXIT THEN
   DUP [CHAR] . = IF DROP TRUE EXIT THEN
   DUP [CHAR] ~ = IF DROP TRUE EXIT THEN
-\  DUP [CHAR] / = IF DROP TRUE EXIT THEN \ js не кодирует
+\  DUP [CHAR] / = IF DROP TRUE EXIT THEN \ js РЅРµ РєРѕРґРёСЂСѓРµС‚
   DROP FALSE
 ;
-: URLENCODE2 { a u \ mem o b -- a2 u2 } \ исходная строка предполагается в UTF-8-кодировке
-  \ результат в allocated-буфере; портится область <# #>
+: URLENCODE2 { a u \ mem o b -- a2 u2 } \ РёСЃС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР° РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ РІ UTF-8-РєРѕРґРёСЂРѕРІРєРµ
+  \ СЂРµР·СѓР»СЊС‚Р°С‚ РІ allocated-Р±СѓС„РµСЂРµ; РїРѕСЂС‚РёС‚СЃСЏ РѕР±Р»Р°СЃС‚СЊ <# #>
 
   u 3 * 1 + ALLOCATE THROW -> mem
   BASE @ -> b HEX

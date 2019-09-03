@@ -1,7 +1,7 @@
 \ www.forth.org.ru/~yz/lib/automation.f
 
-\ Пример использования библиотеки
-\ Переделка некоторой программы на VB (ее текст см. в конце файла)
+\ ╨Я╤А╨╕╨╝╨╡╤А ╨╕╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╤П ╨▒╨╕╨▒╨╗╨╕╨╛╤В╨╡╨║╨╕
+\ ╨Я╨╡╤А╨╡╨┤╨╡╨╗╨║╨░ ╨╜╨╡╨║╨╛╤В╨╛╤А╨╛╨╣ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨╜╨░ VB (╨╡╨╡ ╤В╨╡╨║╤Б╤В ╤Б╨╝. ╨▓ ╨║╨╛╨╜╤Ж╨╡ ╤Д╨░╨╣╨╗╨░)
 
 REQUIRE :: ~yz/lib/automation.f
 
@@ -13,7 +13,7 @@ REQUIRE :: ~yz/lib/automation.f
   COM-init DROP
 
   " Excel.Application" create-object 
-  IF ." Не могу запустить Excel" BYE THEN
+  IF ." ╨Э╨╡ ╨╝╨╛╨│╤Г ╨╖╨░╨┐╤Г╤Б╤В╨╕╤В╤М Excel" BYE THEN
   TO excel
 
   TRUE _bool excel :: Visible !
@@ -23,7 +23,7 @@ REQUIRE :: ~yz/lib/automation.f
   3 _int excel :: ActiveSheet Cells [1,1] Value !
   2 _int excel :: ActiveSheet Cells [2,1] Value !
   1 _int excel :: ActiveSheet Cells [3,1] Value !
-\ Можно было сделать и с помощью Range, как в оригинале
+\ ╨Ь╨╛╨╢╨╜╨╛ ╨▒╤Л╨╗╨╛ ╤Б╨┤╨╡╨╗╨░╤В╤М ╨╕ ╤Б ╨┐╨╛╨╝╨╛╤Й╤М╤О Range, ╨║╨░╨║ ╨▓ ╨╛╤А╨╕╨│╨╕╨╜╨░╨╗╨╡
 
   arg() excel :: Range ["A1:A3"] Select
   
@@ -34,7 +34,7 @@ REQUIRE :: ~yz/lib/automation.f
 
   180 30 DO  
     I _int chart :: Rotation !  
-    50 PAUSE \ Форт и Бейсик - почувствуйте разницу :-)
+    50 PAUSE \ ╨д╨╛╤А╤В ╨╕ ╨С╨╡╨╣╤Б╨╕╨║ - ╨┐╨╛╤З╤Г╨▓╤Б╤В╨▓╤Г╨╣╤В╨╡ ╤А╨░╨╖╨╜╨╕╤Ж╤Г :-)
   10 +LOOP
 
   1000 PAUSE
@@ -51,7 +51,7 @@ make-excel-chart
 
 BYE
 
-\ А вот так это выглядело в Визуальном Бейсике:
+\ ╨Р ╨▓╨╛╤В ╤В╨░╨║ ╤Н╤В╨╛ ╨▓╤Л╨│╨╗╤П╨┤╨╡╨╗╨╛ ╨▓ ╨Т╨╕╨╖╤Г╨░╨╗╤М╨╜╨╛╨╝ ╨С╨╡╨╣╤Б╨╕╨║╨╡:
 
 \    Dim ExcelApp As Object
 \    Dim ExcelChart As Object

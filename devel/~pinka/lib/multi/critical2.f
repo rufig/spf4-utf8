@@ -7,8 +7,8 @@ REQUIRE ENTER-CS    ~pinka\lib\multi\critical.f
 WINAPI: TryEnterCriticalSection    KERNEL32.DLL
 
 VECT ENTER-CS?  ( cs -- flag )
-\ Если секция cs свободна, завладеть ей и вернуть true,
-\ иначе вернуть false
+\ Р•СЃР»Рё СЃРµРєС†РёСЏ cs СЃРІРѕР±РѕРґРЅР°, Р·Р°РІР»Р°РґРµС‚СЊ РµР№ Рё РІРµСЂРЅСѓС‚СЊ true,
+\ РёРЅР°С‡Рµ РІРµСЂРЅСѓС‚СЊ false
 
 ' TryEnterCriticalSection TO ENTER-CS?
 

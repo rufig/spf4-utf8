@@ -1,6 +1,6 @@
-\ 26.Jul.2007 наследован от exc-dump.f
+\ 26.Jul.2007 РЅР°СЃР»РµРґРѕРІР°РЅ РѕС‚ exc-dump.f
 \ $Id$
-( Модуль предоставляет ENUM-STORAGES и поддержку WordByAddr для множества хранилищ.
+( РњРѕРґСѓР»СЊ РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ ENUM-STORAGES Рё РїРѕРґРґРµСЂР¶РєСѓ WordByAddr РґР»СЏ РјРЅРѕР¶РµСЃС‚РІР° С…СЂР°РЅРёР»РёС‰.
 )
 
 REQUIRE NEW-STORAGE  ~pinka/spf/storage.f
@@ -10,12 +10,12 @@ MODULE: storage-support
 
 REQUIRE BIND-NODE ~pinka/samples/2006/lib/plain-list.f
 
-USER STORAGE-LIST \ список хранилищ, созданных потоком
+USER STORAGE-LIST \ СЃРїРёСЃРѕРє С…СЂР°РЅРёР»РёС‰, СЃРѕР·РґР°РЅРЅС‹С… РїРѕС‚РѕРєРѕРј
 
-: excide-this ( -- ) \ выкинуть
+: excide-this ( -- ) \ РІС‹РєРёРЅСѓС‚СЊ
   STORAGE-ID STORAGE-LIST FIND-LIST IF UNBIND-NODE DROP THEN
 ;
-: enroll-this ( -- ) \ вписать
+: enroll-this ( -- ) \ РІРїРёСЃР°С‚СЊ
   excide-this
   0 , HERE STORAGE-ID , STORAGE-LIST BIND-NODE
 ;

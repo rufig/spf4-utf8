@@ -27,7 +27,7 @@ N1 1+ N2 1+ array2D U
 : fill-U N2 1+ 0 DO   N1 1+ 0 DO 1e I J U! LOOP    LOOP ;
 : print N2 1+ 0 DO   N1 1+ 0 DO I J U@ F. SPACE LOOP    CR LOOP ;
 
-\ -------------------------------- Краевые условия
+\ -------------------------------- РљСЂР°РµРІС‹Рµ СѓСЃР»РѕРІРёСЏ
 0.8e FVALUE L1 0.8e FVALUE L2
 0.7e FVALUE a 0.1e FVALUE b 0.9e FVALUE c 1.3e FVALUE d -0.1e FVALUE e
 : solution xn FSQR yn FSQR F-

@@ -1,4 +1,4 @@
-\ Ïå÷àòü ðåçóëüòàòà çàïðîñà ê sqlite3 â âèäå JSON-ìàññèâà.
+\ ÐŸÐµÑ‡Ð°Ñ‚ÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð° Ð·Ð°Ð¿Ñ€Ð¾ÑÐ° Ðº sqlite3 Ð² Ð²Ð¸Ð´Ðµ JSON-Ð¼Ð°ÑÑÐ¸Ð²Ð°.
 
 REQUIRE xquery      ~ac/lib/lin/sql/sql3db.f 
 REQUIRE replace-str ~pinka/samples/2005/lib/replace-str.f 
@@ -18,7 +18,7 @@ REQUIRE replace-str ~pinka/samples/2005/lib/replace-str.f
   ppStmt db3_cols 0 ?DO
     I ppStmt db3_col DUP 0= >R 2DUP S" NULL" COMPARE 0= R> OR IF 2DROP S" " THEN
     I ppStmt db3_coltype 3 < 
-    IF \ ÷èñëî íå ïðåîáðàçóåì
+    IF \ Ñ‡Ð¸ÑÐ»Ð¾ Ð½Ðµ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·ÑƒÐµÐ¼
     ELSE ">\" " {''}{s}{''}" STR@ THEN
     I 0 > IF " , {s}" ELSE "  {s}" THEN SQS @ S+
   LOOP  " ],{CRLF}" SQS @ S+
@@ -37,7 +37,7 @@ REQUIRE replace-str ~pinka/samples/2005/lib/replace-str.f
   ppStmt db3_cols 0 ?DO
     I ppStmt db3_col DUP 0= >R 2DUP S" NULL" COMPARE 0= R> OR IF 2DROP S" " THEN
     I ppStmt db3_coltype 3 < 
-    IF \ ÷èñëî íå ïðåîáðàçóåì
+    IF \ Ñ‡Ð¸ÑÐ»Ð¾ Ð½Ðµ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·ÑƒÐµÐ¼
     ELSE 2DUP S" true" COMPARE 0=
        IF 
        ELSE 2DUP S" false" COMPARE 0=

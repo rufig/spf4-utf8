@@ -3,6 +3,6 @@ DECIMAL
 : N>S ( u -- addr u)  S>D DOUBLE>S ;
 : NB>S ( n base -- a u )
      BASE @ >R BASE !
-     N>S ( ¨«¨ DUP ABS S>D <# #S ROT SIGN #>)
+     N>S ( Ð¸Ð»Ð¸ DUP ABS S>D <# #S ROT SIGN #>)
      R> BASE ! ;
 : N>H 16 NB>S ;

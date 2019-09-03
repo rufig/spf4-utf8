@@ -9,14 +9,14 @@ HEX
    1 CONSTANT ILC_MASK
 DECIMAL
 
-\ ------------------ значки ----------------
-: LOAD-ICON16 ( c-addr u -- hicon ) \ загрузить маленькую иконку из файла *.ico
+\ ------------------ Р·РЅР°С‡РєРё ----------------
+: LOAD-ICON16 ( c-addr u -- hicon ) \ Р·Р°РіСЂСѓР·РёС‚СЊ РјР°Р»РµРЅСЊРєСѓСЋ РёРєРѕРЅРєСѓ РёР· С„Р°Р№Р»Р° *.ico
   DROP >R
   LR_LOADFROMFILE LR_LOADTRANSPARENT OR 16 16 IMAGE_ICON R> 0 LoadImageA
 ;
-: СоздатьСписокЗначков ( -- h )
+: вЂ”РѕР·РґР°С‚СЊвЂ”РїРёСЃРѕРєВ«РЅР°С‡РєРѕРІ ( -- h )
   0 3 ILC_MASK 16 16 ImageList_Create
 ;
-: ДобавитьЗначок ( h c-addr u -- index )
+: Ж’РѕР±Р°РІРёС‚СЊВ«РЅР°С‡РѕРє ( h c-addr u -- index )
   LOAD-ICON16 SWAP ImageList_AddIcon
 ;

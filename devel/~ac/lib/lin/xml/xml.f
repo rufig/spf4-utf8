@@ -1,8 +1,8 @@
-( Разбор XML через библиотеку LIBXML2
-  ~ac: переписал через so-xt.f 18.08.2005
+( Р Р°Р·Р±РѕСЂ XML С‡РµСЂРµР· Р±РёР±Р»РёРѕС‚РµРєСѓ LIBXML2
+  ~ac: РїРµСЂРµРїРёСЃР°Р» С‡РµСЂРµР· so-xt.f 18.08.2005
   $Id$
 
-  Для компиляции нужны следующие dll:
+  Р”Р»СЏ РєРѕРјРїРёР»СЏС†РёРё РЅСѓР¶РЅС‹ СЃР»РµРґСѓСЋС‰РёРµ dll:
   libxml2.dll iconv.dll zlib1.dll   
   libcurl.dll zlibwapi.dll
 )  
@@ -97,11 +97,11 @@ CONSTANT /xmlBuffer
 USER RECURSE-LEVEL
 \ : 1-! DUP @ 1- SWAP ! ;
 VECT vlistNodes
-VARIABLE XML_GS \ GlobalState потока, вызвавшего XML_INIT
-                \ а вообще xmlGetGlobalState свой у каждого потока
+VARIABLE XML_GS \ GlobalState РїРѕС‚РѕРєР°, РІС‹Р·РІР°РІС€РµРіРѕ XML_INIT
+                \ Р° РІРѕРѕР±С‰Рµ xmlGetGlobalState СЃРІРѕР№ Сѓ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР°
 
 : nextNode
-\ пропуск текстовых узлов, атрибутов, комментариев и т.д.
+\ РїСЂРѕРїСѓСЃРє С‚РµРєСЃС‚РѕРІС‹С… СѓР·Р»РѕРІ, Р°С‚СЂРёР±СѓС‚РѕРІ, РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ Рё С‚.Рґ.
   BEGIN
     x.next @ DUP
   WHILE
@@ -162,7 +162,7 @@ VARIABLE XML_GS \ GlobalState потока, вызвавшего XML_INIT
   REPEAT
 ;
 \ : attr@ ( addr u node -- node2 )
-\ в т.ч. из DTD
+\ РІ С‚.С‡. РёР· DTD
 \   NIP 2 xmlHasProp
 \ ;
 
@@ -192,7 +192,7 @@ VARIABLE XML_GS \ GlobalState потока, вызвавшего XML_INIT
      ?DO
         res xpo.nodesetval @ xns.nodeTab @ I CELLS + @
         x.children @ ( listNodes)
-\          1 SWAP doc 3 xmlNodeListGetString ASCIIZ> TYPE CR \ ниже то же самое, без выделения памяти
+\          1 SWAP doc 3 xmlNodeListGetString ASCIIZ> TYPE CR \ РЅРёР¶Рµ С‚Рѕ Р¶Рµ СЃР°РјРѕРµ, Р±РµР· РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё
         ?DUP IF x.content @ ?DUP IF ASCIIZ> TYPE CR THEN THEN
      LOOP
   THEN
@@ -237,8 +237,8 @@ CREATE xpathTypes@ ' dumpNodeSet@ , ' dumpBool@ , ' dumpFloat@ , ' dumpString@ ,
     DUP
   WHILE
      DUP x.type @ XML_ELEMENT_NODE =
-     IF \ т.е. ищутся только элементы, то и печатаем только их,
-        \ а текстовые узлы не выводим
+     IF \ С‚.Рµ. РёС‰СѓС‚СЃСЏ С‚РѕР»СЊРєРѕ СЌР»РµРјРµРЅС‚С‹, С‚Рѕ Рё РїРµС‡Р°С‚Р°РµРј С‚РѕР»СЊРєРѕ РёС…,
+        \ Р° С‚РµРєСЃС‚РѕРІС‹Рµ СѓР·Р»С‹ РЅРµ РІС‹РІРѕРґРёРј
        DUP x.name @ ?DUP IF ASCIIZ> TYPE SPACE ELSE DUP . THEN
      THEN
      x.next @
@@ -325,7 +325,7 @@ CREATE xpathTypes@ ' dumpNodeSet@ , ' dumpBool@ , ' dumpFloat@ , ' dumpString@ ,
   NIP 0 ROT R@ 3 xmlSaveToBuffer DUP 0= IF ABORT THEN ( options encoding-z buff -- ctxt )
   DUP >R 2 xmlSaveTree -1 = IF ABORT THEN ( node ctxt -- )
   R> 1 xmlSaveClose DUP -1 = IF ABORT THEN ( len )
-  DROP \ т.к. врет иногда.
+  DROP \ С‚.Рє. РІСЂРµС‚ РёРЅРѕРіРґР°.
   \ R@ 1 xmlBufferContent
   R@ xb.content @ R> xb.use @
 ;
@@ -362,7 +362,7 @@ CREATE xpathTypes@ ' dumpNodeSet@ , ' dumpBool@ , ' dumpFloat@ , ' dumpString@ ,
   XML_READ_DOC -> doc
   doc 1 xmlDocGetRootElement
 \  doc H-STDOUT 3 xmlElemDump DROP
-  1 xmlNodeGetContent ASCIIZ> \ выдает UTF-8
+  1 xmlNodeGetContent ASCIIZ> \ РІС‹РґР°РµС‚ UTF-8
 ;
 : NODE>DOC
   x.doc @
@@ -420,13 +420,13 @@ XML-GLOBAL-INIT
 : TEST { \ doc root }
   S" 1.0" DROP 1 xmlNewDoc -> doc
  \ doc XML_DOC_ROOT .
-  S" this is content рус, " >UTF8 DROP
+  S" this is content СЂСѓСЃ, " >UTF8 DROP
   S" node_name" DROP 0 doc 4 xmlNewDocNode  -> root
   root doc 2 xmlDocSetRootElement DROP
   S" this is comment" DROP doc 2 xmlNewDocComment doc 2 xmlAddChild DROP
-  S" это добавочный <text>текст</text>" >UTF8 SWAP doc 3 xmlNewDocTextLen root 2 xmlAddChild DROP
+  S" СЌС‚Рѕ РґРѕР±Р°РІРѕС‡РЅС‹Р№ <text>С‚РµРєСЃС‚</text>" >UTF8 SWAP doc 3 xmlNewDocTextLen root 2 xmlAddChild DROP
   S" windows-1251" DROP doc S" create_test.xml" DROP 3 xmlSaveFileEnc DROP
 ; TEST
 )
-\ ALSO libxml2.dll DEFINITIONS : TEST ; \ должно вызвать 5 THROW
+\ ALSO libxml2.dll DEFINITIONS : TEST ; \ РґРѕР»Р¶РЅРѕ РІС‹Р·РІР°С‚СЊ 5 THROW
 PREVIOUS PREVIOUS

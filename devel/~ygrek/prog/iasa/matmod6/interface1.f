@@ -22,7 +22,7 @@ show_time >fnum e_time -text!
 : DRAW1 { \ w s1 s }
    GLWindow :new -> w
    0 w :create
-   S" y(x) âûñîòà äàëüíîñòü" w :setText
+   S" y(x) Ð²Ñ‹ÑÐ¾Ñ‚Ð° Ð´Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ" w :setText
    w :maximize
 
    GLPlot2D :new -> s
@@ -49,7 +49,7 @@ show_time >fnum e_time -text!
 : DRAW2 { \ w s1 s }
    GLWindow :new -> w
    0 w :create
-   S" v(t) Ñêîðîñòü îò âðåìåíè" w :setText
+   S" v(t) Ð¡ÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ Ð¾Ñ‚ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸" w :setText
    w :maximize
 
    GLPlot2D :new -> s

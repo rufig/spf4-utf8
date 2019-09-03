@@ -5,8 +5,8 @@ WINAPI: LoadLibraryExA KERNEL32.DLL
 \ WINAPI: GetExtensionVersion perlis.dll
 \ WINAPI: HttpExtensionProc   perlis.dll
 
-\ такой нет! WINAPI: TerminateExtension  php5isapi.dll
-\ такой нет! WINAPI: TerminateExtension  perlis.dll
+\ С‚Р°РєРѕР№ РЅРµС‚! WINAPI: TerminateExtension  php5isapi.dll
+\ С‚Р°РєРѕР№ РЅРµС‚! WINAPI: TerminateExtension  perlis.dll
 
 VECT dIsapiSetStatus
 VECT dIsapiSetHeader
@@ -88,7 +88,7 @@ USER-CREATE ecb ecb /EXTENSION_CONTROL_BLOCK DUP USER-ALLOT ERASE
 
 : SCRIPT_FILENAME ecb ecb.lpszPathInfo @ ASCIIZ> ;
 
-\ веб-сервер должен переопределить SCRIPT_NAME!
+\ РІРµР±-СЃРµСЂРІРµСЂ РґРѕР»Р¶РµРЅ РїРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ SCRIPT_NAME!
 : SCRIPT_NAME SCRIPT_FILENAME ;
 
 (
@@ -101,7 +101,7 @@ USER-CREATE ecb ecb /EXTENSION_CONTROL_BLOCK DUP USER-ALLOT ERASE
 : SERVER_SOFTWARE S" acWEB/3" ; 
 
 : IsapiMapPath1 ( addr u -- addr2 u2 )
-  0 MAX \ PHP может передавать отрицательную длину! :-)
+  0 MAX \ PHP РјРѕР¶РµС‚ РїРµСЂРµРґР°РІР°С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅСѓСЋ РґР»РёРЅСѓ! :-)
 \  ." Map logical path:<" 2DUP TYPE ." >" CR
   2DROP
   SCRIPT_FILENAME
@@ -187,14 +187,14 @@ USER-CREATE ecb ecb /EXTENSION_CONTROL_BLOCK DUP USER-ALLOT ERASE
 :NONAME ( lpdwSizeofBuffer lpvBuffer lpszVariableName hConn -- flag )
   TlsIndex@ >R
   TlsIndex! S0 @ >R SP@ 12 + S0 !
-  >R OVER R> SWAP @ 1- 0 MAX >R \ длина входного буфера для переменной
+  >R OVER R> SWAP @ 1- 0 MAX >R \ РґР»РёРЅР° РІС…РѕРґРЅРѕРіРѕ Р±СѓС„РµСЂР° РґР»СЏ РїРµСЂРµРјРµРЅРЅРѕР№
   ASCIIZ> uIsapiDebug @ IF ." >>" 2DUP TYPE ." =" THEN
   2DUP S" TZ" COMPARE 0= IF 2DROP S" TZone" THEN
-  2DUP S" SCRIPT_NAME" COMPARE 0= IF uSN_CNT 1+! THEN \ хак для PHP
+  2DUP S" SCRIPT_NAME" COMPARE 0= IF uSN_CNT 1+! THEN \ С…Р°Рє РґР»СЏ PHP
   SFIND IF EXECUTE uIsapiDebug @ IF 2DUP TYPE THEN
            DUP
            IF
-             R> MIN \ обрежем значение переменной, если не влазит в буфер
+             R> MIN \ РѕР±СЂРµР¶РµРј Р·РЅР°С‡РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№, РµСЃР»Рё РЅРµ РІР»Р°Р·РёС‚ РІ Р±СѓС„РµСЂ
              >R SWAP R@ 2DUP 1+ ERASE MOVE R> 1+ SWAP ! TRUE
            ELSE 2DROP RDROP DROP 0! FALSE THEN
         ELSE RDROP
@@ -310,7 +310,7 @@ USER-CREATE ecb ecb /EXTENSION_CONTROL_BLOCK DUP USER-ALLOT ERASE
   /EXTENSION_CONTROL_BLOCK   ecb ecb.cbSize !
   dREQUEST_METHOD DROP  IsapiAdump  ecb ecb.lpszMethod !
   dQUERY_STRING DROP    IsapiAdump  ecb ecb.lpszQueryString !
-\ Perl хочет в PATH_INFO видеть путь к скрипту!
+\ Perl С…РѕС‡РµС‚ РІ PATH_INFO РІРёРґРµС‚СЊ РїСѓС‚СЊ Рє СЃРєСЂРёРїС‚Сѓ!
   ( PATH_INFO) DROP     IsapiAdump  ecb ecb.lpszPathInfo !
   dPATH_TRANSLATED DROP IsapiAdump  ecb ecb.lpszPathTranslated !
   TlsIndex@                  ecb ecb.connID !

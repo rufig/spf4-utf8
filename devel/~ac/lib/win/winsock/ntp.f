@@ -1,9 +1,9 @@
-\ Ïðèìåð èñïîëüçîâàíèÿ ïðîòîêîëà NTP.
+\ ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð»Ð° NTP.
 
 REQUIRE WriteTo     ~ac/lib/win/winsock/sockname.f
 
 : NTP_SERVER_IP ( -- ip )
-\  S" 192.43.244.18" GetHostIP THROW \ time.nist.gov íå ðàáîòàåò
+\  S" 192.43.244.18" GetHostIP THROW \ time.nist.gov Ð½Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚
 \  S" time.windows.com" GetHostIP THROW
   S" 207.46.250.85" GetHostIP THROW \ time.windows.com
 \  S" 1.ru.pool.ntp.org" GetHostIP THROW
@@ -32,7 +32,7 @@ VARIABLE NTPS
   R@   0xFF0000 AND  8 RSHIFT OR
   R> 0xFF000000 AND 24 RSHIFT OR
 ;
-: NtpGetTime ( -- unixtime ) \ èëè 0 ïðè îøèáêå (òàéìàóòå)
+: NtpGetTime ( -- unixtime ) \ Ð¸Ð»Ð¸ 0 Ð¿Ñ€Ð¸ Ð¾ÑˆÐ¸Ð±ÐºÐµ (Ñ‚Ð°Ð¹Ð¼Ð°ÑƒÑ‚Ðµ)
   /SNTP ALLOCATE THROW >R
   0xEC0600E3 R@ sntp.livnmode !
   0x34314E31 R@ sntp.refident !

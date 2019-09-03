@@ -4,35 +4,35 @@ REQUIRE INVOKE ~ac/lib/ns/ns.f
   CLASS@ DUP 0= SWAP FORTH-WORDLIST = OR
 ;
 : CAR ( wid -- item )
-\ Âîçâðàòèòü oid ïåðâîãî ýëåìåíòà ñïèñêà wid.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ oid Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° ÑÐ¿Ð¸ÑÐºÐ° wid.
   DUP ?FORTH
   IF @ ELSE DUP S" CAR" INVOKE THEN
 ;
 : WCDR ( item1 wid -- item2 )
-\ Âîçâðàòèòü ñëåäóþùèé ïîñëå item1 ýëåìåíò ñïèñêà wid.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹ Ð¿Ð¾ÑÐ»Ðµ item1 ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ÑÐ¿Ð¸ÑÐºÐ° wid.
   DUP ?FORTH
   IF DROP CDR ELSE S" CDR" INVOKE THEN
 ;
 : CDR ( item1 -- item2 )
-\ Âîçâðàòèòü ñëåäóþùèé ïîñëå item1 ýëåìåíò êîíòåêñòíîãî ñïèñêà.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¹ Ð¿Ð¾ÑÐ»Ðµ item1 ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð½Ð¾Ð³Ð¾ ÑÐ¿Ð¸ÑÐºÐ°.
   CONTEXT @ WCDR
 ;
 : W?VOC ( item wid -- flag )
-\ Âîçâðàòèòü true, åñëè ýëåìåíò item ñïèñêà wid ÿâëÿåòñÿ ñïèñêîì.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ true, ÐµÑÐ»Ð¸ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ item ÑÐ¿Ð¸ÑÐºÐ° wid ÑÐ²Ð»ÑÐµÑ‚ÑÑ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼.
   DUP ?FORTH
   IF DROP ?VOC ELSE S" ?VOC" INVOKE THEN
 ;
 : ?VOC ( item -- flag )
-\ Âîçâðàòèòü true, åñëè ýëåìåíò item êîíòåêñòíîãî ñïèñêà ÿâëÿåòñÿ ñïèñêîì.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ true, ÐµÑÐ»Ð¸ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ item ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð½Ð¾Ð³Ð¾ ÑÐ¿Ð¸ÑÐºÐ° ÑÐ²Ð»ÑÐµÑ‚ÑÑ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼.
   CONTEXT @ W?VOC
 ;
 : WNAME ( item wid -- addr u )
-\ Âîçâðàòèòü èìÿ ýëåìåíòà item ñïèñêà wid.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ Ð¸Ð¼Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° item ÑÐ¿Ð¸ÑÐºÐ° wid.
   DUP ?FORTH
   IF DROP COUNT ELSE S" NAME" INVOKE THEN
 ;
 : NAME ( item -- addr u )
-\ Âîçâðàòèòü èìÿ ýëåìåíòà item êîíòåêñòíîãî ñïèñêà.
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ Ð¸Ð¼Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° item ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð½Ð¾Ð³Ð¾ ÑÐ¿Ð¸ÑÐºÐ°.
   CONTEXT @ WNAME
 ;
 : NFA>WID ( nfa -- wid )
@@ -41,7 +41,7 @@ REQUIRE INVOKE ~ac/lib/ns/ns.f
 : >WID ( item -- wid )
 ;
 : ITEM>WID ( item wid1 -- wid2 )
-\ Âîçâðàòèòü ñïèñîê wid2, âëîæåííûé â ýëåìåíò item ñïèñêà wid1. (lisp car)
+\ Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ñ‚ÑŒ ÑÐ¿Ð¸ÑÐ¾Ðº wid2, Ð²Ð»Ð¾Ð¶ÐµÐ½Ð½Ñ‹Ð¹ Ð² ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ item ÑÐ¿Ð¸ÑÐºÐ° wid1. (lisp car)
   DUP ?FORTH
   IF DROP NFA>WID ELSE S" >WID" INVOKE THEN
 ;

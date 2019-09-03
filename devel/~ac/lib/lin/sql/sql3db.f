@@ -3,24 +3,24 @@ REQUIRE db3_open     ~ac/lib/lin/sql/sqlite3.f
 USER SQH
 USER SQS
 
-\ ## возвращается первое поле первой строки от query
+\ ## РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РїРµСЂРІРѕРµ РїРѕР»Рµ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё РѕС‚ query
 
 : id_query { $query -- id }
   $query STR@ SQH @ db3_get_id2 DROP \ $query STRFREE
 ;
 
-\ ## выполнить первый запрос, если query вернул более 0 строк, иначе второй
-\ ## возвращается первое поле первой строки от query или insert_id от query2
-\ ## (т.е. условная вставка записи в базу)
+\ ## РІС‹РїРѕР»РЅРёС‚СЊ РїРµСЂРІС‹Р№ Р·Р°РїСЂРѕСЃ, РµСЃР»Рё query РІРµСЂРЅСѓР» Р±РѕР»РµРµ 0 СЃС‚СЂРѕРє, РёРЅР°С‡Рµ РІС‚РѕСЂРѕР№
+\ ## РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РїРµСЂРІРѕРµ РїРѕР»Рµ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё РѕС‚ query РёР»Рё insert_id РѕС‚ query2
+\ ## (С‚.Рµ. СѓСЃР»РѕРІРЅР°СЏ РІСЃС‚Р°РІРєР° Р·Р°РїРёСЃРё РІ Р±Р°Р·Сѓ)
 
 : reg_query { $query $query1 $query2 \ id -- id }
-  $query id_query DUP -> id \ $query там НЕ освободилось
+  $query id_query DUP -> id \ $query С‚Р°Рј РќР• РѕСЃРІРѕР±РѕРґРёР»РѕСЃСЊ
   IF
     $query1 STR@ SQH @ db3_exec_
   ELSE
     $query2 STR@ SQH @ db3_exec_ \ SQH @ db3_insert_id -> id
-    $query id_query -> id \ повторный запрос, чтобы не зависеть от ON CONFLICT
-                          \ и вставок в других потоках
+    $query id_query -> id \ РїРѕРІС‚РѕСЂРЅС‹Р№ Р·Р°РїСЂРѕСЃ, С‡С‚РѕР±С‹ РЅРµ Р·Р°РІРёСЃРµС‚СЊ РѕС‚ ON CONFLICT
+                          \ Рё РІСЃС‚Р°РІРѕРє РІ РґСЂСѓРіРёС… РїРѕС‚РѕРєР°С…
   THEN
   $query1 STRFREE  $query2 STRFREE
   $query STRFREE
@@ -60,8 +60,8 @@ USER SQS
   SQS @ STR@
 ;
 
-USER uMqueryI \ для опционального использования в обработчиках __*
-USER uMqueryS \ при поиске счетчик выдаваемых строк не совпадает с обработанными
+USER uMqueryI \ РґР»СЏ РѕРїС†РёРѕРЅР°Р»СЊРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РІ РѕР±СЂР°Р±РѕС‚С‡РёРєР°С… __*
+USER uMqueryS \ РїСЂРё РїРѕРёСЃРєРµ СЃС‡РµС‚С‡РёРє РІС‹РґР°РІР°РµРјС‹С… СЃС‚СЂРѕРє РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЃ РѕР±СЂР°Р±РѕС‚Р°РЅРЅС‹РјРё
 USER uMqueryExTags
 
 : (mquery) { i par ppStmt -- flag }
@@ -97,7 +97,7 @@ USER uMqueryExTags
   THEN
   TRUE
 ;
-: mquery ( addr u -- addr2 u2 ) \ вариант с модификаторами полей и тегами/стилями TR
+: mquery ( addr u -- addr2 u2 ) \ РІР°СЂРёР°РЅС‚ СЃ РјРѕРґРёС„РёРєР°С‚РѕСЂР°РјРё РїРѕР»РµР№ Рё С‚РµРіР°РјРё/СЃС‚РёР»СЏРјРё TR
   uMqueryS 0!
   " <table class='sortable' id='sp_table' cellpadding='0' cellspacing='0'>" SQS !
   SQS @ STR@ >R DROP
@@ -114,7 +114,7 @@ USER uMqueryExTags
   LOOP
   TRUE
 ;
-: tquery ( addr u -- addr2 u2 ) \ простейший вариант с plaintext результатом
+: tquery ( addr u -- addr2 u2 ) \ РїСЂРѕСЃС‚РµР№С€РёР№ РІР°СЂРёР°РЅС‚ СЃ plaintext СЂРµР·СѓР»СЊС‚Р°С‚РѕРј
   "" SQS !
   0 ['] (tquery) SQH @ db3_exec
   SQS @ STR@
@@ -127,7 +127,7 @@ USER uMqueryExTags
   LOOP
   TRUE
 ;
-: nlquery ( addr u -- addr2 u2 ) \ простейший вариант с csv результатом
+: nlquery ( addr u -- addr2 u2 ) \ РїСЂРѕСЃС‚РµР№С€РёР№ РІР°СЂРёР°РЅС‚ СЃ csv СЂРµР·СѓР»СЊС‚Р°С‚РѕРј
   "" SQS !
   0 ['] (nlquery) SQH @ db3_exec
   SQS @ STR@ 1- 0 MAX
@@ -140,7 +140,7 @@ USER uMqueryExTags
   LOOP
   TRUE
 ;
-: nlbquery ( addr u -- addr2 u2 ) \ простейший вариант через запятую
+: nlbquery ( addr u -- addr2 u2 ) \ РїСЂРѕСЃС‚РµР№С€РёР№ РІР°СЂРёР°РЅС‚ С‡РµСЂРµР· Р·Р°РїСЏС‚СѓСЋ
   "" SQS !
   0 ['] (nlbquery) SQH @ db3_exec
   SQS @ STR@ 1- 0 MAX

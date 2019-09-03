@@ -3,8 +3,8 @@ WINAPI: CreateEventA               KERNEL32.DLL
 WINAPI: WaitForSingleObject        KERNEL32.DLL
 
 : WAIT_DISCONNECT ( - u)
-\ Æäåì äèñêîííåêòà ëèíèè
-\ Åñëè âîçâðàòèëè 0 òî çíà÷èò event íîðìàëüíî ïðîèçîøåë
+\ Ð–Ð´ÐµÐ¼ Ð´Ð¸ÑÐºÐ¾Ð½Ð½ÐµÐºÑ‚Ð° Ð»Ð¸Ð½Ð¸Ð¸
+\ Ð•ÑÐ»Ð¸ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¸Ð»Ð¸ 0 Ñ‚Ð¾ Ð·Ð½Ð°Ñ‡Ð¸Ñ‚ event Ð½Ð¾Ñ€Ð¼Ð°Ð»ÑŒÐ½Ð¾ Ð¿Ñ€Ð¾Ð¸Ð·Ð¾ÑˆÐµÐ»
    RASCN_Disconnection
    0 0 0 0 CreateEventA DUP >R
    INVALID_HANDLE_VALUE

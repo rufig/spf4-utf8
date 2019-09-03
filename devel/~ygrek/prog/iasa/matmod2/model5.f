@@ -1,4 +1,4 @@
-( åÆ§•´Ï £Æ≠™® ¢ÆÆ‡„¶•≠®© ê®Á†‡§·Æ≠†
+( –ú–æ–¥–µ–ª—å –≥–æ–Ω–∫–∏ –≤–æ–æ—Ä—É–∂–µ–Ω–∏–π –†–∏—á–∞—Ä–¥—Å–æ–Ω–∞
   x'=ay-mx+r
   y'=bx-ny+s
 )
@@ -6,9 +6,9 @@ VOCABULARY Model5
 GET-CURRENT
 ALSO Model5 DEFINITIONS
 
-1e FVALUE a 1e FVALUE b  \ ‚•¨ØÎ £Æ≠™®, ‡•·„‡·Î ·‚‡†≠Î >0
-1e FVALUE m 1e FVALUE n  \ ‚•¨ØÎ ß†‚‡†‚ ≠† ¢ÆÆ‡„¶•≠®•  >0
--0.2e FVALUE r -0.2e FVALUE s    \ ·‚•Ø•≠Ï †£‡•··®¢≠Æ·‚®       ´Ó°Î•
+1e FVALUE a 1e FVALUE b  \ —Ç–µ–º–ø—ã –≥–æ–Ω–∫–∏, —Ä–µ—Å—É—Ä—Å—ã —Å—Ç—Ä–∞–Ω—ã >0
+1e FVALUE m 1e FVALUE n  \ —Ç–µ–º–ø—ã –∑–∞—Ç—Ä–∞—Ç –Ω–∞ –≤–æ–æ—Ä—É–∂–µ–Ω–∏–µ  >0
+-0.2e FVALUE r -0.2e FVALUE s    \ —Å—Ç–µ–ø–µ–Ω—å –∞–≥—Ä–µ—Å—Å–∏–≤–Ω–æ—Å—Ç–∏       –ª—é–±—ã–µ
 \ a,m,r - Magenta  b,n,s - Yellow
 
 0e FVALUE x0   0e FVALUE y0

@@ -1,4 +1,4 @@
-\ Ядро AutoPusher-а
+\ ╨п╨┤╤А╨╛ AutoPusher-╨░
 
 WINAPI: FindWindowExA user32.DLL
 WINAPI: SendMessageA user32.DLL
@@ -6,8 +6,8 @@ WINAPI: SendMessageA user32.DLL
 REQUIRE GetDesktopWindow ~micro/lib/windows/window.f
 
 : WindowSearch ( hwnd1 addr u -- hwnd2 )
-\ если hwnd1<>0, то найти среди его дочерних окон окно с текстом addr u,
-\ иначе hwnd2=0
+\ ╨╡╤Б╨╗╨╕ hwnd1<>0, ╤В╨╛ ╨╜╨░╨╣╤В╨╕ ╤Б╤А╨╡╨┤╨╕ ╨╡╨│╨╛ ╨┤╨╛╤З╨╡╤А╨╜╨╕╤Е ╨╛╨║╨╛╨╜ ╨╛╨║╨╜╨╛ ╤Б ╤В╨╡╨║╤Б╤В╨╛╨╝ addr u,
+\ ╨╕╨╜╨░╤З╨╡ hwnd2=0
   ROT DUP >R
   ROT ROT
   R> IF
@@ -19,10 +19,10 @@ REQUIRE GetDesktopWindow ~micro/lib/windows/window.f
 ;
 
 : desktop ( -- hwnd ) GetDesktopWindow ;
-\ вернуть хэндл десктопа
+\ ╨▓╨╡╤А╨╜╤Г╤В╤М ╤Е╤Н╨╜╨┤╨╗ ╨┤╨╡╤Б╨║╤В╨╛╨┐╨░
 
 : push ( hwnd -- )
-\ нажать на окно hwnd, если hwnd<>0
+\ ╨╜╨░╨╢╨░╤В╤М ╨╜╨░ ╨╛╨║╨╜╨╛ hwnd, ╨╡╤Б╨╗╨╕ hwnd<>0
   ?DUP IF
     0 SWAP
     0 SWAP

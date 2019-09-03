@@ -14,7 +14,7 @@ WARNING !
   DROP -> ns
 \  arg( Z" c:\\delosoft.pst" _str )arg ns :: AddStore >
 \  . .
-  ns :: Folders ["Личные папки"] @
+  ns :: Folders ["Р›РёС‡РЅС‹Рµ РїР°РїРєРё"] @
   DROP :: Folders ["cherezov"] @
 \ oSourceInbox = oNS.Folders("mypst").Folders("Inbox")
   DROP :: Items @

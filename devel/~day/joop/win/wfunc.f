@@ -152,7 +152,7 @@ CONSTANT /RECT
 CONSTANT /PS
 
 : GetDesktopCoord ( -- x y)
-\ Получить размер десктопа
+\ РџРѕР»СѓС‡РёС‚СЊ СЂР°Р·РјРµСЂ РґРµСЃРєС‚РѕРїР°
     4 RALLOT DUP
     GetDesktopWindow
     GetClientRect DROP
@@ -169,7 +169,7 @@ CONSTANT /PS
     R> @
 ;
 
-\ После этого выполнить 4 RFREE
+\ РџРѕСЃР»Рµ СЌС‚РѕРіРѕ РІС‹РїРѕР»РЅРёС‚СЊ 4 RFREE
 : RECT-RP! ( b r t l -- addr)
   R> 
   SWAP >R
@@ -185,6 +185,6 @@ CONSTANT /PS
     SWAP !
 ;
 
-IMAGE-BASE CONSTANT HINST \ хэндл приложения
+IMAGE-BASE CONSTANT HINST \ С…СЌРЅРґР» РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 : .S DEPTH 0 ?DO S0 @ I 1+ CELLS - @ . LOOP ;

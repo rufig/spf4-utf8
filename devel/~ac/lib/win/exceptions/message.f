@@ -45,7 +45,7 @@ VARIABLE DenyGuiMessages
 
 [UNDEFINED] PROG-NAME [IF] : PROG-NAME S" SP-Forth" ; [THEN]
 
-VARIABLE MAIN-WINDOW \ запишите сюда хэндл главного окна, если сообщения должны быть подчиненными
+VARIABLE MAIN-WINDOW \ Р·Р°РїРёС€РёС‚Рµ СЃСЋРґР° С…СЌРЅРґР» РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°, РµСЃР»Рё СЃРѕРѕР±С‰РµРЅРёСЏ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РїРѕРґС‡РёРЅРµРЅРЅС‹РјРё
 
 : MsgBox
   MAIN-WINDOW @
@@ -98,7 +98,7 @@ WINAPI: WTSSendMessageA       WTSAPI32.DLL
   TRUE
 ;
 : MsgBoxWT { s style \ out -- out }
-\ вывести сообщение на экраны всех активных сессий Terminal Services и на консоль (если консоль активна)
+\ РІС‹РІРµСЃС‚Рё СЃРѕРѕР±С‰РµРЅРёРµ РЅР° СЌРєСЂР°РЅС‹ РІСЃРµС… Р°РєС‚РёРІРЅС‹С… СЃРµСЃСЃРёР№ Terminal Services Рё РЅР° РєРѕРЅСЃРѕР»СЊ (РµСЃР»Рё РєРѕРЅСЃРѕР»СЊ Р°РєС‚РёРІРЅР°)
   DenyGuiMessages @ IF s STR@ TYPE CR ( EXIT) THEN
   s style ^ out ['] (MsgBoxWT) ForEachWTSession
   2DROP out
@@ -115,4 +115,4 @@ WINAPI: WTSSendMessageA       WTSAPI32.DLL
 : ServiceMessageY/NWT ( s -- flag )
   MB_YESNO MB_ICONQUESTION OR MB_SERVICE_NOTIFICATION OR MsgBoxWT IDYES =
 ;
-\ " Да?" ServiceMessageY/NWT .
+\ " Р”Р°?" ServiceMessageY/NWT .

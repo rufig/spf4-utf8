@@ -7,7 +7,7 @@ USES comctl32.dll
 DECIMAL
 0 CONSTANT NULL
 
-IMAGE-BASE CONSTANT HINST  \ Instance текущего приложения
+IMAGE-BASE CONSTANT HINST  \ Instance С‚РµРєСѓС‰РµРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 S" define.h" INCLUDED
 
@@ -192,9 +192,9 @@ SET-CURRENT
     0 VALUE AddLStrings
     0 VALUE CurLStrings
 CREATE prompt> S" >" S",
-    0 VALUE KEY_EVENT_GUI       \ event на KEY
-    0 VALUE START_EVENT         \ event на запуск форт системы
-    0 VALUE CON_BUFFER_PREPARED \ event на ACCEPT
+    0 VALUE KEY_EVENT_GUI       \ event РЅР° KEY
+    0 VALUE START_EVENT         \ event РЅР° Р·Р°РїСѓСЃРє С„РѕСЂС‚ СЃРёСЃС‚РµРјС‹
+    0 VALUE CON_BUFFER_PREPARED \ event РЅР° ACCEPT
     0 VALUE Spf4wcIni
 
 CREATE sOptions	S" Options" HERE SWAP DUP ALLOT MOVE 0 C,

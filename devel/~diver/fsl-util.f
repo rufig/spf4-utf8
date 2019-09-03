@@ -171,7 +171,7 @@ FALSE VALUE STRUCT-ARRAY?
 
 : Double DOUBLE ;             \ backward compatibility
 
-: add_e ( addr u -- addr u+1 ) \ добавим "е" если его нет в разбираемой строке 
+: add_e ( addr u -- addr u+1 ) \ РґРѕР±Р°РІРёРј "Рµ" РµСЃР»Рё РµРіРѕ РЅРµС‚ РІ СЂР°Р·Р±РёСЂР°РµРјРѕР№ СЃС‚СЂРѕРєРµ 
 2DUP S" e" SEARCH -ROT 2DROP IF \ NOOP
  ELSE
 2DUP + 101 SWAP C! 1+ 

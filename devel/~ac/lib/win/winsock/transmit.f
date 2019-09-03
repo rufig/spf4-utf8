@@ -7,7 +7,7 @@ WINAPI: TransmitFile Mswsock.dll
 ;
 
 \EOF
-\ Пример
+\ РџСЂРёРјРµСЂ
 S" session.txt" R/O OPEN-FILE THROW
 SocketsStartup THROW
 CreateSocket THROW S" localhost" GetHostIP THROW OVER 25 SWAP ConnectSocket THROW

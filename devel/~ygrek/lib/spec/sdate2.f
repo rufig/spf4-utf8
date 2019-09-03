@@ -1,9 +1,9 @@
 \ $Id$
 \
-\ Разбор даты в виде S" 2007-01-27T17:40:36+03:00"
+\ Р Р°Р·Р±РѕСЂ РґР°С‚С‹ РІ РІРёРґРµ S" 2007-01-27T17:40:36+03:00"
 
-\ Не знаю что за формат такой - его использует ForthWiki
-\ Парсить правда проще :)
+\ РќРµ Р·РЅР°СЋ С‡С‚Рѕ Р·Р° С„РѕСЂРјР°С‚ С‚Р°РєРѕР№ - РµРіРѕ РёСЃРїРѕР»СЊР·СѓРµС‚ ForthWiki
+\ РџР°СЂСЃРёС‚СЊ РїСЂР°РІРґР° РїСЂРѕС‰Рµ :)
 
 REQUIRE /STRING lib/include/string.f
 REQUIRE { lib/ext/locals.f
@@ -46,9 +46,9 @@ MODULE: ygrek/lib/spec/sdate2.f
    NUMBER 14 MUST TO +z
    2DUP S" +" COMPARE 0= IF 2DROP +z NEGATE TO +z ELSE S" -" COMPARE 0= 15 MUST THEN
 
-   \ учтём timezone
+   \ СѓС‡С‚С‘Рј timezone
    ss mm hh d m y DateTime>Num ( stamp ) 
-   +z 60 * 60 * + \ прибавили смещение (+z в часах)
+   +z 60 * 60 * + \ РїСЂРёР±Р°РІРёР»Рё СЃРјРµС‰РµРЅРёРµ (+z РІ С‡Р°СЃР°С…)
    ;
 
 EXPORT

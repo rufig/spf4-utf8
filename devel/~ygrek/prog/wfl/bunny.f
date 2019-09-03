@@ -1,7 +1,7 @@
 \ $Id$
 \
-\ Чтобы увидеть кролика - модель брать тут : http://www.forth.org.ru/~ygrek/files/bun_zipper.7z
-\ распаковать и положить рядом
+\ Р§С‚РѕР±С‹ СѓРІРёРґРµС‚СЊ РєСЂРѕР»РёРєР° - РјРѕРґРµР»СЊ Р±СЂР°С‚СЊ С‚СѓС‚ : http://www.forth.org.ru/~ygrek/files/bun_zipper.7z
+\ СЂР°СЃРїР°РєРѕРІР°С‚СЊ Рё РїРѕР»РѕР¶РёС‚СЊ СЂСЏРґРѕРј
 
 REQUIRE WL-MODULES ~day/lib/includemodule.f
 
@@ -77,7 +77,7 @@ CGLSimpleCanvas SUBCLASS CGLMyScene
 : make-bunny
   S" bun_zipper.ply2" _model :model _ply2 :load
 
-  \ сдвинем модель в сцене поближе к нам (разместим перед кубиками)
+  \ СЃРґРІРёРЅРµРј РјРѕРґРµР»СЊ РІ СЃС†РµРЅРµ РїРѕР±Р»РёР¶Рµ Рє РЅР°Рј (СЂР°Р·РјРµСЃС‚РёРј РїРµСЂРµРґ РєСѓР±РёРєР°РјРё)
   10e 0e 10e _model :setShift 
   0e 1e 0e _model :setAngleSpeed
   0e 90e 0e _model :setAngle
@@ -91,21 +91,21 @@ init: make-bunny make-cubes ;
 : :display
    SUPER :display 
 
-  -50f -15f -15f glTranslatef DROP \ сдвинем всю сцену
+  -50f -15f -15f glTranslatef DROP \ СЃРґРІРёРЅРµРј РІСЃСЋ СЃС†РµРЅСѓ
 
    GL_SPECULAR GL_FRONT_AND_BACK glColorMaterial DROP
-   0f 0f 0f glColor3f DROP \ кубики не отражают specular свет
+   0f 0f 0f glColor3f DROP \ РєСѓР±РёРєРё РЅРµ РѕС‚СЂР°Р¶Р°СЋС‚ specular СЃРІРµС‚
    GL_AMBIENT_AND_DIFFUSE GL_FRONT_AND_BACK glColorMaterial DROP
-   \ все SetColor для каждого кубика будут влиять на diffuse&ambient
+   \ РІСЃРµ SetColor РґР»СЏ РєР°Р¶РґРѕРіРѕ РєСѓР±РёРєР° Р±СѓРґСѓС‚ РІР»РёСЏС‚СЊ РЅР° diffuse&ambient
 
    _list :draw
    _list :rotate
 
    GL_SPECULAR GL_FRONT_AND_BACK glColorMaterial DROP
-   1.0f 1.0f 1.0f glColor3f DROP \ specular цвет кролика
+   1.0f 1.0f 1.0f glColor3f DROP \ specular С†РІРµС‚ РєСЂРѕР»РёРєР°
 
    GL_AMBIENT_AND_DIFFUSE GL_FRONT_AND_BACK glColorMaterial DROP
-   \ смена цвета внутри _model будет влиять на diffuse&ambient цвет
+   \ СЃРјРµРЅР° С†РІРµС‚Р° РІРЅСѓС‚СЂРё _model Р±СѓРґРµС‚ РІР»РёСЏС‚СЊ РЅР° diffuse&ambient С†РІРµС‚
 
    100f GL_SHININESS GL_FRONT_AND_BACK glMaterialf DROP 
 
@@ -114,9 +114,9 @@ init: make-bunny make-cubes ;
 
    200f GL_SHININESS GL_FRONT_AND_BACK glMaterialf DROP
 
-   glLoadIdentity DROP \ Размещаем свет в мировых координат
+   glLoadIdentity DROP \ Р Р°Р·РјРµС‰Р°РµРј СЃРІРµС‚ РІ РјРёСЂРѕРІС‹С… РєРѕРѕСЂРґРёРЅР°С‚
 
-   SetLight \ в принципе это достаточно сделать один раз
+   SetLight \ РІ РїСЂРёРЅС†РёРїРµ СЌС‚Рѕ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃРґРµР»Р°С‚СЊ РѕРґРёРЅ СЂР°Р·
    ;
 
 ;CLASS

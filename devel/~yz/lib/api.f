@@ -1,5 +1,5 @@
-\ Áûñòðîå îïèñàíèå ïðîöåäóð èç ñòàíäàðòíûõ äèíàìè÷åñêèõ áèáëèîòåê Windows
-\ Þ. Æèëîâåö, 2001
+\ Ð‘Ñ‹ÑÑ‚Ñ€Ð¾Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€ Ð¸Ð· ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ñ‹Ñ… Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐº Windows
+\ Ð®. Ð–Ð¸Ð»Ð¾Ð²ÐµÑ†, 2001
 REQUIRE " ~yz/lib/common.f
 
 MODULE: API
@@ -13,7 +13,7 @@ VARIABLE u32
 VARIABLE g32
 
 : get-handle ( z adr -- ) OVER LoadLibraryA
-  ?DUP IF SWAP ! DROP ELSE .ASCIIZ -1 ABORT" Áèáëèîòåêà íå íàéäåíà" THEN ;
+  ?DUP IF SWAP ! DROP ELSE .ASCIIZ -1 ABORT" Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ð°" THEN ;
 
 kernel32 k32 get-handle
 user32   u32 get-handle
@@ -32,11 +32,11 @@ VARIABLE WINAP
   0 , \ address of function name
   IS-TEMP-WL 0=
   IF
-    HERE WINAPLINK @ , WINAPLINK ! ( ñâÿçü )
+    HERE WINAPLINK @ , WINAPLINK ! ( ÑÐ²ÑÐ·ÑŒ )
   THEN
   HERE WINAP @ 2 CELLS + !
   HERE >R
-  NextWord HERE SWAP DUP ALLOT MOVE 0 C, \ èìÿ ôóíêöèè
+  NextWord HERE SWAP DUP ALLOT MOVE 0 C, \ Ð¸Ð¼Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸
   R> R> CELL+ @ @ GetProcAddress 0= IF -2010 THROW THEN \ ABORT" Procedure not found"
 ;
 

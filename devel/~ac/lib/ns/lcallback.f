@@ -1,7 +1,7 @@
-\ LEXTERN и LCALLBACK - "облегченные" версии EXTERN и CALLBACK,
-\ пропускающие создание нового форт-окружения при входе в callback.
-\ Замена для ~af/lib/QuickWNDPROC.f, не работающего под Linux.
-\ Требует изменения ядра branch-linux-port spf_win_api.f 1.9.4.1 !
+\ LEXTERN Рё LCALLBACK - "РѕР±Р»РµРіС‡РµРЅРЅС‹Рµ" РІРµСЂСЃРёРё EXTERN Рё CALLBACK,
+\ РїСЂРѕРїСѓСЃРєР°СЋС‰РёРµ СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ С„РѕСЂС‚-РѕРєСЂСѓР¶РµРЅРёСЏ РїСЂРё РІС…РѕРґРµ РІ callback.
+\ Р—Р°РјРµРЅР° РґР»СЏ ~af/lib/QuickWNDPROC.f, РЅРµ СЂР°Р±РѕС‚Р°СЋС‰РµРіРѕ РїРѕРґ Linux.
+\ РўСЂРµР±СѓРµС‚ РёР·РјРµРЅРµРЅРёСЏ СЏРґСЂР° branch-linux-port spf_win_api.f 1.9.4.1 !
 
 : LEXTERN ( xt1 n -- xt2 )
   HERE
@@ -14,7 +14,7 @@
 ;
 
 : LCALLBACK: ( xt n "name" -- )
-\ Здесь n в байтах!
+\ Р—РґРµСЃСЊ n РІ Р±Р°Р№С‚Р°С…!
   LEXTERN
   HEADER
   ['] _WNDPROC-CODE COMPILE,
@@ -26,7 +26,7 @@
   ['] _WNDPROC-CODE COMPILE,
   ,
 ;
-\EOF Слегка усложненный тест из ~af/lib/QuickWNDPROC.f:
+\EOF РЎР»РµРіРєР° СѓСЃР»РѕР¶РЅРµРЅРЅС‹Р№ С‚РµСЃС‚ РёР· ~af/lib/QuickWNDPROC.f:
 
 : MyCallBackWord \ -- 
   TlsIndex@ .

@@ -1,5 +1,5 @@
-\ Лог с выводом в Critical Section (быстрая альтернатива Mutex)
-\ TYPE будет логгировать НЕ через CriticalSection
+\ Р›РѕРі СЃ РІС‹РІРѕРґРѕРј РІ Critical Section (Р±С‹СЃС‚СЂР°СЏ Р°Р»СЊС‚РµСЂРЅР°С‚РёРІР° Mutex)
+\ TYPE Р±СѓРґРµС‚ Р»РѕРіРіРёСЂРѕРІР°С‚СЊ РќР• С‡РµСЂРµР· CriticalSection
 
 WINAPI: InitializeCriticalSection  KERNEL32.DLL
 WINAPI: EnterCriticalSection       KERNEL32.DLL

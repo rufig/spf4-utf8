@@ -1,12 +1,12 @@
-\ âñå WINAPI-ôóíêöèè áóäóò îñòàâëÿòü ñëåä â uLastApiFunc,
-\ ÷òîáû â ñëó÷àå EXCEPTION'à âíå òåëà ôîðòà èìåòü íàì¸ê íà ñáîéíóâøóþ ôóíêöèþ
+\ Ð²ÑÐµ WINAPI-Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð±ÑƒÐ´ÑƒÑ‚ Ð¾ÑÑ‚Ð°Ð²Ð»ÑÑ‚ÑŒ ÑÐ»ÐµÐ´ Ð² uLastApiFunc,
+\ Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð² ÑÐ»ÑƒÑ‡Ð°Ðµ EXCEPTION'Ð° Ð²Ð½Ðµ Ñ‚ÐµÐ»Ð° Ñ„Ð¾Ñ€Ñ‚Ð° Ð¸Ð¼ÐµÑ‚ÑŒ Ð½Ð°Ð¼Ñ‘Ðº Ð½Ð° ÑÐ±Ð¾Ð¹Ð½ÑƒÐ²ÑˆÑƒÑŽ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ
 
 USER uLastApiFunc
 
 : _WINAPI-TRACE
   uLastApiFunc !
 ;
-: (__WIN:)  ( params "ÈìÿÏðîöåäóðû" "ÈìÿÁèáëèîòåêè" -- )
+: (__WIN:)  ( params "Ð˜Ð¼ÑÐŸÑ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñ‹" "Ð˜Ð¼ÑÐ‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸" -- )
   HERE >R
   0 , \ address of winproc
   0 , \ address of library name
@@ -14,17 +14,17 @@ USER uLastApiFunc
   , \ # of parameters
   IS-TEMP-WL 0=
   IF
-    HERE WINAPLINK @ , WINAPLINK ! ( ñâÿçü )
+    HERE WINAPLINK @ , WINAPLINK ! ( ÑÐ²ÑÐ·ÑŒ )
   THEN
   HERE DUP R@ CELL+ CELL+ !
-  PARSE-NAME CHARS HERE SWAP DUP ALLOT MOVE 0 C, \ èìÿ ôóíêöèè
+  PARSE-NAME CHARS HERE SWAP DUP ALLOT MOVE 0 C, \ Ð¸Ð¼Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸
   HERE DUP R> CELL+ !
-  PARSE-NAME CHARS HERE SWAP DUP ALLOT MOVE 0 C, \ èìÿ áèáëèîòåêè
+  PARSE-NAME CHARS HERE SWAP DUP ALLOT MOVE 0 C, \ Ð¸Ð¼Ñ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸
 \  LoadLibraryA DUP 0= IF -2009 THROW THEN \ ABORT" Library not found"
 \  GetProcAddress 0= IF -2010 THROW THEN \ ABORT" Procedure not found"
   2DROP
 ;
-: WINAPI: ( "ÈìÿÏðîöåäóðû" "ÈìÿÁèáëèîòåêè" -- )
+: WINAPI: ( "Ð˜Ð¼ÑÐŸÑ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñ‹" "Ð˜Ð¼ÑÐ‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸" -- )
 
   >IN @ NextWord SFIND
   IF DROP

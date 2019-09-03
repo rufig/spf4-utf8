@@ -1,4 +1,4 @@
-\ Пакетный графический редактор 1.00
+\ РџР°РєРµС‚РЅС‹Р№ РіСЂР°С„РёС‡РµСЃРєРёР№ СЂРµРґР°РєС‚РѕСЂ 1.00
 \ 20.10.2002
 
 REQUIRE "      ~yz/lib/common.f
@@ -38,8 +38,8 @@ WINAPI: wvsprintfA USER32.DLL
 ; WNDPROC: tifferror
 \ ---------------------------------------------------------------
 
-0 VALUE ширина
-0 VALUE высота
+0 VALUE С€РёСЂРёРЅР°
+0 VALUE РІС‹СЃРѕС‚Р°
 0 VALUE tiff
 0 VALUE c-dc
 0 VALUE c-bmp
@@ -55,7 +55,7 @@ VARIABLE m-pic
 VARIABLE y-pic
 VARIABLE k-pic
 
-\ Эти сишные функции не чистят за собой стек
+\ Р­С‚Рё СЃРёС€РЅС‹Рµ С„СѓРЅРєС†РёРё РЅРµ С‡РёСЃС‚СЏС‚ Р·Р° СЃРѕР±РѕР№ СЃС‚РµРє
 2 CAPI: TIFFOpen		libtiff.dll
 1 CAPI: TIFFSetErrorHandler	libtiff.dll
 3 CAPI: TIFFGetField 		libtiff.dll
@@ -83,24 +83,24 @@ WINAPI: SetBkMode           GDI32.DLL
 
 : new-pic { \ dc bmp pic -- pic bmp dc}
   0 CreateCompatibleDC TO dc
-  \ создаем картинку
+  \ СЃРѕР·РґР°РµРј РєР°СЂС‚РёРЅРєСѓ
   HERE init->>
   10 CELLS >>
-  ширина >>
-  высота NEGATE >>
+  С€РёСЂРёРЅР° >>
+  РІС‹СЃРѕС‚Р° NEGATE >>
   1 W>>
   8 W>>
   W: bi_rgb >>
   0 >> 11180 >> 11180 >>
   0 >> 0 >>
-  \ заполняем серую палитру: 0,0,0 потом 1,1,1 и т.д.
+  \ Р·Р°РїРѕР»РЅСЏРµРј СЃРµСЂСѓСЋ РїР°Р»РёС‚СЂСѓ: 0,0,0 РїРѕС‚РѕРј 1,1,1 Рё С‚.Рґ.
   256 0 DO
     I C>> I C>> I C>> 0 C>>
   LOOP
   0 0 ^ pic W: dib_rgb_colors HERE dc CreateDIBSection TO bmp
   bmp dc SelectObject DROP
   W: transparent dc SetBkMode DROP
-  pic ширина высота * ERASE
+  pic С€РёСЂРёРЅР° РІС‹СЃРѕС‚Р° * ERASE
   pic bmp dc ;
 
 \ ----------------------------------------
@@ -114,20 +114,20 @@ WINAPI: SetBkMode           GDI32.DLL
 0 VALUE y-stroke
 0 VALUE k-stroke
 
-: белая ( -- r g b) 255 255 255 ;
-: черная ( -- r g b) 0 0 0 ;
-: желтая ( -- r g b) 255 255 0 ;
-: пурпурная ( -- r g b) 255 0 255 ;
-: голубая ( -- r g b) 0 255 255 ;
-: красная ( -- r g b) 255 0 0 ;
-: зеленая ( -- r g b) 0 255 0 ;
-: синяя ( -- r g b) 0 0 255 ;
-: серая ( n -- r g b) 255 SWAP - DUP DUP ;
-: серая10 ( -- r g b ) 10 серая ;
-: серая15 ( -- r g b ) 15 серая ;
+: Р±РµР»Р°СЏ ( -- r g b) 255 255 255 ;
+: С‡РµСЂРЅР°СЏ ( -- r g b) 0 0 0 ;
+: Р¶РµР»С‚Р°СЏ ( -- r g b) 255 255 0 ;
+: РїСѓСЂРїСѓСЂРЅР°СЏ ( -- r g b) 255 0 255 ;
+: РіРѕР»СѓР±Р°СЏ ( -- r g b) 0 255 255 ;
+: РєСЂР°СЃРЅР°СЏ ( -- r g b) 255 0 0 ;
+: Р·РµР»РµРЅР°СЏ ( -- r g b) 0 255 0 ;
+: СЃРёРЅСЏСЏ ( -- r g b) 0 0 255 ;
+: СЃРµСЂР°СЏ ( n -- r g b) 255 SWAP - DUP DUP ;
+: СЃРµСЂР°СЏ10 ( -- r g b ) 10 СЃРµСЂР°СЏ ;
+: СЃРµСЂР°СЏ15 ( -- r g b ) 15 СЃРµСЂР°СЏ ;
 
 : rgb>cmyk { r g b \ c m y k -- c m y k }
-\ Алгоритм от Борланда
+\ РђР»РіРѕСЂРёС‚Рј РѕС‚ Р‘РѕСЂР»Р°РЅРґР°
 \  C := 255 - R; M := 255 - G;   Y := 255 - B; 
 \  if C < M then  K := C else K := M; 
 \  if Y < K then  K := Y; 
@@ -139,11 +139,11 @@ WINAPI: SetBkMode           GDI32.DLL
 : >cref ( col -- cref ) DUP 8 LSHIFT OVER 16 LSHIFT OR OR ;
 : cref> ( cref -- col ) 0xFF AND ;
 
-\ пересчитывает миллиметры в пиксели
-: мм ( n -- n2 ) 3000 254 */ ;
+\ РїРµСЂРµСЃС‡РёС‚С‹РІР°РµС‚ РјРёР»Р»РёРјРµС‚СЂС‹ РІ РїРёРєСЃРµР»Рё
+: РјРј ( n -- n2 ) 3000 254 */ ;
 
-\ пересчитывает типографские пункты в пиксели
-: пт ( n -- n2 ) 300 72 */ ;
+\ РїРµСЂРµСЃС‡РёС‚С‹РІР°РµС‚ С‚РёРїРѕРіСЂР°С„СЃРєРёРµ РїСѓРЅРєС‚С‹ РІ РїРёРєСЃРµР»Рё
+: РїС‚ ( n -- n2 ) 300 72 */ ;
 
 \ ---------------------------------------------
 
@@ -163,7 +163,7 @@ WINAPI: CreatePen  GDI32.DLL
 : newpen ( color dc -- )
   >R >cref 1 pen-style @ CreatePen R> SelectObject DeleteObject DROP ;
 
-: Обводка ( r g b -- )
+: РћР±РІРѕРґРєР° ( r g b -- )
   rgb>cmyk TO k-stroke TO y-stroke TO m-stroke TO c-stroke
   c-stroke c-dc newpen
   m-stroke m-dc newpen
@@ -198,7 +198,7 @@ WINAPI: SetTextColor         GDI32.DLL
   logbrush CreateBrushIndirect dc SelectObject DeleteObject DROP
   color >cref dc SetTextColor DROP ;
 
-: Заливка ( r g b -- )
+: Р—Р°Р»РёРІРєР° ( r g b -- )
   rgb>cmyk TO k-fill TO y-fill TO m-fill TO c-fill
   c-fill c-dc newbrush
   m-fill m-dc newbrush
@@ -232,26 +232,26 @@ VARIABLE stroke
 
 WINAPI: SetPixel GDI32.DLL
 : setpixel fill @ >cref arg1 @ arg2 @ cdc @ SetPixel DROP ;
-: Точка ( x y -- )
+: РўРѕС‡РєР° ( x y -- )
   arg2 ! arg1 ! ['] setpixel separate ;
 
 WINAPI: MoveToEx  GDI32.DLL
 WINAPI: LineTo    GDI32.DLL
 : line   0 arg2 @ arg1 @ cdc @ MoveToEx DROP
   arg4 @ arg3 @ cdc @ LineTo DROP ; 
-: Линия ( x1 y1 x2 y2 -- )
+: Р›РёРЅРёСЏ ( x1 y1 x2 y2 -- )
   4args ['] line separate ;
 
 WINAPI: Rectangle  GDI32.DLL
 : rectangle  4args@ cdc @ Rectangle DROP ;
-: Прямоугольник ( x1 y1 x2 y2 -- )
+: РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє ( x1 y1 x2 y2 -- )
   4args ['] rectangle separate ;
 
-\ : Скругленный-прямоугольник ;
+\ : РЎРєСЂСѓРіР»РµРЅРЅС‹Р№-РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє ;
 
 WINAPI: Ellipse  GDI32.DLL
 : ellipse  4args@ cdc @ Ellipse DROP ;
-: Эллипс ( x1 y1 x2 y2 -- ) 4args ['] ellipse separate ;
+: Р­Р»Р»РёРїСЃ ( x1 y1 x2 y2 -- ) 4args ['] ellipse separate ;
 
 WINAPI: PolyBezier  GDI32.DLL
 : curve { \ [ 8 CELLS ] pt -- }
@@ -261,7 +261,7 @@ WINAPI: PolyBezier  GDI32.DLL
   arg5 @ >> arg6 @ >>
   arg7 @ >> arg8 @ >>
   4 pt cdc @ PolyBezier DROP ;
-: Кривая ( x1 y1  x2 y2  x3 y3  x4 y4 -- )
+: РљСЂРёРІР°СЏ ( x1 y1  x2 y2  x3 y3  x4 y4 -- )
   arg8 ! arg7 ! arg6 ! arg5 ! arg4 ! arg3 ! arg2 ! arg1 !
   ['] curve separate ; 
 
@@ -270,10 +270,10 @@ WINAPI: PolyBezier  GDI32.DLL
 : OR! ( n a -- ) SWAP OVER @ OR SWAP ! ;
 
 VARIABLE font-attr   font-attr 0!
-: жирный  1 font-attr OR! ;
-: курсив 2 font-attr OR! ;
-: подчеркнутый  4 font-attr OR! ;
-: перечеркнутый 8 font-attr OR! ;
+: Р¶РёСЂРЅС‹Р№  1 font-attr OR! ;
+: РєСѓСЂСЃРёРІ 2 font-attr OR! ;
+: РїРѕРґС‡РµСЂРєРЅСѓС‚С‹Р№  4 font-attr OR! ;
+: РїРµСЂРµС‡РµСЂРєРЅСѓС‚С‹Р№ 8 font-attr OR! ;
 
 WINAPI: CreateFontA  GDI32.DLL
 
@@ -291,52 +291,52 @@ WINAPI: CreateFontA  GDI32.DLL
   DUP y-dc SelectObject DeleteObject DROP
       k-dc SelectObject DeleteObject DROP ;
 
-: Шрифт ( z size -- ) пт NEGATE create-font new-fonts ;
+: РЁСЂРёС„С‚ ( z size -- ) РїС‚ NEGATE create-font new-fonts ;
 
 WINAPI: TextOutA  GDI32.DLL
 WINAPI: SetTextAlign  GDI32.DLL
 : text
   arg4 @ W: ta_baseline OR cdc @ SetTextAlign DROP
   arg1 @ ZLEN arg1 @ arg3 @ arg2 @ cdc @ TextOutA DROP ;
-: Слева ( z x y -- )     W: ta_left   4args ['] text separate ;
-: Справа ( z x y -- )    W: ta_right  4args ['] text separate ;
-: По-центру ( z x y -- ) W: ta_center 4args ['] text separate ;
+: РЎР»РµРІР° ( z x y -- )     W: ta_left   4args ['] text separate ;
+: РЎРїСЂР°РІР° ( z x y -- )    W: ta_right  4args ['] text separate ;
+: РџРѕ-С†РµРЅС‚СЂСѓ ( z x y -- ) W: ta_center 4args ['] text separate ;
 
 WINAPI: GetTextExtentPoint32A GDI32.DLL
-: Размер-надписи ( z  -- w h )
+: Р Р°Р·РјРµСЂ-РЅР°РґРїРёСЃРё ( z  -- w h )
   HERE SWAP ASCIIZ> SWAP k-dc GetTextExtentPoint32A
   HERE @ HERE CELL+ @ ;
 
 \ ---------------------------------------
-: Создать ( width height -- )
-  TO высота TO ширина  
+: РЎРѕР·РґР°С‚СЊ ( width height -- )
+  TO РІС‹СЃРѕС‚Р° TO С€РёСЂРёРЅР°  
   new-pic TO c-dc TO c-bmp c-pic !
   new-pic TO m-dc TO m-bmp m-pic !
   new-pic TO y-dc TO y-bmp y-pic !
   new-pic TO k-dc TO k-bmp k-pic !
-  черная Обводка  черная Заливка ;
+  С‡РµСЂРЅР°СЏ РћР±РІРѕРґРєР°  С‡РµСЂРЅР°СЏ Р—Р°Р»РёРІРєР° ;
 
 : set-fields
   program-name 305 tiff!  \ software
-  ширина 256 tiff!        \ imagewidth
-  высота 257 tiff!        \ imageheight
+  С€РёСЂРёРЅР° 256 tiff!        \ imagewidth
+  РІС‹СЃРѕС‚Р° 257 tiff!        \ imageheight
   5 259 tiff!		  \ compression: lzw
   8 258 tiff!		  \ bits/sample
   1 284 tiff!             \ planarconfig: contig
   2 296 tiff!             \ resunits: inches
-  \  x resolution: поскольку библиотека в этом месте хочет float,
-  \ заставить ее работать я не смог. Поэтому
-  0 0 282 tiff2!      \ выставляем внутренние флажки, что это значение присутствует
-  0x43960000 tiff 26 CELLS! \ и записываем 300.00 во внутреннюю структуру
-  \ Слава открытым исходным текстам!
-  0 0 283 tiff2!        \ тот же фокус с yresolution
+  \  x resolution: РїРѕСЃРєРѕР»СЊРєСѓ Р±РёР±Р»РёРѕС‚РµРєР° РІ СЌС‚РѕРј РјРµСЃС‚Рµ С…РѕС‡РµС‚ float,
+  \ Р·Р°СЃС‚Р°РІРёС‚СЊ РµРµ СЂР°Р±РѕС‚Р°С‚СЊ СЏ РЅРµ СЃРјРѕРі. РџРѕСЌС‚РѕРјСѓ
+  0 0 282 tiff2!      \ РІС‹СЃС‚Р°РІР»СЏРµРј РІРЅСѓС‚СЂРµРЅРЅРёРµ С„Р»Р°Р¶РєРё, С‡С‚Рѕ СЌС‚Рѕ Р·РЅР°С‡РµРЅРёРµ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚
+  0x43960000 tiff 26 CELLS! \ Рё Р·Р°РїРёСЃС‹РІР°РµРј 300.00 РІРѕ РІРЅСѓС‚СЂРµРЅРЅСЋСЋ СЃС‚СЂСѓРєС‚СѓСЂСѓ
+  \ РЎР»Р°РІР° РѕС‚РєСЂС‹С‚С‹Рј РёСЃС…РѕРґРЅС‹Рј С‚РµРєСЃС‚Р°Рј!
+  0 0 283 tiff2!        \ С‚РѕС‚ Р¶Рµ С„РѕРєСѓСЃ СЃ yresolution
   0x43960000 tiff 27 CELLS! ;
 
-: load-err ( z -- ) >R <( R> " Не могу загрузить файл: ~Z" )> error ;
+: load-err ( z -- ) >R <( R> " РќРµ РјРѕРіСѓ Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»: ~Z" )> error ;
 
 : tifftype ( -- type)
-  258 tiff@ 8 <> IF " биты/канал<>8" load-err FALSE EXIT THEN
-  284 tiff@ 1 <> IF " изображение разбито на плоскости" load-err FALSE EXIT THEN
+  258 tiff@ 8 <> IF " Р±РёС‚С‹/РєР°РЅР°Р»<>8" load-err FALSE EXIT THEN
+  284 tiff@ 1 <> IF " РёР·РѕР±СЂР°Р¶РµРЅРёРµ СЂР°Р·Р±РёС‚Рѕ РЅР° РїР»РѕСЃРєРѕСЃС‚Рё" load-err FALSE EXIT THEN
   262 tiff@ ;
 
 VARIABLE samples
@@ -345,9 +345,9 @@ VARIABLE extrasamples
 0 VALUE last-width
 0 VALUE last-height
 
-\ Прозрачность понимается в стиле Фотошопа:
-\ используется первый дополнительный канал (тип unspecified)
-\ в котором 0 - 100% перекрытие, 255 - полная прозрачность
+\ РџСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ РїРѕРЅРёРјР°РµС‚СЃСЏ РІ СЃС‚РёР»Рµ Р¤РѕС‚РѕС€РѕРїР°:
+\ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РїРµСЂРІС‹Р№ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ РєР°РЅР°Р» (С‚РёРї unspecified)
+\ РІ РєРѕС‚РѕСЂРѕРј 0 - 100% РїРµСЂРµРєСЂС‹С‚РёРµ, 255 - РїРѕР»РЅР°СЏ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ
 
 0 == gray
 1 == cmyk
@@ -390,13 +390,13 @@ VARIABLE extrasamples
     1 OF 1 ['] gray-updown read-channels ENDOF
     2 OF 3 ['] rgb2cmyk    read-channels ENDOF
     5 OF 4 ['] justcmyk    read-channels ENDOF
-  DROP " неизвестный тип изображения" load-err
+  DROP " РЅРµРёР·РІРµСЃС‚РЅС‹Р№ С‚РёРї РёР·РѕР±СЂР°Р¶РµРЅРёСЏ" load-err
   ENDCASE
   tiff TIFFClose DROP ;
 
 \ ------------------------------------
 
-\ Формат объекта:
+\ Р¤РѕСЂРјР°С‚ РѕР±СЉРµРєС‚Р°:
 0
 CELL -- :buf
 CELL -- :type
@@ -405,7 +405,7 @@ CELL -- :w
 CELL -- :h
 == obj#
 
-: Прочитать ( filename obj -- )
+: РџСЂРѕС‡РёС‚Р°С‚СЊ ( filename obj -- )
   >R load-tiff
   R@ :h !
   R@ :w !
@@ -415,9 +415,9 @@ CELL -- :h
 
 : object ( ->bl; -- a ) CREATE HERE 0 , 4 CELLS ALLOT ;
 
-: Объект ( ->bl; z -- ) object Прочитать ;
+: РћР±СЉРµРєС‚ ( ->bl; z -- ) object РџСЂРѕС‡РёС‚Р°С‚СЊ ;
 
-: Размеры ( o -- w h) DUP :w @ SWAP :h @ ;
+: Р Р°Р·РјРµСЂС‹ ( o -- w h) DUP :w @ SWAP :h @ ;
 
 : k> ( from to-off -- )
   >R C@ R> k-pic @ + C! ;
@@ -449,18 +449,18 @@ CELL -- :h
   o :h @ oy - oh MIN TO oh
   x 0 MAX TO x
   y 0 MAX TO y
-  ширина x - ow MIN TO ow
-  высота y - oh MIN TO oh
+  С€РёСЂРёРЅР° x - ow MIN TO ow
+  РІС‹СЃРѕС‚Р° y - oh MIN TO oh
   o :buf @ TO buf
   oh 0 ?DO
     ow 0 ?DO
       oy J + owidth * ox + I + bytes * buf +
-      y J + ширина * x + I +
+      y J + С€РёСЂРёРЅР° * x + I +
       putproc EXECUTE
     LOOP 
   LOOP ;
 
-: Наложить-часть ( o ox oy owidth oheight x y -- )
+: РќР°Р»РѕР¶РёС‚СЊ-С‡Р°СЃС‚СЊ ( o ox oy owidth oheight x y -- )
   6 PICK DUP :type @ gray = IF
     :alpha @ IF 2 ['] ka> ELSE 1 ['] k> THEN
   ELSE
@@ -468,21 +468,21 @@ CELL -- :h
   THEN
   put-part ;
 
-: Наложить ( o x y -- )
-  2>R 0 OVER 0 SWAP DUP :w @ SWAP :h @ 2R> Наложить-часть ;
+: РќР°Р»РѕР¶РёС‚СЊ ( o x y -- )
+  2>R 0 OVER 0 SWAP DUP :w @ SWAP :h @ 2R> РќР°Р»РѕР¶РёС‚СЊ-С‡Р°СЃС‚СЊ ;
 
-: Загрузить { filename \ [ obj# CELLS ] o -- }
-  filename o Прочитать
-  o :w @ o :h @ Создать
-  o 0 0 Наложить
+: Р—Р°РіСЂСѓР·РёС‚СЊ { filename \ [ obj# CELLS ] o -- }
+  filename o РџСЂРѕС‡РёС‚Р°С‚СЊ
+  o :w @ o :h @ РЎРѕР·РґР°С‚СЊ
+  o 0 0 РќР°Р»РѕР¶РёС‚СЊ
   o :buf @ FREEMEM ;
 
-: Из-файла ( z -- )
+: РР·-С„Р°Р№Р»Р° ( z -- )
   ASCIIZ> INCLUDED ;
 
 \ ----------------------------------
 
-: Сохранить { filename \ ptr -- }
+: РЎРѕС…СЂР°РЅРёС‚СЊ { filename \ ptr -- }
   " w" filename TIFFOpen TO tiff
   tiff 0= IF EXIT THEN
   set-fields
@@ -490,11 +490,11 @@ CELL -- :h
   255 0 336 tiff! DROP	  \ dot range
   5 262 tiff!		  \ photometric: separated
   1 332 tiff!		  \ inkset: cmyk
-  ширина 4 * GETMEM TO buf
+  С€РёСЂРёРЅР° 4 * GETMEM TO buf
   0 TO ptr
-  высота 0 ?DO
+  РІС‹СЃРѕС‚Р° 0 ?DO
     buf init->>
-    ширина 0 ?DO
+    С€РёСЂРёРЅР° 0 ?DO
       c-pic @ ptr + C@ C>>
       m-pic @ ptr + C@ C>>
       y-pic @ ptr + C@ C>>
@@ -506,14 +506,14 @@ CELL -- :h
   buf FREEMEM
   tiff TIFFClose DROP ;
 
-: Сохранить-ч/б { filename -- }
+: РЎРѕС…СЂР°РЅРёС‚СЊ-С‡/Р± { filename -- }
   " w" filename TIFFOpen TO tiff
   tiff 0= IF EXIT THEN
   set-fields
   1 277 tiff!		  \ samples/pixel
   0 262 tiff!		  \ photometric: min-is-black
-  высота 0 ?DO
-    0 I ширина I * k-pic @ + tiff TIFFWriteScanline DROP
+  РІС‹СЃРѕС‚Р° 0 ?DO
+    0 I С€РёСЂРёРЅР° I * k-pic @ + tiff TIFFWriteScanline DROP
   LOOP
   tiff TIFFClose DROP ;
 
@@ -531,29 +531,29 @@ CELL -- :h
 
 \ ---------------------------------------------------------------
 
-: ?next ( "name" или name<BL> -- a # / 0)
+: ?next ( "name" РёР»Рё name<BL> -- a # / 0)
   PeekChar c: " = IF c: " ELSE BL THEN WORD
   DUP C@ 0= IF DROP 0 EXIT THEN
-  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( убрал кавычки, если есть) ;
+  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( СѓР±СЂР°Р» РєР°РІС‹С‡РєРё, РµСЃР»Рё РµСЃС‚СЊ) ;
 
 : RUN
   -1 TO SOURCE-ID
   GetCommandLineA ASCIIZ> SOURCE!
-  ?next 2DROP  \ убрали имя файла
+  ?next 2DROP  \ СѓР±СЂР°Р»Рё РёРјСЏ С„Р°Р№Р»Р°
   ?next 
   ?DUP 0= IF
-   ." GED 1.00 -- Пакетный графический редактор" CR
-   ." Ю. Жиловец, 2002 (http://www.forth.org.ru/~yz)" CR
+   ." GED 1.00 -- РџР°РєРµС‚РЅС‹Р№ РіСЂР°С„РёС‡РµСЃРєРёР№ СЂРµРґР°РєС‚РѕСЂ" CR
+   ." Р®. Р–РёР»РѕРІРµС†, 2002 (http://www.forth.org.ru/~yz)" CR
   BYE
   THEN
   ['] tifferror TIFFSetErrorHandler DROP
   ( a # ) ['] INCLUDED CATCH
   ?DUP IF
     CASE
-      2 3 <OF< " Входной файл не найден" err 0 ENDOF
-      -2003 OF " Неизвестное слово"  ENDOF
-      0xC0000005 OF " Нарушение общей защиты" ENDOF
-    >R <( R> DUP " Ошибка ~N (0x~06H)" )>
+      2 3 <OF< " Р’С…РѕРґРЅРѕР№ С„Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ" err 0 ENDOF
+      -2003 OF " РќРµРёР·РІРµСЃС‚РЅРѕРµ СЃР»РѕРІРѕ"  ENDOF
+      0xC0000005 OF " РќР°СЂСѓС€РµРЅРёРµ РѕР±С‰РµР№ Р·Р°С‰РёС‚С‹" ENDOF
+    >R <( R> DUP " РћС€РёР±РєР° ~N (0x~06H)" )>
     END-CASE
     error
   THEN

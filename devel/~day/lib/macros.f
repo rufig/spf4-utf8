@@ -1,4 +1,4 @@
-( Макроподстановка с условием )
+( РњР°РєСЂРѕРїРѕРґСЃС‚Р°РЅРѕРІРєР° СЃ СѓСЃР»РѕРІРёРµРј )
 
 : ?MACRO:  ( "name <char> ccc<char>" f -- )
   : POSTPONE IF CHAR PARSE POSTPONE SLITERAL POSTPONE EVALUATE
@@ -16,12 +16,12 @@
 
 \EOF
 
-?MACRO: нажать ' S" button pressed!" TYPE'
+?MACRO: РЅР°Р¶Р°С‚СЊ ' S" button pressed!" TYPE'
 
-TRUE CONDITION нажатьКнопку?
+TRUE CONDITION РЅР°Р¶Р°С‚СЊРљРЅРѕРїРєСѓ?
 
 : go
-     нажатьКнопку? нажать
+     РЅР°Р¶Р°С‚СЊРљРЅРѕРїРєСѓ? РЅР°Р¶Р°С‚СЊ
 ;
 
 go

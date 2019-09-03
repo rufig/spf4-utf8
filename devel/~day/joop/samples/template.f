@@ -1,6 +1,6 @@
-\ Заготовка для простого Windows приложения.
-\ То есть практически любое ваше gui приложение должно
-\ начинаться с этой заготовки
+\ Р—Р°РіРѕС‚РѕРІРєР° РґР»СЏ РїСЂРѕСЃС‚РѕРіРѕ Windows РїСЂРёР»РѕР¶РµРЅРёСЏ.
+\ РўРѕ РµСЃС‚СЊ РїСЂР°РєС‚РёС‡РµСЃРєРё Р»СЋР±РѕРµ РІР°С€Рµ gui РїСЂРёР»РѕР¶РµРЅРёРµ РґРѕР»Р¶РЅРѕ
+\ РЅР°С‡РёРЅР°С‚СЊСЃСЏ СЃ СЌС‚РѕР№ Р·Р°РіРѕС‚РѕРІРєРё
 
 REQUIRE FrameWindow ~day\joop\win\framewindow.f
 REQUIRE Button ~day\joop\win\control.f
@@ -11,25 +11,25 @@ REQUIRE MENUITEM ~day\joop\win\menu.f
 
 CLASS: AppWindow <SUPER FrameWindow
 
-        \ Здесь можно описать кнопочки, типа Button OBJ MyButton
+        \ Р—РґРµСЃСЊ РјРѕР¶РЅРѕ РѕРїРёСЃР°С‚СЊ РєРЅРѕРїРѕС‡РєРё, С‚РёРїР° Button OBJ MyButton
         
 : :createPopup ( -- hMenu)
-   0 \ Вместо 0 вставьте текст-описание всплывающего меню 
+   0 \ Р’РјРµСЃС‚Рѕ 0 РІСЃС‚Р°РІСЊС‚Рµ С‚РµРєСЃС‚-РѕРїРёСЃР°РЅРёРµ РІСЃРїР»С‹РІР°СЋС‰РµРіРѕ РјРµРЅСЋ 
 ;
         
 : :createMenu
-   0 \ аналогично, но для меню приложения
+   0 \ Р°РЅР°Р»РѕРіРёС‡РЅРѕ, РЅРѕ РґР»СЏ РјРµРЅСЋ РїСЂРёР»РѕР¶РµРЅРёСЏ
 ;
 
 : :init
    own :init
-   \ Здесь действия перед созданием окна ф-ей CreateWindowEx
+   \ Р—РґРµСЃСЊ РґРµР№СЃС‚РІРёСЏ РїРµСЂРµРґ СЃРѕР·РґР°РЅРёРµРј РѕРєРЅР° С„-РµР№ CreateWindowEx
 ;
 
 : :create
-  \ Здесь действия перед созданием окна ф-ей CreateWindowEx
+  \ Р—РґРµСЃСЊ РґРµР№СЃС‚РІРёСЏ РїРµСЂРµРґ СЃРѕР·РґР°РЅРёРµРј РѕРєРЅР° С„-РµР№ CreateWindowEx
   own :create
-  \ Здесь создание и инициализация кнопочек etc
+  \ Р—РґРµСЃСЊ СЃРѕР·РґР°РЅРёРµ Рё РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРЅРѕРїРѕС‡РµРє etc
 ;
 
 ;CLASS
@@ -38,7 +38,7 @@ CLASS: AppWindow <SUPER FrameWindow
 : RUN { \ w }
    AppWindow :new -> w
    0 w :create
-   S" Здесь ваш caption" w :setText
+   S" Р—РґРµСЃСЊ РІР°С€ caption" w :setText
    100 50 200 160 w :move
    w :show
    w :run 
@@ -46,7 +46,7 @@ CLASS: AppWindow <SUPER FrameWindow
    BYE
 ;
 
-HERE IMAGE-BASE - 10000 + TO IMAGE-SIZE \ Вместо 10000 свое значение
+HERE IMAGE-BASE - 10000 + TO IMAGE-SIZE \ Р’РјРµСЃС‚Рѕ 10000 СЃРІРѕРµ Р·РЅР°С‡РµРЅРёРµ
 ' RUN MAINX !
 TRUE TO ?GUI
 S" yourapp.exe" SAVE BYE

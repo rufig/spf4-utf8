@@ -1,17 +1,17 @@
 \ 28-10-2007 ~mOleg
-\ тестируем скорость работы алгоритма
+\ С‚РµСЃС‚РёСЂСѓРµРј СЃРєРѕСЂРѕСЃС‚СЊ СЂР°Р±РѕС‚С‹ Р°Р»РіРѕСЂРёС‚РјР°
 
  REQUIRE FOR  devel\~mOleg\lib\util\for-next.f
  REQUIRE own  devel\~moleg\lib\util\priority.f
 
                                    DECIMAL
 
- 16000 CONSTANT #array   \ размер массива в ячейках
+ 16000 CONSTANT #array   \ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° РІ СЏС‡РµР№РєР°С…
 
-       CREATE array      \ сам массив начинается отсюда
+       CREATE array      \ СЃР°Рј РјР°СЃСЃРёРІ РЅР°С‡РёРЅР°РµС‚СЃСЏ РѕС‚СЃСЋРґР°
             #array CELLS ALLOT
 
- \ проверка коректности работы:
+ \ РїСЂРѕРІРµСЂРєР° РєРѕСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°Р±РѕС‚С‹:
  HEX 12345678 SP@ 1 revarr 1E6A2C48 <> THROW
      87654321 SP@ 1 revarr 84C2A6E1 <> THROW
  DECIMAL
@@ -19,16 +19,16 @@
  REQUIRE ?DEFINED       devel\~moleg\lib\util\ifdef.f
  REQUIRE RANDOM         devel\~day\common\RND.F
 
-\ заполнить массив случайными числами
+\ Р·Р°РїРѕР»РЅРёС‚СЊ РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
 : filarr ( --> ) array #array FOR RANDOM OVER ! CELL + TILL DROP ;
 
-\ для замера скорости
+\ РґР»СЏ Р·Р°РјРµСЂР° СЃРєРѕСЂРѕСЃС‚Рё
  REQUIRE ResetProfiles  devel\~pinka\lib\Tools\profiler.f
 
-\ реверс порядка бит для каждой ячейки массива
+\ СЂРµРІРµСЂСЃ РїРѕСЂСЏРґРєР° Р±РёС‚ РґР»СЏ РєР°Р¶РґРѕР№ СЏС‡РµР№РєРё РјР°СЃСЃРёРІР°
 : sample ( --> ) array #array revarr ;
 
-realtime own 0= THROW \ не могу установить приоритет
+realtime own 0= THROW \ РЅРµ РјРѕРіСѓ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїСЂРёРѕСЂРёС‚РµС‚
 
 : test ( --> )
        filarr

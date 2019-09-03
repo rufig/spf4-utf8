@@ -2,7 +2,7 @@
 \ Deferred words
 \ Accepted at the 2005 Forth200x meeting
 
-\ На случай, для совместимости.
+\ РќР° СЃР»СѓС‡Р°Р№, РґР»СЏ СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚Рё.
 
 : DEFER ( "<spaces>name" -- )
   VECT

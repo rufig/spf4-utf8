@@ -13,11 +13,11 @@ REQUIRE [IF] lib/include/tools.f
   THEN
   CURRENT @ +SWORD
   ALIGN
-  HERE SWAP ! ( заполнили cfa )
+  HERE SWAP ! ( Р·Р°РїРѕР»РЅРёР»Рё cfa )
 ;
 : SCREATE ( S" name" -- )
   SHEADER
-  HERE DOES>A ! ( для DOES )
+  HERE DOES>A ! ( РґР»СЏ DOES )
   ['] _CREATE-CODE COMPILE,
 ;
 [THEN]

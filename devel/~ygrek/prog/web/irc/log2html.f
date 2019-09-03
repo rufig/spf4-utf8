@@ -1,5 +1,5 @@
 \ $Id$
-\ Конвертор IRC логов в HTML
+\ РљРѕРЅРІРµСЂС‚РѕСЂ IRC Р»РѕРіРѕРІ РІ HTML
 
 REQUIRE STR@ ~ac/lib/str5.f
 REQUIRE SPLIT ~pinka/samples/2005/lib/split.f

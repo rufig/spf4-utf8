@@ -1,7 +1,7 @@
-\ Простейшие оконные и контекстные меню.
-\ От popupmenu.f отличаются наличием иконок.
-\ Примеры в конце.
-\ Связывать с пунктом меню XT вместо ID можно только в NT.
+\ РџСЂРѕСЃС‚РµР№С€РёРµ РѕРєРѕРЅРЅС‹Рµ Рё РєРѕРЅС‚РµРєСЃС‚РЅС‹Рµ РјРµРЅСЋ.
+\ РћС‚ popupmenu.f РѕС‚Р»РёС‡Р°СЋС‚СЃСЏ РЅР°Р»РёС‡РёРµРј РёРєРѕРЅРѕРє.
+\ РџСЂРёРјРµСЂС‹ РІ РєРѕРЅС†Рµ.
+\ РЎРІСЏР·С‹РІР°С‚СЊ СЃ РїСѓРЅРєС‚РѕРј РјРµРЅСЋ XT РІРјРµСЃС‚Рѕ ID РјРѕР¶РЅРѕ С‚РѕР»СЊРєРѕ РІ NT.
 
 REQUIRE Window         ~ac/lib/win/window/window.f
 REQUIRE TrackMenu      ~ac/lib/win/window/popupmenu.f
@@ -58,7 +58,7 @@ MF_STRING CONSTANT MFT_STRING
 VECT vGetIconFilename
 
 : GetIconFilename1 ( nfa i -- addr u )
-\ по имени и индексу слова в словаре выдать его иконку для меню
+\ РїРѕ РёРјРµРЅРё Рё РёРЅРґРµРєСЃСѓ СЃР»РѕРІР° РІ СЃР»РѕРІР°СЂРµ РІС‹РґР°С‚СЊ РµРіРѕ РёРєРѕРЅРєСѓ РґР»СЏ РјРµРЅСЋ
   2DROP S" "
 ; ' GetIconFilename1 TO vGetIconFilename
 
@@ -69,19 +69,19 @@ VECT vGetIconFilename
   BEGIN
     DUP
   WHILE
-\    DUP NAME>        \ пришлось заменить на i, т.к. Win98 не сохраняет полный id :(
+\    DUP NAME>        \ РїСЂРёС€Р»РѕСЃСЊ Р·Р°РјРµРЅРёС‚СЊ РЅР° i, С‚.Рє. Win98 РЅРµ СЃРѕС…СЂР°РЅСЏРµС‚ РїРѕР»РЅС‹Р№ id :(
     -> nfa
     i 1+ -> i
     h i 0
     nfa i vGetIconFilename
-    nfa COUNT 2DUP + DUP -> a C@ -> c  0 a C! \ временная запись нуля в конце имени
+    nfa COUNT 2DUP + DUP -> a C@ -> c  0 a C! \ РІСЂРµРјРµРЅРЅР°СЏ Р·Р°РїРёСЃСЊ РЅСѓР»СЏ РІ РєРѕРЅС†Рµ РёРјРµРЅРё
     AppendMenuItem DROP
     c a C!
     nfa CDR
   REPEAT DROP
-  x y wnd h TrackMenuWnd -> i \ WinNT позволяет передавать xt в качестве id
-  i                           \ а Win98 'обрезает' большие числа, пришлось
-  IF                          \ вводить эту глупость с нумерацией
+  x y wnd h TrackMenuWnd -> i \ WinNT РїРѕР·РІРѕР»СЏРµС‚ РїРµСЂРµРґР°РІР°С‚СЊ xt РІ РєР°С‡РµСЃС‚РІРµ id
+  i                           \ Р° Win98 'РѕР±СЂРµР·Р°РµС‚' Р±РѕР»СЊС€РёРµ С‡РёСЃР»Р°, РїСЂРёС€Р»РѕСЃСЊ
+  IF                          \ РІРІРѕРґРёС‚СЊ СЌС‚Сѓ РіР»СѓРїРѕСЃС‚СЊ СЃ РЅСѓРјРµСЂР°С†РёРµР№
     wid @
     BEGIN
       i 1- DUP -> i
@@ -101,7 +101,7 @@ VECT vGetIconFilename
 CreatePopupMenu
 ' NOOP 0 S" 111.bmp" S" test&1" AppendMenuItem
 ' NOOP 0 S" 111.bmp" S" tes&t2" AppendMenuItem
-:NONAME ." Thanks!" CR ; 0 S" 111.bmp" S" &Нажми меня!" AppendMenuItem
+:NONAME ." Thanks!" CR ; 0 S" 111.bmp" S" &РќР°Р¶РјРё РјРµРЅСЏ!" AppendMenuItem
 \  0 0 ROT TrackMenu EXECUTE
 \ EOF
 
@@ -114,7 +114,7 @@ CreateMenu
   || h ||
   S" RichEdit20A" SPF_STDEDIT 0 Window -> h
   ( menu ) h SetMenu DROP
-  S" Это редактор" DROP h SetWindowTextA DROP
+  S" Р­С‚Рѕ СЂРµРґР°РєС‚РѕСЂ" DROP h SetWindowTextA DROP
   h WindowShow
   h MessageLoop
   h WindowDelete

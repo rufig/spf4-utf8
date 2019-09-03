@@ -1,5 +1,5 @@
-\ Колебания
-\ Математическое моделирование
+\ РљРѕР»РµР±Р°РЅРёСЏ
+\ РњР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ
 \ (c) yGREK Heretix mailto:heretix@yandex.ru
 \ 21.Apr.2005
 
@@ -15,7 +15,7 @@ model.f
 : DRAW1 { \ w s1 s }
    GLWindow :new -> w
    w :create
-   S" Автоколебания" w :setText
+   S" РђРІС‚РѕРєРѕР»РµР±Р°РЅРёСЏ" w :setText
    w :maximize
 
    GLPlot2D :new -> s
@@ -40,7 +40,7 @@ model.f
 : DRAW2 { \ w s1 s }
    GLWindow :new -> w
    w :create
-   S" Мат моделирование - Колебания" w :setText
+   S" РњР°С‚ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ - РљРѕР»РµР±Р°РЅРёСЏ" w :setText
    w :maximize
 
    GLPlot2D :new -> s
@@ -76,7 +76,7 @@ REQUIRE button ~ygrek/~yz/lib/winctl.f
   R> -text# >FLOAT 0= IF 0e THEN
   FREE THROW
 ;
-\ учитываем что без символа "e" вещественное число не воспринимается
+\ СѓС‡РёС‚С‹РІР°РµРј С‡С‚Рѕ Р±РµР· СЃРёРјРІРѕР»Р° "e" РІРµС‰РµСЃС‚РІРµРЅРЅРѕРµ С‡РёСЃР»Рѕ РЅРµ РІРѕСЃРїСЂРёРЅРёРјР°РµС‚СЃСЏ
 : >fnum >FNUM OVER + DUP [CHAR] e SWAP C! 1+ 0 SWAP C! ;
 \ : >fnum >FNUM OVER + 0 SWAP C! ;
 
@@ -86,7 +86,7 @@ add-graph.f
   WINDOWS...
   " Times New Roman Cyr" 12 create-font default-font
   0 dialog-window TO winmain
-  " Мат моделирование N5. yGREK heretix. КА-21" winmain -text!
+  " РњР°С‚ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ N5. yGREK heretix. РљРђ-21" winmain -text!
 
   GRID
 
@@ -94,8 +94,8 @@ add-graph.f
 
     hline 500 1 this ctlresize |
     ===
-    " График1" button -right add-graph1 this -command! | 
-    " График2" button -left  add-graph2 this -command! | 
+    " Р“СЂР°С„РёРє1" button -right add-graph1 this -command! | 
+    " Р“СЂР°С„РёРє2" button -left  add-graph2 this -command! | 
   GRID; winmain -grid!
   winmain wincenter
   winmain winshow

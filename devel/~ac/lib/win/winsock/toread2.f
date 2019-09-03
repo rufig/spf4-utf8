@@ -1,6 +1,6 @@
-\ ToRead2 - расширенный вариант ToRead, возвращающий ошибку -1002
-\ при обрыве или закрытии соединения (старый ToRead обрывов не замечает)
-\ ср. PAD 0x541B ( FIONREAD) s ioctlsocket ...
+\ ToRead2 - СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ РІР°СЂРёР°РЅС‚ ToRead, РІРѕР·РІСЂР°С‰Р°СЋС‰РёР№ РѕС€РёР±РєСѓ -1002
+\ РїСЂРё РѕР±СЂС‹РІРµ РёР»Рё Р·Р°РєСЂС‹С‚РёРё СЃРѕРµРґРёРЅРµРЅРёСЏ (СЃС‚Р°СЂС‹Р№ ToRead РѕР±СЂС‹РІРѕРІ РЅРµ Р·Р°РјРµС‡Р°РµС‚)
+\ СЃСЂ. PAD 0x541B ( FIONREAD) s ioctlsocket ...
 
 REQUIRE {             lib/ext/locals.f
 REQUIRE CreateSocket  ~ac/lib/win/winsock/sockets.f
@@ -12,7 +12,7 @@ REQUIRE CreateSocket  ~ac/lib/win/winsock/sockets.f
   0  mem 2 CELLS + !
 
   0  mem 3 CELLS + !
-  50  mem 4 CELLS + ! \ таймаут 50ms
+  50  mem 4 CELLS + ! \ С‚Р°Р№РјР°СѓС‚ 50ms
 
   mem 3 CELLS +  mem 0 mem 0 select
   mem FREE ?DUP IF 0 SWAP EXIT THEN

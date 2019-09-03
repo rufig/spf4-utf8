@@ -2,10 +2,10 @@ REQUIRE STR@          ~ac/lib/str5.f
 REQUIRE COMPARE-U     ~ac/lib/string/compare-u.f
 
 VECT vParseMime
-USER MimePart           \ временный указатель на текущую mime-часть
-USER CurrentHeader      \ временный указатель на текущее поле заголовка
-USER NestingLevel       \ текущий уровень вложенности
-USER uBodySectionHeader \ модификатор. Если TRUE, то GetMimePart отдаст заголовок
+USER MimePart           \ РІСЂРµРјРµРЅРЅС‹Р№ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚РµРєСѓС‰СѓСЋ mime-С‡Р°СЃС‚СЊ
+USER CurrentHeader      \ РІСЂРµРјРµРЅРЅС‹Р№ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚РµРєСѓС‰РµРµ РїРѕР»Рµ Р·Р°РіРѕР»РѕРІРєР°
+USER NestingLevel       \ С‚РµРєСѓС‰РёР№ СѓСЂРѕРІРµРЅСЊ РІР»РѕР¶РµРЅРЅРѕСЃС‚Рё
+USER uBodySectionHeader \ РјРѕРґРёС„РёРєР°С‚РѕСЂ. Р•СЃР»Рё TRUE, С‚Рѕ GetMimePart РѕС‚РґР°СЃС‚ Р·Р°РіРѕР»РѕРІРѕРє
 USER Rfc822MessageSize
 
 0
@@ -59,7 +59,7 @@ CONSTANT /MimePart
   REPEAT DROP
 ;
 : FindMimeHeader { addr u mp -- addr2 u2 }
-  mp 0= IF 0 0 EXIT THEN \ неверный формат письма = multipart, но части не распознаны
+  mp 0= IF 0 0 EXIT THEN \ РЅРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РїРёСЃСЊРјР° = multipart, РЅРѕ С‡Р°СЃС‚Рё РЅРµ СЂР°СЃРїРѕР·РЅР°РЅС‹
   mp mpHeaderList @
   BEGIN
     DUP
@@ -70,7 +70,7 @@ CONSTANT /MimePart
     mhNextHeader @
   REPEAT DROP
   \ S" "
-  0 0 ( =NIL, а не "" )
+  0 0 ( =NIL, Р° РЅРµ "" )
 ;
 
 : ParseHeaderLineNew
@@ -85,7 +85,7 @@ CONSTANT /MimePart
 : ParseHeaderLineCont
   SOURCE NIP LTL @ + CurrentHeader @ mhValueLen +!
 ;
-: ParseHeaderLine  ( -- ) \ на входе в TIB строка заголовка
+: ParseHeaderLine  ( -- ) \ РЅР° РІС…РѕРґРµ РІ TIB СЃС‚СЂРѕРєР° Р·Р°РіРѕР»РѕРІРєР°
   TIB C@ IsDelimiter
   IF ParseHeaderLineCont ELSE ParseHeaderLineNew THEN
 ;
@@ -171,15 +171,15 @@ USER uPhParamNum
 : ParseHeader
   /MimePart ALLOCATE THROW 
   DUP MimePart !
-  mpHeaderList CurrentHeader ! \ псевдозаголовок, указатель на список
+  mpHeaderList CurrentHeader ! \ РїСЃРµРІРґРѕР·Р°РіРѕР»РѕРІРѕРє, СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃРїРёСЃРѕРє
   NestingLevel @ MimePart @ mpLevel !
-  1 MimePart @ mpIndex ! \ перезапишется при выходе, если была рекурсия
+  1 MimePart @ mpIndex ! \ РїРµСЂРµР·Р°РїРёС€РµС‚СЃСЏ РїСЂРё РІС‹С…РѕРґРµ, РµСЃР»Рё Р±С‹Р»Р° СЂРµРєСѓСЂСЃРёСЏ
   SOURCE MimePart @ mpPartLen ! MimePart @ mpPartAddr !
 
   TIB MimePart @ mpHeaderAddr !
   BEGIN
     13 PARSE DUP
-    PeekChar 13 = IF >IN 1+! THEN \ неправильные концы строк CRCRLF
+    PeekChar 13 = IF >IN 1+! THEN \ РЅРµРїСЂР°РІРёР»СЊРЅС‹Рµ РєРѕРЅС†С‹ СЃС‚СЂРѕРє CRCRLF
     PeekChar 10 = IF >IN 1+! THEN
   WHILE
     ['] ParseHeaderLine EVALUATE-WITH
@@ -201,12 +201,12 @@ USER uPhParamNum
     MimePart @ mpBoundaryLen @ + TIB - >IN !
     TIB >IN @ + 2 S" --" COMPARE 0<> IF 2 >IN +! TRUE EXIT THEN
     4 >IN +!
-    PeekChar 0x0A = ( неправильные концы строк )
+    PeekChar 0x0A = ( РЅРµРїСЂР°РІРёР»СЊРЅС‹Рµ РєРѕРЅС†С‹ СЃС‚СЂРѕРє )
     IF >IN 1+! THEN
     TRUE
   ELSE
     DUP 5 < IF DROP FALSE EXIT THEN
-    \ не найден разделитель частей, неверный формат письма, обработаем его хвост
+    \ РЅРµ РЅР°Р№РґРµРЅ СЂР°Р·РґРµР»РёС‚РµР»СЊ С‡Р°СЃС‚РµР№, РЅРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РїРёСЃСЊРјР°, РѕР±СЂР°Р±РѕС‚Р°РµРј РµРіРѕ С…РІРѕСЃС‚
     DUP >IN +!
     + TRUE
   THEN
@@ -216,7 +216,7 @@ USER uPhParamNum
   CurrentHeader @ -> ch
   CurrentHeader 0! MimePart 0!
   NestingLevel 1+!
-  addr u ['] vParseMime EVALUATE-WITH \ рекурсия
+  addr u ['] vParseMime EVALUATE-WITH \ СЂРµРєСѓСЂСЃРёСЏ
   i OVER mpIndex !
   NestingLevel @ 1- NestingLevel !
   ch CurrentHeader !
@@ -238,7 +238,7 @@ USER uPhParamNum
 : ParseMultipartBody { \ i pp -- }
   PartBoundary NIP 0= IF EXIT THEN
   BEGIN
-    CharAddr DUP C@ 0x0A = IF 1+ THEN \ неправильные концы строк
+    CharAddr DUP C@ 0x0A = IF 1+ THEN \ РЅРµРїСЂР°РІРёР»СЊРЅС‹Рµ РєРѕРЅС†С‹ СЃС‚СЂРѕРє
     PartBoundary
   WHILE
     i 1+ -> i
@@ -298,7 +298,7 @@ USER uPhParamNum
        ELSE ParsePlainBody THEN
   THEN
 ;
-: ParseMime ( -- mp ) \ на входе в TIB сообщение
+: ParseMime ( -- mp ) \ РЅР° РІС…РѕРґРµ РІ TIB СЃРѕРѕР±С‰РµРЅРёРµ
   ParseHeader
   ParseBody
   MimePart @

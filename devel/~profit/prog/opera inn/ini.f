@@ -33,15 +33,15 @@ IF restOfString THEN
 
 [CHAR] = byChar divide-patch
 
-                       *> \ последовательно подаём:
-section @       DROPB <*> \ сначала название секции,
-isComment @     DROPB <*> \ потом коментарийность,
-S>              DROPB <*> \ потом имя значения,
-restOfString S> DROPB <*  \ потом -- значение.
+                       *> \ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕ РїРѕРґР°С‘Рј:
+section @       DROPB <*> \ СЃРЅР°С‡Р°Р»Р° РЅР°Р·РІР°РЅРёРµ СЃРµРєС†РёРё,
+isComment @     DROPB <*> \ РїРѕС‚РѕРј РєРѕРјРµРЅС‚Р°СЂРёР№РЅРѕСЃС‚СЊ,
+S>              DROPB <*> \ РїРѕС‚РѕРј РёРјСЏ Р·РЅР°С‡РµРЅРёСЏ,
+restOfString S> DROPB <*  \ РїРѕС‚РѕРј -- Р·РЅР°С‡РµРЅРёРµ.
 
-}arr ( addr u ) \ массив из record 
+}arr ( addr u ) \ РјР°СЃСЃРёРІ РёР· record 
 
-record iterateBy \ проход по массиву, прыгаем через record ячеек в каждой итерации
+record iterateBy \ РїСЂРѕС…РѕРґ РїРѕ РјР°СЃСЃРёРІСѓ, РїСЂС‹РіР°РµРј С‡РµСЂРµР· record СЏС‡РµРµРє РІ РєР°Р¶РґРѕР№ РёС‚РµСЂР°С†РёРё
 DUP commentFlag @ CR IF ." ;" THEN
 DUP secName @ STR@ TYPE
 DUP setting @ SPACE STR@ TYPE

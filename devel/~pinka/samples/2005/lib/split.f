@@ -4,8 +4,8 @@
 REQUIRE [UNDEFINED] lib/include/tools.f
 
 : SPLIT- ( a u a-key u-key -- a-right u-right  a-left u-left  true  |  a u false )
-\ разделить строку a u на часть слева от подстроки a-key u-key
-\ и на часть справа от этой подстроки.
+\ СЂР°Р·РґРµР»РёС‚СЊ СЃС‚СЂРѕРєСѓ a u РЅР° С‡Р°СЃС‚СЊ СЃР»РµРІР° РѕС‚ РїРѕРґСЃС‚СЂРѕРєРё a-key u-key
+\ Рё РЅР° С‡Р°СЃС‚СЊ СЃРїСЂР°РІР° РѕС‚ СЌС‚РѕР№ РїРѕРґСЃС‚СЂРѕРєРё.
 
   2OVER DROP >R DUP >R ( R: a u1 )
   SEARCH   IF  ( aa uu )
@@ -15,11 +15,11 @@ REQUIRE [UNDEFINED] lib/include/tools.f
 
   2R> 2DROP FALSE
 ;
-\ Без локальных переменных. 
-\ С ними проще сделать, а работает на 15-20% медленней (см. split-test.f)
+\ Р‘РµР· Р»РѕРєР°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С…. 
+\ РЎ РЅРёРјРё РїСЂРѕС‰Рµ СЃРґРµР»Р°С‚СЊ, Р° СЂР°Р±РѕС‚Р°РµС‚ РЅР° 15-20% РјРµРґР»РµРЅРЅРµР№ (СЃРј. split-test.f)
 
 : SPLIT ( a u a-key u-key -- a-left u-left  a-right u-right  true  |  a u false )
-\ вариант дает более 'логичный' порядок на выходе: левая_часть правая_часть
+\ РІР°СЂРёР°РЅС‚ РґР°РµС‚ Р±РѕР»РµРµ 'Р»РѕРіРёС‡РЅС‹Р№' РїРѕСЂСЏРґРѕРє РЅР° РІС‹С…РѕРґРµ: Р»РµРІР°СЏ_С‡Р°СЃС‚СЊ РїСЂР°РІР°СЏ_С‡Р°СЃС‚СЊ
   DUP >R 2OVER DROP >R ( R: u1 a )
   SEARCH   IF  ( aa uu )
   SWAP R@ OVER R> -     \ a aa-a       - left part
@@ -32,7 +32,7 @@ REQUIRE [UNDEFINED] lib/include/tools.f
   ROT SWAP MOVE
 ;
 : INPLACE- ( a u a-key u-key a-value u-value -- )
-  \ записывает value по всем key
+  \ Р·Р°РїРёСЃС‹РІР°РµС‚ value РїРѕ РІСЃРµРј key
   2>R 2SWAP
   BEGIN  2OVER SPLIT-
   WHILE  + 2R@ MOVE-
@@ -55,7 +55,7 @@ REQUIRE [UNDEFINED] lib/include/tools.f
 \ 01.Dec.2006 added:
 
 : REPLACE- ( a u a-k u-k a-new u-new -- a u3 )
-\ заменяет "на месте". Перемещает на каждом шаге весь оставшийся кусок. Без проверки границ.
+\ Р·Р°РјРµРЅСЏРµС‚ "РЅР° РјРµСЃС‚Рµ". РџРµСЂРµРјРµС‰Р°РµС‚ РЅР° РєР°Р¶РґРѕРј С€Р°РіРµ РІРµСЃСЊ РѕСЃС‚Р°РІС€РёР№СЃСЏ РєСѓСЃРѕРє. Р‘РµР· РїСЂРѕРІРµСЂРєРё РіСЂР°РЅРёС†.
   5 PICK >R 2>R 2SWAP
   ( a-k u-k  a-rest u-rest )
   BEGIN 2OVER SPLIT- WHILE ( a-k u-k  a-r u-r a-l u-l )
@@ -80,11 +80,11 @@ REQUIRE [UNDEFINED] lib/include/tools.f
 [THEN]
 
 : REPLACE-TO ( a u a-k u-k a-new u-new a-dst u-dst-max -- a-dst u )
-\ делает замену в указанный буфер  с проверкой границ.
+\ РґРµР»Р°РµС‚ Р·Р°РјРµРЅСѓ РІ СѓРєР°Р·Р°РЅРЅС‹Р№ Р±СѓС„РµСЂ  СЃ РїСЂРѕРІРµСЂРєРѕР№ РіСЂР°РЅРёС†.
   OVER >R  2SWAP 2>R 2>R  2SWAP
   BEGIN 2OVER SPLIT- WHILE 2R> CROP 2R@ 2SWAP CROP 2>R REPEAT 2SWAP 2DROP
   2R> CROP DROP ( a2 ) RDROP RDROP R> TUCK -
 ;
 \ S" How are you?" S" How" S" Where" S" placeholder to place string here" REPLACE-TO TYPE
 
-\ много параметров... какой тут стек удобней, еще не понятно.
+\ РјРЅРѕРіРѕ РїР°СЂР°РјРµС‚СЂРѕРІ... РєР°РєРѕР№ С‚СѓС‚ СЃС‚РµРє СѓРґРѕР±РЅРµР№, РµС‰Рµ РЅРµ РїРѕРЅСЏС‚РЅРѕ.

@@ -1,5 +1,5 @@
-( GetDNS - получить IP-адреса или имена DNS-серверов по умолчанию и
-  вернуть массив строк )
+( GetDNS - РїРѕР»СѓС‡РёС‚СЊ IP-Р°РґСЂРµСЃР° РёР»Рё РёРјРµРЅР° DNS-СЃРµСЂРІРµСЂРѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ Рё
+  РІРµСЂРЅСѓС‚СЊ РјР°СЃСЃРёРІ СЃС‚СЂРѕРє )
 
 REQUIRE StrValue     ~ac/lib/win/registry2.f
 REQUIRE CreateSocket ~ac/lib/win/winsock/sockets.f

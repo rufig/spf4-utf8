@@ -21,14 +21,14 @@ NewMemoryMark SetReportMark
 (( S" (1++)"  dotto: error.dot -> FALSE ))
 (( S" ()"     dotto: error.dot -> FALSE ))
 (( S" +"      dotto: error.dot -> FALSE ))
-\ (( S" (3))"   dotto: error.dot -> FALSE )) \ это пока не ловится...
+\ (( S" (3))"   dotto: error.dot -> FALSE )) \ СЌС‚Рѕ РїРѕРєР° РЅРµ Р»РѕРІРёС‚СЃСЏ...
 (( S" 123(*)" dotto: error.dot -> FALSE ))
 (( S" a\bc"   dotto: error.dot -> FALSE ))
 
 countMem . .
 NewMemoryMark SetReportMark
 
-\ ClearMemInfo \ тут утечки памяти за счёт некорректных регекспов - игнорируем
+\ ClearMemInfo \ С‚СѓС‚ СѓС‚РµС‡РєРё РїР°РјСЏС‚Рё Р·Р° СЃС‡С‘С‚ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹С… СЂРµРіРµРєСЃРїРѕРІ - РёРіРЅРѕСЂРёСЂСѓРµРј
 
 END-TESTCASES
 
@@ -168,9 +168,9 @@ TESTCASES re_match?
 (( 5 get-group -> 0 0 ))
 (( 6 get-group S" world" TEST-ARRAY -> ))
 (( 7 get-group -> str DROP 17 + 0 ))
-(( 8 ' get-group CATCH NIP 0 <> -> TRUE )) \ ловим ожидаемое исключение
+(( 8 ' get-group CATCH NIP 0 <> -> TRUE )) \ Р»РѕРІРёРј РѕР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ
 
-\ теперь то же самое для статических регекспов
+\ С‚РµРїРµСЂСЊ С‚Рѕ Р¶Рµ СЃР°РјРѕРµ РґР»СЏ СЃС‚Р°С‚РёС‡РµСЃРєРёС… СЂРµРіРµРєСЃРїРѕРІ
 
 (( str RE" (((h(e|a)llo|farewell)\s)+)(cruel\s)?(world|planet)(!?)..." re_match? -> TRUE ))
 (( 0 get-group -> str ))
@@ -181,7 +181,7 @@ TESTCASES re_match?
 (( 5 get-group -> 0 0 ))
 (( 6 get-group S" world" TEST-ARRAY -> ))
 (( 7 get-group -> str DROP 17 + 0 ))
-(( 8 ' get-group CATCH NIP 0 <> -> TRUE )) \ ловим ожидаемое исключение
+(( 8 ' get-group CATCH NIP 0 <> -> TRUE )) \ Р»РѕРІРёРј РѕР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ
 
 (( str RE" ((?:(?:h(e|a)llo|farewell)\s)+)(?:cruel\s)?(world|planet)(!?)..." re_match? -> TRUE ))
 (( 0 get-group -> str ))
@@ -189,7 +189,7 @@ TESTCASES re_match?
 (( 2 get-group S" e" TEST-ARRAY -> ))
 (( 3 get-group S" world" TEST-ARRAY -> ))
 (( 4 get-group -> str DROP 17 + 0 ))
-(( 5 ' get-group CATCH NIP 0 <> -> TRUE )) \ ловим ожидаемое исключение
+(( 5 ' get-group CATCH NIP 0 <> -> TRUE )) \ Р»РѕРІРёРј РѕР¶РёРґР°РµРјРѕРµ РёСЃРєР»СЋС‡РµРЅРёРµ
 
 \ regexp::re_def_groups regexp::print-array
 
@@ -237,7 +237,7 @@ TESTCASES extra
 : str S" ab" ;
 : >pos { a u a1 u1 } a a1 - DUP u + ;
 : np ROT get-group 2SWAP >pos ;
-0 [IF] \ не проходится! FIX!!
+0 [IF] \ РЅРµ РїСЂРѕС…РѕРґРёС‚СЃСЏ! FIX!!
 (( str S" ((a?)((ab)?))(b?)" stre_match? -> TRUE ))
 (( 0 str np -> 0 2 ))
 (( 1 str np -> 0 2 ))
@@ -290,7 +290,7 @@ END-TESTCASES
 
 \ -----------------------------------------------------------------------
 
-0 regexp::set-default-groups \ чтобы утихомирить MemReport, удаляем результаты последнего сопоставления
+0 regexp::set-default-groups \ С‡С‚РѕР±С‹ СѓС‚РёС…РѕРјРёСЂРёС‚СЊ MemReport, СѓРґР°Р»СЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
 
 MemReport
 countMem NIP 1 = [IF] CR .( NB: It is not a leak but a dynamic buffer for ANSI-FILE) [THEN]

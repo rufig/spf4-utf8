@@ -2,14 +2,14 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="windows-1251"/>
 
-  <!-- Óñòàíàâëèâàåì êîäèðîêó äÿë âñåõ âûõîäíûõ ôîðìàòîâ -->
+  <!-- Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð´Ð¸Ñ€Ð¾ÐºÑƒ Ð´ÑÐ» Ð²ÑÐµÑ… Ð²Ñ‹Ñ…Ð¾Ð´Ð½Ñ‹Ñ… Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð¾Ð² -->
   <xsl:param name="htmlhelp.encoding" select="'windows-1251'"></xsl:param>
   <xsl:param name="htmlhelp.output.encoding" select="'windows-1251'"></xsl:param>
   <xsl:param name="chunker.output.encoding" select="'windows-1251'"></xsl:param>
 
   <xsl:param name="generate.legalnotice.link" select="1"/>
 
-  <!-- Âêëþ÷àåì íàâèãàöèþ (ïåðåõîäû Ñëåä. è Ïðåä.) -->
+  <!-- Ð’ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸ÑŽ (Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ñ‹ Ð¡Ð»ÐµÐ´. Ð¸ ÐŸÑ€ÐµÐ´.) -->
   <xsl:param name="suppress.navigation" select="0"/>
 
   <!--xsl:param name="process.empty.source.toc" select="1"></xsl:param-->
@@ -18,10 +18,10 @@
 
   <xsl:param name="html.stylesheet" select="'simple.css'"/>
 
-  <!-- ßçûê (÷òîáû êîìïèëÿòîð chm âûáðàë ïðàâèëüíóþ êîäèðîâêó)-->
+  <!-- Ð¯Ð·Ñ‹Ðº (Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ‚Ð¾Ñ€ chm Ð²Ñ‹Ð±Ñ€Ð°Ð» Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½ÑƒÑŽ ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÑƒ)-->
   <xsl:param name="l10n.gentext.default.language" select="'ru'"></xsl:param>
 
-  <!-- Ýòîò òåêñò áóäåò â øàïêå êàæäîé ñòðàíèöû -->
+  <!-- Ð­Ñ‚Ð¾Ñ‚ Ñ‚ÐµÐºÑÑ‚ Ð±ÑƒÐ´ÐµÑ‚ Ð² ÑˆÐ°Ð¿ÐºÐµ ÐºÐ°Ð¶Ð´Ð¾Ð¹ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ -->
   <xsl:template name="user.header.navigation">
     <hr></hr>
     <p>
@@ -33,7 +33,7 @@
   <xsl:param name="toc.section.depth" select="1"/>
   <xsl:param name="toc.max.depth">1</xsl:param>
 
-  <!-- Ñîçäàâàòü îãëàâëåíèå äëÿ óêàçàííûõ ðàçäåëîâ òîëüêî -->
+  <!-- Ð¡Ð¾Ð·Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð¾Ð³Ð»Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´Ð»Ñ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ñ‹Ñ… Ñ€Ð°Ð·Ð´ÐµÐ»Ð¾Ð² Ñ‚Ð¾Ð»ÑŒÐºÐ¾ -->
   <xsl:param name="generate.toc">
   book toc
   chapter toc

@@ -1,7 +1,7 @@
 REQUIRE TESTCASES ~ygrek/lib/testcase.f
 
-\ Проверка на выровненность структур данных,
-\ порождаемых словами:
+\ РџСЂРѕРІРµСЂРєР° РЅР° РІС‹СЂРѕРІРЅРµРЅРЅРѕСЃС‚СЊ СЃС‚СЂСѓРєС‚СѓСЂ РґР°РЅРЅС‹С…,
+\ РїРѕСЂРѕР¶РґР°РµРјС‹С… СЃР»РѕРІР°РјРё:
 \ CREATE , VARIABLE , VALUE , USER , USER-VALUE
 
 TESTCASES data cell alignment
@@ -122,7 +122,7 @@ ALIGN DUP ALLOT
 
 DROP
 
-\ шесть достаточно?..
+\ С€РµСЃС‚СЊ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ?..
 
 WARNING !
 END-TESTCASES

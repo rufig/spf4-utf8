@@ -1,30 +1,30 @@
 \ 21-02-2007 ~mOleg
 \ Copyright [C] 2006-2007 mOleg mininoleg@yahoo.com
-\ конструкции, которых не хватает в СПФ
+\ РєРѕРЅСЃС‚СЂСѓРєС†РёРё, РєРѕС‚РѕСЂС‹С… РЅРµ С…РІР°С‚Р°РµС‚ РІ РЎРџР¤
 
  REQUIRE ?DEFINED devel\~moleg\lib\util\ifdef.f
 
-\ выдает смещение от текущего адреса до указанного.
+\ РІС‹РґР°РµС‚ СЃРјРµС‰РµРЅРёРµ РѕС‚ С‚РµРєСѓС‰РµРіРѕ Р°РґСЂРµСЃР° РґРѕ СѓРєР°Р·Р°РЅРЅРѕРіРѕ.
 ?DEFINED atod : atod ( addr --> disp )  HERE CELL+ - ;
 
-\ ветвление по нулю
+\ РІРµС‚РІР»РµРЅРёРµ РїРѕ РЅСѓР»СЋ
 : N?BRANCH, ( ? )
             ?SET
             0x85 TO J_COD
             ???BR-OPT
             SetJP  SetOP
-            J_COD    \  JX без 0x0F
-            0x0F     \  кусок от JX
+            J_COD    \  JX Р±РµР· 0x0F
+            0x0F     \  РєСѓСЃРѕРє РѕС‚ JX
             C, C,
             DUP IF atod THEN , DP @ TO LAST-HERE ;
 
-\ пропустить, если 0 иначе переход за ELSE
+\ РїСЂРѕРїСѓСЃС‚РёС‚СЊ, РµСЃР»Рё 0 РёРЅР°С‡Рµ РїРµСЂРµС…РѕРґ Р·Р° ELSE
 : IFNOT ( flag --> ) ?COMP 0 N?BRANCH, >MARK 1 ; IMMEDIATE
 
-\ продолжать цикл, если 0
+\ РїСЂРѕРґРѕР»Р¶Р°С‚СЊ С†РёРєР», РµСЃР»Рё 0
 : WHILENOT ( flag --> ) ?COMP 0 N?BRANCH, >MARK 1 2SWAP ; IMMEDIATE
 
-?DEFINED test{ \EOF \ -- тестовая секция -------------------------------------
+?DEFINED test{ \EOF \ -- С‚РµСЃС‚РѕРІР°СЏ СЃРµРєС†РёСЏ -------------------------------------
 
 test{
       12345 CONSTANT zzzz

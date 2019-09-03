@@ -1,6 +1,6 @@
-\ ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
-\ ณ  80486 CPU Assembler/Disassembler for Common Forth Experiment Versions  ณ
-\ ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+\ ะทะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดยฉ
+\ ะ  80486 CPU Assembler/Disassembler for Common Forth Experiment Versions  ะ
+\ ัะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดั
 
                         \ Copyright (C) Luke Lee, since 1993
                         \               All rights reserved.
@@ -66,7 +66,7 @@
         \   11/13/'95 : Add FOR ... NEXT structure for counted loop.    
         \   03/28/'96 : Modify for TRACER.4TH, set TRACER OFF in CODE:,
         \                or it will sure to crash . 
-        \  11\26\'99  €ค ฏโจเฎข ญฎ ฏฎค SPFOpt  ชแจฌฎข๋ฌ ..
+        \  11\26\'99  โ”€โ•“โ•โ•ะ‘โ•—ะฎโ•โ•’โ•โ•โ• โ•โ•โ•“ SPFOpt โ–โ•โ•ะโ•—โ•โ•โ•’ะโ• โ–.โ–.
         \  email:mak@mail.rtc.neva.ru
         \  http://informer.rtc.neva.ru/fpauk.html
 
@@ -96,19 +96,19 @@
 \ -----------------------------------------
 
 \  1. Prefix : ( Prefixes may not follow the following order .)
-\   ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฟ
-\   ณ Address Size ณ Operand Size ณ Instruction ณ Segment    ณ prefix
-\   ณ Prefix       ณ Prefix       ณ Prefix      ณ  Override  ณ name
-\   รฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤด
-\   ณ    0 or 1    ณ    0 or 1    ณ   0 or 1    ณ   0 or 1   ณ bytes
-\   ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤู
+\   ะทะดะดะดะดะดะดะดะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะดะดะดะดะดยฉ
+\   ะ Address Size ะ Operand Size ะ Instruction ะ Segment    ะ prefix
+\   ะ Prefix       ะ Prefix       ะ Prefix      ะ  Override  ะ name
+\   ัะดะดะดะดะดะดะดะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะดะดะดะดะดโ•ข
+\   ะ    0 or 1    ะ    0 or 1    ะ   0 or 1    ะ   0 or 1   ะ bytes
+\   ัะดะดะดะดะดะดะดะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะดะดะดะดะดั
 
 \  2. Instruction body :
-\   ฺฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
-\   ณ  Opcode  ณ MOD|REG|R/M ณ  SIB  ณ  Displacement  ณ   Immediate   ณ
-\   รฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤด
-\   ณ  1 or 2  ณ   0 or 1    ณ 0 or 1ณ   0,1,2 or 4   ณ  0,1,2 or 4   ณ bytes
-\   ภฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+\   ะทะดะดะดะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะฑะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดยฉ
+\   ะ  Opcode  ะ MOD|REG|R/M ะ  SIB  ะ  Displacement  ะ   Immediate   ะ
+\   ัะดะดะดะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะตะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดโ•ข
+\   ะ  1 or 2  ะ   0 or 1    ะ 0 or 1ะ   0,1,2 or 4   ะ  0,1,2 or 4   ะ bytes
+\   ัะดะดะดะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะฐะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดั
 \  ( Maximum length of instruction = 16 bytes )
 WARNING @
 WARNING OFF
@@ -168,40 +168,40 @@ CONSTANT DisassembleTableEntry:
 CONSTANT InstructionPatterns:
 
 \  Operand pattern :
-\                 ฺฤฤ Sub-type
-\         ฺฤ Size ณ        ฺฤฤ Type
-\        ฺมฤฟ  ฺฤฤมฤฤฟ  ฺฤฤมฤฤฟ
+\                 ะทะดะด Sub-type
+\         ะทะด Size ะ        ะทะดะด Type
+\        ะทะฐะดยฉ  ะทะดะดะฐะดะดยฉ  ะทะดะดะฐะดะดยฉ
 \        7  6  5  4  3  2  1  0
-\      ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-\      ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ
-\      ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
-\        ณ  ณ  ณ  ณ  ณ  ภฤฤมฤฤมฤ 000 : Not a special pattern (gerneal pattern)
-\        ณ  ณ  ณ  ณ  ณ           001 : Integer  register
-\        ณ  ณ  ณ  ณ  ณ           010 : Segment  register
-\        ณ  ณ  ณ  ณ  ณ           011 : Floating register
-\        ณ  ณ  ณ  ณ  ณ           100 : Control  register
-\        ณ  ณ  ณ  ณ  ณ           101 : Test     register
-\        ณ  ณ  ณ  ณ  ณ           110 : Debug    register
-\        ณ  ณ  ณ  ณ  ณ           111 : **  Extreme cases  **
-\        ณ  ณ  ภฤฤมฤฤมฤ if special pattern :
-\        ณ  ณ             ๙ Register type : Register value
-\        ณ  ณ             ๙ Extreme cases : 000 : Offset in segment (unsigned)
-\        ณ  ณ                               001 : Relative to (E)IP (signed)
-\        ณ  ณ                               010 : immediate displacement
-\        ณ  ณ                               011 : Memory only
-\        ณ  ณ                               100 : Memory >= 80 ( for floating )
-\        ณ  ณ                               101 : ( not used )
-\        ณ  ณ                               110 : Signed immediate value
-\        ณ  ณ                               111 : Immediate value
-\        ณ  ณ           if general pattern :
-\        ณ  ณ                               000 : memory/integer registers
-\        ณ  ณ                               001 : Integer registers only
-\        ณ  ณ                               010 : Segment registers only
-\        ณ  ณ                               011 : Floating registers only
-\        ณ  ณ                               100 : Control registers only
-\        ณ  ณ                               101 : Test registers only
-\        ณ  ณ                               110 : Debug registers only
-\        ภฤฤมฤ Opreand size : 00 8-bits
+\      ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+\      ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ
+\      ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
+\        ะ  ะ  ะ  ะ  ะ  ัะดะดะฐะดะดะฐะด 000 : Not a special pattern (gerneal pattern)
+\        ะ  ะ  ะ  ะ  ะ           001 : Integer  register
+\        ะ  ะ  ะ  ะ  ะ           010 : Segment  register
+\        ะ  ะ  ะ  ะ  ะ           011 : Floating register
+\        ะ  ะ  ะ  ะ  ะ           100 : Control  register
+\        ะ  ะ  ะ  ะ  ะ           101 : Test     register
+\        ะ  ะ  ะ  ะ  ะ           110 : Debug    register
+\        ะ  ะ  ะ  ะ  ะ           111 : **  Extreme cases  **
+\        ะ  ะ  ัะดะดะฐะดะดะฐะด if special pattern :
+\        ะ  ะ             ะซ Register type : Register value
+\        ะ  ะ             ะซ Extreme cases : 000 : Offset in segment (unsigned)
+\        ะ  ะ                               001 : Relative to (E)IP (signed)
+\        ะ  ะ                               010 : immediate displacement
+\        ะ  ะ                               011 : Memory only
+\        ะ  ะ                               100 : Memory >= 80 ( for floating )
+\        ะ  ะ                               101 : ( not used )
+\        ะ  ะ                               110 : Signed immediate value
+\        ะ  ะ                               111 : Immediate value
+\        ะ  ะ           if general pattern :
+\        ะ  ะ                               000 : memory/integer registers
+\        ะ  ะ                               001 : Integer registers only
+\        ะ  ะ                               010 : Segment registers only
+\        ะ  ะ                               011 : Floating registers only
+\        ะ  ะ                               100 : Control registers only
+\        ะ  ะ                               101 : Test registers only
+\        ะ  ะ                               110 : Debug registers only
+\        ัะดะดะฐะด Opreand size : 00 8-bits
 \                             01 16-bits
 \                             10 32-bits
 \                             11 80-bits
@@ -213,24 +213,24 @@ CONSTANT InstructionPatterns:
 
 \   InstructionDescriptor.OverallDescription
 \        7  6  5  4  3  2  1  0
-\      ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-\      ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ
-\      ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
-\        ณ  ณ  ณ  ณ  ณ  ณ  ภฤฤมฤ Number of opcode(s)
-\        ณ  ณ  ณ  ณ  ภฤฤมฤ Number of operand(s)
-\        ณ  ณ  ณ  ภฤฤ 1 : No operand prefix check for operand 1
-\        ณ  ณ  ภฤฤ 1 : No operand prefix check for operand 2
-\        ณ  ภฤฤ 1 : Both operands are general register patterns ( MOV )
-\        ภฤฤ 1 : Force operand size check for immediate values ( PUSH immed )
+\      ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+\      ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ
+\      ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
+\        ะ  ะ  ะ  ะ  ะ  ะ  ัะดะดะฐะด Number of opcode(s)
+\        ะ  ะ  ะ  ะ  ัะดะดะฐะด Number of operand(s)
+\        ะ  ะ  ะ  ัะดะด 1 : No operand prefix check for operand 1
+\        ะ  ะ  ัะดะด 1 : No operand prefix check for operand 2
+\        ะ  ัะดะด 1 : Both operands are general register patterns ( MOV )
+\        ัะดะด 1 : Force operand size check for immediate values ( PUSH immed )
 \
 \    InstructionDescriptor.DetailDescription
 \        7  6  5  4  3  2  1  0
-\      ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-\      ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ
-\      ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
-\              ณ  ณ  ณ     ณ  ภฤ 1 : Opcode modifier exist
-\              ณ  ณ  ณ     ภฤ 1 : MOD|REG|R/M modifier exist( extended opcode )
-\              ภฤฤมฤฤมฤ MOD|REG|R/M modify value ( only if modifier exists )
+\      ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+\      ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ
+\      ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
+\              ะ  ะ  ะ     ะ  ัะด 1 : Opcode modifier exist
+\              ะ  ะ  ะ     ัะด 1 : MOD|REG|R/M modifier exist( extended opcode )
+\              ัะดะดะฐะดะดะฐะด MOD|REG|R/M modify value ( only if modifier exists )
 
 0
         1 FIELD .OverallDescription
@@ -246,12 +246,12 @@ CONSTANT InstructionDescriptor:
 
 \ OperandDescriptor.Scale
 \        7  6  5  4  3  2  1  0
-\      ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-\      ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ
-\      ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
-\        ณ                 ภฤฤมฤฤ  Scale value : 0, 1, 2 or 3
-\        ณ                         ( where 0 is default value )
-\        ภฤฤ  0 Scale on .Register1Pattern ( default )
+\      ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+\      ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ
+\      ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
+\        ะ                 ัะดะดะฐะดะด  Scale value : 0, 1, 2 or 3
+\        ะ                         ( where 0 is default value )
+\        ัะดะด  0 Scale on .Register1Pattern ( default )
 \             1 Scale on .Register2Pattern
 
 0
@@ -263,17 +263,17 @@ CONSTANT OperandDescriptor:
 
 \  InstructionBuffer.Description byte :
 \     7  6  5  4  3  2  1  0
-\   ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-\   ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ  ณ
-\   ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
-\    ณ  ณ   ณ  ณ  ณ  ณ  ภฤฤมฤฤ  Opcode length \ at least 1, 0 is invalid
-\    ณ  ณ   ณ  ณ  ณ  ภฤฤ 1: Addressing mode byte ( MOD|Reg|R/M ) present
-\    ณ  ณ   ณ  ณ  ภฤฤ 1: Scale Index byte present
-\    ณ  ณ   ภฤฤมฤฤ  00 : No displacement
-\    ณ  ณ           01 : 1-byte displacement
-\    ณ  ณ           10 : 2-byte displacement
-\    ณ  ณ           11 : 4-byte displacement
-\    ภฤฤมฤฤ 00 : No immediate value
+\   ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+\   ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ  ะ
+\   ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
+\    ะ  ะ   ะ  ะ  ะ  ะ  ัะดะดะฐะดะด  Opcode length \ at least 1, 0 is invalid
+\    ะ  ะ   ะ  ะ  ะ  ัะดะด 1: Addressing mode byte ( MOD|Reg|R/M ) present
+\    ะ  ะ   ะ  ะ  ัะดะด 1: Scale Index byte present
+\    ะ  ะ   ัะดะดะฐะดะด  00 : No displacement
+\    ะ  ะ           01 : 1-byte displacement
+\    ะ  ะ           10 : 2-byte displacement
+\    ะ  ะ           11 : 4-byte displacement
+\    ัะดะดะฐะดะด 00 : No immediate value
 \           01 : 1 byte immediate value
 \           10 : 2-byte immediate value
 \           11 : 4-byte immediate value
@@ -895,11 +895,11 @@ InitRegisterTable
  \ Prefix never exist alone, it always appears before some instruction.
  \   PrefixDisassembled :
  \                                    1 0
- \      ฺฤฤฤฤฤฤฤฤฤฤฤ๙๙๙๙๙๙ฤฤฤฤฤฤฤฤฤฤฤยฤยฤฟ
- \      ณ          Not  Used         ณ ณ ณ
- \      ภฤฤฤฤฤฤฤฤฤฤฤ๙๙๙๙๙๙ฤฤฤฤฤฤฤฤฤฤฤมฤมฤู
- \                                    ณ ภฤ Operand size prefix (OS:)
- \                                    ภฤ Address size Prefix (AS:)
+ \      ะทะดะดะดะดะดะดะดะดะดะดะดะซะซะซะซะซะซะดะดะดะดะดะดะดะดะดะดะดะฑะดะฑะดยฉ
+ \      ะ          Not  Used         ะ ะ ะ
+ \      ัะดะดะดะดะดะดะดะดะดะดะดะซะซะซะซะซะซะดะดะดะดะดะดะดะดะดะดะดะฐะดะฐะดั
+ \                                    ะ ัะด Operand size prefix (OS:)
+ \                                    ัะด Address size Prefix (AS:)
 
 : Address/Operand-Prefix ( Tcurr-addr flag-value -- Tnext-addr )
         \ set flag and execute next disassembler
@@ -1109,9 +1109,9 @@ VARIABLE NoOperandPrefix \ read by OperandPrefixCheck
    \ General patterns : r/mXX regXX segXX ctlXX dbgXX tstXX
    \
    \  Addressing Mode Byte Format :    7  6  5  4  3  2  1  0
-   \                                 ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-   \               MM|REG|R/M        ณ MOD ณ R  E  Gณ R /  M ณ
-   \                                 ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
+   \                                 ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+   \               MM|REG|R/M        ะ MOD ะ R  E  Gะ R /  M ะ
+   \                                 ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
 
 : AddrModeBytePresent   ( -- )
         0x04  CurrentInstruction .Description   OR-C!    ;
@@ -1149,17 +1149,17 @@ VARIABLE NoOperandPrefix \ read by OperandPrefixCheck
 
    \ 16-bit addressing modes :
    \
-   \     \ MODบ     00     ณ      01      ณ      10       ณ      11
-   \    R/M \ บ            ณ              ณ               ณ  w=0  ณ   w=1
-   \   อออออออฮออออออออออออุออออออออออออออุอออออออออออออออุอออออออุออออออออ
-   \     000  บ  [BX+SI]   ณ  [BX+SI]+d8  ณ  [BX+SI]+d16  ณ   AL  ณ   AX
-   \     001  บ  [BX+DI]   ณ  [BX+DI]+d8  ณ  [BX+DI]+d16  ณ   CL  ณ   CX
-   \     010  บ  [BP+SI]   ณ  [BP+SI]+d8  ณ  [BP+SI]+d16  ณ   DL  ณ   DX
-   \     011  บ  [BP+DI]   ณ  [BP+DI]+d8  ณ  [BP+DI]+d16  ณ   BL  ณ   BX
-   \     100  บ   [SI]     ณ   [SI]  +d8  ณ   [SI]  +d16  ณ   AH  ณ   SP
-   \     101  บ   [DI]     ณ   [DI]  +d8  ณ   [DI]  +d16  ณ   CH  ณ   BP
-   \     110  บ [offset16] ณ   [BP]  +d8  ณ   [BP]  +d16  ณ   DH  ณ   SI
-   \     111  บ   [BX]     ณ   [BX]  +d8  ณ   [BX]  +d16  ณ   BH  ณ   DI
+   \     \ MODโ•จ     00     ะ      01      ะ      10       ะ      11
+   \    R/M \ โ•จ            ะ              ะ               ะ  w=0  ะ   w=1
+   \   ะผะผะผะผะผะผะผะฝะผะผะผะผะผะผะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผะผะผะผะผัะผะผะผะผะผะผะผัะผะผะผะผะผะผะผะผ
+   \     000  โ•จ  [BX+SI]   ะ  [BX+SI]+d8  ะ  [BX+SI]+d16  ะ   AL  ะ   AX
+   \     001  โ•จ  [BX+DI]   ะ  [BX+DI]+d8  ะ  [BX+DI]+d16  ะ   CL  ะ   CX
+   \     010  โ•จ  [BP+SI]   ะ  [BP+SI]+d8  ะ  [BP+SI]+d16  ะ   DL  ะ   DX
+   \     011  โ•จ  [BP+DI]   ะ  [BP+DI]+d8  ะ  [BP+DI]+d16  ะ   BL  ะ   BX
+   \     100  โ•จ   [SI]     ะ   [SI]  +d8  ะ   [SI]  +d16  ะ   AH  ะ   SP
+   \     101  โ•จ   [DI]     ะ   [DI]  +d8  ะ   [DI]  +d16  ะ   CH  ะ   BP
+   \     110  โ•จ [offset16] ะ   [BP]  +d8  ะ   [BP]  +d16  ะ   DH  ะ   SI
+   \     111  โ•จ   [BX]     ะ   [BX]  +d8  ะ   [BX]  +d16  ะ   BH  ะ   DI
 
 \ MOD = 00 01 10
 
@@ -1237,17 +1237,17 @@ VARIABLE NoOperandPrefix \ read by OperandPrefixCheck
 
    \ 32-bit addressing modes :
    \
-   \     \ MODบ     00     ณ     01     ณ     10      ณ      11
-   \    R/M \ บ            ณ            ณ             ณ  w=0  ณ  w=1
-   \   อออออออฮออออออออออออุออออออออออออุอออออออออออออุอออออออุอออออออ
-   \     000  บ   [EAX]    ณ  [EAX]+d8  ณ  [EAX]+d32  ณ   AL  ณ  EAX
-   \     001  บ   [ECX]    ณ  [ECX]+d8  ณ  [ECX]+d32  ณ   CL  ณ  ECX
-   \     010  บ   [EDX]    ณ  [EDX]+d8  ณ  [EDX]+d32  ณ   DL  ณ  EDX
-   \     011  บ   [EBX]    ณ  [EBX]+d8  ณ  [EBX]+d32  ณ   BL  ณ  EBX
-   \     100  บ    SIB     ณ   SIB +d8  ณ   SIB +d32  ณ   AH  ณ  ESP
-   \     101  บ [offset32] ณ  [EBP]+d8  ณ  [EBP]+d32  ณ   CH  ณ  EBP
-   \     110  บ   [ESI]    ณ  [ESI]+d8  ณ  [ESI]+d32  ณ   DH  ณ  ESI
-   \     111  บ   [EDI]    ณ  [EDI]+d8  ณ  [EDI]+d32  ณ   BH  ณ  EDI
+   \     \ MODโ•จ     00     ะ     01     ะ     10      ะ      11
+   \    R/M \ โ•จ            ะ            ะ             ะ  w=0  ะ  w=1
+   \   ะผะผะผะผะผะผะผะฝะผะผะผะผะผะผะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผะผะผัะผะผะผะผะผะผะผัะผะผะผะผะผะผะผ
+   \     000  โ•จ   [EAX]    ะ  [EAX]+d8  ะ  [EAX]+d32  ะ   AL  ะ  EAX
+   \     001  โ•จ   [ECX]    ะ  [ECX]+d8  ะ  [ECX]+d32  ะ   CL  ะ  ECX
+   \     010  โ•จ   [EDX]    ะ  [EDX]+d8  ะ  [EDX]+d32  ะ   DL  ะ  EDX
+   \     011  โ•จ   [EBX]    ะ  [EBX]+d8  ะ  [EBX]+d32  ะ   BL  ะ  EBX
+   \     100  โ•จ    SIB     ะ   SIB +d8  ะ   SIB +d32  ะ   AH  ะ  ESP
+   \     101  โ•จ [offset32] ะ  [EBP]+d8  ะ  [EBP]+d32  ะ   CH  ะ  EBP
+   \     110  โ•จ   [ESI]    ะ  [ESI]+d8  ะ  [ESI]+d32  ะ   DH  ะ  ESI
+   \     111  โ•จ   [EDI]    ะ  [EDI]+d8  ะ  [EDI]+d32  ะ   BH  ะ  EDI
 
 : SetDisplacement8/32   ( disp R/M -- MM|000|R/M )
         SWAP DUP IF \ displacement <> 0
@@ -1265,9 +1265,9 @@ VARIABLE NoOperandPrefix \ read by OperandPrefixCheck
         THEN ;
 
    \  Scale Index Byte Format :    7  6  5  4  3  2  1  0
-   \                             ฺฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤยฤฤฟ
-   \           SS | III | BBB    ณ S  Sณ I  I  Iณ B  B  Bณ
-   \                             ภฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤมฤฤู
+   \                             ะทะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดะฑะดะดยฉ
+   \           SS | III | BBB    ะ S  Sะ I  I  Iะ B  B  Bะ
+   \                             ัะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดะฐะดะดั
    \  Scale = 00 ... *1
    \          01 ... *2
    \          10 ... *4
@@ -3428,21 +3428,21 @@ FORTH ALSO DEFINITIONS
 
 \   Label structure : while |Forward? is TRUE
 \   LABEL:   LBL:
-\   ษออออออออออออออป
-\   บ |ForwardLinkฤืฤฤฤฟ               JMP     LBL:
-\   วฤฤฤฤฤฤฤฤฤฤฤฤฤฤถ   ณ               ษออออออัออออออออออออป
-\   บ |Forward?    บ   ณ       ฺฤฤฤฤฤ> บ jmp  ณ    þฤฤฤฤฤฤฤืฤฤฤฤฤฤ> NIL
-\   ศออออออออออออออผ   ณ       ณ       ศออออออฯออออออออออออผ
-\                      ณ       ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
-\                      ณ               JZ      LBL:               ณ
-\                      ณ               ษออออออัอออออออออออป       ณ
-\                      ณ       ฺฤฤฤฤฤ> บ  jz  ณ    þฤฤฤฤฤฤืฤฤฤฤฤฤฤู
-\                      ณ       ณ       ศออออออฯอออออออออออผ
-\                      ณ       ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
-\                      ณ               JGE     LBL:               ณ
-\                      ณ pointer to theษออออออัอออออออออออป jump  ณ to
-\                      ภฤฤฤฤฤฤฤฤฤฤฤฤฤ> บ jge  ณ    þฤฤฤฤฤฤืฤฤฤฤฤฤฤู previous
-\                        instruction   ศออออออฯอออออออออออผ node instruction
+\   ะธะผะผะผะผะผะผะผะผะผะผะผะผะผะผโ•ฉ
+\   โ•จ |ForwardLinkะดะฒะดะดะดยฉ               JMP     LBL:
+\   ะณะดะดะดะดะดะดะดะดะดะดะดะดะดะดโ•ค   ะ               ะธะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผะผโ•ฉ
+\   โ•จ |Forward?    โ•จ   ะ       ะทะดะดะดะดะด> โ•จ jmp  ะ    ะงะดะดะดะดะดะดะดะฒะดะดะดะดะดะด> NIL
+\   ั…ะผะผะผะผะผะผะผะผะผะผะผะผะผะผโ•ช   ะ       ะ       ั…ะผะผะผะผะผะผะพะผะผะผะผะผะผะผะผะผะผะผะผโ•ช
+\                      ะ       ัะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดยฉ
+\                      ะ               JZ      LBL:               ะ
+\                      ะ               ะธะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผโ•ฉ       ะ
+\                      ะ       ะทะดะดะดะดะด> โ•จ  jz  ะ    ะงะดะดะดะดะดะดะฒะดะดะดะดะดะดะดั
+\                      ะ       ะ       ั…ะผะผะผะผะผะผะพะผะผะผะผะผะผะผะผะผะผะผโ•ช
+\                      ะ       ัะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดะดยฉ
+\                      ะ               JGE     LBL:               ะ
+\                      ะ pointer to theะธะผะผะผะผะผะผัะผะผะผะผะผะผะผะผะผะผะผโ•ฉ jump  ะ to
+\                      ัะดะดะดะดะดะดะดะดะดะดะดะดะด> โ•จ jge  ะ    ะงะดะดะดะดะดะดะฒะดะดะดะดะดะดะดั previous
+\                        instruction   ั…ะผะผะผะผะผะผะพะผะผะผะผะผะผะผะผะผะผะผโ•ช node instruction
 \
 
 : LABEL: ( <label-name> -- ) \ declare a label name

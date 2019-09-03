@@ -1,9 +1,9 @@
-( ~ac: 21.01.2005, изменения под SO - 28.08.2005 
+( ~ac: 21.01.2005, РёР·РјРµРЅРµРЅРёСЏ РїРѕРґ SO - 28.08.2005 
 
   $Id$
 
-  Привязка JavaScript через SpiderMonkey - JS-движок из Mozilla.
-  Текущие версии dll для JS1.7 брать из FireFox2.
+  РџСЂРёРІСЏР·РєР° JavaScript С‡РµСЂРµР· SpiderMonkey - JS-РґРІРёР¶РѕРє РёР· Mozilla.
+  РўРµРєСѓС‰РёРµ РІРµСЂСЃРёРё dll РґР»СЏ JS1.7 Р±СЂР°С‚СЊ РёР· FireFox2.
 
   http://www.mozilla.org/js/spidermonkey/apidoc/jsguide.html
   http://egachine.berlios.de/embedding-sm-best-practice/ar01s05.html
@@ -33,10 +33,10 @@ USER global
 : JsInit
   8  1024 * 1024 * 1 JS_Init DUP rt ! 0= IF ABORT THEN
   8192 rt @ 2 JS_NewContext DUP cx ! 0= IF ABORT THEN
-  cx @ 1 JS_GetOptions 64 ( JSOPTION_XML) OR cx @ 2 JS_SetOptions DROP \ работает в DeerPark
+  cx @ 1 JS_GetOptions 64 ( JSOPTION_XML) OR cx @ 2 JS_SetOptions DROP \ СЂР°Р±РѕС‚Р°РµС‚ РІ DeerPark
   0 0 0 cx @ 4 JS_NewObject DUP global ! 0= IF ABORT THEN
   global @ cx @ 2 JS_InitStandardClasses 1 <> IF ABORT THEN
-  S" 1.7" DROP 1 JS_StringToVersion cx @ 2 JS_SetVersion 0 <> IF ABORT THEN \ без этого не работают генераторы let/yield
+  S" 1.7" DROP 1 JS_StringToVersion cx @ 2 JS_SetVersion 0 <> IF ABORT THEN \ Р±РµР· СЌС‚РѕРіРѕ РЅРµ СЂР°Р±РѕС‚Р°СЋС‚ РіРµРЅРµСЂР°С‚РѕСЂС‹ let/yield
 ;
 : JsVal> ( jval -- val type )
   DUP 1 AND 1 = IF 1 RSHIFT 1 EXIT THEN   \ val 1 int
@@ -52,7 +52,7 @@ USER global
   R> JsVal>
 ;
 \ PAD 0 0 S" 5+5" SWAP global @ cx @ JS_EvaluateScript NIP NIP NIP NIP NIP NIP NIP . PAD @ .
-: UASCIIZ> ( addr -- addr u ) \ вариант ASCIIZ> для Unicode
+: UASCIIZ> ( addr -- addr u ) \ РІР°СЂРёР°РЅС‚ ASCIIZ> РґР»СЏ Unicode
   0 OVER
   BEGIN
     DUP W@ 0<>
@@ -73,14 +73,14 @@ USER global
   OVER ASCIIZ> TYPE CR 0
 ; 3 CELLS CALLBACK: ERRORREP
 
-\ Пример самодельной форт-функции, внедряемой внутрь JS через JS_DefineFunctions
+\ РџСЂРёРјРµСЂ СЃР°РјРѕРґРµР»СЊРЅРѕР№ С„РѕСЂС‚-С„СѓРЅРєС†РёРё, РІРЅРµРґСЂСЏРµРјРѕР№ РІРЅСѓС‚СЂСЊ JS С‡РµСЂРµР· JS_DefineFunctions
 :NONAME ( *rval *argv argc *obj *cx -- flag )
   ." TESTF: "
-  2>R DUP . \ число параметров
-      OVER @ @ UASCIIZ> TYPE CR \ переданная строка
+  2>R DUP . \ С‡РёСЃР»Рѕ РїР°СЂР°РјРµС‚СЂРѕРІ
+      OVER @ @ UASCIIZ> TYPE CR \ РїРµСЂРµРґР°РЅРЅР°СЏ СЃС‚СЂРѕРєР°
   2R>
-  2>R 2>R 14 ( JSVAL_TRUE) OVER ! 2R> 2R> \ возвращаемый результат
-  1 \ JS_TRUE - выполнено успешно
+  2>R 2>R 14 ( JSVAL_TRUE) OVER ! 2R> 2R> \ РІРѕР·РІСЂР°С‰Р°РµРјС‹Р№ СЂРµР·СѓР»СЊС‚Р°С‚
+  1 \ JS_TRUE - РІС‹РїРѕР»РЅРµРЅРѕ СѓСЃРїРµС€РЅРѕ
 ; 5 CELLS CALLBACK: TESTF
 
 
@@ -106,7 +106,7 @@ S" 5+5" JE
 S" var x=10.0;Math.sqrt(x*x*x*x);" JE
 S" Date()" JE
 S" d=new Date;d.getFullYear()" JE
-S" 'some string, рус'" JE
+S" 'some string, СЂСѓСЃ'" JE
 S" 5==5" JE
 S" false" JE
 S" this" JE

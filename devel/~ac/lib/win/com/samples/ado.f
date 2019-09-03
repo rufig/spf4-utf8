@@ -12,7 +12,7 @@ REQUIRE :: ~yz/lib/automation.f
 COM-init DROP
 
   " ADODB.Connection" ?create-object 
-  IF ." Не могу создать ADODB" BYE THEN
+  IF ." РќРµ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ ADODB" BYE THEN
   TO conn
 
 \  arg( " Driver={Microsoft Access Driver (*.mdb)};DBQ=c:/pro/eserv_dbms/db/eserv_msgbase.mdb" _str )arg conn :: open
@@ -20,7 +20,7 @@ COM-init DROP
   arg( " Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:/pro/eserv_dbms/db/eserv_msgbase.mdb" _str )arg conn :: Open
 
   " ADODB.Recordset" ?create-object 
-  IF ." Не могу создать ADODB" BYE THEN
+  IF ." РќРµ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ ADODB" BYE THEN
   TO rs
 
   arg( " SELECT * FROM sp_users" _str conn _obj )arg rs :: Open

@@ -1,7 +1,7 @@
 \ ------- parser begin ------
 
 : EndOfChunk ( -- flag )
-  >IN @ SOURCE NIP < 0=        \ >IN не меньше, чем длина чанка
+  >IN @ SOURCE NIP < 0=        \ >IN РЅРµ РјРµРЅСЊС€Рµ, С‡РµРј РґР»РёРЅР° С‡Р°РЅРєР°
 ;
 
 : CharAddr ( -- c-addr )
@@ -9,7 +9,7 @@
 ;
 
 : PeekChar ( -- char )
-  CharAddr C@       \ символ из текущего значения >IN
+  CharAddr C@       \ СЃРёРјРІРѕР» РёР· С‚РµРєСѓС‰РµРіРѕ Р·РЅР°С‡РµРЅРёСЏ >IN
 ;
 
 : IsDelimiter ( char -- flag )
@@ -26,7 +26,7 @@
   GetChar SWAP IsDelimiter AND
 ;
 
-: SkipDelimiters ( -- ) \ пропустить пробельные символы
+: SkipDelimiters ( -- ) \ РїСЂРѕРїСѓСЃС‚РёС‚СЊ РїСЂРѕР±РµР»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹
   BEGIN
     OnDelimiter
   WHILE
@@ -38,7 +38,7 @@
   GetChar SWAP IsDelimiter 0= AND
 ;
 
-: SkipWord ( -- ) \ пропустить непробельные символы
+: SkipWord ( -- ) \ РїСЂРѕРїСѓСЃС‚РёС‚СЊ РЅРµРїСЂРѕР±РµР»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹
   BEGIN
     OnNotDelimiter
   WHILE

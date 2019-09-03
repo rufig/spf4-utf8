@@ -14,5 +14,5 @@ VARIABLE white
 0 0 0 im @ gdImageColorAllocate@16 DUP . black !
 255 255 255 im @ gdImageColorAllocate@16 DUP . white !
 white @ 99 99 0 0 im @ gdImageLine@24 DROP
-white @ S" test_рус" DROP 50 50 gdFontGetSmall@0 im @ gdImageString@24 DROP
+white @ S" test_СЂСѓСЃ" DROP 50 50 gdFontGetSmall@0 im @ gdImageString@24 DROP
 S" wb" DROP S" test2.png" DROP fopen NIP NIP DUP . im @ gdImagePng@8 DROP

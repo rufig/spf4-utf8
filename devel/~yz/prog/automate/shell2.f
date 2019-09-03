@@ -1,5 +1,5 @@
-\ Ю. Жиловец, http://www.forth.org.ru/~yz
-\ Пример использования библиотеке Automate: цикл FOREACH ... NEXT
+\ Р®. Р–РёР»РѕРІРµС†, http://www.forth.org.ru/~yz
+\ РџСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ Р±РёР±Р»РёРѕС‚РµРєРµ Automate: С†РёРєР» FOREACH ... NEXT
 
 REQUIRE [[ ~yz/lib/automate.f
 REQUIRE { lib/ext/locals.f
@@ -18,12 +18,12 @@ REQUIRE { lib/ext/locals.f
  ComInit DROP
 
  " Shell.Application" CreateObject
- IF " Не могу запустить объект Shell.Explorer" .ansiz BYE THEN
+ IF " РќРµ РјРѕРіСѓ Р·Р°РїСѓСЃС‚РёС‚СЊ РѕР±СЉРµРєС‚ Shell.Explorer" .ansiz BYE THEN
  TO shell
 
  shell [[ NameSpace ( 17 ) ]] TO folder
 
-  " Объект" 20 Z.R  " Имя" 25 Z.R  " Размер" 12 Z.R " Свободно" 12 Z.R CR
+  " РћР±СЉРµРєС‚" 20 Z.R  " РРјСЏ" 25 Z.R  " Р Р°Р·РјРµСЂ" 12 Z.R " РЎРІРѕР±РѕРґРЅРѕ" 12 Z.R CR
  69 0 DO c: - EMIT LOOP CR
 
  folder [[ Items ]] FOREACH

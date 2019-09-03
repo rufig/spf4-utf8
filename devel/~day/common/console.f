@@ -28,9 +28,9 @@ WINAPI: GetConsoleCursorInfo     KERNEL32.DLL
 
 CREATE CONSOLE_CURSOR_INFO 8 ALLOT
 
-\ Взято у ~micro
+\ Р’Р·СЏС‚Рѕ Сѓ ~micro
 : HIDE-CURSOR
-\ Спрятать курсор
+\ РЎРїСЂСЏС‚Р°С‚СЊ РєСѓСЂСЃРѕСЂ
   CONSOLE_CURSOR_INFO H-STDOUT GetConsoleCursorInfo DROP
   0 CONSOLE_CURSOR_INFO 4 + !
   CONSOLE_CURSOR_INFO H-STDOUT SetConsoleCursorInfo DROP

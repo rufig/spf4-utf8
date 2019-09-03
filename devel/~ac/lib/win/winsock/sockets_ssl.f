@@ -1,4 +1,4 @@
-\ Переопределение части функций из sockets.f для прозрачной работы по SSL
+\ РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ С‡Р°СЃС‚Рё С„СѓРЅРєС†РёР№ РёР· sockets.f РґР»СЏ РїСЂРѕР·СЂР°С‡РЅРѕР№ СЂР°Р±РѕС‚С‹ РїРѕ SSL
 
 REQUIRE {             ~ac/lib/locals.f
 REQUIRE CreateSocket  ~ac/lib/win/winsock/sockets.f
@@ -22,7 +22,7 @@ VECT dSslWaitInit ' NOOP TO dSslWaitInit
 ; ' FailedSsl TO dFailedSsl
 
 : SslServerSocket { addr u verify s -- namea nameu cert }
-\ addr u - имя файла с сертификатом и закрытым ключем в PEM-формате
+\ addr u - РёРјСЏ С„Р°Р№Р»Р° СЃ СЃРµСЂС‚РёС„РёРєР°С‚РѕРј Рё Р·Р°РєСЂС‹С‚С‹Рј РєР»СЋС‡РµРј РІ PEM-С„РѕСЂРјР°С‚Рµ
   SslInit
   5000 SSL-MUT @ WAIT THROW DROP
   s uSSL_SOCKET !
@@ -30,7 +30,7 @@ VECT dSslWaitInit ' NOOP TO dSslWaitInit
   addr u X509_FILETYPE_PEM 
   SslNewServerContext uSSL_CONTEXT !
   addr u verify ( SSL_VERIFY_PEER) uSSL_CONTEXT @ SslSetVerify
-  s uSSL_CONTEXT @ ['] SslObjAccept CATCH \ 0=OK, 5=не тот сертификат, 1= нет сертификата
+  s uSSL_CONTEXT @ ['] SslObjAccept CATCH \ 0=OK, 5=РЅРµ С‚РѕС‚ СЃРµСЂС‚РёС„РёРєР°С‚, 1= РЅРµС‚ СЃРµСЂС‚РёС„РёРєР°С‚Р°
   SSL-MUT @ RELEASE-MUTEX DROP
   ?DUP IF NIP NIP dFailedSsl EXIT THEN
   DUP uSSL_OBJECT !
@@ -39,14 +39,14 @@ VECT dSslWaitInit ' NOOP TO dSslWaitInit
        ELSE S" " 0 THEN
 ;
 : SslClientSocket { addr u verify s -- namea nameu cert }
-\ addr u - имя файла с сертификатом и закрытым ключем в PEM-формате
+\ addr u - РёРјСЏ С„Р°Р№Р»Р° СЃ СЃРµСЂС‚РёС„РёРєР°С‚РѕРј Рё Р·Р°РєСЂС‹С‚С‹Рј РєР»СЋС‡РµРј РІ PEM-С„РѕСЂРјР°С‚Рµ
   SslInit
   s uSSL_SOCKET !
   dSslWaitInit
   addr u X509_FILETYPE_PEM 
   SslNewClientContext uSSL_CONTEXT !
   addr u verify ( SSL_VERIFY_PEER) uSSL_CONTEXT @ SslSetVerify
-  s uSSL_CONTEXT @ ['] SslObjConnect CATCH \ 0=OK, 5=не тот сертификат, 1= нет сертификата
+  s uSSL_CONTEXT @ ['] SslObjConnect CATCH \ 0=OK, 5=РЅРµ С‚РѕС‚ СЃРµСЂС‚РёС„РёРєР°С‚, 1= РЅРµС‚ СЃРµСЂС‚РёС„РёРєР°С‚Р°
   ?DUP IF NIP NIP dFailedSsl EXIT THEN
   DUP uSSL_OBJECT !
   verify 0= IF DROP S" " 0 EXIT THEN
@@ -98,7 +98,7 @@ VECT dSslWaitInit ' NOOP TO dSslWaitInit
   ELSE CloseSocket THEN
 ;
 : read ( addr len socket -- )
-  \ прочесть ровно len байт из сокета socket и записать в addr
+  \ РїСЂРѕС‡РµСЃС‚СЊ СЂРѕРІРЅРѕ len Р±Р°Р№С‚ РёР· СЃРѕРєРµС‚Р° socket Рё Р·Р°РїРёСЃР°С‚СЊ РІ addr
   { _addr _len _sock \ _p }
   _sock uSSL_SOCKET @ =
   IF
@@ -108,7 +108,7 @@ VECT dSslWaitInit ' NOOP TO dSslWaitInit
     WHILE
       _addr _p +  _len _sock
       ReadSocket THROW
-      DUP 0= IF DROP -1002 THROW THEN ( если принято 0, то обрыв соединения )
+      DUP 0= IF DROP -1002 THROW THEN ( РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, С‚Рѕ РѕР±СЂС‹РІ СЃРѕРµРґРёРЅРµРЅРёСЏ )
       DUP _p + -> _p
       _len SWAP - -> _len
     REPEAT
@@ -125,15 +125,15 @@ VECT dSslWaitInit ' NOOP TO dSslWaitInit
 : READ-SOCK-EXACT ( a u socket -- ior )
   >R BEGIN DUP WHILE
     2DUP R@ ReadSocket ?DUP IF NIP NIP NIP RDROP EXIT THEN ( a1 u1 u2 )
-    ( в случае, если принято 0, ReadSocket возвращает ior -1002,
-      в отличии от READ-FILE, который возвращет ior 0 и длину 0 при
-      достижении конца файла или ior 109 при достижении конца pipe
+    ( РІ СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, ReadSocket РІРѕР·РІСЂР°С‰Р°РµС‚ ior -1002,
+      РІ РѕС‚Р»РёС‡РёРё РѕС‚ READ-FILE, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰РµС‚ ior 0 Рё РґР»РёРЅСѓ 0 РїСЂРё
+      РґРѕСЃС‚РёР¶РµРЅРёРё РєРѕРЅС†Р° С„Р°Р№Р»Р° РёР»Рё ior 109 РїСЂРё РґРѕСЃС‚РёР¶РµРЅРёРё РєРѕРЅС†Р° pipe
     )
     TUCK - -ROT + SWAP
   REPEAT ( a1 0 )
   NIP RDROP
 ;
-: ReadSocketExact ( a u socket -- ior ) \ см. также "read" в sock2.f
+: ReadSocketExact ( a u socket -- ior ) \ СЃРј. С‚Р°РєР¶Рµ "read" РІ sock2.f
   READ-SOCK-EXACT
 ;
 

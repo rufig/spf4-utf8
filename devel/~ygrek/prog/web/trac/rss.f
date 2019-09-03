@@ -1,8 +1,8 @@
 
-\ Генератор RSS по tab delimited отчёту с trac
-\ Сортирует записи по убыванию changetime
+\ Р“РµРЅРµСЂР°С‚РѕСЂ RSS РїРѕ tab delimited РѕС‚С‡С‘С‚Сѓ СЃ trac
+\ РЎРѕСЂС‚РёСЂСѓРµС‚ Р·Р°РїРёСЃРё РїРѕ СѓР±С‹РІР°РЅРёСЋ changetime
 \
-\ Требует libcurl.dll - http://curl.haxx.se/latest.cgi?curl=win32-ssl
+\ РўСЂРµР±СѓРµС‚ libcurl.dll - http://curl.haxx.se/latest.cgi?curl=win32-ssl
 
 REQUIRE ENUM ~ygrek/lib/enum.f
 REQUIRE STR@ ~ac/lib/str5.f
@@ -174,12 +174,12 @@ TRUE VALUE ?first
    R@ WRITE-FILE THROW
    R> CLOSE-FILE THROW ;
 
-\ Стянуть файл с сети
+\ РЎС‚СЏРЅСѓС‚СЊ С„Р°Р№Р» СЃ СЃРµС‚Рё
 : get-www ( -- a u )
  " {report-url}{tab-param}" STR@ GET-FILE
  STR@ 2DUP S" 1.dat" to-file ;
 
-\ Или использовать локальный файл
+\ РР»Рё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р»РѕРєР°Р»СЊРЅС‹Р№ С„Р°Р№Р»
 : get-loc ( -- a u ) S" 1.dat" FILE ;
 
 : do get-www RSS STR@ S" 1.xml" to-file ." Done" ;

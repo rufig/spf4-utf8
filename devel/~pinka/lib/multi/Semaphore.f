@@ -1,6 +1,6 @@
 \ 10.Feb.2001
 \ semaphores
-\ Wait и Release* не возвращают ior. При ошибке вызывают THROW внутри.
+\ Wait Рё Release* РЅРµ РІРѕР·РІСЂР°С‰Р°СЋС‚ ior. РџСЂРё РѕС€РёР±РєРµ РІС‹Р·С‹РІР°СЋС‚ THROW РІРЅСѓС‚СЂРё.
 
 WINAPI: CreateSemaphoreA KERNEL32.DLL
 WINAPI: ReleaseSemaphore KERNEL32.DLL
@@ -23,21 +23,21 @@ object's current count is to be increased.
 )
 
 : CreateSem ( addr u MaxCount InitCount -- handle ior )
-\ создает семафор. Если InitCount=0, то созданный семфор занят.
-\ успешный Wait уменьшает счетчик на 1.
-\ порядок Max Init - как в DO...LOOP ;)
-\ addr u - имя (или 0 0)
-  ROT DROP \ убираю длину
+\ СЃРѕР·РґР°РµС‚ СЃРµРјР°С„РѕСЂ. Р•СЃР»Рё InitCount=0, С‚Рѕ СЃРѕР·РґР°РЅРЅС‹Р№ СЃРµРјС„РѕСЂ Р·Р°РЅСЏС‚.
+\ СѓСЃРїРµС€РЅС‹Р№ Wait СѓРјРµРЅСЊС€Р°РµС‚ СЃС‡РµС‚С‡РёРє РЅР° 1.
+\ РїРѕСЂСЏРґРѕРє Max Init - РєР°Рє РІ DO...LOOP ;)
+\ addr u - РёРјСЏ (РёР»Рё 0 0)
+  ROT DROP \ СѓР±РёСЂР°СЋ РґР»РёРЅСѓ
   0 \ default security descriptor,  the resulting handle is not inheritable.
   CreateSemaphoreA  DUP  ERR
 ;
 : NReleaseSem ( n handle -- )
-\ счетчик увеличивается на n
+\ СЃС‡РµС‚С‡РёРє СѓРІРµР»РёС‡РёРІР°РµС‚СЃСЏ РЅР° n
   0 ROT ROT
   ReleaseSemaphore ERR THROW
 ;
 : ReleaseSem ( handle -- )
-\ счетчик увеличивается на 1
+\ СЃС‡РµС‚С‡РёРє СѓРІРµР»РёС‡РёРІР°РµС‚СЃСЏ РЅР° 1
   0 1 ROT
   ReleaseSemaphore ERR THROW
 ;

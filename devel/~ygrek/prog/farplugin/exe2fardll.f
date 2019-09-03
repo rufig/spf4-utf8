@@ -10,11 +10,11 @@
 (  
    ----- IMAGE-BASE
    0x1000 .reserved \ uninitialized data
-   0x1000 .idata \ - импортируемые функции
+   0x1000 .idata \ - РёРјРїРѕСЂС‚РёСЂСѓРµРјС‹Рµ С„СѓРЅРєС†РёРё
    ----- IMAGE-BEGIN  \ ORG-ADDR
-     .text \ основное хранилище форт-системы
-     первая команда: CALL INIT
-     словарь FORTH
+     .text \ РѕСЃРЅРѕРІРЅРѕРµ С…СЂР°РЅРёР»РёС‰Рµ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹
+     РїРµСЂРІР°СЏ РєРѕРјР°РЅРґР°: CALL INIT
+     СЃР»РѕРІР°СЂСЊ FORTH
    ----- IMAGE-END    \ HERE
      reserved for main store
    ----- IMAGE-BEGIN + IMAGE-SIZE
@@ -25,8 +25,8 @@
 )
 
 \ 30.Apr.2006 ~ygrek
-\ Подправлено для экспорта функций плагина для FAR Manager
-\ Для добавления экспорта - поправить все места с отметкой !HERE!
+\ РџРѕРґРїСЂР°РІР»РµРЅРѕ РґР»СЏ СЌРєСЃРїРѕСЂС‚Р° С„СѓРЅРєС†РёР№ РїР»Р°РіРёРЅР° РґР»СЏ FAR Manager
+\ Р”Р»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СЌРєСЃРїРѕСЂС‚Р° - РїРѕРїСЂР°РІРёС‚СЊ РІСЃРµ РјРµСЃС‚Р° СЃ РѕС‚РјРµС‚РєРѕР№ !HERE!
 
 
 GET-ORDER  GET-CURRENT OVER 2 +  (  x1 x2 ... xk k )
@@ -66,10 +66,10 @@ StoreAs OrigContext&Current
 REQUIRE {       ~ac\lib\locals.f
                                         VOC-LIST !  
 
-( надо фиксить VOC-LIST на старое значение.
-  Потому как. даже если словарь создается во временном хранилище /во временном словаре/
-  он добавляется в VOC-LIST
-  =-> VOC-LIST должно быть локальным для хранилища!
+( РЅР°РґРѕ С„РёРєСЃРёС‚СЊ VOC-LIST РЅР° СЃС‚Р°СЂРѕРµ Р·РЅР°С‡РµРЅРёРµ.
+  РџРѕС‚РѕРјСѓ РєР°Рє. РґР°Р¶Рµ РµСЃР»Рё СЃР»РѕРІР°СЂСЊ СЃРѕР·РґР°РµС‚СЃСЏ РІРѕ РІСЂРµРјРµРЅРЅРѕРј С…СЂР°РЅРёР»РёС‰Рµ /РІРѕ РІСЂРµРјРµРЅРЅРѕРј СЃР»РѕРІР°СЂРµ/
+  РѕРЅ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ РІ VOC-LIST
+  =-> VOC-LIST РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р»РѕРєР°Р»СЊРЅС‹Рј РґР»СЏ С…СЂР°РЅРёР»РёС‰Р°!
 )
 
 VARIABLE dllname-a
@@ -162,8 +162,8 @@ VARIABLE image-offs
   0 [r], 0 [r],
   vReloc reloc-offs @
 ;
-( значения самой перовой проверяемой ячейки должно быть одинаково
-в обоих образах)
+( Р·РЅР°С‡РµРЅРёСЏ СЃР°РјРѕР№ РїРµСЂРѕРІРѕР№ РїСЂРѕРІРµСЂСЏРµРјРѕР№ СЏС‡РµР№РєРё РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РѕРґРёРЅР°РєРѕРІРѕ
+РІ РѕР±РѕРёС… РѕР±СЂР°Р·Р°С…)
 
 0 VALUE hdll
 
@@ -232,7 +232,7 @@ VARIABLE image-offs
 
   HERE 0x086 + W@  2 <> ABORT" unknown sections."
     4
-  HERE 0x086 + ! \ 4 секции
+  HERE 0x086 + ! \ 4 СЃРµРєС†РёРё
     1 13 LSHIFT >R \ IMAGE_FILE_DLL
   HERE 0x096 + DUP W@ R> OR SWAP W!  \ dll flag
     ['] DllMain >RVA
@@ -244,7 +244,7 @@ VARIABLE image-offs
   HERE 0x0D4 + !  \ HeaderSize
     0xF
   HERE 0x0DE + W!  \ DLLFlags \ but not used
-  \ надо фиксить размеры стеков в dll до 0  ?
+  \ РЅР°РґРѕ С„РёРєСЃРёС‚СЊ СЂР°Р·РјРµСЂС‹ СЃС‚РµРєРѕРІ РІ dll РґРѕ 0  ?
     \ 0x2000 IMAGE-SIZE 0x1000 alignes + RelocSize 0x1000 alignes +
     \ EDataA >RVA
     ExportDirectory
@@ -282,7 +282,7 @@ VARIABLE image-offs
             0 W,
   ( 'NameOrdinals )
 
-  \ !HERE! добавить строку с именем функции так чтобы список был отсортировани по алфавиту
+  \ !HERE! РґРѕР±Р°РІРёС‚СЊ СЃС‚СЂРѕРєСѓ СЃ РёРјРµРЅРµРј С„СѓРЅРєС†РёРё С‚Р°Рє С‡С‚РѕР±С‹ СЃРїРёСЃРѕРє Р±С‹Р» РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРё РїРѕ Р°Р»С„Р°РІРёС‚Сѓ
   HERE 1+ >rva  S" SetStartupInfo" S", 0 C, \ name itself 
   HERE 1+ >rva  S" OpenPlugin"     S", 0 C, \ name itself
   HERE 1+ >rva  S" GetPluginInfo"  S", 0 C, \ name itself
@@ -340,17 +340,17 @@ VARIABLE image-offs
   Make-Export
   SectionsH ( -> a2 u2 )
   PEHeader  ( -> a3 u3 )
-  R> HERE  - ALLOT \ откат.
-  OVER >R \ начало прочитанного заголовка файла
+  R> HERE  - ALLOT \ РѕС‚РєР°С‚.
+  OVER >R \ РЅР°С‡Р°Р»Рѕ РїСЂРѕС‡РёС‚Р°РЅРЅРѕРіРѕ Р·Р°РіРѕР»РѕРІРєР° С„Р°Р№Р»Р°
   DUP >R
   hdll WRITE-FILE THROW  \ PE header 
   DUP >R
   hdll WRITE-FILE THROW  \ section's headers
   HERE   0x400 2R> + - DUP 0< ABORT" unexpected EXE-header size"
   \ 2DUP 0xFF FILL
-  hdll WRITE-FILE THROW \ выравнивание
+  hdll WRITE-FILE THROW \ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ
   R> 0x200 + 0x200 
-  hdll WRITE-FILE THROW \ section_01 таблица импорта  .idata 
+  hdll WRITE-FILE THROW \ section_01 С‚Р°Р±Р»РёС†Р° РёРјРїРѕСЂС‚Р°  .idata 
 
   IMAGE-BEGIN ImageSize 0x200 alignes hdll WRITE-FILE THROW \ section_02 .text
   hdll WRITE-FILE THROW  \ section_03 relocations  .reloc

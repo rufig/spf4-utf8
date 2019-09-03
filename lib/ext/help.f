@@ -1,4 +1,4 @@
-\ Справка к сп-форту. После подключения наберите HELP
+\ ╨б╨┐╤А╨░╨▓╨║╨░ ╨║ ╤Б╨┐-╤Д╨╛╤А╤В╤Г. ╨Я╨╛╤Б╨╗╨╡ ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П ╨╜╨░╨▒╨╡╤А╨╕╤В╨╡ HELP
 
 REQUIRE [IF] lib/include/tools.f
 
@@ -67,14 +67,14 @@ USER ?Topic
    S" help.fhlp" +ModuleDirName
    ['] INCLUDE-PROBE CATCH IF DROP THEN DROP
    ?HelpFound @ 0=
-   IF \ Попробуем capital letters
+   IF \ ╨Я╨╛╨┐╤А╨╛╨▒╤Г╨╡╨╝ capital letters
      HelpWord-A @ HelpWord-U @ TO-UPPER
      NIP HelpWord-U !
      S" help.fhlp" +ModuleDirName
      ['] INCLUDE-PROBE CATCH IF DROP THEN DROP
    THEN POSTPONE \
    HelpWord-A @ FREE THROW
-   ?HelpFound @ 0= IF ." В справке не найдено..." CR THEN
+   ?HelpFound @ 0= IF ." ╨Т ╤Б╨┐╤А╨░╨▓╨║╨╡ ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜╨╛..." CR THEN
 ;
 
 : HELP  ?Topic 0! (HELP) ;
@@ -84,7 +84,7 @@ USER ?Topic
 
 
 : CLR
-\ Очистить экран
+\ ╨Ю╤З╨╕╤Б╤В╨╕╤В╤М ╤Н╨║╤А╨░╨╜
   50 0 DO CR LOOP 
 ;
 

@@ -1,5 +1,5 @@
-\ LIBTCC - Си-компилятор TinyCC в виде DLL-библиотеки размером около 100Кб 
-\ (как Форт :), можно использовать из Форта.
+\ LIBTCC - РЎРё-РєРѕРјРїРёР»СЏС‚РѕСЂ TinyCC РІ РІРёРґРµ DLL-Р±РёР±Р»РёРѕС‚РµРєРё СЂР°Р·РјРµСЂРѕРј РѕРєРѕР»Рѕ 100РљР± 
+\ (РєР°Рє Р¤РѕСЂС‚ :), РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёР· Р¤РѕСЂС‚Р°.
 
 \ http://bellard.org/tcc/tcc-doc.html#SEC22
 
@@ -28,13 +28,13 @@ ALSO SO NEW: libtcc.dll
   TCC_OUTPUT_MEMORY s 2 tcc_set_output_type DROP
   addr s 2 tcc_compile_string IF ." Compile error." CR EXIT THEN
 
-  \ это вместо #include <stdio.h>, возьмем printf из msvcrt
+  \ СЌС‚Рѕ РІРјРµСЃС‚Рѕ #include <stdio.h>, РІРѕР·СЊРјРµРј printf РёР· msvcrt
   S" msvcrt.dll" DLOPEN S" printf" ROT DLSYM S" printf" DROP s 3 tcc_add_symbol DROP
 
-  \ подключим Форт-функцию внутрь Си-программы
+  \ РїРѕРґРєР»СЋС‡РёРј Р¤РѕСЂС‚-С„СѓРЅРєС†РёСЋ РІРЅСѓС‚СЂСЊ РЎРё-РїСЂРѕРіСЂР°РјРјС‹
   ['] add S" add" DROP s 3 tcc_add_symbol DROP
 
-  \ здесь собственно привязка внешних символов
+  \ Р·РґРµСЃСЊ СЃРѕР±СЃС‚РІРµРЅРЅРѕ РїСЂРёРІСЏР·РєР° РІРЅРµС€РЅРёС… СЃРёРјРІРѕР»РѕРІ
   s 1 tcc_relocate IF ." Relocate error." CR EXIT THEN
 
   S" foo" DROP ^ f s 3 tcc_get_symbol IF ." Get symbol error." CR EXIT THEN

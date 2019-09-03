@@ -1,5 +1,5 @@
-\ Ðàáîòà ñ ìîäàëüíûìè Windows äèàëîãàìè (õîòÿ ðåêîìåíäóþ framewindow.f
-\ èíîãäà ýòîò ôàéë óäîáíåå)
+\ Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ Ð¼Ð¾Ð´Ð°Ð»ÑŒÐ½Ñ‹Ð¼Ð¸ Windows Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°Ð¼Ð¸ (Ñ…Ð¾Ñ‚Ñ Ñ€ÐµÐºÐ¾Ð¼ÐµÐ½Ð´ÑƒÑŽ framewindow.f
+\ Ð¸Ð½Ð¾Ð³Ð´Ð° ÑÑ‚Ð¾Ñ‚ Ñ„Ð°Ð¹Ð» ÑƒÐ´Ð¾Ð±Ð½ÐµÐµ)
 
 REQUIRE Window ~day\joop\win\window.f
 
@@ -16,7 +16,7 @@ REQUIRE Window ~day\joop\win\window.f
          WM_INITDIALOG SWAP WM:
        ELSE FALSE
        THEN
-     ELSE \ Èùåì è âûçûâàåì îáðàáîò÷èê
+     ELSE \ Ð˜Ñ‰ÐµÐ¼ Ð¸ Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÐµÐ¼ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº
        uint OVER [CHAR] W SearchWM
        IF
            lparam wparam uint hwnd DUP HANDLE>OBJ :fillMessage           
@@ -96,7 +96,7 @@ C: IDCANCEL
 
 ;CLASS
 
-\ Êëàññû DialogBoxControls
+\ ÐšÐ»Ð°ÑÑÑ‹ DialogBoxControls
 BASE @ HEX
 0080 CONSTANT DI_Button 
 0081 CONSTANT DI_Edit 
@@ -107,7 +107,7 @@ BASE @ HEX
 BASE !
 
 \ --------------------------------------------------------
-\ ******* ïðîöåäóðà äëÿ ñîçäàíèÿ øàáëîíà äèàëîãà â ïàìÿòè
+\ ******* Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð° Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð° Ð´Ð¸Ð°Ð»Ð¾Ð³Ð° Ð² Ð¿Ð°Ð¼ÑÑ‚Ð¸
 0
 4 -- DLGTEMPLATE.style
 4 -- DLGTEMPLATE.dwExtendedStyle
@@ -128,7 +128,7 @@ CONSTANT /DLGTEMPLATE
 2 -- DLGITEMTEMPLATE.id
 CONSTANT /DLGITEMTEMPLATE
 
-: L" ( "ccc" -- ) \ ******* êîìïèëÿöèÿ ñòðîêè â UNICODE
+: L" ( "ccc" -- ) \ ******* ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ñ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² UNICODE
   [CHAR] " PARSE
   0 ?DO DUP I + C@ W, LOOP DROP 
   0 W,
@@ -169,7 +169,7 @@ CONSTANT /DLGITEMTEMPLATE
   t DLGITEMTEMPLATE.id   W!
   >IN @ #TIB @ <
   IF L" ELSE 0 W, THEN  \ title (initial text)
-  HERE 4 MOD 2 = IF -2 ALLOT BL W, 0 W, THEN \ ýõ, MS, MS ... :)
+  HERE 4 MOD 2 = IF -2 ALLOT BL W, 0 W, THEN \ ÑÑ…, MS, MS ... :)
   0 ,                   \ creation data
   1+
 ;
@@ -196,7 +196,7 @@ CONSTANT /DLGITEMTEMPLATE
 ;
 
 \ ----------------------------------------------------------------------
-( \ Ïðèìåð
+( \ ÐŸÑ€Ð¸Ð¼ÐµÑ€
 0 0 102 64 STANDART-STYLE
 
 DIALOG: PasswordDialog Login

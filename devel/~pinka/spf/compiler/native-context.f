@@ -1,9 +1,9 @@
 \ 01.2008
-\ Управление контекстом трансляции,
-\ постфиксный и прозрачный по стеку данных аналог MODULE: ... EXPORT ... ;MODULE
+\ РЈРїСЂР°РІР»РµРЅРёРµ РєРѕРЅС‚РµРєСЃС‚РѕРј С‚СЂР°РЅСЃР»СЏС†РёРё,
+\ РїРѕСЃС‚С„РёРєСЃРЅС‹Р№ Рё РїСЂРѕР·СЂР°С‡РЅС‹Р№ РїРѕ СЃС‚РµРєСѓ РґР°РЅРЅС‹С… Р°РЅР°Р»РѕРі MODULE: ... EXPORT ... ;MODULE
 
 
-REQUIRE >CS ~pinka/spf/compiler/control-stack.f \ управляющий стек
+REQUIRE >CS ~pinka/spf/compiler/control-stack.f \ СѓРїСЂР°РІР»СЏСЋС‰РёР№ СЃС‚РµРє
 
 
 : (NODE-PRECEDING-FROM) ( node1 node9 -- node2|0 ) \ node9--> ... -->node2-->node1
@@ -35,8 +35,8 @@ REQUIRE >CS ~pinka/spf/compiler/control-stack.f \ управляющий стек
 ;
 : SCOPE-DEPTH ( -- u )
   CONTEXT S-O - >CELLS
-  \ не может быть отрицательным (by design),
-  \ поэтому допустимо использовать >CELLS напрямую
+  \ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј (by design),
+  \ РїРѕСЌС‚РѕРјСѓ РґРѕРїСѓСЃС‚РёРјРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ >CELLS РЅР°РїСЂСЏРјСѓСЋ
 ;
 : PUSH-SCOPE ( wid -- )
   ALSO! \ == ALSO CONTEXT !

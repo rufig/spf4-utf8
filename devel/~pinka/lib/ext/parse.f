@@ -1,7 +1,7 @@
 \ 01.2002
-\ 04.Aug.2004 ïåðåèìåíîâàë (áûëè êîëëèçèè èìåí ñ acTCP )
-\             SPARSE    â  PARSE-FOR
-\             SPARSETO  â  PARSE-BEFORE
+\ 04.Aug.2004 Ð¿ÐµÑ€ÐµÐ¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð» (Ð±Ñ‹Ð»Ð¸ ÐºÐ¾Ð»Ð»Ð¸Ð·Ð¸Ð¸ Ð¸Ð¼ÐµÐ½ Ñ acTCP )
+\             SPARSE    Ð²  PARSE-FOR
+\             SPARSETO  Ð²  PARSE-BEFORE
 
 REQUIRE [UNDEFINED]   lib/include/tools.f
 REQUIRE {             lib/ext/locals.f
@@ -13,8 +13,8 @@ REQUIRE {             lib/ext/locals.f
 ;                       [THEN]
 
 : PARSE-FOR ( sa su -- a1 u1 true | false )
-\ Ðàçáèðàåò äî ðàçäåëèòåëÿ sa su, ðàçäåëèòåëü ïðîïóñêàåò.
-\ Ïðè íåóñïåõå >IN íå ìåíÿåòñÿ.
+\ Ð Ð°Ð·Ð±Ð¸Ñ€Ð°ÐµÑ‚ Ð´Ð¾ Ñ€Ð°Ð·Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»Ñ sa su, Ñ€Ð°Ð·Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»ÑŒ Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°ÐµÑ‚.
+\ ÐŸÑ€Ð¸ Ð½ÐµÑƒÑÐ¿ÐµÑ…Ðµ >IN Ð½Ðµ Ð¼ÐµÐ½ÑÐµÑ‚ÑÑ.
   PARSE-AREA@ { sa su a u }
   a u sa su SEARCH  IF 
   DROP a -  DUP su + >IN +!
@@ -22,8 +22,8 @@ REQUIRE {             lib/ext/locals.f
   2DROP FALSE
 ;
 : PARSE-BEFORE ( sa su -- a1 u1 true | false )
-\ Ðàçáèðàåò äî ðàçäåëèòåëÿ sa su, ðàçäåëèòåëü ÍÅ ïðîïóñêàåò.
-\ Ïðè íåóñïåõå >IN íå ìåíÿåòñÿ.
+\ Ð Ð°Ð·Ð±Ð¸Ñ€Ð°ÐµÑ‚ Ð´Ð¾ Ñ€Ð°Ð·Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»Ñ sa su, Ñ€Ð°Ð·Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»ÑŒ ÐÐ• Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°ÐµÑ‚.
+\ ÐŸÑ€Ð¸ Ð½ÐµÑƒÑÐ¿ÐµÑ…Ðµ >IN Ð½Ðµ Ð¼ÐµÐ½ÑÐµÑ‚ÑÑ.
   PARSE-AREA@ { sa su a u }
   a u sa su SEARCH  IF 
   DROP a -  DUP >IN +!

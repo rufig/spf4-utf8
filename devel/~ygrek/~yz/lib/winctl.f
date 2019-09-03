@@ -2,16 +2,16 @@
 
 \ $Id$
 
-\ Библиотека пользовательского интерфейса Windows
-\ ч. 2. Стандартные элементы интерфейса и их размещение
-\ Ю. Жиловец, 2.02.2002
+\ Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° Windows
+\ С‡. 2. РЎС‚Р°РЅРґР°СЂС‚РЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РёРЅС‚РµСЂС„РµР№СЃР° Рё РёС… СЂР°Р·РјРµС‰РµРЅРёРµ
+\ Р®. Р–РёР»РѕРІРµС†, 2.02.2002
 
 REQUIRE WINDOWS... ~ygrek/~yz/lib/winlib.f
 
 0 VALUE common-tooltip
 
 \ ------------------------------
-\ Полезные процедуры
+\ РџРѕР»РµР·РЅС‹Рµ РїСЂРѕС†РµРґСѓСЂС‹
 
 WINAPI: SelectObject          GDI32.DLL
 WINAPI: GetTextExtentPoint32A GDI32.DLL
@@ -19,22 +19,22 @@ WINAPI: GetDC                 USER32.DLL
 WINAPI: ReleaseDC             USER32.DLL
 
 common table control
-  item -font	getset	\ шрифт
-  item -align 	set 	\ выравнивание текста
-  item -notify  	\ обработчик уведомлений
-  item -command 	\ вызов команды
-  item -defcommand	\ сообщение по умолчанию
-  item -updown		\ спин-симбионт
-  item -tooltip  getset \ подсказка
-  item -tooltipexists   \ флажок: есть ли подсказка
-  item -locked          \ нельзя менять размеры
-  \ специализированные слова
-  item -calcsize        \ слово вычисления размеров окна
-  item -ctlshow         \ слово показа элемента
-  item -ctlhide         \ слово отключения показа элемента
-  item -ctlresize       \ изменение размеров
-  item -ctlmove		\ перестановка элемента
-  item -ctladdpart      \ добавление внутренних частей к окну
+  item -font	getset	\ С€СЂРёС„С‚
+  item -align 	set 	\ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ С‚РµРєСЃС‚Р°
+  item -notify  	\ РѕР±СЂР°Р±РѕС‚С‡РёРє СѓРІРµРґРѕРјР»РµРЅРёР№
+  item -command 	\ РІС‹Р·РѕРІ РєРѕРјР°РЅРґС‹
+  item -defcommand	\ СЃРѕРѕР±С‰РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+  item -updown		\ СЃРїРёРЅ-СЃРёРјР±РёРѕРЅС‚
+  item -tooltip  getset \ РїРѕРґСЃРєР°Р·РєР°
+  item -tooltipexists   \ С„Р»Р°Р¶РѕРє: РµСЃС‚СЊ Р»Рё РїРѕРґСЃРєР°Р·РєР°
+  item -locked          \ РЅРµР»СЊР·СЏ РјРµРЅСЏС‚СЊ СЂР°Р·РјРµСЂС‹
+  \ СЃРїРµС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Рµ СЃР»РѕРІР°
+  item -calcsize        \ СЃР»РѕРІРѕ РІС‹С‡РёСЃР»РµРЅРёСЏ СЂР°Р·РјРµСЂРѕРІ РѕРєРЅР°
+  item -ctlshow         \ СЃР»РѕРІРѕ РїРѕРєР°Р·Р° СЌР»РµРјРµРЅС‚Р°
+  item -ctlhide         \ СЃР»РѕРІРѕ РѕС‚РєР»СЋС‡РµРЅРёСЏ РїРѕРєР°Р·Р° СЌР»РµРјРµРЅС‚Р°
+  item -ctlresize       \ РёР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂРѕРІ
+  item -ctlmove		\ РїРµСЂРµСЃС‚Р°РЅРѕРІРєР° СЌР»РµРјРµРЅС‚Р°
+  item -ctladdpart      \ РґРѕР±Р°РІР»РµРЅРёРµ РІРЅСѓС‚СЂРµРЅРЅРёС… С‡Р°СЃС‚РµР№ Рє РѕРєРЅСѓ
 endtable
 
 VECT common-tooltip-op
@@ -72,7 +72,7 @@ WINAPI: GetIconInfo USER32.DLL
 : +style ( style ctl -- ) DUP -style@ ROT OR SWAP -style! ;
 
 \ -----------------------------------
-\ Элементы управления
+\ Р­Р»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ
 
 :NONAME \ get-font ( ctl -- font)
   W: wm_getfont ?send ;
@@ -106,10 +106,10 @@ USER-VALUE this
 
 :NONAME
   lparam @ window@ TO thisctl
-  thisctl 0= IF FALSE EXIT THEN \ сообщение не от наших объектов не обрабатываем
+  thisctl 0= IF FALSE EXIT THEN \ СЃРѕРѕР±С‰РµРЅРёРµ РЅРµ РѕС‚ РЅР°С€РёС… РѕР±СЉРµРєС‚РѕРІ РЅРµ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј
   lparam 3 CELLS + TO lparam
   lparam CELL- @
-  \ подменяем сообщение для панели инструментов
+  \ РїРѕРґРјРµРЅСЏРµРј СЃРѕРѕР±С‰РµРЅРёРµ РґР»СЏ РїР°РЅРµР»Рё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
   DUP W: tbn_dropdown = IF DROP W: bn_clicked THEN
   DUP thisctl -defcommand@ = IF
     DROP thisctl -command@ EXECUTE
@@ -119,13 +119,13 @@ USER-VALUE this
 ; TO notifyproc
 
 \ ----------------------------------
-\ Шрифт по умолчанию
+\ РЁСЂРёС„С‚ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
 : default-font ( font -- ) TO def-font ;
 : -sysfont  0 this -font! ;
 
 \ ----------------------------------
-\ Строки статуса
+\ РЎС‚СЂРѕРєРё СЃС‚Р°С‚СѓСЃР°
 
 WINAPI: CreateStatusWindow COMCTL32.DLL
 
@@ -147,7 +147,7 @@ WINAPI: CreateStatusWindow COMCTL32.DLL
  >R SWAP W: sb_settexta R> -status@ send DROP ;
 
 \ --------------------------------
-\ Статические элементы
+\ РЎС‚Р°С‚РёС‡РµСЃРєРёРµ СЌР»РµРјРµРЅС‚С‹
 
 0 == left
 1 == center
@@ -156,9 +156,9 @@ WINAPI: CreateStatusWindow COMCTL32.DLL
 " STATIC" ASCIIZ static
 
 control table buttonlike
-  item -xpad		\ горизонтальное расстояние от текста до края
-  item -ypad		\ вертикальное расстояние от текста до края
-  item -image	getset	\ текущая картинка
+  item -xpad		\ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РµРєСЃС‚Р° РґРѕ РєСЂР°СЏ
+  item -ypad		\ РІРµСЂС‚РёРєР°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РµРєСЃС‚Р° РґРѕ РєСЂР°СЏ
+  item -image	getset	\ С‚РµРєСѓС‰Р°СЏ РєР°СЂС‚РёРЅРєР°
   item -state	getset
 endtable
 
@@ -173,7 +173,7 @@ endtable
 
 :NONAME \ set-labeltext ( z ctl -- ) 
   2DUP set-text DUP ?invalidate DUP adjust-size 
-  \ заставим элемент перерисоваться еще раз
+  \ Р·Р°СЃС‚Р°РІРёРј СЌР»РµРјРµРЅС‚ РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊСЃСЏ РµС‰Рµ СЂР°Р·
   set-text
 ; -text buttonlike storeset
 
@@ -233,7 +233,7 @@ endtable
   create-control-exstyle ;
 
 \ -----------------------------
-\ Кнопки
+\ РљРЅРѕРїРєРё
 
 " BUTTON" ASCIIZ buttons
 
@@ -324,9 +324,9 @@ endtable
 
 : ?uncheck-group ( grp -- ) CELL+ @ ?DUP IF 0 SWAP set-state THEN ;
 
-\ Формат группы:
-\ +0	cell	Код установленной кнопки
-\ +4	cell	Адрес установленной кнопки
+\ Р¤РѕСЂРјР°С‚ РіСЂСѓРїРїС‹:
+\ +0	cell	РљРѕРґ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ РєРЅРѕРїРєРё
+\ +4	cell	РђРґСЂРµСЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ РєРЅРѕРїРєРё
 
 : GROUP ( ->bl; -- ) 
   CREATE -1 , 0 , ;
@@ -358,7 +358,7 @@ endtable
 
 PROC: check-this-radio ( -- ) thisctl check-radio ;
 
-\ игнорируем state - радиокнопки не надо сбрасывать по одной
+\ РёРіРЅРѕСЂРёСЂСѓРµРј state - СЂР°РґРёРѕРєРЅРѕРїРєРё РЅРµ РЅР°РґРѕ СЃР±СЂР°СЃС‹РІР°С‚СЊ РїРѕ РѕРґРЅРѕР№
 : set-radio-state ( state ctl -- )
   PRESS check-radio ;
 
@@ -378,7 +378,7 @@ PROC: check-this-radio ( -- ) thisctl check-radio ;
   R> ;
 
 \ -----------------------------
-\ Строка редактирования
+\ РЎС‚СЂРѕРєР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
 
 " EDIT" ASCIIZ edits
 
@@ -418,7 +418,7 @@ PROC: check-this-radio ( -- ) thisctl check-radio ;
 : limit-edit ( n ctl -- ) W: em_setlimittext wsend DROP ;
 
 \ ------------------------------
-\ Обработка сообщения wm_command
+\ РћР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёСЏ wm_command
 
 :NONAME
   lparam window@ TO thisctl
@@ -431,10 +431,10 @@ PROC: check-this-radio ( -- ) thisctl check-radio ;
 ; TO command
 
 \ -----------------------------
-\ Окна-списки
+\ РћРєРЅР°-СЃРїРёСЃРєРё
 
 control table listlike
-  item -selected getset	\ Текущий выбранный элемент
+  item -selected getset	\ РўРµРєСѓС‰РёР№ РІС‹Р±СЂР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚
 endtable
 
 : lb-getsel ( ctl -- pos)
@@ -464,7 +464,7 @@ endtable
 : lb-count ( lb -- n) W: lb_getcount ?send ;
 
 \ ----------------------------------
-\ Комбинированные списки
+\ РљРѕРјР±РёРЅРёСЂРѕРІР°РЅРЅС‹Рµ СЃРїРёСЃРєРё
 
 : cb-getsel ( ctl -- pos)
   W: cb_getcursel ?send ;
@@ -493,14 +493,14 @@ endtable
 : combo-count ( lb -- n) W: cb_getcount ?send ;
 
 \ --------------------------------
-\ Полосы прокрутки
+\ РџРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё
 
 " SCROLLBAR" ASCIIZ scrolls
 
 control table scrolllike
-  item -pos	getset	\ Позиция бегунка
-  item -min	getset  \ минимальная позиция прокрутки
-  item -max	getset	\ максимальная позиция прокрутки
+  item -pos	getset	\ РџРѕР·РёС†РёСЏ Р±РµРіСѓРЅРєР°
+  item -min	getset  \ РјРёРЅРёРјР°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ РїСЂРѕРєСЂСѓС‚РєРё
+  item -max	getset	\ РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ РїСЂРѕРєСЂСѓС‚РєРё
 endtable
 
 WINAPI: GetScrollPos   USER32.DLL
@@ -554,7 +554,7 @@ WINAPI: SetScrollRange USER32.DLL
 ; TO scrollctlproc
 
 \ -----------------------------
-\ Размещение объектов
+\ Р Р°Р·РјРµС‰РµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ
 
 : ctl-size ( ctl -- x y)
   DUP -calcsize@ ?DUP IF
@@ -570,8 +570,8 @@ WINAPI: SetScrollRange USER32.DLL
 : (set-ud) ( ctl what -- )
   SWAP >R 0 W: udm_setbuddy R> -updown@ send DROP ;
 
-\ спин делается видимым, так как система почему-то при добавлении
-\ прячет его, если спин относится к полю ввода
+\ СЃРїРёРЅ РґРµР»Р°РµС‚СЃСЏ РІРёРґРёРјС‹Рј, С‚Р°Рє РєР°Рє СЃРёСЃС‚РµРјР° РїРѕС‡РµРјСѓ-С‚Рѕ РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё
+\ РїСЂСЏС‡РµС‚ РµРіРѕ, РµСЃР»Рё СЃРїРёРЅ РѕС‚РЅРѕСЃРёС‚СЃСЏ Рє РїРѕР»СЋ РІРІРѕРґР°
 : add-ud ( ctl -- ) DUP DUP -hwnd@ (set-ud) -updown@ winshow ;
 
 : remove-ud ( ctl -- ) DUP ctl-size 2 PICK 0 (set-ud) ROT resize ;
@@ -637,10 +637,10 @@ WINAPI: SetParent USER32.DLL
 : remove ( ctl -- ) 
   DUP winhide 0 SWAP -parent! ;
 
-\ Быстрая инициализация текущего объекта
+\ Р‘С‹СЃС‚СЂР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С‚РµРєСѓС‰РµРіРѕ РѕР±СЉРµРєС‚Р°
 \ (/ -font f  -color blue  -bgcolor white  /)
 
-\ Более хитрые вещи:
+\ Р‘РѕР»РµРµ С…РёС‚СЂС‹Рµ РІРµС‰Рё:
 \ (/ -name value-var  -size 100 200 /)
 
 -1 == -size
@@ -652,10 +652,10 @@ WINAPI: SetParent USER32.DLL
     I @ CASE
     -size OF 
       I CELL- @ I 2 CELLS - @ this ctlresize
-      3 ( параметра)
+      3 ( РїР°СЂР°РјРµС‚СЂР°)
     ENDOF
       I CELL- @ SWAP this setproc
-      2 ( параметра)
+      2 ( РїР°СЂР°РјРµС‚СЂР°)
     END-CASE
   CELLS NEGATE +LOOP
   ELSE
@@ -669,7 +669,7 @@ WINAPI: SetParent USER32.DLL
   \ -hwnd@ GetParent ?DUP IF 
   \  window@ DUP -xsize@ SWAP -ysize@
   \ ELSE
-  \  screen-x 10 - screen-y 20 - ( с небольшой поправкой на оформление окна)
+  \  screen-x 10 - screen-y 20 - ( СЃ РЅРµР±РѕР»СЊС€РѕР№ РїРѕРїСЂР°РІРєРѕР№ РЅР° РѕС„РѕСЂРјР»РµРЅРёРµ РѕРєРЅР°)
   \ THEN ;
   DROP screen-x 10 - screen-y 20 - ;
 
@@ -679,7 +679,7 @@ S" ~ygrek/~yz/lib/wingrid.f" INCLUDED
 : -bevel ( -- ) groupedge cur-grid @ :gbox ! ;
 
 
-\ Модальные диалоги ==================
+\ РњРѕРґР°Р»СЊРЅС‹Рµ РґРёР°Р»РѕРіРё ==================
 
 : MODAL... ( z -- oldmw olddlg )
   modal-window dialog 

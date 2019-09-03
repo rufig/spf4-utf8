@@ -1,5 +1,5 @@
-\ Работа с вариантами
-\ Ю. Жиловец, 27.03.2002
+\ Р Р°Р±РѕС‚Р° СЃ РІР°СЂРёР°РЅС‚Р°РјРё
+\ Р®. Р–РёР»РѕРІРµС†, 27.03.2002
 
 REQUIRE ==       ~yz/lib/common.f
 REQUIRE ::AddRef ~yz/lib/interfaces.f
@@ -10,7 +10,7 @@ REQUIRE ::AddRef ~yz/lib/interfaces.f
 8 -- :var-value
 == variant-len
 
-( значения позаимствованы из wintypes.h)
+( Р·РЅР°С‡РµРЅРёСЏ РїРѕР·Р°РёРјСЃС‚РІРѕРІР°РЅС‹ РёР· wintypes.h)
  0 == _empty
  1 == _null
 17 == _char     _char   == _ui1

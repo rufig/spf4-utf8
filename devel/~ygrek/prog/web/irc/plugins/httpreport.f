@@ -1,5 +1,5 @@
 \ $Id$
-\ Отчёт о количестве собеседников на канале
+\ РћС‚С‡С‘С‚ Рѕ РєРѕР»РёС‡РµСЃС‚РІРµ СЃРѕР±РµСЃРµРґРЅРёРєРѕРІ РЅР° РєР°РЅР°Р»Рµ
 
 REQUIRE CURLOPT! ~ac/lib/lin/curl/curlopt.f
 REQUIRE AT-NAMES-UPDATED ~ygrek/prog/web/irc/plugins/names.f

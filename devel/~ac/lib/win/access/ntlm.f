@@ -1,51 +1,51 @@
-\ структуры сообщений NTLM (передаются между клиентом и сервером при авторизации)
+\ СЃС‚СЂСѓРєС‚СѓСЂС‹ СЃРѕРѕР±С‰РµРЅРёР№ NTLM (РїРµСЂРµРґР°СЋС‚СЃСЏ РјРµР¶РґСѓ РєР»РёРµРЅС‚РѕРј Рё СЃРµСЂРІРµСЂРѕРј РїСЂРё Р°РІС‚РѕСЂРёР·Р°С†РёРё)
 
 REQUIRE {          lib/ext/locals.f
 REQUIRE debase64   ~ac/lib/string/conv.f
 REQUIRE LocalLogon ~ac/lib/win/access/sspi_logon.f 
 
-\ NTLM_mes1 NEGOTIATE_MESSAGE от клиента серверу
+\ NTLM_mes1 NEGOTIATE_MESSAGE РѕС‚ РєР»РёРµРЅС‚Р° СЃРµСЂРІРµСЂСѓ
 0
 8 -- ntlm_protocol \ asciiz "NTLMSSP"
 1 -- ntlm_type     \ 0x01
-3 -- ntlm_zero1    \ нули
-2 -- ntlm_flags1   \ 0xB203 или 0xB207 или x8207
-2 -- ntlm_flags2   \ 0xA208 или 0x0008
-2 -- ntlm_domlen1  \ длина имени домена или рабочей группы (не asciiz)
-2 -- ntlm_domlen2  \ то же (maxlen)
-4 -- ntlm_domoffs  \ смещение имени домена
-2 -- ntlm_hostlen1 \ длина имени хоста (WorkstationLen)
-2 -- ntlm_hostlen2 \ то же (maxlen)
-4 -- ntlm_hostoffs \ смещение имени хоста
-1 -- ntlm_wprodmaj \ ProductMajorVersion (Windows - 6 или 5)
+3 -- ntlm_zero1    \ РЅСѓР»Рё
+2 -- ntlm_flags1   \ 0xB203 РёР»Рё 0xB207 РёР»Рё x8207
+2 -- ntlm_flags2   \ 0xA208 РёР»Рё 0x0008
+2 -- ntlm_domlen1  \ РґР»РёРЅР° РёРјРµРЅРё РґРѕРјРµРЅР° РёР»Рё СЂР°Р±РѕС‡РµР№ РіСЂСѓРїРїС‹ (РЅРµ asciiz)
+2 -- ntlm_domlen2  \ С‚Рѕ Р¶Рµ (maxlen)
+4 -- ntlm_domoffs  \ СЃРјРµС‰РµРЅРёРµ РёРјРµРЅРё РґРѕРјРµРЅР°
+2 -- ntlm_hostlen1 \ РґР»РёРЅР° РёРјРµРЅРё С…РѕСЃС‚Р° (WorkstationLen)
+2 -- ntlm_hostlen2 \ С‚Рѕ Р¶Рµ (maxlen)
+4 -- ntlm_hostoffs \ СЃРјРµС‰РµРЅРёРµ РёРјРµРЅРё С…РѕСЃС‚Р°
+1 -- ntlm_wprodmaj \ ProductMajorVersion (Windows - 6 РёР»Рё 5)
 1 -- ntlm_wprodmin \ ProductMinorVersion (Windows - 0..2)
 2 -- ntlm_wbuild   \ ProductBuild
-3 -- ntlm_reserved \ нули
+3 -- ntlm_reserved \ РЅСѓР»Рё
 1 -- ntlm_revision \ NTLMSSP_REVISION_W2K3=0x0F, NTLMSSP_REVISION_W2K3_RC1=0x0A
-\ далее собственно имя хоста и домена
+\ РґР°Р»РµРµ СЃРѕР±СЃС‚РІРµРЅРЅРѕ РёРјСЏ С…РѕСЃС‚Р° Рё РґРѕРјРµРЅР°
 CONSTANT /NTLM_mes1
 
-\ NTLM_mes2 CHALLENGE_MESSAGE от сервера клиенту
+\ NTLM_mes2 CHALLENGE_MESSAGE РѕС‚ СЃРµСЂРІРµСЂР° РєР»РёРµРЅС‚Сѓ
 0
 8 -- ntlm2_protocol \ asciiz "NTLMSSP"
 1 -- ntlm2_type     \ 0x02
-3 -- ntlm2_zero4    \ нули
-2 -- ntlm2_targlen1 \ длина TargetName (домен) или нули
-2 -- ntlm2_targlen2 \ то же
-4 -- ntlm2_targoffs \ смещение TargetName или 0x28 (/NTLM_mes2), если его нет
-2 -- ntlm2_flags1   \ 0x8205 или 0x8201, если TargetName нет
-2 -- ntlm2_flags2   \ ... или нули
+3 -- ntlm2_zero4    \ РЅСѓР»Рё
+2 -- ntlm2_targlen1 \ РґР»РёРЅР° TargetName (РґРѕРјРµРЅ) РёР»Рё РЅСѓР»Рё
+2 -- ntlm2_targlen2 \ С‚Рѕ Р¶Рµ
+4 -- ntlm2_targoffs \ СЃРјРµС‰РµРЅРёРµ TargetName РёР»Рё 0x28 (/NTLM_mes2), РµСЃР»Рё РµРіРѕ РЅРµС‚
+2 -- ntlm2_flags1   \ 0x8205 РёР»Рё 0x8201, РµСЃР»Рё TargetName РЅРµС‚
+2 -- ntlm2_flags2   \ ... РёР»Рё РЅСѓР»Рё
 8 -- ntlm2_mes      \ 64-bit challenge
-8 -- ntlm2_reserv1  \ обязательно нули
+8 -- ntlm2_reserv1  \ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РЅСѓР»Рё
 
-2 -- ntlm2_tinflen1 \ длина TargetInfo, поле есть, если флаг NTLMSSP_NEGOTIATE_TARGET_INFO
-2 -- ntlm2_tinflen2 \ то же
-4 -- ntlm2_tinfoffs \ смещение TargetInfo
+2 -- ntlm2_tinflen1 \ РґР»РёРЅР° TargetInfo, РїРѕР»Рµ РµСЃС‚СЊ, РµСЃР»Рё С„Р»Р°Рі NTLMSSP_NEGOTIATE_TARGET_INFO
+2 -- ntlm2_tinflen2 \ С‚Рѕ Р¶Рµ
+4 -- ntlm2_tinfoffs \ СЃРјРµС‰РµРЅРёРµ TargetInfo
 
-1 -- ntlm2_wprodmaj \ ProductMajorVersion (Windows - 6 или 5)
+1 -- ntlm2_wprodmaj \ ProductMajorVersion (Windows - 6 РёР»Рё 5)
 1 -- ntlm2_wprodmin \ ProductMinorVersion (Windows - 0..2)
 2 -- ntlm2_wbuild   \ ProductBuild
-3 -- ntlm2_reserved \ нули
+3 -- ntlm2_reserved \ РЅСѓР»Рё
 1 -- ntlm2_revision \ NTLMSSP_REVISION_W2K3=0x0F, NTLMSSP_REVISION_W2K3_RC1=0x0A
 
 CONSTANT /NTLM_mes2
@@ -53,49 +53,49 @@ CONSTANT /NTLM_mes2
 CREATE NTLM_mes2 CHAR N C, CHAR T C, CHAR L C, CHAR M C, CHAR S C, CHAR S C, CHAR P C, 0 C,
 2 , 0 , 40 , 0x8201 , 0 , 0 , 0 , 0 , 
 
-\ challenge-сообщение сервера в случае, если на сервере не работает SSPI
-\ или клиент и сервер в разных доменах, в разных сетях, или не-windows-сети
+\ challenge-СЃРѕРѕР±С‰РµРЅРёРµ СЃРµСЂРІРµСЂР° РІ СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РЅР° СЃРµСЂРІРµСЂРµ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ SSPI
+\ РёР»Рё РєР»РёРµРЅС‚ Рё СЃРµСЂРІРµСЂ РІ СЂР°Р·РЅС‹С… РґРѕРјРµРЅР°С…, РІ СЂР°Р·РЅС‹С… СЃРµС‚СЏС…, РёР»Рё РЅРµ-windows-СЃРµС‚Рё
 : BNTLM_mes2 NTLM_mes2 0x28 ( /NTLM_mes2 ) base64 ;
 : (BNTLM_mes2) NTLM_mes2 0x28 ( /NTLM_mes2 ) ;
 
-\ NTLM_mes3 AUTHENTICATE_MESSAGE от клиента серверу
+\ NTLM_mes3 AUTHENTICATE_MESSAGE РѕС‚ РєР»РёРµРЅС‚Р° СЃРµСЂРІРµСЂСѓ
 0
 8 -- ntlm3_protocol \ asciiz "NTLMSSP"
 1 -- ntlm3_type     \ 0x03 (NtLmAuthenticate)
-3 -- ntlm3_zero8    \ нули
-2 -- ntlm3_resplen1 \ длина ответа LanManager (0x18)
-2 -- ntlm3_resplen2 \ то же
+3 -- ntlm3_zero8    \ РЅСѓР»Рё
+2 -- ntlm3_resplen1 \ РґР»РёРЅР° РѕС‚РІРµС‚Р° LanManager (0x18)
+2 -- ntlm3_resplen2 \ С‚Рѕ Р¶Рµ
 
-4 -- ntlm3_respoffs \ смещение ответа LanManager
-2 -- ntlm3_ntrespl1 \ длина ответа NT (0x38 или 0x18)
-2 -- ntlm3_ntrespl2 \ то же
-4 -- ntlm3_ntrespof \ смещение ответа NT
-2 -- ntlm3_domlen1  \ длина домена в байтах,
-                    \ сам домен в виде unicode (вместо рабочей группы имя хоста строчными)
-2 -- ntlm3_domlen2  \ то же
+4 -- ntlm3_respoffs \ СЃРјРµС‰РµРЅРёРµ РѕС‚РІРµС‚Р° LanManager
+2 -- ntlm3_ntrespl1 \ РґР»РёРЅР° РѕС‚РІРµС‚Р° NT (0x38 РёР»Рё 0x18)
+2 -- ntlm3_ntrespl2 \ С‚Рѕ Р¶Рµ
+4 -- ntlm3_ntrespof \ СЃРјРµС‰РµРЅРёРµ РѕС‚РІРµС‚Р° NT
+2 -- ntlm3_domlen1  \ РґР»РёРЅР° РґРѕРјРµРЅР° РІ Р±Р°Р№С‚Р°С…,
+                    \ СЃР°Рј РґРѕРјРµРЅ РІ РІРёРґРµ unicode (РІРјРµСЃС‚Рѕ СЂР°Р±РѕС‡РµР№ РіСЂСѓРїРїС‹ РёРјСЏ С…РѕСЃС‚Р° СЃС‚СЂРѕС‡РЅС‹РјРё)
+2 -- ntlm3_domlen2  \ С‚Рѕ Р¶Рµ
 
-4 -- ntlm3_domoffs  \ смешение имени домена
-2 -- ntlm3_userlen1 \ длина логина в байтах (сам логин в unicode = UTF-16LE)
-2 -- ntlm3_userlen2 \ то же
-4 -- ntlm3_useroffs \ смещение логина
-2 -- ntlm3_hostlen1 \ длина хоста в байтах (сам в unicode прописными)
-2 -- ntlm3_hostlen2 \ то же
+4 -- ntlm3_domoffs  \ СЃРјРµС€РµРЅРёРµ РёРјРµРЅРё РґРѕРјРµРЅР°
+2 -- ntlm3_userlen1 \ РґР»РёРЅР° Р»РѕРіРёРЅР° РІ Р±Р°Р№С‚Р°С… (СЃР°Рј Р»РѕРіРёРЅ РІ unicode = UTF-16LE)
+2 -- ntlm3_userlen2 \ С‚Рѕ Р¶Рµ
+4 -- ntlm3_useroffs \ СЃРјРµС‰РµРЅРёРµ Р»РѕРіРёРЅР°
+2 -- ntlm3_hostlen1 \ РґР»РёРЅР° С…РѕСЃС‚Р° РІ Р±Р°Р№С‚Р°С… (СЃР°Рј РІ unicode РїСЂРѕРїРёСЃРЅС‹РјРё)
+2 -- ntlm3_hostlen2 \ С‚Рѕ Р¶Рµ
 
-4 -- ntlm3_hostoffs \ смещение имени хоста
-2 -- ntlm3_seskeyl1 \ длина сессионного ключа (на практике 0)
-2 -- ntlm3_seskeyl2 \ то же
-4 -- ntlm3_keyoffs  \ смещение ключа (на практике здесь длина всей структуры!)
-2 -- ntlm3_flags1   \ 0x8205 или 0x8201 или 0xC205
-2 -- ntlm3_flags2   \ 0x0200 или 0xA288
+4 -- ntlm3_hostoffs \ СЃРјРµС‰РµРЅРёРµ РёРјРµРЅРё С…РѕСЃС‚Р°
+2 -- ntlm3_seskeyl1 \ РґР»РёРЅР° СЃРµСЃСЃРёРѕРЅРЅРѕРіРѕ РєР»СЋС‡Р° (РЅР° РїСЂР°РєС‚РёРєРµ 0)
+2 -- ntlm3_seskeyl2 \ С‚Рѕ Р¶Рµ
+4 -- ntlm3_keyoffs  \ СЃРјРµС‰РµРЅРёРµ РєР»СЋС‡Р° (РЅР° РїСЂР°РєС‚РёРєРµ Р·РґРµСЃСЊ РґР»РёРЅР° РІСЃРµР№ СЃС‚СЂСѓРєС‚СѓСЂС‹!)
+2 -- ntlm3_flags1   \ 0x8205 РёР»Рё 0x8201 РёР»Рё 0xC205
+2 -- ntlm3_flags2   \ 0x0200 РёР»Рё 0xA288
 
-1 -- ntlm3_wprodmaj \ ProductMajorVersion (Windows - 6 или 5)
+1 -- ntlm3_wprodmaj \ ProductMajorVersion (Windows - 6 РёР»Рё 5)
 1 -- ntlm3_wprodmin \ ProductMinorVersion (Windows - 0..2)
 2 -- ntlm3_wbuild   \ ProductBuild
-3 -- ntlm3_reserved \ нули
+3 -- ntlm3_reserved \ РЅСѓР»Рё
 1 -- ntlm3_revision \ NTLMSSP_REVISION_W2K3=0x0F, NTLMSSP_REVISION_W2K3_RC1=0x0A
-\ далее неизвестные числа (16 байт во всех браузерах), скорее всего user GUID
-\ далее домен, логин, хост, LM-ответ, NT-ответ 
-\ (все эти "далее" могут отсутствовать, если соответствующие длины =0)
+\ РґР°Р»РµРµ РЅРµРёР·РІРµСЃС‚РЅС‹Рµ С‡РёСЃР»Р° (16 Р±Р°Р№С‚ РІРѕ РІСЃРµС… Р±СЂР°СѓР·РµСЂР°С…), СЃРєРѕСЂРµРµ РІСЃРµРіРѕ user GUID
+\ РґР°Р»РµРµ РґРѕРјРµРЅ, Р»РѕРіРёРЅ, С…РѕСЃС‚, LM-РѕС‚РІРµС‚, NT-РѕС‚РІРµС‚ 
+\ (РІСЃРµ СЌС‚Рё "РґР°Р»РµРµ" РјРѕРіСѓС‚ РѕС‚СЃСѓС‚СЃС‚РІРѕРІР°С‚СЊ, РµСЃР»Рё СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ РґР»РёРЅС‹ =0)
 CONSTANT /NTLM_mes3
 
 1 CONSTANT NtLmNegotiate

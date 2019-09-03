@@ -1,8 +1,8 @@
-( Обёртки для функций Extended MAPI.
-  Набор средств для перебора, извлечения и создания объектов
-  [сообщений/задач/заметок и т.д.] в базах MAPI-приложений -
-  MS Outlook, Exchange, MAPILab Groupware, Oxchange и т.п.
-  Примеры см. в mapi_test.f и list.f.
+( РћР±С‘СЂС‚РєРё РґР»СЏ С„СѓРЅРєС†РёР№ Extended MAPI.
+  РќР°Р±РѕСЂ СЃСЂРµРґСЃС‚РІ РґР»СЏ РїРµСЂРµР±РѕСЂР°, РёР·РІР»РµС‡РµРЅРёСЏ Рё СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ
+  [СЃРѕРѕР±С‰РµРЅРёР№/Р·Р°РґР°С‡/Р·Р°РјРµС‚РѕРє Рё С‚.Рґ.] РІ Р±Р°Р·Р°С… MAPI-РїСЂРёР»РѕР¶РµРЅРёР№ -
+  MS Outlook, Exchange, MAPILab Groupware, Oxchange Рё С‚.Рї.
+  РџСЂРёРјРµСЂС‹ СЃРј. РІ mapi_test.f Рё list.f.
 
   ~ac 06.07.2007 $Id$
 )
@@ -13,7 +13,7 @@ REQUIRE DumpRowSet       ~ac/lib/win/mapi/enum.f
 REQUIRE MAPIInitialize   ~ac/lib/win/mapi/funct.f
 
 REQUIRE {                ~ac/lib/locals.f
-REQUIRE STR@             ~ac/lib/str5.f \ используется только в примерах
+REQUIRE STR@             ~ac/lib/str5.f \ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РІ РїСЂРёРјРµСЂР°С…
 REQUIRE DLOPEN           ~ac/lib/ns/dlopen.f 
 
 USER uMapiSession  : MapiSession  uMapiSession @ ;
@@ -23,14 +23,14 @@ USER uMapiStore    : MapiStore    uMapiStore @ ;
 USER uMapiFolder   : MapiFolder   uMapiFolder @ ;
 USER uMapiMessage  : MapiMessage  uMapiMessage @ ;
 
-0 VALUE aMAPIAllocateBuffer \ для конвертера MIME->MAPI
+0 VALUE aMAPIAllocateBuffer \ РґР»СЏ РєРѕРЅРІРµСЂС‚РµСЂР° MIME->MAPI
 0 VALUE aMAPIFreeBuffer
 
-( !!!!!! Некоторые функции MAPI самовольно меняют текущий каталог !!!!!! )
-( !!!!!! на C:\Program Files\Common Files\System\Mapi\1049 !!!!!! )
-( !!!!!! Пришлось вводить глупый хак SaveDir/RestDir !!!!!! )
-( !!!!!! По той же причине затруднительно использовать либу многопоточно ! )
-( !!!!!! Если кто знает, как "отключить" переключение каталогов в MAPI - пишите! :)
+( !!!!!! РќРµРєРѕС‚РѕСЂС‹Рµ С„СѓРЅРєС†РёРё MAPI СЃР°РјРѕРІРѕР»СЊРЅРѕ РјРµРЅСЏСЋС‚ С‚РµРєСѓС‰РёР№ РєР°С‚Р°Р»РѕРі !!!!!! )
+( !!!!!! РЅР° C:\Program Files\Common Files\System\Mapi\1049 !!!!!! )
+( !!!!!! РџСЂРёС€Р»РѕСЃСЊ РІРІРѕРґРёС‚СЊ РіР»СѓРїС‹Р№ С…Р°Рє SaveDir/RestDir !!!!!! )
+( !!!!!! РџРѕ С‚РѕР№ Р¶Рµ РїСЂРёС‡РёРЅРµ Р·Р°С‚СЂСѓРґРЅРёС‚РµР»СЊРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р»РёР±Сѓ РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕ ! )
+( !!!!!! Р•СЃР»Рё РєС‚Рѕ Р·РЅР°РµС‚, РєР°Рє "РѕС‚РєР»СЋС‡РёС‚СЊ" РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РєР°С‚Р°Р»РѕРіРѕРІ РІ MAPI - РїРёС€РёС‚Рµ! :)
 
 WINAPI: GetCurrentDirectoryA KERNEL32.DLL
 WINAPI: SetCurrentDirectoryA KERNEL32.DLL
@@ -46,7 +46,7 @@ USER uMapiDir
 ;
 : MapiLogon { profile-a profile-u pass-a pass-u \ madll -- ior }
   MapiSaveDir
-  0 ( см. не 0 для многопоточного ) MAPIInitialize MapiRestDir ?DUP IF EXIT THEN
+  0 ( СЃРј. РЅРµ 0 РґР»СЏ РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕРіРѕ ) MAPIInitialize MapiRestDir ?DUP IF EXIT THEN
   uMapiSession
   \ 0x2033 
   MAPI_EXTENDED MAPI_NEW_SESSION OR 
@@ -57,7 +57,7 @@ USER uMapiDir
   S" MAPIFreeBuffer" madll DLSYM TO aMAPIFreeBuffer
   0
 ;
-\ остальные функции сами вызывают THROW при ошибках
+\ РѕСЃС‚Р°Р»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё СЃР°РјРё РІС‹Р·С‹РІР°СЋС‚ THROW РїСЂРё РѕС€РёР±РєР°С…
 
 : MapiGetStores ( -- )
   uMapiStores 0 MapiSession ::GetMsgStoresTable THROW
@@ -129,7 +129,7 @@ USER uMapiDir
 : MapiOpenFolderPath ( addr u -- folder )
   ['] (MapiOpenFolderPath) EVALUATE-WITH
 ;
-: MapiGetIPF { class-a class-u \ root table rs -- ida idu } \ напр. IPF.Appointment, IPF.Task
+: MapiGetIPF { class-a class-u \ root table rs -- ida idu } \ РЅР°РїСЂ. IPF.Appointment, IPF.Task
   MapiGetRootFolderId MapiOpenFolder DROP -> root
   ^ table 0 root ::GetHierarchyTable THROW
   ^ rs  0 0 0 0 table HrQueryAllRows@24 THROW
@@ -152,7 +152,7 @@ USER uMapiDir
   BEGIN
     rcount 0 >
   WHILE
-    ^ rs 0 10 table ::QueryRows THROW \ больше 10 не дают
+    ^ rs 0 10 table ::QueryRows THROW \ Р±РѕР»СЊС€Рµ 10 РЅРµ РґР°СЋС‚
     rs xt MapiForEach
     rcount rs @ - -> rcount
   REPEAT
@@ -171,15 +171,15 @@ USER uMapiDir
 ;
 
 : MapiNewMessage { class-a class-u \ msg -- }
-\ IPM.Activity - Дневник, IPM.Task - Задачи, IPM.Note - Сообщение (Входящие)
-\ IPM.StickyNote - Заметка, IPM.Appointment - Событие (Календарь), IPM.Contact
-\ IPM.Post.Rss - пост в папке "RSS-каналы"
+\ IPM.Activity - Р”РЅРµРІРЅРёРє, IPM.Task - Р—Р°РґР°С‡Рё, IPM.Note - РЎРѕРѕР±С‰РµРЅРёРµ (Р’С…РѕРґСЏС‰РёРµ)
+\ IPM.StickyNote - Р—Р°РјРµС‚РєР°, IPM.Appointment - РЎРѕР±С‹С‚РёРµ (РљР°Р»РµРЅРґР°СЂСЊ), IPM.Contact
+\ IPM.Post.Rss - РїРѕСЃС‚ РІ РїР°РїРєРµ "RSS-РєР°РЅР°Р»С‹"
   ^ msg 0 0 MapiFolder ::CreateMessage THROW
   class-a class-u msg PR_MESSAGE_CLASS MapiProp!
           msg PR_CREATION_TIME MapiProp@ ( x1 x2 )
-     2DUP msg PR_MESSAGE_DELIVERY_TIME MapiProp! \ эта дата показывается в "Получено"
-          msg PR_CLIENT_SUBMIT_TIME MapiProp! \ выставляется при ::SubmitMessage (ставим сами, т.к. иначе пишет в заголовке "Отправлено: нет" и не показывает "Заголовки интернета")
-      0 0 msg PR_MESSAGE_FLAGS MapiProp! \ сброс read и unsent-флагов (=9, которые ставятся по умолчанию, т.к. считаются исходящими)
+     2DUP msg PR_MESSAGE_DELIVERY_TIME MapiProp! \ СЌС‚Р° РґР°С‚Р° РїРѕРєР°Р·С‹РІР°РµС‚СЃСЏ РІ "РџРѕР»СѓС‡РµРЅРѕ"
+          msg PR_CLIENT_SUBMIT_TIME MapiProp! \ РІС‹СЃС‚Р°РІР»СЏРµС‚СЃСЏ РїСЂРё ::SubmitMessage (СЃС‚Р°РІРёРј СЃР°РјРё, С‚.Рє. РёРЅР°С‡Рµ РїРёС€РµС‚ РІ Р·Р°РіРѕР»РѕРІРєРµ "РћС‚РїСЂР°РІР»РµРЅРѕ: РЅРµС‚" Рё РЅРµ РїРѕРєР°Р·С‹РІР°РµС‚ "Р—Р°РіРѕР»РѕРІРєРё РёРЅС‚РµСЂРЅРµС‚Р°")
+      0 0 msg PR_MESSAGE_FLAGS MapiProp! \ СЃР±СЂРѕСЃ read Рё unsent-С„Р»Р°РіРѕРІ (=9, РєРѕС‚РѕСЂС‹Рµ СЃС‚Р°РІСЏС‚СЃСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ, С‚.Рє. СЃС‡РёС‚Р°СЋС‚СЃСЏ РёСЃС…РѕРґСЏС‰РёРјРё)
   \ CLEAR_READ_FLAG msg ::SetReadFlag THROW
   msg uMapiMessage !
 ;
@@ -190,7 +190,7 @@ USER uMapiDir
   MapiMessage PR_SUBJECT MapiProp@
 ;
 : MapiSender! ( email-a email-u name-a name-u -- )
-  2DUP MapiMessage PR_SENT_REPRESENTING_NAME MapiProp! \ это имя показывается в "От"
+  2DUP MapiMessage PR_SENT_REPRESENTING_NAME MapiProp! \ СЌС‚Рѕ РёРјСЏ РїРѕРєР°Р·С‹РІР°РµС‚СЃСЏ РІ "РћС‚"
        MapiMessage PR_SENDER_NAME MapiProp!
   2DUP MapiMessage PR_SENT_REPRESENTING_EMAIL_ADDRESS MapiProp!
        MapiMessage PR_SENDER_EMAIL_ADDRESS MapiProp!
@@ -206,7 +206,7 @@ USER uMapiDir
 : MapiHeaders! ( hdr-a hdr-u -- )
   MapiMessage PR_TRANSPORT_MESSAGE_HEADERS MapiProp!
 ;
-\ просто чтобы не было нулевых указателей :)
+\ РїСЂРѕСЃС‚Рѕ С‡С‚РѕР±С‹ РЅРµ Р±С‹Р»Рѕ РЅСѓР»РµРІС‹С… СѓРєР°Р·Р°С‚РµР»РµР№ :)
 : _DISPLAY_NAME  S" MAPI Lib" DROP ;
 : _EMAIL_ADDRESS S" libmapi@forth.org.ru" DROP ;
 : _ADDRTYPE      S" SMTP" DROP ;
@@ -245,7 +245,7 @@ HERE SWAP - CONSTANT /MapiAddrProps
   0 ATTACH_BY_VALUE att PR_ATTACH_METHOD MapiProp!
   body-a body-u att PR_ATTACH_DATA_BIN MapiProp!
   name-a name-u att PR_ATTACH_FILENAME MapiProp!
-  0 body-u att PR_ATTACH_SIZE MapiProp! \ MAPI сам ставит этот размер, причем добавляет туда размер имени файла и еще какие-то данные
+  0 body-u att PR_ATTACH_SIZE MapiProp! \ MAPI СЃР°Рј СЃС‚Р°РІРёС‚ СЌС‚РѕС‚ СЂР°Р·РјРµСЂ, РїСЂРёС‡РµРј РґРѕР±Р°РІР»СЏРµС‚ С‚СѓРґР° СЂР°Р·РјРµСЂ РёРјРµРЅРё С„Р°Р№Р»Р° Рё РµС‰Рµ РєР°РєРёРµ-С‚Рѕ РґР°РЅРЅС‹Рµ
   ct-a ct-u att PR_ATTACH_MIME_TAG MapiProp!
   4 att ::SaveChanges THROW
   att ::Release THROW
@@ -256,9 +256,9 @@ HERE SWAP - CONSTANT /MapiAddrProps
 
 : MapiSaveAtt { addr u num \ att astream stream bug -- }
   ^ att 0 0 num MapiMessage ::OpenAttach THROW
-  ^ astream 0 0 IID_IStream PR_ATTACH_DATA_BIN att ::OpenProperty IF att ::Release THROW EXIT THEN \ недописанный аттач в PST?
+  ^ astream 0 0 IID_IStream PR_ATTACH_DATA_BIN att ::OpenProperty IF att ::Release THROW EXIT THEN \ РЅРµРґРѕРїРёСЃР°РЅРЅС‹Р№ Р°С‚С‚Р°С‡ РІ PST?
   ^ stream 0 addr STGM_CREATE STGM_READWRITE OR aMAPIFreeBuffer aMAPIAllocateBuffer OpenStreamOnFile THROW
-\ !!! не знаю, что это за недокументированный 5й параметр (который я назвал bug), но без него ::CopyTo вызывает исчерпание стека!
+\ !!! РЅРµ Р·РЅР°СЋ, С‡С‚Рѕ СЌС‚Рѕ Р·Р° РЅРµРґРѕРєСѓРјРµРЅС‚РёСЂРѕРІР°РЅРЅС‹Р№ 5Р№ РїР°СЂР°РјРµС‚СЂ (РєРѕС‚РѕСЂС‹Р№ СЏ РЅР°Р·РІР°Р» bug), РЅРѕ Р±РµР· РЅРµРіРѕ ::CopyTo РІС‹Р·С‹РІР°РµС‚ РёСЃС‡РµСЂРїР°РЅРёРµ СЃС‚РµРєР°!
   bug 0 0 MAX-INT stream astream ::CopyTo THROW
   stream ::Release THROW
   astream ::Release THROW
@@ -266,11 +266,11 @@ HERE SWAP - CONSTANT /MapiAddrProps
 ;
 
 : MapiImportMime { addr u \ conv stream -- }
-\ Загрузить заданное письмо из файла addr u в текущее (создаваемое) сообщение.
+\ Р—Р°РіСЂСѓР·РёС‚СЊ Р·Р°РґР°РЅРЅРѕРµ РїРёСЃСЊРјРѕ РёР· С„Р°Р№Р»Р° addr u РІ С‚РµРєСѓС‰РµРµ (СЃРѕР·РґР°РІР°РµРјРѕРµ) СЃРѕРѕР±С‰РµРЅРёРµ.
   CLSID_IConverterSession CreateObject THROW -> conv
 
   ^ stream 0 addr 0 aMAPIFreeBuffer aMAPIAllocateBuffer OpenStreamOnFile THROW
-  \ или SHCreateStreamOnFile
+  \ РёР»Рё SHCreateStreamOnFile
 
   \ 1 conv @ ::SetEncoding .( se=) U.
 
@@ -279,11 +279,11 @@ HERE SWAP - CONSTANT /MapiAddrProps
   conv ::Release THROW
 ;
 : MapiExportMime { addr u \ conv stream -- }
-\ Записать текущее сообщение в файл.
+\ Р—Р°РїРёСЃР°С‚СЊ С‚РµРєСѓС‰РµРµ СЃРѕРѕР±С‰РµРЅРёРµ РІ С„Р°Р№Р».
   CLSID_IConverterSession CreateObject THROW -> conv
 
   ^ stream 0 addr STGM_CREATE STGM_READWRITE OR aMAPIFreeBuffer aMAPIAllocateBuffer OpenStreamOnFile THROW
-  \ или SHCreateStreamOnFile
+  \ РёР»Рё SHCreateStreamOnFile
 
   \ 1 conv @ ::SetEncoding .( se=) U.
 
@@ -297,8 +297,8 @@ HERE SWAP - CONSTANT /MapiAddrProps
     ^ compr 0 0 ( STGM_READ | STGM_DIRECT = 0 )
     IID_IStream PR_RTF_COMPRESSED msg ::OpenProperty THROW
 
-    \ хак для определения размера несжатого потока, вместо неподдерживаемого в RTF ::Stat
-    \ читаем LZFU-заголовок:
+    \ С…Р°Рє РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ СЂР°Р·РјРµСЂР° РЅРµСЃР¶Р°С‚РѕРіРѕ РїРѕС‚РѕРєР°, РІРјРµСЃС‚Рѕ РЅРµРїРѕРґРґРµСЂР¶РёРІР°РµРјРѕРіРѕ РІ RTF ::Stat
+    \ С‡РёС‚Р°РµРј LZFU-Р·Р°РіРѕР»РѕРІРѕРє:
     ^ rlen 4 CELLS ^ csize compr ::Read THROW magic 0x75465A4C <> IF 70020 THROW THEN
     0 0 0 0 compr ::Seek THROW
 
@@ -312,5 +312,5 @@ HERE SWAP - CONSTANT /MapiAddrProps
     buff rawsize
   ELSE S" " THEN
 ;
-: MapiSubmit 0 MapiMessage ::SubmitMessage THROW ; \ сохранить и отправить (независимо от папки, но зависимо от флагов)
-: MapiSave 4 MapiMessage ::SaveChanges THROW ; \ сохранить созданное сообщение
+: MapiSubmit 0 MapiMessage ::SubmitMessage THROW ; \ СЃРѕС…СЂР°РЅРёС‚СЊ Рё РѕС‚РїСЂР°РІРёС‚СЊ (РЅРµР·Р°РІРёСЃРёРјРѕ РѕС‚ РїР°РїРєРё, РЅРѕ Р·Р°РІРёСЃРёРјРѕ РѕС‚ С„Р»Р°РіРѕРІ)
+: MapiSave 4 MapiMessage ::SaveChanges THROW ; \ СЃРѕС…СЂР°РЅРёС‚СЊ СЃРѕР·РґР°РЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ

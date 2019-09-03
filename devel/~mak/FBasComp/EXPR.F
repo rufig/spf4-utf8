@@ -11,7 +11,7 @@ REQUIRE TokenId ~mak\FBasComp\parser.f
     tStr OF  ." S" 34 EMIT SPACE Token TYPE 34 EMIT SPACE  vStr  ENDOF
     tCmd OF  Token 2DUP ?Name$ IF  NewStrVar  ELSE  NewIntVar  THEN  ENDOF
     tDel OF  S" (" CheckToken  NextToken ('Expr) EXECUTE S" )" CheckToken  ENDOF
-    -1 ABORT" ¤¥¡¨«."
+    -1 ABORT" Ð´ÐµÐ±Ð¸Ð»."
   ENDCASE
   NextToken
 ;

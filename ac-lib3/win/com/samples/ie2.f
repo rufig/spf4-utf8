@@ -16,7 +16,7 @@ REQUIRE :: ~ac/lib/win/com/samples/automation+.f
   arg( Z" http://www.eserv.ru/" _str )arg app :: Navigate
   TRUE  _bool app :: Visible !
   KEY DROP
-  Z" Удивительная вещь :)" _str app :: StatusText !
+  Z" РЈРґРёРІРёС‚РµР»СЊРЅР°СЏ РІРµС‰СЊ :)" _str app :: StatusText !
   COM-destroy
 ;
 

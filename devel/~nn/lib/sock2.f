@@ -116,9 +116,9 @@ CREATE TIMEOUT 600000 ,
   THEN
 ;
 : ToRead ( socket -- n ior )
-  \ сколько байт можно сейчас прочесть из сокета
-  \ можно использовать перед ReadSocket для того чтобы
-  \ избежать блокирования при n=0
+  \ СЃРєРѕР»СЊРєРѕ Р±Р°Р№С‚ РјРѕР¶РЅРѕ СЃРµР№С‡Р°СЃ РїСЂРѕС‡РµСЃС‚СЊ РёР· СЃРѕРєРµС‚Р°
+  \ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїРµСЂРµРґ ReadSocket РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹
+  \ РёР·Р±РµР¶Р°С‚СЊ Р±Р»РѕРєРёСЂРѕРІР°РЅРёСЏ РїСЂРё n=0
   4 ALLOCATE THROW >R R@ 0!
   R@ [ HEX ] 4004667F [ DECIMAL ] ROT ioctlsocket SOCKET_ERROR =
   IF 0 WSAGetLastError ELSE R@ @ 0 THEN R> FREE THROW
@@ -152,7 +152,7 @@ CREATE TIMEOUT 600000 ,
   >R SWAP 2>R 0 2R> R> recv DUP SOCKET_ERROR =
   IF WSAGetLastError ELSE 0 THEN
   OVER 0= IF DROP -1002 THEN
-  ( если принято 0, то обрыв соединения )
+  ( РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, С‚Рѕ РѕР±СЂС‹РІ СЃРѕРµРґРёРЅРµРЅРёСЏ )
 ;
 : GetHostName ( IP -- addr u ior )
   PAD ! PF_INET 4 PAD gethostbyaddr

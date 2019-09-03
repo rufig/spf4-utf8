@@ -1,15 +1,15 @@
 \ 29.Jan.2007 Mon 20:18 ruv
 \ $Id$
-( Обертка поверх libxml2, предоставляет подмножество функций DOM,
-  пока все они относятся к типу R/O.
+( РћР±РµСЂС‚РєР° РїРѕРІРµСЂС… libxml2, РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ РїРѕРґРјРЅРѕР¶РµСЃС‚РІРѕ С„СѓРЅРєС†РёР№ DOM,
+  РїРѕРєР° РІСЃРµ РѕРЅРё РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє С‚РёРїСѓ R/O.
 
-  Заметка. libxml2 зачастую предоставляет структуры как есть вместо функций 
-   -- это в нашем случае дает экономию на вызовах API-функций :]
+  Р—Р°РјРµС‚РєР°. libxml2 Р·Р°С‡Р°СЃС‚СѓСЋ РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹ РєР°Рє РµСЃС‚СЊ РІРјРµСЃС‚Рѕ С„СѓРЅРєС†РёР№ 
+   -- СЌС‚Рѕ РІ РЅР°С€РµРј СЃР»СѓС‡Р°Рµ РґР°РµС‚ СЌРєРѕРЅРѕРјРёСЋ РЅР° РІС‹Р·РѕРІР°С… API-С„СѓРЅРєС†РёР№ :]
 )
 
 REQUIRE [UNDEFINED] lib/include/tools.f
 
-REQUIRE AsQName     ~pinka/samples/2006/syntax/qname.f \ понятие однословных строк в виде `abc
+REQUIRE AsQName     ~pinka/samples/2006/syntax/qname.f \ РїРѕРЅСЏС‚РёРµ РѕРґРЅРѕСЃР»РѕРІРЅС‹С… СЃС‚СЂРѕРє РІ РІРёРґРµ `abc
 REQUIRE EQUAL       ~pinka/lib/ext/basics.f
 
 REQUIRE /xmlNs      ~pinka/lib/lin/xml/libxml2-struct.f 
@@ -191,8 +191,8 @@ REQUIRE /xmlNs      ~pinka/lib/lin/xml/libxml2-struct.f
 ;
 \ namespaceByPrefix | searchNamespaceURI | searchPrefixURI 
 : searchNamespace ( prefix-a prefix-u node -- ns-a ns-u TRUE | prefix-a prefix-u FALSE )
-\ libxml2: список xmlns есть только у корневого элемента,
-\ определенные локально пространства имен таким путем недоступны (кроме xmlns самого узла)
+\ libxml2: СЃРїРёСЃРѕРє xmlns РµСЃС‚СЊ С‚РѕР»СЊРєРѕ Сѓ РєРѕСЂРЅРµРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°,
+\ РѕРїСЂРµРґРµР»РµРЅРЅС‹Рµ Р»РѕРєР°Р»СЊРЅРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РёРјРµРЅ С‚Р°РєРёРј РїСѓС‚РµРј РЅРµРґРѕСЃС‚СѓРїРЅС‹ (РєСЂРѕРјРµ xmlns СЃР°РјРѕРіРѕ СѓР·Р»Р°)
   DUP >R searchNamespaceLocal IF RDROP TRUE EXIT THEN
   R> ownerDocument documentElement searchNamespaceLocal
 ;
@@ -217,11 +217,11 @@ REQUIRE /xmlNs      ~pinka/lib/lin/xml/libxml2-struct.f
   firstChild DUP IF nodeValue EXIT THEN 0
 ;
 : nodeLineNumber ( node -- line_in_source_file|0 )
-  \ Номер строки узла в исходном файле xml-документа.
-  \ Именованно по аналогии с nodeName.
+  \ РќРѕРјРµСЂ СЃС‚СЂРѕРєРё СѓР·Р»Р° РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ xml-РґРѕРєСѓРјРµРЅС‚Р°.
+  \ РРјРµРЅРѕРІР°РЅРЅРѕ РїРѕ Р°РЅР°Р»РѕРіРёРё СЃ nodeName.
   \ libxml2: 
-  \  для текстовых узлов всегда дает 0
-  \  для узлов-комментариев номер строки, где комментарий заканчивается
+  \  РґР»СЏ С‚РµРєСЃС‚РѕРІС‹С… СѓР·Р»РѕРІ РІСЃРµРіРґР° РґР°РµС‚ 0
+  \  РґР»СЏ СѓР·Р»РѕРІ-РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё, РіРґРµ РєРѕРјРјРµРЅС‚Р°СЂРёР№ Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ
   DUP nodeType DOCUMENT_NODE <> IF x.line W@ EXIT THEN
   DROP 0
 ;

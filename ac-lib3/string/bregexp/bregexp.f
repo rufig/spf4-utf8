@@ -30,13 +30,13 @@ CONSTANT /BREGEXP
   rxp @ rxp.endp @ R> + @ OVER -
 ;
 : BregexpMatch ( S" string" S" pattern" -- n )
-\ n - к-во попаданий в ()
+\ n - Рє-РІРѕ РїРѕРїР°РґР°РЅРёР№ РІ ()
   2>R 2>R PAD rxp 2R> OVER + SWAP 2R> DROP BMatch >R 2DROP 2DROP DROP R>
   DUP -1 = IF PAD ASCIIZ> TYPE CR ABORT THEN
   1 = IF rxp @ rxp.nparens @ 1+ ELSE 0 THEN
 ;
 : BregexpReplace ( S" string" S" pattern" -- S" result" n )
-\ n - к-во замен
+\ n - Рє-РІРѕ Р·Р°РјРµРЅ
   2OVER 2>R
   2>R 2>R PAD rxp 2R> OVER + SWAP 2R> DROP BSubst >R 2DROP 2DROP DROP R>
   DUP -1 = IF PAD ASCIIZ> TYPE CR ABORT THEN
@@ -64,7 +64,7 @@ CONSTANT /BREGEXP
 \   . CR TYPE CR TYPE CR TYPE CR TYPE CR 
 \   S" Yokohama 045-222-1111  Osaka 06-5555-6666  Tokyo 03-1111-9999 "
 \   S" /(03|045)-(\d{3,4})-(\d{4})/" BregexpGetMatch
-\   DUP . 0 ?DO TYPE CR LOOP \ находит только первое совпадение
+\   DUP . 0 ?DO TYPE CR LOOP \ РЅР°С…РѕРґРёС‚ С‚РѕР»СЊРєРѕ РїРµСЂРІРѕРµ СЃРѕРІРїР°РґРµРЅРёРµ
 \   S" Yokohama 045-222-1111  Osaka 06-5555-6666  Tokyo 03-1111-9999 "
 \   S" s/(\d\d)-\d{4}-\d{4}/$1-xxxx-xxxx/g" BregexpReplace
 \   . TYPE

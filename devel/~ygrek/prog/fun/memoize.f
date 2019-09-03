@@ -1,4 +1,4 @@
-\ �ਬ�� � ~ygrek/lib/fun/memoize.f
+\ пример к ~ygrek/lib/fun/memoize.f
 
 REQUIRE memoize: ~ygrek/lib/fun/memoize.f
 REQUIRE STR@ ~ac/lib/str5.f

@@ -1,17 +1,17 @@
 \ $Id$
 
-( Ñîõðàíåíèå ñèñòåìû â ôîðìàòå Windows Portable Executable.
+( Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ Windows Portable Executable.
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Ðåâèçèÿ - ñåíòÿáðü 1999
+  Ð ÐµÐ²Ð¸Ð·Ð¸Ñ - ÑÐµÐ½Ñ‚ÑÐ±Ñ€ÑŒ 1999
 )
 
-( HERE íà ìîìåíò íà÷àëà êîìïèëÿöèè)
+( HERE Ð½Ð° Ð¼Ð¾Ð¼ÐµÐ½Ñ‚ Ð½Ð°Ñ‡Ð°Ð»Ð° ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ð¸)
 DECIMAL
-DUP        VALUE ORG-ADDR      \ àäðåñ êîìïèëÿöèè êîäà
-DUP        VALUE IMAGE-BEGIN   \ àäðåñ çàãðóçêè êîäà
-512 1024 * VALUE IMAGE-SIZE    \ ñêîëüêî ìåñòà ðåçåðâèðîâàòü ïðè 
-                               \ çàãðóçêå ñåêöèè êîäà
-DUP 8 1024 * - CONSTANT IMAGE-BASE \ àäðåñ çàãðóçêè ïåðâîé ñåêöèè
+DUP        VALUE ORG-ADDR      \ Ð°Ð´Ñ€ÐµÑ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ð¸ ÐºÐ¾Ð´Ð°
+DUP        VALUE IMAGE-BEGIN   \ Ð°Ð´Ñ€ÐµÑ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ ÐºÐ¾Ð´Ð°
+512 1024 * VALUE IMAGE-SIZE    \ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¼ÐµÑÑ‚Ð° Ñ€ÐµÐ·ÐµÑ€Ð²Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¸ 
+                               \ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐµ ÑÐµÐºÑ†Ð¸Ð¸ ÐºÐ¾Ð´Ð°
+DUP 8 1024 * - CONSTANT IMAGE-BASE \ Ð°Ð´Ñ€ÐµÑ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¿ÐµÑ€Ð²Ð¾Ð¹ ÑÐµÐºÑ†Ð¸Ð¸
 
 VARIABLE RESOURCES-RVA
 VARIABLE RESOURCES-SIZE
@@ -21,8 +21,8 @@ VARIABLE EXPORTS-SIZE
 
 HEX
 
-: SAVE ( c-addr u -- ) \ íàïðèìåð S" My Forth Program.exe" SAVE
-  ( ñîõðàíåíèå íàðàáîòàííîé ôîðò-ñèñòåìû â EXE-ôàéëå ôîðìàòà PE - Win32 )
+: SAVE ( c-addr u -- ) \ Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€ S" My Forth Program.exe" SAVE
+  ( ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ Ð½Ð°Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð½Ð½Ð¾Ð¹ Ñ„Ð¾Ñ€Ñ‚-ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð² EXE-Ñ„Ð°Ð¹Ð»Ðµ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð° PE - Win32 )
   R/W CREATE-FILE THROW >R
   ModuleName R/O OPEN-FILE-SHARED THROW >R
   HERE 400 R@ READ-FILE THROW 400 < THROW
@@ -44,7 +44,7 @@ HEX
   EXPORTS-SIZE @ HERE FC + !
   HERE 1C8 + 38 ERASE
 
-  HERE 400 R@ WRITE-FILE THROW ( çàãîëîâîê è òàáëèöà èìïîðòà )
+  HERE 400 R@ WRITE-FILE THROW ( Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¸ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ð° Ð¸Ð¼Ð¿Ð¾Ñ€Ñ‚Ð° )
   HERE 200 ERASE
   IMAGE-BEGIN HERE OVER - 1FF + 200 / 200 * R@ WRITE-FILE THROW
   R> CLOSE-FILE THROW
@@ -53,7 +53,7 @@ HEX
 DECIMAL
 
 : SUBSTRING-OPTIONS ( c-addr1 u1 -- c-addr u )
-\ âûäåëèòü èç ñòðîêè îïöèè, ïðîïóñòèâ èìÿ ïðîãðàììû
+\ Ð²Ñ‹Ð´ÐµÐ»Ð¸Ñ‚ÑŒ Ð¸Ð· ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð¾Ð¿Ñ†Ð¸Ð¸, Ð¿Ñ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð² Ð¸Ð¼Ñ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹
   DUP 0= IF EXIT THEN
   OVER C@ [CHAR] " = IF SWAP CHAR+ SWAP 1- [CHAR] " ELSE BL THEN
   0 >R RP@ TUCK C! 1 SEARCH RDROP  0= IF 2DROP 0. EXIT THEN
@@ -61,6 +61,6 @@ DECIMAL
   -TRAILING
 ;
 : COMMANDLINE-OPTIONS ( -- c-addr u )
-\ äàòü îïöèè êîìàíäíîé ñòðîêè çàïóñêà
+\ Ð´Ð°Ñ‚ÑŒ Ð¾Ð¿Ñ†Ð¸Ð¸ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð·Ð°Ð¿ÑƒÑÐºÐ°
   GetCommandLineA ASCIIZ> SUBSTRING-OPTIONS
 ;

@@ -92,9 +92,9 @@ REQUIRE [IFNDEF] ~nn\lib\ifdef.f
 ;
 
 : ?SLITERAL2_H  ( c-addr u -- ... )
-  ( расширенный вариант ?SLITERAL1:
-    если строка - не число, то пытаемся трактовать её
-    как имя файла для авто-INCLUDED)
+  ( СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ РІР°СЂРёР°РЅС‚ ?SLITERAL1:
+    РµСЃР»Рё СЃС‚СЂРѕРєР° - РЅРµ С‡РёСЃР»Рѕ, С‚Рѕ РїС‹С‚Р°РµРјСЃСЏ С‚СЂР°РєС‚РѕРІР°С‚СЊ РµС‘
+    РєР°Рє РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ Р°РІС‚Рѕ-INCLUDED)
   DUP 1 >
      IF
 	 2DUP 2>R
@@ -140,12 +140,12 @@ REQUIRE [IFNDEF] ~nn\lib\ifdef.f
  XXX-SLITERAL 0= \ ['] ?SLITERAL1 CATCH
   IF  2R>
        OVER C@ [CHAR] " = OVER 2 > AND
-       IF 2 - SWAP 1+ SWAP THEN ( убрал кавычки, если есть)
+       IF 2 - SWAP 1+ SWAP THEN ( СѓР±СЂР°Р» РєР°РІС‹С‡РєРё, РµСЃР»Рё РµСЃС‚СЊ)
        2DUP + 0 SWAP C!
 \       2dup type
        ['] INCLUDED CATCH
-       DUP 2 = OVER 3 = OR OVER 161 = OR ( файл не найден или путь не найден,
-       или неразрешенное имя файла)
+       DUP 2 = OVER 3 = OR OVER 161 = OR ( С„Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ РёР»Рё РїСѓС‚СЊ РЅРµ РЅР°Р№РґРµРЅ,
+       РёР»Рё РЅРµСЂР°Р·СЂРµС€РµРЅРЅРѕРµ РёРјСЏ С„Р°Р№Р»Р°)
        IF  -2003 THROW \ ABORT"  -???"
        ELSE  THROW THEN
   ELSE RDROP RDROP

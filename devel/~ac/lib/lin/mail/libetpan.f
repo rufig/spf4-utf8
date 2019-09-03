@@ -1,4 +1,4 @@
-\ http://libetpan.sourceforge.net/ клиент для почтовых протоколов
+\ http://libetpan.sourceforge.net/ РєР»РёРµРЅС‚ РґР»СЏ РїРѕС‡С‚РѕРІС‹С… РїСЂРѕС‚РѕРєРѕР»РѕРІ
 
 REQUIRE SO            ~ac/lib/ns/so-xt.f
 REQUIRE STR@          ~ac/lib/str5.f

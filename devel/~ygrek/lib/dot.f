@@ -1,9 +1,9 @@
 \ $Id$
 \
-\ Построение dot диаграмм
+\ РџРѕСЃС‚СЂРѕРµРЅРёРµ dot РґРёР°РіСЂР°РјРј
 \
-\ Для преобразования полученной dot диаграммы в картинку
-\ потребуется GraphViz http://www.graphviz.org/
+\ Р”Р»СЏ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РїРѕР»СѓС‡РµРЅРЅРѕР№ dot РґРёР°РіСЂР°РјРјС‹ РІ РєР°СЂС‚РёРЅРєСѓ
+\ РїРѕС‚СЂРµР±СѓРµС‚СЃСЏ GraphViz http://www.graphviz.org/
 
 REQUIRE state-table ~profit/lib/chartable.f
 REQUIRE BOUNDS ~ygrek/lib/string.f
@@ -66,7 +66,7 @@ EXPORT
     DOT-TYPE
    THEN ;
 
-\ вершина a u будет иметь аттрибут a2 u2 установленным в a1 u1
+\ РІРµСЂС€РёРЅР° a u Р±СѓРґРµС‚ РёРјРµС‚СЊ Р°С‚С‚СЂРёР±СѓС‚ a2 u2 СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рј РІ a1 u1
 : DOT-ATTRIBUTE ( node-a node-u val-a val-u attr-a attr-u -- )
    2>R
    DOT-CR
@@ -77,19 +77,19 @@ EXPORT
    ( val-a val-u ) SAFE-DOT-TYPE
    S" ];" DOT-TYPE ;
 
-\ a u - цвет заливки всех последующих вершин
+\ a u - С†РІРµС‚ Р·Р°Р»РёРІРєРё РІСЃРµС… РїРѕСЃР»РµРґСѓСЋС‰РёС… РІРµСЂС€РёРЅ
 : DOT-FILLCOLOR ( a u -- )
    S" node" 2SWAP S" fillcolor" DOT-ATTRIBUTE ;
 
-\ вершина a u будет иметь надпись a2 u2
+\ РІРµСЂС€РёРЅР° a u Р±СѓРґРµС‚ РёРјРµС‚СЊ РЅР°РґРїРёСЃСЊ a2 u2
 : DOT-LABEL ( a u a2 u2 -- )
    S" label" DOT-ATTRIBUTE ;
 
-\ вершина a u будет иметь форму a2 u2
+\ РІРµСЂС€РёРЅР° a u Р±СѓРґРµС‚ РёРјРµС‚СЊ С„РѕСЂРјСѓ a2 u2
 : DOT-SHAPE ( a u a2 u2 -- )
    S" shape" DOT-ATTRIBUTE ;
 
-\ связь от обьекта a u к обьекту a2 u2
+\ СЃРІСЏР·СЊ РѕС‚ РѕР±СЊРµРєС‚Р° a u Рє РѕР±СЊРµРєС‚Сѓ a2 u2
 : DOT-LINK ( a u a2 u2 -- )
    DOT-CR
    2SWAP
@@ -98,12 +98,12 @@ EXPORT
    SAFE-DOT-TYPE
    S" ;" DOT-TYPE ;
 
-\ Начать dot диаграмму. Сохранить в файл a u
+\ РќР°С‡Р°С‚СЊ dot РґРёР°РіСЂР°РјРјСѓ. РЎРѕС…СЂР°РЅРёС‚СЊ РІ С„Р°Р№Р» a u
 : dot{ ( a u -- )
    R/W CREATE-FILE THROW TO H
    S" digraph {" DOT-TYPE ;
 
-\ Закончить dot диаграмму
+\ Р—Р°РєРѕРЅС‡РёС‚СЊ dot РґРёР°РіСЂР°РјРјСѓ
 : }dot
     DOT-CR
     S" }" DOT-TYPE

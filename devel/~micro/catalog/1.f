@@ -105,7 +105,7 @@ MODULE: Script
 : Y ( y -- )
 	TO Year
 	<center> <h1>
-	Year . ." год"
+	Year . ." РіРѕРґ"
 	</h1> </center> <br> CR
 	TRUE TO 1stGP ;
 : GP ( "name" "dir" -- )
@@ -115,7 +115,7 @@ MODULE: Script
 		CR </ul> CR
 	THEN
 	NextWord
-	<h2> ." ГП " TYPE ." ." </h2> CR
+	<h2> ." Р“Рџ " TYPE ." ." </h2> CR
 	<ul>
 	NextWord
 	DUP TO gpdirU
@@ -154,12 +154,12 @@ MODULE: Script
 	.' charset=windows-1251">' CR
 	</head> CR
 	.' <bgsound src="intro.wav"></bgsound>' CR
-	.' <title>Перлы от Попова</title>' CR
+	.' <title>РџРµСЂР»С‹ РѕС‚ РџРѕРїРѕРІР°</title>' CR
 	<body> CR ;
 : bottom
 	CR
 	<br> CR
-	<center> .' <a href="..\..\index.htm">Обратно</a>' </center> CR
+	<center> .' <a href="..\..\index.htm">РћР±СЂР°С‚РЅРѕ</a>' </center> CR
 	</body>
 	</html> ;
 : Make

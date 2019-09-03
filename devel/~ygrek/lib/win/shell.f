@@ -38,8 +38,8 @@ ALSO yz
   binfo SHBrowseForFolder ?DUP IF
     DUP dirname SWAP SHGetPathFromIDList DROP
     dirname ASCIIZ> xt EXECUTE
-    \ теперь надо освободить возвращенный PIDL
-    \ делается это, как и все в Майкрософте, через извращение
+    \ С‚РµРїРµСЂСЊ РЅР°РґРѕ РѕСЃРІРѕР±РѕРґРёС‚СЊ РІРѕР·РІСЂР°С‰РµРЅРЅС‹Р№ PIDL
+    \ РґРµР»Р°РµС‚СЃСЏ СЌС‚Рѕ, РєР°Рє Рё РІСЃРµ РІ РњР°Р№РєСЂРѕСЃРѕС„С‚Рµ, С‡РµСЂРµР· РёР·РІСЂР°С‰РµРЅРёРµ
     ^ shmalloc SHGetMalloc DROP
     shmalloc ::Free DROP
     shmalloc release

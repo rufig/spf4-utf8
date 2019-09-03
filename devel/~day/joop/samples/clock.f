@@ -72,7 +72,7 @@ W: WM_TIMER
 
 
 W: WM_NCHITTEST
-    HTCAPTION \ Обманываем Windows :)
+    HTCAPTION \ РћР±РјР°РЅС‹РІР°РµРј Windows :)
 ;
 
 W: WM_NCRBUTTONDOWN

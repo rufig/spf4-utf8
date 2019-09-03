@@ -1,4 +1,4 @@
-\ Маленький эксель, SPF 4.19
+\ РњР°Р»РµРЅСЊРєРёР№ СЌРєСЃРµР»СЊ, SPF 4.19
 \ http://fforum.winglion.ru/viewtopic.php?t=1157
 
 REQUIRE ON lib/ext/onoff.f
@@ -9,9 +9,9 @@ REQUIRE NUMBER ~ygrek/lib/parse.f
 REQUIRE STR@ ~ac/lib/str5.f
 REQUIRE >=  ~profit/lib/logic.f
 REQUIRE state-table ~profit/lib/chartable.f
-: symbols: символы: ;
-: same-reaction POSTPONE тоже-самое ; IMMEDIATE
-\ ^-- кандидаты на добавление в chartable.f
+: symbols: СЃРёРјРІРѕР»С‹: ;
+: same-reaction POSTPONE С‚РѕР¶Рµ-СЃР°РјРѕРµ ; IMMEDIATE
+\ ^-- РєР°РЅРґРёРґР°С‚С‹ РЅР° РґРѕР±Р°РІР»РµРЅРёРµ РІ chartable.f
 
 REQUIRE __ ~profit/lib/cellfield.f
 S" ~pinka/lib/ext/requ.f" INCLUDED
@@ -20,7 +20,7 @@ REQUIRE ?EXIT ~mak/utils.f
 : +TO ' >BODY STATE @ IF POSTPONE LITERAL POSTPONE +! ELSE +! THEN ; IMMEDIATE
 
 
-\ перечисление типов ячеек в таблице
+\ РїРµСЂРµС‡РёСЃР»РµРЅРёРµ С‚РёРїРѕРІ СЏС‡РµРµРє РІ С‚Р°Р±Р»РёС†Рµ
 0
 ENUM null
 ENUM number
@@ -29,36 +29,36 @@ ENUM expression
 ENUM error
 CONSTANT cellTypesCount
 
-\ структура ячейки в таблице
+\ СЃС‚СЂСѓРєС‚СѓСЂР° СЏС‡РµР№РєРё РІ С‚Р°Р±Р»РёС†Рµ
 0
 __ cellType
 __ cellContents
-__ cellRefsCount \ кол-во прямых ссылок
-__ cellRefsArr \ указатель на массив прямых связей
-__ cellBRefsCount \ кол-во обратных ссылок
-__ cellBRefsArr \ указатель на массив обратных связей
-__ cellUnresolvedLinksCount \ кол-во неразрешённых прямых связей
-__ cellFilledBLinksCount \ кол-во заполненных обратных связей (иниц-ся в allot-bref-arrays, используется в fill-bref-arrays)
-__ cellResult \ результат вычисления формулы (в случае простого числа равен числу)
-__ cellResolved \ вычислена ли формула
+__ cellRefsCount \ РєРѕР»-РІРѕ РїСЂСЏРјС‹С… СЃСЃС‹Р»РѕРє
+__ cellRefsArr \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ РїСЂСЏРјС‹С… СЃРІСЏР·РµР№
+__ cellBRefsCount \ РєРѕР»-РІРѕ РѕР±СЂР°С‚РЅС‹С… СЃСЃС‹Р»РѕРє
+__ cellBRefsArr \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ РѕР±СЂР°С‚РЅС‹С… СЃРІСЏР·РµР№
+__ cellUnresolvedLinksCount \ РєРѕР»-РІРѕ РЅРµСЂР°Р·СЂРµС€С‘РЅРЅС‹С… РїСЂСЏРјС‹С… СЃРІСЏР·РµР№
+__ cellFilledBLinksCount \ РєРѕР»-РІРѕ Р·Р°РїРѕР»РЅРµРЅРЅС‹С… РѕР±СЂР°С‚РЅС‹С… СЃРІСЏР·РµР№ (РёРЅРёС†-СЃСЏ РІ allot-bref-arrays, РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ fill-bref-arrays)
+__ cellResult \ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ С„РѕСЂРјСѓР»С‹ (РІ СЃР»СѓС‡Р°Рµ РїСЂРѕСЃС‚РѕРіРѕ С‡РёСЃР»Р° СЂР°РІРµРЅ С‡РёСЃР»Сѓ)
+__ cellResolved \ РІС‹С‡РёСЃР»РµРЅР° Р»Рё С„РѕСЂРјСѓР»Р°
 CONSTANT spreadCell
 
-\ Описание ошибок могущих возникнуть при обсчёте или вводе ячеек таблицы:
+\ РћРїРёСЃР°РЅРёРµ РѕС€РёР±РѕРє РјРѕРіСѓС‰РёС… РІРѕР·РЅРёРєРЅСѓС‚СЊ РїСЂРё РѕР±СЃС‡С‘С‚Рµ РёР»Рё РІРІРѕРґРµ СЏС‡РµРµРє С‚Р°Р±Р»РёС†С‹:
 5664
-ENUM cellformat-error  \ неправильно задана ячейка
-ENUM typecast-error  \ ошибка типов
-ENUM number-error  \ ошибка ввода числа, неверные символы
-ENUM cycle-error  \ нерешаемая, циклическая ссылка (рекурсивные формулы)
-ENUM reference-error  \ неверная ссылка на ячейку (выход за границу)
-ENUM formula-error  \ неправильно задана формула
+ENUM cellformat-error  \ РЅРµРїСЂР°РІРёР»СЊРЅРѕ Р·Р°РґР°РЅР° СЏС‡РµР№РєР°
+ENUM typecast-error  \ РѕС€РёР±РєР° С‚РёРїРѕРІ
+ENUM number-error  \ РѕС€РёР±РєР° РІРІРѕРґР° С‡РёСЃР»Р°, РЅРµРІРµСЂРЅС‹Рµ СЃРёРјРІРѕР»С‹
+ENUM cycle-error  \ РЅРµСЂРµС€Р°РµРјР°СЏ, С†РёРєР»РёС‡РµСЃРєР°СЏ СЃСЃС‹Р»РєР° (СЂРµРєСѓСЂСЃРёРІРЅС‹Рµ С„РѕСЂРјСѓР»С‹)
+ENUM reference-error  \ РЅРµРІРµСЂРЅР°СЏ СЃСЃС‹Р»РєР° РЅР° СЏС‡РµР№РєСѓ (РІС‹С…РѕРґ Р·Р° РіСЂР°РЅРёС†Сѓ)
+ENUM formula-error  \ РЅРµРїСЂР°РІРёР»СЊРЅРѕ Р·Р°РґР°РЅР° С„РѕСЂРјСѓР»Р°
 DROP
-0xC0000095 CONSTANT overflow-error  \ переполнение
-0xC0000094 CONSTANT zerodivide-error \ деление на ноль
+0xC0000095 CONSTANT overflow-error  \ РїРµСЂРµРїРѕР»РЅРµРЅРёРµ
+0xC0000094 CONSTANT zerodivide-error \ РґРµР»РµРЅРёРµ РЅР° РЅРѕР»СЊ
 
 : cell-error! ( spreadCell' error-num -- )
 OVER cellContents ! error SWAP cellType ! ;
 
-0 VALUE spreadSheet \ указатель на таблицу
+0 VALUE spreadSheet \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚Р°Р±Р»РёС†Сѓ
 0 VALUE rows
 0 VALUE cols
 
@@ -96,7 +96,7 @@ LOOP CR LOOP DROP ;
 
 : overflow? ( d -- ) DABS 2147483647. D> IF overflow-error THROW THEN ;
 
-\ Подсчёт прямых ссылок в формуле
+\ РџРѕРґСЃС‡С‘С‚ РїСЂСЏРјС‹С… СЃСЃС‹Р»РѕРє РІ С„РѕСЂРјСѓР»Рµ
 MODULE: count-refs
 VARIABLE counter
 : cell_reference_occured ( row col -- ) 2DROP counter 1+! ;
@@ -106,7 +106,7 @@ EXPORT
 ;MODULE
 
 
-\ Заполнение массива прямых ссылок
+\ Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° РїСЂСЏРјС‹С… СЃСЃС‹Р»РѕРє
 MODULE: fill-refs
 0 VALUE runner
 : cell_reference_occured ( row col -- )
@@ -120,7 +120,7 @@ DUP cellRefsArr @ TO runner
 cellContents @ process-expression ;
 ;MODULE
 
-: allot-bref-arrays ( -- ) \ взятие из кучи места для массивов обратных ссылок для всех ячеек листа
+: allot-bref-arrays ( -- ) \ РІР·СЏС‚РёРµ РёР· РєСѓС‡Рё РјРµСЃС‚Р° РґР»СЏ РјР°СЃСЃРёРІРѕРІ РѕР±СЂР°С‚РЅС‹С… СЃСЃС‹Р»РѕРє РґР»СЏ РІСЃРµС… СЏС‡РµРµРє Р»РёСЃС‚Р°
 spreadRowsCols 0 ?DO
 DUP cellBRefsCount @ ?DUP 0<> IF
 CELLS ALLOCATE THROW
@@ -128,7 +128,7 @@ OVER cellBRefsArr ! THEN
 DUP cellFilledBLinksCount 0!
 spreadCell + LOOP DROP ;
 
-: fill-bref-arrays ( -- ) \ заполнение массивов обратных ссылок для всех ячеек листа
+: fill-bref-arrays ( -- ) \ Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІРѕРІ РѕР±СЂР°С‚РЅС‹С… СЃСЃС‹Р»РѕРє РґР»СЏ РІСЃРµС… СЏС‡РµРµРє Р»РёСЃС‚Р°
 spreadRowsCols 0 ?DO
 DUP cellType @ error <> IF
 DUP cellRefsCount @ CELLS OVER cellRefsArr @ TUCK + SWAP ?DO
@@ -138,7 +138,7 @@ I @ cellFilledBLinksCount 1+!
 CELL +LOOP THEN
 spreadCell + LOOP DROP ;
 
-\ Вычисление формулы в ячейке
+\ Р’С‹С‡РёСЃР»РµРЅРёРµ С„РѕСЂРјСѓР»С‹ РІ СЏС‡РµР№РєРµ
 MODULE: calc
 256 state-table op-save ( char -- xt )
 : add ( n1 n2 -- n1+n2 ) >R S>D R> S>D D+ 2DUP overflow? D>S ; symbol: + ['] add ;
@@ -149,7 +149,7 @@ MODULE: calc
 : op-execute ( n1 xt n2 -- xt[n1,n2] ) SWAP EXECUTE ;
 : cell_reference_occured ( row col -- n ) spreadAddr
 cellResult @ ;
-: nonnegative_number_occured ( n -- ... ) ; \ <-- автомат не поглощает полученные числа -- они идут в вычисление
+: nonnegative_number_occured ( n -- ... ) ; \ <-- Р°РІС‚РѕРјР°С‚ РЅРµ РїРѕРіР»РѕС‰Р°РµС‚ РїРѕР»СѓС‡РµРЅРЅС‹Рµ С‡РёСЃР»Р° -- РѕРЅРё РёРґСѓС‚ РІ РІС‹С‡РёСЃР»РµРЅРёРµ
 : operation_occured ( char -- 'xt ) >R op-execute R> op-save ;
 : error_occured ( -- ) formula-error THROW ;
 Include expression.f
@@ -162,7 +162,7 @@ expression OF ['] NOOP SWAP cellContents @ process-expression op-execute ENDOF
 typecast-error THROW ENDCASE ;
 ;MODULE
 
-: resolve-cell ( spreadCell' -- ) \ попытка решить формулу в ячейке
+: resolve-cell ( spreadCell' -- ) \ РїРѕРїС‹С‚РєР° СЂРµС€РёС‚СЊ С„РѕСЂРјСѓР»Сѓ РІ СЏС‡РµР№РєРµ
 DUP cellResolved @ NOT
 OVER cellUnresolvedLinksCount @ 0= AND IF
 DUP cellResolved ON
@@ -171,12 +171,12 @@ DUP cellBRefsCount @ CELLS SWAP cellBRefsArr @ TUCK + SWAP ?DO
 -1 I @ cellUnresolvedLinksCount +!  I @ RECURSE     CELL +LOOP
 ELSE DROP THEN ;
 
-: calc-formulas ( -- ) \ вычисление всех формул на листе
+: calc-formulas ( -- ) \ РІС‹С‡РёСЃР»РµРЅРёРµ РІСЃРµС… С„РѕСЂРјСѓР» РЅР° Р»РёСЃС‚Рµ
 spreadRowsCols 0 ?DO
 DUP ['] resolve-cell CATCH ?DUP IF cell-error! THEN
 spreadCell + LOOP DROP ;
 
-MODULE: mark-type \ поиск ошибок типизации и пометка циклических ссылок
+MODULE: mark-type \ РїРѕРёСЃРє РѕС€РёР±РѕРє С‚РёРїРёР·Р°С†РёРё Рё РїРѕРјРµС‚РєР° С†РёРєР»РёС‡РµСЃРєРёС… СЃСЃС‹Р»РѕРє
 : cell_reference_occured ( row col -- )
 spreadAddr DUP cellType @ CASE
 expression OF ENDOF number OF ENDOF
@@ -192,14 +192,14 @@ R@ cellResolved @ NOT IF R@ cycle-error cell-error! THEN THEN THEN RDROP ;
 ;MODULE
 
 
-: mark-errors ( -- ) \ пометка нерешённых формул на листе как ошибок
+: mark-errors ( -- ) \ РїРѕРјРµС‚РєР° РЅРµСЂРµС€С‘РЅРЅС‹С… С„РѕСЂРјСѓР» РЅР° Р»РёСЃС‚Рµ РєР°Рє РѕС€РёР±РѕРє
 spreadRowsCols 0 ?DO 
 DUP mark-error-cell
 spreadCell + LOOP DROP ;
 
-\ Обработчик всего ввода (по-ячеечно) в таблицу
-\ на входе имеет адрес ячейки таблицы (spreadCell'), строку определяющую эту ячейку (addr u)
-\ и первый символ этой строки (char) который и отдаётся switch-конструкции
+\ РћР±СЂР°Р±РѕС‚С‡РёРє РІСЃРµРіРѕ РІРІРѕРґР° (РїРѕ-СЏС‡РµРµС‡РЅРѕ) РІ С‚Р°Р±Р»РёС†Сѓ
+\ РЅР° РІС…РѕРґРµ РёРјРµРµС‚ Р°РґСЂРµСЃ СЏС‡РµР№РєРё С‚Р°Р±Р»РёС†С‹ (spreadCell'), СЃС‚СЂРѕРєСѓ РѕРїСЂРµРґРµР»СЏСЋС‰СѓСЋ СЌС‚Сѓ СЏС‡РµР№РєСѓ (addr u)
+\ Рё РїРµСЂРІС‹Р№ СЃРёРјРІРѕР» СЌС‚РѕР№ СЃС‚СЂРѕРєРё (char) РєРѕС‚РѕСЂС‹Р№ Рё РѕС‚РґР°С‘С‚СЃСЏ switch-РєРѕРЅСЃС‚СЂСѓРєС†РёРё
 256 state-table cellInput0 ( spreadCell' addr u char -- )
 
 all: ( spreadCell' addr u  -- ) cellformat-error THROW ;
@@ -236,10 +236,10 @@ R> fill-refs-in-array ;
 
 : cellInput ( spreadCell' addr u -- ) OVER C@ cellInput0 ;
 
-\ Взятие строки до разделителя-табулятора (строго один и строго табулятор! Никаких двух табуляторов для пущей красоты и пробелов)
+\ Р’Р·СЏС‚РёРµ СЃС‚СЂРѕРєРё РґРѕ СЂР°Р·РґРµР»РёС‚РµР»СЏ-С‚Р°Р±СѓР»СЏС‚РѕСЂР° (СЃС‚СЂРѕРіРѕ РѕРґРёРЅ Рё СЃС‚СЂРѕРіРѕ С‚Р°Р±СѓР»СЏС‚РѕСЂ! РќРёРєР°РєРёС… РґРІСѓС… С‚Р°Р±СѓР»СЏС‚РѕСЂРѕРІ РґР»СЏ РїСѓС‰РµР№ РєСЂР°СЃРѕС‚С‹ Рё РїСЂРѕР±РµР»РѕРІ)
 : tabParse ( -- addr-z u ) 9 PARSE 2DUP + 0 SWAP C! ;
-\ asciiz-строка нужна для того чтобы взятие первого символа в случае пустой строки 
-\ выдавало ноль в (в слове cellInput)
+\ asciiz-СЃС‚СЂРѕРєР° РЅСѓР¶РЅР° РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РІР·СЏС‚РёРµ РїРµСЂРІРѕРіРѕ СЃРёРјРІРѕР»Р° РІ СЃР»СѓС‡Р°Рµ РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРё 
+\ РІС‹РґР°РІР°Р»Рѕ РЅРѕР»СЊ РІ (РІ СЃР»РѕРІРµ cellInput)
 
 
 : ---------------tiny-excel--------------- ( -- )
@@ -270,13 +270,13 @@ print-spreadSheet ;
 \ ' ---------------tiny-excel--------------- MAINX ! 0 TO SPF-INIT? FALSE TO ?GUI S" tinyexcel.exe" SAVE BYE
 \ \EOF
 
----------------tiny-excel--------------- \ Деление на ноль
+---------------tiny-excel--------------- \ Р”РµР»РµРЅРёРµ РЅР° РЅРѕР»СЊ
 1	2
 =1/0
 
 \ #zerodiv
 
----------------tiny-excel--------------- \ Слишком большое число при вводе
+---------------tiny-excel--------------- \ РЎР»РёС€РєРѕРј Р±РѕР»СЊС€РѕРµ С‡РёСЃР»Рѕ РїСЂРё РІРІРѕРґРµ
 2	2
 9999999999	10
 =B1*B1	3
@@ -284,7 +284,7 @@ print-spreadSheet ;
 \ #overflow       10
 \ 100     3
 
----------------tiny-excel--------------- \ Ошибка ссылки на ячейку (выход за заданные границы)
+---------------tiny-excel--------------- \ РћС€РёР±РєР° СЃСЃС‹Р»РєРё РЅР° СЏС‡РµР№РєСѓ (РІС‹С…РѕРґ Р·Р° Р·Р°РґР°РЅРЅС‹Рµ РіСЂР°РЅРёС†С‹)
 4	2
 1	=A5
 'bubu	3
@@ -292,13 +292,13 @@ print-spreadSheet ;
 'bubu	3
 
 
----------------tiny-excel--------------- \ Ошибка типизации
+---------------tiny-excel--------------- \ РћС€РёР±РєР° С‚РёРїРёР·Р°С†РёРё
 2	2
 1	=A2
 'bubu	3
 
 
----------------tiny-excel--------------- \ Переполнение в формуле
+---------------tiny-excel--------------- \ РџРµСЂРµРїРѕР»РЅРµРЅРёРµ РІ С„РѕСЂРјСѓР»Рµ
 2	2
 555555555	10
 =A1*10	3
@@ -307,7 +307,7 @@ print-spreadSheet ;
 \ #overflow       3
 
 
----------------tiny-excel--------------- \ Неправильный формат числа
+---------------tiny-excel--------------- \ РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ С‡РёСЃР»Р°
 2	2
 55555rrrr	10
 =B1*B1	3
@@ -315,7 +315,7 @@ print-spreadSheet ;
 \ #number       10
 \ 100     3
 
----------------tiny-excel--------------- \ Циклические ссылки
+---------------tiny-excel--------------- \ Р¦РёРєР»РёС‡РµСЃРєРёРµ СЃСЃС‹Р»РєРё
 2	2
 1	=A2
 =B1*B1	3
@@ -324,13 +324,13 @@ print-spreadSheet ;
 \ #cycle  3
 
 
----------------tiny-excel--------------- \ Пример данных:
+---------------tiny-excel--------------- \ РџСЂРёРјРµСЂ РґР°РЅРЅС‹С…:
 3	4
 12	=C2	3	'Sample
 =A1+B1*C1/5	=A2*B1	=B3-C3	'Spread
 'Test	=4-3	5	'Sheet
 
-\ Ожидаемый вывод:
+\ РћР¶РёРґР°РµРјС‹Р№ РІС‹РІРѕРґ:
 \ 12      -4      3       Sample
 \ 4       -16     -4      Spread
 \ Test    1       5       Sheet

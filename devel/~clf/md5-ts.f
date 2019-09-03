@@ -1,4 +1,4 @@
-\ изменения для thread-safe
+\ РёР·РјРµРЅРµРЅРёСЏ РґР»СЏ thread-safe
 \ ~ac
 
 REQUIRE [IF]    lib/include/tools.f
@@ -68,7 +68,7 @@ JABARI ZAKIYA
 
   0 VALUE  LITVAL
 : ]L  S" TO LITVAL LITVAL ] LITERAL " EVALUATE ; IMMEDIATE
-\ извращенцы :) LITVAL здесь и не нужен вовсе (~ac)
+\ РёР·РІСЂР°С‰РµРЅС†С‹ :) LITVAL Р·РґРµСЃСЊ Рё РЅРµ РЅСѓР¶РµРЅ РІРѕРІСЃРµ (~ac)
 
   1 A !     \ FOR ENDIAN TESTING
   A C@ [IF] \ IF LITTLE ENDIAN CPU

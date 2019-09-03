@@ -10,7 +10,7 @@ REQUIRE IS-/OR\? ~nn/lib/file/fract.f
     IF  DUP R@ <>
         IF DUP 1- C@ [CHAR] : = 
         ELSE DUP C@ IS-/OR\? THEN
-        IF \ либо первый символ '\', либо X:\
+        IF \ Р»РёР±Рѕ РїРµСЂРІС‹Р№ СЃРёРјРІРѕР» '\', Р»РёР±Рѕ X:\
             1+ 
         THEN
         0 SWAP C! 

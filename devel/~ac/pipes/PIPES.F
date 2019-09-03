@@ -119,7 +119,7 @@ CREATE saAttr 12 , 0 , 1 ,
 \      hInputFile = CreateFile(argv[1], GENERIC_READ, 0, NULL, 
 \         OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL); 
 \   else 
-\ это к делу не относится
+\ СЌС‚Рѕ Рє РґРµР»Сѓ РЅРµ РѕС‚РЅРѕСЃРёС‚СЃСЏ
 
       hSaveStdin @ hInputFile !
  
@@ -188,7 +188,7 @@ CREATE chBuf BUFSIZE ALLOT
 : ReadFromPipe_ ( -- )
 
 \   HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE); 
-\ не понял - где они используют hStdout в этой функции?
+\ РЅРµ РїРѕРЅСЏР» - РіРґРµ РѕРЅРё РёСЃРїРѕР»СЊР·СѓСЋС‚ hStdout РІ СЌС‚РѕР№ С„СѓРЅРєС†РёРё?
 
 // Close the write end of the pipe before reading from the 
 // read end of the pipe. 

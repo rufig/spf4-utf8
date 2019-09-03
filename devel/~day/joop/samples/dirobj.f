@@ -1,11 +1,11 @@
 REQUIRE DirObject ~day\joop\win\dirobject.f
 REQUIRE ADD-CONST-VOC ~day\wincons\wc.f
 
-  DirObject :new VALUE aFile       \ делать объект класса DirObject
+  DirObject :new VALUE aFile       \ РґРµР»Р°С‚СЊ РѕР±СЉРµРєС‚ РєР»Р°СЃСЃР° DirObject
 
   
   : SIMPLEDIR ( -- )
-  \ Вывести список только директорий в c:
+  \ Р’С‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє С‚РѕР»СЊРєРѕ РґРёСЂРµРєС‚РѕСЂРёР№ РІ c:
         S" c:\*" aFile :findFirst
         IF      BEGIN
                         FILE_ATTRIBUTE_DIRECTORY aFile :getAttr

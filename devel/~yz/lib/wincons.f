@@ -1,4 +1,4 @@
-\ ž. †¨«®¢¥æ, http://www.forth.org.ru/~yz
+\ Ð®. Ð–Ð¸Ð»Ð¾Ð²ÐµÑ†, http://www.forth.org.ru/~yz
 REQUIRE LOAD-CONSTANTS ~yz/lib/const.f
 
 S" ~yz/cons/windows.const" LOAD-CONSTANTS

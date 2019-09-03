@@ -1,4 +1,4 @@
-\ [Устаревший] вариант FileExists.
+\ [РЈСЃС‚Р°СЂРµРІС€РёР№] РІР°СЂРёР°РЅС‚ FileExists.
 
 REQUIRE FIND-FILES-R      ~ac/lib/win/file/findfile-r.f 
 

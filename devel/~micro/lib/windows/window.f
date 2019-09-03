@@ -1,4 +1,4 @@
-\ à ¡®â  á ®ª­ ¬¨
+\ Ñ€Ð°Ð±Ð¾Ñ‚Ð° Ñ Ð¾ÐºÐ½Ð°Ð¼Ð¸
 
 WINAPI: GetWindowRect user32.dll
 WINAPI: GetDesktopWindow user32.dll
@@ -11,7 +11,7 @@ REQUIRE WTHROW lib/win/winerr.f
 REQUIRE WINCONST lib/win/const.f
 
 : WindowRect@ ( hwnd -- bottom right top left )
-\ ¯®«ãç¨âì ª®®à¤¨­ âë ã£«®¢ ®ª­ 
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ ÑƒÐ³Ð»Ð¾Ð² Ð¾ÐºÐ½Ð°
   >R
   0 0 0 0 SP@
   R>
@@ -19,22 +19,22 @@ REQUIRE WINCONST lib/win/const.f
 ;
 
 : GetWindowChild ( hwnd -- childhwnd )
-\ ¯®«ãç¨âì ¯¥à¢®¥ ¤®ç¥à­¥¥ ®ª­®
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð¿ÐµÑ€Ð²Ð¾Ðµ Ð´Ð¾Ñ‡ÐµÑ€Ð½ÐµÐµ Ð¾ÐºÐ½Ð¾
   GW_CHILD SWAP GetWindow
 ;
 
 : GetWindowNext ( hwnd -- childhwnd )
-\ ¯®«ãç¨âì á«¥¤ãîé¥¥ ¤®ç¥à­¥¥ ®ª­®
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰ÐµÐµ Ð´Ð¾Ñ‡ÐµÑ€Ð½ÐµÐµ Ð¾ÐºÐ½Ð¾
   GW_HWNDNEXT SWAP GetWindow
 ;
 
 : GetWindowOwner ( hwnd -- childhwnd )
-\ ¯®«ãç¨âì ¢« ¤¥«ìæ  ®ª­ 
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð²Ð»Ð°Ð´ÐµÐ»ÑŒÑ†Ð° Ð¾ÐºÐ½Ð°
   GW_OWNER SWAP GetWindow
 ;
 
 : GetWindowChilds ( hwnd -- h1 ... hn n )
-\ ¯®«ãç¨âì ¢á¥ ¤®ç¥à­¨¥ ®ª­ , n - ¨å ª®«¨ç¥áâ¢®
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð²ÑÐµ Ð´Ð¾Ñ‡ÐµÑ€Ð½Ð¸Ðµ Ð¾ÐºÐ½Ð°, n - Ð¸Ñ… ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾
   GetWindowChild
   DUP IF
     1
@@ -50,19 +50,19 @@ REQUIRE WINCONST lib/win/const.f
 USER-CREATE WinText 257 USER-ALLOT
 
 : GetWindowText ( hwnd -- addr u )
-\ ¯®«ãç¨âì â¥ªáâ ®ª­  
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ñ‚ÐµÐºÑÑ‚ Ð¾ÐºÐ½Ð° 
   256 SWAP WinText SWAP GetWindowTextA WinText SWAP
 ;
 
 USER-CREATE WinClass 257 USER-ALLOT
 
 : GetWindowClass ( hwnd -- addr u )
-\ ¯®«ãç¨âì ª« áá ®ª­ 
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÐºÐ»Ð°ÑÑ Ð¾ÐºÐ½Ð°
   256 SWAP WinClass SWAP GetClassNameA WinClass SWAP
 ;
 
 : FindChildByClass ( h1 addr u -- h2 )
-\ ­ ©â¨ ¤®ç¥à­¥¥ ®ª­® ¯® ¥£® ª« ááã
+\ Ð½Ð°Ð¹Ñ‚Ð¸ Ð´Ð¾Ñ‡ÐµÑ€Ð½ÐµÐµ Ð¾ÐºÐ½Ð¾ Ð¿Ð¾ ÐµÐ³Ð¾ ÐºÐ»Ð°ÑÑÑƒ
   DROP
   SWAP >R
   0 SWAP

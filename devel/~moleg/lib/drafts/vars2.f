@@ -1,26 +1,26 @@
 \ 28-11-2007 ~mOleg
 \ Copyright [C] 2007 mOleg mininoleg@yahoo.com
-\ константы, vect и value переменные, работа с ними.
-\ второй вариант.
+\ РєРѕРЅСЃС‚Р°РЅС‚С‹, vect Рё value РїРµСЂРµРјРµРЅРЅС‹Рµ, СЂР°Р±РѕС‚Р° СЃ РЅРёРјРё.
+\ РІС‚РѕСЂРѕР№ РІР°СЂРёР°РЅС‚.
 
  REQUIRE [IF]     lib\include\tools.f
  REQUIRE PERFORM  devel\~moleg\lib\util\useful.f
  REQUIRE COMPILE  devel\~moleg\lib\util\compile.f
  REQUIRE ADDR     devel\~moleg\lib\util\addr.f
 
-\ адресная ссылка на VARIABLE переменную прямо в код компилируется
-\ поэтому скорость возрастает, но при этом CFA слова менять без толку
+\ Р°РґСЂРµСЃРЅР°СЏ СЃСЃС‹Р»РєР° РЅР° VARIABLE РїРµСЂРµРјРµРЅРЅСѓСЋ РїСЂСЏРјРѕ РІ РєРѕРґ РєРѕРјРїРёР»РёСЂСѓРµС‚СЃСЏ
+\ РїРѕСЌС‚РѕРјСѓ СЃРєРѕСЂРѕСЃС‚СЊ РІРѕР·СЂР°СЃС‚Р°РµС‚, РЅРѕ РїСЂРё СЌС‚РѕРј CFA СЃР»РѕРІР° РјРµРЅСЏС‚СЊ Р±РµР· С‚РѕР»РєСѓ
 : VARIABLE ( / NAME --> )
           CREATE 0 , IMMEDIATE
           DOES> STATE @ IF [COMPILE] LITERAL THEN ;
 
-\ значение константы компилируется в код как литерал!
-\ это значит, что подменить значение константы нельзя
+\ Р·РЅР°С‡РµРЅРёРµ РєРѕРЅСЃС‚Р°РЅС‚С‹ РєРѕРјРїРёР»РёСЂСѓРµС‚СЃСЏ РІ РєРѕРґ РєР°Рє Р»РёС‚РµСЂР°Р»!
+\ СЌС‚Рѕ Р·РЅР°С‡РёС‚, С‡С‚Рѕ РїРѕРґРјРµРЅРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РєРѕРЅСЃС‚Р°РЅС‚С‹ РЅРµР»СЊР·СЏ
 : CONSTANT ( n / name --> )
            CREATE , IMMEDIATE
            DOES> @  STATE @ IF [COMPILE] LITERAL THEN ;
 
-\ смещение относительно tls компилируется прямо в код слова
+\ СЃРјРµС‰РµРЅРёРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ tls РєРѕРјРїРёР»РёСЂСѓРµС‚СЃСЏ РїСЂСЏРјРѕ РІ РєРѕРґ СЃР»РѕРІР°
 : USER ( / name --> )
        CREATE USER-HERE , CELL USER-ALLOT IMMEDIATE
        DOES> @  STATE @ IF 0x8D C, 0x6D C, 0xFC C,   \ dpush tos
@@ -29,14 +29,14 @@
                          ELSE TlsIndex@ +
                         THEN ;
 
-\ переменные - значения.
+\ РїРµСЂРµРјРµРЅРЅС‹Рµ - Р·РЅР°С‡РµРЅРёСЏ.
 : VALUE ( n / name --> )
         CREATE , IMMEDIATE
         DOES> STATE @ IF LIT, COMPILE @
                        ELSE @
                       THEN ;
 
-\ создать переменную-значение в пользовательской области процесса
+\ СЃРѕР·РґР°С‚СЊ РїРµСЂРµРјРµРЅРЅСѓСЋ-Р·РЅР°С‡РµРЅРёРµ РІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ РѕР±Р»Р°СЃС‚Рё РїСЂРѕС†РµСЃСЃР°
 : USER-VALUE ( / name --> )
              CREATE USER-HERE , CELL USER-ALLOT IMMEDIATE
              DOES> @  STATE @ IF 0x8D C, 0x6D C, 0xFC C,   \ dpush tos
@@ -46,16 +46,16 @@
                                ELSE TlsIndex@ + @
                               THEN ;
 
-\ создать слово, хранящее адрес слова, которое может быть
-\ исполнено при упоминании name. Адрес может быть изменен
-\ с помощью слова IS
+\ СЃРѕР·РґР°С‚СЊ СЃР»РѕРІРѕ, С…СЂР°РЅСЏС‰РµРµ Р°РґСЂРµСЃ СЃР»РѕРІР°, РєРѕС‚РѕСЂРѕРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ
+\ РёСЃРїРѕР»РЅРµРЅРѕ РїСЂРё СѓРїРѕРјРёРЅР°РЅРёРё name. РђРґСЂРµСЃ РјРѕР¶РµС‚ Р±С‹С‚СЊ РёР·РјРµРЅРµРЅ
+\ СЃ РїРѕРјРѕС‰СЊСЋ СЃР»РѕРІР° IS
 : VECT ( / name --> )
        CREATE ['] NOOP A,
        DOES> STATE @ IF LIT, COMPILE PERFORM
                       ELSE PERFORM
                      THEN ;
 
-\ вектора, принадлежащие текущему потоку
+\ РІРµРєС‚РѕСЂР°, РїСЂРёРЅР°РґР»РµР¶Р°С‰РёРµ С‚РµРєСѓС‰РµРјСѓ РїРѕС‚РѕРєСѓ
 : USER-VECT ( / name --> )
             CREATE USER-HERE , ADDR USER-ALLOT IMMEDIATE
             DOES> @  STATE @ IF 0x8D C, 0x97 C, , \ LEA addr , [tls] + disp
@@ -63,10 +63,10 @@
                               ELSE TlsIndex@ + PERFORM
                              THEN ;
 
-\ чтобы автоматом определять тип переменной (для TO и IS)
+\ С‡С‚РѕР±С‹ Р°РІС‚РѕРјР°С‚РѕРј РѕРїСЂРµРґРµР»СЏС‚СЊ С‚РёРї РїРµСЂРµРјРµРЅРЅРѕР№ (РґР»СЏ TO Рё IS)
 VECT _vcsmpl USER-VECT _uvcsmpl 0 VALUE _vlsmpl USER-VALUE _uvlsmpl
 
-\ присвоить адрес кода USER-VECT переменной
+\ РїСЂРёСЃРІРѕРёС‚СЊ Р°РґСЂРµСЃ РєРѕРґР° USER-VECT РїРµСЂРµРјРµРЅРЅРѕР№
 : (uisvect) ( addr / name --> )
             CFL + @
             STATE @ IF 0x8D C, 0x97 C, ,
@@ -76,21 +76,21 @@ VECT _vcsmpl USER-VECT _uvcsmpl 0 VALUE _vlsmpl USER-VALUE _uvlsmpl
                      ELSE TlsIndex@ + A!
                     THEN ;
 
-\ изменить содержимое переменной - вектора
+\ РёР·РјРµРЅРёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ РїРµСЂРµРјРµРЅРЅРѕР№ - РІРµРєС‚РѕСЂР°
 : (isvect) ( addr / name --> )
            CFL +
            STATE @ IF LIT, COMPILE A!
                     ELSE A!
                    THEN ;
 
-\ изменить значение VALUE переменной
+\ РёР·РјРµРЅРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ VALUE РїРµСЂРµРјРµРЅРЅРѕР№
 : (tovalue) ( n addr --> )
      CFL +
      STATE @ IF LIT, COMPILE !
               ELSE !
              THEN ;
 
-\ присвоить значение USER-VALUE переменной
+\ РїСЂРёСЃРІРѕРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ USER-VALUE РїРµСЂРµРјРµРЅРЅРѕР№
 : (touvalue) ( n addr --> )
       CFL + @
       STATE @ IF 0x8D C, 0x97 C, ,
@@ -100,17 +100,17 @@ VECT _vcsmpl USER-VECT _uvcsmpl 0 VALUE _vlsmpl USER-VALUE _uvlsmpl
                 ELSE TlsIndex@ + !
                THEN ;
 
-\ найти адрес начала слова по ссылке из CFA на него
+\ РЅР°Р№С‚Рё Р°РґСЂРµСЃ РЅР°С‡Р°Р»Р° СЃР»РѕРІР° РїРѕ СЃСЃС‹Р»РєРµ РёР· CFA РЅР° РЅРµРіРѕ
 : raddr ( ' --> addr ) DUP 1+ @ + ;
 
-\ чтобы IS работал и с USER-VECT и c VECT переменными
+\ С‡С‚РѕР±С‹ IS СЂР°Р±РѕС‚Р°Р» Рё СЃ USER-VECT Рё c VECT РїРµСЂРµРјРµРЅРЅС‹РјРё
 : IS ( addr / name --> )
      ' DUP raddr
      [ ' _vcsmpl raddr  ] LITERAL OVER = IF DROP (isvect) EXIT THEN
      [ ' _uvcsmpl raddr ] LITERAL      = IF (uisvect) EXIT THEN
-     ." указанное слово не является вектором!" CR -1 THROW ; IMMEDIATE
+     ." СѓРєР°Р·Р°РЅРЅРѕРµ СЃР»РѕРІРѕ РЅРµ СЏРІР»СЏРµС‚СЃСЏ РІРµРєС‚РѕСЂРѕРј!" CR -1 THROW ; IMMEDIATE
 
-\ присвоить значение VALUE USER-VALUE VECT или USER-VECT переменной
+\ РїСЂРёСЃРІРѕРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ VALUE USER-VALUE VECT РёР»Рё USER-VECT РїРµСЂРµРјРµРЅРЅРѕР№
 : TO ( n / name --> )
      ' DUP raddr
      [ ' _vlsmpl  raddr ] LITERAL OVER = IF DROP (tovalue) EXIT THEN
@@ -119,8 +119,8 @@ VECT _vcsmpl USER-VECT _uvcsmpl 0 VALUE _vlsmpl USER-VALUE _uvlsmpl
      [ ' _uvcsmpl raddr ] LITERAL      = IF DROP (uisvect) EXIT THEN
      9 + STATE @ IF COMPILE, ELSE EXECUTE THEN ; IMMEDIATE
 
-?DEFINED test{ \EOF -- тестовая секция ---------------------------------------
+?DEFINED test{ \EOF -- С‚РµСЃС‚РѕРІР°СЏ СЃРµРєС†РёСЏ ---------------------------------------
 
-test{ \ тут просто проверка на собираемость.
+test{ \ С‚СѓС‚ РїСЂРѕСЃС‚Рѕ РїСЂРѕРІРµСЂРєР° РЅР° СЃРѕР±РёСЂР°РµРјРѕСЃС‚СЊ.
   S" passed" TYPE
 }test

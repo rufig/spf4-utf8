@@ -1,5 +1,5 @@
-\ Подключение менеджера памяти borlndmm.dll из поставки Borland Delphi 
-\ Пример подключения:
+\ РџРѕРґРєР»СЋС‡РµРЅРёРµ РјРµРЅРµРґР¶РµСЂР° РїР°РјСЏС‚Рё borlndmm.dll РёР· РїРѕСЃС‚Р°РІРєРё Borland Delphi 
+\ РџСЂРёРјРµСЂ РїРѕРґРєР»СЋС‡РµРЅРёСЏ:
 \ MODULE: MM
 \ S" ~ss/lib/borlndmm.f" INCLUDED
 \ ;MODULE

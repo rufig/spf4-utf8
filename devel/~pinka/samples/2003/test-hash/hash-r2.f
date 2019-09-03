@@ -1,5 +1,5 @@
 \ 01.Nov.2003 Sat 15:07 ruv
-\ портированно из  ~pinka\hash\search-wordlist.f ( originally 16.11.2000)
+\ РїРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕ РёР·  ~pinka\hash\search-wordlist.f ( originally 16.11.2000)
 
 32 CONSTANT CELL-BITS@
 CELL-BITS@ 1- CONSTANT CELL-BITS@'
@@ -9,7 +9,7 @@ CELL-BITS@ 1- CONSTANT CELL-BITS@'
  OVER + SWAP DO
    33 * I C@ +
    \ DUP IF DUP CELL-BITS@' RSHIFT XOR THEN
-   DUP CELL-BITS@' RSHIFT XOR  \ так не хуже
+   DUP CELL-BITS@' RSHIFT XOR  \ С‚Р°Рє РЅРµ С…СѓР¶Рµ
  LOOP
  SWAP ?DUP IF UMOD THEN
 ;

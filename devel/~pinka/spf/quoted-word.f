@@ -6,8 +6,8 @@ REQUIRE AsQName ~pinka/samples/2006/syntax/qname.f
 
 
 : I-QWord ( a-text u-text -- xt true | a u false )
-\ интерпретирует text как маскированное тиком слово "'word" (quoted word)
-\ дает xt при успехе.
+\ РёРЅС‚РµСЂРїСЂРµС‚РёСЂСѓРµС‚ text РєР°Рє РјР°СЃРєРёСЂРѕРІР°РЅРЅРѕРµ С‚РёРєРѕРј СЃР»РѕРІРѕ "'word" (quoted word)
+\ РґР°РµС‚ xt РїСЂРё СѓСЃРїРµС…Рµ.
   DUP 2 CHARS U< IF FALSE EXIT THEN
   OVER C@  [CHAR] ' <> IF FALSE EXIT THEN
   2DUP TAIL SFIND IF NIP NIP TRUE EXIT THEN
@@ -18,8 +18,8 @@ REQUIRE AsQName ~pinka/samples/2006/syntax/qname.f
 ;
 
 : I-QChar ( a-text u-text -- c true | a u false )
-\ интерпретирует text как маскированный тиком символ 'c' (quoted char)
-\ дает char при успехе.
+\ РёРЅС‚РµСЂРїСЂРµС‚РёСЂСѓРµС‚ text РєР°Рє РјР°СЃРєРёСЂРѕРІР°РЅРЅС‹Р№ С‚РёРєРѕРј СЃРёРјРІРѕР» 'c' (quoted char)
+\ РґР°РµС‚ char РїСЂРё СѓСЃРїРµС…Рµ.
   DUP 3 CHARS <> IF FALSE EXIT THEN
   OVER C@  [CHAR] ' <> IF FALSE EXIT THEN
   OVER 2 CHARS + C@ [CHAR] ' <> IF FALSE EXIT THEN

@@ -1,6 +1,6 @@
 \ 16-11-2007 ~mOleg
 \ Copyright [C] 2007 mOleg mininoleg@yahoo.com
-\ установка текущего приоритета
+\ СѓСЃС‚Р°РЅРѕРІРєР° С‚РµРєСѓС‰РµРіРѕ РїСЂРёРѕСЂРёС‚РµС‚Р°
 
  REQUIRE ?DEFINED devel\~moleg\lib\util\ifdef.f
 
@@ -14,12 +14,12 @@
         0x4000 CONSTANT normal--
         0x8000 CONSTANT normal++
 
-\ установить собственный приоритет
-\ возвращает FALSE
+\ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРѕР±СЃС‚РІРµРЅРЅС‹Р№ РїСЂРёРѕСЂРёС‚РµС‚
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ FALSE
 : own ( prc --> flag )
       GetCurrentProcess
       SetPriorityClass
       IF TRUE ELSE FALSE THEN ;
 
-\EOF пример использования
+\EOF РїСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ
 idle own

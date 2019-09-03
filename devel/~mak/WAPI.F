@@ -1,4 +1,4 @@
-\ Áûñòðûé âûçîâ API                   Mihail Maksimov
+\ Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð²Ñ‹Ð·Ð¾Ð² API                   Mihail Maksimov
 
 REQUIRE Code  ~mak\asm\ASM.FRT 
 
@@ -196,7 +196,7 @@ MM2:  LEA  EBP, [EBP+0CH]
 
 ENDCode
 
-: __WIN:  ( CFA_INI "ÈìÿÏðîöåäóðû" "ÈìÿÁèáëèîòåêè" -- )
+: __WIN:  ( CFA_INI "Ð˜Ð¼ÑÐŸÑ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñ‹" "Ð˜Ð¼ÑÐ‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸" -- )
 
    COMPILE,
   HERE WINAP !
@@ -206,24 +206,24 @@ ENDCode
 \  0 , \ # of parameters
   IS-TEMP-WL 0=
   IF
-    HERE WINAPLINK @ , WINAPLINK ! ( ñâÿçü )
+    HERE WINAPLINK @ , WINAPLINK ! ( ÑÐ²ÑÐ·ÑŒ )
   THEN
   HERE WINAP @ CELL+ CELL+ !
   HERE >R
-  NextWord HERE SWAP DUP ALLOT MOVE 0 C, \ èìÿ ôóíêöèè
+  NextWord HERE SWAP DUP ALLOT MOVE 0 C, \ Ð¸Ð¼Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸
   HERE WINAP @ CELL+ !
   HERE >R
-  NextWord HERE SWAP DUP ALLOT MOVE 0 C, \ èìÿ áèáëèîòåêè
+  NextWord HERE SWAP DUP ALLOT MOVE 0 C, \ Ð¸Ð¼Ñ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸
   R> LoadLibraryA DUP 0= IF -2009 THROW THEN \ ABORT" Library not found"
   R> SWAP GetProcAddress 0= IF -2010 THROW THEN \ ABORT" Procedure not found"
 ;
 
-: _WIN: ( CFA_INI "ÈìÿÏðîöåäóðû" "ÈìÿÁèáëèîòåêè" -- )
+: _WIN: ( CFA_INI "Ð˜Ð¼ÑÐŸÑ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñ‹" "Ð˜Ð¼ÑÐ‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸" -- )
      >IN @   HEADER   >IN ! __WIN: ;
 
 : RWIN: ['] _RWIN-CODE SkipDelimiters  >IN @  HEADER
- 1+  \ îáõîä ïðåôèêñà îáîçíà÷àþùåãî ôóíêöèþ, ïàðàìåòðû êîòîðîé
-\ ïåðåäàþòñÿ ÷åðåç ñòåê âîçâðàòîâ
+ 1+  \ Ð¾Ð±Ñ…Ð¾Ð´ Ð¿Ñ€ÐµÑ„Ð¸ÐºÑÐ° Ð¾Ð±Ð¾Ð·Ð½Ð°Ñ‡Ð°ÑŽÑ‰ÐµÐ³Ð¾ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ, Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹
+\ Ð¿ÐµÑ€ÐµÐ´Ð°ÑŽÑ‚ÑÑ Ñ‡ÐµÑ€ÐµÐ· ÑÑ‚ÐµÐº Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¾Ð²
     >IN !             __WIN: ;
 : 0WIN: ['] _0WIN-CODE _WIN: ;
 : 1WIN: ['] _1WIN-CODE _WIN: ;

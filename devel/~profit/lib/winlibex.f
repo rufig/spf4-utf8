@@ -1,4 +1,4 @@
-\ Íåáîëüøèå òîíêîñòè è äîïîëíåíèÿ ê WinLib
+\ ÐÐµÐ±Ð¾Ð»ÑŒÑˆÐ¸Ðµ Ñ‚Ð¾Ð½ÐºÐ¾ÑÑ‚Ð¸ Ð¸ Ð´Ð¾Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ðº WinLib
 
 REQUIRE treeview ~yz/lib/wincc.f
 WINAPI: SetScrollInfo user32
@@ -15,22 +15,22 @@ WINAPI: CreateFontW GDI32.DLL
   rect @
   rect 1 CELLS@ ;
 
-\ ñêâîçíîé ñòàòè÷íûé ýëåìåíò, íå ïåðåõâàòûâàþùèé ôîêóñà
+\ ÑÐºÐ²Ð¾Ð·Ð½Ð¾Ð¹ ÑÑ‚Ð°Ñ‚Ð¸Ñ‡Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚, Ð½Ðµ Ð¿ÐµÑ€ÐµÑ…Ð²Ð°Ñ‚Ñ‹Ð²Ð°ÑŽÑ‰Ð¸Ð¹ Ñ„Ð¾ÐºÑƒÑÐ°
 : through-control control static (* ss_left ss_sunken ss_ownerdraw *) create-control
 transparent OVER -bgcolor! ;
 
-\ óñòàíîâèòü ðàçìåð ñòðàíèöû äëÿ ñêðîëëáàðà
+\ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð´Ð»Ñ ÑÐºÑ€Ð¾Ð»Ð»Ð±Ð°Ñ€Ð°
 : set-page-size { page-size ctl \ [ 7 CELLS ] scrollinfo -- } 
 7 CELLS scrollinfo !
 W: SIF_PAGE scrollinfo CELL+ !
 page-size scrollinfo 4 CELLS + !
 TRUE scrollinfo W: sb_ctl ctl -hwnd@ SetScrollInfo DROP ;
 
-\ î÷èñòèòü äåðåâî
+\ Ð¾Ñ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ Ð´ÐµÑ€ÐµÐ²Ð¾
 : tv-del-all-items ( ctl --) W: TVI_ROOT SWAP tv-del ;
 
 
-\ èìÿ øðèôòà â óíèêîäå
+\ Ð¸Ð¼Ñ ÑˆÑ€Ð¸Ñ„Ñ‚Ð° Ð² ÑƒÐ½Ð¸ÐºÐ¾Ð´Ðµ
 : create-font-uni ( zname size -- ) pt>devunits
   >R (* default_pitch ff_dontcare *) W: default_quality
   W: clip_default_precis W: out_default_precis W: ansi_charset

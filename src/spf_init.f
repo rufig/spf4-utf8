@@ -1,7 +1,7 @@
 \ $Id$
-( Инициализация USER-переменных.
+( РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ USER-РїРµСЂРµРјРµРЅРЅС‹С….
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Сентябрь 1999
+  РЎРµРЅС‚СЏР±СЂСЊ 1999
 )
 
 VARIABLE MAINX
@@ -34,8 +34,8 @@ TC-USER-HERE ALIGNED ' USER-OFFS EXECUTE !
 : ERR-EXIT ( xt -- )
   CATCH
   ?DUP IF ['] ERROR CATCH IF 4 ELSE 3 THEN HALT THEN
-  \ выходим с кодом ошибки 3, если обычная ошибка при инициализации 
-  \ 4 - если вложенная
+  \ РІС‹С…РѕРґРёРј СЃ РєРѕРґРѕРј РѕС€РёР±РєРё 3, РµСЃР»Рё РѕР±С‹С‡РЅР°СЏ РѕС€РёР±РєР° РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё 
+  \ 4 - РµСЃР»Рё РІР»РѕР¶РµРЅРЅР°СЏ
 ;
 
 : (ADDR.) BASE @ >R HEX 8 .0 R> BASE ! ;
@@ -98,7 +98,7 @@ TC-USER-HERE ALIGNED ' USER-OFFS EXECUTE !
     SWAP DUMP-TRACE-SHRUNKEN
   ELSE ( esp bottom ) 
     NIP DUP 50 CELLS - DUMP-TRACE 
-    \ при несогласованности предпочтение отдается R0
+    \ РїСЂРё РЅРµСЃРѕРіР»Р°СЃРѕРІР°РЅРЅРѕСЃС‚Рё РїСЂРµРґРїРѕС‡С‚РµРЅРёРµ РѕС‚РґР°РµС‚СЃСЏ R0
   THEN
 ;
 
@@ -113,11 +113,11 @@ TC-USER-HERE ALIGNED ' USER-OFFS EXECUTE !
 ;
 : FATAL-HANDLER1 ( ior -- )
   ['] (FATAL-HANDLER1) CATCH 5 ['] HALT CATCH -1 PAUSE
-  \ Вывод сообщения об ошибке может вызвать исключение.
-  \ Если поток не завершился, то завршаем процесс.
-  \ Если не получилось -- поток засыпает.
-  \ FATAL-HANDLER не имеет права возвращать управление!
-  \ (в том числе, возвращать управление через THROW)
+  \ Р’С‹РІРѕРґ СЃРѕРѕР±С‰РµРЅРёСЏ РѕР± РѕС€РёР±РєРµ РјРѕР¶РµС‚ РІС‹Р·РІР°С‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ.
+  \ Р•СЃР»Рё РїРѕС‚РѕРє РЅРµ Р·Р°РІРµСЂС€РёР»СЃСЏ, С‚Рѕ Р·Р°РІСЂС€Р°РµРј РїСЂРѕС†РµСЃСЃ.
+  \ Р•СЃР»Рё РЅРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ -- РїРѕС‚РѕРє Р·Р°СЃС‹РїР°РµС‚.
+  \ FATAL-HANDLER РЅРµ РёРјРµРµС‚ РїСЂР°РІР° РІРѕР·РІСЂР°С‰Р°С‚СЊ СѓРїСЂР°РІР»РµРЅРёРµ!
+  \ (РІ С‚РѕРј С‡РёСЃР»Рµ, РІРѕР·РІСЂР°С‰Р°С‚СЊ СѓРїСЂР°РІР»РµРЅРёРµ С‡РµСЂРµР· THROW)
 ;
 ' FATAL-HANDLER1 ' FATAL-HANDLER TC-VECT!  \ see THROW
 
@@ -154,18 +154,18 @@ TARGET-POSIX [IF]
 : (OPTIONS) ( -- )
   ['] INTERPRET CATCH PROCESS-ERR THROW
 ;
-: OPTIONS ( -> ) \ интерпретировать командную строку
+: OPTIONS ( -> ) \ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊ РєРѕРјР°РЅРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
   COMMANDLINE-OPTIONS TUCK HEAP-COPY SWAP ['] (OPTIONS) EVALUATE-WITH
 ;
 
 : +HomeDirName ( a u -- a2 u2 )
-\ Добавить addr u к "значение_окружения_HOME/"
+\ Р”РѕР±Р°РІРёС‚СЊ addr u Рє "Р·РЅР°С‡РµРЅРёРµ_РѕРєСЂСѓР¶РµРЅРёСЏ_HOME/"
   S" HOME" ENVIRONMENT? 0= IF EXIT THEN
   SYSTEM-PAD DUP >R /SYSTEM-PAD CROP S" /" CROP- CROP ( a2-rest u2-rest )
   DROP 0 OVER C! R> TUCK -
   
-  \ Данное определение нельзя поместить в spf_module.f
-  \ т.к. должно быть после определения "ENVIRONMENT?"
+  \ Р”Р°РЅРЅРѕРµ РѕРїСЂРµРґРµР»РµРЅРёРµ РЅРµР»СЊР·СЏ РїРѕРјРµСЃС‚РёС‚СЊ РІ spf_module.f
+  \ С‚.Рє. РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕСЃР»Рµ РѕРїСЂРµРґРµР»РµРЅРёСЏ "ENVIRONMENT?"
 ;
 
 
@@ -173,9 +173,9 @@ TARGET-POSIX [IF]
   S" spf4.ini" INCLUDED-EXISTING IF EXIT THEN
   +ModuleDirName INCLUDED-EXISTING IF EXIT THEN 2DROP
   S" .spf4.ini" +HomeDirName INCLUDED-EXISTING IF EXIT THEN 2DROP
-  \ надо ли искать ".spf4.ini" в других местах?
-  \ сделать ли имя ini-файла платформенно-зависимым?
-  \ см. Bug#3274947
+  \ РЅР°РґРѕ Р»Рё РёСЃРєР°С‚СЊ ".spf4.ini" РІ РґСЂСѓРіРёС… РјРµСЃС‚Р°С…?
+  \ СЃРґРµР»Р°С‚СЊ Р»Рё РёРјСЏ ini-С„Р°Р№Р»Р° РїР»Р°С‚С„РѕСЂРјРµРЅРЅРѕ-Р·Р°РІРёСЃРёРјС‹Рј?
+  \ СЃРј. Bug#3274947
 ;
 
 \ Scattering a Colon Definition
@@ -186,7 +186,7 @@ TARGET-POSIX [IF]
 TRUE VALUE SPF-INIT?
 
 \ Startup
-\ Точка входа при запуске:
+\ РўРѕС‡РєР° РІС…РѕРґР° РїСЂРё Р·Р°РїСѓСЃРєРµ:
 
 TARGET-POSIX [IF]
 : (INIT) ( env argv argc -- )
@@ -210,12 +210,12 @@ TARGET-POSIX [IF]
   SPF-INIT?
   IF
     ['] SPF-INI ERR-EXIT
-    ['] OPTIONS CATCH ERROR \ продолжить не смотря на ошибку
+    ['] OPTIONS CATCH ERROR \ РїСЂРѕРґРѕР»Р¶РёС‚СЊ РЅРµ СЃРјРѕС‚СЂСЏ РЅР° РѕС€РёР±РєСѓ
   THEN
   CGI? @ 0= POST? @ OR IF ['] <MAIN> ERR-EXIT THEN
   BYE
-  \ если где-то тут произойдет исключение (например, при исполнении ERROR),
-  \ то его обработает FATAL-HANDLER и процесс завершится.
+  \ РµСЃР»Рё РіРґРµ-С‚Рѕ С‚СѓС‚ РїСЂРѕРёР·РѕР№РґРµС‚ РёСЃРєР»СЋС‡РµРЅРёРµ (РЅР°РїСЂРёРјРµСЂ, РїСЂРё РёСЃРїРѕР»РЅРµРЅРёРё ERROR),
+  \ С‚Рѕ РµРіРѕ РѕР±СЂР°Р±РѕС‚Р°РµС‚ FATAL-HANDLER Рё РїСЂРѕС†РµСЃСЃ Р·Р°РІРµСЂС€РёС‚СЃСЏ.
 ;
 
 ' PROCESS-INIT TO TC-FORTH-INSTANCE>

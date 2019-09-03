@@ -4,7 +4,7 @@ REQUIRE WL-MODULES ~day\lib\includemodule.f
 NEEDS ~day\wfl\wfl.f
 NEEDS ~day\wfl\controls\splitter.f
 
-( Панель с выводом процентов ширины )
+( РџР°РЅРµР»СЊ СЃ РІС‹РІРѕРґРѕРј РїСЂРѕС†РµРЅС‚РѕРІ С€РёСЂРёРЅС‹ )
 
 CPanel SUBCLASS CPercentPanel
 
@@ -39,26 +39,26 @@ CFrameWindow SUBCLASS CVerySimpleWindow
 W: WM_CREATE
    hsplitter setHorizontal
 
-   \ Мы не назначаем стиль WS_EX_CLIENTEDGE панелям, как в complexsplitter
-    \ примере, значит мы должны отрисовать сплиттер сами
+   \ РњС‹ РЅРµ РЅР°Р·РЅР°С‡Р°РµРј СЃС‚РёР»СЊ WS_EX_CLIENTEDGE РїР°РЅРµР»СЏРј, РєР°Рє РІ complexsplitter
+    \ РїСЂРёРјРµСЂРµ, Р·РЅР°С‡РёС‚ РјС‹ РґРѕР»Р¶РЅС‹ РѕС‚СЂРёСЃРѕРІР°С‚СЊ СЃРїР»РёС‚С‚РµСЂ СЃР°РјРё
    TRUE hsplitter drawSplitter? !
    TRUE vsplitter drawSplitter? !
 
-   \ увеличим немного ширину
+   \ СѓРІРµР»РёС‡РёРј РЅРµРјРЅРѕРіРѕ С€РёСЂРёРЅСѓ
    6 hsplitter splitWidth !
    6 vsplitter splitWidth !
 
-   \ простое создание панелей
-    \ контроллер сам создаст и удалит панели
+   \ РїСЂРѕСЃС‚РѕРµ СЃРѕР·РґР°РЅРёРµ РїР°РЅРµР»РµР№
+    \ РєРѕРЅС‚СЂРѕР»Р»РµСЂ СЃР°Рј СЃРѕР·РґР°СЃС‚ Рё СѓРґР°Р»РёС‚ РїР°РЅРµР»Рё
 
    SELF hsplitter createPanels
    SELF hsplitter createSplitter
 
-   \ более сложное
-    \ мы отвечаем за создание и удаление объектов панелей
-     \ контроллер отвечает со инициализацию панелей (создание win окон)
+   \ Р±РѕР»РµРµ СЃР»РѕР¶РЅРѕРµ
+    \ РјС‹ РѕС‚РІРµС‡Р°РµРј Р·Р° СЃРѕР·РґР°РЅРёРµ Рё СѓРґР°Р»РµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ РїР°РЅРµР»РµР№
+     \ РєРѕРЅС‚СЂРѕР»Р»РµСЂ РѕС‚РІРµС‡Р°РµС‚ СЃРѕ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ РїР°РЅРµР»РµР№ (СЃРѕР·РґР°РЅРёРµ win РѕРєРѕРЅ)
    
-   hsplitter getUpperPane ( родитель )
+   hsplitter getUpperPane ( СЂРѕРґРёС‚РµР»СЊ )
    leftPane this OVER vsplitter setLeftPane
    rightPane this OVER vsplitter setRightPane
 

@@ -1,5 +1,5 @@
 \ 07.Jul.2001 Sat 02:13  Ruv
-\ Посылка сообщений с квитированием о начале обработки.
+\ РџРѕСЃС‹Р»РєР° СЃРѕРѕР±С‰РµРЅРёР№ СЃ РєРІРёС‚РёСЂРѕРІР°РЅРёРµРј Рѕ РЅР°С‡Р°Р»Рµ РѕР±СЂР°Р±РѕС‚РєРё.
 
 REQUIRE GetMessageA  ~pinka\lib\Multi\messages.f 
 
@@ -24,10 +24,10 @@ WM_USER 0x50 + CONSTANT m_receipt
 : -ROT ROT ROT ; [THEN]
 
 : MessageWithAck! (  x msg_num target_thread_id -- )
-\ послать сообщение
-\      lparam - параметр x
+\ РїРѕСЃР»Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ
+\      lparam - РїР°СЂР°РјРµС‚СЂ x
 \      wparam - tid
-\ дождаться квитанции о начале обработки сообщения
+\ РґРѕР¶РґР°С‚СЊСЃСЏ РєРІРёС‚Р°РЅС†РёРё Рѕ РЅР°С‡Р°Р»Рµ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёСЏ
   GetCurrentThreadId -ROT PostThreadMessageA  ERR THROW
 
   m_receipt DUP 0 /MSG RALLOT GetMessageA
@@ -40,10 +40,10 @@ WM_USER 0x50 + CONSTANT m_receipt
 ;
 
 : ExistMsg ( msg_num_min msg_num_max 'msg -- true | false )
-\ Если есть сообщение в очередели сообщений, принять его в msg
-\ и вернуть true, иначе вернуть false.
-\ в сообщении от MessageWithAck!
-\      lparam - параметр x
+\ Р•СЃР»Рё РµСЃС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РІ РѕС‡РµСЂРµРґРµР»Рё СЃРѕРѕР±С‰РµРЅРёР№, РїСЂРёРЅСЏС‚СЊ РµРіРѕ РІ msg
+\ Рё РІРµСЂРЅСѓС‚СЊ true, РёРЅР°С‡Рµ РІРµСЂРЅСѓС‚СЊ false.
+\ РІ СЃРѕРѕР±С‰РµРЅРёРё РѕС‚ MessageWithAck!
+\      lparam - РїР°СЂР°РјРµС‚СЂ x
 \      wparam - tid
   >R SWAP PM_REMOVE -ROT  -1  R> PeekMessageA 0<>
 ;
@@ -55,8 +55,8 @@ WM_USER 0x50 + CONSTANT m_receipt
 ;
 
 : MessageWithAck@ ( msg_num_min msg_num_max --  x msg_num )
-\ получить сообщение
-\ отправить сообщение-квитанцию.
+\ РїРѕР»СѓС‡РёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ
+\ РѕС‚РїСЂР°РІРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ-РєРІРёС‚Р°РЅС†РёСЋ.
    SWAP
    0 /MSG RALLOT DUP >R   GetMessageA
    -1 = IF GetLastError THROW THEN
@@ -89,6 +89,6 @@ WM_USER 0x50 + CONSTANT m_receipt
   0 t START DROP
 ;  
  test 
- 10 PAUSE \ чтобы поток успел стартануть и заполнить s
+ 10 PAUSE \ С‡С‚РѕР±С‹ РїРѕС‚РѕРє СѓСЃРїРµР» СЃС‚Р°СЂС‚Р°РЅСѓС‚СЊ Рё Р·Р°РїРѕР»РЅРёС‚СЊ s
 : t  -11 10  s MessageWithAck! ; \ t t t t 
 \ )

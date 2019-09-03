@@ -20,7 +20,7 @@ NextWord 2DUP SFIND 0= IF 2DROP 0 THEN
 R> >IN ! ( addr u xt|0 )
 WARNING @ WARNING 0! : WARNING !
 cur-status-variable LIT, POSTPONE @
-cur-status-variable @ LIT, \ текущее состояние механизма
+cur-status-variable @ LIT, \ С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РјРµС…Р°РЅРёР·РјР°
 
 ?DUP 0= IF ( addr u )
 POSTPONE <> 0 ?BRANCH, >MARK 1

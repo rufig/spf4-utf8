@@ -61,12 +61,12 @@ VARIABLE l
     NONAME] l DoList
 ;
 : test
-    S" ‚¥α" S" 70" l SetProp
-    S" ®αβ" S" 176" l SetProp
+    S" Π’ΠµΡ" S" 70" l SetProp
+    S" Π ΠΎΡΡ‚" S" 176" l SetProp
     .l
-    S" ‚¥α" l GetProp TYPE CR CR
-    S" ‚¥α" S" 65" l SetProp
-    S" ‚¥α" l GetProp TYPE CR CR
+    S" Π’ΠµΡ" l GetProp TYPE CR CR
+    S" Π’ΠµΡ" S" 65" l SetProp
+    S" Π’ΠµΡ" l GetProp TYPE CR CR
     .l
     S" " l GetProp TYPE CR CR
 ;

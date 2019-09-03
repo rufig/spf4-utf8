@@ -1,5 +1,5 @@
-\ Форматный вывод а ля printf()
-\ Ю. Жиловец, http://www.forth.org.ru/~yz
+\ Р¤РѕСЂРјР°С‚РЅС‹Р№ РІС‹РІРѕРґ Р° Р»СЏ printf()
+\ Р®. Р–РёР»РѕРІРµС†, http://www.forth.org.ru/~yz
 
 WINAPI: wvsprintfA   USER32.DLL
 

@@ -6,7 +6,7 @@
 
 <also wordlist="forthml-hidden">
 
-<!-- ìåòà-ñëîâî <test/> - äëÿ èñïûòàíèé ôðàãìåíòîâ êîäà BacFORTH -->
+<!-- Ð¼ÐµÑ‚Ð°-ÑÐ»Ð¾Ð²Ð¾ <test/> - Ð´Ð»Ñ Ð¸ÑÐ¿Ñ‹Ñ‚Ð°Ð½Ð¸Ð¹ Ñ„Ñ€Ð°Ð³Ð¼ÐµÐ½Ñ‚Ð¾Ð² ÐºÐ¾Ð´Ð° BacFORTH -->
 
 <r:rule match="test"> FirstChildValue TYPE CR <r:mm>
   HERE >R <p><r:yield/></p> EXECUTE CR R> HERE - ALLOT

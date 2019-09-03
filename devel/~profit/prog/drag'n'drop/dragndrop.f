@@ -23,11 +23,11 @@ WINDOWS...
 
 0 (* WS_BORDER WS_CAPTION WS_SYSMENU WS_VISIBLE *) 0 create-window-with-styles TO winmain
 W: COLOR_BTNFACE syscolor winmain -bgcolor!
-1 winmain -hwnd@ DragAcceptFiles DROP \ указываем на то что на окно можно сбрасывть файлы
+1 winmain -hwnd@ DragAcceptFiles DROP \ СѓРєР°Р·С‹РІР°РµРј РЅР° С‚Рѕ С‡С‚Рѕ РЅР° РѕРєРЅРѕ РјРѕР¶РЅРѕ СЃР±СЂР°СЃС‹РІС‚СЊ С„Р°Р№Р»С‹
 
-" Заголовок" winmain -text!
+" Р—Р°РіРѕР»РѕРІРѕРє" winmain -text!
 GRID
-" Сбрасывай сюда файлы" label -xspan -yspan |
+" РЎР±СЂР°СЃС‹РІР°Р№ СЃСЋРґР° С„Р°Р№Р»С‹" label -xspan -yspan |
 ===
 GRID; winmain -grid!
 

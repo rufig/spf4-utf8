@@ -1,5 +1,5 @@
 \ http://fforum.winglion.ru/viewtopic.php?p=6242#6242
-\ Использование функции сортировки
+\ РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё СЃРѕСЂС‚РёСЂРѕРІРєРё
 
 REQUIRE [DEFINED] lib/include/tools.f 
 

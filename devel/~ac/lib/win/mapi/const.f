@@ -14,9 +14,9 @@
         30 CONSTANT PT_STRING8	\ Null terminated 8-bit character string
 
 0x0FFF0102 CONSTANT PR_ENTRYID
-0x3006001E CONSTANT PR_PROVIDER_DISPLAY \ MAPILab Group Folders или Личные папки
-0x3001001E CONSTANT PR_DISPLAY_NAME \ RAINBOW:Личные папки
-0x30090003 CONSTANT PR_RESOURCE_FLAGS \ 860 или 2
+0x3006001E CONSTANT PR_PROVIDER_DISPLAY \ MAPILab Group Folders РёР»Рё Р›РёС‡РЅС‹Рµ РїР°РїРєРё
+0x3001001E CONSTANT PR_DISPLAY_NAME \ RAINBOW:Р›РёС‡РЅС‹Рµ РїР°РїРєРё
+0x30090003 CONSTANT PR_RESOURCE_FLAGS \ 860 РёР»Рё 2
 0x3400000B CONSTANT PR_DEFAULT_STORE
 
 0x00000002 CONSTANT MODRECIP_ADD
@@ -72,20 +72,20 @@
 
 0x35E00102 CONSTANT PR_IPM_SUBTREE_ENTRYID
 
-\ свойства папок
+\ СЃРІРѕР№СЃС‚РІР° РїР°РїРѕРє
 0x36020003 CONSTANT PR_CONTENT_COUNT
 0x36030003 CONSTANT PR_CONTENT_UNREAD
-0x3613001E CONSTANT PR_CONTAINER_CLASS \ напр. IPF.Appointment
+0x3613001E CONSTANT PR_CONTAINER_CLASS \ РЅР°РїСЂ. IPF.Appointment
 
-\ коды ошибок
-0x40380 CONSTANT MAPI_W_ERRORS_RETURNED \ для ::GetProps означает "не найдено одно из свойств"
+\ РєРѕРґС‹ РѕС€РёР±РѕРє
+0x40380 CONSTANT MAPI_W_ERRORS_RETURNED \ РґР»СЏ ::GetProps РѕР·РЅР°С‡Р°РµС‚ "РЅРµ РЅР°Р№РґРµРЅРѕ РѕРґРЅРѕ РёР· СЃРІРѕР№СЃС‚РІ"
 
-\ свойства аттачей
-\ 3001001E PR_DISPLAY_NAME -- редко
+\ СЃРІРѕР№СЃС‚РІР° Р°С‚С‚Р°С‡РµР№
+\ 3001001E PR_DISPLAY_NAME -- СЂРµРґРєРѕ
 0x3704001E CONSTANT PR_ATTACH_FILENAME \ 8.3
 0x3707001E CONSTANT PR_ATTACH_LONG_FILENAME
-0x370E001E CONSTANT PR_ATTACH_MIME_TAG \ напр. application/octet-stream
-0x3713001E CONSTANT PR_ATTACH_CONTENT_LOCATION \ иногда содержит URL прилагаемой картинки, в *.h нет кода
+0x370E001E CONSTANT PR_ATTACH_MIME_TAG \ РЅР°РїСЂ. application/octet-stream
+0x3713001E CONSTANT PR_ATTACH_CONTENT_LOCATION \ РёРЅРѕРіРґР° СЃРѕРґРµСЂР¶РёС‚ URL РїСЂРёР»Р°РіР°РµРјРѕР№ РєР°СЂС‚РёРЅРєРё, РІ *.h РЅРµС‚ РєРѕРґР°
 0x37050003 CONSTANT PR_ATTACH_METHOD
 0x37010102 CONSTANT PR_ATTACH_DATA_BIN
 0x00000001 CONSTANT ATTACH_BY_VALUE
@@ -94,20 +94,20 @@
 0x0E200003 CONSTANT PR_ATTACH_SIZE
 0x0E210003 CONSTANT PR_ATTACH_NUM
 
-\ свойства IPM
+\ СЃРІРѕР№СЃС‚РІР° IPM
 0x00170003 CONSTANT PR_IMPORTANCE
 \ PR_MESSAGE_CLASS=IPM.Task
 0x00360003 CONSTANT PR_SENSITIVITY
-\ PR_SUBJECT=заголовок задачи
+\ PR_SUBJECT=Р·Р°РіРѕР»РѕРІРѕРє Р·Р°РґР°С‡Рё
 \ PR_MESSAGE_DELIVERY_TIME=51426DC0 
 0x30070040 CONSTANT PR_CREATION_TIME
-0x30080040 CONSTANT PR_LAST_MODIFICATION_TIME \ напр. 4A8915B0
+0x30080040 CONSTANT PR_LAST_MODIFICATION_TIME \ РЅР°РїСЂ. 4A8915B0
 0x00390040 CONSTANT PR_CLIENT_SUBMIT_TIME
 
-\ при закрытии задачи:
+\ РїСЂРё Р·Р°РєСЂС‹С‚РёРё Р·Р°РґР°С‡Рё:
 \ 8059000B 57570000->57570001 
 \ 81250003 0->2 
-\ 80580040 не было ->9C1C8800 
+\ 80580040 РЅРµ Р±С‹Р»Рѕ ->9C1C8800 
 
 \ HTML
 0x3FDE0003 CONSTANT PR_INTERNET_CPID 
@@ -130,7 +130,7 @@
 0x10810003 CONSTANT PR_LAST_VERB_EXECUTED \ 102 = EXCHIVERB_REPLYTOSENDER
 0x10820040 CONSTANT PR_LAST_VERB_EXECUTION_TIME
 
-\ получатель (входящего) сообщения
+\ РїРѕР»СѓС‡Р°С‚РµР»СЊ (РІС…РѕРґСЏС‰РµРіРѕ) СЃРѕРѕР±С‰РµРЅРёСЏ
 0x0077001E CONSTANT PR_RCVD_REPRESENTING_ADDRTYPE \ SMTP
 0x0075001E CONSTANT PR_RECEIVED_BY_ADDRTYPE \ SMTP
 
@@ -146,7 +146,7 @@
 0x0070001E CONSTANT PR_CONVERSATION_TOPIC \ Re[4]: cvs   eserv
 0x80C5000B CONSTANT PR_UseTNEF
 
-0x30000003 CONSTANT PR_ROWID \ напр. номер Rcpt в списке
+0x30000003 CONSTANT PR_ROWID \ РЅР°РїСЂ. РЅРѕРјРµСЂ Rcpt РІ СЃРїРёСЃРєРµ
 
 0x0002 CONSTANT CCSF_SMTP		
 0x0004 CONSTANT CCSF_NOHEADERS		
@@ -159,9 +159,9 @@
 
 1 CONSTANT STATFLAG_NONAME
 
-\ Работа с Outbox
+\ Р Р°Р±РѕС‚Р° СЃ Outbox
 \ PR_IPM_OUTBOX_ENTRYID
 \ PR_DELETE_AFTER_SUBMIT
 
 \ Tasks
-\ 0x806E000B CONSTANT PR_TaskComplete \ user-0x8xxx-свойства не имеют фиксированной нумерации
+\ 0x806E000B CONSTANT PR_TaskComplete \ user-0x8xxx-СЃРІРѕР№СЃС‚РІР° РЅРµ РёРјРµСЋС‚ С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕР№ РЅСѓРјРµСЂР°С†РёРё

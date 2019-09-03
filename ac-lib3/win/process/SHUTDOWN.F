@@ -1,7 +1,7 @@
-\ SetHandler - установить обработчик Ctrl+C, Ctrl+Break, Close & Shutdown
-\ для консольного приложения.
-\ При получении таких сигналов будет выполняться AtShutdown
-\ Win9x,ME не посылает сигнал при Shutdown :(
+\ SetHandler - СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРє Ctrl+C, Ctrl+Break, Close & Shutdown
+\ РґР»СЏ РєРѕРЅСЃРѕР»СЊРЅРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ.
+\ РџСЂРё РїРѕР»СѓС‡РµРЅРёРё С‚Р°РєРёС… СЃРёРіРЅР°Р»РѕРІ Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ AtShutdown
+\ Win9x,ME РЅРµ РїРѕСЃС‹Р»Р°РµС‚ СЃРёРіРЅР°Р» РїСЂРё Shutdown :(
 
 WINAPI: SetConsoleCtrlHandler KERNEL32.DLL
 

@@ -54,7 +54,7 @@ WINAPI: CreateDirectoryA   KERNEL32.DLL
 \ ===
 
 \ Another decision, not so pretty, like previous ;) 
-\ Другое решение
+\ Р”СЂСѓРіРѕРµ СЂРµС€РµРЅРёРµ
 
 [UNDEFINED] path_delimiter  [IF] CHAR \  VALUE path_delimiter    [THEN]
 

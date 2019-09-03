@@ -1,4 +1,4 @@
-\ Ìîæíî ñäåëàòü ïîëó÷øå, ñ îòðèñîâêîé êàðòèíêè...
+\ ÐœÐ¾Ð¶Ð½Ð¾ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ Ð¿Ð¾Ð»ÑƒÑ‡ÑˆÐµ, Ñ Ð¾Ñ‚Ñ€Ð¸ÑÐ¾Ð²ÐºÐ¾Ð¹ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸...
 
 REQUIRE FrameWindow ~day\joop\win\framewindow.f
 REQUIRE Button ~day\joop\win\control.f
@@ -45,7 +45,7 @@ W: WM_CHAR wparam @ 13 = IF self :b1Click THEN ;
 
 ;CLASS
 
-\ Ñíà÷àëà èìÿ ïðèëîæåíèÿ, çàòåì âåðñèÿ
+\ Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð¸Ð¼Ñ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ, Ð·Ð°Ñ‚ÐµÐ¼ Ð²ÐµÑ€ÑÐ¸Ñ
 : ShowAbout ( c-addr1 u1 c-addr2-u2 hwnd)
    >R AboutWindow :new >R
    R@ :setStrings

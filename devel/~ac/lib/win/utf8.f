@@ -1,5 +1,5 @@
-\ Âûíåñåíî èç ~ac/lib/win/com/com.f ðàäè UTF8>,
-\ êîòîðûé â ýòîì âàðèàíòå áîëåå âñåÿäíûé, ÷åì ðåàëèçàöèÿ â ICONV
+\ Ð’Ñ‹Ð½ÐµÑÐµÐ½Ð¾ Ð¸Ð· ~ac/lib/win/com/com.f Ñ€Ð°Ð´Ð¸ UTF8>,
+\ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð² ÑÑ‚Ð¾Ð¼ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚Ðµ Ð±Ð¾Ð»ÐµÐµ Ð²ÑÐµÑÐ´Ð½Ñ‹Ð¹, Ñ‡ÐµÐ¼ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð² ICONV
 
 WINAPI: MultiByteToWideChar   KERNEL32.DLL
 WINAPI: WideCharToMultiByte   KERNEL32.DLL
@@ -23,16 +23,16 @@ VARIABLE COM-DEBUG \ TRUE COM-DEBUG !
   2DUP + 0 SWAP W!
 ;
 : UNICODE> ( addr u -- addr2 u2 )
-\ íà âõîäå - äëèíà â áàéòàõ, à WideCharToMultiByte õî÷åò ê-âî ñèìâîëîâ
+\ Ð½Ð° Ð²Ñ…Ð¾Ð´Ðµ - Ð´Ð»Ð¸Ð½Ð° Ð² Ð±Ð°Ð¹Ñ‚Ð°Ñ…, Ð° WideCharToMultiByte Ñ…Ð¾Ñ‡ÐµÑ‚ Ðº-Ð²Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²
   DUP 0= IF 2DROP CELL ALLOCATE THROW DUP UnicodeBuf ! 0 EXIT THEN
   2DUP 2>R
   2 /
-  1+ \ 0 â êîíöå òîæå ñ÷èòàåì, ò.ê. îí åñòü â ðåçóëüò.ñòðîêå
+  1+ \ 0 Ð² ÐºÐ¾Ð½Ñ†Ðµ Ñ‚Ð¾Ð¶Ðµ ÑÑ‡Ð¸Ñ‚Ð°ÐµÐ¼, Ñ‚.Ðº. Ð¾Ð½ ÐµÑÑ‚ÑŒ Ð² Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚.ÑÑ‚Ñ€Ð¾ÐºÐµ
   >R >R 0 0 R> R>
   DUP CELL+ ALLOCATE DROP UnicodeBuf ! \ 0 0 addr len
   SWAP >R                        \ 0 0 len
   DUP CELL+ UnicodeBuf @         \ 0 0 len len+4 mem
-  ROT ( ìîæíî ïîñòâèòü DROP -1 äëÿ àâòîðàñ÷åòà äëèíû) 
+  ROT ( Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ð¾ÑÑ‚Ð²Ð¸Ñ‚ÑŒ DROP -1 Ð´Ð»Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð°ÑÑ‡ÐµÑ‚Ð° Ð´Ð»Ð¸Ð½Ñ‹) 
   R>                             \ 0 0 len+4 mem len addr
   0 ( flags) 0 ( CP_ACP)
   WideCharToMultiByte
@@ -55,16 +55,16 @@ VARIABLE COM-DEBUG \ TRUE COM-DEBUG !
   2DUP + 0 SWAP W!
 ;
 : UNICODE>UTF8 ( addr u -- addr2 u2 )
-\ íà âõîäå - äëèíà â áàéòàõ, à WideCharToMultiByte õî÷åò ê-âî ñèìâîëîâ
+\ Ð½Ð° Ð²Ñ…Ð¾Ð´Ðµ - Ð´Ð»Ð¸Ð½Ð° Ð² Ð±Ð°Ð¹Ñ‚Ð°Ñ…, Ð° WideCharToMultiByte Ñ…Ð¾Ñ‡ÐµÑ‚ Ðº-Ð²Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²
   DUP 0= IF 2DROP CELL ALLOCATE THROW DUP UnicodeBuf ! 0 EXIT THEN
   2DUP 2>R
   2 /
-  1+ \ 0 â êîíöå òîæå ñ÷èòàåì, ò.ê. îí åñòü â ðåçóëüò.ñòðîêå
+  1+ \ 0 Ð² ÐºÐ¾Ð½Ñ†Ðµ Ñ‚Ð¾Ð¶Ðµ ÑÑ‡Ð¸Ñ‚Ð°ÐµÐ¼, Ñ‚.Ðº. Ð¾Ð½ ÐµÑÑ‚ÑŒ Ð² Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚.ÑÑ‚Ñ€Ð¾ÐºÐµ
   >R >R 0 0 R> R>
   2* DUP CELL+ ALLOCATE DROP UnicodeBuf ! \ 0 0 addr len
   SWAP >R                        \ 0 0 len
   DUP CELL+ UnicodeBuf @         \ 0 0 len len+4 mem
-  ROT 2 / ( ìîæíî ïîñòâèòü DROP -1 äëÿ àâòîðàñ÷åòà äëèíû) 
+  ROT 2 / ( Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ð¾ÑÑ‚Ð²Ð¸Ñ‚ÑŒ DROP -1 Ð´Ð»Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð°ÑÑ‡ÐµÑ‚Ð° Ð´Ð»Ð¸Ð½Ñ‹) 
   R>                             \ 0 0 len+4 mem len addr
   0 ( flags) CP_UTF8
   WideCharToMultiByte

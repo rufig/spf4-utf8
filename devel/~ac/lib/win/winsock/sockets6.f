@@ -1,8 +1,8 @@
 REQUIRE CreateSocket  ~ac/lib/win/winsock/sockets.f
 REQUIRE WinVer        ~ac/lib/win/winver.f 
 
-VARIABLE IPV6_MODE \ при FALSE будет работать в режиме IPv4, не пытаясь
-                   \ получать из DNS IPv6-адреса и пытаться и соединяться с ними
+VARIABLE IPV6_MODE \ РїСЂРё FALSE Р±СѓРґРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ РІ СЂРµР¶РёРјРµ IPv4, РЅРµ РїС‹С‚Р°СЏСЃСЊ
+                   \ РїРѕР»СѓС‡Р°С‚СЊ РёР· DNS IPv6-Р°РґСЂРµСЃР° Рё РїС‹С‚Р°С‚СЊСЃСЏ Рё СЃРѕРµРґРёРЅСЏС‚СЊСЃСЏ СЃ РЅРёРјРё
 
 23 CONSTANT AF_INET6     \ Internetwork Version 6
 
@@ -10,9 +10,9 @@ CREATE IPV6_ALL 0 , 0 , 0 , 0 ,
 
  0
  2 -- sin6_family
- 2 -- sin6_port \ в сетевом порядке байтов
+ 2 -- sin6_port \ РІ СЃРµС‚РµРІРѕРј РїРѕСЂСЏРґРєРµ Р±Р°Р№С‚РѕРІ
  4 -- sin6_flowinfo
-16 -- sin6_addr \ в случае IPv4 здесь "0..0 FF FF IPv4_addr"
+16 -- sin6_addr \ РІ СЃР»СѓС‡Р°Рµ IPv4 Р·РґРµСЃСЊ "0..0 FF FF IPv4_addr"
  4 -- sin6_scope_id
 CONSTANT /sockaddr_in6
 
@@ -21,8 +21,8 @@ USER IP6_BUFFS_HERE
 960 CONSTANT /IP6_BUFFS
 
 : Ip6Buf ( -- addr )
-  \ кольцевой буфер из 20 сегментов по 48 байт - достаточно для sockaddr_in6,
-  \ addrinfo или для строчного представления IPv6-адреса (46 симв. max)
+  \ РєРѕР»СЊС†РµРІРѕР№ Р±СѓС„РµСЂ РёР· 20 СЃРµРіРјРµРЅС‚РѕРІ РїРѕ 48 Р±Р°Р№С‚ - РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР»СЏ sockaddr_in6,
+  \ addrinfo РёР»Рё РґР»СЏ СЃС‚СЂРѕС‡РЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ IPv6-Р°РґСЂРµСЃР° (46 СЃРёРјРІ. max)
   IP6_BUFFS @ 0= IF /IP6_BUFFS ALLOCATE THROW DUP IP6_BUFFS ! 48 + IP6_BUFFS_HERE ! THEN
   IP6_BUFFS_HERE @ IP6_BUFFS @ - /IP6_BUFFS < 0= IF IP6_BUFFS @ 48 + IP6_BUFFS_HERE ! THEN
   IP6_BUFFS_HERE @ DUP 48 + IP6_BUFFS_HERE !
@@ -34,8 +34,8 @@ USER IP6_BUFFS_HERE
   /IP6_BUFFS U<
 ;
 
-\ В WinXP не поддерживаются "двухрежимные" сокеты, поэтому не будем
-\ пока использовать эту опцию.
+\ Р’ WinXP РЅРµ РїРѕРґРґРµСЂР¶РёРІР°СЋС‚СЃСЏ "РґРІСѓС…СЂРµР¶РёРјРЅС‹Рµ" СЃРѕРєРµС‚С‹, РїРѕСЌС‚РѕРјСѓ РЅРµ Р±СѓРґРµРј
+\ РїРѕРєР° РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЌС‚Сѓ РѕРїС†РёСЋ.
 \ 27 CONSTANT IPV6_V6ONLY
 \ CREATE NOT_IPV6_V6ONLY 0 ,
 \ 41 CONSTANT IPPROTO_IPV6
@@ -99,7 +99,7 @@ USER FE_IfIndex6
   IF WSAGetLastError ELSE 0 THEN
 ;
 : BindSocketInterface ( port ip s -- ior )
-  OVER 0= IF BindSocketInterface EXIT THEN \ "все_интерфейсы" в IPv4
+  OVER 0= IF BindSocketInterface EXIT THEN \ "РІСЃРµ_РёРЅС‚РµСЂС„РµР№СЃС‹" РІ IPv4
   OVER IsIPv6
   IF SWAP IP6_BUFFS @ + SWAP BindSocketInterface6
   ELSE BindSocketInterface THEN
@@ -157,13 +157,13 @@ WINAPI: WSAAddressToStringA WS2_32.DLL
 : GetHostIP ( addr u -- IP ior )
   WinVer 50 = IF GetHostIP EXIT THEN
   v>IDN
-  DUP 0= IF NIP 11004 EXIT THEN \ иначе пустой хост S" " дает 0 0
+  DUP 0= IF NIP 11004 EXIT THEN \ РёРЅР°С‡Рµ РїСѓСЃС‚РѕР№ С…РѕСЃС‚ S" " РґР°РµС‚ 0 0
 \  OVER inet_addr DUP -1 <> IF NIP NIP 0 EXIT ELSE DROP THEN
 
   DROP
   Ip6Buf DUP >R
-  IPV6_MODE @ IF 0 ( любой IP)
-              ELSE Ip6Buf DUP ai_family AF_INET SWAP ! ( только IPv4)
+  IPV6_MODE @ IF 0 ( Р»СЋР±РѕР№ IP)
+              ELSE Ip6Buf DUP ai_family AF_INET SWAP ! ( С‚РѕР»СЊРєРѕ IPv4)
               THEN
   ROT 0 SWAP getaddrinfo DUP 0=
   IF
@@ -209,14 +209,14 @@ USER _ch_s6
 USER _ch_lerr
 
 : ConnectHost ( addr u port -- sock ior )
-\ Подключиться к хосту addr u на порт port
-\ с автоматическим перебором всех IP хоста.
-\ Если коннект не удался, то ior - код ошибки (на последнем хосте из списка)
-\ и socks=0.
-\ Если удался, то sock - новый соединенный сокет, ior=0.
+\ РџРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє С…РѕСЃС‚Сѓ addr u РЅР° РїРѕСЂС‚ port
+\ СЃ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёРј РїРµСЂРµР±РѕСЂРѕРј РІСЃРµС… IP С…РѕСЃС‚Р°.
+\ Р•СЃР»Рё РєРѕРЅРЅРµРєС‚ РЅРµ СѓРґР°Р»СЃСЏ, С‚Рѕ ior - РєРѕРґ РѕС€РёР±РєРё (РЅР° РїРѕСЃР»РµРґРЅРµРј С…РѕСЃС‚Рµ РёР· СЃРїРёСЃРєР°)
+\ Рё socks=0.
+\ Р•СЃР»Рё СѓРґР°Р»СЃСЏ, С‚Рѕ sock - РЅРѕРІС‹Р№ СЃРѕРµРґРёРЅРµРЅРЅС‹Р№ СЃРѕРєРµС‚, ior=0.
 
   IPV6_MODE @ 0= IF ConnectHost EXIT THEN
-  WinVer 50 = IF ConnectHost EXIT THEN \ в win2000 нет getaddrinfo
+  WinVer 50 = IF ConnectHost EXIT THEN \ РІ win2000 РЅРµС‚ getaddrinfo
 
   uLastCH_IP 0! _ch_port 0! _ch_s4 0! _ch_s6 0! _ch_lerr 0!
 

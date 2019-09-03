@@ -53,10 +53,10 @@ EXPORT
   msg .trail @ STRFREE
   msg FREE THROW ;   
 
-\ âûäåëèòü íèê èç IRC êîíòàêòà
+\ Ð²Ñ‹Ð´ÐµÐ»Ð¸Ñ‚ÑŒ Ð½Ð¸Ðº Ð¸Ð· IRC ÐºÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð°
 : ClientName>Nick ( a u -- a1 u1 ) LAMBDA{ [CHAR] ! PARSE } EVALUATE-WITH ;
 
-\ îïðåäåëèòü îòïðàâèòåëÿ ñîîáùåíèÿ
+\ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÐµÐ»Ñ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ
 : irc-msg-sender ( msg -- a u ) :prefix ClientName>Nick ;
 : irc-msg-text ( msg -- a u ) :trail ;
 : irc-msg-cmd ( nsg -- a u ) :cmd ;
@@ -64,9 +64,9 @@ EXPORT
 : irc-action? ( a u -- a u ? ) 
    RE" \x01ACTION\s(.*)\x01" re_match? IF 1 get-group TRUE ELSE 0 get-group FALSE THEN ;
 
-\ ïîëó÷èòü êîíòåêñò îáùåíèÿ
-\ åñëè ñîîáùåíèå áûëî íàïðàâëåíî â êàíàë - âåðíóòü èìÿ êàíàëà
-\ åñëè æå ñîîùåíèå áûëî íàïðàâëåíî ëè÷íî íàì - âåðíóòü èìÿ îòïðàâèòåëÿ
+\ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ
+\ ÐµÑÐ»Ð¸ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð±Ñ‹Ð»Ð¾ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾ Ð² ÐºÐ°Ð½Ð°Ð» - Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð¸Ð¼Ñ ÐºÐ°Ð½Ð°Ð»Ð°
+\ ÐµÑÐ»Ð¸ Ð¶Ðµ ÑÐ¾Ð¾Ñ‰ÐµÐ½Ð¸Ðµ Ð±Ñ‹Ð»Ð¾ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾ Ð»Ð¸Ñ‡Ð½Ð¾ Ð½Ð°Ð¼ - Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð¸Ð¼Ñ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÐµÐ»Ñ
 : irc-msg-target { msg -- a u }
    msg :params 1 MIN S" #" COMPARE 0= IF
     msg :params
@@ -97,7 +97,7 @@ msg FREE-IRC-MSG
 msg irc-msg-sender S" somebody" TEST-ARRAY
 msg irc-msg-cmd S" JOIN" TEST-ARRAY
 msg FREE-IRC-MSG
-(( S" :ChanServ!service@RusNet MODE #forth +o ÇâåðþãÀ" PARSE-IRC-MSG -> TRUE ))
+(( S" :ChanServ!service@RusNet MODE #forth +o Ð—Ð²ÐµÑ€ÑŽÐ³Ð" PARSE-IRC-MSG -> TRUE ))
 (( S" :irc.run.net PING" PARSE-IRC-MSG -> TRUE ))
 (( S" PING" PARSE-IRC-MSG -> TRUE ))
 (( S" PING :irc.run.net" PARSE-IRC-MSG -> TRUE ))

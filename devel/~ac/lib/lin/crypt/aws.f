@@ -1,4 +1,4 @@
-\ Ïğèìåğ ğàáîòû ñ Amazon AWS S3.
+\ ĞŸÑ€Ğ¸Ğ¼ĞµÑ€ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ñ‹ Ñ Amazon AWS S3.
 
 REQUIRE STR@        ~ac/lib/str5.f
 REQUIRE HMAC-SHA1   ~ac/lib/lin/crypt/gcrypt.f
@@ -14,18 +14,18 @@ REQUIRE POST-FILE   ~ac/lib/lin/curl/curlpost.f
   S" %a, %d %b %Y %H:%M:%S" DROP 30 uLocalTime strftime NIP NIP NIP NIP 
   uLocalTime SWAP
   RDROP
-  " {s} +0000" STR@ \ â ôîğìàòíîé ñòğîêå strftime íå ïğèíèìàåò
+  " {s} +0000" STR@ \ Ğ² Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ‚Ğ½Ğ¾Ğ¹ ÑÑ‚Ñ€Ğ¾ĞºĞµ strftime Ğ½Ğµ Ğ¿Ñ€Ğ¸Ğ½Ğ¸Ğ¼Ğ°ĞµÑ‚
 ;
 : CurrentTimeZ ( -- addr u )
   UnixTime UnixTimeZ
 ;
 : AwsPUT { va vu cta ctu na nu bucketa bucketu hosta hostu la lu pwa pwu \ da du s ma mu -- result }
-  \ va vu - çíà÷åíèå, êîòîğîå ğàçìåñòèòü â S3
+  \ va vu - Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ, ĞºĞ¾Ñ‚Ğ¾Ñ€Ğ¾Ğµ Ñ€Ğ°Ğ·Ğ¼ĞµÑÑ‚Ğ¸Ñ‚ÑŒ Ğ² S3
   \ cta ctu - content-type
-  \ na nu - èìÿ îáúåêòà (URL áåç õîñòà è êîğçèíû)
-  \ la lu - ëîãèí (AWS Access Key Id)
+  \ na nu - Ğ¸Ğ¼Ñ Ğ¾Ğ±ÑŠĞµĞºÑ‚Ğ° (URL Ğ±ĞµĞ· Ñ…Ğ¾ÑÑ‚Ğ° Ğ¸ ĞºĞ¾Ñ€Ğ·Ğ¸Ğ½Ñ‹)
+  \ la lu - Ğ»Ğ¾Ğ³Ğ¸Ğ½ (AWS Access Key Id)
   \ pwa pwu - AWS Secret Access Key
-  \ result - HTTP-êîä îòâåòà (200=ÎÊ)
+  \ result - HTTP-ĞºĞ¾Ğ´ Ğ¾Ñ‚Ğ²ĞµÑ‚Ğ° (200=ĞĞš)
 
   GCryptInit 0= IF 599 EXIT THEN
   na nu bucketa bucketu
@@ -46,12 +46,12 @@ Authorization: AWS {s}:{s}" STR@
 ;
 
 : AwsGET { ra ru na nu bucketa bucketu hosta hostu la lu pwa pwu \ da du s ma mu cta ctu -- va vu result }
-  \ va vu - ïîëó÷åííîå çíà÷åíèå
-  \ na nu - èìÿ îáúåêòà (URL áåç õîñòà è êîğçèíû è ïàğàìåòğîâ çàïğîñà)
-  \ ra ru - ïàğàìåòğû çàïğîñà, íàïğèìåğ "?prefix=TEST"
-  \ la lu - ëîãèí (AWS Access Key Id)
+  \ va vu - Ğ¿Ğ¾Ğ»ÑƒÑ‡ĞµĞ½Ğ½Ğ¾Ğµ Ğ·Ğ½Ğ°Ñ‡ĞµĞ½Ğ¸Ğµ
+  \ na nu - Ğ¸Ğ¼Ñ Ğ¾Ğ±ÑŠĞµĞºÑ‚Ğ° (URL Ğ±ĞµĞ· Ñ…Ğ¾ÑÑ‚Ğ° Ğ¸ ĞºĞ¾Ñ€Ğ·Ğ¸Ğ½Ñ‹ Ğ¸ Ğ¿Ğ°Ñ€Ğ°Ğ¼ĞµÑ‚Ñ€Ğ¾Ğ² Ğ·Ğ°Ğ¿Ñ€Ğ¾ÑĞ°)
+  \ ra ru - Ğ¿Ğ°Ñ€Ğ°Ğ¼ĞµÑ‚Ñ€Ñ‹ Ğ·Ğ°Ğ¿Ñ€Ğ¾ÑĞ°, Ğ½Ğ°Ğ¿Ñ€Ğ¸Ğ¼ĞµÑ€ "?prefix=TEST"
+  \ la lu - Ğ»Ğ¾Ğ³Ğ¸Ğ½ (AWS Access Key Id)
   \ pwa pwu - AWS Secret Access Key
-  \ result - HTTP-êîä îòâåòà (200=ÎÊ)
+  \ result - HTTP-ĞºĞ¾Ğ´ Ğ¾Ñ‚Ğ²ĞµÑ‚Ğ° (200=ĞĞš)
 
   GCryptInit 0= IF 599 EXIT THEN
   S" text/plain" -> ctu -> cta

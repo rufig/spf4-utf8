@@ -21,9 +21,9 @@ WINAPI: JetAddColumnA          ESENT.DLL
 
 : TEST { \ ins ses db tbl }
   S" spf4" DROP ^ ins JetCreateInstanceA THROW
-  ^ ins JetInit THROW \ это создает служебные edb-файлы, сходу занимающие 16Мб :)
+  ^ ins JetInit THROW \ СЌС‚Рѕ СЃРѕР·РґР°РµС‚ СЃР»СѓР¶РµР±РЅС‹Рµ edb-С„Р°Р№Р»С‹, СЃС…РѕРґСѓ Р·Р°РЅРёРјР°СЋС‰РёРµ 16РњР± :)
   0 0 ^ ses ins JetBeginSessionA THROW
-  0 ^ db 0 S" test_ese.edb" DROP ses JetCreateDatabaseA \ пустая БД - 1Мб
+  0 ^ db 0 S" test_ese.edb" DROP ses JetCreateDatabaseA \ РїСѓСЃС‚Р°СЏ Р‘Р” - 1РњР±
   DUP JET_errDatabaseDuplicate = 
   IF DROP
      0 S" test_ese.edb" DROP ses JetAttachDatabaseA THROW

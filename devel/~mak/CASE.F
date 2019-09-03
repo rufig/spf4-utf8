@@ -1,6 +1,6 @@
 
 
-VARIABLE   CSP    \ Указатель стека контроля
+VARIABLE   CSP    \ РЈРєР°Р·Р°С‚РµР»СЊ СЃС‚РµРєР° РєРѕРЅС‚СЂРѕР»СЏ
 
 : CASE 
   CSP @ SP@ CSP ! ; IMMEDIATE

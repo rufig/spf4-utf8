@@ -1,9 +1,9 @@
-( Исправление HTML через библиотеку TIDY
+( РСЃРїСЂР°РІР»РµРЅРёРµ HTML С‡РµСЂРµР· Р±РёР±Р»РёРѕС‚РµРєСѓ TIDY
   $Id$
 
-  Для компиляции нужна tidy.dll.
+  Р”Р»СЏ РєРѕРјРїРёР»СЏС†РёРё РЅСѓР¶РЅР° tidy.dll.
   http://dev.int64.org/tidy.html
-  Скомпилированная в PAS-режиме.
+  РЎРєРѕРјРїРёР»РёСЂРѕРІР°РЅРЅР°СЏ РІ PAS-СЂРµР¶РёРјРµ.
 )  
   
 WARNING @ WARNING 0!
@@ -40,7 +40,7 @@ OS_WINDOWS [IF]
   S" utf16le" DROP TidyInCharEncoding doc tidyOptSetValue DROP
   S" utf8" DROP TidyOutCharEncoding doc tidyOptSetValue DROP
   ^ errbuf doc tidySetErrorBuffer DROP
-\ Tidy не умеет работать с кириллицей, поэтому конвертируем в юникод.
+\ Tidy РЅРµ СѓРјРµРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ СЃ РєРёСЂРёР»Р»РёС†РµР№, РїРѕСЌС‚РѕРјСѓ РєРѕРЅРІРµСЂС‚РёСЂСѓРµРј РІ СЋРЅРёРєРѕРґ.
   addr u DelXmlDecl >UNICODE
   DUP -> ilen 2+ -> buf2 -> ibuf ^ ibuf doc tidyParseBuffer DROP
   doc tidyCleanAndRepair DROP
@@ -70,7 +70,7 @@ OS_WINDOWS [IF]
   S" utf16le" DROP TidyInCharEncoding doc tidyOptSetValue DROP
   S" utf8" DROP TidyOutCharEncoding doc tidyOptSetValue DROP
   ^ errbuf doc tidySetErrorBuffer DROP
-\ Tidy не умеет работать с кириллицей, поэтому конвертируем в юникод.
+\ Tidy РЅРµ СѓРјРµРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ СЃ РєРёСЂРёР»Р»РёС†РµР№, РїРѕСЌС‚РѕРјСѓ РєРѕРЅРІРµСЂС‚РёСЂСѓРµРј РІ СЋРЅРёРєРѕРґ.
   addr u DelXmlDecl
   DUP -> ilen 2+ -> buf2 -> ibuf ^ ibuf doc tidyParseBuffer DROP
   doc tidyCleanAndRepair DROP
@@ -91,8 +91,8 @@ OS_WINDOWS [IF]
 \  ^ buf tidyBufFree DROP
 ;
 
-\ S" <title>Foo</title><p>О рус!" TIDY_CYR_HTML TYPE
-\ S" <title>Foo</title><p>О рус!" S" test.xml" TIDY_CYR_HTML_SAVE
+\ S" <title>Foo</title><p>Рћ СЂСѓСЃ!" TIDY_CYR_HTML TYPE
+\ S" <title>Foo</title><p>Рћ СЂСѓСЃ!" S" test.xml" TIDY_CYR_HTML_SAVE
 \ S" test.xml" FILE S" test2.xml" TIDY_CYR_HTML_SAVE
 \ S" D:\ac\xml\antispamnews.html" FILE S" test3.xml" TIDY_CYR_HTML_SAVE
 \ S" D:\Eserv3\CommonPlugins\plugins\groups_e2\ru\docs.html" FILE S" test4.html" TIDY_CYR_HTML_SAVE
@@ -105,4 +105,4 @@ PREVIOUS
 PREVIOUS
 [THEN]
 
-\ ALSO tidy.dll DEFINITIONS : TEST ; \ должно вызвать 5 THROW
+\ ALSO tidy.dll DEFINITIONS : TEST ; \ РґРѕР»Р¶РЅРѕ РІС‹Р·РІР°С‚СЊ 5 THROW

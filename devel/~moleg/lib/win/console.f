@@ -1,6 +1,6 @@
 \ 08-12-2007 ~mOleg
-\ Сopyright [C] 2007 mOleg mininoleg@yahoo.com
-\ работа с консолью: page setxy getxy screen# ~chars
+\ РЎopyright [C] 2007 mOleg mininoleg@yahoo.com
+\ СЂР°Р±РѕС‚Р° СЃ РєРѕРЅСЃРѕР»СЊСЋ: page setxy getxy screen# ~chars
 
  REQUIRE ?DEFINED     devel\~moleg\lib\util\ifdef.f
  REQUIRE THIS         devel\~moleg\lib\util\useful.f
@@ -32,40 +32,40 @@ VOCABULARY Console
 
 CREATE buffer /buffer ALLOT
 
-\ извлечь содержимое поля coord
+\ РёР·РІР»РµС‡СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ РїРѕР»СЏ coord
 : xy@ ( addr --> x y ) DUP off_x W@ SWAP off_y W@ ;
 
 ALSO FORTH THIS
 
-\ получить текущее положение курсора
+\ РїРѕР»СѓС‡РёС‚СЊ С‚РµРєСѓС‰РµРµ РїРѕР»РѕР¶РµРЅРёРµ РєСѓСЂСЃРѕСЂР°
 : getxy ( --> x y )
         buffer H-STDOUT GetConsoleScreenBufferInfo DROP
         buffer Position xy@ ;
 
-\ установить курсор в указанную позицию
+\ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РєСѓСЂСЃРѕСЂ РІ СѓРєР°Р·Р°РЅРЅСѓСЋ РїРѕР·РёС†РёСЋ
 : setxy ( x y --> )
         16 LSHIFT OR H-STDOUT SetConsoleCursorPosition DROP ;
 
-\ получить размеры консоли
+\ РїРѕР»СѓС‡РёС‚СЊ СЂР°Р·РјРµСЂС‹ РєРѕРЅСЃРѕР»Рё
 : screen# ( --> x y )
           buffer H-STDOUT GetConsoleScreenBufferInfo DROP
           buffer Dimensions xy@ ;
 
-\ вывести # символо char начиная с текущей позиции
-\ позиция курсора не смещается.
+\ РІС‹РІРµСЃС‚Рё # СЃРёРјРІРѕР»Рѕ char РЅР°С‡РёРЅР°СЏ СЃ С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё
+\ РїРѕР·РёС†РёСЏ РєСѓСЂСЃРѕСЂР° РЅРµ СЃРјРµС‰Р°РµС‚СЃСЏ.
 : ~chars ( char # --> )
          SP@ getxy 16 LSHIFT OR 2SWAP SWAP H-STDOUT
          FillConsoleOutputCharacterA DROP ;
 
-\ очистить содержимое экрана
+\ РѕС‡РёСЃС‚РёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ СЌРєСЂР°РЅР°
 : page ( --> ) 0 0 setxy BL screen# * ~chars ;
 
-\ установить заглавие окна
+\ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·Р°РіР»Р°РІРёРµ РѕРєРЅР°
 : ~title ( asc # --> ) DROP SetConsoleTitleA DROP ;
 
 RECENT
 
-?DEFINED test{ \EOF -- тестовая секция ---------------------------------------
+?DEFINED test{ \EOF -- С‚РµСЃС‚РѕРІР°СЏ СЃРµРєС†РёСЏ ---------------------------------------
 
 test{ getxy * 0 < THROW
       screen# * getxy * < THROW

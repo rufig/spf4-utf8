@@ -4,7 +4,7 @@
 
   <xsl:include href="devel.basic.xsl"/>
 
-  <!-- Íàçâàíèÿ ñëóæåáíûõ ôàéëîâ -->
+  <!-- ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ñ ÑÐ»ÑƒÐ¶ÐµÐ±Ð½Ñ‹Ñ… Ñ„Ð°Ð¹Ð»Ð¾Ð² -->
   <xsl:param name="htmlhelp.chm" select="'devel.chm'"/>
   <xsl:param name="htmlhelp.hhp" select="'devel.hhp'"/>
   <xsl:param name="htmlhelp.hhc" select="'devel.hhc'"/>
@@ -12,20 +12,20 @@
 
   <xsl:param name="htmlhelp.hhc.binary" select="0"/>
 
-  <!-- Çíà÷êè ðàçäåëîâ â ïàíåëè ñîäåðæàíèÿ -->
+  <!-- Ð—Ð½Ð°Ñ‡ÐºÐ¸ Ñ€Ð°Ð·Ð´ÐµÐ»Ð¾Ð² Ð² Ð¿Ð°Ð½ÐµÐ»Ð¸ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ñ -->
   <xsl:param name="htmlhelp.hhc.folders.instead.books" select="0"/>
 
   <!--xsl:param name="htmlhelp.hhc.show.root" select="0"></xsl:param>
   <xsl:param name="htmlhelp.default.topic" select="'pr01.html'"/-->
 
-  <!-- Êàòàëîã äëÿ ñîõðàíåíèÿ html ôàéëîâ -->
+  <!-- ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³ Ð´Ð»Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ html Ñ„Ð°Ð¹Ð»Ð¾Ð² -->
   <xsl:param name="base.dir" select="'chm/'"></xsl:param>
 
   <xsl:param name="htmlhelp.hhc.section.depth" select="1"/>
 
   <xsl:param name="htmlhelp.chunk.first.sections" select="0"></xsl:param>
 
-  <!-- Ïèñàòü èíôó â index.hhk ÷òîáû ññûëêè èç èíäåêñà ïåðåõîäèëè íà ñîîòâåòñòâóþùåå ñëîâî -->
+  <!-- ÐŸÐ¸ÑÐ°Ñ‚ÑŒ Ð¸Ð½Ñ„Ñƒ Ð² index.hhk Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÑÑÑ‹Ð»ÐºÐ¸ Ð¸Ð· Ð¸Ð½Ð´ÐµÐºÑÐ° Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ð¸Ð»Ð¸ Ð½Ð° ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰ÐµÐµ ÑÐ»Ð¾Ð²Ð¾ -->
   <xsl:param name="htmlhelp.use.hhk" select="1"></xsl:param>
 
 </xsl:stylesheet>

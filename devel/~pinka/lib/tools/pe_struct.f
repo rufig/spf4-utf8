@@ -1,7 +1,7 @@
 
 REQUIRE STRUCT:  lib\ext\struct.f
 
-\ структура PE-HEADER
+\ СЃС‚СЂСѓРєС‚СѓСЂР° PE-HEADER
 
 STRUCT: PEHeader
  \ IMAGE_FILE_HEADER
@@ -80,12 +80,12 @@ STRUCT: PEHeader
  \ /IMAGE_OPTIONAL_HEADER
 ;STRUCT
 
-STRUCT: ImageSectionHeader \ aka элемент таблицы объектов (идет вслед за PE-header)
+STRUCT: ImageSectionHeader \ aka СЌР»РµРјРµРЅС‚ С‚Р°Р±Р»РёС†С‹ РѕР±СЉРµРєС‚РѕРІ (РёРґРµС‚ РІСЃР»РµРґ Р·Р° PE-header)
  8 -- Name                  \ CODE\0\0\0\0
- 4 -- Misc                  \ PhysicalAddress or VirtualSize - сколько памяти отводится объекту при загруке
- 4 -- VirtualAddress        \ относительный виртуальный адрес
- 4 -- SizeOfRawData         \ физический размер объекта в файле
- 4 -- PointerToRawData      \ смещение в exe-файле
+ 4 -- Misc                  \ PhysicalAddress or VirtualSize - СЃРєРѕР»СЊРєРѕ РїР°РјСЏС‚Рё РѕС‚РІРѕРґРёС‚СЃСЏ РѕР±СЉРµРєС‚Сѓ РїСЂРё Р·Р°РіСЂСѓРєРµ
+ 4 -- VirtualAddress        \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РІРёСЂС‚СѓР°Р»СЊРЅС‹Р№ Р°РґСЂРµСЃ
+ 4 -- SizeOfRawData         \ С„РёР·РёС‡РµСЃРєРёР№ СЂР°Р·РјРµСЂ РѕР±СЉРµРєС‚Р° РІ С„Р°Р№Р»Рµ
+ 4 -- PointerToRawData      \ СЃРјРµС‰РµРЅРёРµ РІ exe-С„Р°Р№Р»Рµ
  4 -- PointerToRelocations  \ pointer to relocations
  4 -- PointerToLinenumbers  \ pointer to line numbers
  2 -- NumberOfRelocations   \ number of relocations
@@ -93,7 +93,7 @@ STRUCT: ImageSectionHeader \ aka элемент таблицы объектов (идет вслед за PE-head
  4 -- Characteristics       \ 60000020h=readable excutable code (E0000060h=-"-+writeable data)
 ;STRUCT
 
-STRUCT: ImageImportDescriptor \ Структура записей в каталоге импорта
+STRUCT: ImageImportDescriptor \ РЎС‚СЂСѓРєС‚СѓСЂР° Р·Р°РїРёСЃРµР№ РІ РєР°С‚Р°Р»РѕРіРµ РёРјРїРѕСЂС‚Р°
  4 -- OriginalFirstThunk    \ RVA
  4 -- TimeDateStamp         \  0
  4 -- ForwarderChain        \ -1

@@ -57,7 +57,7 @@ WINAPI: gluOrtho2D        Glu32.DLL
 
 ALSO GL-FUNCS
 
-\EOF \ просмотр порядка вызова функций
+\EOF \ РїСЂРѕСЃРјРѕС‚СЂ РїРѕСЂСЏРґРєР° РІС‹Р·РѕРІР° С„СѓРЅРєС†РёР№
 
 REQUIRE enqueueNOTFOUND ~pinka/samples/2006/core/trans/nf-ext.f
 REQUIRE [WID] ~ygrek/lib/wid.f

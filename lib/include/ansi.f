@@ -6,7 +6,7 @@
 \ Newsgroups: fido7.su.forth
 \ Message-ID: <dtkera$r89$93914@www.fido-online.com>
 
-\ ASNI'фикация SP-FORTH'а
+\ ASNI'С„РёРєР°С†РёСЏ SP-FORTH'Р°
 
 BASE @ DECIMAL
 
@@ -32,7 +32,7 @@ WARNING @  0 WARNING !
 
 DECIMAL
 
-: ?DUP  ?DUP ;  \ ?DUP в SP-FORTH'е state-smart, а это не по стандарту
+: ?DUP  ?DUP ;  \ ?DUP РІ SP-FORTH'Рµ state-smart, Р° СЌС‚Рѕ РЅРµ РїРѕ СЃС‚Р°РЅРґР°СЂС‚Сѓ
 
 : CONVERT  ( ud1 c-addr1 -- ud2 c-addr2 )
     \ from gforth
@@ -41,7 +41,7 @@ DECIMAL
 
 VARIABLE SPAN  0 SPAN !
 : EXPECT  ( a u -- )
-    \ это лучше, чем ничего
+    \ СЌС‚Рѕ Р»СѓС‡С€Рµ, С‡РµРј РЅРёС‡РµРіРѕ
     ACCEPT SPAN !
 ;
 

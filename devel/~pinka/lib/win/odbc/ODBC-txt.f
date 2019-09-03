@@ -1,10 +1,10 @@
 \ 25.Feb.2004   ruv
 \ $Id$
-( слово ExecSQLTxt
-  - эмулирует DELETE через SELECT INTO и DROP TABLE
-  Необходимо, если используется Text File Driver
+( СЃР»РѕРІРѕ ExecSQLTxt
+  - СЌРјСѓР»РёСЂСѓРµС‚ DELETE С‡РµСЂРµР· SELECT INTO Рё DROP TABLE
+  РќРµРѕР±С…РѕРґРёРјРѕ, РµСЃР»Рё РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Text File Driver
   ---
-  В этом запросе DELETE слово FROM обязательно.
+  Р’ СЌС‚РѕРј Р·Р°РїСЂРѕСЃРµ DELETE СЃР»РѕРІРѕ FROM РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ.
 )
 
 REQUIRE COMPARE-U   ~ac\lib\string\compare-u.f 

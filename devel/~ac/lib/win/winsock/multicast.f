@@ -1,4 +1,4 @@
-\ Поддержка IP-multicast (начиная с Windows XP)
+\ РџРѕРґРґРµСЂР¶РєР° IP-multicast (РЅР°С‡РёРЅР°СЏ СЃ Windows XP)
 
 REQUIRE ReadFrom  ~ac/lib/win/winsock/sockname.f
 REQUIRE ForEachIP ~ac/lib/win/winsock/foreach_ip.f 
@@ -12,14 +12,14 @@ WINAPI: getsockopt      WSOCK32.DLL
 
 \ 5 CONSTANT IP_ADD_MEMBERSHIP
 \ 6 CONSTANT IP_DROP_MEMBERSHIP
-\ вот и верь после этого winsock.h, правильные значения в ws2ipdef
+\ РІРѕС‚ Рё РІРµСЂСЊ РїРѕСЃР»Рµ СЌС‚РѕРіРѕ winsock.h, РїСЂР°РІРёР»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РІ ws2ipdef
 
  9 CONSTANT IP_MULTICAST_IF
 12 CONSTANT IP_ADD_MEMBERSHIP
 13 CONSTANT IP_DROP_MEMBERSHIP
 
 : SocketAddMembership ( ip_if ip_mc s -- ior )
-\ интерфейс указывать обязательно!
+\ РёРЅС‚РµСЂС„РµР№СЃ СѓРєР°Р·С‹РІР°С‚СЊ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ!
   >R 8 ALLOCATE ?DUP IF NIP RDROP EXIT THEN
   >R
   R@ !
@@ -55,7 +55,7 @@ USER uMC_CNT
 : (CreateMcListener) ( ip -- ) \ throwable
 \ ." cml:" DUP NtoA TYPE SPACE
   uMC_IP @ uMC_SOCK @ SocketAddMembership ?DUP
-  IF \ ошибки 10022 здесь могут означать уже подключенный интерфейс (если несколько IP на интерфейсе)
+  IF \ РѕС€РёР±РєРё 10022 Р·РґРµСЃСЊ РјРѕРіСѓС‚ РѕР·РЅР°С‡Р°С‚СЊ СѓР¶Рµ РїРѕРґРєР»СЋС‡РµРЅРЅС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ (РµСЃР»Рё РЅРµСЃРєРѕР»СЊРєРѕ IP РЅР° РёРЅС‚РµСЂС„РµР№СЃРµ)
     DROP \ . CR
   ELSE uMC_CNT 1+!
     \ ." ok" CR
@@ -64,24 +64,24 @@ USER uMC_CNT
 : CreateMcListener ( mc_ip_a mc_ip_u mc_port -- socket cnt ) \ throwable
   >R GetHostIP THROW R>
   CreateMcSocket THROW >R
-  0 R@ BindSocketInterface THROW \ слушаем указанный порт на всех интерфейсах
-  ( mc_ip ) uMC_IP ! \ итератор ForEachIP держит на стеке список IP, поэтому передать в xt доп.параметры нельзя
+  0 R@ BindSocketInterface THROW \ СЃР»СѓС€Р°РµРј СѓРєР°Р·Р°РЅРЅС‹Р№ РїРѕСЂС‚ РЅР° РІСЃРµС… РёРЅС‚РµСЂС„РµР№СЃР°С…
+  ( mc_ip ) uMC_IP ! \ РёС‚РµСЂР°С‚РѕСЂ ForEachIP РґРµСЂР¶РёС‚ РЅР° СЃС‚РµРєРµ СЃРїРёСЃРѕРє IP, РїРѕСЌС‚РѕРјСѓ РїРµСЂРµРґР°С‚СЊ РІ xt РґРѕРї.РїР°СЂР°РјРµС‚СЂС‹ РЅРµР»СЊР·СЏ
   R@ uMC_SOCK !
   uMC_CNT 0!
-  ['] (CreateMcListener) ForEachIP THROW \ подключаем сокет к указанной multicast-группе на всех интерфейсах
+  ['] (CreateMcListener) ForEachIP THROW \ РїРѕРґРєР»СЋС‡Р°РµРј СЃРѕРєРµС‚ Рє СѓРєР°Р·Р°РЅРЅРѕР№ multicast-РіСЂСѓРїРїРµ РЅР° РІСЃРµС… РёРЅС‚РµСЂС„РµР№СЃР°С…
   R> uMC_CNT @
 ;
-: SsdpGroup S" 239.255.255.250" ; \ multicast-группа для Simple Service Discovery Protocol и WS-Discovery
+: SsdpGroup S" 239.255.255.250" ; \ multicast-РіСЂСѓРїРїР° РґР»СЏ Simple Service Discovery Protocol Рё WS-Discovery
 SsdpGroup GetHostIP THROW CONSTANT SsdpGroupIP4
 1900 CONSTANT SsdpPort
-3702 CONSTANT WsdpPort \ См. http://specs.xmlsoap.org/ws/2005/04/discovery/ws-discovery.pdf , Vista использует
+3702 CONSTANT WsdpPort \ РЎРј. http://specs.xmlsoap.org/ws/2005/04/discovery/ws-discovery.pdf , Vista РёСЃРїРѕР»СЊР·СѓРµС‚
 
 \EOF
 
-\ Пример подключения к SSDP-извещениям.
-\ Никаких запросов не посылается, просто прослушивается фон.
-\ Если UPnP-устройств (маршрутизаторов, медиасерверов, медиаплейеров,...)
-\ в сети нет, то ждать придется долго ;)
+\ РџСЂРёРјРµСЂ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє SSDP-РёР·РІРµС‰РµРЅРёСЏРј.
+\ РќРёРєР°РєРёС… Р·Р°РїСЂРѕСЃРѕРІ РЅРµ РїРѕСЃС‹Р»Р°РµС‚СЃСЏ, РїСЂРѕСЃС‚Рѕ РїСЂРѕСЃР»СѓС€РёРІР°РµС‚СЃСЏ С„РѕРЅ.
+\ Р•СЃР»Рё UPnP-СѓСЃС‚СЂРѕР№СЃС‚РІ (РјР°СЂС€СЂСѓС‚РёР·Р°С‚РѕСЂРѕРІ, РјРµРґРёР°СЃРµСЂРІРµСЂРѕРІ, РјРµРґРёР°РїР»РµР№РµСЂРѕРІ,...)
+\ РІ СЃРµС‚Рё РЅРµС‚, С‚Рѕ Р¶РґР°С‚СЊ РїСЂРёРґРµС‚СЃСЏ РґРѕР»РіРѕ ;)
 
 REQUIRE STR@         ~ac/lib/str5.f
 
@@ -90,7 +90,7 @@ REQUIRE STR@         ~ac/lib/str5.f
 
   SsdpGroup SsdpPort CreateMcListener ?DUP
   IF
-   ." Поключен к " . ." интерфейсам. Слушаю..." CR
+   ." РџРѕРєР»СЋС‡РµРЅ Рє " . ." РёРЅС‚РµСЂС„РµР№СЃР°Рј. РЎР»СѓС€Р°СЋ..." CR
    >R
    BEGIN
      PAD 1500 R@ ReadFrom ." A:"
@@ -98,6 +98,6 @@ REQUIRE STR@         ~ac/lib/str5.f
      PAD SWAP TYPE CR ." -----------------------------" CR
    AGAIN
    RDROP
-  ELSE ." Не могу подключиться к multicast-группе" CR THEN
+  ELSE ." РќРµ РјРѕРіСѓ РїРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє multicast-РіСЂСѓРїРїРµ" CR THEN
 ;
 MC-DUMP

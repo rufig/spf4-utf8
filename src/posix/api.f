@@ -1,15 +1,15 @@
 \ $Id$
 \ 
-\ Интерфейс с внешними функциями
-\ Вызовы и обратные вызовы
-\ Ю. Жиловец, 5.05.07
+\ РРЅС‚РµСЂС„РµР№СЃ СЃ РІРЅРµС€РЅРёРјРё С„СѓРЅРєС†РёСЏРјРё
+\ Р’С‹Р·РѕРІС‹ Рё РѕР±СЂР°С‚РЅС‹Рµ РІС‹Р·РѕРІС‹
+\ Р®. Р–РёР»РѕРІРµС†, 5.05.07
 
 CODE C-CALL ( x1 ... xn n adr -- res)
-\ Порядок экспортируемых аргументов обратный, по сравнению
-\ со словами API-CALL (spf_win_api.f) и CAPI-CALL (~af/lib/c/capi.f).
-\ Порядок обращается при их переносе на R-стек.
+\ РџРѕСЂСЏРґРѕРє СЌРєСЃРїРѕСЂС‚РёСЂСѓРµРјС‹С… Р°СЂРіСѓРјРµРЅС‚РѕРІ РѕР±СЂР°С‚РЅС‹Р№, РїРѕ СЃСЂР°РІРЅРµРЅРёСЋ
+\ СЃРѕ СЃР»РѕРІР°РјРё API-CALL (spf_win_api.f) Рё CAPI-CALL (~af/lib/c/capi.f).
+\ РџРѕСЂСЏРґРѕРє РѕР±СЂР°С‰Р°РµС‚СЃСЏ РїСЂРё РёС… РїРµСЂРµРЅРѕСЃРµ РЅР° R-СЃС‚РµРє.
 
-     MOV EBX, [EBP]      \ число аргументов
+     MOV EBX, [EBP]      \ С‡РёСЃР»Рѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ
      MOV ESI, # 4
 @@1: OR EBX, EBX
      JZ @@2
@@ -37,7 +37,7 @@ END-CODE
 
 0 VALUE ST-RES
 
-\ обработчики ненахождения ф-ии/либы
+\ РѕР±СЂР°Р±РѕС‚С‡РёРєРё РЅРµРЅР°С…РѕР¶РґРµРЅРёСЏ С„-РёРё/Р»РёР±С‹
 VECT PROC-ERROR
 VECT LIB-ERROR
 
@@ -46,7 +46,7 @@ CODE _WNDPROC-CODE
      SUB  ESP, # 3968
 A;   HERE 4 - ' ST-RES 9 + EXECUTE
      PUSH EBP
-     MOV  EBP, 4 [EAX] ( адрес возврата из CALLBACK )
+     MOV  EBP, 4 [EAX] ( Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° РёР· CALLBACK )
      PUSH EBP
      MOV  EBP, EAX
      ADD  EBP, # 12
@@ -55,7 +55,7 @@ A;   HERE 4 - ' ST-RES 9 + EXECUTE
      PUSH EDX
      PUSH ESI
      PUSH EDI
-     MOV  EAX, [EAX] ( адрес адреса форт-процедуры )
+     MOV  EAX, [EAX] ( Р°РґСЂРµСЃ Р°РґСЂРµСЃР° С„РѕСЂС‚-РїСЂРѕС†РµРґСѓСЂС‹ )
      MOV  EBX, [EAX]
      MOV  EAX, -4 [EBP]
      CALL EBX
@@ -68,8 +68,8 @@ A;   HERE 4 - ' ST-RES 9 + EXECUTE
      POP  EBX
      MOV  EAX, ESP
      MOV  ESP, EBP
-     MOV  EBP, 4 [EAX] \ сохраненный EBP
-     MOV  EAX, [EAX]   \ адрес возврата из CALLBACK
+     MOV  EBP, 4 [EAX] \ СЃРѕС…СЂР°РЅРµРЅРЅС‹Р№ EBP
+     MOV  EAX, [EAX]   \ Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° РёР· CALLBACK
      XCHG EAX, [ESP]
      RET
 END-CODE
@@ -77,8 +77,8 @@ END-CODE
 
 ' _WNDPROC-CODE TO WNDPROC-CODE
 
-VECT FORTH-INSTANCE>  \ эти процедуры будут выполняться на входе
-VECT <FORTH-INSTANCE  \ и выходе в WNDPROC-процедуры (инициализация TlsIndex)
+VECT FORTH-INSTANCE>  \ СЌС‚Рё РїСЂРѕС†РµРґСѓСЂС‹ Р±СѓРґСѓС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РЅР° РІС…РѕРґРµ
+VECT <FORTH-INSTANCE  \ Рё РІС‹С…РѕРґРµ РІ WNDPROC-РїСЂРѕС†РµРґСѓСЂС‹ (РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ TlsIndex)
 
 ' FORTH-INSTANCE> TO TC-FORTH-INSTANCE>
 ' <FORTH-INSTANCE TO TC-<FORTH-INSTANCE

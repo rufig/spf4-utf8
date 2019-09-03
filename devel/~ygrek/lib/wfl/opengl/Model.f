@@ -1,7 +1,7 @@
 \ $Id$
 \
-\ Класс модели (набор треугольников и нормалей)
-\ Загрузка из форматов PLY2 и OFF (Maya Text Export ?)
+\ РљР»Р°СЃСЃ РјРѕРґРµР»Рё (РЅР°Р±РѕСЂ С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ Рё РЅРѕСЂРјР°Р»РµР№)
+\ Р—Р°РіСЂСѓР·РєР° РёР· С„РѕСЂРјР°С‚РѕРІ PLY2 Рё OFF (Maya Text Export ?)
 
 REQUIRE WL-MODULES ~day/lib/includemodule.f
 
@@ -24,7 +24,7 @@ NEEDS ~day/hype3/locals.f
     1   0 <EXP>     >R
     1   0 <SIGN>    >R
     4   0 <DIGITS>  >R
-    NIP 0= \ После всего этого должен быть конец строки
+    NIP 0= \ РџРѕСЃР»Рµ РІСЃРµРіРѕ СЌС‚РѕРіРѕ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕРЅРµС† СЃС‚СЂРѕРєРё
     2R> 2R> 2R> R> AND
     AND AND AND AND AND
     AND
@@ -147,7 +147,7 @@ init:
    norm :resize1
    norm :last :: CPoint4f.:set ;
 
-\ Посчитать нормаль к точке p0 для треугольника p0-pa-pb
+\ РџРѕСЃС‡РёС‚Р°С‚СЊ РЅРѕСЂРјР°Р»СЊ Рє С‚РѕС‡РєРµ p0 РґР»СЏ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° p0-pa-pb
 ( [pb-p0]x[pa-p0] )
 : (tri-norm) ( p0 pa pb -- F: x y z )
    || CPoint4f p0 CPoint4f pa CPoint4f pb ||
@@ -231,7 +231,7 @@ dispose: ;
 CModelLoader SUBCLASS CModelLoaderOFF
 
 : (parse-tri-vertex-and-normal) ( "vi//ni " -- vi ni )
-  [CHAR] / PARSE NUMBER ENSURE 1- \ индексы в файле начинаются с единицы - у нас с нуля
+  [CHAR] / PARSE NUMBER ENSURE 1- \ РёРЅРґРµРєСЃС‹ РІ С„Р°Р№Р»Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃ РµРґРёРЅРёС†С‹ - Сѓ РЅР°СЃ СЃ РЅСѓР»СЏ
   [CHAR] / PSKIP
   BL PARSE NUMBER ENSURE 1- ;
 

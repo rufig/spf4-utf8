@@ -1,5 +1,5 @@
 \ http://fforum.winglion.ru//viewtopic.php?p=4398#4398
-\ Усложнённый на ровном месте вариант tools/nsis/spf_cvs.f
+\ РЈСЃР»РѕР¶РЅС‘РЅРЅС‹Р№ РЅР° СЂРѕРІРЅРѕРј РјРµСЃС‚Рµ РІР°СЂРёР°РЅС‚ tools/nsis/spf_cvs.f
 
 REQUIRE CONT ~profit/lib/bac4th.f
 REQUIRE COMPARE-U ~ac/lib/string/compare-u.f
@@ -48,11 +48,11 @@ byChar split DUP STR@ [CHAR] / byChar split DUP STR@ *> <*> S" \\" <* }concat DU
 " *Makefile"                <*>
 " {SPF-PATH}/docs/*.md.css" <* STR@ CONT ;
 
-: FILTER ( addr u <--> addr u ) PRO \ на входе: строка-имя файла, в зависимости от условий делает или не делает успех
+: FILTER ( addr u <--> addr u ) PRO \ РЅР° РІС…РѕРґРµ: СЃС‚СЂРѕРєР°-РёРјСЏ С„Р°Р№Р»Р°, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СѓСЃР»РѕРІРёР№ РґРµР»Р°РµС‚ РёР»Рё РЅРµ РґРµР»Р°РµС‚ СѓСЃРїРµС…
 CUT:
  *> EXCEPTIONS 2OVER 2SWAP COMPARE-U 0= ONTRUE
 <*> DIRS 2OVER 2SWAP COMPARE-U 0= ONTRUE  NOT: EXCLUDE 2OVER 2OVER COMPARE-U 0= ONTRUE -NOT <* -CUT CONT ;
-: FILTER ( addr u <--> addr u ) PRO \ на входе: строка-имя файла, в зависимости от условий делает или не делает успех
+: FILTER ( addr u <--> addr u ) PRO \ РЅР° РІС…РѕРґРµ: СЃС‚СЂРѕРєР°-РёРјСЏ С„Р°Р№Р»Р°, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СѓСЃР»РѕРІРёР№ РґРµР»Р°РµС‚ РёР»Рё РЅРµ РґРµР»Р°РµС‚ СѓСЃРїРµС…
 CR 2DUP TYPE
 CUT: EXCEPTIONS 2OVER 2SWAP COMPARE-U 0= ONTRUE -CUT DEPTH ." =" . ." ="  CONT ." !" ;
 

@@ -4,7 +4,7 @@ REQUIRE REPLACE-WORD lib/ext/patch.f
 
 MODULE: add-after-compile
 
-: CALL, ( ADDR -- ) \ скомпилировать инструкцию ADDR CALL
+: CALL, ( ADDR -- ) \ СЃРєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РёРЅСЃС‚СЂСѓРєС†РёСЋ ADDR CALL
   ?SET SetOP 0xE8 C,
   DUP IF DP @ CELL+ - THEN ,    DP @ TO LAST-HERE
 ;

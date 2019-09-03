@@ -21,25 +21,25 @@ USER MemwSize
 : (MEMW) ( addr u mb1 -- mb2 )
   
   1 MemwStep !
-  2 MemwStep ! DUP 0= IF NIP NIP S" zero_mb" MEMW_ERR EXIT THEN \ не инициализировано
-  3 MemwStep ! DUP 0x10000 < IF DUP . NIP NIP S" too_low_mb" MEMW_ERR EXIT THEN \ подозрительное значение указателя
-  4 MemwStep ! OVER 0< IF NIP NIP S" negative_u" MEMW_ERR EXIT THEN \ подозрительное значение размера
+  2 MemwStep ! DUP 0= IF NIP NIP S" zero_mb" MEMW_ERR EXIT THEN \ РЅРµ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРѕ
+  3 MemwStep ! DUP 0x10000 < IF DUP . NIP NIP S" too_low_mb" MEMW_ERR EXIT THEN \ РїРѕРґРѕР·СЂРёС‚РµР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ
+  4 MemwStep ! OVER 0< IF NIP NIP S" negative_u" MEMW_ERR EXIT THEN \ РїРѕРґРѕР·СЂРёС‚РµР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СЂР°Р·РјРµСЂР°
 
-  5 MemwStep ! OVER /MBL > IF OVER ." memw_size=" . NIP NIP S" will_overflow" MEMW_ERR EXIT THEN \ записываемая порция больше допустимого
+  5 MemwStep ! OVER /MBL > IF OVER ." memw_size=" . NIP NIP S" will_overflow" MEMW_ERR EXIT THEN \ Р·Р°РїРёСЃС‹РІР°РµРјР°СЏ РїРѕСЂС†РёСЏ Р±РѕР»СЊС€Рµ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ
   >R
   DUP R@ mb.Offs @ + /MB <
   IF 6 MemwStep ! R@ mb.Addr R@ mb.Offs @ + SWAP DUP R@ mb.Offs +! CMOVE R> EXIT THEN
 
-  \ сюда доходим, если в текущий буфер не влазит, но записываемый размер меньше грануляции буферов, 
-  \ т.е. надо выделить новый, и в него поместится,
-  \ либо отправить текущий и использовать его заново
+  \ СЃСЋРґР° РґРѕС…РѕРґРёРј, РµСЃР»Рё РІ С‚РµРєСѓС‰РёР№ Р±СѓС„РµСЂ РЅРµ РІР»Р°Р·РёС‚, РЅРѕ Р·Р°РїРёСЃС‹РІР°РµРјС‹Р№ СЂР°Р·РјРµСЂ РјРµРЅСЊС€Рµ РіСЂР°РЅСѓР»СЏС†РёРё Р±СѓС„РµСЂРѕРІ, 
+  \ С‚.Рµ. РЅР°РґРѕ РІС‹РґРµР»РёС‚СЊ РЅРѕРІС‹Р№, Рё РІ РЅРµРіРѕ РїРѕРјРµСЃС‚РёС‚СЃСЏ,
+  \ Р»РёР±Рѕ РѕС‚РїСЂР°РІРёС‚СЊ С‚РµРєСѓС‰РёР№ Рё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РµРіРѕ Р·Р°РЅРѕРІРѕ
 
   7 MemwStep !
-  R@ vMbFlush \ если возвращает 0, то можно использовать тот же буфер, иначе надо выделить новый и добавить в цепочку:
+  R@ vMbFlush \ РµСЃР»Рё РІРѕР·РІСЂР°С‰Р°РµС‚ 0, С‚Рѕ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚РѕС‚ Р¶Рµ Р±СѓС„РµСЂ, РёРЅР°С‡Рµ РЅР°РґРѕ РІС‹РґРµР»РёС‚СЊ РЅРѕРІС‹Р№ Рё РґРѕР±Р°РІРёС‚СЊ РІ С†РµРїРѕС‡РєСѓ:
   IF
     8 MemwStep !
     S" will_alloc" MEMW_ERR
-    \ добавляемся в очередь на реальный flush
+    \ РґРѕР±Р°РІР»СЏРµРјСЃСЏ РІ РѕС‡РµСЂРµРґСЊ РЅР° СЂРµР°Р»СЊРЅС‹Р№ flush
     /MB ALLOCATE THROW DUP R> mb.Next ! >R
   THEN
 
@@ -62,14 +62,14 @@ USER MemwSize
 ;
 : MEMW ( addr u mb1 -- mb2 )
   BEGIN
-    OVER /MBL > \ записываемая порция больше допустимого? надо дробить на части
+    OVER /MBL > \ Р·Р°РїРёСЃС‹РІР°РµРјР°СЏ РїРѕСЂС†РёСЏ Р±РѕР»СЊС€Рµ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ? РЅР°РґРѕ РґСЂРѕР±РёС‚СЊ РЅР° С‡Р°СЃС‚Рё
   WHILE
     SWAP /MBL - >R ( addr mb1 )
     OVER /MBL ( addr mb1 addr u1 )
     ROT MEMW1 ( addr mb2 )
     SWAP /MBL + SWAP R> SWAP ( addr u2 mb2 )
   REPEAT
-  MEMW1 \ запись последней части
+  MEMW1 \ Р·Р°РїРёСЃСЊ РїРѕСЃР»РµРґРЅРµР№ С‡Р°СЃС‚Рё
 ;
 USER _MB
 : MEMC, ( byte mb1 -- mb2 )
@@ -85,7 +85,7 @@ USER _MB
   ROT MEMW
 ;
 USER MB
-USER MB1 \ вход в список буферов
+USER MB1 \ РІС…РѕРґ РІ СЃРїРёСЃРѕРє Р±СѓС„РµСЂРѕРІ
 
 : mW ( addr u -- )
   MB @ MEMW MB !

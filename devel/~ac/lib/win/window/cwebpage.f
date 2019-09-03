@@ -1,10 +1,10 @@
-\ Альтернативный ATLному способу встраивания браузера (см. browser.f).
-\ Использует (вместо atl.dll) маленькую cwebpage.dll by Jeff Glatt
-\ См. http://www.codeproject.com/KB/COM/cwebpage.aspx
+\ РђР»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹Р№ ATLРЅРѕРјСѓ СЃРїРѕСЃРѕР±Сѓ РІСЃС‚СЂР°РёРІР°РЅРёСЏ Р±СЂР°СѓР·РµСЂР° (СЃРј. browser.f).
+\ РСЃРїРѕР»СЊР·СѓРµС‚ (РІРјРµСЃС‚Рѕ atl.dll) РјР°Р»РµРЅСЊРєСѓСЋ cwebpage.dll by Jeff Glatt
+\ РЎРј. http://www.codeproject.com/KB/COM/cwebpage.aspx
 
-\ TAB (который у Джефа тоже НЕ работает, как почти у всех :)
-\ здесь укрощен тем же способом, что в browser.f, но в другом месте -
-\ в стиле Rene Nyffenegger'а.
+\ TAB (РєРѕС‚РѕСЂС‹Р№ Сѓ Р”Р¶РµС„Р° С‚РѕР¶Рµ РќР• СЂР°Р±РѕС‚Р°РµС‚, РєР°Рє РїРѕС‡С‚Рё Сѓ РІСЃРµС… :)
+\ Р·РґРµСЃСЊ СѓРєСЂРѕС‰РµРЅ С‚РµРј Р¶Рµ СЃРїРѕСЃРѕР±РѕРј, С‡С‚Рѕ РІ browser.f, РЅРѕ РІ РґСЂСѓРіРѕРј РјРµСЃС‚Рµ -
+\ РІ СЃС‚РёР»Рµ Rene Nyffenegger'Р°.
 
 REQUIRE Window    ~ac/lib/win/window/window.f
 REQUIRE {         lib/ext/locals.f
@@ -17,8 +17,8 @@ WINAPI: GetClientRect   USER32.DLL
 WINAPI: FillRect        USER32.DLL
 WINAPI: PostQuitMessage USER32.DLL
 
-\ функция для превращения системных цветов в RGB может использоваться
-\ для автоматической генерации "системной" CSS для браузера
+\ С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРµРІСЂР°С‰РµРЅРёСЏ СЃРёСЃС‚РµРјРЅС‹С… С†РІРµС‚РѕРІ РІ RGB РјРѕР¶РµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ
+\ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕР№ РіРµРЅРµСЂР°С†РёРё "СЃРёСЃС‚РµРјРЅРѕР№" CSS РґР»СЏ Р±СЂР°СѓР·РµСЂР°
 WINAPI: GetSysColor    USER32.DLL
 
 WINAPI: EmbedBrowserObject   cwebpage.dll
@@ -28,12 +28,12 @@ WINAPI: DisplayHTMLStr       cwebpage.dll
 WINAPI: DisplayHTMLPage      cwebpage.dll
 WINAPI: GetWebPtrs           cwebpage.dll
 
-\ ========== код из 96/wnd/dlgtempl.txt (в 98м стал частью Eserv/2) ======
+\ ========== РєРѕРґ РёР· 96/wnd/dlgtempl.txt (РІ 98Рј СЃС‚Р°Р» С‡Р°СЃС‚СЊСЋ Eserv/2) ======
 
 VARIABLE DlgMessageList
 
 : M: ( "WM_..." -- )
-  \ определить обработчик сообщения
+  \ РѕРїСЂРµРґРµР»РёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёСЏ
   HERE
   DlgMessageList @ ,
   ' EXECUTE ,
@@ -47,7 +47,7 @@ VARIABLE DlgMessageList
   R> BASE !
 ;
 : FindMessageToken ( uint=msg -- xt TRUE | FALSE )
-  \ найти обработчик сообщения
+  \ РЅР°Р№С‚Рё РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёСЏ
   { msg }
   DlgMessageList @
   BEGIN
@@ -59,19 +59,19 @@ VARIABLE DlgMessageList
 ;
 
 : (DlgWndProc)     ( lparam wparam uint hwnd -- flag )
-  \ функция окна диалога
+  \ С„СѓРЅРєС†РёСЏ РѕРєРЅР° РґРёР°Р»РѕРіР°
 
 \  vServerIdleWait
 
   || lparam wparam uint hwnd t sp || (( lparam wparam uint hwnd ))
 \  LogMsg @ IF uint . THEN
 \  SP@ S0 !
-\  hwnd TO Диалог
+\  hwnd TO Р”РёР°Р»РѕРі
 \  hwnd TO TI-WND
 \  DLG-TLS @ TlsIndex!
   uint FindMessageToken
   IF -> t lparam wparam hwnd SP@ -> sp t ['] EXECUTE CATCH DROP sp SP@ - -8 = IF 1 THEN
-     ( если обработчик не оставил элементов на стеке, кладем за него "обработано" )
+     ( РµСЃР»Рё РѕР±СЂР°Р±РѕС‚С‡РёРє РЅРµ РѕСЃС‚Р°РІРёР» СЌР»РµРјРµРЅС‚РѕРІ РЅР° СЃС‚РµРєРµ, РєР»Р°РґРµРј Р·Р° РЅРµРіРѕ "РѕР±СЂР°Р±РѕС‚Р°РЅРѕ" )
   ELSE
      lparam wparam uint hwnd DefWindowProcA
   THEN
@@ -79,20 +79,20 @@ VARIABLE DlgMessageList
 ;
 \ =========================================================== /96
 
-\ цвета
+\ С†РІРµС‚Р°
 #define COLOR_WINDOW            5
 #define COLOR_APPWORKSPACE      12
 #define COLOR_HIGHLIGHT         13
 
-\ от Window
-#define WM_GETMINMAXINFO                0x0024 \ первое сообщение окна
-#define WM_NCCREATE                     0x0081 \ второе, должно вернуть true, lparam=wcl
-#define WM_NCCALCSIZE                   0x0083 \ далее в порядке поступления
+\ РѕС‚ Window
+#define WM_GETMINMAXINFO                0x0024 \ РїРµСЂРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕРєРЅР°
+#define WM_NCCREATE                     0x0081 \ РІС‚РѕСЂРѕРµ, РґРѕР»Р¶РЅРѕ РІРµСЂРЅСѓС‚СЊ true, lparam=wcl
+#define WM_NCCALCSIZE                   0x0083 \ РґР°Р»РµРµ РІ РїРѕСЂСЏРґРєРµ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ
 #define WM_CREATE                       0x0001
 
-\ от WindowShow
+\ РѕС‚ WindowShow
 #define WM_SHOWWINDOW                   0x0018
-#define WM_WINDOWPOSCHANGING            0x0046 \ два раза, одинаковые
+#define WM_WINDOWPOSCHANGING            0x0046 \ РґРІР° СЂР°Р·Р°, РѕРґРёРЅР°РєРѕРІС‹Рµ
 #define WM_ACTIVATEAPP                  0x001C
 #define WM_NCACTIVATE                   0x0086
 #define WM_ACTIVATE                     0x0006
@@ -102,18 +102,18 @@ VARIABLE DlgMessageList
 #define WM_ERASEBKGND                   0x0014
 #define WM_WINDOWPOSCHANGED             0x0047
 #define WM_GETTEXT                      0x000D
-#define WM_GETICON                      0x007F \ три раза - 2,0,1
+#define WM_GETICON                      0x007F \ С‚СЂРё СЂР°Р·Р° - 2,0,1
 #define WM_SIZE                         0x0005
 #define WM_MOVE                         0x0003
 
-\ в MessageLoop (только новые)
+\ РІ MessageLoop (С‚РѕР»СЊРєРѕ РЅРѕРІС‹Рµ)
 \ MSG:0 0 31F 100ACA =0 ???
 \ #define WM_KEYDOWN                      0x0100
 #define WM_KEYUP                        0x0101
 #define WM_CHAR                         0x0102
 #define WM_PAINT                        0x000F
 
-\ движение мыши
+\ РґРІРёР¶РµРЅРёРµ РјС‹С€Рё
 #define WM_SETCURSOR                    0x0020
 #define WM_NCHITTEST                    0x0084
 #define WM_MOUSEMOVE                    0x0200
@@ -122,14 +122,14 @@ VARIABLE DlgMessageList
 #define WM_IME_NOTIFY                   0x0282
 #define WM_KILLFOCUS                    0x0008
 
-\ закрытие окна
+\ Р·Р°РєСЂС‹С‚РёРµ РѕРєРЅР°
 #define WM_CAPTURECHANGED               0x0215
 #define WM_SYSCOMMAND                   0x0112
-\ уже есть #define WM_CLOSE                        0x0010
+\ СѓР¶Рµ РµСЃС‚СЊ #define WM_CLOSE                        0x0010
 \ 0x0090 ?
 #define WM_DESTROY                      0x0002
 
-\ ---------- обработчики ---------
+\ ---------- РѕР±СЂР°Р±РѕС‚С‡РёРєРё ---------
 \ M: WM_NCCREATE ( lparam wparam hwnd -- true )
 \    DROP 2DROP TRUE
 \ ;
@@ -153,12 +153,12 @@ M: WM_DESTROY ( lparam wparam hwnd -- true )
    TRUE
 ;
 M: WM_KEYDOWN { lparam wparam hwnd \ iWebBrowser2 iHTMLDocument2 oleip msg -- true }
-   wparam VK_TAB = \ обрабатываем только tab/shift+tab, т.к. только они не работают,
-                   \ а остальные сработают вторично, если пустим их в ::TranslateAccelerator
+   wparam VK_TAB = \ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј С‚РѕР»СЊРєРѕ tab/shift+tab, С‚.Рє. С‚РѕР»СЊРєРѕ РѕРЅРё РЅРµ СЂР°Р±РѕС‚Р°СЋС‚,
+                   \ Р° РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃСЂР°Р±РѕС‚Р°СЋС‚ РІС‚РѕСЂРёС‡РЅРѕ, РµСЃР»Рё РїСѓСЃС‚РёРј РёС… РІ ::TranslateAccelerator
    IF
-   \ Утверждается, что этот хак с TAB'ом описан здесь:
+   \ РЈС‚РІРµСЂР¶РґР°РµС‚СЃСЏ, С‡С‚Рѕ СЌС‚РѕС‚ С…Р°Рє СЃ TAB'РѕРј РѕРїРёСЃР°РЅ Р·РґРµСЃСЊ:
    \ http://www.microsoft.com/0499/faq/faq0499.asp
-   \ но этот URL MS удалили, приходится списывать у других :)
+   \ РЅРѕ СЌС‚РѕС‚ URL MS СѓРґР°Р»РёР»Рё, РїСЂРёС…РѕРґРёС‚СЃСЏ СЃРїРёСЃС‹РІР°С‚СЊ Сѓ РґСЂСѓРіРёС… :)
    ^ iHTMLDocument2 ^ iWebBrowser2 hwnd GetWebPtrs 0= iWebBrowser2 0 <> AND
    IF \ ."  interf:" iHTMLDocument2 . iWebBrowser2 .
       ^ oleip IID_IOleInPlaceActiveObject iWebBrowser2 ::QueryInterface 0= oleip 0 <> AND
@@ -215,18 +215,18 @@ CONSTANT /WCL
   WHILE
     DEBUG @ IF mem CELL+ @ WM_SYSTIMER <> IF mem 16 DUMP CR THEN THEN
     0 -> bro
-    mem @ wnd <> IF mem @ -> bro THEN \ если получатель сообшения не главное окно, то это встроенный браузер
+    mem @ wnd <> IF mem @ -> bro THEN \ РµСЃР»Рё РїРѕР»СѓС‡Р°С‚РµР»СЊ СЃРѕРѕР±С€РµРЅРёСЏ РЅРµ РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ, С‚Рѕ СЌС‚Рѕ РІСЃС‚СЂРѕРµРЅРЅС‹Р№ Р±СЂР°СѓР·РµСЂ
 
     mem haccel mem @ TranslateAcceleratorA 0=
     IF
       mem CELL+ @ 0x100 0x108 WITHIN bro AND
-      IF \ из браузера скопировать родителю, иначе не cработает хак
-         \ c акселераторами браузера, см. хак в обработчике WM_KEYDOWN
+      IF \ РёР· Р±СЂР°СѓР·РµСЂР° СЃРєРѕРїРёСЂРѕРІР°С‚СЊ СЂРѕРґРёС‚РµР»СЋ, РёРЅР°С‡Рµ РЅРµ cСЂР°Р±РѕС‚Р°РµС‚ С…Р°Рє
+         \ c Р°РєСЃРµР»РµСЂР°С‚РѕСЂР°РјРё Р±СЂР°СѓР·РµСЂР°, СЃРј. С…Р°Рє РІ РѕР±СЂР°Р±РѕС‚С‡РёРєРµ WM_KEYDOWN
          mem 3 CELLS + @ mem 2 CELLS + @ mem 1 CELLS + @
-         wnd PostMessageA DROP \ SendMessage не помогает
+         wnd PostMessageA DROP \ SendMessage РЅРµ РїРѕРјРѕРіР°РµС‚
       THEN
 
-      mem TranslateMessage DROP \ превращение keydown в char
+      mem TranslateMessage DROP \ РїСЂРµРІСЂР°С‰РµРЅРёРµ keydown РІ char
       mem DispatchMessageA DROP
     ELSE ( ." accel ") THEN
   REPEAT

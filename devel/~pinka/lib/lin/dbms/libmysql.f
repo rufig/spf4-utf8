@@ -1,5 +1,5 @@
 \ Mar.2008
-\ надо будет уйти от "WINAPI:"
+\ РЅР°РґРѕ Р±СѓРґРµС‚ СѓР№С‚Рё РѕС‚ "WINAPI:"
 
 REQUIRE CREATE-CS ~pinka/lib/multi/critical.f
 

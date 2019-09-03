@@ -108,14 +108,14 @@ USER-CREATE SUBST-SRC 2 CELLS USER-ALLOT
         THEN
      ELSE
          SP@ R@ ( sp) SWAP - DUP 2 CELLS =
-         IF \ âñòàâëÿåì ñòðîêó
+         IF \ Ð²ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ ÑÑ‚Ñ€Ð¾ÐºÑƒ
             DROP RDROP SUBST+
          ELSE
          1 CELLS =
-         IF \ âñòàâëÿåì ÷èñëî
+         IF \ Ð²ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ Ñ‡Ð¸ÑÐ»Ð¾
              RDROP DUP >R ABS S>D <# #S R> SIGN #>
              SUBST+
-         ELSE \ îøèáêà ëèáî áîëüøå ëèáî ìåíüøå â ñòåêå äàííûõ
+         ELSE \ Ð¾ÑˆÐ¸Ð±ÐºÐ° Ð»Ð¸Ð±Ð¾ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð»Ð¸Ð±Ð¾ Ð¼ÐµÐ½ÑŒÑˆÐµ Ð² ÑÑ‚ÐµÐºÐµ Ð´Ð°Ð½Ð½Ñ‹Ñ…
              R> SP!
              SUBST-ERROR
              SUBST-SRC 2@ TYPE CR
@@ -158,14 +158,14 @@ USER-CREATE SUBST-SRC 2 CELLS USER-ALLOT
            SUBST-ERROR 2DUP TYPE CR
         ELSE
             SP@ R@ ( sp) SWAP - DUP 2 CELLS =
-            IF \ âñòàâëÿåì ñòðîêó
+            IF \ Ð²ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ ÑÑ‚Ñ€Ð¾ÐºÑƒ
                DROP RDROP SUBST+
             ELSE
             1 CELLS =
-            IF \ âñòàâëÿåì ÷èñëî
+            IF \ Ð²ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ Ñ‡Ð¸ÑÐ»Ð¾
                 RDROP DUP >R ABS S>D <# #S R> SIGN #>
                 SUBST+
-            ELSE \ îøèáêà ëèáî áîëüøå ëèáî ìåíüøå â ñòåêå äàííûõ
+            ELSE \ Ð¾ÑˆÐ¸Ð±ÐºÐ° Ð»Ð¸Ð±Ð¾ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð»Ð¸Ð±Ð¾ Ð¼ÐµÐ½ÑŒÑˆÐµ Ð² ÑÑ‚ÐµÐºÐµ Ð´Ð°Ð½Ð½Ñ‹Ñ…
                 R> SP!
                 SUBST-ERROR
                 SUBST-SRC 2@ TYPE CR

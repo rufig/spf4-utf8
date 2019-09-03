@@ -7,7 +7,7 @@ AUS TFarDialogItem ThisItem
 
 : send-to-dialog ( param2 param1 Msg hDlg -- result) FARAPI. SendDlgMessage @ API-CALL ;
 : send ( param2 param1 msg win -- result) -hdlg@ send-to-dialog ;
-\ ���뫠�� ᮮ�饭�� ������� ᮤ�ঠ饬� ������� � param1=id �⮣� ����஫�
+\ Посылаем сообщение диалогу содержащему элемент с param1=id этого контрола
 : ctlsend ( param2 ctl message -- ) SWAP DUP -id@ -ROT -parent@ send ;
 
 \ : send0 ( win message -- n/ )  SWAP 0 0 2SWAP send ;

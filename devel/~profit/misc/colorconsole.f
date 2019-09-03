@@ -17,7 +17,7 @@ WINAPI: FillConsoleOutputAttribute KERNEL32
 
 : setColorsInRow ( x y n color -- )
 2>R xy ( xy R: n color )
-RP@ \ ïîëó÷èëè àäðåñ ÿ÷åéêè â ñòåêå âîçâðàòîâ, òàê êàê ôóíêöèè íóæåí àäðåñ ïåðåìåííîé êóäà îíà áóäåò ïèñàòü
+RP@ \ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¸ Ð°Ð´Ñ€ÐµÑ ÑÑ‡ÐµÐ¹ÐºÐ¸ Ð² ÑÑ‚ÐµÐºÐµ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¾Ð², Ñ‚Ð°Ðº ÐºÐ°Ðº Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð½ÑƒÐ¶ÐµÐ½ Ð°Ð´Ñ€ÐµÑ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ ÐºÑƒÐ´Ð° Ð¾Ð½Ð° Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ð¸ÑÐ°Ñ‚ÑŒ
 SWAP 2R@ ( addr xy n color )
 H-STDOUT FillConsoleOutputAttribute DROP RDROP RDROP ;
 
@@ -28,7 +28,7 @@ ROT TUCK + SWAP DO 2DUP I SWAP c setColorsInRow LOOP 2DROP ;
 
 10 0 7 3 FOREGROUND_RED BACKGROUND_GREEN OR setColorsForBlock
 
-\ Íà "áèñ", åù¸ áîëåå ïðîñòîé âàðèàíò
+\ ÐÐ° "Ð±Ð¸Ñ", ÐµÑ‰Ñ‘ Ð±Ð¾Ð»ÐµÐµ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ð¹ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚
 
 VARIABLE XY
 XY 0!
@@ -40,7 +40,7 @@ XY 0!
 VARIABLE color
 : setColor ( c -- ) color ! ;
 
-: setColorsInRow ( n -- )  \ íè÷åãî ñåáå ñîêðàùåíèå?..
+: setColorsInRow ( n -- )  \ Ð½Ð¸Ñ‡ÐµÐ³Ð¾ ÑÐµÐ±Ðµ ÑÐ¾ÐºÑ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ?..
 0 >R RP@ SWAP XY @ SWAP color @ H-STDOUT FillConsoleOutputAttribute DROP RDROP ;
 
 BACKGROUND_RED FOREGROUND_GREEN OR setColor
@@ -48,7 +48,7 @@ BACKGROUND_RED FOREGROUND_GREEN OR setColor
 3 setColorsInRow
 
 : setColorsForBlock ( w h -- )
-XY @ >R \ ñîõðàíÿåì çíà÷åíèå êóðñîðà, ò.ê. îíî ìåíÿåòñÿ
+XY @ >R \ ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ ÐºÑƒÑ€ÑÐ¾Ñ€Ð°, Ñ‚.Ðº. Ð¾Ð½Ð¾ Ð¼ÐµÐ½ÑÐµÑ‚ÑÑ
 0 DO DUP setColorsInRow moveDown LOOP DROP
 R> XY ! ;
 

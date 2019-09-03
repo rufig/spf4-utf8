@@ -1,6 +1,6 @@
-( 06.09.1999 Черезов А. )
+( 06.09.1999 Р§РµСЂРµР·РѕРІ Рђ. )
 
-( Работа с Popup Menu )
+( Р Р°Р±РѕС‚Р° СЃ Popup Menu )
 
 REQUIRE Window  ~ac/lib/win/window/window.f
 
@@ -37,16 +37,16 @@ BASE !
   BEGIN
     DUP
   WHILE
-\    DUP NAME>        \ пришлось заменить на i, т.к. Win98 не сохраняет полный id :(
+\    DUP NAME>        \ РїСЂРёС€Р»РѕСЃСЊ Р·Р°РјРµРЅРёС‚СЊ РЅР° i, С‚.Рє. Win98 РЅРµ СЃРѕС…СЂР°РЅСЏРµС‚ РїРѕР»РЅС‹Р№ id :(
     i 1+ DUP -> i
     OVER COUNT 2DUP + DUP -> a C@ -> c  0 a C!
     ROT h AppendMenu
     c a C!
     CDR
   REPEAT DROP
-  x y wnd h TrackMenuWnd -> i \ WinNT позволяет передавать xt в качестве id
-  i                           \ а Win98 'обрезает' большие числа, пришлось
-  IF                          \ вводить эту глупость с нумерацией
+  x y wnd h TrackMenuWnd -> i \ WinNT РїРѕР·РІРѕР»СЏРµС‚ РїРµСЂРµРґР°РІР°С‚СЊ xt РІ РєР°С‡РµСЃС‚РІРµ id
+  i                           \ Р° Win98 'РѕР±СЂРµР·Р°РµС‚' Р±РѕР»СЊС€РёРµ С‡РёСЃР»Р°, РїСЂРёС€Р»РѕСЃСЊ
+  IF                          \ РІРІРѕРґРёС‚СЊ СЌС‚Сѓ РіР»СѓРїРѕСЃС‚СЊ СЃ РЅСѓРјРµСЂР°С†РёРµР№
     wid @
     BEGIN
       i 1- DUP -> i
@@ -57,7 +57,7 @@ BASE !
   h DestroyMenu DROP
 ;
 
-\ Примеры:
+\ РџСЂРёРјРµСЂС‹:
 
 \ VARIABLE M
 \ CreatePopupMenu M !

@@ -7,7 +7,7 @@
 [THEN]
 
 USE-OPTIMIZER 0= [IF]
-  \ Если сюда попали, то тут уже идет трансляция в целевую систему
+  \ Р•СЃР»Рё СЃСЋРґР° РїРѕРїР°Р»Рё, С‚Рѕ С‚СѓС‚ СѓР¶Рµ РёРґРµС‚ С‚СЂР°РЅСЃР»СЏС†РёСЏ РІ С†РµР»РµРІСѓСЋ СЃРёСЃС‚РµРјСѓ
   .( Warning: Can't hide macroopt words since USE-OPTIMIZER is 0 ) CR
 [ELSE]
 
@@ -16,7 +16,7 @@ USE-OPTIMIZER 0= [IF]
 BASE @ DECIMAL  \ since macroopt.f use HEX (!!!)
 
 
-\ Нижеследующий код транслируется один раз, и только в инструментальную систему!
+\ РќРёР¶РµСЃР»РµРґСѓСЋС‰РёР№ РєРѕРґ С‚СЂР°РЅСЃР»РёСЂСѓРµС‚СЃСЏ РѕРґРёРЅ СЂР°Р·, Рё С‚РѕР»СЊРєРѕ РІ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Р»СЊРЅСѓСЋ СЃРёСЃС‚РµРјСѓ!
 
 
 [UNDEFINED] \EOF [IF]
@@ -30,23 +30,23 @@ GET-CURRENT ALSO MACROOPT-HIDING-SUPPORT DEFINITIONS
 \ **********
 \ common API
 
-: S", ( addr u -- ) \ компиляция строки, заданной addr u, в виде строки со счетчиком
+: S", ( addr u -- ) \ РєРѕРјРїРёР»СЏС†РёСЏ СЃС‚СЂРѕРєРё, Р·Р°РґР°РЅРЅРѕР№ addr u, РІ РІРёРґРµ СЃС‚СЂРѕРєРё СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј
   DUP C, DP @ SWAP DUP ALLOT CMOVE
 ;
-  \ -- не определено на этапе подключения macroopt.f
+  \ -- РЅРµ РѕРїСЂРµРґРµР»РµРЅРѕ РЅР° СЌС‚Р°РїРµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ macroopt.f
 
 
 \ src: ~pinka/spf/compiler/native-wordlist.f
 : RELATE-WORDLIST ( xt  c-addr u  wid -- )
-\ поставить имя (заданное c-addr u) в отношение к xt в списке wid
+\ РїРѕСЃС‚Р°РІРёС‚СЊ РёРјСЏ (Р·Р°РґР°РЅРЅРѕРµ c-addr u) РІ РѕС‚РЅРѕС€РµРЅРёРµ Рє xt РІ СЃРїРёСЃРєРµ wid
   >R
   \ HERE LAST-CFA !
-  ROT , \ ссылка на xt
+  ROT , \ СЃСЃС‹Р»РєР° РЅР° xt
   0 C,                  \ flags
   \ +SWORD was here
-  HERE LAST ! S",       \ само имя
-  \ (формат SPF4)
-  LAST @  R> DUP @ , !  \ связали в список wid
+  HERE LAST ! S",       \ СЃР°РјРѕ РёРјСЏ
+  \ (С„РѕСЂРјР°С‚ SPF4)
+  LAST @  R> DUP @ , !  \ СЃРІСЏР·Р°Р»Рё РІ СЃРїРёСЃРѕРє wid
 ;
 
 \ src: ~pinka/spf/compiler/native-context.f
@@ -92,9 +92,9 @@ VARIABLE BORDER
 DUP SET-CURRENT
 
 : INIT-MACROOPT-HIDING ( -- )
-  CONTEXT @ FORTH-WORDLIST = IF \ в инструментальной системе
+  CONTEXT @ FORTH-WORDLIST = IF \ РІ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Р»СЊРЅРѕР№ СЃРёСЃС‚РµРјРµ
     FORTH-WORDLIST  TO TC-FORTH-WL
-  ELSE \ в целевой системе
+  ELSE \ РІ С†РµР»РµРІРѕР№ СЃРёСЃС‚РµРјРµ
     ALSO S" TC-WL" & EXECUTE \ it is vocabulary in real!
       CONTEXT @     TO TC-FORTH-WL
     PREVIOUS
@@ -172,8 +172,8 @@ BASE !
 
   INIT-MACROOPT-HIDING  \ (!!!)
 
-  WORDLIST VALUE MACROOPT-WL  \ после INIT, т.к должно попасть в перемещаемую цепочку слов
-  \ Создаем тут, т.к. этот список не создается в macroopt.f при трансляции в инструментальную систему,
-  \ см. macroopt.f # [DEFINED] [TTO]
+  WORDLIST VALUE MACROOPT-WL  \ РїРѕСЃР»Рµ INIT, С‚.Рє РґРѕР»Р¶РЅРѕ РїРѕРїР°СЃС‚СЊ РІ РїРµСЂРµРјРµС‰Р°РµРјСѓСЋ С†РµРїРѕС‡РєСѓ СЃР»РѕРІ
+  \ РЎРѕР·РґР°РµРј С‚СѓС‚, С‚.Рє. СЌС‚РѕС‚ СЃРїРёСЃРѕРє РЅРµ СЃРѕР·РґР°РµС‚СЃСЏ РІ macroopt.f РїСЂРё С‚СЂР°РЅСЃР»СЏС†РёРё РІ РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°Р»СЊРЅСѓСЋ СЃРёСЃС‚РµРјСѓ,
+  \ СЃРј. macroopt.f # [DEFINED] [TTO]
 
 [THEN] \ for skipping if USE-OPTIMIZER is 0

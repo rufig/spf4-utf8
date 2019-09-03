@@ -284,7 +284,7 @@ W: WM_CHAR wparam @ 13 = IF self :b1Click THEN ;
 
 ;CLASS
 
-\ ‘­ ç «  ¨¬ï ¯à¨«®¦¥­¨ï, § â¥¬ ¢¥àá¨ï
+\ Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð¸Ð¼Ñ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ, Ð·Ð°Ñ‚ÐµÐ¼ Ð²ÐµÑ€ÑÐ¸Ñ
 : ShowAbout ( c-addr1 u1 c-addr2-u2 hwnd)
    >R AboutWindow :new >R
    R@ :setStrings

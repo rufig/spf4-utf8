@@ -1,5 +1,5 @@
 \ $Id$
-\ погода от http://www.gismeteo.ru
+\ РїРѕРіРѕРґР° РѕС‚ http://www.gismeteo.ru
 
 REQUIRE HEAP-ID ~pinka/spf/mem.f
 REQUIRE XSLT ~ac/lib/lin/xml/xslt.f
@@ -59,9 +59,9 @@ MODULE: bot_plugin_gismeteo
 : find-city-code ( a u -- a u ) >STR DUP STR@ UPPERCASE DUP STR@ h HASH@ ROT STRFREE ;
 
 %[
-  %[ " мск" % " Москва" % ]% %
-  %[ " спб" % " Санкт-Петербург" % ]% %
-  %[ " нск" % " Новосибирск" % ]% %
+  %[ " РјСЃРє" % " РњРѕСЃРєРІР°" % ]% %
+  %[ " СЃРїР±" % " РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі" % ]% %
+  %[ " РЅСЃРє" % " РќРѕРІРѕСЃРёР±РёСЂСЃРє" % ]% %
 ]% VALUE short-cities
 
 {{ list
@@ -81,7 +81,7 @@ MODULE: bot_plugin_gismeteo
    R@ STR@ S" plugins/frc3.xsl" XSLT ( a u )
    R> STRFREE
    FINE-HEAD
-   l list::cdar STR@ l list::cddar STR@ " {s}: погода в городе {s} {s}" STR-SAY
+   l list::cdar STR@ l list::cddar STR@ " {s}: РїРѕРіРѕРґР° РІ РіРѕСЂРѕРґРµ {s} {s}" STR-SAY
    S" BUG: MEMORY LEAK - NEED XSLT FREE" log::debug
    l ['] STRFREE list::free-with
   AGAIN
@@ -92,7 +92,7 @@ EXPORT
 \ -----------------------------------------------------------------------
 
 MODULE: BOT-COMMANDS-HELP
-: !weather S" Usage: !weather <город> - погода от http://www.gismeteo.ru/" S-REPLY ;
+: !weather S" Usage: !weather <РіРѕСЂРѕРґ> - РїРѕРіРѕРґР° РѕС‚ http://www.gismeteo.ru/" S-REPLY ;
 ;MODULE
 
 MODULE: BOT-COMMANDS
@@ -102,13 +102,13 @@ MODULE: BOT-COMMANDS
     DUP 0= IF 2DROP BOT-COMMANDS-HELP::!weather EXIT THEN
     short-city
     2DUP find-city-code
-    DUP 0= IF 2DROP 2DROP current-msg-sender " {s}: Нет такого города!" STR-REPLY EXIT THEN
+    DUP 0= IF 2DROP 2DROP current-msg-sender " {s}: РќРµС‚ С‚Р°РєРѕРіРѕ РіРѕСЂРѕРґР°!" STR-REPLY EXIT THEN
     %[ >STR % >STR % current-msg-sender >STR % ]% q_ mtq::put
     TRUE TO ?check
 ;
-: !п !weather ;
+: !Рї !weather ;
 : !w !weather ;
-: !погода !weather ;
+: !РїРѕРіРѕРґР° !weather ;
 
 ;MODULE
 
@@ -125,6 +125,6 @@ $Revision$ " -- gismeteo weather plugin {s} loaded." STYPE CR
 ALSO bot_plugin_gismeteo
 ALSO BOT-COMMANDS
 AT-CONNECT
-S" хельсинки" find-city-code CR TYPE
-!weather киев
-S" нск" short-city find-city-code CR TYPE
+S" С…РµР»СЊСЃРёРЅРєРё" find-city-code CR TYPE
+!weather РєРёРµРІ
+S" РЅСЃРє" short-city find-city-code CR TYPE

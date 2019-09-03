@@ -1,7 +1,7 @@
-\ Ю. Жиловец, http://www.forth.org.ru/~yz
-\ Загружаемые таблицы констант 1.04
+\ ╨о. ╨Ц╨╕╨╗╨╛╨▓╨╡╤Ж, http://www.forth.org.ru/~yz
+\ ╨Ч╨░╨│╤А╤Г╨╢╨░╨╡╨╝╤Л╨╡ ╤В╨░╨▒╨╗╨╕╤Ж╤Л ╨║╨╛╨╜╤Б╤В╨░╨╜╤В 1.04
 
-\ LOAD-CONSTANT   Исправлено Михаилом Максимовым
+\ LOAD-CONSTANT   ╨Ш╤Б╨┐╤А╨░╨▓╨╗╨╡╨╜╨╛ ╨Ь╨╕╤Е╨░╨╕╨╗╨╛╨╝ ╨Ь╨░╨║╤Б╨╕╨╝╨╛╨▓╤Л╨╝
 
 REQUIRE LOAD-NAMETABLE ~yz/lib/nametable.f
 
@@ -17,12 +17,12 @@ EXPORT
   DUP IF @ TRUE THEN ;
 
 : FIND-CONSTANT2 ( name-a name-n -- n)
-  FIND-CONSTANT 0= ABORT" Константа не найдена" ;
+  FIND-CONSTANT 0= ABORT" ╨Ъ╨╛╨╜╤Б╤В╨░╨╜╤В╨░ ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜╨░" ;
 
 : W: ( ->bl)  BL PARSE FIND-CONSTANT2
   STATE @ IF [COMPILE] LITERAL THEN ; IMMEDIATE
 
-: (* \ должно помещаться на одной строке
+: (* \ ╨┤╨╛╨╗╨╢╨╜╨╛ ╨┐╨╛╨╝╨╡╤Й╨░╤В╤М╤Б╤П ╨╜╨░ ╨╛╨┤╨╜╨╛╨╣ ╤Б╤В╤А╨╛╨║╨╡
   0
   BEGIN
     BL PARSE 2DUP S" *)" COMPARE

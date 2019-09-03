@@ -11,14 +11,14 @@ REQUIRE CreatePng ~ac/lib/lin/zlib/png.f
   ['] SaveSamplePNG CapOpen -> cap
   cap 0= IF EXIT THEN
   cap CapStart
-  2000 PAUSE \ колбэки получают кадры
+  2000 PAUSE \ РєРѕР»Р±СЌРєРё РїРѕР»СѓС‡Р°СЋС‚ РєР°РґСЂС‹
   cap CapStop
   cap CapClose
 
   CR CR
   ['] SaveSamplePNG CapOpen -> cap
   cap CapStart
-  2000 PAUSE \ колбэки получают кадры
+  2000 PAUSE \ РєРѕР»Р±СЌРєРё РїРѕР»СѓС‡Р°СЋС‚ РєР°РґСЂС‹
   cap CapStop
   cap CapClose
 ;

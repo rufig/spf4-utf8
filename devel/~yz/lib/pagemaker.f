@@ -1,4 +1,4 @@
-\ Вспомогательные функции - подсоединение к PageMaker
+\ Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё - РїРѕРґСЃРѕРµРґРёРЅРµРЅРёРµ Рє PageMaker
 REQUIRE dde-connect ~yz/lib/ddeclient.f
 REQUIRE msgbox      ~yz/lib/msgbox.f
 REQUIRE PARSE...    ~yz/lib/parse.f
@@ -9,7 +9,7 @@ USER-CREATE request 5000 USER-ALLOT
 : PMconnect ( -- ?)
   dde-init DROP
   " PageMaker" " notopic" dde-connect
-  IF 0 EXIT THEN \ произошла ошибка при подключении
+  IF 0 EXIT THEN \ РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РїРѕРґРєР»СЋС‡РµРЅРёРё
   DUP TO pmaker ; 
 
 : PMdisconnect ( -- )
@@ -31,9 +31,9 @@ WINAPI: DdeGetLastError  USER32.DLL
     z pmaker dde-request ( -- z 0 / 0 0 / err)
     ?DUP IF
       0x4002 ( ddedatatimeout) <>
-      IF 0 EXIT THEN \ произошла ошибка, но не тайм-аут 
+      IF 0 EXIT THEN \ РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°, РЅРѕ РЅРµ С‚Р°Р№Рј-Р°СѓС‚ 
     ELSE
-      \ получена нормальная строка
+      \ РїРѕР»СѓС‡РµРЅР° РЅРѕСЂРјР°Р»СЊРЅР°СЏ СЃС‚СЂРѕРєР°
       ?DUP IF EXIT THEN
     THEN
     1000 PAUSE
@@ -43,7 +43,7 @@ WINAPI: DdeGetLastError  USER32.DLL
    " GetLastErrorStr" PMrequest-loop
   >R
   R@ DUP ZLEN " \q \q" DUP ZLEN COMPARE
-  IF " PageMaker сообщает об ошибке" R@ msgbox THEN
+  IF " PageMaker СЃРѕРѕР±С‰Р°РµС‚ РѕР± РѕС€РёР±РєРµ" R@ msgbox THEN
   R> FREEMEM
 ;
 
@@ -56,10 +56,10 @@ WINAPI: DdeGetLastError  USER32.DLL
   THEN
 ;
 
-\ так PM должен лучше работать
+\ С‚Р°Рє PM РґРѕР»Р¶РµРЅ Р»СѓС‡С€Рµ СЂР°Р±РѕС‚Р°С‚СЊ
 : PMexecute ( z -- )  PMrequest DROP ;
 
-\ разбор строк, возвращенных PageMaker
+\ СЂР°Р·Р±РѕСЂ СЃС‚СЂРѕРє, РІРѕР·РІСЂР°С‰РµРЅРЅС‹С… PageMaker
 
 : parsed ( -- n / a #)
   PeekChar c: " = IF

@@ -1,6 +1,6 @@
 \ $Id$
 \
-\ Разбор даты в виде S" Tue, 19 Dec 2006 19:55:16 +0300"
+\ Р Р°Р·Р±РѕСЂ РґР°С‚С‹ РІ РІРёРґРµ S" Tue, 19 Dec 2006 19:55:16 +0300"
 \ 
 \ target: RFC-822
 
@@ -75,9 +75,9 @@ DEFINITIONS
      2DUP S" +" COMPARE 0= IF 2DROP +z NEGATE TO +z ELSE S" -" COMPARE 0= 17 MUST THEN
    THEN
 
-   \ учтём timezone
+   \ СѓС‡С‚С‘Рј timezone
    ss mm hh d m y DateTime>Num ( stamp ) 
-   +z 60 * 60 * + \ прибавили смещение (+z в часах)
+   +z 60 * 60 * + \ РїСЂРёР±Р°РІРёР»Рё СЃРјРµС‰РµРЅРёРµ (+z РІ С‡Р°СЃР°С…)
    ;
 
 : (parse-date)

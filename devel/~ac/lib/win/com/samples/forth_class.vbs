@@ -8,10 +8,10 @@ WScript.Echo Result
 Result = Forth.NEGATE(5)
 WScript.Echo Result
 
-Result = Forth.TYPE("Привет, Форт!")
+Result = Forth.TYPE("РџСЂРёРІРµС‚, Р¤РѕСЂС‚!")
 WScript.Echo Result
 
-Result = Forth.TYPE("Привет, Форт!", "Привет, Фортер!")
+Result = Forth.TYPE("РџСЂРёРІРµС‚, Р¤РѕСЂС‚!", "РџСЂРёРІРµС‚, Р¤РѕСЂС‚РµСЂ!")
 WScript.Echo Result
 
 Result = Forth.EVALUATE("R/W CREATE-FILE THROW", "TEST-FILE.TXT")

@@ -2,7 +2,7 @@ REQUIRE "   ~yz/lib/common.f
 
 " XMENU 1.30" ASCIIZ program-name
 " xmenu.cfg"  ASCIIZ filename
-" Секретное меню" ASCIIZ secret-menu-tooltip
+" РЎРµРєСЂРµС‚РЅРѕРµ РјРµРЅСЋ" ASCIIZ secret-menu-tooltip
 
 REQUIRE msg            ~yz/lib/msg.f
 REQUIRE (*             ~yz/lib/wincons.f
@@ -19,11 +19,11 @@ REQUIRE RECORD:        ~yz/lib/record.f
 
 \ -----------------------------------------------------
 
-: my-error ( ERR-NUM -> ) \ показать расшифровку ошибки
+: my-error ( ERR-NUM -> ) \ РїРѕРєР°Р·Р°С‚СЊ СЂР°СЃС€РёС„СЂРѕРІРєСѓ РѕС€РёР±РєРё
   ." err"  DUP -2 = IF DROP 
                 ER-A @ ER-U @ PAD CZMOVE PAD err
            THEN
-  >R <( R> DUP " Ошибка #~N (0x~06H)" )> err
+  >R <( R> DUP " РћС€РёР±РєР° #~N (0x~06H)" )> err
 ;
 : error ( z--) err BYE ;
 : ?error ( ? z --) SWAP IF error ELSE DROP THEN ;
@@ -41,13 +41,13 @@ REQUIRE RECORD:        ~yz/lib/record.f
   DEPTH TO depth
   filename-a filename-# ['] INCLUDED CATCH
   ?DUP IF
-    PRESS PRESS \ уничтожаем остатки от INCLUDED
+    PRESS PRESS \ СѓРЅРёС‡С‚РѕР¶Р°РµРј РѕСЃС‚Р°С‚РєРё РѕС‚ INCLUDED
     CASE
-      2 3 <OF< <( filename-a filename-# " Файл ~'~S~' не найден" )> err 0 EXIT ENDOF
-      -2003 OF " Неизвестное ключевое слово"  ENDOF
-      0xC0000005 OF " Нарушение общей защиты" ENDOF
-      -1000 OF " КОНЕЦ-МЕНЮ без МЕНЮ" ENDOF
-    >R <( R> " Ошибка ~N" )>
+      2 3 <OF< <( filename-a filename-# " Р¤Р°Р№Р» ~'~S~' РЅРµ РЅР°Р№РґРµРЅ" )> err 0 EXIT ENDOF
+      -2003 OF " РќРµРёР·РІРµСЃС‚РЅРѕРµ РєР»СЋС‡РµРІРѕРµ СЃР»РѕРІРѕ"  ENDOF
+      0xC0000005 OF " РќР°СЂСѓС€РµРЅРёРµ РѕР±С‰РµР№ Р·Р°С‰РёС‚С‹" ENDOF
+      -1000 OF " РљРћРќР•Р¦-РњР•РќР® Р±РµР· РњР•РќР®" ENDOF
+    >R <( R> " РћС€РёР±РєР° ~N" )>
     END-CASE
     err-dialog 0 EXIT
   THEN
@@ -73,7 +73,7 @@ CELL -- :time
 CELL -- :pt
 CONSTANT #message
 
-\ win-структура для регистрации класса окна - WNDCLASS
+\ win-СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ СЂРµРіРёСЃС‚СЂР°С†РёРё РєР»Р°СЃСЃР° РѕРєРЅР° - WNDCLASS
 0
 CELL -- :Style
 CELL -- :WndProc
@@ -140,7 +140,7 @@ RECORD: #notify
 RECORD;
 
 #notify RECORDEX: #notifyex
-  64 TCHAR  :nTip2           \ огрызок от нового поля
+  64 TCHAR  :nTip2           \ РѕРіСЂС‹Р·РѕРє РѕС‚ РЅРѕРІРѕРіРѕ РїРѕР»СЏ
   DWORD     :nState
   DWORD     :nStateMask
   256 TCHAR :nInfo
@@ -164,35 +164,35 @@ CREATE save-macros 8 CELLS ALLOT
 : create-wordlist
   TEMP-WORDLIST TO commands
   TEMP-WORDLIST TO macros
-  ( сохраним чистые словари. Мне очень стыдно за непортабельный код, но
-    уничтожить через free-wordlist старый словарь нельзя, потому что он был
-    создан в другом потоке, а forget почему-то не предусмотрен)
+  ( СЃРѕС…СЂР°РЅРёРј С‡РёСЃС‚С‹Рµ СЃР»РѕРІР°СЂРё. РњРЅРµ РѕС‡РµРЅСЊ СЃС‚С‹РґРЅРѕ Р·Р° РЅРµРїРѕСЂС‚Р°Р±РµР»СЊРЅС‹Р№ РєРѕРґ, РЅРѕ
+    СѓРЅРёС‡С‚РѕР¶РёС‚СЊ С‡РµСЂРµР· free-wordlist СЃС‚Р°СЂС‹Р№ СЃР»РѕРІР°СЂСЊ РЅРµР»СЊР·СЏ, РїРѕС‚РѕРјСѓ С‡С‚Рѕ РѕРЅ Р±С‹Р»
+    СЃРѕР·РґР°РЅ РІ РґСЂСѓРіРѕРј РїРѕС‚РѕРєРµ, Р° forget РїРѕС‡РµРјСѓ-С‚Рѕ РЅРµ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅ)
   commands CELL- save-wl 8 CELLS CMOVE
   macros   CELL- save-macros 8 CELLS CMOVE ;
 
-\ Запись об отрисовываемом пункте статического меню
+\ Р—Р°РїРёСЃСЊ РѕР± РѕС‚СЂРёСЃРѕРІС‹РІР°РµРјРѕРј РїСѓРЅРєС‚Рµ СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ РјРµРЅСЋ
 
 0
-CELL -- :micon        \ иконка пункта меню
-CELL -- :mheight      \ высота строки (высчитывается при обработке wm_measureitem)
-CELL -- :mstr         \ адрес начала строки
-CELL -- :mstable      \ не подлежит уничтожению через destroy-menu
+CELL -- :micon        \ РёРєРѕРЅРєР° РїСѓРЅРєС‚Р° РјРµРЅСЋ
+CELL -- :mheight      \ РІС‹СЃРѕС‚Р° СЃС‚СЂРѕРєРё (РІС‹СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ РїСЂРё РѕР±СЂР°Р±РѕС‚РєРµ wm_measureitem)
+CELL -- :mstr         \ Р°РґСЂРµСЃ РЅР°С‡Р°Р»Р° СЃС‚СЂРѕРєРё
+CELL -- :mstable      \ РЅРµ РїРѕРґР»РµР¶РёС‚ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЋ С‡РµСЂРµР· destroy-menu
 == #micon
 
-\ Запись о подменю динамического меню
+\ Р—Р°РїРёСЃСЊ Рѕ РїРѕРґРјРµРЅСЋ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РјРµРЅСЋ
 
 #micon
-CELL -- :mfilled	\ меню уже заполнено
-CELL -- :mfilter	\ фильтр подменю
-CELL -- :mpath		\ путь, соответствующий этому подменю
-CELL -- :mpath2		\ второй путь 
-CELL -- :mdynid		\ подменю: hmenu, пункт: id
+CELL -- :mfilled	\ РјРµРЅСЋ СѓР¶Рµ Р·Р°РїРѕР»РЅРµРЅРѕ
+CELL -- :mfilter	\ С„РёР»СЊС‚СЂ РїРѕРґРјРµРЅСЋ
+CELL -- :mpath		\ РїСѓС‚СЊ, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ СЌС‚РѕРјСѓ РїРѕРґРјРµРЅСЋ
+CELL -- :mpath2		\ РІС‚РѕСЂРѕР№ РїСѓС‚СЊ 
+CELL -- :mdynid		\ РїРѕРґРјРµРЅСЋ: hmenu, РїСѓРЅРєС‚: id
 == #mdynsubmenu
 
-\ Запись о подпункте динамического меню
-\ Такая же, как и о подменю, но различается смысл некоторых полей
+\ Р—Р°РїРёСЃСЊ Рѕ РїРѕРґРїСѓРЅРєС‚Рµ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ РјРµРЅСЋ
+\ РўР°РєР°СЏ Р¶Рµ, РєР°Рє Рё Рѕ РїРѕРґРјРµРЅСЋ, РЅРѕ СЂР°Р·Р»РёС‡Р°РµС‚СЃСЏ СЃРјС‹СЃР» РЅРµРєРѕС‚РѕСЂС‹С… РїРѕР»РµР№
 
-: :mparent  :mfilled ;  \ подменю-владелец
+: :mparent  :mfilled ;  \ РїРѕРґРјРµРЅСЋ-РІР»Р°РґРµР»РµС†
 
 : new-mitem ( z icon -- a)
   OVER ZLEN 1+ #micon + MGETMEM ( z icon a )
@@ -221,7 +221,7 @@ CELL -- :mdynid		\ подменю: hmenu, пункт: id
   point GetCursorPos DROP  point @ point CELL+ @ ;
 
 : menuappend ( cont id flags menu -- )
-  AppendMenuA 0= " Не могу добавить пункт меню" ?error ;
+  AppendMenuA 0= " РќРµ РјРѕРіСѓ РґРѕР±Р°РІРёС‚СЊ РїСѓРЅРєС‚ РјРµРЅСЋ" ?error ;
 
 : append-line ( menu -- )
   >R 0 0 W: mf_separator R> menuappend ;
@@ -257,7 +257,7 @@ VARIABLE stack-pointer
 ;
 
 \ -----------------------------------
-\ Список именованных иконок
+\ РЎРїРёСЃРѕРє РёРјРµРЅРѕРІР°РЅРЅС‹С… РёРєРѕРЅРѕРє
 
 VAR named-icons
 
@@ -297,7 +297,7 @@ WINAPI: DestroyIcon      USER32.DLL
 ;
 
 \ -----------------------------------
-\ Обход и уничтожение меню со всеми внутренностями
+\ РћР±С…РѕРґ Рё СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РјРµРЅСЋ СЃРѕ РІСЃРµРјРё РІРЅСѓС‚СЂРµРЅРЅРѕСЃС‚СЏРјРё
 
 WINAPI: GetMenuItemInfoA USER32.DLL
 WINAPI: GetMenuItemCount USER32.DLL
@@ -317,13 +317,13 @@ WINAPI: RemoveMenu       USER32.DLL
 \ itemifo
 \ 0	UINT    cbSize;  
 \ 1	UINT    fMask; 
-\ 2	UINT    fType;		Тип подъэлемента
+\ 2	UINT    fType;		РўРёРї РїРѕРґСЉСЌР»РµРјРµРЅС‚Р°
 \ 3	UINT    fState; 
 \ 4	UINT    wID; 
-\ 5	HMENU   hSubMenu;       Подменю (если есть)
+\ 5	HMENU   hSubMenu;       РџРѕРґРјРµРЅСЋ (РµСЃР»Рё РµСЃС‚СЊ)
 \ 6	HBITMAP hbmpChecked; 
 \ 7	HBITMAP hbmpUnchecked; 
-\ 8	DWORD   dwItemData;     Наши данные
+\ 8	DWORD   dwItemData;     РќР°С€Рё РґР°РЅРЅС‹Рµ
 \ 9	LPTSTR  dwTypeData; 
 \ 10	UINT    cch; 
 
@@ -365,17 +365,17 @@ PROC;
 ;
 
 \ -----------------------------------
-\ Системный лоток
+\ РЎРёСЃС‚РµРјРЅС‹Р№ Р»РѕС‚РѕРє
 
 : change-icon-in-tray ( icon -- )
   { \ [ #notify ] data }
   DUP TO current-icon
   #notify => data :nSize
   secret-window => data :nHwnd
-  0x2 ( есть иконка) => data :nFlags
+  0x2 ( РµСЃС‚СЊ РёРєРѕРЅРєР°) => data :nFlags
   => data :nIcon
   data 1 ( nim_modify) Shell_NotifyIconA
-  0= " Не могу изменить иконку" ?error
+  0= " РќРµ РјРѕРіСѓ РёР·РјРµРЅРёС‚СЊ РёРєРѕРЅРєСѓ" ?error
 ;
 
 : new-icon ( hicon ms -- )
@@ -402,33 +402,33 @@ PROC;
   { \ [ #notify ] data }
   #notify => data :nSize
   secret-window => data :nHwnd
-  0x4 ( есть подсказка) => data :nFlags
+  0x4 ( РµСЃС‚СЊ РїРѕРґСЃРєР°Р·РєР°) => data :nFlags
   data :nTip ZMOVE
   data 1 ( nim_modify) Shell_NotifyIconA
-  0= " Не могу изменить подсказку" ?error
+  0= " РќРµ РјРѕРіСѓ РёР·РјРµРЅРёС‚СЊ РїРѕРґСЃРєР°Р·РєСѓ" ?error
 ;
 
 : popup-info { ztitle zinfo ms \ [ #notifyex ] data -- }
   #notifyex data => :nSize
   secret-window => data :nHwnd
-  0x10 ( вызвать информацию) => data :nFlags
+  0x10 ( РІС‹Р·РІР°С‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ) => data :nFlags
   ztitle data :nInfoTitle ZMOVE
   zinfo data :nInfo ZMOVE
   ms => data :nTimeout
   0 ( niif_none) => data :nInfoFlags
   data 1 ( nim_modify) Shell_NotifyIconA
-  0= " Не могу вывести информацию" ?error
+  0= " РќРµ РјРѕРіСѓ РІС‹РІРµСЃС‚Рё РёРЅС„РѕСЂРјР°С†РёСЋ" ?error
 ;
 
 : hide-into-tray
   #notify => HERE :nSize
   secret-window => HERE :nHwnd
-  0x7 ( есть все) => HERE :nFlags
+  0x7 ( РµСЃС‚СЊ РІСЃРµ) => HERE :nFlags
   fromtray => HERE :nCallback
   2 instance LoadIconA DUP TO current-icon => HERE :nIcon 
   secret-menu-tooltip HERE :nTip ZMOVE
   HERE 0 ( nim_add) Shell_NotifyIconA
-  0= " Не могу добавить иконку в системную панель" ?error
+  0= " РќРµ РјРѕРіСѓ РґРѕР±Р°РІРёС‚СЊ РёРєРѕРЅРєСѓ РІ СЃРёСЃС‚РµРјРЅСѓСЋ РїР°РЅРµР»СЊ" ?error
 ;
 
 
@@ -438,7 +438,7 @@ PROC;
   secret-window => data :nHwnd
   0 => data :nFlags
   data 2 ( nim_delete) Shell_NotifyIconA
-  0= " Не могу удалить иконку из системной панели" ?error
+  0= " РќРµ РјРѕРіСѓ СѓРґР°Р»РёС‚СЊ РёРєРѕРЅРєСѓ РёР· СЃРёСЃС‚РµРјРЅРѕР№ РїР°РЅРµР»Рё" ?error
 ;
 
 \ -----------------------------------
@@ -509,7 +509,7 @@ WINAPI: GetCurrentDirectoryA  KERNEL32.DLL
   next-menu-id  item-name 0! ;
 
 \ ---------------------------------------
-\ Динамические меню
+\ Р”РёРЅР°РјРёС‡РµСЃРєРёРµ РјРµРЅСЋ
 
 : n>s ( n -- a #) 
   S>D <# 0 HOLD #S #> ;
@@ -571,7 +571,7 @@ VARIABLE sptr
       EXECUTE ASCIIZ> land-str
       2DROP
     ELSE
-      2>R <( 2R> " Макрос не найден: ~'~S~'" )> err-dialog
+      2>R <( 2R> " РњР°РєСЂРѕСЃ РЅРµ РЅР°Р№РґРµРЅ: ~'~S~'" )> err-dialog
     THEN
   AGAIN
 ;
@@ -592,14 +592,14 @@ VARIABLE sptr
 : save-string
   BL SKIP 1 PARSE macro-expand-here ;
 
-: ?next ( "name" или name<BL> -- a # / 0)
+: ?next ( "name" РёР»Рё name<BL> -- a # / 0)
   PeekChar c: " = IF c: " ELSE BL THEN WORD
   DUP C@ 0= IF DROP 0 EXIT THEN
-  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( убрал кавычки, если есть)
+  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( СѓР±СЂР°Р» РєР°РІС‹С‡РєРё, РµСЃР»Рё РµСЃС‚СЊ)
 ;
 
 : parse-name-and-args
-  HERE >R 0 , 0 , \ адреса начала имени и аргументов
+  HERE >R 0 , 0 , \ Р°РґСЂРµСЃР° РЅР°С‡Р°Р»Р° РёРјРµРЅРё Рё Р°СЂРіСѓРјРµРЅС‚РѕРІ
   BL SKIP 
   ?next ?DUP IF HERE R@ ! macro-expand-here THEN
   BL SKIP
@@ -643,7 +643,7 @@ WINAPI: SHGetFileInfoA	       SHELL32.DLL
   fn ASCIIZ> S" ." SEARCH PRESS IF
     1+ ext ZMOVE
     ext ASCIIZ> iconlist HASH@N 0= IF
-      ( иконки еще нет)
+      ( РёРєРѕРЅРєРё РµС‰Рµ РЅРµС‚)
       fn ?associated-icon DUP ext ASCIIZ> ROT iconlist HASH!N
     THEN
   THEN ;
@@ -652,10 +652,10 @@ WINAPI: SHGetFileInfoA	       SHELL32.DLL
   n 0= IF 0 EXIT THEN
   a n buf CZMOVE
   a n iconlist HASH@N 0= IF
-     ( иконки еще нет)
+     ( РёРєРѕРЅРєРё РµС‰Рµ РЅРµС‚)
      W: lr_loadfromfile icon-size DUP W: image_icon buf instance
      LoadImageA DUP a n ROT iconlist HASH!N
-     DUP 0= IF <( a n " Иконка не найдена: ~'~S~'" )> err THEN
+     DUP 0= IF <( a n " РРєРѕРЅРєР° РЅРµ РЅР°Р№РґРµРЅР°: ~'~S~'" )> err THEN
   THEN ;
 
 : get-header ( -- a n icon )
@@ -675,7 +675,7 @@ WINAPI: SHGetFileInfoA	       SHELL32.DLL
     get-associated-icon item-icon !
   THEN
   scriptexec
-  ( добавим пункт меню)
+  ( РґРѕР±Р°РІРёРј РїСѓРЅРєС‚ РјРµРЅСЋ)
   append-to-current-menu
 ;
 
@@ -686,14 +686,14 @@ WINAPI: SHGetFileInfoA	       SHELL32.DLL
   item-name DUP HERE ZMOVE ZLEN 1+ ALLOT
   HERE   
   2SWAP macro-expand-here
-  \ уберем "\", если есть
+  \ СѓР±РµСЂРµРј "\", РµСЃР»Рё РµСЃС‚СЊ
   HERE 2- C@ c: \ = IF 0 HERE 2- C! THEN
   CreatePopupMenu DUP >R new-dynsubmenu R> SWAP >R
   R@ :mdynid !
   TRUE  R@ :mstable !
   FALSE R@ :mfilled !
   filter R@ :mfilter !
-  ( добавим пункт подменю)
+  ( РґРѕР±Р°РІРёРј РїСѓРЅРєС‚ РїРѕРґРјРµРЅСЋ)
   R@ DUP R> :mdynid @ current-menu append-menu-with-icon
   item-name 0!
   0 TO filter
@@ -713,7 +713,7 @@ WINAPI: SHGetFileInfoA	       SHELL32.DLL
 : may-change-menu? ( -- ?)
   current-menu left-menu = current-menu right-menu = OR
   DUP 0= IF 
-    " Нельзя переключать меню в середине подменю" err
+    " РќРµР»СЊР·СЏ РїРµСЂРµРєР»СЋС‡Р°С‚СЊ РјРµРЅСЋ РІ СЃРµСЂРµРґРёРЅРµ РїРѕРґРјРµРЅСЋ" err
   THEN
 ;
 
@@ -721,7 +721,7 @@ VAR memorized-icon
 CREATE std-tooltip-text 61 ALLOT
 
 \ -----------------------------------
-\ Команды
+\ РљРѕРјР°РЅРґС‹
 
 WORDLIST TO keywords
 
@@ -736,13 +736,13 @@ keywords SET-CURRENT
 
 : \  ( ->eol) 1 PARSE 2DROP ;
 
-: СКРИПТ ( ->bl; ->eol)
+: РЎРљР РРџРў ( ->bl; ->eol)
   GET-CURRENT keywords SET-CURRENT
   CREATE save-string does-script
   SET-CURRENT
 ;
 
-: ЗАПУСТИТЬ ( ->eol)
+: Р—РђРџРЈРЎРўРРўР¬ ( ->eol)
   menu-id S>D <# # # # #> CREATED
   HERE parse-name-and-args
   item-icon @ IF 
@@ -751,55 +751,55 @@ keywords SET-CURRENT
     2 CELLS+ file-small-icon item-icon !
   THEN
   winexec
-  ( добавим пункт меню)
+  ( РґРѕР±Р°РІРёРј РїСѓРЅРєС‚ РјРµРЅСЋ)
   append-to-current-menu ;
 
-: ФИЛЬТР ( ->bl)
+: Р¤РР›Р¬РўР  ( ->bl)
   HERE TO filter
   BL PARSE macro-expand-here 
 ;
 
-: КАТАЛОГ ( ->eol) 
+: РљРђРўРђР›РћР“ ( ->eol) 
   BL SKIP 1 PARSE 2DUP make-directory >R
   item-icon @ ?DUP 0= IF ?associated-icon-from-a# ELSE PRESS PRESS THEN
   R> :micon !
 ;
 
-: ПАПКА 
+: РџРђРџРљРђ 
   [ ALSO keywords CONTEXT ! ]
-  КАТАЛОГ 
+  РљРђРўРђР›РћР“ 
   [ PREVIOUS ] ;
 
-: МОИ-ДОКУМЕНТЫ ( -- )
- S" [Мои документы]" make-directory
+: РњРћР-Р”РћРљРЈРњР•РќРўР« ( -- )
+ S" [РњРѕРё РґРѕРєСѓРјРµРЅС‚С‹]" make-directory
  item-icon @ ?DUP 0= IF " documents" icon-by-name THEN SWAP :micon !
 ;
 
-: ПРОГРАММЫ ( -- )
-  HERE S" [Общие программы]" macro-expand-here
-  S" [Программы]" make-directory
+: РџР РћР“Р РђРњРњР« ( -- )
+  HERE S" [РћР±С‰РёРµ РїСЂРѕРіСЂР°РјРјС‹]" macro-expand-here
+  S" [РџСЂРѕРіСЂР°РјРјС‹]" make-directory
   item-icon @ ?DUP 0= IF " programs" icon-by-name THEN
   OVER :micon !
   :mpath2 !
 ;
 
-: ПРОГРАММА ( ->eol; -- )
+: РџР РћР“Р РђРњРњРђ ( ->eol; -- )
   BL SKIP 1 PARSE
   2>R HERE
-  <( 2R@ " [Общие программы]\\~S" )> ASCIIZ> macro-expand-here
-  <( 2R> " [Программы]\\~S" )> ASCIIZ> make-directory
+  <( 2R@ " [РћР±С‰РёРµ РїСЂРѕРіСЂР°РјРјС‹]\\~S" )> ASCIIZ> macro-expand-here
+  <( 2R> " [РџСЂРѕРіСЂР°РјРјС‹]\\~S" )> ASCIIZ> make-directory
   item-icon @ ?DUP 0= IF " programs" icon-by-name THEN
   OVER :micon ! :mpath2 !
 ;
 
-: МЕНЮ ( ->eol; --  zmenu-name icon parent-menu "menu" )
+: РњР•РќР® ( ->eol; --  zmenu-name icon parent-menu "menu" )
   get-header ( a n icon) >R CZGETMEM R>
   current-menu
   CreatePopupMenu TO current-menu 
   CELL" MENU"
 ;
 
-: КОНЕЦ-МЕНЮ ( zmenu-name icon parent-menu "menu" -- )
+: РљРћРќР•Р¦-РњР•РќР® ( zmenu-name icon parent-menu "menu" -- )
   CELL" MENU" <> IF -1000 THROW THEN
   SWAP >R 2DUP R> ?DUP
   IF
@@ -810,34 +810,34 @@ keywords SET-CURRENT
   TO current-menu FREEMEM
 ;
 
-: ФОРТ:
+: Р¤РћР Рў:
   menu-id S>D <# # # # #> SHEADER
   ALSO FORTH
   ]
   append-to-current-menu
 ;
 
-: ФОРТ;
+: Р¤РћР Рў;
   RET, [COMPILE] [ \ ]
   PREVIOUS
 ; IMMEDIATE
 
-: МАКРО ( ->bl; ->eol)
+: РњРђРљР Рћ ( ->bl; ->eol)
   GET-CURRENT
   macros SET-CURRENT
   CREATE save-string
   SET-CURRENT
 ;
 
-: РАСШИРЕНИЯ:
+: Р РђРЎРЁРР Р•РќРРЇ:
   switch-to-forth
 ;
 
-: РАСШИРЕНИЯ;
+: Р РђРЎРЁРР Р•РќРРЇ;
   switch-back
 ; 
 
-: ДОБАВИТЬ ( ->eol; -- )
+: Р”РћР‘РђР’РРўР¬ ( ->eol; -- )
   { \ [ 100 ] buf }
   switch-to-forth
   BL SKIP 1 PARSE buf CZMOVE
@@ -845,54 +845,54 @@ keywords SET-CURRENT
   switch-back
 ;
 
-: ИКОНКА ( ->eol)
+: РРљРћРќРљРђ ( ->eol)
   1 PARSE get-icon 0 new-icon
 ;
 
-: ПОДСКАЗКА ( ->eol)
+: РџРћР”РЎРљРђР—РљРђ ( ->eol)
   1 PARSE std-tooltip-text CZMOVE
   std-tooltip-text TO std-tooltip
 ;
 
-: ЛЕВОЕ-МЕНЮ
+: Р›Р•Р’РћР•-РњР•РќР®
   may-change-menu? 0= IF EXIT THEN
   left-menu TO current-menu
 ;
 
-: ПРАВОЕ-МЕНЮ
+: РџР РђР’РћР•-РњР•РќР®
   may-change-menu? 0= IF EXIT THEN
   right-menu TO current-menu
 ;
 
-: ПРАВОЕ-МЕНЮ-ПО-ЛЕВОМУ
+: РџР РђР’РћР•-РњР•РќР®-РџРћ-Р›Р•Р’РћРњРЈ
   right-menu destroy-menu
   left-menu TO right-menu
 ;
 
-: ПУНКТ-ПЕРЕЧИТАТЬ 
-  " Перечитать настройки" " reload" icon-by-name id-reload current-menu icon-append ;
+: РџРЈРќРљРў-РџР•Р Р•Р§РРўРђРўР¬ 
+  " РџРµСЂРµС‡РёС‚Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєРё" " reload" icon-by-name id-reload current-menu icon-append ;
 
-: ПУНКТ-О-ПРОГРАММЕ
-  " О программе..." " mouse" icon-by-name id-about current-menu icon-append ;
+: РџРЈРќРљРў-Рћ-РџР РћР“Р РђРњРњР•
+  " Рћ РїСЂРѕРіСЂР°РјРјРµ..." " mouse" icon-by-name id-about current-menu icon-append ;
 
-: ПУНКТ-ВЫХОД
-  " Выход" " exit" icon-by-name  id-exit current-menu icon-append ;
+: РџРЈРќРљРў-Р’Р«РҐРћР”
+  " Р’С‹С…РѕРґ" " exit" icon-by-name  id-exit current-menu icon-append ;
 
-: ЗАПОМНИТЬ ( ->bl/"; -- )
-  BL SKIP ?next DUP 0= IF DROP " Пропущено имя файла в команде \'ЗАПОМНИТЬ\'" error THEN
+: Р—РђРџРћРњРќРРўР¬ ( ->bl/"; -- )
+  BL SKIP ?next DUP 0= IF DROP " РџСЂРѕРїСѓС‰РµРЅРѕ РёРјСЏ С„Р°Р№Р»Р° РІ РєРѕРјР°РЅРґРµ \'Р—РђРџРћРњРќРРўР¬\'" error THEN
   get-icon TO memorized-icon
 ;
 
-: КАК ( ->bl/"; --)
-  memorized-icon 0= " Пропущена команда \'ЗАПОМНИТЬ\'" ?error 
-  BL SKIP ?next ?DUP 0= IF DROP " В команде \'КАК\' отсутствует имя для иконки" error THEN
+: РљРђРљ ( ->bl/"; --)
+  memorized-icon 0= " РџСЂРѕРїСѓС‰РµРЅР° РєРѕРјР°РЅРґР° \'Р—РђРџРћРњРќРРўР¬\'" ?error 
+  BL SKIP ?next ?DUP 0= IF DROP " Р’ РєРѕРјР°РЅРґРµ \'РљРђРљ\' РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РёРјСЏ РґР»СЏ РёРєРѕРЅРєРё" error THEN
   memorized-icon -ROT new-named-icon-s
 ;
 
 SET-CURRENT
 
 \ -----------------------------------
-\ Удаленные команды
+\ РЈРґР°Р»РµРЅРЅС‹Рµ РєРѕРјР°РЅРґС‹
 
 VAR ch
 
@@ -938,7 +938,7 @@ SET-CURRENT
 : open-remote-channel
   init-channels
   " XMENU" create-channel TO ch
-  ch 0= IF " Не могу создать канал" msg EXIT THEN
+  ch 0= IF " РќРµ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ РєР°РЅР°Р»" msg EXIT THEN
   0 listen-channel START DROP
 ;
 
@@ -951,19 +951,19 @@ PROC;
 PROC: del-submenu ( key-a key# dynsubmenu -- ?)
   >R 2DROP
   R@ :mstable @ IF
-    \ здесь ничего нет
+    \ Р·РґРµСЃСЊ РЅРёС‡РµРіРѕ РЅРµС‚
     R@ :mfilled 0!
     R> :mdynid @ DUP del-menuitems traverse-menu
-    \ удаляем все пункты из этого меню
+    \ СѓРґР°Р»СЏРµРј РІСЃРµ РїСѓРЅРєС‚С‹ РёР· СЌС‚РѕРіРѕ РјРµРЅСЋ
     >R
     BEGIN
       W: mf_byposition 0 R@ RemoveMenu
     WHILE
     REPEAT RDROP
-    FALSE \ оставить запись
+    FALSE \ РѕСЃС‚Р°РІРёС‚СЊ Р·Р°РїРёСЃСЊ
   ELSE
     R> del-icon-from-micon
-    TRUE \ удалить эту запись
+    TRUE \ СѓРґР°Р»РёС‚СЊ СЌС‚Сѓ Р·Р°РїРёСЃСЊ
   THEN 
 PROC;
 
@@ -992,11 +992,11 @@ WINAPI: RegQueryValueExA ADVAPI32.DLL
 : add-std-macros
   GET-CURRENT
   macros SET-CURRENT
-  S" Программы" CREATED
+  S" РџСЂРѕРіСЂР°РјРјС‹" CREATED
   HKEY_CURRENT_USER ( ) " Programs" save-key-value
-  S" Общие программы" CREATED
+  S" РћР±С‰РёРµ РїСЂРѕРіСЂР°РјРјС‹" CREATED
   HKEY_LOCAL_MACHINE " Common Programs" save-key-value
-  S" Мои документы" CREATED
+  S" РњРѕРё РґРѕРєСѓРјРµРЅС‚С‹" CREATED
   HKEY_CURRENT_USER ( ) " Personal" save-key-value
   SET-CURRENT
 ;
@@ -1006,7 +1006,7 @@ WINAPI: RegQueryValueExA ADVAPI32.DLL
     left-menu destroy-menu right-menu destroy-menu 
     iconlist del-hash
     dyn-submenus del-hash-and-icons
-    ( очистим словари)
+    ( РѕС‡РёСЃС‚РёРј СЃР»РѕРІР°СЂРё)
     save-wl commands CELL- 8 CELLS CMOVE
     save-macros macros CELL- 8 CELLS CMOVE
     del-named-icons
@@ -1021,10 +1021,10 @@ WINAPI: RegQueryValueExA ADVAPI32.DLL
   small-hash TO dyn-items
   create-named-icons
   start-dir SetCurrentDirectoryA DROP
-  CreatePopupMenu ?DUP 0= IF " Не могу создать меню" error THEN TO left-menu
-  CreatePopupMenu ?DUP 0= IF " Не могу создать меню" error THEN TO right-menu
+  CreatePopupMenu ?DUP 0= IF " РќРµ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ РјРµРЅСЋ" error THEN TO left-menu
+  CreatePopupMenu ?DUP 0= IF " РќРµ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ РјРµРЅСЋ" error THEN TO right-menu
   first-menu-id TO menu-id
-  \ добавим определение макросов "Мои документы" и "Главное меню"
+  \ РґРѕР±Р°РІРёРј РѕРїСЂРµРґРµР»РµРЅРёРµ РјР°РєСЂРѕСЃРѕРІ "РњРѕРё РґРѕРєСѓРјРµРЅС‚С‹" Рё "Р“Р»Р°РІРЅРѕРµ РјРµРЅСЋ"
   add-std-macros
   FORTH DEFINITIONS
   WARNING 0!
@@ -1033,7 +1033,7 @@ WINAPI: RegQueryValueExA ADVAPI32.DLL
 : read-my-file ( z -- )
   ASCIIZ> 2DUP FILE-EXIST IF 
     include-file
-    IF " Ошибка в файле меню" err THEN
+    IF " РћС€РёР±РєР° РІ С„Р°Р№Р»Рµ РјРµРЅСЋ" err THEN
   ELSE
     2DROP
   THEN
@@ -1043,10 +1043,10 @@ ALSO keywords CONTEXT !
 
 : ?right-menu
   right-menu GetMenuItemCount 0= IF
-    ПРАВОЕ-МЕНЮ
-    ПУНКТ-ПЕРЕЧИТАТЬ
-    ПУНКТ-О-ПРОГРАММЕ
-    ПУНКТ-ВЫХОД
+    РџР РђР’РћР•-РњР•РќР®
+    РџРЈРќРљРў-РџР•Р Р•Р§РРўРђРўР¬
+    РџРЈРќРљРў-Рћ-РџР РћР“Р РђРњРњР•
+    РџРЈРќРљРў-Р’Р«РҐРћР”
   THEN
 ;
 
@@ -1079,7 +1079,7 @@ WINAPI: MessageBoxIndirectA USER32.DLL
   40 params !
   secret-window params CELL+ !
   instance params 2 CELLS + !
-  " Меню для быстрого вызова программ.\n\nЮ. Жиловец, 2004\nhttp://www.forth.org.ru/~yz/xmenu.html\nМышку нарисовала Н. Рымарь."
+  " РњРµРЅСЋ РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РІС‹Р·РѕРІР° РїСЂРѕРіСЂР°РјРј.\n\nР®. Р–РёР»РѕРІРµС†, 2004\nhttp://www.forth.org.ru/~yz/xmenu.html\nРњС‹С€РєСѓ РЅР°СЂРёСЃРѕРІР°Р»Р° Рќ. Р С‹РјР°СЂСЊ."
   params 3 CELLS + !
   program-name params 4 CELLS + !
   (* mb_ok mb_usericon *) params 5 CELLS + !
@@ -1101,7 +1101,7 @@ WINAPI: PostMessageA  USER32.DLL
   CASE
     id-reload OF read-my-files ENDOF
     id-about  OF about ENDOF
-    id-exit   OF ( выход)
+    id-exit   OF ( РІС‹С…РѕРґ)
        0 PostQuitMessage DROP
     ENDOF
     first-menu-id menu-id  <OF< cmd do-command ENDOF
@@ -1144,7 +1144,7 @@ WINAPI: GetSysColor	USER32.DLL
   lparam 10 CELLS@ ry - TO rh
   lparam 11 CELLS@ TO data
   state W: ods_selected = IF
-    \ рисуем выделенный пункт
+    \ СЂРёСЃСѓРµРј РІС‹РґРµР»РµРЅРЅС‹Р№ РїСѓРЅРєС‚
     W: color_highlight 1+ lparam 7 CELLS+ dc FillRect DROP
     dc GetTextColor TO textcolor
     W: color_highlighttext GetSysColor dc SetTextColor DROP
@@ -1153,10 +1153,10 @@ WINAPI: GetSysColor	USER32.DLL
   ELSE
     W: color_menu 1+ lparam 7 CELLS+ dc FillRect DROP
   THEN
-  \ рисуем иконку
+  \ СЂРёСЃСѓРµРј РёРєРѕРЅРєСѓ
   W: di_normal 0 0 icon-size DUP data :micon @
   icon-top ry + icon-left rx + dc DrawIconEx DROP
-  \ пишем строку
+  \ РїРёС€РµРј СЃС‚СЂРѕРєСѓ
    icon-left icon-size + icon-right + rect +!
    rw 10 100 */ rect 2 CELLS+ -!
 \  icon-size data :mheight @ - 2/ icon-top + ry + 1+
@@ -1165,13 +1165,13 @@ WINAPI: GetSysColor	USER32.DLL
   (* dt_end_ellipsis dt_noprefix dt_vcenter dt_singleline *) 
   rect data :mstr @ ASCIIZ> SWAP dc DrawTextA DROP
   state W: ods_selected = IF
-    \ приводим в порядок контекст устройства
+    \ РїСЂРёРІРѕРґРёРј РІ РїРѕСЂСЏРґРѕРє РєРѕРЅС‚РµРєСЃС‚ СѓСЃС‚СЂРѕР№СЃС‚РІР°
     textcolor dc SetTextColor DROP
     backcolor dc SetBkColor DROP
   THEN ;
 
 \ ---------------------------------------
-\ Список файлов и каталогов
+\ РЎРїРёСЃРѕРє С„Р°Р№Р»РѕРІ Рё РєР°С‚Р°Р»РѕРіРѕРІ
 
 WINAPI: SendMessageA   USER32.DLL
 WINAPI: FindFirstFileA KERNEL32.DLL
@@ -1225,7 +1225,7 @@ WINAPI: lstrcmpi KERNEL32.DLL
       <( directory fd :sName " ~Z\\~Z" )>
       DUP TO full-path file-small-icon TO icon
       fd is-dir? IF
-        \ такой записи в списке еще нет?
+        \ С‚Р°РєРѕР№ Р·Р°РїРёСЃРё РІ СЃРїРёСЃРєРµ РµС‰Рµ РЅРµС‚?
         fd :sName dirlist not-in-list? IF
           fd :sName full-path CreatePopupMenu DUP >R 
           new-dynsubmenu-with-strings R> SWAP >R
@@ -1237,10 +1237,10 @@ WINAPI: lstrcmpi KERNEL32.DLL
           R> dirlist add-to-listbox
         THEN
       ELSE
-          \ расширение .lnk выкидываем, чтобы не портило вид
+          \ СЂР°СЃС€РёСЂРµРЅРёРµ .lnk РІС‹РєРёРґС‹РІР°РµРј, С‡С‚РѕР±С‹ РЅРµ РїРѕСЂС‚РёР»Рѕ РІРёРґ
         fd :sName " .lnk" -trail
         fd :sName dirlist not-in-list? IF
-        \ такой записи в списке еще нет?
+        \ С‚Р°РєРѕР№ Р·Р°РїРёСЃРё РІ СЃРїРёСЃРєРµ РµС‰Рµ РЅРµС‚?
           fd :sName full-path dyn-id
           new-dynitem-with-strings >R
           icon  R@ :micon !
@@ -1280,9 +1280,9 @@ WINAPI: lstrcmpi KERNEL32.DLL
 : fill-dynsubmenu
   { hmenu \ submenu flist dlist -- }
   hmenu n>s dyn-submenus HASH@R TO submenu
-  \ наше меню?
+  \ РЅР°С€Рµ РјРµРЅСЋ?
   submenu 0= IF EXIT THEN
-  \ может быть, уже заполнено?
+  \ РјРѕР¶РµС‚ Р±С‹С‚СЊ, СѓР¶Рµ Р·Р°РїРѕР»РЅРµРЅРѕ?
   submenu :mfilled @ IF EXIT THEN
   create-listbox TO flist
   create-listbox TO dlist
@@ -1295,10 +1295,10 @@ WINAPI: lstrcmpi KERNEL32.DLL
     flist dlist  submenu :mfilter @ ?filter
     traverse-directory-with-filters
   THEN
-  \ Перебираем список и заносим в подменю
-  \ сначала каталоги
+  \ РџРµСЂРµР±РёСЂР°РµРј СЃРїРёСЃРѕРє Рё Р·Р°РЅРѕСЃРёРј РІ РїРѕРґРјРµРЅСЋ
+  \ СЃРЅР°С‡Р°Р»Р° РєР°С‚Р°Р»РѕРіРё
   hmenu (: >R DUP :mdynid @ R> append-menu-with-icon ;) dlist traverse-list
-  \ потом файлы
+  \ РїРѕС‚РѕРј С„Р°Р№Р»С‹
   hmenu (: >R DUP :mdynid @ R> append-with-icon ;) flist traverse-list
   TRUE submenu :mfilled !
   flist delete-listbox
@@ -1306,7 +1306,7 @@ WINAPI: lstrcmpi KERNEL32.DLL
 ;
 
 \ ---------------------------------------
-\ Обработчик сообщений
+\ РћР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёР№
 
 :NONAME
   ( lparam wparam msg hwnd) 
@@ -1333,9 +1333,9 @@ WINAPI: lstrcmpi KERNEL32.DLL
     DUP lparam 5 CELLS@ :mheight !
     icon-size icon-top icon-bottom + + MAX
     SWAP max-text-width MIN  icon-size + icon-left + icon-right +
-    \ Windows почему-то добавляет к возвращенной величине еще
-    \ где-то 50% непонятно на что и менюшки получаются слишком широкие.
-    \ Обманем ее, немного ужав наши требования
+    \ Windows РїРѕС‡РµРјСѓ-С‚Рѕ РґРѕР±Р°РІР»СЏРµС‚ Рє РІРѕР·РІСЂР°С‰РµРЅРЅРѕР№ РІРµР»РёС‡РёРЅРµ РµС‰Рµ
+    \ РіРґРµ-С‚Рѕ 50% РЅРµРїРѕРЅСЏС‚РЅРѕ РЅР° С‡С‚Рѕ Рё РјРµРЅСЋС€РєРё РїРѕР»СѓС‡Р°СЋС‚СЃСЏ СЃР»РёС€РєРѕРј С€РёСЂРѕРєРёРµ.
+    \ РћР±РјР°РЅРµРј РµРµ, РЅРµРјРЅРѕРіРѕ СѓР¶Р°РІ РЅР°С€Рё С‚СЂРµР±РѕРІР°РЅРёСЏ
     90 100 */ lparam 3 CELLS!
     lparam 4 CELLS!
     TRUE
@@ -1351,7 +1351,7 @@ WINAPI: lstrcmpi KERNEL32.DLL
      0
   ENDOF
 
-  \ Бобик сдох, в смысле Explorer упал и запущен заново
+  \ Р‘РѕР±РёРє СЃРґРѕС…, РІ СЃРјС‹СЃР»Рµ Explorer СѓРїР°Р» Рё Р·Р°РїСѓС‰РµРЅ Р·Р°РЅРѕРІРѕ
   taskbar-created OF
     hide-into-tray
     0 
@@ -1371,7 +1371,7 @@ WINAPI: lstrcmpi KERNEL32.DLL
 ;
 
 : create-hidden-window
-  \ готовим класс к регистрации
+  \ РіРѕС‚РѕРІРёРј РєР»Р°СЃСЃ Рє СЂРµРіРёСЃС‚СЂР°С†РёРё
   HERE :Style 0!
   ['] process-hidden-window HERE :WndProc !
   HERE :ClsExtra 0!
@@ -1382,11 +1382,11 @@ WINAPI: lstrcmpi KERNEL32.DLL
   1 HERE :Background !
   HERE :MenuName 0!
   " XMENU" HERE :ClassName !
-  HERE RegisterClassA 0= " Не могу зарегистрировать класс окна" ?error
-  \ создаем окно
+  HERE RegisterClassA 0= " РќРµ РјРѕРіСѓ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ РєР»Р°СЃСЃ РѕРєРЅР°" ?error
+  \ СЃРѕР·РґР°РµРј РѕРєРЅРѕ
   0 instance 0 0 W: cw_usedefault DUP DUP DUP W: ws_disabled
   " XMENU" DUP W: ws_ex_toolwindow
-  CreateWindowExA ?DUP 0= " Не могу создать секретное окно" ?error
+  CreateWindowExA ?DUP 0= " РќРµ РјРѕРіСѓ СЃРѕР·РґР°С‚СЊ СЃРµРєСЂРµС‚РЅРѕРµ РѕРєРЅРѕ" ?error
   TO secret-window
 ;
 
@@ -1407,7 +1407,7 @@ WINAPI: RegisterWindowMessageA USER32.DLL
   MessageLoop
   remove-from-tray
   ch delete-channel
-\ все остальное уничтожит сама система
+\ РІСЃРµ РѕСЃС‚Р°Р»СЊРЅРѕРµ СѓРЅРёС‡С‚РѕР¶РёС‚ СЃР°РјР° СЃРёСЃС‚РµРјР°
   BYE ;
 
 REMOVE-ALL-CONSTANTS

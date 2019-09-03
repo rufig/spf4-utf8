@@ -6,7 +6,7 @@
 
 : MODULE: ( "name" -- old-current )
 \ start a forth module
-\ Åñëè òàêîé ìîäóëü óæå ñóùåñòâóåò, ïðîäîëæèòü êîìïèëÿöèþ â íåãî
+\ Ð•ÑÐ»Ð¸ Ñ‚Ð°ÐºÐ¾Ð¹ Ð¼Ð¾Ð´ÑƒÐ»ÑŒ ÑƒÐ¶Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚, Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸ÑŽ Ð² Ð½ÐµÐ³Ð¾
   >IN @ 
   ['] ' CATCH
   IF >IN ! VOCABULARY LATEST NAME> ELSE NIP THEN
@@ -23,8 +23,8 @@
 ;
 
 : {{ ( "name" -- )
-\ Êëàäåò â ORDER wordlist, ê-ûé äàñò "name"
-\ èëè vocabulary åñëè "name" - vocabulary
+\ ÐšÐ»Ð°Ð´ÐµÑ‚ Ð² ORDER wordlist, Ðº-Ñ‹Ð¹ Ð´Ð°ÑÑ‚ "name"
+\ Ð¸Ð»Ð¸ vocabulary ÐµÑÐ»Ð¸ "name" - vocabulary
         DEPTH >R
         ALSO ' EXECUTE
         DEPTH R> <>             IF      \ wid on the stack?

@@ -1,14 +1,14 @@
-\  работа с  последовательным портом под Виндовс
+\  СЂР°Р±РѕС‚Р° СЃ  РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅС‹Рј РїРѕСЂС‚РѕРј РїРѕРґ Р’РёРЅРґРѕРІСЃ
 
-\ константы Виндовс
+\ РєРѕРЅСЃС‚Р°РЅС‚С‹ Р’РёРЅРґРѕРІСЃ
 -2147483648 CONSTANT GENERIC_READ
 1073741824 CONSTANT GENERIC_WRITE
 
-\ внутренние переменные
+\ РІРЅСѓС‚СЂРµРЅРЅРёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ
 0 VALUE handle
 VARIABLE WasRead
 VARIABLE ReadBuffer
-\ ф-ии Виндовс
+\ С„-РёРё Р’РёРЅРґРѕРІСЃ
 
 WINAPI: TransmitCommChar KERNEL32.DLL \ ( char handle -- ior )
 WINAPI: SetCommTimeouts KERNEL32.DLL
@@ -43,7 +43,7 @@ HERE DUP COMMTIMEOUTS DUP ALLOT ERASE VALUE CommTimeouts
 CELL -- DCBlength           \ sizeof(DCB) 
 CELL -- BaudRate            \ current baud rate 
 CELL -- Mode
-(   биты слова Mode
+(   Р±РёС‚С‹ СЃР»РѕРІР° Mode
     ^-- fBinary:1            \ 1 - binary mode, no EOF check 
     ^-- fParity:1            \ 0 - enable parity checking 
     ^-- fOutxCtsFlow:1       \ 0 - CTS output flow control 
@@ -85,15 +85,15 @@ DUP -1 = IF DROP 0 ELSE TO handle -1 THEN
 : CommClose ( -- ior )
 handle CloseHandle
 ;
-\ передача символа в открытый порт
+\ РїРµСЂРµРґР°С‡Р° СЃРёРјРІРѕР»Р° РІ РѕС‚РєСЂС‹С‚С‹Р№ РїРѕСЂС‚
 : CommOut ( char -- ) \ worked maybe :-)
 handle TransmitCommChar DROP ;
 
-\ прием символа из порта
+\ РїСЂРёРµРј СЃРёРјРІРѕР»Р° РёР· РїРѕСЂС‚Р°
 : CommIn ( -- char ) \ WaitComm
 0 WasRead 1 ReadBuffer handle ReadFile DROP ReadBuffer C@ ;
 
-\ прием нескольких байт в выбранный буфер
+\ РїСЂРёРµРј РЅРµСЃРєРѕР»СЊРєРёС… Р±Р°Р№С‚ РІ РІС‹Р±СЂР°РЅРЅС‹Р№ Р±СѓС„РµСЂ
 : ReadFromComm' ( addr n -- )
 SP@ 0 \ ( addr n &n 0 ) -> ( 0 &N N ADDR )
  SWAP 2SWAP SWAP
@@ -117,7 +117,7 @@ OVER + SWAP ?DO
 I C@ CommOut ( pause ) 1 PAUSE
 LOOP
 ;
-: Timeouts ( ms -- flag ) \ установка интервалов ожидания для чтения/записи в порт
+: Timeouts ( ms -- flag ) \ СѓСЃС‚Р°РЅРѕРІРєР° РёРЅС‚РµСЂРІР°Р»РѕРІ РѕР¶РёРґР°РЅРёСЏ РґР»СЏ С‡С‚РµРЅРёСЏ/Р·Р°РїРёСЃРё РІ РїРѕСЂС‚
 10 CommTimeouts ReadIntervalTimeout !
 1 CommTimeouts ReadTotalTimeoutMultiplier !
  CommTimeouts ReadTotalTimeoutConstant !
@@ -125,7 +125,7 @@ LOOP
 1 CommTimeouts WriteTotalTimeoutConstant !
 CommTimeouts handle SetCommTimeouts 
 ;
-: CommInit ( -- ior ) \ первоначальная инициализация порта
+: CommInit ( -- ior ) \ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕСЂС‚Р°
 DCB MyDCB DCBlength !
 MyDCB handle GetCommState DROP
 9600 MyDCB BaudRate ! 
@@ -136,7 +136,7 @@ MyDCB handle GetCommState DROP
 MyDCB handle SetCommState 
 ; 
 : SetComm ( BaudRate ByteSize StopBits Parity -- ior )
-\ настройка порта
+\ РЅР°СЃС‚СЂРѕР№РєР° РїРѕСЂС‚Р°
  MyDCB Parity C!
  MyDCB StopBits C!
  MyDCB ByteSize C!
@@ -147,5 +147,5 @@ MyDCB handle SetCommState
 : COM1 ( -- flag ) S" COM1" CommOpen DUP IF CommInit 1000 Timeouts 2DROP THEN ;
 : COM2 ( -- flag ) S" COM2" CommOpen DUP IF CommInit 1000 Timeouts 2DROP THEN ;
 
-\ тестовые слова
+\ С‚РµСЃС‚РѕРІС‹Рµ СЃР»РѕРІР°
 : TEST 0 ?DO I CommOut LOOP ;

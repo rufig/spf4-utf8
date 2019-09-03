@@ -14,7 +14,7 @@ REQUIRE GLWindow  ~ygrek/lib/joopengl/GLWindow.f
    s w :add
 
    GLPyramid :new -> s 
-   -1e s :resize \ Ставим пирамиду вверх основанием
+   -1e s :resize \ РЎС‚Р°РІРёРј РїРёСЂР°РјРёРґСѓ РІРІРµСЂС… РѕСЃРЅРѕРІР°РЅРёРµРј
    0e 2e 0e s <angle.speed @ :set
    s w :add
 
@@ -33,7 +33,7 @@ REQUIRE GLWindow  ~ygrek/lib/joopengl/GLWindow.f
 
 \ : main
 \ 1 IF 
-  \ HERE IMAGE-BASE - 20000 + TO IMAGE-SIZE \ Вместо 10000 свое значение
+  \ HERE IMAGE-BASE - 20000 + TO IMAGE-SIZE \ Р’РјРµСЃС‚Рѕ 10000 СЃРІРѕРµ Р·РЅР°С‡РµРЅРёРµ
   ' RUN TO <MAIN> 
   \ ' RUN MAINX !
   \ TRUE TO ?GUI

@@ -1,4 +1,4 @@
-\ SNMP v2 клиент/сервер. (C) 2005 Andrey CHerezov
+\ SNMP v2 РєР»РёРµРЅС‚/СЃРµСЂРІРµСЂ. (C) 2005 Andrey CHerezov
 
 WINAPI: SnmpStartup       Wsnmp32.DLL
 WINAPI: SnmpCreateSession Wsnmp32.DLL
@@ -113,7 +113,7 @@ VECT vSnmpOnRecv ' NOOP TO vSnmpOnRecv
 \ .1.3.6.1.2.1.1.1
 \ .iso.org.dod.internet.mgmt.mib-2.system.sysDescr
 
-: SnmpFreeOutValue ( -- ) \ освобождение полученного по GetVb
+: SnmpFreeOutValue ( -- ) \ РѕСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ РїРѕ GetVb
   SNMPoutoid SNMP_SYNTAX_OID SnmpFreeDescriptor 0= THROW
   SNMPoutvalue @ DUP SNMP_SYNTAX_OID = SWAP SNMP_SYNTAX_OCTETS = OR
   SNMPoutvalue CELL+ CELL+ @ AND
@@ -168,7 +168,7 @@ VECT v_add-value
 \    PAD 100 SNMPsrcentity @ DUP ." src=" . SnmpEntityToStr DUP .
 \    IF PAD ASCIIZ> TYPE ." ->" THEN
 \    PAD 100 SNMPdstentity @ DUP ." dst=" . SnmpEntityToStr DUP .
-\    IF PAD ASCIIZ> TYPE CR THEN \ в режиме агента = 0 !
+\    IF PAD ASCIIZ> TYPE CR THEN \ РІ СЂРµР¶РёРјРµ Р°РіРµРЅС‚Р° = 0 !
     SnmpFreeOutValue
   LOOP
   0 0 0 0 SNMPresp SNMPoutpdu @ SnmpSetPduData 0= THROW
@@ -275,56 +275,56 @@ VECT v_add-value
 
 CREATE SnmpOutValue 0 , 0 , 0 ,
 
-: SnmpStrValue ( addr u -- addr2 ) \ addr2 освободить по FREE
+: SnmpStrValue ( addr u -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   2>R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_OCTETS OVER !
   DUP 2R> ROT CELL+ ! OVER CELL+ CELL+ ! \ value
 ;
-: SnmpGaugeValue ( x -- addr2 ) \ addr2 освободить по FREE
+: SnmpGaugeValue ( x -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   >R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_GAUGE32 OVER !
   R> OVER CELL+ ! \ value
 ;
-: SnmpIntValue ( n -- addr2 ) \ addr2 освободить по FREE
+: SnmpIntValue ( n -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   >R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_INT OVER !
   R> OVER CELL+ ! \ value
 ;
-: SnmpUintValue ( n -- addr2 ) \ addr2 освободить по FREE
+: SnmpUintValue ( n -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   >R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_UINT32 OVER !
   R> OVER CELL+ ! \ value
 ;
-: SnmpCounterValue ( n -- addr2 ) \ addr2 освободить по FREE
+: SnmpCounterValue ( n -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   >R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_CNTR32 OVER !
   R> OVER CELL+ ! \ value
 ;
-: SnmpOidValue ( addr u -- addr2 ) \ addr2 освободить по FREE
+: SnmpOidValue ( addr u -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   2>R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_OID OVER !
   DUP CELL+ 2R> DROP SnmpStrToOid 0= THROW \ value
 ;
-: SnmpTimeValue ( n -- addr2 ) \ addr2 освободить по FREE
+: SnmpTimeValue ( n -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   >R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue
   SNMP_SYNTAX_TIMETICKS OVER !
   R> OVER CELL+ ! \ value
 ;
-: SnmpOidName ( addr u -- addr2 ) \ addr2 освободить по FREE
+: SnmpOidName ( addr u -- addr2 ) \ addr2 РѕСЃРІРѕР±РѕРґРёС‚СЊ РїРѕ FREE
   2>R
 \  3 CELLS ALLOCATE THROW
   SnmpOutValue

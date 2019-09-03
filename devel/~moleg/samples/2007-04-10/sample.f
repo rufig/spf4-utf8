@@ -1,11 +1,11 @@
 \ 10-04-2007 ~mOleg
 \ Copyright [C] 2006-2007 mOleg mininoleg@yahoo.com
-\ пример очень простой обработки файла.
+\ РїСЂРёРјРµСЂ РѕС‡РµРЅСЊ РїСЂРѕСЃС‚РѕР№ РѕР±СЂР°Р±РѕС‚РєРё С„Р°Р№Р»Р°.
 
 VOCABULARY process
            ALSO process DEFINITIONS
 
-      \ я не люблю NOTFOUND, но в данном примере он кстати.
+      \ СЏ РЅРµ Р»СЋР±Р»СЋ NOTFOUND, РЅРѕ РІ РґР°РЅРЅРѕРј РїСЂРёРјРµСЂРµ РѕРЅ РєСЃС‚Р°С‚Рё.
       : NOTFOUND ( asc # --> ) 2DROP
                  0 >IN !
                  0x0D PARSE
@@ -13,7 +13,7 @@ VOCABULARY process
 
 PREVIOUS DEFINITIONS
 
-\ по-умолчанию сохраняем в STDLOG
+\ РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ СЃРѕС…СЂР°РЅСЏРµРј РІ STDLOG
 : sample ( srcZ # --> )
          ONLY process
          GetCommandLineA ASCIIZ> SOURCE! NextWord 2DROP
@@ -24,9 +24,9 @@ PREVIOUS DEFINITIONS
 
 S" sample.exe" SAVE CR S" passed " CR BYE
 
-\ пример использования:
+\ РїСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ:
 \ sample file.name >result.file
 
-\ заменяем завершающую последовательность строки 0x0D 0x0D 0x0A
-\ на принятую в данной ОС ( для win платформы 0x0D 0x0A для linux - 0x0A )
-\ пустые строки удаляются.
+\ Р·Р°РјРµРЅСЏРµРј Р·Р°РІРµСЂС€Р°СЋС‰СѓСЋ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ СЃС‚СЂРѕРєРё 0x0D 0x0D 0x0A
+\ РЅР° РїСЂРёРЅСЏС‚СѓСЋ РІ РґР°РЅРЅРѕР№ РћРЎ ( РґР»СЏ win РїР»Р°С‚С„РѕСЂРјС‹ 0x0D 0x0A РґР»СЏ linux - 0x0A )
+\ РїСѓСЃС‚С‹Рµ СЃС‚СЂРѕРєРё СѓРґР°Р»СЏСЋС‚СЃСЏ.

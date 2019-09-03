@@ -11,7 +11,7 @@ CLASS: TreeView <SUPER Control
     RECORD: TVINSERT
         var hParent
         var hInsertAfter
-    ;RECORD /TVINSERT \ Ôèãíÿ. Ãîðàçäî áîëüøå.
+    ;RECORD /TVINSERT \ Ð¤Ð¸Ð³Ð½Ñ. Ð“Ð¾Ñ€Ð°Ð·Ð´Ð¾ Ð±Ð¾Ð»ÑŒÑˆÐµ.
 
     RECORD: TVITEM
         var mask           \     UINT      mask;

@@ -8,8 +8,8 @@ WINAPI: SQLGetDiagField       ODBC32.DLL
 
 EXPORT
 
-\ Записать последнее собщение драйвера в addr size
-\ Возвращает кол-во реально записанных байт
+\ Р—Р°РїРёСЃР°С‚СЊ РїРѕСЃР»РµРґРЅРµРµ СЃРѕР±С‰РµРЅРёРµ РґСЂР°Р№РІРµСЂР° РІ addr size
+\ Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»-РІРѕ СЂРµР°Р»СЊРЅРѕ Р·Р°РїРёСЃР°РЅРЅС‹С… Р±Р°Р№С‚
 : SQL_MESSAGE { addr size \ len -- len }
   ^ len size addr W: sql_diag_message_text 1 last-stat @ W: sql_handle_stmt SQLGetDiagField DROP
   len

@@ -1,9 +1,9 @@
 \ Name: vararr.f
-\ "Ðàáîòà â Variant-ìàññèâàìè"
-\ Ïðèìî÷êà äëÿ Automate.f (c) ~yz 
-\ Àáäðàõèìîâ È.À. ilya@forth.org.ru
-\ v1.0 - 14.07.2005ã.
-\ v1.1 - 17.07.2005ã.
+\ "Ð Ð°Ð±Ð¾Ñ‚Ð° Ð² Variant-Ð¼Ð°ÑÑÐ¸Ð²Ð°Ð¼Ð¸"
+\ ÐŸÑ€Ð¸Ð¼Ð¾Ñ‡ÐºÐ° Ð´Ð»Ñ Automate.f (c) ~yz 
+\ ÐÐ±Ð´Ñ€Ð°Ñ…Ð¸Ð¼Ð¾Ð² Ð˜.Ð. ilya@forth.org.ru
+\ v1.0 - 14.07.2005Ð³.
+\ v1.1 - 17.07.2005Ð³.
 
 
 
@@ -41,54 +41,54 @@ CONSTANT /SAFEARRAY
 
 CREATE SAFEARRAYBOUND /SAFEARRAYBOUND 10 * ALLOT
 
-VARIABLE psa			\ äåñêðèïòîð SAFEARRAY ìàññèâà
-VARIABLE c_arr			\ óêçàòåëü íà ìàññèâ â "Ñ++" ôîðìàòå
-VARIABLE colMax			\ êîë-âî ñòîëáöîâ â ìàññèâå
-VARIABLE rowMax			\ êîë-âî ñòðîê â ìàññèâå
-VARIABLE varrType		\ òèï ìàññèâà
+VARIABLE psa			\ Ð´ÐµÑÐºÑ€Ð¸Ð¿Ñ‚Ð¾Ñ€ SAFEARRAY Ð¼Ð°ÑÑÐ¸Ð²Ð°
+VARIABLE c_arr			\ ÑƒÐºÐ·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð¼Ð°ÑÑÐ¸Ð² Ð² "Ð¡++" Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ
+VARIABLE colMax			\ ÐºÐ¾Ð»-Ð²Ð¾ ÑÑ‚Ð¾Ð»Ð±Ñ†Ð¾Ð² Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ
+VARIABLE rowMax			\ ÐºÐ¾Ð»-Ð²Ð¾ ÑÑ‚Ñ€Ð¾Ðº Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ
+VARIABLE varrType		\ Ñ‚Ð¸Ð¿ Ð¼Ð°ÑÑÐ¸Ð²Ð°
 
 : create-arr SafeArrayCreate DUP 0= ABORT" Not Create Array !" ;
 : destroy-arr SafeArrayDestroy  ABORT" Not Destroy Array !" ;
 
 : copy-arr ( psaOut psa -- ) SafeArrayCopy ABORT" Not Copy Array !" ;
 
-\ Ïîëó÷àåì äîñòóï ê äàííûì (â ôîðìàòå C++) èç ìàññèâà àäðåñîâàííîãî psa
+\ ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð´Ð¾ÑÑ‚ÑƒÐ¿ Ðº Ð´Ð°Ð½Ð½Ñ‹Ð¼ (Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ C++) Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð°Ð´Ñ€ÐµÑÐ¾Ð²Ð°Ð½Ð½Ð¾Ð³Ð¾ psa
 : acc-arr ( psa -- ) c_arr SWAP SafeArrayAccessData ABORT" Not Access Array !" ;
-\ Çàêðûâàåì äîñòóï ê äàííûì (â ôîðìàòå C++) èç ìàññèâà àäðåñîâàííîãî psa
+\ Ð—Ð°ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð´Ð¾ÑÑ‚ÑƒÐ¿ Ðº Ð´Ð°Ð½Ð½Ñ‹Ð¼ (Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ C++) Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð°Ð´Ñ€ÐµÑÐ¾Ð²Ð°Ð½Ð½Ð¾Ð³Ð¾ psa
 : unacc-arr ( psa -- ) SafeArrayUnaccessData ABORT" Not Unaccess Array !" ;
 
-\ Ïîëó÷àåì êîëè÷åñòâî ñòðîê è ñòîëáöîâ â ìàññèâå
+\ ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ñ€Ð¾Ðº Ð¸ ÑÑ‚Ð¾Ð»Ð±Ñ†Ð¾Ð² Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ
 : get-range
 	rowMax 1 psa @ SafeArrayGetUBound DROP
 	colMax 2 psa @ SafeArrayGetUBound DROP
 ;
 
-\ Ïðîâåðêà íà äîïóñòèìîñòü èíäåêñîâ
+\ ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð´Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð¸Ð½Ð´ÐµÐºÑÐ¾Ð²
 : check-index ( row col -- )
 	get-range
 	OVER colMax @ 1- > IF ABORT" Column Index Out of Range !" THEN
 	DUP rowMax @ 1- > IF  ABORT" Row Index Out of Range !" THEN
 ;
 
-\ Ïîëó÷èòü n-é ýëåìåíò èç 2-õ ìåðíîãî ìàññèâà (â ôîðìàòå C++) 
+\ ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ n-Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¸Ð· 2-Ñ… Ð¼ÐµÑ€Ð½Ð¾Ð³Ð¾ Ð¼Ð°ÑÑÐ¸Ð²Ð° (Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ C++) 
 : _getel-arr ( n - value/dvalue type )
 	4 CELLS * c_arr @ +
 	variant@ 
 ;
 
-\ Ïîëó÷èòü ýëåìåíò àäðåñîâàííûé row,col èç 2-õ ìåðíîãî ìàññèâà (â ôîðìàòå C++)
+\ ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð°Ð´Ñ€ÐµÑÐ¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ row,col Ð¸Ð· 2-Ñ… Ð¼ÐµÑ€Ð½Ð¾Ð³Ð¾ Ð¼Ð°ÑÑÐ¸Ð²Ð° (Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ C++)
 : getel-arr ( col row -- value/dvalue type) \ { \ rowMax colMax -- }
 	check-index
 	SWAP rowMax @ * +  _getel-arr
 ;
 
-\ Ïîìåñòèòü â ìàññèâ n-é ýëåìåíò
+\ ÐŸÐ¾Ð¼ÐµÑÑ‚Ð¸Ñ‚ÑŒ Ð² Ð¼Ð°ÑÑÐ¸Ð² n-Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚
 : _putel-arr
 	4 CELLS * c_arr @ +
 	variant!
 ;
 
-\ Ïîìåñòèòü ýëåìåíò àäðåñîâàííûé row,col â 2-õ ìåðíûé ìàññèâ (â ôîðìàòå C++)
+\ ÐŸÐ¾Ð¼ÐµÑÑ‚Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð°Ð´Ñ€ÐµÑÐ¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ row,col Ð² 2-Ñ… Ð¼ÐµÑ€Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² (Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ C++)
 : putel-arr ( value/dvalue type col row -- ) \ { \ rowMax colMax -- }
 	check-index
 	SWAP rowMax @ * +  _putel-arr
@@ -96,7 +96,7 @@ VARIABLE varrType		\ òèï ìàññèâà
 
 : _ARR-SAVE { \ psain -- }
 @ DUP TO psain 
-		\ Ñîçäà¸ì íîâûé (ïóñòîé) ìàññèâ ñ ðàçìåðîì è òèïîì âõîäÿùåãî ìàññèâà
+		\ Ð¡Ð¾Ð·Ð´Ð°Ñ‘Ð¼ Ð½Ð¾Ð²Ñ‹Ð¹ (Ð¿ÑƒÑÑ‚Ð¾Ð¹) Ð¼Ð°ÑÑÐ¸Ð² Ñ Ñ€Ð°Ð·Ð¼ÐµÑ€Ð¾Ð¼ Ð¸ Ñ‚Ð¸Ð¿Ð¾Ð¼ Ð²Ñ…Ð¾Ð´ÑÑ‰ÐµÐ³Ð¾ Ð¼Ð°ÑÑÐ¸Ð²Ð°
 		SafeArrayGetDim DUP CR ." DIM=" .H
 		psain W@ .H
 		\ tmp 1 psain SafeArrayGetUBound 0= IF CR ." UBound=" tmp @ . THEN
@@ -104,8 +104,8 @@ VARIABLE varrType		\ òèï ìàññèâà
 		0 SAFEARRAYBOUND cElements !
 		SAFEARRAYBOUND SWAP
 		varrType psain SafeArrayGetVartype DROP varrType @ CR ." =>" .S ." <=" create-arr psa ! 
-		\ Êîïèðóåì âõîäÿùèé ìàññèâ âî âíîâü ñîçäàííûé
+		\ ÐšÐ¾Ð¿Ð¸Ñ€ÑƒÐµÐ¼ Ð²Ñ…Ð¾Ð´ÑÑ‰Ð¸Ð¹ Ð¼Ð°ÑÑÐ¸Ð² Ð²Ð¾ Ð²Ð½Ð¾Ð²ÑŒ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ñ‹Ð¹
 		psa psain copy-arr
-		psa @	\ íà âûõîäå îòäà¸ì óêàçàòåëü íà äåñêðèïòîð ìàññèâà
+		psa @	\ Ð½Ð° Ð²Ñ‹Ñ…Ð¾Ð´Ðµ Ð¾Ñ‚Ð´Ð°Ñ‘Ð¼ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Ð´ÐµÑÐºÑ€Ð¸Ð¿Ñ‚Ð¾Ñ€ Ð¼Ð°ÑÑÐ¸Ð²Ð°
 ;
 ' _ARR-SAVE TO ARR-SAVE

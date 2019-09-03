@@ -7,7 +7,7 @@ REQUIRE /STRING lib/include/string.f
 REQUIRE winlib-icons ~ygrek/~yz/lib/icons.f
 REQUIRE LAMBDA{ ~pinka/lib/lambda.f
 
-MODULE: joopwin \ иначе W: и M: начинают конфликтовать
+MODULE: joopwin \ РёРЅР°С‡Рµ W: Рё M: РЅР°С‡РёРЅР°СЋС‚ РєРѕРЅС„Р»РёРєС‚РѕРІР°С‚СЊ
 
 REQUIRE OpenDialog ~day/joop/win/filedialogs.f
 

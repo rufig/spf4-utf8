@@ -1,14 +1,14 @@
 \ 20.Jan.2007 Sat 14:13 ruv
 \ $Id$
-( Улучшенный дамп отчета аппаратных исключений:
-  - сочетается с наличем множества хранилищ,
-  - подправлена эвристика вычисления значения ESP на момент исключения,
-  - позволяет выводить дополнительную информацию, привязываясь к AT-EXC-DUMP.
+( РЈР»СѓС‡С€РµРЅРЅС‹Р№ РґР°РјРї РѕС‚С‡РµС‚Р° Р°РїРїР°СЂР°С‚РЅС‹С… РёСЃРєР»СЋС‡РµРЅРёР№:
+  - СЃРѕС‡РµС‚Р°РµС‚СЃСЏ СЃ РЅР°Р»РёС‡РµРј РјРЅРѕР¶РµСЃС‚РІР° С…СЂР°РЅРёР»РёС‰,
+  - РїРѕРґРїСЂР°РІР»РµРЅР° СЌРІСЂРёСЃС‚РёРєР° РІС‹С‡РёСЃР»РµРЅРёСЏ Р·РЅР°С‡РµРЅРёСЏ ESP РЅР° РјРѕРјРµРЅС‚ РёСЃРєР»СЋС‡РµРЅРёСЏ,
+  - РїРѕР·РІРѕР»СЏРµС‚ РІС‹РІРѕРґРёС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ, РїСЂРёРІСЏР·С‹РІР°СЏСЃСЊ Рє AT-EXC-DUMP.
 
-  Модуль определяет заново WordByAddr, 
-  предоставляет ENUM-STORAGES, ставит <EXC-DUMP> на EXC-DUMP2
+  РњРѕРґСѓР»СЊ РѕРїСЂРµРґРµР»СЏРµС‚ Р·Р°РЅРѕРІРѕ WordByAddr, 
+  РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ ENUM-STORAGES, СЃС‚Р°РІРёС‚ <EXC-DUMP> РЅР° EXC-DUMP2
 
-  Подключать после storage.f
+  РџРѕРґРєР»СЋС‡Р°С‚СЊ РїРѕСЃР»Рµ storage.f
 )
 
 REQUIRE NEW-STORAGE  ~pinka/spf/storage.f
@@ -27,12 +27,12 @@ MODULE: exc-dump-support
 
 REQUIRE BIND-NODE ~pinka/samples/2006/lib/plain-list.f
 
-USER STORAGE-LIST \ список хранилищ, созданных потоком
+USER STORAGE-LIST \ СЃРїРёСЃРѕРє С…СЂР°РЅРёР»РёС‰, СЃРѕР·РґР°РЅРЅС‹С… РїРѕС‚РѕРєРѕРј
 
-: excide-this ( -- ) \ выкинуть
+: excide-this ( -- ) \ РІС‹РєРёРЅСѓС‚СЊ
   STORAGE-ID STORAGE-LIST FIND-LIST IF UNBIND-NODE DROP THEN
 ;
-: enroll-this ( -- ) \ вписать
+: enroll-this ( -- ) \ РІРїРёСЃР°С‚СЊ
   excide-this
   0 , HERE STORAGE-ID , STORAGE-LIST BIND-NODE
 ;
@@ -60,10 +60,10 @@ DEFINITIONS
 
 : (NEAREST1) ( 0|nfa1 addr nfa2 -- 0|nfa1|nfa2 addr )
   DUP 0= IF DROP EXIT THEN
-  \ сравниваем xt (адреса начала кода, cfa @)
+  \ СЃСЂР°РІРЅРёРІР°РµРј xt (Р°РґСЂРµСЃР° РЅР°С‡Р°Р»Р° РєРѕРґР°, cfa @)
   >R OVER DUP IF NAME> THEN 1- OVER
   R@ NAME> 1- WITHIN IF NIP R> SWAP EXIT THEN RDROP
-  \ 1- т.к. WITHIN строгое здесь
+  \ 1- С‚.Рє. WITHIN СЃС‚СЂРѕРіРѕРµ Р·РґРµСЃСЊ
 ;
 : (NEAREST2) ( wid -- )
   ['] (NEAREST1) FOR-WORDLIST
@@ -104,7 +104,7 @@ WARNING !
 : AT-EXC-DUMP ( -- ) ... ;
 
 : EXC-DUMP2 ( exc-info -- ) 
-  \ см. первоначальную реализацию в сырцах SPF3 и SPF4.
+  \ СЃРј. РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅСѓСЋ СЂРµР°Р»РёР·Р°С†РёСЋ РІ СЃС‹СЂС†Р°С… SPF3 Рё SPF4.
   IN-EXCEPTION @ IF DROP EXIT THEN   TRUE IN-EXCEPTION !  BASE @ >R HEX
 
   ." EXCEPTION! "
@@ -116,8 +116,8 @@ WARNING !
   ( DispatcherContext ContextRecord EstablisherFrame ExceptionRecord  ExceptionRecord )
   DROP 2 PICK
   [ 8 CELLS 80 + \ FLOATING_SAVE_AREA
-    11 CELLS +   \ сдвиг оносительно контекст к регистрам, начиная с edi
-  ] LITERAL + \ вычисление базового адреса образа регистров (~ygrek)
+    11 CELLS +   \ СЃРґРІРёРі РѕРЅРѕСЃРёС‚РµР»СЊРЅРѕ РєРѕРЅС‚РµРєСЃС‚ Рє СЂРµРіРёСЃС‚СЂР°Рј, РЅР°С‡РёРЅР°СЏ СЃ edi
+  ] LITERAL + \ РІС‹С‡РёСЃР»РµРЅРёРµ Р±Р°Р·РѕРІРѕРіРѕ Р°РґСЂРµСЃР° РѕР±СЂР°Р·Р° СЂРµРіРёСЃС‚СЂРѕРІ (~ygrek)
 
   DUP 12 CELLS DUMP CR
 
@@ -132,7 +132,7 @@ WARNING !
   ." RETURN STACK:" CR
   HANDLER @ DUP 0= IF DROP R0 @ THEN ( up-border ) >R
   6 CELLS + DUP @  SWAP  4 CELLS + @ ( a1 a2 )
-  \ берем ближайший снизу к up-border:
+  \ Р±РµСЂРµРј Р±Р»РёР¶Р°Р№С€РёР№ СЃРЅРёР·Сѓ Рє up-border:
   2DUP U> IF SWAP THEN ( min max ) DUP R@ U< IF NIP ELSE DROP THEN ( low-border ) R>
   ( low-border up-border )
   2DUP U< IF OVER 25 CELLS + UMIN SWAP ELSE 2DROP R0 @ DUP 50 CELLS - THEN

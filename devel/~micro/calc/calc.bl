@@ -3,61 +3,61 @@ WARNING 0!
 S" ~micro/calc/fpnum.f" INCLUDED
 S" ~micro/calc/string.f" INCLUDED
 
-" Fixedsys" 20 Шрифт mono
-" Fixedsys" 20 ( жирный ) Шрифт mono-bold
+" Fixedsys" 20 РЁСЂРёС„С‚ mono
+" Fixedsys" 20 ( Р¶РёСЂРЅС‹Р№ ) РЁСЂРёС„С‚ mono-bold
 
-500 350 " Цалцулатор" Форма
+500 350 " Р¦Р°Р»С†СѓР»Р°С‚РѕСЂ" Р¤РѕСЂРјР°
 
 1 ===
-66 Ввод _X
+66 Р’РІРѕРґ _X
 
 3 ===
-10 % 2 Ввод-числа _P 5 % пусто 20 % " Перевести" Кнопка okP
+10 % 2 Р’РІРѕРґ-С‡РёСЃР»Р° _P 5 % РїСѓСЃС‚Рѕ 20 % " РџРµСЂРµРІРµСЃС‚Рё" РљРЅРѕРїРєР° okP
 
-1 === Линия
-
-5 ===
-mono
-15 % || "   7  " Кнопка _7
-15 % || "   8  " Кнопка _8
-15 % || "   9  " Кнопка _9
-15 % || "   /  " Кнопка _/
-30 % || "      C     " Кнопка _C
+1 === Р›РёРЅРёСЏ
 
 5 ===
 mono
-15 % || "   4  " Кнопка _4
-15 % || "   5  " Кнопка _5
-15 % || "   6  " Кнопка _6
-15 % || "   *  " Кнопка _*
-30 % || "      =     " Кнопка _=
+15 % || "   7  " РљРЅРѕРїРєР° _7
+15 % || "   8  " РљРЅРѕРїРєР° _8
+15 % || "   9  " РљРЅРѕРїРєР° _9
+15 % || "   /  " РљРЅРѕРїРєР° _/
+30 % || "      C     " РљРЅРѕРїРєР° _C
 
 5 ===
 mono
-15 % || "   1  " Кнопка _1
-15 % || "   2  " Кнопка _2
-15 % || "   3  " Кнопка _3
-15 % || "   -  " Кнопка _-
-30 % || "            " Кнопка _ 
+15 % || "   4  " РљРЅРѕРїРєР° _4
+15 % || "   5  " РљРЅРѕРїРєР° _5
+15 % || "   6  " РљРЅРѕРїРєР° _6
+15 % || "   *  " РљРЅРѕРїРєР° _*
+30 % || "      =     " РљРЅРѕРїРєР° _=
 
 5 ===
 mono
-15 % || "   0  " Кнопка _0
-15 % || "  +/- " Кнопка _+/-
-15 % || "   .  " Кнопка _.
-15 % || "   +  " Кнопка _+
-30 % || "            " Кнопка _ 
+15 % || "   1  " РљРЅРѕРїРєР° _1
+15 % || "   2  " РљРЅРѕРїРєР° _2
+15 % || "   3  " РљРЅРѕРїРєР° _3
+15 % || "   -  " РљРЅРѕРїРєР° _-
+30 % || "            " РљРЅРѕРїРєР° _ 
 
 5 ===
 mono
-15 % || "   a  " Кнопка _a
-15 % || "   b  " Кнопка _b
-15 % || "   c  " Кнопка _c
-15 % || "   d  " Кнопка _d
-15 % || "   e  " Кнопка _e
-15 % || "   f  " Кнопка _f
+15 % || "   0  " РљРЅРѕРїРєР° _0
+15 % || "  +/- " РљРЅРѕРїРєР° _+/-
+15 % || "   .  " РљРЅРѕРїРєР° _.
+15 % || "   +  " РљРЅРѕРїРєР° _+
+30 % || "            " РљРЅРѕРїРєР° _ 
 
-Обработчики
+5 ===
+mono
+15 % || "   a  " РљРЅРѕРїРєР° _a
+15 % || "   b  " РљРЅРѕРїРєР° _b
+15 % || "   c  " РљРЅРѕРїРєР° _c
+15 % || "   d  " РљРЅРѕРїРєР° _d
+15 % || "   e  " РљРЅРѕРїРєР° _e
+15 % || "   f  " РљРЅРѕРїРєР° _f
+
+РћР±СЂР°Р±РѕС‚С‡РёРєРё
 
 OBJECT PNUM XV
 OBJECT PNUM YV
@@ -80,7 +80,7 @@ S" 10" DROP ' _P SETTEXT
     NEW >R
     R@ <S
     R@ >Z
-    " Опа..."
+    " РћРїР°..."
     SWAP
     0
     MsgBox DROP
@@ -187,78 +187,78 @@ S" 10" DROP ' _P SETTEXT
   ['] _X SETTEXT
 ;
 
-' APPLY-P :NONAME> ERRHND ; дляКнопки okP
-' CALC :NONAME> ERRHND ; дляКнопки _=
+' APPLY-P :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё okP
+' CALC :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _=
 :NONAME
   ['] OP+ DO-IT
-; :NONAME> ERRHND ; дляКнопки _+
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _+
 :NONAME
   ['] OP- DO-IT
-; :NONAME> ERRHND ; дляКнопки _-
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _-
 :NONAME
   ['] OP* DO-IT
-; :NONAME> ERRHND ; дляКнопки _*
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _*
 :NONAME
   ['] OP/ DO-IT
-; :NONAME> ERRHND ; дляКнопки _/
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _/
 :NONAME
   GET
   XV SIGN @ NEGATE XV SIGN !
   PUT
-; :NONAME> ERRHND ; дляКнопки _+/-
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _+/-
 :NONAME
   CLEAR 1 TO TYPING
-; :NONAME> ERRHND ; дляКнопки _C
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _C
 :NONAME
   [CHAR] 0 K
-; :NONAME> ERRHND ; дляКнопки _0
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _0
 :NONAME
   [CHAR] 1 K
-; :NONAME> ERRHND ; дляКнопки _1
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _1
 :NONAME
   [CHAR] 2 K
-; :NONAME> ERRHND ; дляКнопки _2
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _2
 :NONAME
   [CHAR] 3 K
-; :NONAME> ERRHND ; дляКнопки _3
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _3
 :NONAME
   [CHAR] 4 K
-; :NONAME> ERRHND ; дляКнопки _4
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _4
 :NONAME
   [CHAR] 5 K
-; :NONAME> ERRHND ; дляКнопки _5
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _5
 :NONAME
   [CHAR] 6 K
-; :NONAME> ERRHND ; дляКнопки _6
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _6
 :NONAME
   [CHAR] 7 K
-; :NONAME> ERRHND ; дляКнопки _7
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _7
 :NONAME
   [CHAR] 8 K
-; :NONAME> ERRHND ; дляКнопки _8
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _8
 :NONAME
   [CHAR] 9 K
-; :NONAME> ERRHND ; дляКнопки _9
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _9
 :NONAME
   [CHAR] A K
-; :NONAME> ERRHND ; дляКнопки _a
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _a
 :NONAME
   [CHAR] B K
-; :NONAME> ERRHND ; дляКнопки _b
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _b
 :NONAME
   [CHAR] C K
-; :NONAME> ERRHND ; дляКнопки _c
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _c
 :NONAME
   [CHAR] D K
-; :NONAME> ERRHND ; дляКнопки _d
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _d
 :NONAME
   [CHAR] E K
-; :NONAME> ERRHND ; дляКнопки _e
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _e
 :NONAME
   [CHAR] F K
-; :NONAME> ERRHND ; дляКнопки _f
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _f
 :NONAME
   [CHAR] . K
-; :NONAME> ERRHND ; дляКнопки _.
+; :NONAME> ERRHND ; РґР»СЏРљРЅРѕРїРєРё _.
 
-Конец-формы
+РљРѕРЅРµС†-С„РѕСЂРјС‹

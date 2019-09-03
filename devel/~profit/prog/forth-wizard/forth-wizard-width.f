@@ -1,4 +1,4 @@
-\ Промежуточная версия с перебором в ширину
+\ РџСЂРѕРјРµР¶СѓС‚РѕС‡РЅР°СЏ РІРµСЂСЃРёСЏ СЃ РїРµСЂРµР±РѕСЂРѕРј РІ С€РёСЂРёРЅСѓ
 
 REQUIRE FOR ~profit/lib/for-next.f
 REQUIRE ENUM ~nn/lib/enum.f
@@ -21,15 +21,15 @@ CONSTANT operations
 0 VALUE previousOp
 0 VALUE previousOp2
 
-4 CONSTANT maxOperations \ максимальное кол-во операций
-CREATE operationsNumber maxOperations CELLS ALLOT \ берём пространство для операция
-operationsNumber HERE OVER - ERASE \ очищаем память заранее
-operationsNumber VALUE lastOperation \ пока операций нет
+4 CONSTANT maxOperations \ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»-РІРѕ РѕРїРµСЂР°С†РёР№
+CREATE operationsNumber maxOperations CELLS ALLOT \ Р±РµСЂС‘Рј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РґР»СЏ РѕРїРµСЂР°С†РёСЏ
+operationsNumber HERE OVER - ERASE \ РѕС‡РёС‰Р°РµРј РїР°РјСЏС‚СЊ Р·Р°СЂР°РЅРµРµ
+operationsNumber VALUE lastOperation \ РїРѕРєР° РѕРїРµСЂР°С†РёР№ РЅРµС‚
 
 : addOperation ( op -- )  lastOperation !  lastOperation CELL+ TO lastOperation ;
 : operationsCount  ( -- n ) lastOperation operationsNumber - CELL / ;
 
-firstOp addOperation \ первая комбинация
+firstOp addOperation \ РїРµСЂРІР°СЏ РєРѕРјР±РёРЅР°С†РёСЏ
 
 : printOp ( op -- op )  DUP CASE
 SWAPop OF ." SWAP " ENDOF
@@ -59,7 +59,7 @@ A @ CELL+ lastOperation MAX TO lastOperation ;
 ALL iterateOperations ARE  
 checkOpTable
 previousOp TO previousOp2
-DUP TO previousOp \ сохраняем предыдущую операцию
+DUP TO previousOp \ СЃРѕС…СЂР°РЅСЏРµРј РїСЂРµРґС‹РґСѓС‰СѓСЋ РѕРїРµСЂР°С†РёСЋ
 OTHER DROP WISE CONT ;
 
 : operationsValid ( -- f ) PREDICATE checkOperations SUCCEEDS ;

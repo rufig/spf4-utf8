@@ -1,13 +1,13 @@
 : INCLUDE-PROBE ( addr u -- ... 0 | ior )
-  CR ." Выполняется INCLUDE-PROBE " 2DUP TYPE SPACE
-  R/O OPEN-FILE-SHARED ?DUP IF NIP ."  ... не получилось :(" EXIT THEN
-  ."  ... погнали!"
+  CR ." ╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П INCLUDE-PROBE " 2DUP TYPE SPACE
+  R/O OPEN-FILE-SHARED ?DUP IF NIP ."  ... ╨╜╨╡ ╨┐╨╛╨╗╤Г╤З╨╕╨╗╨╛╤Б╤М :(" EXIT THEN
+  ."  ... ╨┐╨╛╨│╨╜╨░╨╗╨╕!"
   INCLUDE-FILE 0
-  CR ." Результат INCLUDE-PROBE " DUP .
+  CR ." ╨а╨╡╨╖╤Г╨╗╤М╤В╨░╤В INCLUDE-PROBE " DUP .
 ;
 
 : IsAnySlash ( c -- f )
-\ f=TRUE, если c является слэшем (неважно каким)
+\ f=TRUE, ╨╡╤Б╨╗╨╕ c ╤П╨▓╨╗╤П╨╡╤В╤Б╤П ╤Б╨╗╤Н╤И╨╡╨╝ (╨╜╨╡╨▓╨░╨╢╨╜╨╛ ╨║╨░╨║╨╕╨╝)
   DUP [CHAR] \ = IF
     DROP TRUE
   ELSE
@@ -16,8 +16,8 @@
 ;
 
 : SelectPath  ( addr -- addr1 u )
-\ вернуть путь (вместе со слэшем) из полного имени файла
-\ addr - null-terminated полное имя
+\ ╨▓╨╡╤А╨╜╤Г╤В╤М ╨┐╤Г╤В╤М (╨▓╨╝╨╡╤Б╤В╨╡ ╤Б╨╛ ╤Б╨╗╤Н╤И╨╡╨╝) ╨╕╨╖ ╨┐╨╛╨╗╨╜╨╛╨│╨╛ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░
+\ addr - null-terminated ╨┐╨╛╨╗╨╜╨╛╨╡ ╨╕╨╝╤П
   DUP >R
   BEGIN
     DUP C@
@@ -39,19 +39,19 @@
 ;
 
 : SAVE-CURFILE ( addr u -- lastaddr )
-\ записать addr u в CURFILE, и вернуть его старое значение
+\ ╨╖╨░╨┐╨╕╤Б╨░╤В╤М addr u ╨▓ CURFILE, ╨╕ ╨▓╨╡╤А╨╜╤Г╤В╤М ╨╡╨│╨╛ ╤Б╤В╨░╤А╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡
   CURFILE @ ROT ROT
   HEAP-COPY CURFILE !
 ;
 
 : RESTORE-CURFILE ( lastaddr -- )
-\ восстановить CURRFILE
+\ ╨▓╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М CURRFILE
   CURFILE @ FREE THROW
   CURFILE !
 ;
 
 : INCLUDED-CURRPATH ( i*x addr u -- ior j*x )
-\ addr u - полный путь или относительно текущей директории.
+\ addr u - ╨┐╨╛╨╗╨╜╤Л╨╣ ╨┐╤Г╤В╤М ╨╕╨╗╨╕ ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╨╛ ╤В╨╡╨║╤Г╤Й╨╡╨╣ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╨╕.
   2DUP
   SAVE-CURFILE >R
     INCLUDE-PROBE
@@ -59,12 +59,12 @@
 ;
 
 : MOVE-TO ( addr-src size addr-dst -- )
-\ просто частовстречающаяся операция
+\ ╨┐╤А╨╛╤Б╤В╨╛ ╤З╨░╤Б╤В╨╛╨▓╤Б╤В╤А╨╡╤З╨░╤О╤Й╨░╤П╤Б╤П ╨╛╨┐╨╡╤А╨░╤Ж╨╕╤П
   SWAP MOVE
 ;
 
 : CONCAT-TO ( addr1 u1 addr2 u2 addr -- )
-\ соединить строки addr1-u1 и addr2-u2, записать результат в addr
+\ ╤Б╨╛╨╡╨┤╨╕╨╜╨╕╤В╤М ╤Б╤В╤А╨╛╨║╨╕ addr1-u1 ╨╕ addr2-u2, ╨╖╨░╨┐╨╕╤Б╨░╤В╤М ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В ╨▓ addr
   >R
   2SWAP ( addr2 u2 addr1 u1 )
   SWAP OVER ( addr2 u2 u1 addr1 u1 )
@@ -73,8 +73,8 @@
 ;
 
 : CONCAT ( addr1 u1 addr2 u2 -- addr u )
-\ соединить строки addr1-u1 и addr2-u2, вернуть динамически
-\ выделенную область памяти с результатом. разультат -
+\ ╤Б╨╛╨╡╨┤╨╕╨╜╨╕╤В╤М ╤Б╤В╤А╨╛╨║╨╕ addr1-u1 ╨╕ addr2-u2, ╨▓╨╡╤А╨╜╤Г╤В╤М ╨┤╨╕╨╜╨░╨╝╨╕╤З╨╡╤Б╨║╨╕
+\ ╨▓╤Л╨┤╨╡╨╗╨╡╨╜╨╜╤Г╤О ╨╛╨▒╨╗╨░╤Б╤В╤М ╨┐╨░╨╝╤П╤В╨╕ ╤Б ╤А╨╡╨╖╤Г╨╗╤М╤В╨░╤В╨╛╨╝. ╤А╨░╨╖╤Г╨╗╤М╤В╨░╤В -
 \ null-terminaated
   2OVER NIP OVER + DUP >R 1+
   ALLOCATE THROW DUP >R
@@ -83,7 +83,7 @@
 ;
 
 : INCLUDED-LASTPATH ( i*x addr u -- ior j*x )
-\ addr u - путь к файлу относительно пути к текущему интерпретируемому файлу
+\ addr u - ╨┐╤Г╤В╤М ╨║ ╤Д╨░╨╣╨╗╤Г ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╨╛ ╨┐╤Г╤В╨╕ ╨║ ╤В╨╡╨║╤Г╤Й╨╡╨╝╤Г ╨╕╨╜╤В╨╡╤А╨┐╤А╨╡╤В╨╕╤А╤Г╨╡╨╝╨╛╨╝╤Г ╤Д╨░╨╣╨╗╤Г
   CURFILE @ ?DUP IF
     SelectPath
     2SWAP CONCAT
@@ -97,26 +97,26 @@
 ;
 
 : INCLUDED-SPF ( i*x addr u -- ior j*x )
-\ addr u - путь к файлу относительно интерпретирующего его ехешника
+\ addr u - ╨┐╤Г╤В╤М ╨║ ╤Д╨░╨╣╨╗╤Г ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╨╛ ╨╕╨╜╤В╨╡╤А╨┐╤А╨╡╤В╨╕╤А╤Г╤О╤Й╨╡╨│╨╛ ╨╡╨│╨╛ ╨╡╤Е╨╡╤И╨╜╨╕╨║╨░
   +ModuleDirName INCLUDED-CURRPATH
 ;
 
 : INCLUDED ( i*x addr u -- j*x ) 
-  CR ." Выполняется INCLUDED " 2DUP TYPE
-  2DUP CR ." от текущего файла(lastpath)... " INCLUDED-LASTPATH IF
-    2DUP CR ."  от spf... " INCLUDED-SPF IF
-      CR ." от текущего пути (current)... " INCLUDED-CURRPATH THROW
+  CR ." ╨Т╤Л╨┐╨╛╨╗╨╜╤П╨╡╤В╤Б╤П INCLUDED " 2DUP TYPE
+  2DUP CR ." ╨╛╤В ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░(lastpath)... " INCLUDED-LASTPATH IF
+    2DUP CR ."  ╨╛╤В spf... " INCLUDED-SPF IF
+      CR ." ╨╛╤В ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╨┐╤Г╤В╨╕ (current)... " INCLUDED-CURRPATH THROW
     ELSE
       2DROP
     THEN
   ELSE
     2DROP
   THEN
-  CR ." ПриINCLUDEDлось"
+  CR ." ╨Я╤А╨╕INCLUDED╨╗╨╛╤Б╤М"
 ;
 
 REQUIRE COMMENT> ~micro/lib/comment.f
 
 COMMENT>
-То же, что и ~micro/lib/newinclude.f, только сообщает о путях поиска
-файла. Демонстрация работы, не более того ;)
+╨в╨╛ ╨╢╨╡, ╤З╤В╨╛ ╨╕ ~micro/lib/newinclude.f, ╤В╨╛╨╗╤М╨║╨╛ ╤Б╨╛╨╛╨▒╤Й╨░╨╡╤В ╨╛ ╨┐╤Г╤В╤П╤Е ╨┐╨╛╨╕╤Б╨║╨░
+╤Д╨░╨╣╨╗╨░. ╨Ф╨╡╨╝╨╛╨╜╤Б╤В╤А╨░╤Ж╨╕╤П ╤А╨░╨▒╨╛╤В╤Л, ╨╜╨╡ ╨▒╨╛╨╗╨╡╨╡ ╤В╨╛╨│╨╛ ;)

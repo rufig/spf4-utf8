@@ -1,19 +1,19 @@
-\ Ядро Deleter-а
+\ ╨п╨┤╤А╨╛ Deleter-╨░
 
 S" ~ac/lib/win/file/findfile.f" INCLUDED
 REQUIRE DATE&TIME lib/include/facil.f
 REQUIRE WTHROW lib/win/winerr.f
 
 CREATE FileName 256 ALLOT
-\ имя файла
+\ ╨╕╨╝╤П ╤Д╨░╨╣╨╗╨░
 
 0 VALUE PathU
 0 VALUE PathAddr
-\ путь к файлу
+\ ╨┐╤Г╤В╤М ╨║ ╤Д╨░╨╣╨╗╤Г
 
 : +Path ( addr u -- )
-\ добавление пути PathAddr PathU к имени файла addr u
-\ в качестве буфера используется FileName
+\ ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╨┐╤Г╤В╨╕ PathAddr PathU ╨║ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░ addr u
+\ ╨▓ ╨║╨░╤З╨╡╤Б╤В╨▓╨╡ ╨▒╤Г╤Д╨╡╤А╨░ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П FileName
   SWAP OVER
   PathAddr FileName PathU MOVE
   FileName PathU + SWAP MOVE
@@ -23,12 +23,12 @@ CREATE FileName 256 ALLOT
 ;
 
 : AllFiles ( -- addr u )
-\ маска "все файлы" в каталоге PathAddr PathU
+\ ╨╝╨░╤Б╨║╨░ "╨▓╤Б╨╡ ╤Д╨░╨╣╨╗╤Л" ╨▓ ╨║╨░╤В╨░╨╗╨╛╨│╨╡ PathAddr PathU
   S" *.*" +Path
 ;
 
 : ._or_.. ( addr u -- f )
-\ возвращает TRUE, если строка addr u равна "." или ".."
+\ ╨▓╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╤В TRUE, ╨╡╤Б╨╗╨╕ ╤Б╤В╤А╨╛╨║╨░ addr u ╤А╨░╨▓╨╜╨░ "." ╨╕╨╗╨╕ ".."
   2DUP S" ." COMPARE IF
     S" .." COMPARE IF
       FALSE
@@ -42,7 +42,7 @@ CREATE FileName 256 ALLOT
 ;
 
 : Delete ( addr u -- )
-\ удалить файл addr u в каталоге PathAddr PathU
+\ ╤Г╨┤╨░╨╗╨╕╤В╤М ╤Д╨░╨╣╨╗ addr u ╨▓ ╨║╨░╤В╨░╨╗╨╛╨│╨╡ PathAddr PathU
   2DUP ._or_.. IF
     2DROP
   ELSE
@@ -52,13 +52,13 @@ CREATE FileName 256 ALLOT
 ;
 
 : DeleteFromDir ( addr u -- )
-\ удалить файлы из каталога addr u
+\ ╤Г╨┤╨░╨╗╨╕╤В╤М ╤Д╨░╨╣╨╗╤Л ╨╕╨╖ ╨║╨░╤В╨░╨╗╨╛╨│╨░ addr u
   TO PathU TO PathAddr
   AllFiles ['] Delete FIND-FILES
 ;
 
 : Append ( addr u -- id )
-\ открыть файл addr u на добавление
+\ ╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗ addr u ╨╜╨░ ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╨╡
   R/W OPEN-FILE THROW
   DUP >R FILE-SIZE THROW ( ud )
   R@ REPOSITION-FILE THROW
@@ -67,10 +67,10 @@ CREATE FileName 256 ALLOT
 
 1024 CONSTANT /CopyBuffer
 CREATE CopyBuffer /CopyBuffer ALLOT
-\ буфер копирования
+\ ╨▒╤Г╤Д╨╡╤А ╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╤П
 
 : Copy ( f1 f2 -- )
-\ копировать файл f1 в файл f2
+\ ╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╤В╤М ╤Д╨░╨╣╨╗ f1 ╨▓ ╤Д╨░╨╣╨╗ f2
   BEGIN
     OVER CopyBuffer /CopyBuffer ROT READ-FILE THROW
     ?DUP
@@ -82,14 +82,14 @@ CREATE CopyBuffer /CopyBuffer ALLOT
 ;
 
 : Open ( addr u -- h )
-\ открыть файл на чтение
+\ ╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗ ╨╜╨░ ╤З╤В╨╡╨╜╨╕╨╡
   R/O OPEN-FILE THROW
 ;
 
 : .. 2 .0 ;
 : :: ." :" ;
 : // ." /" ;
-\ просто красивые слова ;)
+\ ╨┐╤А╨╛╤Б╤В╨╛ ╨║╤А╨░╤Б╨╕╨▓╤Л╨╡ ╤Б╨╗╨╛╨▓╨░ ;)
 
 WINAPI: GetFileTime kernel32.dll
 WINAPI: FileTimeToLocalFileTime kernel32.dll
@@ -111,7 +111,7 @@ CREATE LocalFileTime 2 CELLS ALLOT
 ;
 
 : PrintHeader ( h -- )
-\ вывод заголовка перед каждым файлом в H-STDOUT
+\ ╨▓╤Л╨▓╨╛╨┤ ╨╖╨░╨│╨╛╨╗╨╛╨▓╨║╨░ ╨┐╨╡╤А╨╡╨┤ ╨║╨░╨╢╨┤╤Л╨╝ ╤Д╨░╨╣╨╗╨╛╨╝ ╨▓ H-STDOUT
   CR
   80 0 DO ." =" LOOP CR
   FileCreatedAt ( sec min hr day mt year )
@@ -120,8 +120,8 @@ CREATE LocalFileTime 2 CELLS ALLOT
 ;
 
 : ArchTo ( addr1 u1 addr2 u2 -- )
-\ дописывание файла addr1 u1 в файл addr2 u2 с удалением источника
-\ второй файл должен существовать
+\ ╨┤╨╛╨┐╨╕╤Б╤Л╨▓╨░╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░ addr1 u1 ╨▓ ╤Д╨░╨╣╨╗ addr2 u2 ╤Б ╤Г╨┤╨░╨╗╨╡╨╜╨╕╨╡╨╝ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║╨░
+\ ╨▓╤В╨╛╤А╨╛╨╣ ╤Д╨░╨╣╨╗ ╨┤╨╛╨╗╨╢╨╡╨╜ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╛╨▓╨░╤В╤М
   2OVER 2SWAP
   Append
   ROT ROT ( f2 addr1 addr1 )
@@ -139,10 +139,10 @@ CREATE LocalFileTime 2 CELLS ALLOT
 
 0 VALUE LogAddr
 0 VALUE LogU
-\ Имя файла, в который будут сбрасываться байлы из каталога
+\ ╨Ш╨╝╤П ╤Д╨░╨╣╨╗╨░, ╨▓ ╨║╨╛╤В╨╛╤А╤Л╨╣ ╨▒╤Г╨┤╤Г╤В ╤Б╨▒╤А╨░╤Б╤Л╨▓╨░╤В╤М╤Б╤П ╨▒╨░╨╣╨╗╤Л ╨╕╨╖ ╨║╨░╤В╨░╨╗╨╛╨│╨░
 
 : ArchToLog ( addr u -- )
-\ добавление файла addr u в лог
+\ ╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╤Д╨░╨╣╨╗╨░ addr u ╨▓ ╨╗╨╛╨│
   2DUP ._or_.. IF
     2DROP
   ELSE
@@ -151,8 +151,8 @@ CREATE LocalFileTime 2 CELLS ALLOT
 ;
 
 : Arch ( addr u addr-l u-l -- )
-\ сброс файлов из директории addr u в файл addr-l u-l
-\ файл-приёмник должен существовать
+\ ╤Б╨▒╤А╨╛╤Б ╤Д╨░╨╣╨╗╨╛╨▓ ╨╕╨╖ ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╨╕ addr u ╨▓ ╤Д╨░╨╣╨╗ addr-l u-l
+\ ╤Д╨░╨╣╨╗-╨┐╤А╨╕╤С╨╝╨╜╨╕╨║ ╨┤╨╛╨╗╨╢╨╡╨╜ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╨╛╨▓╨░╤В╤М
   TO LogU TO LogAddr
   TO PathU TO PathAddr
   AllFiles ['] ArchToLog FIND-FILES

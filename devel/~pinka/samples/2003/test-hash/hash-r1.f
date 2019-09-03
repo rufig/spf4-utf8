@@ -1,6 +1,6 @@
 \ 01.Nov.2003 Sat 15:07 ruv
 \ from   Arc\work\Forth\SPF\devel\~pinka\hash\search-wordlist.f    at 16.11.2000
-\ и подзаточено..
+\ Рё РїРѕРґР·Р°С‚РѕС‡РµРЅРѕ..
 
 REQUIRE { lib\ext\locals.f
 

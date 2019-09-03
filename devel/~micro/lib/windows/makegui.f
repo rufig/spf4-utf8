@@ -56,7 +56,7 @@ EXPORT
 
 ;MODULE
 
-\ ðàñïðåäåë¸ííûé case
+\ Ñ€Ð°ÑÐ¿Ñ€ÐµÐ´ÐµÐ»Ñ‘Ð½Ð½Ñ‹Ð¹ case
 
 : HitchEH ( xt0 xt1 -- )
 	EXECUTE
@@ -91,7 +91,7 @@ EXPORT
 	IsHandled?
 	{{ DlgProcParams PopLocals }} ;
 
-\ ïðî÷åå
+\ Ð¿Ñ€Ð¾Ñ‡ÐµÐµ
 
 e:
 	msg WM_INITDIALOG = e> ;

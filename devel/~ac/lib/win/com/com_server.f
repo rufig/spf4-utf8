@@ -5,7 +5,7 @@ REQUIRE CLSID, ~ac/lib/win/com/com.f
 0x80020009 CONSTANT DISP_E_EXCEPTION
          4 CONSTANT DISPATCH_PROPERTYPUT
 
-VARIABLE FCNT \ ãëîáàëüíûé ñ÷åò÷èê AddRef/Release, ò.å. ñ÷åò÷èê æèâûõ îáúåêòîâ
+VARIABLE FCNT \ Ð³Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº AddRef/Release, Ñ‚.Ðµ. ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº Ð¶Ð¸Ð²Ñ‹Ñ… Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð²
 
 : Class. ( oid -- oid )
   CR DUP @ WordByAddr TYPE R@ WordByAddr TYPE SPACE
@@ -15,15 +15,15 @@ VARIABLE FCNT \ ãëîáàëüíûé ñ÷åò÷èê AddRef/Release, ò.å. ñ÷åò÷èê æèâûõ îáúåêòîâ
   CREATE 
     HERE SWAP
     BL WORD COUNT CLSID, 
-    DUP ,               \ ïðåäîê (òî÷íåå IID ðåàëèçóåìîãî èíòåðôåéñà)
-    Methods#            \ ê-âî ìåòîäîâ ïðåäêà
-    DUP ,               \ ñâîè ìåòîäû (ê-âî)
-    LATEST ,            \ ñâî¸ èìÿ
-    HERE CELL+ ,        \ oid êëàññà (óêàçàòåëü íà Vtable)
+    DUP ,               \ Ð¿Ñ€ÐµÐ´Ð¾Ðº (Ñ‚Ð¾Ñ‡Ð½ÐµÐµ IID Ñ€ÐµÐ°Ð»Ð¸Ð·ÑƒÐµÐ¼Ð¾Ð³Ð¾ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ°)
+    Methods#            \ Ðº-Ð²Ð¾ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð² Ð¿Ñ€ÐµÐ´ÐºÐ°
+    DUP ,               \ ÑÐ²Ð¾Ð¸ Ð¼ÐµÑ‚Ð¾Ð´Ñ‹ (Ðº-Ð²Ð¾)
+    LATEST ,            \ ÑÐ²Ð¾Ñ‘ Ð¸Ð¼Ñ
+    HERE CELL+ ,        \ oid ÐºÐ»Ð°ÑÑÐ° (ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° Vtable)
     1+ CELLS HERE SWAP DUP ALLOT ERASE     \ VTABLE
     -1 ,
     GET-CURRENT WORDLIST
-    LATEST OVER VOC-NAME! \ äëÿ îñìûñëåííîãî ïðåäñòàâëåíèÿ â ORDER
+    LATEST OVER VOC-NAME! \ Ð´Ð»Ñ Ð¾ÑÐ¼Ñ‹ÑÐ»ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð² ORDER
     SET-CURRENT SWAP
   DOES> 7 CELLS + ( oid )
 ;
@@ -33,15 +33,15 @@ VARIABLE FCNT \ ãëîáàëüíûé ñ÷åò÷èê AddRef/Release, ò.å. ñ÷åò÷èê æèâûõ îáúåêòîâ
 : Class ( oid -- class_int ) 7 CELLS - ;
 
 : SpfClassName ( oid -- addr u )
-  \ çäåñü oid - com'îâñêèé óêàçàòåëü íà óêàçàòåëü vtable
-  \ ò.å. òîò, ÷òî ïåðâûì ïàðàìåòðîì â âûçîâàõ
+  \ Ð·Ð´ÐµÑÑŒ oid - com'Ð¾Ð²ÑÐºÐ¸Ð¹ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ð° ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ vtable
+  \ Ñ‚.Ðµ. Ñ‚Ð¾Ñ‚, Ñ‡Ñ‚Ð¾ Ð¿ÐµÑ€Ð²Ñ‹Ð¼ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð¼ Ð² Ð²Ñ‹Ð·Ð¾Ð²Ð°Ñ…
   @ 2 CELLS - @ COUNT
 ;
 : SpfClassWid ( oid -- wid )
   @ DUP 3 CELLS - @ \ methods#
-  1+ CELLS + \ ïðîïóñòèëè vtable
-  CELL+ \ ïðîïóñòèëè -1 â ñòðóêòóðå Class: âûøå
-  CELL+ \ ïðîïóñòèëè voc-list
+  1+ CELLS + \ Ð¿Ñ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð»Ð¸ vtable
+  CELL+ \ Ð¿Ñ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð»Ð¸ -1 Ð² ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ðµ Class: Ð²Ñ‹ÑˆÐµ
+  CELL+ \ Ð¿Ñ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð»Ð¸ voc-list
 ;
 : ComClassIID ( oid -- addr u )
   @ 4 CELLS - @
@@ -50,16 +50,16 @@ VARIABLE FCNT \ ãëîáàëüíûé ñ÷åò÷èê AddRef/Release, ò.å. ñ÷åò÷èê æèâûõ îáúåêòîâ
 0
 CELL -- c.VTBL
 CELL -- c.MAGIC  \ SPFR
-CELL -- c.REFCNT \ ñ÷åò÷èê ññûëîê AddRef/Release
-CONSTANT /COM_OBJ \ âäðóã êîãäà-íèáóäü ïðèäåòñÿ äîáàâëÿòü ñëóæ.èíô.
+CELL -- c.REFCNT \ ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº ÑÑÑ‹Ð»Ð¾Ðº AddRef/Release
+CONSTANT /COM_OBJ \ Ð²Ð´Ñ€ÑƒÐ³ ÐºÐ¾Ð³Ð´Ð°-Ð½Ð¸Ð±ÑƒÐ´ÑŒ Ð¿Ñ€Ð¸Ð´ÐµÑ‚ÑÑ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÑ‚ÑŒ ÑÐ»ÑƒÐ¶.Ð¸Ð½Ñ„.
 
 : NewComObj ( extra_size class_oid -- oid )
-\ Ñîçäàòü îáúåêò çàäàííîãî êëàññà ñ äîïîëíèòåëüíîé ïàìÿòüþ ðàçìåðà size.
-\ Ìèíèìàëüíî ðàáî÷èé COM-îáúåêò (extra_size=0) òðåáóåò ïàìÿòü òîëüêî
-\ äëÿ óêàçàòåëÿ íà vmt (êîòîðûé òîò æå ÷òî è ó íàøåãî îáúåêòà "êëàññ").
-\ Íàðèìåð: /BROWSER SPF.IWebBrowserEvents2 NewComObj
-( Ìû ìîæåì ñîçäàâàòü ïîäîáíûå îáúåêòû òîëüêî äëÿ êëàññîâ, èíòåðôåéñû êîòîðûõ
-  ðåàëèçóåì â ñâîåé ïðîãðàììå, ò.å. äëÿ êîòîðûõ ÿâëÿåìñÿ COM-ñåðâåðîì.)
+\ Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¾Ð±ÑŠÐµÐºÑ‚ Ð·Ð°Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ ÐºÐ»Ð°ÑÑÐ° Ñ Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ð¹ Ð¿Ð°Ð¼ÑÑ‚ÑŒÑŽ Ñ€Ð°Ð·Ð¼ÐµÑ€Ð° size.
+\ ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ð¹ COM-Ð¾Ð±ÑŠÐµÐºÑ‚ (extra_size=0) Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ Ð¿Ð°Ð¼ÑÑ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾
+\ Ð´Ð»Ñ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»Ñ Ð½Ð° vmt (ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ñ‚Ð¾Ñ‚ Ð¶Ðµ Ñ‡Ñ‚Ð¾ Ð¸ Ñƒ Ð½Ð°ÑˆÐµÐ³Ð¾ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° "ÐºÐ»Ð°ÑÑ").
+\ ÐÐ°Ñ€Ð¸Ð¼ÐµÑ€: /BROWSER SPF.IWebBrowserEvents2 NewComObj
+( ÐœÑ‹ Ð¼Ð¾Ð¶ÐµÐ¼ ÑÐ¾Ð·Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ð¿Ð¾Ð´Ð¾Ð±Ð½Ñ‹Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ ÐºÐ»Ð°ÑÑÐ¾Ð², Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÑ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ…
+  Ñ€ÐµÐ°Ð»Ð¸Ð·ÑƒÐµÐ¼ Ð² ÑÐ²Ð¾ÐµÐ¹ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ðµ, Ñ‚.Ðµ. Ð´Ð»Ñ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… ÑÐ²Ð»ÑÐµÐ¼ÑÑ COM-ÑÐµÑ€Ð²ÐµÑ€Ð¾Ð¼.)
   @ SWAP /COM_OBJ + ALLOCATE THROW DUP >R c.VTBL !
   S" SPFR" DROP @ R@ c.MAGIC !
   R>
@@ -76,24 +76,24 @@ CONSTANT /COM_OBJ \ âäðóã êîãäà-íèáóäü ïðèäåòñÿ äîáàâëÿòü ñëóæ.èíô.
 : (Release) ( oid -- cnt )
   DUP IsMyComObject?
   IF DUP c.REFCNT @ 1- DUP ROT c.REFCNT !
-     FCNT @ 1- FCNT ! \ òåîðåòè÷åñêè, åñëè ãëîáàëüíûé ñ÷åò÷èê âåðíóëñÿ ê íóëþ, òî com-ñåðâåð ìîæåò çàâåðøèòüñÿ
-  ELSE DROP FCNT @ 1- DUP FCNT ! THEN \ íî íàáëþäåíèå ïîêàçûâàåò, ÷òî îí áûâàåò è îòðèöàòåëüíûì ;)
+     FCNT @ 1- FCNT ! \ Ñ‚ÐµÐ¾Ñ€ÐµÑ‚Ð¸Ñ‡ÐµÑÐºÐ¸, ÐµÑÐ»Ð¸ Ð³Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑÑ‡ÐµÑ‚Ñ‡Ð¸Ðº Ð²ÐµÑ€Ð½ÑƒÐ»ÑÑ Ðº Ð½ÑƒÐ»ÑŽ, Ñ‚Ð¾ com-ÑÐµÑ€Ð²ÐµÑ€ Ð¼Ð¾Ð¶ÐµÑ‚ Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒÑÑ
+  ELSE DROP FCNT @ 1- DUP FCNT ! THEN \ Ð½Ð¾ Ð½Ð°Ð±Ð»ÑŽÐ´ÐµÐ½Ð¸Ðµ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚, Ñ‡Ñ‚Ð¾ Ð¾Ð½ Ð±Ñ‹Ð²Ð°ÐµÑ‚ Ð¸ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼ ;)
 ;
 : Extends ( class_int -- class_int )
   DUP
-  ' EXECUTE             \ oid êëàññà, èç êîòîðîãî êîïèðóåì VTABLE
-  DUP 2 CELLS - @ CELLS \ ñêîëüêî êîïèðîâàòü
+  ' EXECUTE             \ oid ÐºÐ»Ð°ÑÑÐ°, Ð¸Ð· ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ ÐºÐ¾Ð¿Ð¸Ñ€ÑƒÐµÐ¼ VTABLE
+  DUP 2 CELLS - @ CELLS \ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ
   ( class_int class_int oid n )
-  SWAP @                \ îòêóäà êîïèðîâàòü
-  ROT 8 CELLS +         \ êóäà
+  SWAP @                \ Ð¾Ñ‚ÐºÑƒÐ´Ð° ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ
+  ROT 8 CELLS +         \ ÐºÑƒÐ´Ð°
   ROT MOVE
 ;
 
 : ToVtable ( class_int xt -- class_int )
   OVER >R
   LAST @ FIND
-  IF >BODY @ ( íîìåð ìåòîäà â VTABLE )
-     8 + \ ñìåùåíèå VTABLE â îïðåäåëåíèè êëàññà
+  IF >BODY @ ( Ð½Ð¾Ð¼ÐµÑ€ Ð¼ÐµÑ‚Ð¾Ð´Ð° Ð² VTABLE )
+     8 + \ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ðµ VTABLE Ð² Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ð¸ ÐºÐ»Ð°ÑÑÐ°
      CELLS R> + !
   ELSE -321 THROW THEN
 ;

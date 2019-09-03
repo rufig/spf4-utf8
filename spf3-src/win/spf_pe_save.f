@@ -1,14 +1,14 @@
-( Сохранение системы в формате Windows Portable Executable.
+( РЎРѕС…СЂР°РЅРµРЅРёРµ СЃРёСЃС‚РµРјС‹ РІ С„РѕСЂРјР°С‚Рµ Windows Portable Executable.
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Ревизия - сентябрь 1999
+  Р РµРІРёР·РёСЏ - СЃРµРЅС‚СЏР±СЂСЊ 1999
 )
 
-( HERE на момент начала компиляции)
-DUP        VALUE ORG-ADDR      \ адрес компиляции кода
-DUP        VALUE IMAGE-BEGIN   \ адрес загрузки кода
-512 1024 * VALUE IMAGE-SIZE    \ сколько места резервировать при 
-                               \ загрузке секции кода
-DUP 8 1024 * - CONSTANT IMAGE-BASE \ адрес загрузки первой секции
+( HERE РЅР° РјРѕРјРµРЅС‚ РЅР°С‡Р°Р»Р° РєРѕРјРїРёР»СЏС†РёРё)
+DUP        VALUE ORG-ADDR      \ Р°РґСЂРµСЃ РєРѕРјРїРёР»СЏС†РёРё РєРѕРґР°
+DUP        VALUE IMAGE-BEGIN   \ Р°РґСЂРµСЃ Р·Р°РіСЂСѓР·РєРё РєРѕРґР°
+512 1024 * VALUE IMAGE-SIZE    \ СЃРєРѕР»СЊРєРѕ РјРµСЃС‚Р° СЂРµР·РµСЂРІРёСЂРѕРІР°С‚СЊ РїСЂРё 
+                               \ Р·Р°РіСЂСѓР·РєРµ СЃРµРєС†РёРё РєРѕРґР°
+DUP 8 1024 * - CONSTANT IMAGE-BASE \ Р°РґСЂРµСЃ Р·Р°РіСЂСѓР·РєРё РїРµСЂРІРѕР№ СЃРµРєС†РёРё
 
 FALSE VALUE ?GUI
 FALSE VALUE ?CONSOLE
@@ -18,8 +18,8 @@ VARIABLE RESOURCES-SIZE
 
 HEX
 
-: SAVE ( c-addr u -- ) \ например S" My Forth Program.exe" SAVE
-  ( сохранение наработанной форт-системы в EXE-файле формата PE - Win32 )
+: SAVE ( c-addr u -- ) \ РЅР°РїСЂРёРјРµСЂ S" My Forth Program.exe" SAVE
+  ( СЃРѕС…СЂР°РЅРµРЅРёРµ РЅР°СЂР°Р±РѕС‚Р°РЅРЅРѕР№ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹ РІ EXE-С„Р°Р№Р»Рµ С„РѕСЂРјР°С‚Р° PE - Win32 )
   ERASED-CNT 0!
   R/W CREATE-FILE THROW >R
   ModuleName R/O OPEN-FILE-SHARED THROW >R
@@ -41,7 +41,7 @@ HEX
   AOLL @ @ AOGPA @ @
   IMAGE-BASE 1034 + AOLL @ !
   IMAGE-BASE 1038 + AOGPA @ !
-  HERE 400 R@ WRITE-FILE THROW ( заголовок и таблица импорта )
+  HERE 400 R@ WRITE-FILE THROW ( Р·Р°РіРѕР»РѕРІРѕРє Рё С‚Р°Р±Р»РёС†Р° РёРјРїРѕСЂС‚Р° )
   HERE 200 ERASE
   IMAGE-BEGIN HERE OVER - 1FF + 200 / 200 * R@ WRITE-FILE THROW
   AOGPA @ ! AOLL @ !
@@ -49,10 +49,10 @@ HEX
 ;
 DECIMAL
 
-: OPTIONS ( -> ) \ интерпретировать командную строку
+: OPTIONS ( -> ) \ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊ РєРѕРјР°РЅРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
   GetCommandLineA ASCIIZ>
   TIB SWAP C/L MIN DUP #TIB ! MOVE >IN 0!
   TIB C@ [CHAR] " = IF [CHAR] " ELSE BL THEN
-  WORD DROP \ имя программы
+  WORD DROP \ РёРјСЏ РїСЂРѕРіСЂР°РјРјС‹
   <PRE> ['] INTERPRET CATCH ?DUP IF ERROR THEN
 ;

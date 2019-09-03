@@ -24,13 +24,13 @@ NM -- ModuleName \ array[0..NM-1] of Char
  4 -- CharTable \ TFarApiCharTable;
  4 -- Text \ TFarApiText;
  4 -- EditorControl \ TFarApiEditorControl;
-\  Указатель на структуру с адресами полезных функций из far.exe
+\  РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂСѓРєС‚СѓСЂСѓ СЃ Р°РґСЂРµСЃР°РјРё РїРѕР»РµР·РЅС‹С… С„СѓРЅРєС†РёР№ РёР· far.exe
  4 -- FSF \ PFarStandardFunctions;
-\  Функция вывода помощи
+\  Р¤СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РїРѕРјРѕС‰Рё
  4 -- ShowHelp \ TFarApiShowHelp;
-\  Функция, которая будет действовать и в редакторе, и в панелях, и...
+\  Р¤СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РґРµР№СЃС‚РІРѕРІР°С‚СЊ Рё РІ СЂРµРґР°РєС‚РѕСЂРµ, Рё РІ РїР°РЅРµР»СЏС…, Рё...
  4 -- AdvControl \ TFarApiAdvControl;
-\  Функции для обработчика диалога
+\  Р¤СѓРЅРєС†РёРё РґР»СЏ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РґРёР°Р»РѕРіР°
  4 -- InputBox \ TFarApiInputBox;
  4 -- DialogEx \ TFarApiDialogEx;
  4 -- SendDlgMessage \ TFarApiSendDlgMessage;

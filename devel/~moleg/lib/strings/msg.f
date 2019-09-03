@@ -1,16 +1,16 @@
 \ 2008-11-24 ~mOleg
-\ Сopyright [C] 2008 mOleg mininoleg@yahoo.com
-\ работа со списком сообщений
+\ РЎopyright [C] 2008 mOleg mininoleg@yahoo.com
+\ СЂР°Р±РѕС‚Р° СЃРѕ СЃРїРёСЃРєРѕРј СЃРѕРѕР±С‰РµРЅРёР№
 
  REQUIRE ?DEFINED     devel\~moleg\lib\util\ifdef.f
  REQUIRE FILE>HEAP    devel\~moleg\lib\win\file2heap.f
  REQUIRE ROUND        devel\~moleg\lib\util\stackadd.f
  REQUIRE VAL          devel\~moleg\lib\parsing\number.f
 
-\ копировать строку asc # по указанному адресу addr
+\ РєРѕРїРёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ asc # РїРѕ СѓРєР°Р·Р°РЅРЅРѕРјСѓ Р°РґСЂРµСЃСѓ addr
 ?DEFINED SCOPY : SCOPY   ( asc # addr --> ) 2DUP C! 1 + SWAP CMOVE ;
 
-\ отправить строку в стандартный поток ошибок
+\ РѕС‚РїСЂР°РІРёС‚СЊ СЃС‚СЂРѕРєСѓ РІ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РїРѕС‚РѕРє РѕС€РёР±РѕРє
 ?DEFINED >STDERR : >STDERR ( asc # --> ) H-STDERR WRITE-FILE DROP ;
 
 \ ------------------------------------------------------------------------------
@@ -18,16 +18,16 @@
 VOCABULARY Messages
            ALSO Messages DEFINITIONS
 
-        USER msg-list \ ссылка на последнее сообщение в списке
-        USER-VALUE last-msg    \ номер последнего созданного сообщения
+        USER msg-list \ СЃСЃС‹Р»РєР° РЅР° РїРѕСЃР»РµРґРЅРµРµ СЃРѕРѕР±С‰РµРЅРёРµ РІ СЃРїРёСЃРєРµ
+        USER-VALUE last-msg    \ РЅРѕРјРµСЂ РїРѕСЃР»РµРґРЅРµРіРѕ СЃРѕР·РґР°РЅРЅРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ
 
-0 \ формат записи сообщения
-  CELL -- off_msgPrev  \ адрес предыдущего сообщения
-  CELL -- off_msgName  \ номер текущего сообщения
-     1 -- off_msgBody  \ строка сообщения вместе со счетчиком длины
+0 \ С„РѕСЂРјР°С‚ Р·Р°РїРёСЃРё СЃРѕРѕР±С‰РµРЅРёСЏ
+  CELL -- off_msgPrev  \ Р°РґСЂРµСЃ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ
+  CELL -- off_msgName  \ РЅРѕРјРµСЂ С‚РµРєСѓС‰РµРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ
+     1 -- off_msgBody  \ СЃС‚СЂРѕРєР° СЃРѕРѕР±С‰РµРЅРёСЏ РІРјРµСЃС‚Рµ СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј РґР»РёРЅС‹
 CONSTANT /msgRecord
 
-\ добавить новое сообщение в список сообщений
+\ РґРѕР±Р°РІРёС‚СЊ РЅРѕРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РІ СЃРїРёСЃРѕРє СЃРѕРѕР±С‰РµРЅРёР№
 : new-msg ( asc # msg --> )
           OVER /msgRecord + ALLOCATE THROW
           TUCK off_msgName !
@@ -35,7 +35,7 @@ CONSTANT /msgRecord
           R@ msg-list change
           R> off_msgPrev ! ;
 
-\ найти сообщение в списке сообщений по его номеру
+\ РЅР°Р№С‚Рё СЃРѕРѕР±С‰РµРЅРёРµ РІ СЃРїРёСЃРєРµ СЃРѕРѕР±С‰РµРЅРёР№ РїРѕ РµРіРѕ РЅРѕРјРµСЂСѓ
 : find-msg-num ( msg --> asc # true | msg false )
            >R msg-list @
            BEGIN DUP WHILE
@@ -44,7 +44,7 @@ CONSTANT /msgRecord
              REPEAT RDROP off_msgBody COUNT TRUE EXIT
            THEN R> SWAP ;
 
-\ найти номер сообщения по содержимому сообщения
+\ РЅР°Р№С‚Рё РЅРѕРјРµСЂ СЃРѕРѕР±С‰РµРЅРёСЏ РїРѕ СЃРѕРґРµСЂР¶РёРјРѕРјСѓ СЃРѕРѕР±С‰РµРЅРёСЏ
 : find-msg-body ( asc # --> msg | asc # false )
                 2>R msg-list @
                 BEGIN DUP WHILE
@@ -53,50 +53,50 @@ CONSTANT /msgRecord
                   REPEAT off_msgName @ RDROP RDROP EXIT
                 THEN 2R> ROT ;
 
-\ найти номер для следующего сообщения
+\ РЅР°Р№С‚Рё РЅРѕРјРµСЂ РґР»СЏ СЃР»РµРґСѓСЋС‰РµРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ
 : num-msg ( --> err )
           last-msg BEGIN 1 + DUP find-msg-num WHILE 2DROP REPEAT TO last-msg ;
 
-\ найти сообщение в списке msg-list, отобразить его текст
-\ если сообщения с указанным индексом err не найдено, отобразить индекс
+\ РЅР°Р№С‚Рё СЃРѕРѕР±С‰РµРЅРёРµ РІ СЃРїРёСЃРєРµ msg-list, РѕС‚РѕР±СЂР°Р·РёС‚СЊ РµРіРѕ С‚РµРєСЃС‚
+\ РµСЃР»Рё СЃРѕРѕР±С‰РµРЅРёСЏ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРЅРґРµРєСЃРѕРј err РЅРµ РЅР°Р№РґРµРЅРѕ, РѕС‚РѕР±СЂР°Р·РёС‚СЊ РёРЅРґРµРєСЃ
 : ~MESSAGE ( err --> ) find-msg-num IF ELSE 0 (D.) THEN TYPE ( >STDERR) ;
 
-\ отобразить сообщение с номером msg если flag отличен от нуля,
-\ выполнить THROW с кодом msg, если флаг = 0 действия не выполняются
+\ РѕС‚РѕР±СЂР°Р·РёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ СЃ РЅРѕРјРµСЂРѕРј msg РµСЃР»Рё flag РѕС‚Р»РёС‡РµРЅ РѕС‚ РЅСѓР»СЏ,
+\ РІС‹РїРѕР»РЅРёС‚СЊ THROW СЃ РєРѕРґРѕРј msg, РµСЃР»Рё С„Р»Р°Рі = 0 РґРµР№СЃС‚РІРёСЏ РЅРµ РІС‹РїРѕР»РЅСЏСЋС‚СЃСЏ
 : (ABORT) ( flag msg --> )
           SWAP IF DUP ~MESSAGE THROW ELSE DROP THEN ;
 
-\ по содержимому строки asc # определить номер сообщения
+\ РїРѕ СЃРѕРґРµСЂР¶РёРјРѕРјСѓ СЃС‚СЂРѕРєРё asc # РѕРїСЂРµРґРµР»РёС‚СЊ РЅРѕРјРµСЂ СЃРѕРѕР±С‰РµРЅРёСЏ
 : reffered ( asc # --> msg )
            find-msg-body DUP IF ELSE DROP num-msg DUP >R new-msg R> THEN ;
 
 ALSO FORTH DEFINITIONS
 
-\ компилировать код сообщения
+\ РєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РєРѕРґ СЃРѕРѕР±С‰РµРЅРёСЏ
 : NOTICE" ( / message" --> )
           ?COMP [CHAR] " PARSE reffered
           [COMPILE] LITERAL ; IMMEDIATE
 
-\ вывести сообщение о ошибке
+\ РІС‹РІРµСЃС‚Рё СЃРѕРѕР±С‰РµРЅРёРµ Рѕ РѕС€РёР±РєРµ
 : ERROR" ( / message" --> )
          ?COMP [CHAR] " PARSE reffered
          [COMPILE] LITERAL POSTPONE DUP POSTPONE ~MESSAGE POSTPONE THROW
          ; IMMEDIATE
 
-\ компилировать код, в случае ошибки выводящий сообщение message
+\ РєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РєРѕРґ, РІ СЃР»СѓС‡Р°Рµ РѕС€РёР±РєРё РІС‹РІРѕРґСЏС‰РёР№ СЃРѕРѕР±С‰РµРЅРёРµ message
 : ABORT" ( / message" --> )
          ?COMP [CHAR] " PARSE reffered
          [COMPILE] LITERAL POSTPONE (ABORT) ; IMMEDIATE
 
-\ компилировать код, выводящий сообщение message
+\ РєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РєРѕРґ, РІС‹РІРѕРґСЏС‰РёР№ СЃРѕРѕР±С‰РµРЅРёРµ message
 : MESSAGE" ( / message" --> )
            [CHAR] " PARSE reffered
            STATE @ IF [COMPILE] LITERAL POSTPONE ~MESSAGE
-                    ELSE DROP \ в режиме интерпретации сообщение
-                              \ добавляется к списку сообщений
+                    ELSE DROP \ РІ СЂРµР¶РёРјРµ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё СЃРѕРѕР±С‰РµРЅРёРµ
+                              \ РґРѕР±Р°РІР»СЏРµС‚СЃСЏ Рє СЃРїРёСЃРєСѓ СЃРѕРѕР±С‰РµРЅРёР№
                    THEN ; IMMEDIATE
 
-\ сохранить все сообщения в файл с указанным именем
+\ СЃРѕС…СЂР°РЅРёС‚СЊ РІСЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ РІ С„Р°Р№Р» СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј
 : save-messages ( asc # --> )
                 W/O CREATE-FILE THROW >R
                 msg-list
@@ -108,12 +108,12 @@ ALSO FORTH DEFINITIONS
                     off_msgPrev
                 REPEAT DROP R> CLOSE-FILE THROW ;
 
-\ загрузить список сообщений в память из файла Asc #
+\ Р·Р°РіСЂСѓР·РёС‚СЊ СЃРїРёСЃРѕРє СЃРѕРѕР±С‰РµРЅРёР№ РІ РїР°РјСЏС‚СЊ РёР· С„Р°Р№Р»Р° Asc #
 : load-messages ( asc # --> flag ) FILE>HEAP
                 IF SAVE-SOURCE N>R SOURCE! 0 >IN !
                    BEGIN NextWord DUP WHILE
                          OVER C@ [CHAR] \ =
-                         IF 2DROP 13 PARSE 2DROP \ пропуск коментария
+                         IF 2DROP 13 PARSE 2DROP \ РїСЂРѕРїСѓСЃРє РєРѕРјРµРЅС‚Р°СЂРёСЏ
                           ELSE VAL >R 13 PARSE R> new-msg
                          THEN
                          1 >IN +!
@@ -122,14 +122,14 @@ ALSO FORTH DEFINITIONS
                  ELSE FALSE EXIT
                 THEN TRUE ;
 
-?DEFINED test{ \EOF -- тестовая секция ---------------------------------------
+?DEFINED test{ \EOF -- С‚РµСЃС‚РѕРІР°СЏ СЃРµРєС†РёСЏ ---------------------------------------
 
-test{ \ тестирование сборки
+test{ \ С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃР±РѕСЂРєРё
       S" devel\~mOleg\lib\strings\spf.msg" load-messages 0 = THROW
       : ttt NOTICE" sample test" ;
       : zzz NOTICE" sampled test" ;
       : vvv NOTICE" sample test" ;
-      ttt vvv <> THROW \ ошибка, если сообщения дублируются
+      ttt vvv <> THROW \ РѕС€РёР±РєР°, РµСЃР»Рё СЃРѕРѕР±С‰РµРЅРёСЏ РґСѓР±Р»РёСЂСѓСЋС‚СЃСЏ
       : test MESSAGE" passed" ;
       S" .\devel\~mOleg\lib\test.msg" save-messages
     test

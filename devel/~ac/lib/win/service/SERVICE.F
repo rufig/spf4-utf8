@@ -1,6 +1,6 @@
-\ 30.12.2001 ac Исправлены ошибки с числом параметров в (ServiceControlHandler)
-\               и в (ServiceMain)
-\ 20.09.2002 ruvim: исправления в стековой нотации и исправление CreateSevice
+\ 30.12.2001 ac РСЃРїСЂР°РІР»РµРЅС‹ РѕС€РёР±РєРё СЃ С‡РёСЃР»РѕРј РїР°СЂР°РјРµС‚СЂРѕРІ РІ (ServiceControlHandler)
+\               Рё РІ (ServiceMain)
+\ 20.09.2002 ruvim: РёСЃРїСЂР°РІР»РµРЅРёСЏ РІ СЃС‚РµРєРѕРІРѕР№ РЅРѕС‚Р°С†РёРё Рё РёСЃРїСЂР°РІР»РµРЅРёРµ CreateSevice
 
 REQUIRE OpenServiceA ~ac/lib/win/service/service_struct.f
 
@@ -36,8 +36,8 @@ WARNING !
 VARIABLE CtrlHandler
 
 : (ServiceControlHandler) ( fdwControl -- )
-  \ управляющая процедура сервиса
-  \ поступают аргументы =1 или =4
+  \ СѓРїСЂР°РІР»СЏСЋС‰Р°СЏ РїСЂРѕС†РµРґСѓСЂР° СЃРµСЂРІРёСЃР°
+  \ РїРѕСЃС‚СѓРїР°СЋС‚ Р°СЂРіСѓРјРµРЅС‚С‹ =1 РёР»Рё =4
 
   DUP SERVICE_CONTROL_STOP = ( 1 )
   IF
@@ -76,9 +76,9 @@ VECT ServiceProc  ' NOOP TO ServiceProc
   SERVICE_RUNNING     SERVICE_STATUS dwCurrentState !
   SERVICE_ACCEPT_STOP SERVICE_STATUS dwControlsAccepted !
 
-  ['] ServiceControlHandler SERVICE_TABLE @ \ на этом участке ошибки
-  RegisterServiceCtrlHandlerA DUP CtrlHandler !  \ означают скорее всего Win95
-  SERVICE_STATUS SWAP SetServiceStatus DROP      \ поэтому игнорируем
+  ['] ServiceControlHandler SERVICE_TABLE @ \ РЅР° СЌС‚РѕРј СѓС‡Р°СЃС‚РєРµ РѕС€РёР±РєРё
+  RegisterServiceCtrlHandlerA DUP CtrlHandler !  \ РѕР·РЅР°С‡Р°СЋС‚ СЃРєРѕСЂРµРµ РІСЃРµРіРѕ Win95
+  SERVICE_STATUS SWAP SetServiceStatus DROP      \ РїРѕСЌС‚РѕРјСѓ РёРіРЅРѕСЂРёСЂСѓРµРј
 
   ServiceProc
   0
@@ -89,6 +89,6 @@ VECT ServiceProc  ' NOOP TO ServiceProc
   HERE DUP >R SWAP DUP ALLOT MOVE 0 C,
   HERE TO SERVICE_TABLE R> , ['] ServiceMain , 0 , 0 ,
   SERVICE_TABLE StartServiceCtrlDispatcherA 0=
-  ( flag=true функция не работает, возможно Win95 
-    иначе выход из сервиса - останов )
+  ( flag=true С„СѓРЅРєС†РёСЏ РЅРµ СЂР°Р±РѕС‚Р°РµС‚, РІРѕР·РјРѕР¶РЅРѕ Win95 
+    РёРЅР°С‡Рµ РІС‹С…РѕРґ РёР· СЃРµСЂРІРёСЃР° - РѕСЃС‚Р°РЅРѕРІ )
 ;

@@ -1,9 +1,9 @@
-REQUIRE >Äàòà         ~ac/lib/win/date/date.f
+REQUIRE >Ð”Ð°Ñ‚Ð°         ~ac/lib/win/date/date.f
 REQUIRE GET-TIME-ZONE ~ac/lib/win/date/timezone.f
 REQUIRE {             ~ac/lib/locals.f
 
 WINAPI: GetTickCount KERNEL32.DLL
-1 1 1998 >Äàòà CONSTANT d01011998
+1 1 1998 >Ð”Ð°Ñ‚Ð° CONSTANT d01011998
 
 VARIABLE W-DATEA
 VARIABLE M-DATEA
@@ -20,7 +20,7 @@ W-DATE Sun Mon Tue Wed Thu Fri Sat
 M-DATE Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
 
 : >Date>W ( d m y -- w )
-  >Äàòà d01011998 - 4 + 7 MOD
+  >Ð”Ð°Ñ‚Ð° d01011998 - 4 + 7 MOD
   DUP 0< IF 7 + THEN
 ;
 : DateW>S ( w -- addr u )

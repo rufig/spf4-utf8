@@ -1,5 +1,5 @@
-\ Интерпретатор диалоговых форм для баз данных
-\ Ю. Жиловец, 5 ноября 2003 г.
+\ РРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂ РґРёР°Р»РѕРіРѕРІС‹С… С„РѕСЂРј РґР»СЏ Р±Р°Р· РґР°РЅРЅС‹С…
+\ Р®. Р–РёР»РѕРІРµС†, 5 РЅРѕСЏР±СЂСЏ 2003 Рі.
 
 REQUIRE "          ~yz/lib/common.f
 REQUIRE small-hash ~yz/lib/hash.f
@@ -28,13 +28,13 @@ REQUIRE Z>>        ~yz/lib/data.f
 0 VALUE debug  \ TRUE TO debug
 
 \ -------------------------------------
-\ Обработка ошибок
+\ РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє
 
-: my-error ( ERR-NUM -> ) \ показать расшифровку ошибки
+: my-error ( ERR-NUM -> ) \ РїРѕРєР°Р·Р°С‚СЊ СЂР°СЃС€РёС„СЂРѕРІРєСѓ РѕС€РёР±РєРё
   DUP -2 = IF DROP 
                 ER-A @ ER-U @ PAD CZMOVE PAD err
            THEN
-  >R <( R> DUP " Ошибка #~N (0x~06H)" )> err
+  >R <( R> DUP " РћС€РёР±РєР° #~N (0x~06H)" )> err
 ;
 : error ( z--) err BYE ;
 : ?error ( ? z --) SWAP IF error ELSE DROP THEN ;
@@ -51,7 +51,7 @@ VARIABLE last-form-wid
   >R <( R> fatal-a fatal-n  
     S" form-name" last-form-wid @ SEARCH-WORDLIST IF EXECUTE ELSE S" ?" THEN
     RP@ 5 CELLS OVER + SWAP DO I @ WordByAddr CELL +LOOP
-    " ~Z: ~S~/Последняя вызванная форма: ~S~/Стек возвратов: ~S ~S ~S ~S ~S"
+    " ~Z: ~S~/РџРѕСЃР»РµРґРЅСЏСЏ РІС‹Р·РІР°РЅРЅР°СЏ С„РѕСЂРјР°: ~S~/РЎС‚РµРє РІРѕР·РІСЂР°С‚РѕРІ: ~S ~S ~S ~S ~S"
   )> error
 ;
 
@@ -72,9 +72,9 @@ WINAPI: SQLGetDiagField ODBC32.DLL
 : ?sql-error ( ? -- ) 0xFFFF AND 
   DUP W: SQL_SUCCESS = IF DROP EXIT THEN 
   W: SQL_SUCCESS_WITH_INFO = IF 
-    " Предупреждение" sql-message msg 
+    " РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ" sql-message msg 
   ELSE 
-    " Ошибка доступа к базе данных" sql-message error 
+    " РћС€РёР±РєР° РґРѕСЃС‚СѓРїР° Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С…" sql-message error 
   THEN ;
 
 : err-dialog ( z -- )
@@ -87,13 +87,13 @@ WINAPI: SQLGetDiagField ODBC32.DLL
   BYE ;
 
 \ ------------------------------
-\ Запросы
+\ Р—Р°РїСЂРѕСЃС‹
 : query ( z -- ) DUP last-sql-statement ZMOVE 
   database ExecuteSQL ?sql-error ;
 
 : FirstRow ( -- ) database NextRowWithInfo 
   DUP W: sql_no_data_found = IF 
-    DROP " Запрос не вернул данных" sql-message error 
+    DROP " Р—Р°РїСЂРѕСЃ РЅРµ РІРµСЂРЅСѓР» РґР°РЅРЅС‹С…" sql-message error 
   ELSE
     ?sql-error 
   THEN ;
@@ -172,7 +172,7 @@ MODULE: ODBC EXPORT
 ;MODULE
 
 \ ------------------------------
-\ Система
+\ РЎРёСЃС‚РµРјР°
 
 WINAPI: LoadImageA USER32.DLL
 
@@ -180,7 +180,7 @@ WINAPI: LoadImageA USER32.DLL
   >R W: lr_loadfromfile 0 0 W: image_icon R> IMAGE-BASE LoadImageA ;
 
 \ ------------------------------
-\ Формы
+\ Р¤РѕСЂРјС‹
 
 0
 CELL -- :ctl
@@ -191,7 +191,7 @@ CELL -- :load
 CELL -- :unload
 CELL -- :clear
 CELL -- :invalid
-\ добавляя новые поля, не забудьте изменить ELEMENT:
+\ РґРѕР±Р°РІР»СЏСЏ РЅРѕРІС‹Рµ РїРѕР»СЏ, РЅРµ Р·Р°Р±СѓРґСЊС‚Рµ РёР·РјРµРЅРёС‚СЊ ELEMENT:
 == elem-len
 
 : || ( elem -- ) :ctl @ | ;
@@ -216,7 +216,7 @@ USER-VALUE last-element
   ['] FALSE ,   \ :invalid
 ;
 
-: ?INTERP STATE @ IF " Только для режима интерпретации" error THEN ;
+: ?INTERP STATE @ IF " РўРѕР»СЊРєРѕ РґР»СЏ СЂРµР¶РёРјР° РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёРё" error THEN ;
 
 : ELEMENT; ( -- ) ?INTERP ; IMMEDIATE
 
@@ -247,14 +247,14 @@ USER-VALUE last-element
 
 : FORM; ( old-curr-wid -- wid ) 
   last-element S" form-elements" SFIND 
-  0= IF " В форме отсутствует переменная form-elements" fatal-error THEN
+  0= IF " Р’ С„РѕСЂРјРµ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РїРµСЂРµРјРµРЅРЅР°СЏ form-elements" fatal-error THEN
   >BODY !
   GET-CURRENT SWAP SET-CURRENT
   PREVIOUS
 ;
 
 : all-elements ( xt list -- )
-\ передается ( elem -- )
+\ РїРµСЂРµРґР°РµС‚СЃСЏ ( elem -- )
   SWAP >R
   BEGIN
     ?DUP 
@@ -274,7 +274,7 @@ USER-VALUE last-element
   (: :unload @ EXECUTE ;) SWAP all-elements ;  
 
 : some-elements ( xt list -- ?)
-\ передается ( elem -- ?)
+\ РїРµСЂРµРґР°РµС‚СЃСЏ ( elem -- ?)
   SWAP >R
   BEGIN
     ?DUP 
@@ -296,10 +296,10 @@ USER-VALUE last-element
 
 : FORMEXEC ( ... a # wid -- ... )
   >R 2DUP !fatal R>
-  ?FORMEXEC 0= IF " FORMEXEC: Слово не найдено" fatal-error THEN ;
+  ?FORMEXEC 0= IF " FORMEXEC: РЎР»РѕРІРѕ РЅРµ РЅР°Р№РґРµРЅРѕ" fatal-error THEN ;
 
 \ -------------------------------------------------
-\ Регистрация форм и подформ
+\ Р РµРіРёСЃС‚СЂР°С†РёСЏ С„РѕСЂРј Рё РїРѕРґС„РѕСЂРј
 
 0
 CELL -- :formwid
@@ -326,11 +326,11 @@ CELL -- :subformgrid
 
 : ?formrec ( a n -- rec)
   2DUP !fatal
-  FORMS HASH@R ?DUP 0= IF " Форма не зарегистрирована" fatal-error THEN ;
+  FORMS HASH@R ?DUP 0= IF " Р¤РѕСЂРјР° РЅРµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅР°" fatal-error THEN ;
 
 : ?subformrec { wid -- rec }
   S" form-name" wid FORMEXEC !fatal
-  ^ wid 4 SUBFORMS HASH@R ?DUP 0= IF " Подформа не зарегистрирована" fatal-error THEN ;
+  ^ wid 4 SUBFORMS HASH@R ?DUP 0= IF " РџРѕРґС„РѕСЂРјР° РЅРµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅР°" fatal-error THEN ;
 
 : get-form ( a n -- wid)
   ?formrec :formwid @ ;
@@ -355,14 +355,14 @@ CELL -- :subformgrid
   file-a file-u ['] INCLUDED CATCH
   ?DUP IF
     CASE
-      2 3 <OF< <( file-a file-u " Файл ~'~S~' не найден" )> error EXIT ENDOF
-      -2003 OF " Неизвестное ключевое слово"  ENDOF
-      0xC0000005 OF " Нарушение общей защиты" ENDOF
-    >R <( R> " Ошибка ~N" )>
+      2 3 <OF< <( file-a file-u " Р¤Р°Р№Р» ~'~S~' РЅРµ РЅР°Р№РґРµРЅ" )> error EXIT ENDOF
+      -2003 OF " РќРµРёР·РІРµСЃС‚РЅРѕРµ РєР»СЋС‡РµРІРѕРµ СЃР»РѕРІРѕ"  ENDOF
+      0xC0000005 OF " РќР°СЂСѓС€РµРЅРёРµ РѕР±С‰РµР№ Р·Р°С‰РёС‚С‹" ENDOF
+    >R <( R> " РћС€РёР±РєР° ~N" )>
     END-CASE
     err-dialog EXIT
   THEN
-  DEPTH 1- depth <> IF " Сбой стека при загрузке формы" err EXIT THEN
+  DEPTH 1- depth <> IF " РЎР±РѕР№ СЃС‚РµРєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„РѕСЂРјС‹" err EXIT THEN
 ;
 
 MESSAGES: form-pre
@@ -389,7 +389,7 @@ MESSAGES;
   ( win ) >R
   S" form-title" form FORMEXEC R@ -text!
   S" form-grid"  form FORMEXEC R@ -grid!
-  \ зарегистрируем форму
+  \ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј С„РѕСЂРјСѓ
   S" form-name" form FORMEXEC form R@ DUP -grid@ register-form
   R@ S" form-window-init" form ?FORMEXEC 0= IF DROP THEN
   R> winshow
@@ -416,7 +416,7 @@ MESSAGES;
   form FREE-WORDLIST ;
 
 \ -------------------------------
-\ Мелочи
+\ РњРµР»РѕС‡Рё
 
 : skip  filler 1 10 this ctlresize | ;
 : space ( n -- ) filler SWAP 1 this ctlresize ;
@@ -482,21 +482,21 @@ WINAPI: GetLocalTime KERNEL32.DLL
   d ctl -selected@ d format-date ;
 
 : day-of-week ( dt -- n)
-\ 1 - ПН 2 - ВТ ... 7 - ВС
+\ 1 - РџРќ 2 - Р’Рў ... 7 - Р’РЎ
   4 + W@ ?DUP 0= IF 7 THEN ;
 
 : >flag ( ? -- ) IF 1 ELSE 0 THEN ;
 
 : edit-resize { n ctl -- }
-\ размер поля ввода по максимальному числу символов
+\ СЂР°Р·РјРµСЂ РїРѕР»СЏ РІРІРѕРґР° РїРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРјСѓ С‡РёСЃР»Сѓ СЃРёРјРІРѕР»РѕРІ
   n ctl limit-edit
-  " ш" ctl text-size SWAP n * SWAP 6 + ctl resize ;
+  " С€" ctl text-size SWAP n * SWAP 6 + ctl resize ;
 
 : edit-readonly ( flag ctl -- ) W: em_setreadonly wsend DROP ;
 : edit-only-numbers ( ctl -- ) W: es_number SWAP +style ;
 
 \ ---------------------------------
-\ Форматирование запросов
+\ Р¤РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїСЂРѕСЃРѕРІ
 
 USER-CREATE <<<buf 2048 USER-ALLOT
 \ >>>
@@ -527,7 +527,7 @@ USER-CREATE <<<buf 2048 USER-ALLOT
   WHILE
     expand-{}
   REPEAT
-  \ пропускаем все до пробела
+  \ РїСЂРѕРїСѓСЃРєР°РµРј РІСЃРµ РґРѕ РїСЂРѕР±РµР»Р°
   SkipWord
   POSTPONE (>>>)
 ; IMMEDIATE
@@ -564,14 +564,14 @@ USER-CREATE <<<buf 2048 USER-ALLOT
 : ?invalid ( ? z -- ?)  >R DUP IF R@ msg THEN RDROP ;
 
 \ -------------------------------
-\ Данные
+\ Р”Р°РЅРЅС‹Рµ
 
 : ?DATA ( a # data -- a # data ) 
   >R 2DUP !fatal R>
-  ?DUP 0= IF " Область данных = 0" fatal-error THEN ;
+  ?DUP 0= IF " РћР±Р»Р°СЃС‚СЊ РґР°РЅРЅС‹С… = 0" fatal-error THEN ;
 : data@  ( a n data -- n ) 
   >R 2DUP !fatal R> ?DATA HASH@N 
-  0= IF " data@: Нет такого ключа" fatal-error THEN ;
+  0= IF " data@: РќРµС‚ С‚Р°РєРѕРіРѕ РєР»СЋС‡Р°" fatal-error THEN ;
 : data@z ( a n data -- z/0) ?DATA HASH@Z ;
 : :H ( a n data -- ) data@z :Z ;
 
@@ -597,19 +597,19 @@ USER-CREATE <<<buf 2048 USER-ALLOT
   >R data@ >R <( R> " ~N" )> R> -text! ;
 
 \ -------------------------------
-\ Запуск
+\ Р—Р°РїСѓСЃРє
 
-: ?next ( "name" или name<BL> -- a # / 0)
+: ?next ( "name" РёР»Рё name<BL> -- a # / 0)
   PeekChar c: " = IF c: " ELSE BL THEN WORD
   DUP C@ 0= IF DROP 0 EXIT THEN
-  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( убрал кавычки, если есть) ;
+  COUNT OVER C@ c: " = IF 2 - SWAP 1+ SWAP THEN ( СѓР±СЂР°Р» РєР°РІС‹С‡РєРё, РµСЃР»Рё РµСЃС‚СЊ) ;
 
 : ?comstr ( -- a n)
   -1 TO SOURCE-ID 
   GetCommandLineA ASCIIZ> SOURCE!
-  ?next 2DROP  \ убрали имя файла
+  ?next 2DROP  \ СѓР±СЂР°Р»Рё РёРјСЏ С„Р°Р№Р»Р°
   ?next ?DUP 0= IF 
-    " Интерпретатор диалоговых форм\nЗапуск: DB <первая-форма>\nЮ. Жиловец, 2003"
+    " РРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂ РґРёР°Р»РѕРіРѕРІС‹С… С„РѕСЂРј\nР—Р°РїСѓСЃРє: DB <РїРµСЂРІР°СЏ-С„РѕСЂРјР°>\nР®. Р–РёР»РѕРІРµС†, 2003"
     msg BYE
   THEN
 ;
@@ -618,7 +618,7 @@ USER-CREATE <<<buf 2048 USER-ALLOT
   ['] my-error TO ERROR
   prog-name TO mbox-title
   ?comstr
-  StartSQL 0= IF " Не могу подсоединиться к ODBC" error BYE THEN TO database
+  StartSQL 0= IF " РќРµ РјРѕРіСѓ РїРѕРґСЃРѕРµРґРёРЅРёС‚СЊСЃСЏ Рє ODBC" error BYE THEN TO database
   small-hash TO FORMS
   small-hash TO SUBFORMS
   WINDOWS...

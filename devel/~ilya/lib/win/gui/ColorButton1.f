@@ -39,9 +39,9 @@ W: WM_DRAWITEM
 
 CLASS: ColorButton <SUPER Button
 	var vBkColorUp
-	var vBkColorDown		\ Öâåò ïðè íàæàòîé êëàâèøå
-	var vTextColorUp		\ Öâåò ïðè íàæàòîé êëàâèøå
-	var vTextColorDown		\ Öâåò ïðè íàæàòîé êëàâèøå
+	var vBkColorDown		\ Ã·Ð²ÐµÑ‚ Ð¿Ñ€Ð¸ Ð½Ð°Ð¶Ð°Ñ‚Ð¾Ð¹ ÐºÐ»Ð°Ð²Ð¸ÑˆÐµ
+	var vTextColorUp		\ Ã·Ð²ÐµÑ‚ Ð¿Ñ€Ð¸ Ð½Ð°Ð¶Ð°Ñ‚Ð¾Ð¹ ÐºÐ»Ð°Ð²Ð¸ÑˆÐµ
+	var vTextColorDown		\ Ã·Ð²ÐµÑ‚ Ð¿Ñ€Ð¸ Ð½Ð°Ð¶Ð°Ñ‚Ð¾Ð¹ ÐºÐ»Ð°Ð²Ð¸ÑˆÐµ
 	var vCharSize
 	var vfontheight
 	var vfontweight

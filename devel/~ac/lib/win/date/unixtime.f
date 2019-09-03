@@ -1,4 +1,4 @@
-\ CurrentTimeSql äàåò ëîêàëüíûå äàòà-âðåìÿ â ôîðìàòå 2005-12-06 10:33:07
+\ CurrentTimeSql Ð´Ð°ÐµÑ‚ Ð»Ð¾ÐºÐ°Ð»ÑŒÐ½Ñ‹Ðµ Ð´Ð°Ñ‚Ð°-Ð²Ñ€ÐµÐ¼Ñ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ 2005-12-06 10:33:07
 
 WINAPI: time      MSVCRT.DLL
 WINAPI: strftime  MSVCRT.DLL
@@ -38,11 +38,11 @@ USER-CREATE uLocalTime 30 USER-ALLOT
 ;
 \ CurrentTimeRus TYPE
 
-: CurrentTimeRss ( -- addr u ) \ òîæå, ÷òî è DATETIME-UTC â file/filetime.f
+: CurrentTimeRss ( -- addr u ) \ Ñ‚Ð¾Ð¶Ðµ, Ñ‡Ñ‚Ð¾ Ð¸ DATETIME-UTC Ð² file/filetime.f
   UnixTime UnixTimeRss
 ;
 : UNIXTIME>FILETIME ( unixtime -- filetime ) \ UTC
-  10000000 M* 116444736000000000. D+  \ ñì. http://support.microsoft.com/kb/167296
+  10000000 M* 116444736000000000. D+  \ ÑÐ¼. http://support.microsoft.com/kb/167296
 ;
 : FILETIME>UNIXTIME ( filetime -- unixtime ) \ UTC
   2DUP OR 0= IF DROP EXIT THEN

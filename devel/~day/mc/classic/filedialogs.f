@@ -28,7 +28,7 @@ CLASS: OpenDialog
 
           DUP CONSTANT /OFStruct
         
-          260 FIELD lpstrFile2 \ Выделим автоматически вместе со структурой
+          260 FIELD lpstrFile2 \ Р’С‹РґРµР»РёРј Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РІРјРµСЃС‚Рµ СЃРѕ СЃС‚СЂСѓРєС‚СѓСЂРѕР№
        CONSTANT /OpenDialog
 
 WINAPI: GetOpenFileNameA COMDLG32.DLL

@@ -1,7 +1,7 @@
 
 \ 
-\ Расширение класса ListView от ~nn
-\ 29.03.2005г. Абдрахимов И.А.
+\ Р Р°СЃС€РёСЂРµРЅРёРµ РєР»Р°СЃСЃР° ListView РѕС‚ ~nn
+\ 29.03.2005Рі. РђР±РґСЂР°С…РёРјРѕРІ Р.Рђ.
 S" lib/ext/struct.f" INCLUDED
 REQUIRE ListView  ~nn/lib/win/controls/listview.f
 \ typedef struct tagNMLISTVIEW {
@@ -28,14 +28,14 @@ REQUIRE ListView  ~nn/lib/win/controls/listview.f
 		CELL -- uChanged
 		POINT::/SIZE -- ptAction
 		CELL -- lParam
-	;STRUCT			\ Фигня ! Пока интересуют первые 3-и поля
+	;STRUCT			\ Р¤РёРіРЅСЏ ! РџРѕРєР° РёРЅС‚РµСЂРµСЃСѓСЋС‚ РїРµСЂРІС‹Рµ 3-Рё РїРѕР»СЏ
 
 
 
 ListView REOPEN
-	var vSelectedSubItem	\ Выбранный подэлемент
+	var vSelectedSubItem	\ Р’С‹Р±СЂР°РЅРЅС‹Р№ РїРѕРґСЌР»РµРјРµРЅС‚
 	
-\ Реакция на 2-й клик
+\ Р РµР°РєС†РёСЏ РЅР° 2-Р№ РєР»РёРє
 N: NM_DBLCLK 
         lparam @ 3 CELLS + @ ( DUP . CR) vSelectedItem !
 		lparam @ 4 CELLS + @ vSelectedSubItem !
@@ -45,8 +45,8 @@ N: NM_CLICK
 		lparam @ 4 CELLS + @ vSelectedSubItem !
         OnClick GoParent ;		
 
-\ Получит текстовое значение элемента
-\ Где: adr u - указатель и размер буфера
+\ РџРѕР»СѓС‡РёС‚ С‚РµРєСЃС‚РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
+\ Р“РґРµ: adr u - СѓРєР°Р·Р°С‚РµР»СЊ Рё СЂР°Р·РјРµСЂ Р±СѓС„РµСЂР°
 \
 M: GetItem { row col adr u \ item -- }
 0 adr u row LVItem NEW TO item 
@@ -74,27 +74,27 @@ M: SetItemState { state i \ item -- } ( state i -- )
 item DELETE
 ;
 
-\ Устанавливаем цвет "бэкграунда"
+\ РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ "Р±СЌРєРіСЂР°СѓРЅРґР°"
 M: SetBkColor ( coloref -- )
 0 LVM_SETBKCOLOR SendMessage DROP
 ;
-\ Устанавливаем цвет "бэкграунда" текста
+\ РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ "Р±СЌРєРіСЂР°СѓРЅРґР°" С‚РµРєСЃС‚Р°
 M: SetTxtBkColor ( coloref -- )
 0 LVM_SETTEXTBKCOLOR SendMessage DROP
 ;
-\ Устанавливаем цвет текста
+\ РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚ С‚РµРєСЃС‚Р°
 M: SetTxtColor ( coloref -- )
 0 LVM_SETTEXTCOLOR SendMessage DROP
 ;
-\ Читаем цвет "бэкграунда"
+\ Р§РёС‚Р°РµРј С†РІРµС‚ "Р±СЌРєРіСЂР°СѓРЅРґР°"
 M: GetBkColor ( -- coloref )
 0 0 LVM_GETBKCOLOR SendMessage 
 ;
-\ Читаем цвет "бэкграунда" текста
+\ Р§РёС‚Р°РµРј С†РІРµС‚ "Р±СЌРєРіСЂР°СѓРЅРґР°" С‚РµРєСЃС‚Р°
 M: GetTxtBkColor ( -- coloref )
 0 0 LVM_GETTEXTBKCOLOR SendMessage 
 ;
-\ Читаем цвет текста
+\ Р§РёС‚Р°РµРј С†РІРµС‚ С‚РµРєСЃС‚Р°
 M: GetTxtColor ( -- coloref )
 0 0 LVM_GETTEXTCOLOR SendMessage 
 ;

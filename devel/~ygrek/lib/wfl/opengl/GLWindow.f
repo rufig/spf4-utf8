@@ -4,7 +4,7 @@ REQUIRE WL-MODULES ~day/lib/includemodule.f
 
 NEEDS ~day/wfl/wfl.f
 NEEDS ~ygrek/lib/wfl/opengl/common.f
-NEEDS ~ygrek/lib/wfl/opengl/GLCanvas.f \ для удобства подключается сразу
+NEEDS ~ygrek/lib/wfl/opengl/GLCanvas.f \ РґР»СЏ СѓРґРѕР±СЃС‚РІР° РїРѕРґРєР»СЋС‡Р°РµС‚СЃСЏ СЃСЂР°Р·Сѓ
 
 : M, ( addr u -- addr+4 )   OVER  ! CELL+ ;
 : MC, ( addr c -- addr+4 )  OVER C! 1+ ;
@@ -12,8 +12,8 @@ NEEDS ~ygrek/lib/wfl/opengl/GLCanvas.f \ для удобства подключается сразу
 
 \ -----------------------------------------------------------------------
 
-\ Контекст рисовния OpenGL
-\ Состоит из Device Context (GDI) и Rendering Context (GL)
+\ РљРѕРЅС‚РµРєСЃС‚ СЂРёСЃРѕРІРЅРёСЏ OpenGL
+\ РЎРѕСЃС‚РѕРёС‚ РёР· Device Context (GDI) Рё Rendering Context (GL)
 CDC SUBCLASS CGLContext
   VAR _hRC
 
@@ -61,7 +61,7 @@ dispose: :deleteRC SUPER release ;
 
 \ -----------------------------------------------------------------------
 
-\ Клиентская область окна пригодная для рисования OpenGL
+\ РљР»РёРµРЅС‚СЃРєР°СЏ РѕР±Р»Р°СЃС‚СЊ РѕРєРЅР° РїСЂРёРіРѕРґРЅР°СЏ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ OpenGL
 CLASS CGLDrawArea
 
   VAR _hwnd
@@ -115,7 +115,7 @@ dispose: ;
 
       pfd PixelFormat _context checkDC SetPixelFormat 0= S" Can't set this pixel format." SUPER abort
 
-      pfd FREE THROW \ больше не нужен
+      pfd FREE THROW \ Р±РѕР»СЊС€Рµ РЅРµ РЅСѓР¶РµРЅ
 
       _context :createRC 
 
@@ -126,12 +126,12 @@ dispose: ;
 
 \ -----------------------------------------------------------------------
 
-\ Прокси обьединяющий CGLDrawArea и CGLCanvas
-\ canvas устанавливается снаружи, <параметр>
+\ РџСЂРѕРєСЃРё РѕР±СЊРµРґРёРЅСЏСЋС‰РёР№ CGLDrawArea Рё CGLCanvas
+\ canvas СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ СЃРЅР°СЂСѓР¶Рё, <РїР°СЂР°РјРµС‚СЂ>
 CLASS CGLDrawable
 
   CGLDrawArea OBJ _area
-  VAR _v \ область отрисовки
+  VAR _v \ РѕР±Р»Р°СЃС‚СЊ РѕС‚СЂРёСЃРѕРІРєРё
 
 : canvas _v @ ;
 : canvas! _v ! ;
@@ -164,7 +164,7 @@ CLASS CGLDrawable
 
    ?DUP 0 = IF 1 THEN
 
-   \ Теперь устанавливаем GL параметры окна
+   \ РўРµРїРµСЂСЊ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј GL РїР°СЂР°РјРµС‚СЂС‹ РѕРєРЅР°
    _area :enable
    ( w h ) canvas => :resize
    _area :disable
@@ -178,7 +178,7 @@ CLASS CGLDrawable
 
 \ -----------------------------------------------------------------------
 
-\ Окно с рамкой
+\ РћРєРЅРѕ СЃ СЂР°РјРєРѕР№
 CFrameWindow SUBCLASS CGLWindow
 
  CGLDrawable OBJ _gl
@@ -219,7 +219,7 @@ W: WM_DESTROY ( -- n )
 
 \ -----------------------------------------------------------------------
 
-\ Контрол для встраивания в диалоги
+\ РљРѕРЅС‚СЂРѕР» РґР»СЏ РІСЃС‚СЂР°РёРІР°РЅРёСЏ РІ РґРёР°Р»РѕРіРё
 CStatic SUBCLASS CGLControl
 
  CGLDrawable OBJ _gl

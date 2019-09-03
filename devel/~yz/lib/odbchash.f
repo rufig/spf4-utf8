@@ -10,7 +10,7 @@ USER counter
 WINAPI: SQLBindParameter ODBC32.DLL
 
 : bind-parameter { adr type num -- }
-\ type=0 число, <>0 asciiz-строка
+\ type=0 С‡РёСЃР»Рѕ, <>0 asciiz-СЃС‚СЂРѕРєР°
   0  type IF adr @ ZLEN ELSE 4 THEN  
   type IF adr @ ELSE adr THEN
   0  type IF adr @ ZLEN ELSE 4 THEN  
@@ -71,7 +71,7 @@ EXPORT
 
 small-hash TO h
 StartSQL . TO database
-S" реклама" 0 0 0 0 database ConnectSQL SQL_OK? .
+S" СЂРµРєР»Р°РјР°" 0 0 0 0 database ConnectSQL SQL_OK? .
 \ " SELECT * from firms" database ExecuteSQL ?sql-error
 \ h BIND-HASH
 \ database NextRow DROP
@@ -80,9 +80,9 @@ S" реклама" 0 0 0 0 database ConnectSQL SQL_OK? .
 \ UNBIND-HASH
 \ -----------------
 S" number" 1010 h HASH!N
-" Максимиллиан" S" surname" h HASH!Z
+" РњР°РєСЃРёРјРёР»Р»РёР°РЅ" S" surname" h HASH!Z
 S" vm" 1 h HASH!N
 " 543.56" S" sum" h HASH!Z
-" Это просто примечание" S" note" h HASH!Z
+" Р­С‚Рѕ РїСЂРѕСЃС‚Рѕ РїСЂРёРјРµС‡Р°РЅРёРµ" S" note" h HASH!Z
 " ticket" h database insert-hash SQL_OK? .
 BYE

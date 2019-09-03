@@ -1,6 +1,6 @@
-\ LocalLogon - локальная (если компьютер входит в домен, то и доменная)
-\ авторизация по имени и паролю, не требующая сервисных прав процесса
-\ в отличие от LogonUser в nt_logon.f
+\ LocalLogon - Р»РѕРєР°Р»СЊРЅР°СЏ (РµСЃР»Рё РєРѕРјРїСЊСЋС‚РµСЂ РІС…РѕРґРёС‚ РІ РґРѕРјРµРЅ, С‚Рѕ Рё РґРѕРјРµРЅРЅР°СЏ)
+\ Р°РІС‚РѕСЂРёР·Р°С†РёСЏ РїРѕ РёРјРµРЅРё Рё РїР°СЂРѕР»СЋ, РЅРµ С‚СЂРµР±СѓСЋС‰Р°СЏ СЃРµСЂРІРёСЃРЅС‹С… РїСЂР°РІ РїСЂРѕС†РµСЃСЃР°
+\ РІ РѕС‚Р»РёС‡РёРµ РѕС‚ LogonUser РІ nt_logon.f
 
 REQUIRE {                     lib/ext/locals.f
 REQUIRE AllocAuthIdentUnicode ~ac/lib/win/access/sspi.f 
@@ -33,7 +33,7 @@ USER serverCtxHandleOut2
   serverCtxHandleOut @ IF serverCtxHandleOut DeleteSecurityContext THROW serverCtxHandleOut 0! THEN
   hcredServer @ IF hcredServer FreeCredentialsHandle THROW hcredServer 0! THEN
 ;
-\ в ANSI-режиме не работают русские имена и пароли :(
+\ РІ ANSI-СЂРµР¶РёРјРµ РЅРµ СЂР°Р±РѕС‚Р°СЋС‚ СЂСѓСЃСЃРєРёРµ РёРјРµРЅР° Рё РїР°СЂРѕР»Рё :(
 
 : LocalLogon { logina loginu passa passu -- flag }
   expiryClient hcredClient 0 0 
@@ -80,7 +80,7 @@ USER serverCtxHandleOut2
   ELSE ." NTLM unknown return 1:" HEX U. 0 THEN
   SspiFreeContext
 ;
-\ S" тест11" S" test11" LocalLogon .
+\ S" С‚РµСЃС‚11" S" test11" LocalLogon .
 
 : IsGuest ( -- flag ) \ http://support.microsoft.com/kb/180548
   FALSE \ todo

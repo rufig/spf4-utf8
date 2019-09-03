@@ -20,7 +20,7 @@ REQUIRE ForEachIP             ~ac/lib/win/winsock/foreach_ip.f
 ;
 
 : IsIsatapLL ( ip -- flag )
-  \ Link-Local IP6-автоинтерфейс на IP4-адресах FE80::0:5EFE:w.x.y.z
+  \ Link-Local IP6-Р°РІС‚РѕРёРЅС‚РµСЂС„РµР№СЃ РЅР° IP4-Р°РґСЂРµСЃР°С… FE80::0:5EFE:w.x.y.z
   DUP IsIPv6
   IF IP6_BUFFS @ + DUP W@ RV16 0xFE80 =
      SWAP 10 + W@ RV16 0x5EFE = AND
@@ -31,15 +31,15 @@ CREATE IPV6_LOCALHOST   0 ,                       0 , 0 , 0x01000000 ,
 CREATE IPV6_LLLOCALHOST 0xFE C, 0x80 C, 0 C, 0 C, 0 , 0 , 0x01000000 , \ XP [fe80::1]
 
 : ForEachLocalIP { xt \ gaa addr buf aa ua he ll -- ior }
-\ xt - процедура ( IP -- ), запускаемая для каждого IP
-\ На момент выполнения xt на стеке нет промежуточных значений,
-\ поэтому xt может его использовать для своих данных.
+\ xt - РїСЂРѕС†РµРґСѓСЂР° ( IP -- ), Р·Р°РїСѓСЃРєР°РµРјР°СЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ IP
+\ РќР° РјРѕРјРµРЅС‚ РІС‹РїРѕР»РЅРµРЅРёСЏ xt РЅР° СЃС‚РµРєРµ РЅРµС‚ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹С… Р·РЅР°С‡РµРЅРёР№,
+\ РїРѕСЌС‚РѕРјСѓ xt РјРѕР¶РµС‚ РµРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґР»СЏ СЃРІРѕРёС… РґР°РЅРЅС‹С….
 
-\ xt должен сохранить у себя переданный IPv6 (и его NtoA, если нужен),
-\ т.к. передаётся IPv6 во временном буфере Ip6Buf (см. sockets6.f)
+\ xt РґРѕР»Р¶РµРЅ СЃРѕС…СЂР°РЅРёС‚СЊ Сѓ СЃРµР±СЏ РїРµСЂРµРґР°РЅРЅС‹Р№ IPv6 (Рё РµРіРѕ NtoA, РµСЃР»Рё РЅСѓР¶РµРЅ),
+\ С‚.Рє. РїРµСЂРµРґР°С‘С‚СЃСЏ IPv6 РІРѕ РІСЂРµРјРµРЅРЅРѕРј Р±СѓС„РµСЂРµ Ip6Buf (СЃРј. sockets6.f)
 
-\ под "LocalIP" здесь имеется в виду "IP этой машины", а не "интерфейсы
-\ локальной сети" (для их опознания есть слова Is*Local и т.п. и IsLanIP).
+\ РїРѕРґ "LocalIP" Р·РґРµСЃСЊ РёРјРµРµС‚СЃСЏ РІ РІРёРґСѓ "IP СЌС‚РѕР№ РјР°С€РёРЅС‹", Р° РЅРµ "РёРЅС‚РµСЂС„РµР№СЃС‹
+\ Р»РѕРєР°Р»СЊРЅРѕР№ СЃРµС‚Рё" (РґР»СЏ РёС… РѕРїРѕР·РЅР°РЅРёСЏ РµСЃС‚СЊ СЃР»РѕРІР° Is*Local Рё С‚.Рї. Рё IsLanIP).
 
   WinVer 50 = IF xt ForEachIP EXIT THEN
 
@@ -71,16 +71,16 @@ CREATE IPV6_LLLOCALHOST 0xFE C, 0x80 C, 0 C, 0 C, 0 , 0 , 0x01000000 , \ XP [fe8
                DUP sin6_addr 16 IPV6_LLLOCALHOST 16 COMPARE 0= -> ll
                sin6_addr buf 16 MOVE buf IP6_BUFFS @ -
                DUP IsLinkLocal IF aa aa.Ipv6IfIndex @ FE_IfIndex6 ! THEN
-                                  \ иначе "Ambiguous Scoped Addresses",
+                                  \ РёРЅР°С‡Рµ "Ambiguous Scoped Addresses",
                                   \ http://msdn.microsoft.com/en-us/library/ms739166(v=vs.85).aspx
              ELSE TRUE -> ll THEN
           ELSE sin_addr @ THEN
           ll 0=
           IF 
-            IP6_BUFFS_HERE @ -> he \ удерживаем кольцевой буфер от кольцевания...
+            IP6_BUFFS_HERE @ -> he \ СѓРґРµСЂР¶РёРІР°РµРј РєРѕР»СЊС†РµРІРѕР№ Р±СѓС„РµСЂ РѕС‚ РєРѕР»СЊС†РµРІР°РЅРёСЏ...
             xt EXECUTE
             he IP6_BUFFS_HERE !
-          ELSE DROP THEN \ [fe80::1] пропускаем
+          ELSE DROP THEN \ [fe80::1] РїСЂРѕРїСѓСЃРєР°РµРј
           ua ua.Next @
         REPEAT
     THEN

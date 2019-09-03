@@ -7,7 +7,7 @@ REQUIRE S>ZALLOC ~nn/lib/az.f
 WINAPI: SetFocus USER32.DLL
 
 0 VALUE MAIN-HEAP
-IMAGE-BASE CONSTANT HINST \ хэндл приложения
+IMAGE-BASE CONSTANT HINST \ С…СЌРЅРґР» РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 : INIT-STRUCT ( u -- addr )
     DUP ALLOCATE THROW
@@ -55,7 +55,7 @@ VECT GetDlgBaseUnits
 \ CELL -- rect.bottom
 \ CONSTANT /RECT
 
-\ временно, взамен неработающей RFREE
+\ РІСЂРµРјРµРЅРЅРѕ, РІР·Р°РјРµРЅ РЅРµСЂР°Р±РѕС‚Р°СЋС‰РµР№ RFREE
  : _RFREE ( u)
     2 LSHIFT
     R> SWAP RP@ +
@@ -63,7 +63,7 @@ VECT GetDlgBaseUnits
  ;
 
 : GetDesktopSize ( -- x y)
-\ Получить размер десктопа
+\ РџРѕР»СѓС‡РёС‚СЊ СЂР°Р·РјРµСЂ РґРµСЃРєС‚РѕРїР°
     0 0 0 0 SP@
     GetDesktopWindow
     GetClientRect DROP
@@ -245,10 +245,10 @@ M: TextOut ( addr u x y)
 ;
 
 : M:: ( c "WM_..." -- )
-  \ определить обработчик сообщения
-  \ c - символ типа сообщения
+  \ РѕРїСЂРµРґРµР»РёС‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёСЏ
+  \ c - СЃРёРјРІРѕР» С‚РёРїР° СЃРѕРѕР±С‰РµРЅРёСЏ
   BASE @ >R
-  NextWord EVALUATE HEX \ Для того чтобы Windows константы искались
+  NextWord EVALUATE HEX \ Р”Р»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ Windows РєРѕРЅСЃС‚Р°РЅС‚С‹ РёСЃРєР°Р»РёСЃСЊ
   0 <# # # # #  # # # # ROT HOLD BL HOLD [CHAR] : HOLD #>
   EVALUATE
   R> BASE !
@@ -258,7 +258,7 @@ M: TextOut ( addr u x y)
 : C: [CHAR] C M:: ; \ WM_COMMAND
 : N: [CHAR] N M:: ; \ WM_NOTIFY
 : P: [CHAR] P M:: ; \ WM_PARENTNOTIFY
-: MM: [CHAR] M M:: ; \ меню
+: MM: [CHAR] M M:: ; \ РјРµРЅСЋ
 
 
 ;CLASS
@@ -290,7 +290,7 @@ M: TextOut ( addr u x y)
 ;
 
 : ->WM ( mess_id oid c)
-\ Послать заданное сообщение объекту
+\ РџРѕСЃР»Р°С‚СЊ Р·Р°РґР°РЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕР±СЉРµРєС‚Сѓ
   OVER >R SearchWM
   IF R> ExecuteMethod
   ELSE R> DROP

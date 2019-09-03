@@ -1,5 +1,5 @@
-.( ’¥áâ ­  á®®â¢¥âáâ¢¨¥ ï¤à  ”®àâ  á¯¥æ¨ä¨ª æ¨ï¬ áâ ­¤ àâ  ANS.) CR
-.( ‘-”®àâ 2.5[94]-3.0[96] ¯®«­®áâìî ãá¯¥è­® ¥£® ¯à®å®¤¨â:) CR
+.( Ð¢ÐµÑÑ‚ Ð½Ð° ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²Ð¸Ðµ ÑÐ´Ñ€Ð° Ð¤Ð¾Ñ€Ñ‚Ð° ÑÐ¿ÐµÑ†Ð¸Ñ„Ð¸ÐºÐ°Ñ†Ð¸ÑÐ¼ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð° ANS.) CR
+.( Ð¡ÐŸ-Ð¤Ð¾Ñ€Ñ‚ 2.5[94]-3.0[96] Ð¿Ð¾Ð»Ð½Ð¾ÑÑ‚ÑŒÑŽ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ ÐµÐ³Ð¾ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ñ‚:) CR
 WARNING 0!
 
 \ (C) 1993 JOHNS HOPKINS UNIVERSITY / APPLIED PHYSICS LABORATORY
@@ -570,7 +570,7 @@ IFSYM     : T*/    T*/MOD SWAP DROP ;
 { -7 2 3 */ -> -7 2 3 T*/ }
 { -7 2 -3 */ -> -7 2 -3 T*/ }
 
-( €.—. â® ¯à®áâ® ®è¨¡ª  à §à ¡®âç¨ª  â¥áâ , ¯® ANS §¤¥áì overflow
+( Ð.Ð§. Ð­Ñ‚Ð¾ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ Ð¾ÑˆÐ¸Ð±ÐºÐ° Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° Ñ‚ÐµÑÑ‚Ð°, Ð¿Ð¾ ANS Ð·Ð´ÐµÑÑŒ overflow
 { MAX-INT 2 1 */ -> MAX-INT 2 1 T*/ }
 { MIN-INT 2 1 */ -> MIN-INT 2 1 T*/ }
 )
@@ -595,7 +595,7 @@ IFSYM     : T*/    T*/MOD SWAP DROP ;
 { -7 2 3 */MOD -> -7 2 3 T*/MOD }
 { -7 2 -3 */MOD -> -7 2 -3 T*/MOD }
 
-( €.—. â®¦¥ ®è¨¡ª , ¤®«¦­® ¡ëâì overflow
+( Ð.Ð§. Ñ‚Ð¾Ð¶Ðµ Ð¾ÑˆÐ¸Ð±ÐºÐ°, Ð´Ð¾Ð»Ð¶Ð½Ð¾ Ð±Ñ‹Ñ‚ÑŒ overflow
 { MAX-INT 2 1 */MOD -> MAX-INT 2 1 T*/MOD }
 { MIN-INT 2 1 */MOD -> MIN-INT 2 1 T*/MOD }
 )
@@ -720,7 +720,7 @@ TESTING IF ELSE THEN BEGIN WHILE REPEAT UNTIL RECURSE
 { 5 GI4 -> 5 6 }
 { 6 GI4 -> 6 7 }
 
-( €.—. - ¨á¯à ¢¨âì )
+( Ð.Ð§. - Ð¸ÑÐ¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ )
 { : GI5 BEGIN DUP 2 > WHILE DUP 5 < WHILE DUP 1+ REPEAT 123 ELSE 345 THEN ; -> }
 { 1 GI5 -> 1 345 }
 { 2 GI5 -> 2 345 }
@@ -990,7 +990,7 @@ CREATE SBUF 12 C, 34 C, 56 C,
 { FBUF CHAR+ FBUF 2 CHARS MOVE -> }
 { SEEBUF -> 12 34 34 }
 
-\ CMOVE ®¡ï§ â¥«ì­® ¡ ©â®¢®¥! Dmitry Yakimov
+\ CMOVE Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð±Ð°Ð¹Ñ‚Ð¾Ð²Ð¾Ðµ! Dmitry Yakimov
 { FBUF FBUF CHAR+ 2 CHARS CMOVE -> }
 { SEEBUF -> 12 12 12 }
 

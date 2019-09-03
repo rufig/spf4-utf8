@@ -1,6 +1,6 @@
 WARNING 0!
-\ --------- пример ActiveX-сервера ----------------
-\ см. исходный вариант samples\com-sample4.f
+\ --------- РїСЂРёРјРµСЂ ActiveX-СЃРµСЂРІРµСЂР° ----------------
+\ СЃРј. РёСЃС…РѕРґРЅС‹Р№ РІР°СЂРёР°РЅС‚ samples\com-sample4.f
 
 REQUIRE Class: ~ac/lib/win/com/com_server.f
 
@@ -13,7 +13,7 @@ VECT vSPF.Application
 VECT vSPF.IDispatch
 
 
-\ ===================== базовый класс IUnknown ========================
+\ ===================== Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ IUnknown ========================
 IID_IUnknown
 Class: SPF.IUnknown {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}
 
@@ -72,10 +72,10 @@ USER uExcep
 USER uFlags
 
 : param@ ( variant -- ... )
-\ переданные по ссылке переменные (обычный FORTH.NEGATE(VAR)) рекурсивно
-\ разворачиваются, как если бы были переданы значения.
-\ Это лишает некоторых возможностей, но зато логически чище,
-\ и удобнее использовать.
+\ РїРµСЂРµРґР°РЅРЅС‹Рµ РїРѕ СЃСЃС‹Р»РєРµ РїРµСЂРµРјРµРЅРЅС‹Рµ (РѕР±С‹С‡РЅС‹Р№ FORTH.NEGATE(VAR)) СЂРµРєСѓСЂСЃРёРІРЅРѕ
+\ СЂР°Р·РІРѕСЂР°С‡РёРІР°СЋС‚СЃСЏ, РєР°Рє РµСЃР»Рё Р±С‹ Р±С‹Р»Рё РїРµСЂРµРґР°РЅС‹ Р·РЅР°С‡РµРЅРёСЏ.
+\ Р­С‚Рѕ Р»РёС€Р°РµС‚ РЅРµРєРѕС‚РѕСЂС‹С… РІРѕР·РјРѕР¶РЅРѕСЃС‚РµР№, РЅРѕ Р·Р°С‚Рѕ Р»РѕРіРёС‡РµСЃРєРё С‡РёС‰Рµ,
+\ Рё СѓРґРѕР±РЅРµРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ.
   >R
 \  ." TYPE=" R@ W@ .
   R@ W@ 2 = IF R> 2 CELLS + @ ( DUP . ." ,") EXIT THEN
@@ -150,15 +150,15 @@ DROP
      THEN
   SP@ uSPInvoke @ - \ DUP .
   DUP -4 = IF DROP
-              3 R@ ! ( uFlags @ 3 = IF @ THEN) \ бейсик не делает разницы между method и property_get
+              3 R@ ! ( uFlags @ 3 = IF @ THEN) \ Р±РµР№СЃРёРє РЅРµ РґРµР»Р°РµС‚ СЂР°Р·РЅРёС†С‹ РјРµР¶РґСѓ method Рё property_get
               R> 2 CELLS + ! 0 EXIT
-           THEN \ число
+           THEN \ С‡РёСЃР»Рѕ
   DUP -8 = IF DROP
               uFlags @ DISPATCH_PROPERTYPUT AND 
-              IF ! RDROP 0 EXIT THEN \ присвоение переменной форта
+              IF ! RDROP 0 EXIT THEN \ РїСЂРёСЃРІРѕРµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ С„РѕСЂС‚Р°
               8 R@ ! >BSTR R> 2 CELLS + ! 0 EXIT
-           THEN \ строка
-  0 = IF RDROP 0 EXIT THEN \ нет результатов
+           THEN \ СЃС‚СЂРѕРєР°
+  0 = IF RDROP 0 EXIT THEN \ РЅРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
   uSPInvoke @ SP! RDROP 
   DISP_E_BADPARAMCOUNT
 ; METHOD

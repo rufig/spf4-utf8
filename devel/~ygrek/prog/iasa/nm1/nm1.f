@@ -54,7 +54,7 @@ PRINT-EXP
  UNTIL
  DROP
 ;
-: ?Eigen ( matrix vector F: lambda -- F: ¦¦Av-lambda*v¦¦)
+: ?Eigen ( matrix vector F: lambda -- F: В¦В¦Av-lambda*vВ¦В¦)
  >R 
  ( matrix ) R@ MM*  R@ ( F: lambda) -1e F* MConst* 
  R@ SWAP MM+
@@ -82,7 +82,7 @@ PRINT-EXP
 
 : polinom ( F: x -- f<x> ) 
  FTO temp
- FPU FSAVE \ сохраним стек во избежание переполнения
+ FPU FSAVE \ СЃРѕС…СЂР°РЅРёРј СЃС‚РµРє РІРѕ РёР·Р±РµР¶Р°РЅРёРµ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ
  temp
  0e 
  N 0 DO
@@ -121,14 +121,14 @@ S" ===================" TYPE CR CR
           
 : main
  S" matrix.dat" MAIN LoadMatrix
- MAIN .dimX TO N \ размерность матрицы поскольку квадратная
- N 1- TO N-1 \ индекс последнего элемента в строке/столбце поскольку [0..N-1]
+ MAIN .dimX TO N \ СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹ РїРѕСЃРєРѕР»СЊРєСѓ РєРІР°РґСЂР°С‚РЅР°СЏ
+ N 1- TO N-1 \ РёРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РІ СЃС‚СЂРѕРєРµ/СЃС‚РѕР»Р±С†Рµ РїРѕСЃРєРѕР»СЊРєСѓ [0..N-1]
  N N Matrix TO c
  N N Matrix TO b 
  N N Matrix TO ml
  N N Matrix TO mr
 
- \ Макс и Мин Собственные Числа
+ \ РњР°РєСЃ Рё РњРёРЅ РЎРѕР±СЃС‚РІРµРЅРЅС‹Рµ Р§РёСЃР»Р°
  MAIN a MCopy
  a FindLambdaMax
  t MPrint
@@ -154,7 +154,7 @@ S" ===================" TYPE CR CR
  F- \ lambda_min
  a t FDUP ?Eigen Epsilon F< IF ." OK " THEN F. 
 
- \ Данилевский
+ \ Р”Р°РЅРёР»РµРІСЃРєРёР№
 CR S" -------------------" TYPE CR CR
  MAIN a MCopy
  ml IdMatrix mr IdMatrix

@@ -1,6 +1,6 @@
 \ $Id$
-\ Построчное чтение файла
-\ READ-LINE модифицирован чтобы возвращать флаг
+\ РџРѕСЃС‚СЂРѕС‡РЅРѕРµ С‡С‚РµРЅРёРµ С„Р°Р№Р»Р°
+\ READ-LINE РјРѕРґРёС„РёС†РёСЂРѕРІР°РЅ С‡С‚РѕР±С‹ РІРѕР·РІСЂР°С‰Р°С‚СЊ С„Р»Р°Рі
 
 REQUIRE STR@ ~ac/lib/str5.f
 REQUIRE PRO ~profit/lib/bac4th.f
@@ -16,17 +16,17 @@ CREATE buf 1026 ALLOT
 
   R@ READ-FILE ?DUP IF NIP RDROP >R 0 0 0 R> EXIT THEN
 
-  DUP >R 0= IF RDROP RDROP 0 0 0 0 EXIT THEN \ были в конце файла
+  DUP >R 0= IF RDROP RDROP 0 0 0 0 EXIT THEN \ Р±С‹Р»Рё РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р°
 
   _addr @ R@ LT LTL @ SEARCH
-  IF   \ найден разделитель строк
+  IF   \ РЅР°Р№РґРµРЅ СЂР°Р·РґРµР»РёС‚РµР»СЊ СЃС‚СЂРѕРє
      DROP _addr @ -
      DUP
      LTL @ + S>D _fp2 @ _fp1 @ D+ RDROP R> REPOSITION-FILE DROP
      TRUE
-  ELSE \ не найден разделитель строк
+  ELSE \ РЅРµ РЅР°Р№РґРµРЅ СЂР°Р·РґРµР»РёС‚РµР»СЊ СЃС‚СЂРѕРє
      2DROP
-     R> RDROP  \ если строка прочитана не полностью - будет разрезана
+     R> RDROP  \ РµСЃР»Рё СЃС‚СЂРѕРєР° РїСЂРѕС‡РёС‚Р°РЅР° РЅРµ РїРѕР»РЅРѕСЃС‚СЊСЋ - Р±СѓРґРµС‚ СЂР°Р·СЂРµР·Р°РЅР°
      FALSE
   THEN
   TRUE 0

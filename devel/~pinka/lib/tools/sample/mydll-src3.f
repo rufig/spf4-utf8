@@ -11,7 +11,7 @@ REQUIRE {       ~ac\lib\locals.f
   0 TO H-STDIN
   CONSOLE-HANDLES
   ['] CGI-OPTIONS ERR-EXIT
-  ['] AT-PROCESS-STARTING ERR-EXIT \ тут оно выполнится уже после AT-THREAD-STARTING
+  ['] AT-PROCESS-STARTING ERR-EXIT \ С‚СѓС‚ РѕРЅРѕ РІС‹РїРѕР»РЅРёС‚СЃСЏ СѓР¶Рµ РїРѕСЃР»Рµ AT-THREAD-STARTING
   MAINX @ ?DUP IF ERR-EXIT THEN
 ;
 

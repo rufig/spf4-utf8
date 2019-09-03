@@ -73,7 +73,7 @@ VARIABLE APP-Sem
 : (StartApp00) ( 'startup-info S" app" -- ? )
   -1 TO ExitCodeProc
   APP-pi 4 CELLS ERASE
-  OVER + 0 SWAP C!  OVER >R ( si, чтобы на выходе проверить 0=)
+  OVER + 0 SWAP C!  OVER >R ( si, С‡С‚РѕР±С‹ РЅР° РІС‹С…РѕРґРµ РїСЂРѕРІРµСЂРёС‚СЊ 0=)
 
 \ PATH@, PATH+
   APP-Dir @ IF PATH@ DROP ELSE 0 THEN >R

@@ -1,6 +1,6 @@
-\ ВЫКИНУТЬ
+\ Р’Р«РљРРќРЈРўР¬
 
-\ Вариант реализации TranslateWord ( А.Ч. 12.01.2001 )
+\ Р’Р°СЂРёР°РЅС‚ СЂРµР°Р»РёР·Р°С†РёРё TranslateWord ( Рђ.Р§. 12.01.2001 )
 
 : TranslateWord ( addr u -- | ... ) \ throwable
   STATE @ IF CompileWord ELSE ExecuteWord THEN
@@ -14,4 +14,4 @@
 : SearchCompilationSemantic ( addr u -- xt wid )
 ;
 
-\ ... Не нравится мне такое распараллеливание
+\ ... РќРµ РЅСЂР°РІРёС‚СЃСЏ РјРЅРµ С‚Р°РєРѕРµ СЂР°СЃРїР°СЂР°Р»Р»РµР»РёРІР°РЅРёРµ

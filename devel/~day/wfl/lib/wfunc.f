@@ -163,7 +163,7 @@ CONSTANT /RECT
 CONSTANT /PS
 
 : GetDesktopCoord ( -- x y)
-\ Получить размер десктопа
+\ РџРѕР»СѓС‡РёС‚СЊ СЂР°Р·РјРµСЂ РґРµСЃРєС‚РѕРїР°
     4 RALLOT DUP
     GetDesktopWindow
     GetClientRect DROP
@@ -180,7 +180,7 @@ CONSTANT /PS
     R> @
 ;
 
-\ После этого выполнить 4 RFREE
+\ РџРѕСЃР»Рµ СЌС‚РѕРіРѕ РІС‹РїРѕР»РЅРёС‚СЊ 4 RFREE
 : RECT-RP! ( b r t l -- addr)
   R> 
   4 PICK >R
@@ -261,7 +261,7 @@ WM_USER 0x1C00 + CONSTANT OCM_BASE
    0xFFFF AND
 ;
 
-USER CC_INIT \ однократная инициализация CommonControls
+USER CC_INIT \ РѕРґРЅРѕРєСЂР°С‚РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ CommonControls
 CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
 
 : InitCommonControls
@@ -290,9 +290,9 @@ CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
 ;  
 
 : W>S ( w -- s )
-\ расширить знак 16 -> 32
+\ СЂР°СЃС€РёСЂРёС‚СЊ Р·РЅР°Рє 16 -> 32
    DUP 0x8000 AND
-   IF \ отрицательное число
+   IF \ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ
       0xFFFF0000 OR
    THEN
 ;

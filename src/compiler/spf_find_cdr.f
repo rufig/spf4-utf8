@@ -1,10 +1,10 @@
-( Поиск слов в словарях [выделено из spf_find.f]
+( РџРѕРёСЃРє СЃР»РѕРІ РІ СЃР»РѕРІР°СЂСЏС… [РІС‹РґРµР»РµРЅРѕ РёР· spf_find.f]
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
 
-  Оптимизировано by day, 29.10.2000
-  Оптимизировано by mak July 26th, 2001 - 15:45
-  Код наследован от SEARCH-WORDLIST, by ~ygrek Nov.2006
-  Исправлен баг "Access Violation" и рефакторинг by ~ruv, Sep.2008 
+  РћРїС‚РёРјРёР·РёСЂРѕРІР°РЅРѕ by day, 29.10.2000
+  РћРїС‚РёРјРёР·РёСЂРѕРІР°РЅРѕ by mak July 26th, 2001 - 15:45
+  РљРѕРґ РЅР°СЃР»РµРґРѕРІР°РЅ РѕС‚ SEARCH-WORDLIST, by ~ygrek Nov.2006
+  РСЃРїСЂР°РІР»РµРЅ Р±Р°Рі "Access Violation" Рё СЂРµС„Р°РєС‚РѕСЂРёРЅРі by ~ruv, Sep.2008 
 
   $Id$
 )
@@ -17,7 +17,7 @@ CODE CDR-BY-NAME0 ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
 @@2:
     MOV EAX, 1 [EDX] [EAX]
 @@1: OR EAX, EAX
-    JZ SHORT @@9   \ конец списка
+    JZ SHORT @@9   \ РєРѕРЅРµС† СЃРїРёСЃРєР°
     MOV DL, BYTE [EAX]
     CMP EDX, EBX
     JNZ SHORT @@2
@@ -35,10 +35,10 @@ CODE CDR-BY-NAME1 ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
     AND EDX, # 0xFF
     MOV EAX, 1 [EDX] [EAX]
 @@1: OR EAX, EAX
-    JZ SHORT @@9  \ конец списка
+    JZ SHORT @@9  \ РєРѕРЅРµС† СЃРїРёСЃРєР°
     MOV DX, [EAX]
     CMP DX, BX
-    JNZ SHORT @@2 \ коды равны - выход
+    JNZ SHORT @@2 \ РєРѕРґС‹ СЂР°РІРЅС‹ - РІС‹С…РѕРґ
 @@9:
     RET
 END-CODE
@@ -56,11 +56,11 @@ CODE CDR-BY-NAME2 ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
     AND EDX, # 0xFF
     MOV EAX, 1 [EDX] [EAX]
 @@1: OR EAX, EAX
-    JZ SHORT @@9   \ конец списка
-    MOV EDX, [EAX] \ полагается, что тут до границы памяти не достанем.
+    JZ SHORT @@9   \ РєРѕРЅРµС† СЃРїРёСЃРєР°
+    MOV EDX, [EAX] \ РїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ С‚СѓС‚ РґРѕ РіСЂР°РЅРёС†С‹ РїР°РјСЏС‚Рё РЅРµ РґРѕСЃС‚Р°РЅРµРј.
     AND EDX, # 0x00FFFFFF
     CMP EDX, EBX
-    JNZ SHORT @@2 \ коды равны - выход
+    JNZ SHORT @@2 \ РєРѕРґС‹ СЂР°РІРЅС‹ - РІС‹С…РѕРґ
 @@9:
     RET
 END-CODE
@@ -78,19 +78,19 @@ CODE CDR-BY-NAME3 ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
     MOV EAX, 1 [EDX] [EAX]
 @@1:
     OR EAX, EAX  
-    JZ SHORT @@9    \ конец списка
+    JZ SHORT @@9    \ РєРѕРЅРµС† СЃРїРёСЃРєР°
     MOV EDX, [EAX]
     CMP EDX, EBX
-    JNZ SHORT @@2   \ коды равны - выход
+    JNZ SHORT @@2   \ РєРѕРґС‹ СЂР°РІРЅС‹ - РІС‹С…РѕРґ
 @@9:
     RET
 END-CODE
 
 
 CODE CDR-BY-NAME ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
-\ тоже, что и CDR (см. в spf_wordlist.f), но кроме конца списка стопором является и заданное имя.
+\ С‚РѕР¶Рµ, С‡С‚Рѕ Рё CDR (СЃРј. РІ spf_wordlist.f), РЅРѕ РєСЂРѕРјРµ РєРѕРЅС†Р° СЃРїРёСЃРєР° СЃС‚РѕРїРѕСЂРѕРј СЏРІР»СЏРµС‚СЃСЏ Рё Р·Р°РґР°РЅРЅРѕРµ РёРјСЏ.
 
-    MOV EDX, [EBP]                \ длина (счетчик)
+    MOV EDX, [EBP]                \ РґР»РёРЅР° (СЃС‡РµС‚С‡РёРє)
     CMP EDX, # 3
     JG   @@1 \  u > 3  (performs signed comparison)
     JE   ' CDR-BY-NAME3 \ u = 3
@@ -102,11 +102,11 @@ CODE CDR-BY-NAME ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
     CALL ' CDR-BY-NAME3
     OR EAX, EAX
     JNZ SHORT @@5
-    RET \ конец списка
+    RET \ РєРѕРЅРµС† СЃРїРёСЃРєР°
     \ JZ SHORT @@9
 @@5:
     PUSH EDI
-    MOV ESI, ECX  \ addr в искомом (see CDR-BY-NAME3)
+    MOV ESI, ECX  \ addr РІ РёСЃРєРѕРјРѕРј (see CDR-BY-NAME3)
     ADD ESI, # 3
     MOV ECX, # 0
     JMP SHORT @@3
@@ -114,19 +114,19 @@ CODE CDR-BY-NAME ( c-addr u nfa1|0 -- c-addr u nfa1|nfa2|0 )
     AND EDX, # 0xFF
     MOV EAX, 1 [EDX] [EAX]
     OR EAX, EAX  
-    JZ SHORT @@8    \ конец списка
+    JZ SHORT @@8    \ РєРѕРЅРµС† СЃРїРёСЃРєР°
     MOV EDX, [EAX]
     CMP EDX, EBX
-    JNZ SHORT @@2   \ коды не равны - идем по списку дальше
-@@3: \ сравнение остатка строк побайтно
-    MOV EDI, EAX  \ в списке
+    JNZ SHORT @@2   \ РєРѕРґС‹ РЅРµ СЂР°РІРЅС‹ - РёРґРµРј РїРѕ СЃРїРёСЃРєСѓ РґР°Р»СЊС€Рµ
+@@3: \ СЃСЂР°РІРЅРµРЅРёРµ РѕСЃС‚Р°С‚РєР° СЃС‚СЂРѕРє РїРѕР±Р°Р№С‚РЅРѕ
+    MOV EDI, EAX  \ РІ СЃРїРёСЃРєРµ
     ADD EDI, # 4
     MOV CL, BL    \ counter (see CDR-BY-NAME3)
     SUB CL, # 3   \ 3 chars in the code
     PUSH ESI
     REPZ CMPS BYTE
     POP ESI
-    JNZ SHORT @@2 \ строки не равны -- идем по списку дальше
+    JNZ SHORT @@2 \ СЃС‚СЂРѕРєРё РЅРµ СЂР°РІРЅС‹ -- РёРґРµРј РїРѕ СЃРїРёСЃРєСѓ РґР°Р»СЊС€Рµ
 @@8:
     POP EDI
 @@9:

@@ -1,7 +1,7 @@
 REQUIRE CapInit          ~ac/lib/win/mm/capture.f 
 REQUIRE GetDesktopWindow ~ac/lib/win/window/enumwindows.f 
 
-\ ISampleGrabberCB callback'и
+\ ISampleGrabberCB callback'Рё
 0
 CELL -- CB.QueryInterface ( REFIID riid, void ** ppv)
 CELL -- CB.AddRef
@@ -10,11 +10,11 @@ CELL -- CB.Release
 CELL -- CB.SampleCB ( double SampleTime, IMediaSample *pSample)
 CELL -- CB.BufferCB ( double dblSampleTime, BYTE *pBuffer, long lBufferSize)
 
-CELL -- CB.width    \ наша самодеятельность, доп.параметры для callback'ов
-CELL -- CB.height   \ передаются через "this"
+CELL -- CB.width    \ РЅР°С€Р° СЃР°РјРѕРґРµСЏС‚РµР»СЊРЅРѕСЃС‚СЊ, РґРѕРї.РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ callback'РѕРІ
+CELL -- CB.height   \ РїРµСЂРµРґР°СЋС‚СЃСЏ С‡РµСЂРµР· "this"
 CELL -- CB.xt
-CELL -- CB.param    \ дополнительные параметры для внутреннего колбэка
-CELL -- CB.result   \ дополнительная возможность вернуть результат
+CELL -- CB.param    \ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РєРѕР»Р±СЌРєР°
+CELL -- CB.result   \ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РІРµСЂРЅСѓС‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚
 CELL -- CB.n
 CELL -- CB.lost
 CELL -- CB.stat_in
@@ -22,7 +22,7 @@ CELL -- CB.stat_out
 CONSTANT /CB
 
 :NONAME 
-  \ ." QueryInterface " на практике не вызывается, поэтому не проверено
+  \ ." QueryInterface " РЅР° РїСЂР°РєС‚РёРєРµ РЅРµ РІС‹Р·С‹РІР°РµС‚СЃСЏ, РїРѕСЌС‚РѕРјСѓ РЅРµ РїСЂРѕРІРµСЂРµРЅРѕ
   { ppv riid this -- x }
   
   riid 16 IID_IUnknown 16 COMPARE 0=
@@ -32,7 +32,7 @@ CONSTANT /CB
 ; 3 CELLS CALLBACK: (CB::QueryInterface)
 
 :NONAME ( this -- x )
-  \ ." AddRef " вызывается
+  \ ." AddRef " РІС‹Р·С‹РІР°РµС‚СЃСЏ
   DROP 2
 ; 1 CELLS CALLBACK: (CB::AddRef)
 
@@ -47,7 +47,7 @@ CONSTANT /CB
 ; 4 CELLS CALLBACK: (CB::SampleCB)
 
 :NONAME ( lBufferSize pBuffer dblSampleTime2 dblSampleTime1 this -- x )
-  \ ." BufferCB " вызывается
+  \ ." BufferCB " РІС‹Р·С‹РІР°РµС‚СЃСЏ
   DUP @ CB.xt @ ?DUP IF EXECUTE ELSE DROP 2DROP 2DROP THEN
   0
 ; 5 CELLS CALLBACK: (CB::BufferCB)
@@ -69,7 +69,7 @@ CELL -- Cap.pWindowssCtrl
 CELL -- Cap.pCB
 CONSTANT /Cap
 
-: CamBufStretch { pBuffer lBufferSize -- } \ разворот bottom-up-ориентации и цвета
+: CamBufStretch { pBuffer lBufferSize -- } \ СЂР°Р·РІРѕСЂРѕС‚ bottom-up-РѕСЂРёРµРЅС‚Р°С†РёРё Рё С†РІРµС‚Р°
   lBufferSize 100000 < IF EXIT THEN
   lBufferSize 2 / 0 DO
     pBuffer I + DUP C@
@@ -78,8 +78,8 @@ CONSTANT /Cap
 ;
 : CapOpen { xt \ pGraph pCaptureBuilder pControl pDevEnum pEnumMoniker moniker fetched n property vax1 vav vax2 var pSrcFilter pSampleGrabberFilter pSampleGrabber mt pMediaControl pVMR9 pFilterConfig pWindowssCtrl cb sr dr cap -- cap }
 
-  \ инициализация процесса получения кадров, подключение к камере.
-  \ xt - фортовый колбэк, которому передаются параметры BufferCB с данными кадра
+  \ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСЂРѕС†РµСЃСЃР° РїРѕР»СѓС‡РµРЅРёСЏ РєР°РґСЂРѕРІ, РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє РєР°РјРµСЂРµ.
+  \ xt - С„РѕСЂС‚РѕРІС‹Р№ РєРѕР»Р±СЌРє, РєРѕС‚РѕСЂРѕРјСѓ РїРµСЂРµРґР°СЋС‚СЃСЏ РїР°СЂР°РјРµС‚СЂС‹ BufferCB СЃ РґР°РЅРЅС‹РјРё РєР°РґСЂР°
 
   /Cap ALLOCATE THROW -> cap
   DsInit DUP -> pGraph cap Cap.pGraph ! ( GraphBilder)
@@ -92,10 +92,10 @@ CONSTANT /Cap
 
   0 ^ pEnumMoniker
   S" {860BB310-5D01-11d0-BD3B-00A0C911CE86}" >UNICODE String>CLSID THROW \ CLSID_VideoInputDeviceCategory
-  pDevEnum ::CreateClassEnumerator 1 = IF ." Нет видеокамеры." 0 EXIT THEN
-  \  ['] .. pEnumMoniker EnumVariant . \ универсальный enum не очень подходит, т.к. тип значений не variant
+  pDevEnum ::CreateClassEnumerator 1 = IF ." РќРµС‚ РІРёРґРµРѕРєР°РјРµСЂС‹." 0 EXIT THEN
+  \  ['] .. pEnumMoniker EnumVariant . \ СѓРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Р№ enum РЅРµ РѕС‡РµРЅСЊ РїРѕРґС…РѕРґРёС‚, С‚.Рє. С‚РёРї Р·РЅР°С‡РµРЅРёР№ РЅРµ variant
 
-  \ активация последней камеры в списке
+  \ Р°РєС‚РёРІР°С†РёСЏ РїРѕСЃР»РµРґРЅРµР№ РєР°РјРµСЂС‹ РІ СЃРїРёСЃРєРµ
   BEGIN
     ^ fetched ^ moniker 1 pEnumMoniker ::Next 0=
   WHILE
@@ -107,14 +107,14 @@ CONSTANT /Cap
     n 1+ -> n
   REPEAT
   pEnumMoniker ::Release DROP  pDevEnum ::Release DROP
-  n 0= IF ." Нет видеокамеры?" 0 EXIT THEN
-  pSrcFilter 0= IF ." Не удалось подключиться к видеокамере." 0 EXIT THEN
+  n 0= IF ." РќРµС‚ РІРёРґРµРѕРєР°РјРµСЂС‹?" 0 EXIT THEN
+  pSrcFilter 0= IF ." РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє РІРёРґРµРѕРєР°РјРµСЂРµ." 0 EXIT THEN
   pSrcFilter cap Cap.pSrcFilter !
 
   S" Capture Filter" >BSTR pSrcFilter pGraph ::AddFilter THROW
 
   SampleGrabberInit DUP -> pSampleGrabberFilter
-  0= IF ." Требуется DirectX 8 и регистрация qedit.dll." 0 EXIT THEN
+  0= IF ." РўСЂРµР±СѓРµС‚СЃСЏ DirectX 8 Рё СЂРµРіРёСЃС‚СЂР°С†РёСЏ qedit.dll." 0 EXIT THEN
   pSampleGrabberFilter cap Cap.pSampleGrabberFilter !
 
   ^ pSampleGrabber IID_ISampleGrabber pSampleGrabberFilter ::QueryInterface THROW
@@ -139,14 +139,14 @@ CONSTANT /Cap
   GetDesktopWindow pWindowssCtrl ::SetVideoClippingWindow THROW
   pWindowssCtrl cap Cap.pWindowssCtrl !
 
-  \ если вместо pVMR9 передать 0, то появится окно ActiveMovie
+  \ РµСЃР»Рё РІРјРµСЃС‚Рѕ pVMR9 РїРµСЂРµРґР°С‚СЊ 0, С‚Рѕ РїРѕСЏРІРёС‚СЃСЏ РѕРєРЅРѕ ActiveMovie
   pVMR9 pSampleGrabberFilter pSrcFilter
   ( MEDIATYPE_Video) S" {73646976-0000-0010-8000-00AA00389B71}" >UNICODE String>CLSID THROW
   ( PIN_CATEGORY_PREVIEW) S" {fb6c4282-0353-11d1-905f-0000c0cc16ba}" >UNICODE String>CLSID THROW
   pCaptureBuilder ::RenderStream DROP \ ( 4027E) HEX . DECIMAL CR
 
   /CB ALLOCATE THROW -> cb
-  mt pSampleGrabber ::GetConnectedMediaType ?DUP IF HEX U. DECIMAL ." Камера занята?" 0 EXIT THEN \ VFW_E_NOT_CONNECTED=0x80040209
+  mt pSampleGrabber ::GetConnectedMediaType ?DUP IF HEX U. DECIMAL ." РљР°РјРµСЂР° Р·Р°РЅСЏС‚Р°?" 0 EXIT THEN \ VFW_E_NOT_CONNECTED=0x80040209
   mt AMT.pbFormat @ VIH.bmiHeader BMI.biWidth @ DUP cb CB.width ! . ." x "
   mt AMT.pbFormat @ VIH.bmiHeader BMI.biHeight @ DUP cb CB.height ! . ." @"
   mt AMT.pbFormat @ VIH.bmiHeader BMI.biBitCount W@ . CR
@@ -163,8 +163,8 @@ CONSTANT /Cap
   ['] (CB::BufferCB) cb CB.BufferCB !
   xt cb CB.xt !
 \  1 ^ cb pSampleGrabber ::SetCallback DROP
-  cb cap Cap.pCB ! \ указатель продолжает использоваться grabber'ом и после
-                   \ выхода из функции, поэтому нельзя оставлять его указателем на стек возвратов
+  cb cap Cap.pCB ! \ СѓРєР°Р·Р°С‚РµР»СЊ РїСЂРѕРґРѕР»Р¶Р°РµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ grabber'РѕРј Рё РїРѕСЃР»Рµ
+                   \ РІС‹С…РѕРґР° РёР· С„СѓРЅРєС†РёРё, РїРѕСЌС‚РѕРјСѓ РЅРµР»СЊР·СЏ РѕСЃС‚Р°РІР»СЏС‚СЊ РµРіРѕ СѓРєР°Р·Р°С‚РµР»РµРј РЅР° СЃС‚РµРє РІРѕР·РІСЂР°С‚РѕРІ
   1 cap Cap.pCB pSampleGrabber ::SetCallback DROP
 
   /RECT ALLOCATE THROW -> sr

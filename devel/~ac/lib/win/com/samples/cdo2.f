@@ -11,7 +11,7 @@ WARNING !
 
   Z" MAPI.Session" create-object THROW -> ses
   arg() ses :: Logon
-  arg(  Z" Это тестовая тема" _str Z" Тестовое сообщение" _str )arg 
+  arg(  Z" Р­С‚Рѕ С‚РµСЃС‚РѕРІР°СЏ С‚РµРјР°" _str Z" РўРµСЃС‚РѕРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ" _str )arg 
   ses :: Outbox Messages Add
   DROP -> mes
   mes :: Recipients @

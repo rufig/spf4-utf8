@@ -4,7 +4,7 @@
 \ NON-OPT-WL contains five words: EXECUTE  ?DUP  R>  >R  RDROP
 
 
-REQUIRE AsQName   ~pinka/samples/2006/syntax/qname.f \ ïîíÿòèå îäíîñëîâíûõ ñòðîê â âèäå `abc
+REQUIRE AsQName   ~pinka/samples/2006/syntax/qname.f \ Ð¿Ð¾Ð½ÑÑ‚Ð¸Ðµ Ð¾Ð´Ð½Ð¾ÑÐ»Ð¾Ð²Ð½Ñ‹Ñ… ÑÑ‚Ñ€Ð¾Ðº Ð² Ð²Ð¸Ð´Ðµ `abc
 
 MODULE: fix-inlines-support
 
@@ -20,11 +20,11 @@ EXPORT
 : GET-COMPILER? ( xt -- xt-compiler true | xt false )
   DUP h-compilers FIND-NODE IF NIP CELL+ @ TRUE EXIT THEN FALSE
 ;
-\ äà, âîò òàê :)  È íå íàäî ââîäèòü äîïîëíèòåëüíûõ ïîëåé â ñòàðûå çàãîëîâêè.
+\ Ð´Ð°, Ð²Ð¾Ñ‚ Ñ‚Ð°Ðº :)  Ð˜ Ð½Ðµ Ð½Ð°Ð´Ð¾ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¿Ð¾Ð»ÐµÐ¹ Ð² ÑÑ‚Ð°Ñ€Ñ‹Ðµ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ¸.
 \ -----
 
 : COMPILE(?DUP)
-  HERE TO :-SET ['] C-?DUP  INLINE, HERE TO :-SET \ íóæíî êàê â THEN
+  HERE TO :-SET ['] C-?DUP  INLINE, HERE TO :-SET \ Ð½ÑƒÐ¶Ð½Ð¾ ÐºÐ°Ðº Ð² THEN
 ;
 : COMPILE(EXECUTE)
   ['] C-EXECUTE INLINE,
@@ -36,33 +36,33 @@ EXPORT
 `R>      SFIND 0= THROW ' R>      ADVICE-COMPILER
 `>R      SFIND 0= THROW ' >R      ADVICE-COMPILER
 
-\ hint: ' (òèê) èùåò c NON-OPT-WL íà âåðøèíå, 
-\ ïîýòîìó çäåñü èìåíà ðàçðåøàþòñÿ ÷åðåç SFIND
+\ hint: ' (Ñ‚Ð¸Ðº) Ð¸Ñ‰ÐµÑ‚ c NON-OPT-WL Ð½Ð° Ð²ÐµÑ€ÑˆÐ¸Ð½Ðµ, 
+\ Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ Ð·Ð´ÐµÑÑŒ Ð¸Ð¼ÐµÐ½Ð° Ñ€Ð°Ð·Ñ€ÐµÑˆÐ°ÑŽÑ‚ÑÑ Ñ‡ÐµÑ€ÐµÐ· SFIND
 
-\ I-NATIVE íå èùåò â NON-OPT-WL, ñ ó÷åòîì ýòîãî
-\ ïðîïèøåì êîìïèëÿòîðû äëÿ ýòè ñëîâ èç ñëîâàðÿ FORTH:
+\ I-NATIVE Ð½Ðµ Ð¸Ñ‰ÐµÑ‚ Ð² NON-OPT-WL, Ñ ÑƒÑ‡ÐµÑ‚Ð¾Ð¼ ÑÑ‚Ð¾Ð³Ð¾
+\ Ð¿Ñ€Ð¾Ð¿Ð¸ÑˆÐµÐ¼ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ‚Ð¾Ñ€Ñ‹ Ð´Ð»Ñ ÑÑ‚Ð¸ ÑÐ»Ð¾Ð² Ð¸Ð· ÑÐ»Ð¾Ð²Ð°Ñ€Ñ FORTH:
 
 ' COMPILE(?DUP)         `?DUP    SFIND 0= THROW ADVICE-COMPILER
 ' COMPILE(EXECUTE)      `EXECUTE SFIND 0= THROW ADVICE-COMPILER
 
-\ "ñàìè ñåáå" êîìïèëÿòîðû:
+\ "ÑÐ°Ð¼Ð¸ ÑÐµÐ±Ðµ" ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ‚Ð¾Ñ€Ñ‹:
 `RDROP   SFIND 0= THROW  DUP  ADVICE-COMPILER
 `R>      SFIND 0= THROW  DUP  ADVICE-COMPILER
 `>R      SFIND 0= THROW  DUP  ADVICE-COMPILER
 
 
-\ Çàãëóøêè-ïóñòûøêè ñ ôëàãîì immediate
-\ -- èõ è áåç òîãî îïòèìèçàòîð âûêóñûâàåò,
-\ à immediate -- ïîâîä íå ïóñêàòü â forthml
+\ Ð—Ð°Ð³Ð»ÑƒÑˆÐºÐ¸-Ð¿ÑƒÑÑ‚Ñ‹ÑˆÐºÐ¸ Ñ Ñ„Ð»Ð°Ð³Ð¾Ð¼ immediate
+\ -- Ð¸Ñ… Ð¸ Ð±ÐµÐ· Ñ‚Ð¾Ð³Ð¾ Ð¾Ð¿Ñ‚Ð¸Ð¼Ð¸Ð·Ð°Ñ‚Ð¾Ñ€ Ð²Ñ‹ÐºÑƒÑÑ‹Ð²Ð°ÐµÑ‚,
+\ Ð° immediate -- Ð¿Ð¾Ð²Ð¾Ð´ Ð½Ðµ Ð¿ÑƒÑÐºÐ°Ñ‚ÑŒ Ð² forthml
 WARNING @ WARNING 0!
 `CHARS  SFIND DUP 0= THROW NIP 1 = [IF] : CHARS  ; [THEN]
 `>CHARS SFIND DUP 0= THROW NIP 1 = [IF] : >CHARS ; [THEN]
 WARNING !
 
 
-\ Äëÿ ñëîâ, ÷óâñòâèòåëüíûõ ê óðîâíþ ñòåêà âîçâðàòîâ, íåëüçÿ äåëàòü õâîñòîâóþ îïòèìèçàöèþ.
-\ Ïðîïèñûâàþ ñîáñòâåííûé êîìïèëÿòîð äëÿ ñëîâà "2R>", ÷òîáû ãåíåðèòü âåðíûé êîä
-\ äëÿ íåãî äàæå ïðè âêëþ÷åííîé õâîñòîâîé îïòèìèçàöèè ("?C-JMP").
+\ Ð”Ð»Ñ ÑÐ»Ð¾Ð², Ñ‡ÑƒÐ²ÑÑ‚Ð²Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ðº ÑƒÑ€Ð¾Ð²Ð½ÑŽ ÑÑ‚ÐµÐºÐ° Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‚Ð¾Ð², Ð½ÐµÐ»ÑŒÐ·Ñ Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ñ…Ð²Ð¾ÑÑ‚Ð¾Ð²ÑƒÑŽ Ð¾Ð¿Ñ‚Ð¸Ð¼Ð¸Ð·Ð°Ñ†Ð¸ÑŽ.
+\ ÐŸÑ€Ð¾Ð¿Ð¸ÑÑ‹Ð²Ð°ÑŽ ÑÐ¾Ð±ÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹ ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ‚Ð¾Ñ€ Ð´Ð»Ñ ÑÐ»Ð¾Ð²Ð° "2R>", Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð³ÐµÐ½ÐµÑ€Ð¸Ñ‚ÑŒ Ð²ÐµÑ€Ð½Ñ‹Ð¹ ÐºÐ¾Ð´
+\ Ð´Ð»Ñ Ð½ÐµÐ³Ð¾ Ð´Ð°Ð¶Ðµ Ð¿Ñ€Ð¸ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ð¾Ð¹ Ñ…Ð²Ð¾ÑÑ‚Ð¾Ð²Ð¾Ð¹ Ð¾Ð¿Ñ‚Ð¸Ð¼Ð¸Ð·Ð°Ñ†Ð¸Ð¸ ("?C-JMP").
 
 : COMPILE(2R>)
   ['] 2R> COMPILE,

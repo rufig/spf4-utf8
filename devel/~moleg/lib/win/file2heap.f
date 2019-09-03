@@ -1,13 +1,13 @@
 \ 06.12.2008 ~mOleg
-\ Сopyright [C] 2008 mOleg mininoleg@yahoo.com
-\ копировать содержимое файла в хип
+\ РЎopyright [C] 2008 mOleg mininoleg@yahoo.com
+\ РєРѕРїРёСЂРѕРІР°С‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ С„Р°Р№Р»Р° РІ С…РёРї
 
  REQUIRE ?DEFINED     devel\~moleg\lib\util\ifdef.f
 
 ?DEFINED GetFileSize  WINAPI: GetFileSize    KERNEL32.DLL ( addr fid --> # )
 
-\ прочитать содержимое файла Asc # в память,
-\ вернуть адрес начала блока памяти и его длину
+\ РїСЂРѕС‡РёС‚Р°С‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ С„Р°Р№Р»Р° Asc # РІ РїР°РјСЏС‚СЊ,
+\ РІРµСЂРЅСѓС‚СЊ Р°РґСЂРµСЃ РЅР°С‡Р°Р»Р° Р±Р»РѕРєР° РїР°РјСЏС‚Рё Рё РµРіРѕ РґР»РёРЅСѓ
 : FILE>HEAP ( asc # --> addr # true | false )
             R/O OPEN-FILE DUP IF 2DROP FALSE EXIT THEN DROP >R
             0 R@ GetFileSize DUP
@@ -15,8 +15,8 @@
             SWAP 2R@ DROP READ-FILE  2R> SWAP CLOSE-FILE DROP
             SWAP IF FREE 2DROP FALSE ELSE SWAP TRUE THEN ;
 
-?DEFINED test{ \EOF -- тестовая секция ---------------------------------------
+?DEFINED test{ \EOF -- С‚РµСЃС‚РѕРІР°СЏ СЃРµРєС†РёСЏ ---------------------------------------
 
-test{ \ просто проверка сборки
+test{ \ РїСЂРѕСЃС‚Рѕ РїСЂРѕРІРµСЂРєР° СЃР±РѕСЂРєРё
   S" passed" TYPE
 }test

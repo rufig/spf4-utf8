@@ -27,7 +27,7 @@ CHAR a
 CHAR u 8 LSHIFT OR
 CHAR d 16 LSHIFT OR
 CHAR c 24 LSHIFT OR CONSTANT ICTYPE_AUDIO
-\ ïåðåáîð àóäèî-êîäåêîâ ýòèìè ôóíêöèÿìè (íèæå) íå ðàáîòàåò...
+\ Ð¿ÐµÑ€ÐµÐ±Ð¾Ñ€ Ð°ÑƒÐ´Ð¸Ð¾-ÐºÐ¾Ð´ÐµÐºÐ¾Ð² ÑÑ‚Ð¸Ð¼Ð¸ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑÐ¼Ð¸ (Ð½Ð¸Ð¶Ðµ) Ð½Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚...
 
 4 CONSTANT ICMODE_QUERY
 
@@ -37,8 +37,8 @@ CHAR c 24 LSHIFT OR CONSTANT ICTYPE_AUDIO
   BEGIN
     ici i ICTYPE_VIDEO ICInfo
   WHILE
-    \ ici ici.szName 32 DUMP \ ïóñòî
-    \ ici ici.szDescription 32 DUMP \ ïóñòî
+    \ ici ici.szName 32 DUMP \ Ð¿ÑƒÑÑ‚Ð¾
+    \ ici ici.szDescription 32 DUMP \ Ð¿ÑƒÑÑ‚Ð¾
     i . ici ici.szDriver UASCIIZ> UNICODE> TYPE SPACE
     ici ici.fccType 8 TYPE SPACE
     ICMODE_QUERY ici ici.fccHandler @ ici ici.fccType @ ICOpen ?DUP

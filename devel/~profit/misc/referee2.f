@@ -8,7 +8,7 @@ REQUIRE CLASS: ~day/joop/oop.f
 
 VARIABLE game
 : change-game ( move -- )  IF game 1+! ELSE -1 game +! THEN ;
-: lost? ( -- lost? )  5 game @ - ABS 5 =  ; \ или =0 или =10
+: lost? ( -- lost? )  5 game @ - ABS 5 =  ; \ РёР»Рё =0 РёР»Рё =10
 
 VARIABLE moves-made
 : send-updates? ( -- send? ) moves-made DUP 1+! @ 5 MOD 0= ;
@@ -29,9 +29,9 @@ CELL    VAR board-xt
 : :init 123 lastMove !  123 predMove ! ;
 : :free name @ FREE THROW ;
 
-: :set ( addr u -- ) \ закачка методов из файла
+: :set ( addr u -- ) \ Р·Р°РєР°С‡РєР° РјРµС‚РѕРґРѕРІ РёР· С„Р°Р№Р»Р°
 WARNING KEEP WARNING 0!
-2DUP HEAP-COPY OVER name 2! \ имя сохраняем
+2DUP HEAP-COPY OVER name 2! \ РёРјСЏ СЃРѕС…СЂР°РЅСЏРµРј
 INCLUDED
 S" move"  SFIND IF move-xt !  ELSE 2DROP THEN 
 S" board" SFIND IF board-xt ! ELSE 2DROP THEN ;
@@ -72,10 +72,10 @@ moves-made 0!
 5 game !
 show-game
 
-\ Судья бросает монетку, кому делать первый ход:
+\ РЎСѓРґСЊСЏ Р±СЂРѕСЃР°РµС‚ РјРѕРЅРµС‚РєСѓ, РєРѕРјСѓ РґРµР»Р°С‚СЊ РїРµСЂРІС‹Р№ С…РѕРґ:
 32 CHOOSE 15 > 
 IF red blue ELSE blue red THEN TO blue TO red
-\ если надо меняем местами -- у красных есть право первого хода
+\ РµСЃР»Рё РЅР°РґРѕ РјРµРЅСЏРµРј РјРµСЃС‚Р°РјРё -- Сѓ РєСЂР°СЃРЅС‹С… РµСЃС‚СЊ РїСЂР°РІРѕ РїРµСЂРІРѕРіРѕ С…РѕРґР°
 
 BEGIN
 red :make-move IF EXIT THEN

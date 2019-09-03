@@ -5,8 +5,8 @@ REQUIRE DEFER ~mlg/SrcLib/compat.f
 \ (c) M.L.Gassanenko
 \ If you find a bug, please, report to mlg@forth.org (Michael Gassanenko)
 \ Note: this package is not an ANS program
-\ ê†°Æ‚† · °®‚Æ¢Î¨® ØÆ´Ô¨®
-\ (c) å.ã.É†·†≠•≠™Æ 
+\ –†–∞–±–æ—Ç–∞ —Å –±–∏—Ç–æ–≤—ã–º–∏ –ø–æ–ª—è–º–∏
+\ (c) –ú.–õ.–ì–∞—Å–∞–Ω–µ–Ω–∫–æ 
 
 \ ===========================================================================
 \ These words work with exactly as many bits as you specify.

@@ -1,12 +1,12 @@
-\ Еще один вариант реализации тех же хэш-функций, что и в gcrypt.f,
-\ и тех же crc, что в zlib.f. Экономия порядка 200кб (лишних dll),
-\ если требуются только эти функции.
+\ Р•С‰Рµ РѕРґРёРЅ РІР°СЂРёР°РЅС‚ СЂРµР°Р»РёР·Р°С†РёРё С‚РµС… Р¶Рµ С…СЌС€-С„СѓРЅРєС†РёР№, С‡С‚Рѕ Рё РІ gcrypt.f,
+\ Рё С‚РµС… Р¶Рµ crc, С‡С‚Рѕ РІ zlib.f. Р­РєРѕРЅРѕРјРёСЏ РїРѕСЂСЏРґРєР° 200РєР± (Р»РёС€РЅРёС… dll),
+\ РµСЃР»Рё С‚СЂРµР±СѓСЋС‚СЃСЏ С‚РѕР»СЊРєРѕ СЌС‚Рё С„СѓРЅРєС†РёРё.
 
 \ http://mhash.sourceforge.net/mhash.3.html
 
-\ Под Linux не тестировалось.
-\ Под Windows вызывает утечки памяти, не смотря на mhash_deinit,
-\ поэтому для долгоиграющих приложений gcrypt предпочтительней.
+\ РџРѕРґ Linux РЅРµ С‚РµСЃС‚РёСЂРѕРІР°Р»РѕСЃСЊ.
+\ РџРѕРґ Windows РІС‹Р·С‹РІР°РµС‚ СѓС‚РµС‡РєРё РїР°РјСЏС‚Рё, РЅРµ СЃРјРѕС‚СЂСЏ РЅР° mhash_deinit,
+\ РїРѕСЌС‚РѕРјСѓ РґР»СЏ РґРѕР»РіРѕРёРіСЂР°СЋС‰РёС… РїСЂРёР»РѕР¶РµРЅРёР№ gcrypt РїСЂРµРґРїРѕС‡С‚РёС‚РµР»СЊРЅРµР№.
 
 REQUIRE SO            ~ac/lib/ns/so-xt.f
 REQUIRE {             lib/ext/locals.f
@@ -35,20 +35,20 @@ ALSO SO NEW: libmhash.dll
   td 1 mhash_hmac_end ( ha)
   algo 1 mhash_get_block_size DUP -> hu
   HEAP-COPY hu
-\  0 td 2 mhash_hmac_deinit DROP \ какая-то там ошибка...
+\  0 td 2 mhash_hmac_deinit DROP \ РєР°РєР°СЏ-С‚Рѕ С‚Р°Рј РѕС€РёР±РєР°...
 ;
 PREVIOUS
 
-: MD5B ( a u -- ha hu ) \ см. gcrypt.f
+: MD5B ( a u -- ha hu ) \ СЃРј. gcrypt.f
   MHASH_MD5 MHASH
 ;
-: SHA1B ( a u -- ha hu ) \ см. gcrypt.f
+: SHA1B ( a u -- ha hu ) \ СЃРј. gcrypt.f
   MHASH_SHA1 MHASH
 ;
-: CRC32 ( a u -- x ) \ см. zlib.f
+: CRC32 ( a u -- x ) \ СЃРј. zlib.f
   MHASH_CRC32B MHASH DROP @
 ;
-: ADLER32 ( a u -- x ) \ см. zlib.f
+: ADLER32 ( a u -- x ) \ СЃРј. zlib.f
   MHASH_ADLER32 MHASH DROP @
 ;
 : HMAC-MD5 ( addr u keya keyu  -- ha hu )
@@ -67,6 +67,6 @@ S" test" SHA1B DUMP CR
 S" test" CRC32 . CR
 S" test" ADLER32 . CR
 
-\ тесты из RFC2202:
+\ С‚РµСЃС‚С‹ РёР· RFC2202:
 S" what do ya want for nothing?" S" Jefe" HMAC-MD5 DUMP CR \ 0x750c783e6ab0b503eaa86e310a5db738
 S" what do ya want for nothing?" S" Jefe" HMAC-SHA1 DUMP CR \ 0xeffcdf6ae5eb2fa2d27416d5f184df9c259a7c79

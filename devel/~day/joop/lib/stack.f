@@ -2,7 +2,7 @@ REQUIRE Object ~day\joop\oop.f
 
 CLASS: Stack <SUPER Object
 
-        CELL VAR Data \ Íà÷àëüíûé àäðåñ ñòåêà
+        CELL VAR Data \ ÐÐ°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ ÑÑ‚ÐµÐºÐ°
         CELL VAR Num
 
 : :init

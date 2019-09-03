@@ -1,15 +1,15 @@
-\ Парсер для двоичного представления ASN.1-структур.
+\ РџР°СЂСЃРµСЂ РґР»СЏ РґРІРѕРёС‡РЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ ASN.1-СЃС‚СЂСѓРєС‚СѓСЂ.
 \ X.690 Information technology - ASN.1 encoding rules:
 \ Specification of Basic Encoding Rules (BER),
 \ Canonical Encoding Rules (CER) and
 \ Distinguished Encoding Rules (DER)
 
-\ Нумерация тегов указана в тексте самого ASN.1, стр.22
+\ РќСѓРјРµСЂР°С†РёСЏ С‚РµРіРѕРІ СѓРєР°Р·Р°РЅР° РІ С‚РµРєСЃС‚Рµ СЃР°РјРѕРіРѕ ASN.1, СЃС‚СЂ.22
 \ X.680 Information technology - Abstract Syntax
 \ Notation One (ASN.1): Specification of basic
 \ notation
 
-\ Справочник OIDs: http://www.alvestrand.no/objectid/1.2.840.113549.1.9.1.html
+\ РЎРїСЂР°РІРѕС‡РЅРёРє OIDs: http://www.alvestrand.no/objectid/1.2.840.113549.1.9.1.html
 \ http://www.oid-info.com/cgi-bin/display?tree=1.2.840.113549.1.1.4&see=all
 
 REQUIRE >UTF8  ~ac/lib/lin/iconv/iconv.f 
@@ -25,13 +25,13 @@ REQUIRE >UTF8  ~ac/lib/lin/iconv/iconv.f
 \ string types
 0x0C CONSTANT ASN_UTF8_STRING
 0x13 CONSTANT ASN_PRINTABLE_STRING
-0x14 CONSTANT ASN_TELETEX_STRING \ openssl записывает так utf8-строки...
-0x16 CONSTANT ASN_IA5_STRING     \ например email
-0x17 CONSTANT ASN_UTCTime        \ например 100329134908Z
+0x14 CONSTANT ASN_TELETEX_STRING \ openssl Р·Р°РїРёСЃС‹РІР°РµС‚ С‚Р°Рє utf8-СЃС‚СЂРѕРєРё...
+0x16 CONSTANT ASN_IA5_STRING     \ РЅР°РїСЂРёРјРµСЂ email
+0x17 CONSTANT ASN_UTCTime        \ РЅР°РїСЂРёРјРµСЂ 100329134908Z
 0x1E CONSTANT ASN_UNICODE_STRING \ BMPString
 
 
-\ другие, из которых в поле встречается только enum
+\ РґСЂСѓРіРёРµ, РёР· РєРѕС‚РѕСЂС‹С… РІ РїРѕР»Рµ РІСЃС‚СЂРµС‡Р°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ enum
    7 CONSTANT ASN_OBJECTDESCRIPTOR
    8 CONSTANT ASN_EXTERNAL
    9 CONSTANT ASN_REAL
@@ -39,13 +39,13 @@ REQUIRE >UTF8  ~ac/lib/lin/iconv/iconv.f
 0x0B CONSTANT ASN_EMBED
 0x0D CONSTANT ASB_REL_OID
 \ 0x0E, 0x0F reserved
-\ 0x10 - см. sequence
+\ 0x10 - СЃРј. sequence
 
 \ constructed types
 
-\ fixme: константы ASN_* частично пересекаются с ~ac/lib/win/snmp/snmp.f,
-\        но не являются ни windows-, ни snmp- специфичными, поэтому надо 
-\        перенести всё сюда
+\ fixme: РєРѕРЅСЃС‚Р°РЅС‚С‹ ASN_* С‡Р°СЃС‚РёС‡РЅРѕ РїРµСЂРµСЃРµРєР°СЋС‚СЃСЏ СЃ ~ac/lib/win/snmp/snmp.f,
+\        РЅРѕ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ РЅРё windows-, РЅРё snmp- СЃРїРµС†РёС„РёС‡РЅС‹РјРё, РїРѕСЌС‚РѕРјСѓ РЅР°РґРѕ 
+\        РїРµСЂРµРЅРµСЃС‚Рё РІСЃС‘ СЃСЋРґР°
 
 0x00 CONSTANT ASN_UNIVERSAL
 0x40 CONSTANT ASN_APPLICATION
@@ -78,19 +78,19 @@ REQUIRE >UTF8  ~ac/lib/lin/iconv/iconv.f
 
 
 : AsnStrDer> { a u \ u2 l z lz -- a2 u2 }
-  a C@ 128 = IF a 1+ -1 EXIT THEN \ indefinite form - до end-of-contents octets
+  a C@ 128 = IF a 1+ -1 EXIT THEN \ indefinite form - РґРѕ end-of-contents octets
   a C@ DUP 128 < IF a 1+ SWAP EXIT THEN
-  \ а для 128 и более байтов в asn.1 требуется 2 или более байтов на длину
-  \ 0x81 0x80 - представление длины 128
-  127 AND DUP -> u2 \ длина длины
+  \ Р° РґР»СЏ 128 Рё Р±РѕР»РµРµ Р±Р°Р№С‚РѕРІ РІ asn.1 С‚СЂРµР±СѓРµС‚СЃСЏ 2 РёР»Рё Р±РѕР»РµРµ Р±Р°Р№С‚РѕРІ РЅР° РґР»РёРЅСѓ
+  \ 0x81 0x80 - РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РґР»РёРЅС‹ 128
+  127 AND DUP -> u2 \ РґР»РёРЅР° РґР»РёРЅС‹
   0 ?DO
     a 1+ I + C@ l 8 LSHIFT + -> l
   LOOP
   a 1+ u2 + l
 ;
 : AsnStr> { a u \ u2 l i -- a2 u2 }
-\ преобразует строку с asn1-счетчиком (a) в форт-строку a2 u2
-\ см. ту же функцию asn_str> в ~ac/lib/lin/asn1/tasn1.f 
+\ РїСЂРµРѕР±СЂР°Р·СѓРµС‚ СЃС‚СЂРѕРєСѓ СЃ asn1-СЃС‡РµС‚С‡РёРєРѕРј (a) РІ С„РѕСЂС‚-СЃС‚СЂРѕРєСѓ a2 u2
+\ СЃРј. С‚Сѓ Р¶Рµ С„СѓРЅРєС†РёСЋ asn_str> РІ ~ac/lib/lin/asn1/tasn1.f 
   a C@ 128 <> IF a u AsnStrDer> EXIT THEN
   a 1+ -> a u 1- -> u
   BEGIN
@@ -98,7 +98,7 @@ REQUIRE >UTF8  ~ac/lib/lin/iconv/iconv.f
                   l 2+ -> l i 1- -> i
                   i 0 > 0= IF a l EXIT THEN
                 THEN
-    l 1+ -> l \ пропуск тега
+    l 1+ -> l \ РїСЂРѕРїСѓСЃРє С‚РµРіР°
     a l + u l - AsnStrDer> DUP -1 =
     IF 2DROP l 1+ -> l i 1+ -> i
     ELSE
@@ -161,7 +161,7 @@ USER uAsnLevel
   s STR@ 1- 0 MAX
 ;
 
-: AsnInt@ ( a u -- x ) \ переполнение отбрасывается
+: AsnInt@ ( a u -- x ) \ РїРµСЂРµРїРѕР»РЅРµРЅРёРµ РѕС‚Р±СЂР°СЃС‹РІР°РµС‚СЃСЏ
   0 SWAP
   0 ?DO
     OVER I + C@ SWAP 8 LSHIFT +
@@ -174,7 +174,7 @@ VECT vAsn1Parse
 
 : BITS. ( a u -- )
   BASE @ >R 2 BASE ! INT. R> BASE !
-EXIT \ слишком длинные бывают :)
+EXIT \ СЃР»РёС€РєРѕРј РґР»РёРЅРЅС‹Рµ Р±С‹РІР°СЋС‚ :)
   DUP 0= IF 2DROP EXIT THEN
   10 MIN DUMP
 ;
@@ -183,8 +183,8 @@ EXIT \ слишком длинные бывают :)
   DUP 0= IF 2DROP EXIT THEN
 
   70 MIN PTYPE  EXIT
-  \ наличие вложенных в octet_string объектов зависит от схемы
-  \ и парсить их по умолчанию не требуется
+  \ РЅР°Р»РёС‡РёРµ РІР»РѕР¶РµРЅРЅС‹С… РІ octet_string РѕР±СЉРµРєС‚РѕРІ Р·Р°РІРёСЃРёС‚ РѕС‚ СЃС…РµРјС‹
+  \ Рё РїР°СЂСЃРёС‚СЊ РёС… РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РЅРµ С‚СЂРµР±СѓРµС‚СЃСЏ
   OVER C@ ASN_SEQUENCE =
   IF ." [embed seq]" CR CR vAsn1Parse DROP
   ELSE OVER C@ ASN_IA5_STRING =
@@ -207,25 +207,25 @@ EXIT \ слишком длинные бывают :)
 VARIABLE AsnDebug \ TRUE AsnDebug !
 
 0
-CELL -- asNextPart \ связь элементов того же уровня
+CELL -- asNextPart \ СЃРІСЏР·СЊ СЌР»РµРјРµРЅС‚РѕРІ С‚РѕРіРѕ Р¶Рµ СѓСЂРѕРІРЅСЏ
 CELL -- asTag
-CELL -- asAddr     \ весь целиком
+CELL -- asAddr     \ РІРµСЃСЊ С†РµР»РёРєРѕРј
 CELL -- asLen
-CELL -- asPartAddr \ без учета заголовка
+CELL -- asPartAddr \ Р±РµР· СѓС‡РµС‚Р° Р·Р°РіРѕР»РѕРІРєР°
 CELL -- asPartLen
-CELL -- asLevel    \ уровень вложенности
-CELL -- asIndex    \ номер на уровне
-CELL -- asIsMultipart \ является ли составным
-CELL -- asParts    \ голова списка вложенных элементов
-CELL -- asChilds#  \ к-во вложенных элементов (на одном уровне)
-CELL -- asPar      \ верхний уровень
-CELL -- asOID      \ символьное представление OID при tag=ASN_OBJECTIDENTIFIER
-CELL -- asName     \ символическое имя, составленное из порядковых номеров
-                   \ на каждом уровне иерархии (подобно нумерации MIME-частей в IMAP)
-                   \ - для поиска по именам вида "ASN.1.3.2"
-CELL -- asEvalRes  \ фильтры в LDAP представлены в виде ASN.1-деревьев,
-                   \ это поле используем для "подъема" результов вычисления
-                   \ фильтров от листьев к корню
+CELL -- asLevel    \ СѓСЂРѕРІРµРЅСЊ РІР»РѕР¶РµРЅРЅРѕСЃС‚Рё
+CELL -- asIndex    \ РЅРѕРјРµСЂ РЅР° СѓСЂРѕРІРЅРµ
+CELL -- asIsMultipart \ СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃРѕСЃС‚Р°РІРЅС‹Рј
+CELL -- asParts    \ РіРѕР»РѕРІР° СЃРїРёСЃРєР° РІР»РѕР¶РµРЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
+CELL -- asChilds#  \ Рє-РІРѕ РІР»РѕР¶РµРЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ (РЅР° РѕРґРЅРѕРј СѓСЂРѕРІРЅРµ)
+CELL -- asPar      \ РІРµСЂС…РЅРёР№ СѓСЂРѕРІРµРЅСЊ
+CELL -- asOID      \ СЃРёРјРІРѕР»СЊРЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ OID РїСЂРё tag=ASN_OBJECTIDENTIFIER
+CELL -- asName     \ СЃРёРјРІРѕР»РёС‡РµСЃРєРѕРµ РёРјСЏ, СЃРѕСЃС‚Р°РІР»РµРЅРЅРѕРµ РёР· РїРѕСЂСЏРґРєРѕРІС‹С… РЅРѕРјРµСЂРѕРІ
+                   \ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РёРµСЂР°СЂС…РёРё (РїРѕРґРѕР±РЅРѕ РЅСѓРјРµСЂР°С†РёРё MIME-С‡Р°СЃС‚РµР№ РІ IMAP)
+                   \ - РґР»СЏ РїРѕРёСЃРєР° РїРѕ РёРјРµРЅР°Рј РІРёРґР° "ASN.1.3.2"
+CELL -- asEvalRes  \ С„РёР»СЊС‚СЂС‹ РІ LDAP РїСЂРµРґСЃС‚Р°РІР»РµРЅС‹ РІ РІРёРґРµ ASN.1-РґРµСЂРµРІСЊРµРІ,
+                   \ СЌС‚Рѕ РїРѕР»Рµ РёСЃРїРѕР»СЊР·СѓРµРј РґР»СЏ "РїРѕРґСЉРµРјР°" СЂРµР·СѓР»СЊС‚РѕРІ РІС‹С‡РёСЃР»РµРЅРёСЏ
+                   \ С„РёР»СЊС‚СЂРѕРІ РѕС‚ Р»РёСЃС‚СЊРµРІ Рє РєРѕСЂРЅСЋ
 CONSTANT /AsnPart
 
 
@@ -235,13 +235,13 @@ CONSTANT /AsnPart
   TRUE -> t
   BEGIN
     u 1 >
-    t AND \ страховка от неправильного формата
+    t AND \ СЃС‚СЂР°С…РѕРІРєР° РѕС‚ РЅРµРїСЂР°РІРёР»СЊРЅРѕРіРѕ С„РѕСЂРјР°С‚Р°
   WHILE
     n 1+ -> n
     par asChilds# 1+!
     /AsnPart ALLOCATE THROW -> as
     prev IF
-      as prev asNextPart ! \ связываем в прямом порядке, а не в фортовом обратном
+      as prev asNextPart ! \ СЃРІСЏР·С‹РІР°РµРј РІ РїСЂСЏРјРѕРј РїРѕСЂСЏРґРєРµ, Р° РЅРµ РІ С„РѕСЂС‚РѕРІРѕРј РѕР±СЂР°С‚РЅРѕРј
     ELSE
       as par asParts !
     THEN
@@ -273,11 +273,11 @@ CONSTANT /AsnPart
   uAsnLevel @ 1- uAsnLevel !
 ;
 : Asn1Parse { a u \ as -- as }
-  \ в "a u" на уровне корня может быть несколько
-  \ элементов, поэтому надо создать псевдокорень со счетчиком asChilds#.
-  \ Возвращается корень списка.
-  \ Если вызвавшей функции нужны свойства псевдокорня,
-  \ можно получить его через asPar @.
+  \ РІ "a u" РЅР° СѓСЂРѕРІРЅРµ РєРѕСЂРЅСЏ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ
+  \ СЌР»РµРјРµРЅС‚РѕРІ, РїРѕСЌС‚РѕРјСѓ РЅР°РґРѕ СЃРѕР·РґР°С‚СЊ РїСЃРµРІРґРѕРєРѕСЂРµРЅСЊ СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј asChilds#.
+  \ Р’РѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РєРѕСЂРµРЅСЊ СЃРїРёСЃРєР°.
+  \ Р•СЃР»Рё РІС‹Р·РІР°РІС€РµР№ С„СѓРЅРєС†РёРё РЅСѓР¶РЅС‹ СЃРІРѕР№СЃС‚РІР° РїСЃРµРІРґРѕРєРѕСЂРЅСЏ,
+  \ РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ РµРіРѕ С‡РµСЂРµР· asPar @.
   /AsnPart ALLOCATE THROW -> as
   uAsnLevel @ as asLevel !
   a as asAddr !
@@ -307,8 +307,8 @@ CONSTANT /AsnPart
   UNTIL
 ;
 : Asn1GetPart { pna pnu as -- as2 }
-  \ найти элемент по ASN.n.n-имени
-  \ если такого нет, возвращается 0
+  \ РЅР°Р№С‚Рё СЌР»РµРјРµРЅС‚ РїРѕ ASN.n.n-РёРјРµРЅРё
+  \ РµСЃР»Рё С‚Р°РєРѕРіРѕ РЅРµС‚, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ 0
   as 0= IF 0 EXIT THEN
   BEGIN
     as asName @ STR@ pna pnu COMPARE 0=
@@ -334,8 +334,8 @@ CONSTANT /AsnPart
   ELSE S" " 0 THEN
 ;
 : Asn1GetPartByOID { oida oidu as -- as2 }
-  \ найти элемент по OID
-  \ если такого нет, возвращается 0
+  \ РЅР°Р№С‚Рё СЌР»РµРјРµРЅС‚ РїРѕ OID
+  \ РµСЃР»Рё С‚Р°РєРѕРіРѕ РЅРµС‚, РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ 0
   as 0= IF 0 EXIT THEN
   BEGIN
     as asOID @ ?DUP IF STR@ oida oidu COMPARE 0= ELSE FALSE THEN
@@ -350,11 +350,11 @@ CONSTANT /AsnPart
   0
 ;
 
-\ Asn1GetValueByOID ищет в ASN1-дереве значение (RU) по OID (2.5.4.6) такой пары
+\ Asn1GetValueByOID РёС‰РµС‚ РІ ASN1-РґРµСЂРµРІРµ Р·РЅР°С‡РµРЅРёРµ (RU) РїРѕ OID (2.5.4.6) С‚Р°РєРѕР№ РїР°СЂС‹
 \ | | | |1 |0x30 (9 ASN.1.1.2.1.1) 
 \ | | | | |1 |0x6 (3 ASN.1.1.2.1.1.1) OID=2.5.4.6.
 \ | | | | |2 |0x13 (2 ASN.1.1.2.1.1.2) RU
-\ результат в кодировке windows-1251
+\ СЂРµР·СѓР»СЊС‚Р°С‚ РІ РєРѕРґРёСЂРѕРІРєРµ windows-1251
 
 : Asn1GetValueByOID ( oida oidu as -- a u )
   DUP 0= IF DROP 2DROP S" " EXIT THEN
@@ -366,7 +366,7 @@ CONSTANT /AsnPart
   ELSE S" " THEN
 ;
 
-\ Asn1GetPairValueByOID ищет в ASN1-дереве значение (bits) по OID (1.2.840.113549.1.1.1) такой пары
+\ Asn1GetPairValueByOID РёС‰РµС‚ РІ ASN1-РґРµСЂРµРІРµ Р·РЅР°С‡РµРЅРёРµ (bits) РїРѕ OID (1.2.840.113549.1.1.1) С‚Р°РєРѕР№ РїР°СЂС‹
 \ | |3 |0x30 (290 ASN.1.1.3) 
 \ | | |1 |0x30 (13 ASN.1.1.3.1) 
 \ | | | |1 |0x6 (9 ASN.1.1.3.1.1) OID=1.2.840.113549.1.1.1.

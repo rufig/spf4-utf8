@@ -29,7 +29,7 @@ CONSTR: init
 ;
 
 
-( Параметры CreateFont
+( РџР°СЂР°РјРµС‚СЂС‹ CreateFont
   int nHeight,             // logical height of font
   int nWidth,              // logical average character width
   int nEscapement,         // angle of escapement

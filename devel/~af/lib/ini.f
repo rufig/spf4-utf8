@@ -1,6 +1,6 @@
 \ Andrey Filatkin, af@forth.org.ru
 \ Work in spf3, spf4
-\ Работа с ini-файлами
+\ Р Р°Р±РѕС‚Р° СЃ ini-С„Р°Р№Р»Р°РјРё
 
 REQUIRE [DEFINED]  lib/include/tools.f
 
@@ -10,17 +10,17 @@ WINAPI: WritePrivateProfileStringA  kernel32.dll
 USER-CREATE BufIni 4096 USER-ALLOT
 : N>S ( u -- addr0)
   S>D DUP >R DABS <#
-  [ VERSION 400000 < [IF] ] 0 HOLD  [ [THEN] ] \ чтобы была 0-строка
+  [ VERSION 400000 < [IF] ] 0 HOLD  [ [THEN] ] \ С‡С‚РѕР±С‹ Р±С‹Р»Р° 0-СЃС‚СЂРѕРєР°
   #S R> SIGN #> DROP
 ;
 
-\ Получить строковое значение ключа
+\ РџРѕР»СѓС‡РёС‚СЊ СЃС‚СЂРѕРєРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡Р°
 : GetIniString ( addr0_ini addr0_sec addr0_key addr0_def -- addr0)
-\ где addr0_ini - нуль-терминированная строка - имя ini файла
-\ addr0_sec - имя секции
-\ addr0_key - имя ключа
-\ addr0_def - значение по умолчанию
-\ addr0 - требуемая строка
+\ РіРґРµ addr0_ini - РЅСѓР»СЊ-С‚РµСЂРјРёРЅРёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° - РёРјСЏ ini С„Р°Р№Р»Р°
+\ addr0_sec - РёРјСЏ СЃРµРєС†РёРё
+\ addr0_key - РёРјСЏ РєР»СЋС‡Р°
+\ addr0_def - Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+\ addr0 - С‚СЂРµР±СѓРµРјР°СЏ СЃС‚СЂРѕРєР°
   ASCIIZ> 1+ PAD SWAP MOVE
   >R >R
   4096 BufIni PAD
@@ -29,16 +29,16 @@ USER-CREATE BufIni 4096 USER-ALLOT
   BufIni
 ;
 
-\ Записать строковое значение ключа
+\ Р—Р°РїРёСЃР°С‚СЊ СЃС‚СЂРѕРєРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡Р°
 : SetIniString ( addr0_ini addr0_sec addr0_key addr0 -- )
-\ гиде - addr0 - записываемая строка
+\ РіРёРґРµ - addr0 - Р·Р°РїРёСЃС‹РІР°РµРјР°СЏ СЃС‚СЂРѕРєР°
   SWAP ROT
   WritePrivateProfileStringA DROP
 ;
 
-\ Получить числовое значение ключа
+\ РџРѕР»СѓС‡РёС‚СЊ С‡РёСЃР»РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡Р°
 : GetIniInt ( addr0_ini addr0_sec addr0_key u1 -- u2)
-\ u1 - дефолтное число
+\ u1 - РґРµС„РѕР»С‚РЅРѕРµ С‡РёСЃР»Рѕ
   DUP >R
   N>S GetIniString
   ASCIIZ> ['] ?SLITERAL1 CATCH 0= IF
@@ -48,19 +48,19 @@ USER-CREATE BufIni 4096 USER-ALLOT
   THEN
 ;
 
-\ Записать числовое значение ключа
+\ Р—Р°РїРёСЃР°С‚СЊ С‡РёСЃР»РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡Р°
 : SetIniInt ( addr0_ini addr0_sec addr0_key u1 -- )
   N>S SetIniString
 ;
 
-\ Получить список ключей в секции
+\ РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РєР»СЋС‡РµР№ РІ СЃРµРєС†РёРё
 : EnumSectionKeys ( addr0_ini addr0_sec addr u -- flag)
-\ где addr0_ini - нуль-терминированная строка - имя ini файла
-\ addr0_sec - имя секции
-\ addr - буфер для списка
-\ u - его размер
-\ Формат списка ключей:
-\ каждый ключ - 0-строка, в конце списка два нуля
+\ РіРґРµ addr0_ini - РЅСѓР»СЊ-С‚РµСЂРјРёРЅРёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° - РёРјСЏ ini С„Р°Р№Р»Р°
+\ addr0_sec - РёРјСЏ СЃРµРєС†РёРё
+\ addr - Р±СѓС„РµСЂ РґР»СЏ СЃРїРёСЃРєР°
+\ u - РµРіРѕ СЂР°Р·РјРµСЂ
+\ Р¤РѕСЂРјР°С‚ СЃРїРёСЃРєР° РєР»СЋС‡РµР№:
+\ РєР°Р¶РґС‹Р№ РєР»СЋС‡ - 0-СЃС‚СЂРѕРєР°, РІ РєРѕРЅС†Рµ СЃРїРёСЃРєР° РґРІР° РЅСѓР»СЏ
   ROT >R
   SWAP
   0 PAD C!  PAD
@@ -68,12 +68,12 @@ USER-CREATE BufIni 4096 USER-ALLOT
   GetPrivateProfileStringA 0<>
 ;
 
-\ Удалить ключ
+\ РЈРґР°Р»РёС‚СЊ РєР»СЋС‡
 : DeleteIniKey ( addr0_ini addr0_sec addr0_key -- )
   0 SetIniString
 ;
 
-\ Удалить секцию
+\ РЈРґР°Р»РёС‚СЊ СЃРµРєС†РёСЋ
 : DeleteIniSection ( addr0_ini addr0_sec -- )
   0 0 SetIniString
 ;

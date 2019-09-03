@@ -26,13 +26,13 @@ REQUIRE fgets ~ac/lib/win/winsock/psocket.f
     s S+
   REPEAT
   so fgets STR@ S" END" COMPARE 0=
-  IF s STR@ ELSE S" " ( ошибка) THEN
+  IF s STR@ ELSE S" " ( РѕС€РёР±РєР°) THEN
 ;
 : (Mc@) { na nu so -- va vu }
   na nu " get {s}
 " so fputs
   so fgets STR@
-  2DUP S" END" COMPARE 0= IF 2DROP S" " ( отсутствует) EXIT THEN
+  2DUP S" END" COMPARE 0= IF 2DROP S" " ( РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚) EXIT THEN
   so ROT ROT ['] (Mc@g) EVALUATE-WITH
 ;
 : Mc@ { na nu \ so -- va vu }

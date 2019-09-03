@@ -1,4 +1,4 @@
-\ std-хэндлы для fwrite-функций (исп. для openssl applink)
+\ std-С…СЌРЅРґР»С‹ РґР»СЏ fwrite-С„СѓРЅРєС†РёР№ (РёСЃРї. РґР»СЏ openssl applink)
 
 WINAPI: _fdopen         MSVCRT.DLL
 WINAPI: _open_osfhandle MSVCRT.DLL

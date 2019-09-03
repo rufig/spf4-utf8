@@ -2,7 +2,7 @@
 
 REQUIRE DLOPEN          ~ac/lib/ns/dlopen.f
 REQUIRE NAMING-         ~pinka/spf/compiler/native-wordlist.f
-REQUIRE AsQName         ~pinka/samples/2006/syntax/qname.f \ понятие однословных строк в виде `abc
+REQUIRE AsQName         ~pinka/samples/2006/syntax/qname.f \ РїРѕРЅСЏС‚РёРµ РѕРґРЅРѕСЃР»РѕРІРЅС‹С… СЃС‚СЂРѕРє РІ РІРёРґРµ `abc
 REQUIRE STHROW          ~pinka/spf/sthrow.f
 
 \ MODULE: ffi-support
@@ -41,12 +41,12 @@ REQUIRE STHROW          ~pinka/spf/sthrow.f
 : EXEC-FOREIGN-P1 ( i*x n-in entry-point -- x ) 
   SWAP 1+ CELLS DRMOVE 0 R> EXECUTE (  [ x ]  ) 
 ; 
-( Этимология:
-  'EXEC'        -- от фортова EXECUTE -- выполнить;
-  'FOREIGN'     -- чужой токен, не свой;
-  'P', 'C'      -- формат вызова и определение чужого;
-  '1'           -- на выходе одно значение [впрочем, форматы C и P иного и не подразумевают, 
-                   поэтому, может быть излишне].
+( Р­С‚РёРјРѕР»РѕРіРёСЏ:
+  'EXEC'        -- РѕС‚ С„РѕСЂС‚РѕРІР° EXECUTE -- РІС‹РїРѕР»РЅРёС‚СЊ;
+  'FOREIGN'     -- С‡СѓР¶РѕР№ С‚РѕРєРµРЅ, РЅРµ СЃРІРѕР№;
+  'P', 'C'      -- С„РѕСЂРјР°С‚ РІС‹Р·РѕРІР° Рё РѕРїСЂРµРґРµР»РµРЅРёРµ С‡СѓР¶РѕРіРѕ;
+  '1'           -- РЅР° РІС‹С…РѕРґРµ РѕРґРЅРѕ Р·РЅР°С‡РµРЅРёРµ [РІРїСЂРѕС‡РµРј, С„РѕСЂРјР°С‚С‹ C Рё P РёРЅРѕРіРѕ Рё РЅРµ РїРѕРґСЂР°Р·СѓРјРµРІР°СЋС‚, 
+                   РїРѕСЌС‚РѕРјСѓ, РјРѕР¶РµС‚ Р±С‹С‚СЊ РёР·Р»РёС€РЅРµ].
 )
 
 
@@ -62,9 +62,9 @@ REQUIRE STHROW          ~pinka/spf/sthrow.f
 : DLPOINT-NAME ( p -- a u ) DLPOINT-NAME@ DUP IF COUNT EXIT THEN 0 ;
 : DLPOINT-PARENT ( p1 -- p2 ) CELL+ @ ;
 : SET-DLPOINT-NAME ( a u p -- ) ALIGN HERE SWAP DLPOINT-NAME! S", 0 C, ;
-( Здесь, 
-  возможно, стоит сделать XCOUNT, со счетчиком в ячейку, вместо COUNT,
-  ограничинный 255 символов [ MAX_PATH имеет значение 256, а URL -- хоть 2 Kb ]
+( Р—РґРµСЃСЊ, 
+  РІРѕР·РјРѕР¶РЅРѕ, СЃС‚РѕРёС‚ СЃРґРµР»Р°С‚СЊ XCOUNT, СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј РІ СЏС‡РµР№РєСѓ, РІРјРµСЃС‚Рѕ COUNT,
+  РѕРіСЂР°РЅРёС‡РёРЅРЅС‹Р№ 255 СЃРёРјРІРѕР»РѕРІ [ MAX_PATH РёРјРµРµС‚ Р·РЅР°С‡РµРЅРёРµ 256, Р° URL -- С…РѕС‚СЊ 2 Kb ]
 )
 
 : CACHE-DL ( p -- )
@@ -89,8 +89,8 @@ REQUIRE STHROW          ~pinka/spf/sthrow.f
 : EXEC-DLPOINT-P1 ( i*x i p -- x )
   DLPOINT-FUNC EXEC-FOREIGN-P1
 ;
-\ Возможно, стоит зашить формат вызова прямо в DLPOINT?
-\ (но тогда, почему бы не зашить и туда числа входящих аргументов?)
+\ Р’РѕР·РјРѕР¶РЅРѕ, СЃС‚РѕРёС‚ Р·Р°С€РёС‚СЊ С„РѕСЂРјР°С‚ РІС‹Р·РѕРІР° РїСЂСЏРјРѕ РІ DLPOINT?
+\ (РЅРѕ С‚РѕРіРґР°, РїРѕС‡РµРјСѓ Р±С‹ РЅРµ Р·Р°С€РёС‚СЊ Рё С‚СѓРґР° С‡РёСЃР»Р° РІС…РѕРґСЏС‰РёС… Р°СЂРіСѓРјРµРЅС‚РѕРІ?)
 
 
 \ ;MODULE
@@ -101,7 +101,7 @@ REQUIRE /TEST ~profit/lib/testing.f
 /TEST
 
 \ test
-\ определяем слово "WAPI:" на определенной выше базе.
+\ РѕРїСЂРµРґРµР»СЏРµРј СЃР»РѕРІРѕ "WAPI:" РЅР° РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ РІС‹С€Рµ Р±Р°Р·Рµ.
 
 : CREATE-WAPI ( d-func d-lib -- )
   0  CREATED-DLPOINT DUP >R SET-DLPOINT-NAME
@@ -113,28 +113,28 @@ REQUIRE /TEST ~profit/lib/testing.f
   NextWord NextWord CREATE-WAPI
 ;  
 
-\ испытание в работе
+\ РёСЃРїС‹С‚Р°РЅРёРµ РІ СЂР°Р±РѕС‚Рµ
 
 WAPI: MessageBoxA  user32.dll
 0 S" test" DROP S" test passed" DROP 0  4 MessageBoxA . CR
 
 \EOF
-\ а так выглядит по старому
+\ Р° С‚Р°Рє РІС‹РіР»СЏРґРёС‚ РїРѕ СЃС‚Р°СЂРѕРјСѓ
 WINAPI: MessageBoxA  user32.dll
 0 S" test" DROP S" test passed" DROP 0   MessageBoxA . CR
 
 
 \EOF
-todo: учесть следующее обстоятельство
-  Иногда библиотека экспортирует данные а не функцию, как например
+todo: СѓС‡РµСЃС‚СЊ СЃР»РµРґСѓСЋС‰РµРµ РѕР±СЃС‚РѕСЏС‚РµР»СЊСЃС‚РІРѕ
+  РРЅРѕРіРґР° Р±РёР±Р»РёРѕС‚РµРєР° СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ РґР°РЅРЅС‹Рµ Р° РЅРµ С„СѓРЅРєС†РёСЋ, РєР°Рє РЅР°РїСЂРёРјРµСЂ
   memory management functions in the libxml2 (xmlFree & Co.)
     -- http://mail.gnome.org/archives/xml/2002-August/msg00107.html
   
-  или PcreFree из pcre.dll
-    -- см. ~ac/lib/string/regexp.f
+  РёР»Рё PcreFree РёР· pcre.dll
+    -- СЃРј. ~ac/lib/string/regexp.f
   
-  В случае xmlFree "точка входа" представляет из себя указатель на функцию,
-  которая может быть вызвана следующим образом:
+  Р’ СЃР»СѓС‡Р°Рµ xmlFree "С‚РѕС‡РєР° РІС…РѕРґР°" РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РёР· СЃРµР±СЏ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С„СѓРЅРєС†РёСЋ,
+  РєРѕС‚РѕСЂР°СЏ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІС‹Р·РІР°РЅР° СЃР»РµРґСѓСЋС‰РёРј РѕР±СЂР°Р·РѕРј:
     ( addr-to-be-freed ) 1
     `xmlFree `libxml2 DLOPEN-SURE DLSYM-SURE
     @

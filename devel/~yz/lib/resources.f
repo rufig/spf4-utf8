@@ -4,13 +4,13 @@ MODULE: RESOURCES
 0 VALUE start
 
 : relocate ( adr xt -- ) 
-\ Ø‡®¨•≠®‚Ï ™Æ ¢·•¨ Ì´•¨•≠‚†¨ ™†‚†´Æ£† adr ·´Æ¢Æ xt
+\ –ø—Ä–∏–º–µ–Ω–∏—Ç—å –∫–æ –≤—Å–µ–º —ç–ª–µ–º–µ–Ω—Ç–∞–º –∫–∞—Ç–∞–ª–æ–≥–∞ adr —Å–ª–æ–≤–æ xt
   >R
-  DUP 12 + W@ ( ®¨•≠Æ¢†≠≠Î• ß†Ø®·®) OVER 14 + W@ ( ≠•®¨•≠Æ¢†≠≠Î• ß†Ø®·®) +
+  DUP 12 + W@ ( –∏–º–µ–Ω–æ–≤–∞–Ω–Ω—ã–µ –∑–∞–ø–∏—Å–∏) OVER 14 + W@ ( –Ω–µ–∏–º–µ–Ω–æ–≤–∞–Ω–Ω—ã–µ –∑–∞–ø–∏—Å–∏) +
   SWAP 16 + SWAP
   BEGIN ( adr #) DUP WHILE
     OVER CELL+ @ 0x7FFFFFFF AND start + R@ EXECUTE
-  SWAP 2 CELLS + ( §´®≠† ß†Ø®·®) SWAP 1-
+  SWAP 2 CELLS + ( –¥–ª–∏–Ω–∞ –∑–∞–ø–∏—Å–∏) SWAP 1-
   REPEAT 2DROP
   RDROP
 ;
@@ -22,12 +22,12 @@ MODULE: RESOURCES
 EXPORT
 
 : RESOURCES: ( ->eol; -- )
-  1 WORD COUNT R/O OPEN-FILE ABORT" î†©´ ‡•·„‡·Æ¢ ≠• ≠†©§•≠" TO h
+  1 WORD COUNT R/O OPEN-FILE ABORT" –§–∞–π–ª —Ä–µ—Å—É—Ä—Å–æ–≤ –Ω–µ –Ω–∞–π–¥–µ–Ω" TO h
   512 ALIGN-BYTES ! ALIGN 4 ALIGN-BYTES !
   HERE DUP TO start IMAGE-BASE - RESOURCES-RVA !
-  start h FILE-SIZE 2DROP h READ-FILE ABORT" éË®°™† Á‚•≠®Ô"
+  start h FILE-SIZE 2DROP h READ-FILE ABORT" –û—à–∏–±–∫–∞ —á—Ç–µ–Ω–∏—è"
   DUP ALLOT RESOURCES-SIZE ! 
-  start ['] relocate1 relocate \ §Æ°†¢®‚Ï ™Æ ¢·•¨ †§‡•·†¨ ‡•·„‡·Æ¢ RESOURCES-RVA
+  start ['] relocate1 relocate \ –¥–æ–±–∞–≤–∏—Ç—å –∫–æ –≤—Å–µ–º –∞–¥—Ä–µ—Å–∞–º —Ä–µ—Å—É—Ä—Å–æ–≤ RESOURCES-RVA
   h CLOSE-FILE DROP
 ;
 

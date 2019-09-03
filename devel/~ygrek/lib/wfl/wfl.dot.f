@@ -1,15 +1,15 @@
-\ Диаграмма классов wfl
-\ На выходе dot-файл для GraphViz
+\ Р”РёР°РіСЂР°РјРјР° РєР»Р°СЃСЃРѕРІ wfl
+\ РќР° РІС‹С…РѕРґРµ dot-С„Р°Р№Р» РґР»СЏ GraphViz
 \ "C:\Program Files\ATT\Graphviz\bin\dot.exe" -Tpng wfl.dot -owfl.png
-\ Соответствующую картинка - http://forth.org.ru/~ygrek/files/wfl.png
+\ РЎРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ РєР°СЂС‚РёРЅРєР° - http://forth.org.ru/~ygrek/files/wfl.png
 
 REQUIRE WL-MODULES ~day/lib/includemodule.f
 NEEDS ~day/hype3/hype3.f
 NEEDS ~ygrek/lib/dot.f
 NEEDS ~ygrek/lib/parse.f
 
-\ переопределяем наследование для Hype3
-\ собираем инфу о связях между классами
+\ РїРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РЅР°СЃР»РµРґРѕРІР°РЅРёРµ РґР»СЏ Hype3
+\ СЃРѕР±РёСЂР°РµРј РёРЅС„Сѓ Рѕ СЃРІСЏР·СЏС… РјРµР¶РґСѓ РєР»Р°СЃСЃР°РјРё
 : SUBCLASS
    DUP HYPE::.nfa @ COUNT PICK-NAME DOT-LINK
 

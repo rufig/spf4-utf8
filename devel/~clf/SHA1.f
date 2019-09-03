@@ -1,10 +1,10 @@
 : 3DROP DROP 2DROP ;
 
 
-\ Œ“: 	JZAKIYA
-\ ƒ¿“¿:		—¡. 4 ÕŒﬂ¡. 2000 00:00
-\ ›À≈ “–ŒÕÕ¿ﬂ œŒ◊“¿: 		JZAK...@MAIL.COM
-\ √–”œœ€: 		COMP.LANG.FORTH
+\ –Ω—Ä: 	JZAKIYA
+\ –¥—é—Ä—é:		—è–∞. 4 –º–Ω—ä–∞. 2000 00:00
+\ —â–∫–µ–π—Ä–ø–Ω–º–º—é—ä –æ–Ω–≤—Ä—é: 		JZAK...@MAIL.COM
+\ —Ü–ø—Å–æ–æ—à: 		COMP.LANG.FORTH
 
 \ HERE IS ANS FORTH CODE FOR THE SECURE HASH ALGORITHM.
 

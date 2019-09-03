@@ -26,7 +26,7 @@ CONSTANT /full-test
 
 : SET-INTERPRET &INTERPRET ! ;
 
-: TO-STR ( -> ) \ ������஢��� �室��� ��⮪
+: TO-STR ( -> ) \ интерпретировать входной поток
   BEGIN
     PARSE-NAME DUP
   WHILE

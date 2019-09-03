@@ -6,14 +6,14 @@ REQUIRE T-SLIT ~pinka/samples/2006/core/trans/common.f
 REQUIRE TAIL   ~pinka/samples/2006/lib/head-tail.f
 
 : I-QName ( a-text u-text -- a1 u1 true | a u false )
-\ пытается интерпретировать text как маскированное обратным тиком имя "`name" (quoted name)
-\ дает имя (как строку) при успехе.
+\ РїС‹С‚Р°РµС‚СЃСЏ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊ text РєР°Рє РјР°СЃРєРёСЂРѕРІР°РЅРЅРѕРµ РѕР±СЂР°С‚РЅС‹Рј С‚РёРєРѕРј РёРјСЏ "`name" (quoted name)
+\ РґР°РµС‚ РёРјСЏ (РєР°Рє СЃС‚СЂРѕРєСѓ) РїСЂРё СѓСЃРїРµС…Рµ.
   DUP /CHAR U> IF
     OVER C@  [CHAR] ` = IF TAIL TRUE EXIT THEN
   THEN FALSE
 ;
 : AsQName ( a-text u-text -- i*x true | a u false )  \ T-QName
-\ пытается транслировать как маскированное имя(строку), маскированное обратным тиком
+\ РїС‹С‚Р°РµС‚СЃСЏ С‚СЂР°РЅСЃР»РёСЂРѕРІР°С‚СЊ РєР°Рє РјР°СЃРєРёСЂРѕРІР°РЅРЅРѕРµ РёРјСЏ(СЃС‚СЂРѕРєСѓ), РјР°СЃРєРёСЂРѕРІР°РЅРЅРѕРµ РѕР±СЂР°С‚РЅС‹Рј С‚РёРєРѕРј
   I-QName IF T-SLIT TRUE EXIT THEN
   FALSE
 ;

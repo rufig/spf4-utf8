@@ -1,4 +1,4 @@
-\ Управление встроенным браузером. Примеры см. в ~ac/lib/win/window/browser.f
+\ РЈРїСЂР°РІР»РµРЅРёРµ РІСЃС‚СЂРѕРµРЅРЅС‹Рј Р±СЂР°СѓР·РµСЂРѕРј. РџСЂРёРјРµСЂС‹ СЃРј. РІ ~ac/lib/win/window/browser.f
 
 REQUIRE CLSID,  ~ac/lib/win/com/com.f
 
@@ -72,11 +72,11 @@ Interface;
 
 IID_IUnknown
 Interface: IID_IOleInPlaceActiveObject {00000117-0000-0000-C000-000000000046}
-\ первые два из IOleWindow
+\ РїРµСЂРІС‹Рµ РґРІР° РёР· IOleWindow
   Method: ::GetWindow ( This,phwnd)
   Method: ::ContextSensitiveHelp ( This,fEnterMode)
 
-  Method: ::TranslateAccelerator ( This,lpmsg) \ единственный способ передать TAB на обработку окну браузера
+  Method: ::TranslateAccelerator ( This,lpmsg) \ РµРґРёРЅСЃС‚РІРµРЅРЅС‹Р№ СЃРїРѕСЃРѕР± РїРµСЂРµРґР°С‚СЊ TAB РЅР° РѕР±СЂР°Р±РѕС‚РєСѓ РѕРєРЅСѓ Р±СЂР°СѓР·РµСЂР°
   Method: ::OnFrameWindowActivate ( This,fActivate)
   Method: ::OnDocWindowActivate ( This,fActivate)
   Method: ::ResizeBorder ( This,prcBorder,pUIWindow,fFrameWindow)

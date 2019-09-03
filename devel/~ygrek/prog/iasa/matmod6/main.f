@@ -1,5 +1,5 @@
-\ Полёт снаряда и ракеты
-\ Математическое моделирование
+\ РџРѕР»С‘С‚ СЃРЅР°СЂСЏРґР° Рё СЂР°РєРµС‚С‹
+\ РњР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ
 \ (c) yGREK Heretix mailto:heretix@yandex.ru
 \ 07.May.2005
 
@@ -33,18 +33,18 @@ model2.f
   R> -text# >FLOAT 0= IF 0e THEN
   FREE THROW
 ;
-\ учитываем что без символа "e" вещественное число не воспринимается
+\ СѓС‡РёС‚С‹РІР°РµРј С‡С‚Рѕ Р±РµР· СЃРёРјРІРѕР»Р° "e" РІРµС‰РµСЃС‚РІРµРЅРЅРѕРµ С‡РёСЃР»Рѕ РЅРµ РІРѕСЃРїСЂРёРЅРёРјР°РµС‚СЃСЏ
 \ : >fnum >FNUM OVER + DUP [CHAR] e SWAP C! 1+ 0 SWAP C! ;
 : >fnum >FNUM OVER + 0 SWAP C! ;
 
 : info { \ str }
    [ ALSO AC ]
    ALSO AC
-   " Дальность {xmax >FNUM} м {CRLF}" TO str
-   " Высота {ymax >FNUM} м {CRLF}" str S+ 
-   " Угол падения {TEnd >FNUM} рад {CRLF}" str S+
-   " Скорость падения {vEnd >FNUM} м/сек {CRLF}" str S+
-   " Время {tEnd >FNUM} сек {CRLF}" str S+
+   " Р”Р°Р»СЊРЅРѕСЃС‚СЊ {xmax >FNUM} Рј {CRLF}" TO str
+   " Р’С‹СЃРѕС‚Р° {ymax >FNUM} Рј {CRLF}" str S+ 
+   " РЈРіРѕР» РїР°РґРµРЅРёСЏ {TEnd >FNUM} СЂР°Рґ {CRLF}" str S+
+   " РЎРєРѕСЂРѕСЃС‚СЊ РїР°РґРµРЅРёСЏ {vEnd >FNUM} Рј/СЃРµРє {CRLF}" str S+
+   " Р’СЂРµРјСЏ {tEnd >FNUM} СЃРµРє {CRLF}" str S+
    str STR@ ShowMessage  
    str STRFREE
    PREVIOUS
@@ -60,7 +60,7 @@ grid.f
   WINDOWS...
   " Times New Roman Cyr" 12 create-font default-font
   0 dialog-window TO winmain
-  " Мат моделирование N6. yGREK heretix. КА-21" winmain -text!
+  " РњР°С‚ РјРѕРґРµР»РёСЂРѕРІР°РЅРёРµ N6. yGREK heretix. РљРђ-21" winmain -text!
 
   make-grids
   GRID make-tabs | GRID; winmain -grid!

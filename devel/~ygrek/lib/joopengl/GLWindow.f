@@ -1,10 +1,10 @@
 \ Last changes 07/05/2005
 
 \ 07.May.2005  ~ygrek
-\  Небольшие фиксы
+\  РќРµР±РѕР»СЊС€РёРµ С„РёРєСЃС‹
 
-\ TODO: Разобраться с многочисленными багами, глюками и ошибками
-\  которые появляются при запуске. Такие как - GL error 502 итп
+\ TODO: Р Р°Р·РѕР±СЂР°С‚СЊСЃСЏ СЃ РјРЅРѕРіРѕС‡РёСЃР»РµРЅРЅС‹РјРё Р±Р°РіР°РјРё, РіР»СЋРєР°РјРё Рё РѕС€РёР±РєР°РјРё
+\  РєРѕС‚РѕСЂС‹Рµ РїРѕСЏРІР»СЏСЋС‚СЃСЏ РїСЂРё Р·Р°РїСѓСЃРєРµ. РўР°РєРёРµ РєР°Рє - GL error 502 РёС‚Рї
 
 \ OpenGL demo in Forth  
 \ with jOOP by ~day
@@ -30,9 +30,9 @@ FDOUBLE
 : status CR ." f=" FDEPTH . ." d=" DEPTH DUP . HEX 10 < IF DEPTH .SN THEN
   GetLastError ?DUP IF CR ." Error " . THEN
   glGetError ?DUP IF CR ." GL error " . THEN
-  \ Если это закоментарить то не запуститься
-  \ Потому что получениу инфы об ошибке очищает внутренний флаг ошибки
-  \ и дяльше будет выполняться нормально. Где ошибка я не знаю.
+  \ Р•СЃР»Рё СЌС‚Рѕ Р·Р°РєРѕРјРµРЅС‚Р°СЂРёС‚СЊ С‚Рѕ РЅРµ Р·Р°РїСѓСЃС‚РёС‚СЊСЃСЏ
+  \ РџРѕС‚РѕРјСѓ С‡С‚Рѕ РїРѕР»СѓС‡РµРЅРёСѓ РёРЅС„С‹ РѕР± РѕС€РёР±РєРµ РѕС‡РёС‰Р°РµС‚ РІРЅСѓС‚СЂРµРЅРЅРёР№ С„Р»Р°Рі РѕС€РёР±РєРё
+  \ Рё РґСЏР»СЊС€Рµ Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РЅРѕСЂРјР°Р»СЊРЅРѕ. Р“РґРµ РѕС€РёР±РєР° СЏ РЅРµ Р·РЅР°СЋ.
   DECIMAL
 ;
 : M, ( addr u -- addr+4 )   OVER  ! CELL+ ;
@@ -46,7 +46,7 @@ CLASS: GLWinClass <SUPER WinClass
     \ ." Init."
      own :init
      S" OpenGL Class" DROP lpszClassName !
-     style @ CS_OWNDC OR style !  \ это похоже не критично   
+     style @ CS_OWNDC OR style !  \ СЌС‚Рѕ РїРѕС…РѕР¶Рµ РЅРµ РєСЂРёС‚РёС‡РЅРѕ   
      \ ." Init done."
 ;
      
@@ -57,14 +57,14 @@ GLWinClass :newLit VALUE iGLClass
 : show ( node -- ) <data @ DUP :draw :rotate 0 ;
 
 << :maximize
-<< :add \ добавить обьект для отрисовки
+<< :add \ РґРѕР±Р°РІРёС‚СЊ РѕР±СЊРµРєС‚ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё
 CLASS: GLWindow <SUPER FrameWindow
 
   CELL VAR hDC          \ Private GDI Device Context
   CELL VAR hRC          \ Permanent Rendering Context
   CELL VAR width        \
-  CELL VAR height       \ размеры GL окна
-  List OBJ scene        \ все обьекты для отрисовки
+  CELL VAR height       \ СЂР°Р·РјРµСЂС‹ GL РѕРєРЅР°
+  List OBJ scene        \ РІСЃРµ РѕР±СЊРµРєС‚С‹ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё
 
 : :init
    own :init
@@ -82,7 +82,7 @@ M: ID_ABOUT
     self ShowAbout
 ;
 
-\ M: ID_CLOSE self :free ; \ именно self, а не own
+\ M: ID_CLOSE self :free ; \ РёРјРµРЅРЅРѕ self, Р° РЅРµ own
  
 : :createPopup
    POPUPMENU
@@ -110,7 +110,7 @@ M: ID_ABOUT
 ;
 
 : :resize { \ WindowRect -- } \ Resize And Initialize The GL Window
-\ Подогнать запрашиваемые размеры к возможным GLевским
+\ РџРѕРґРѕРіРЅР°С‚СЊ Р·Р°РїСЂР°С€РёРІР°РµРјС‹Рµ СЂР°Р·РјРµСЂС‹ Рє РІРѕР·РјРѕР¶РЅС‹Рј GLРµРІСЃРєРёРј
   \     CR ." Request dimensions : " width @ . height @ .
        RECT::/SIZE ALLOCATE THROW TO WindowRect                                 
                  0 WindowRect RECT::left ! \ Set Left Value To 0                 
@@ -125,7 +125,7 @@ M: ID_ABOUT
        WindowRect FREE THROW             
    \    CR ." Changed dimensions to : " width @ . height @ .                                 
 
- \ Теперь устанавливаем GL параметры окна
+ \ РўРµРїРµСЂСЊ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј GL РїР°СЂР°РјРµС‚СЂС‹ РѕРєРЅР°
         height @ 0 = IF 1 height ! THEN  \ Prevent A Divide By Zero
         height @ width @ 0 0 glViewport DROP    \ Reset The Current Viewport
 
@@ -192,7 +192,7 @@ M: ID_ABOUT
     own :free BYE
    THEN
 
-   pfd FREE THROW \ больше не нужен
+   pfd FREE THROW \ Р±РѕР»СЊС€Рµ РЅРµ РЅСѓР¶РµРЅ
 
    hDC @ wglCreateContext hRC !
    hRC @ 0= IF
@@ -256,7 +256,7 @@ W: WM_TIMER  \ Here's Where We Do All The Drawing
 
  scene :free 
  \ ." done."
- \ own :free \ по идее это нужно, но вызывает ошибку
+ \ own :free \ РїРѕ РёРґРµРµ СЌС‚Рѕ РЅСѓР¶РЅРѕ, РЅРѕ РІС‹Р·С‹РІР°РµС‚ РѕС€РёР±РєСѓ
 ;
 
 : :move

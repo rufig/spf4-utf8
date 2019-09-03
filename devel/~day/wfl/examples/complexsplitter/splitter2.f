@@ -1,4 +1,4 @@
-( Типичный email клиент - слева дерево, справа вверху список, внизу htmlview )
+( РўРёРїРёС‡РЅС‹Р№ email РєР»РёРµРЅС‚ - СЃР»РµРІР° РґРµСЂРµРІРѕ, СЃРїСЂР°РІР° РІРІРµСЂС…Сѓ СЃРїРёСЃРѕРє, РІРЅРёР·Сѓ htmlview )
 
 REQUIRE WL-MODULES ~day\lib\includemodule.f
 NEEDS ~day\wfl\wfl.f
@@ -34,23 +34,23 @@ CFrameWindow SUBCLASS CSplitterViewDemo
 
 \ OnDocumentComplete
 H: 0x103
-    0 S" ЗАГРУЖЕНО" listView insertString
+    0 S" Р—РђР“Р РЈР–Р•РќРћ" listView insertString
 ;
 
 W: WM_CREATE
-   \ установим нужные стили контролов
+   \ СѓСЃС‚Р°РЅРѕРІРёРј РЅСѓР¶РЅС‹Рµ СЃС‚РёР»Рё РєРѕРЅС‚СЂРѕР»РѕРІ
    LVS_REPORT listView style OR!
    TVS_HASBUTTONS TVS_HASLINES OR TVS_LINESATROOT OR treeView style OR!
    WS_EX_CLIENTEDGE htmlView exStyle OR!
 
-    \ мы отвечаем за создание и удаление объектов панелей
-     \ контроллер отвечает со инициализацию панелей (создание win окон)
+    \ РјС‹ РѕС‚РІРµС‡Р°РµРј Р·Р° СЃРѕР·РґР°РЅРёРµ Рё СѓРґР°Р»РµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ РїР°РЅРµР»РµР№
+     \ РєРѕРЅС‚СЂРѕР»Р»РµСЂ РѕС‚РІРµС‡Р°РµС‚ СЃРѕ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ РїР°РЅРµР»РµР№ (СЃРѕР·РґР°РЅРёРµ win РѕРєРѕРЅ)
 
    treeView this SELF vsplitter setLeftPane
    rightPane this SELF vsplitter setRightPane
    SELF vsplitter createSplitter
    
-   \ установим нужный размер
+   \ СѓСЃС‚Р°РЅРѕРІРёРј РЅСѓР¶РЅС‹Р№ СЂР°Р·РјРµСЂ
    30 vsplitter setPercent 
 
    hsplitter setHorizontal
@@ -59,7 +59,7 @@ W: WM_CREATE
    htmlView this OVER hsplitter setBottomPane
    hsplitter createSplitter
 
-   \ пост инициализация
+   \ РїРѕСЃС‚ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 
    fillListView
    fillTreeView 
@@ -97,6 +97,6 @@ FALSE TO TRACE-WINMESSAGES
 ;
 
 ' winTest MAINX !
-   ( сохраним с манифестом стиля )
+   ( СЃРѕС…СЂР°РЅРёРј СЃ РјР°РЅРёС„РµСЃС‚РѕРј СЃС‚РёР»СЏ )
    S" splitter2.exe" S" splitter2.fres " devel\~af\lib\save.f
     BYE

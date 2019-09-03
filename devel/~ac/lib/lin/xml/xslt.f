@@ -10,11 +10,11 @@ ALSO SO NEW: libxslt.so.1
 ALSO libxml2.dll
 
 : XmlMemFree ( ptr 1 -- res )
-  \ замена для xmlMemFree, который переопределен в windows-версии libxml через xmlMemSetup
+  \ Р·Р°РјРµРЅР° РґР»СЏ xmlMemFree, РєРѕС‚РѕСЂС‹Р№ РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅ РІ windows-РІРµСЂСЃРёРё libxml С‡РµСЂРµР· xmlMemSetup
   PAD 12 + PAD 8 + PAD 4 + PAD 4 xmlMemGet DROP PAD @ C-EXEC
 ;
 : XSLT { xaddr xu saddr su \ style doc res len str -- addr u }
-\ преобразовать XML-файл с именем/url xaddr xu с использованием XSL-файла saddr su
+\ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ XML-С„Р°Р№Р» СЃ РёРјРµРЅРµРј/url xaddr xu СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј XSL-С„Р°Р№Р»Р° saddr su
   saddr 1 xsltParseStylesheetFile DUP -> style 0= IF 60002 THROW THEN
   xaddr xu XML_READ_DOC DUP -> doc 0= IF 60003 THROW THEN
   0 doc style 3 xsltApplyStylesheet DUP -> res 0= IF 60004 THROW THEN
@@ -28,7 +28,7 @@ ALSO libxml2.dll
 \  0 xmlCleanupParser DROP
 ;
 : XSLTm { xaddr xu saddr su \ style doc res len str -- addr u }
-\ преобразовать XML-строку xaddr xu с использованием XSL-файла saddr su
+\ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ XML-СЃС‚СЂРѕРєСѓ xaddr xu СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј XSL-С„Р°Р№Р»Р° saddr su
   saddr 1 xsltParseStylesheetFile DUP -> style 0= IF 60002 THROW THEN
   xaddr xu XML_READ_DOC_MEM DUP -> doc 0= IF 60005 THROW THEN
   0 doc style 3 xsltApplyStylesheet DUP -> res 0= IF 60004 THROW THEN
@@ -42,7 +42,7 @@ ALSO libxml2.dll
 \  0 xmlCleanupParser DROP
 ;
 : XSLTmm { xaddr xu saddr su \ sdoc style doc res len str -- addr u }
-\ преобразовать XML-строку xaddr xu с использованием XSL-СТРОКИ saddr su
+\ РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ XML-СЃС‚СЂРѕРєСѓ xaddr xu СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј XSL-РЎРўР РћРљР saddr su
   saddr su XML_READ_DOC_MEM DUP -> sdoc 0= IF 60006 THROW THEN
   sdoc 1 xsltParseStylesheetDoc DUP -> style 0= IF 60002 THROW THEN
   xaddr xu XML_READ_DOC_MEM DUP -> doc 0= IF 60005 THROW THEN
@@ -59,6 +59,6 @@ ALSO libxml2.dll
 PREVIOUS PREVIOUS PREVIOUS
 
 \ S" 1.xml" S" 1.xsl" XSLT
-\ Здесь запись имя:пароль поддерживается через curl, а сам libxml не умеет.
-\ И внутри XSL-файлов в document() имя:пароль не работают.
+\ Р—РґРµСЃСЊ Р·Р°РїРёСЃСЊ РёРјСЏ:РїР°СЂРѕР»СЊ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ С‡РµСЂРµР· curl, Р° СЃР°Рј libxml РЅРµ СѓРјРµРµС‚.
+\ Р РІРЅСѓС‚СЂРё XSL-С„Р°Р№Р»РѕРІ РІ document() РёРјСЏ:РїР°СЂРѕР»СЊ РЅРµ СЂР°Р±РѕС‚Р°СЋС‚.
 \ S" http://name:pass@localhost/rep/Domains.xml" S" dbtable.xsl" XSLT TYPE

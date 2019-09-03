@@ -17,12 +17,12 @@ USER CURFILE
 ;
 
 : CUT-PATH ( a u -- a u1 )
-\ Из строки a u выделить часть от начала до последнего 
-\ символа разделителя каталогов (включительно)
+\ РР· СЃС‚СЂРѕРєРё a u РІС‹РґРµР»РёС‚СЊ С‡Р°СЃС‚СЊ РѕС‚ РЅР°С‡Р°Р»Р° РґРѕ РїРѕСЃР»РµРґРЅРµРіРѕ 
+\ СЃРёРјРІРѕР»Р° СЂР°Р·РґРµР»РёС‚РµР»СЏ РєР°С‚Р°Р»РѕРіРѕРІ (РІРєР»СЋС‡РёС‚РµР»СЊРЅРѕ)
 \ "some/path/name" -> "some/path/"
 \ "some/path/" -> "some/path/"
 \ "name" -> ""
-\ Исходная строка остается неизменной (r/o).
+\ РСЃС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР° РѕСЃС‚Р°РµС‚СЃСЏ РЅРµРёР·РјРµРЅРЅРѕР№ (r/o).
   CHARS OVER +
   BEGIN 2DUP <> WHILE CHAR- DUP C@ is_path_delimiter UNTIL CHAR+ THEN
   OVER - >CHARS
@@ -33,7 +33,7 @@ USER CURFILE
 ;
 
 : +ModuleDirName ( addr u -- addr2 u2 )
-\ Добавить addr u к "полный_путь_приложения/"
+\ Р”РѕР±Р°РІРёС‚СЊ addr u Рє "РїРѕР»РЅС‹Р№_РїСѓС‚СЊ_РїСЂРёР»РѕР¶РµРЅРёСЏ/"
   2>R
   ModuleDirName 2DUP +
   2R> DUP >R ROT SWAP CHAR+ CHARS MOVE 
@@ -41,7 +41,7 @@ USER CURFILE
 ;
 
 : +LibraryDirName ( addr u -- addr2 u2 )
-\ Добавить addr u к "полный_путь_приложения/devel/"
+\ Р”РѕР±Р°РІРёС‚СЊ addr u Рє "РїРѕР»РЅС‹Р№_РїСѓС‚СЊ_РїСЂРёР»РѕР¶РµРЅРёСЏ/devel/"
   2>R
   ModuleDirName 2DUP +
   S" devel/" ROT SWAP CHARS MOVE

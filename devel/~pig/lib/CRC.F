@@ -1,8 +1,8 @@
-\ Расчет кодов CRC32
+\ Р Р°СЃС‡РµС‚ РєРѕРґРѕРІ CRC32
 
 \ ~pig, 22.04.2007:
-\ реентерабельность и многопоточность Crc32FileHandle
-\ возвращает правильное значение CRC ( FFFFFFFF XOR )
+\ СЂРµРµРЅС‚РµСЂР°Р±РµР»СЊРЅРѕСЃС‚СЊ Рё РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕСЃС‚СЊ Crc32FileHandle
+\ РІРѕР·РІСЂР°С‰Р°РµС‚ РїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ CRC ( FFFFFFFF XOR )
 
 \ Dmitry Yakimov \ 1999
 
@@ -76,7 +76,7 @@ CREATE CrcTable
              B40BBE37 ,  C30C8EA1 ,  5A05DF1B ,  2D02EF8D ,    
 
 
-\ FFFFFFFF VALUE FirstCrc	( преобразовано в константу и инвертировано, поскольку так правильно )
+\ FFFFFFFF VALUE FirstCrc	( РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРѕ РІ РєРѕРЅСЃС‚Р°РЅС‚Сѓ Рё РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРѕ, РїРѕСЃРєРѕР»СЊРєСѓ С‚Р°Рє РїСЂР°РІРёР»СЊРЅРѕ )
 0 CONSTANT FirstCrc
 
 : GetCrcVal ( u -- u1 )
@@ -85,7 +85,7 @@ CREATE CrcTable
 
 \   Result := (crc shr 8) xor CrcTab[(c xor crc )  and $FF];
 
-: (Crc32Byte) ( crc с -- crc1 )
+: (Crc32Byte) ( crc СЃ -- crc1 )
   OVER XOR FF AND GetCrcVal
   SWAP 8 RSHIFT XOR
 ;
@@ -95,12 +95,12 @@ CREATE CrcTable
 ;
 
 : Crc32Buf ( crc addr n -- crc1 )
-  ROT FFFFFFFF XOR -ROT		\ рабочее значение CRC (побитно инвертированное)
-  OVER + SWAP			\ по всему буферу
+  ROT FFFFFFFF XOR -ROT		\ СЂР°Р±РѕС‡РµРµ Р·РЅР°С‡РµРЅРёРµ CRC (РїРѕР±РёС‚РЅРѕ РёРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅРѕРµ)
+  OVER + SWAP			\ РїРѕ РІСЃРµРјСѓ Р±СѓС„РµСЂСѓ
   ?DO
-    I C@ (Crc32Byte)		\ подсчитать CRC для очередного байта
+    I C@ (Crc32Byte)		\ РїРѕРґСЃС‡РёС‚Р°С‚СЊ CRC РґР»СЏ РѕС‡РµСЂРµРґРЅРѕРіРѕ Р±Р°Р№С‚Р°
   LOOP
-  FFFFFFFF XOR			\ побитная инверсия для возврата правильного результата
+  FFFFFFFF XOR			\ РїРѕР±РёС‚РЅР°СЏ РёРЅРІРµСЂСЃРёСЏ РґР»СЏ РІРѕР·РІСЂР°С‚Р° РїСЂР°РІРёР»СЊРЅРѕРіРѕ СЂРµР·СѓР»СЊС‚Р°С‚Р°
 ;
 : Crc32BufFirst ( addr n -- crc1 )
   FirstCrc -ROT Crc32Buf
@@ -108,23 +108,23 @@ CREATE CrcTable
 
 DECIMAL
 
-\ 0 VALUE AddrBuffer ( перенесено в локальные переменные )
+\ 0 VALUE AddrBuffer ( РїРµСЂРµРЅРµСЃРµРЅРѕ РІ Р»РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ )
 50000 VALUE LenBuffer
-\ FirstCrc VALUE Crc ( перенесено в локальные переменные )
+\ FirstCrc VALUE Crc ( РїРµСЂРµРЅРµСЃРµРЅРѕ РІ Р»РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ )
 
 : Crc32FileHandle ( handle fskip256 -- crc )
-  IF   DUP 257. ROT REPOSITION-FILE THROW	\ пропустить первые 256 байт
-  ELSE DUP 0.   ROT REPOSITION-FILE THROW	\ обсчитывать файл целиком
+  IF   DUP 257. ROT REPOSITION-FILE THROW	\ РїСЂРѕРїСѓСЃС‚РёС‚СЊ РїРµСЂРІС‹Рµ 256 Р±Р°Р№С‚
+  ELSE DUP 0.   ROT REPOSITION-FILE THROW	\ РѕР±СЃС‡РёС‚С‹РІР°С‚СЊ С„Р°Р№Р» С†РµР»РёРєРѕРј
   THEN
-  LenBuffer ALLOCATE THROW >R			\ выделить буфер для работы
-  FirstCrc					\ начальная CRC
+  LenBuffer ALLOCATE THROW >R			\ РІС‹РґРµР»РёС‚СЊ Р±СѓС„РµСЂ РґР»СЏ СЂР°Р±РѕС‚С‹
+  FirstCrc					\ РЅР°С‡Р°Р»СЊРЅР°СЏ CRC
   BEGIN
-    OVER R@ LenBuffer ROT READ-FILE THROW ?DUP	\ прочитать очередной фрагмент файла
+    OVER R@ LenBuffer ROT READ-FILE THROW ?DUP	\ РїСЂРѕС‡РёС‚Р°С‚СЊ РѕС‡РµСЂРµРґРЅРѕР№ С„СЂР°РіРјРµРЅС‚ С„Р°Р№Р»Р°
   WHILE
-    R@ SWAP Crc32Buf				\ и просчитать CRC для него
+    R@ SWAP Crc32Buf				\ Рё РїСЂРѕСЃС‡РёС‚Р°С‚СЊ CRC РґР»СЏ РЅРµРіРѕ
   REPEAT
-  R> FREE THROW					\ освободить буфер
-  NIP						\ и сбросить ненужный хэндл
+  R> FREE THROW					\ РѕСЃРІРѕР±РѕРґРёС‚СЊ Р±СѓС„РµСЂ
+  NIP						\ Рё СЃР±СЂРѕСЃРёС‚СЊ РЅРµРЅСѓР¶РЅС‹Р№ С…СЌРЅРґР»
 ;
 
 : Crc32File ( addr u fskip256 -- crc )

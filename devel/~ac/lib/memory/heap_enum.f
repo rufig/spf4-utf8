@@ -2,8 +2,8 @@ WINAPI: GetProcessHeaps KERNEL32.DLL
 WINAPI: HeapWalk        KERNEL32.DLL
 
 : GetHeaps ( -- addr n )
-\ addr - адрес массива с хэндлами хипов
-\ n - к-во хэндлов в массиве
+\ addr - Р°РґСЂРµСЃ РјР°СЃСЃРёРІР° СЃ С…СЌРЅРґР»Р°РјРё С…РёРїРѕРІ
+\ n - Рє-РІРѕ С…СЌРЅРґР»РѕРІ РІ РјР°СЃСЃРёРІРµ
   PAD 250 GetProcessHeaps PAD SWAP
 ;
 

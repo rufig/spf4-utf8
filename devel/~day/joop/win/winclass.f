@@ -53,7 +53,7 @@ CLASS: WinClass <SUPER Object
      RegisterClassExA DUP vRegAlready !
      0= IF TRUE ABORT" #Class has not been registered!" THEN
    THEN
-\   vRegAlready @   !!!! ‘„…‘œ ˆŒŸ Š‹€‘‘€!!!!! ¨§¬¥­¨« ­  \ Šã«¨ª
+\   vRegAlready @   !!!! Ð¡Ð”Ð•Ð¡Ð¬ Ð˜ÐœÐ¯ ÐšÐ›ÐÐ¡Ð¡Ð!!!!! Ð¸Ð·Ð¼ÐµÐ½Ð¸Ð» Ð½Ð° \ ÐšÑƒÐ»Ð¸Ðº
    lpszClassName @
 ;
 

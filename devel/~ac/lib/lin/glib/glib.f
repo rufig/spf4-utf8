@@ -1,4 +1,4 @@
-( Просто чтобы не забыть об еще одной россыпи несметного числа утилит...
+( РџСЂРѕСЃС‚Рѕ С‡С‚РѕР±С‹ РЅРµ Р·Р°Р±С‹С‚СЊ РѕР± РµС‰Рµ РѕРґРЅРѕР№ СЂРѕСЃСЃС‹РїРё РЅРµСЃРјРµС‚РЅРѕРіРѕ С‡РёСЃР»Р° СѓС‚РёР»РёС‚...
   http://library.gnome.org/devel/glib/stable/
 )
 
@@ -26,15 +26,15 @@ ALSO SO NEW: libglib-2.0.so
 
 : TEST { \ gh key str ch ior line len ar tr }
 
-\ хэш-таблицы
+\ С…СЌС€-С‚Р°Р±Р»РёС†С‹
   0 0 2 g_hash_table_new -> gh
-  " key1" -> key \ там не строковый хэш, а просто пары чисел
+  " key1" -> key \ С‚Р°Рј РЅРµ СЃС‚СЂРѕРєРѕРІС‹Р№ С…СЌС€, Р° РїСЂРѕСЃС‚Рѕ РїР°СЂС‹ С‡РёСЃРµР»
   " value1" key gh 3 g_hash_table_insert DROP \ void
   " value2" 555 gh 3 g_hash_table_insert DROP \ void
   555 gh 2 g_hash_table_lookup STYPE CR
   key gh 2 g_hash_table_lookup STYPE CR
 
-\ динамические строки
+\ РґРёРЅР°РјРёС‡РµСЃРєРёРµ СЃС‚СЂРѕРєРё
   S" string1" SWAP 2 g_string_new_len -> str
   [CHAR] _ str 2 g_string_append_c -> str
   S" string2" SWAP str 3 g_string_append_len -> str
@@ -43,16 +43,16 @@ ALSO SO NEW: libglib-2.0.so
   777 S" _%d!" DROP str 3 g_string_append_printf DROP \ void
   str @ str CELL+ @ TYPE CR
 
-\ каналы (файлы, сокеты, windows-сообщения)
+\ РєР°РЅР°Р»С‹ (С„Р°Р№Р»С‹, СЃРѕРєРµС‚С‹, windows-СЃРѕРѕР±С‰РµРЅРёСЏ)
   ^ ior S" r" DROP S" glib.f" DROP 3 g_io_channel_new_file -> ch
   ^ ior S" CP1251" DROP ch 3 g_io_channel_set_encoding DROP
-  \ по умолчанию входной файл имеет кодировку UTF-8,
-  \ и чтение дает ошибку, если не указать правильную
+  \ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РІС…РѕРґРЅРѕР№ С„Р°Р№Р» РёРјРµРµС‚ РєРѕРґРёСЂРѕРІРєСѓ UTF-8,
+  \ Рё С‡С‚РµРЅРёРµ РґР°РµС‚ РѕС€РёР±РєСѓ, РµСЃР»Рё РЅРµ СѓРєР°Р·Р°С‚СЊ РїСЂР°РІРёР»СЊРЅСѓСЋ
   ^ ior 0 ^ len ^ line ch 5 g_io_channel_read_line
-  IF line len TYPE THEN \ строка преобразуется в UTF-8!
+  IF line len TYPE THEN \ СЃС‚СЂРѕРєР° РїСЂРµРѕР±СЂР°Р·СѓРµС‚СЃСЏ РІ UTF-8!
 
-\ динамические массивы
-  5 0 1 3 g_array_new -> ar \ элементы размером 5 байт
+\ РґРёРЅР°РјРёС‡РµСЃРєРёРµ РјР°СЃСЃРёРІС‹
+  5 0 1 3 g_array_new -> ar \ СЌР»РµРјРµРЅС‚С‹ СЂР°Р·РјРµСЂРѕРј 5 Р±Р°Р№С‚
   1 S" 12345" DROP ar 3 g_array_append_vals -> ar
   1 S" abcde" DROP ar 3 g_array_append_vals -> ar
   1 S" 06789" DROP ar 3 g_array_append_vals -> ar
@@ -62,12 +62,12 @@ ALSO SO NEW: libglib-2.0.so
   1 ar 2 g_array_remove_index -> ar
   ar @ ar CELL+ @ DUMP
 
-\ двоичные деревья
-  ['] GCompareFuncAsc 1 g_tree_new -> tr \ считаем ключи строками
-\ в отличие от хэш-таблиц, здесь ключи и значения копируются (?)
+\ РґРІРѕРёС‡РЅС‹Рµ РґРµСЂРµРІСЊСЏ
+  ['] GCompareFuncAsc 1 g_tree_new -> tr \ СЃС‡РёС‚Р°РµРј РєР»СЋС‡Рё СЃС‚СЂРѕРєР°РјРё
+\ РІ РѕС‚Р»РёС‡РёРµ РѕС‚ С…СЌС€-С‚Р°Р±Р»РёС†, Р·РґРµСЃСЊ РєР»СЋС‡Рё Рё Р·РЅР°С‡РµРЅРёСЏ РєРѕРїРёСЂСѓСЋС‚СЃСЏ (?)
   tr 1 g_tree_nnodes CR .
   S" value1" DROP S" key1" DROP tr 3 g_tree_insert DROP \ void
-  S" value2" DROP S" key1" DROP tr 3 g_tree_insert DROP \ под тем же ключом
+  S" value2" DROP S" key1" DROP tr 3 g_tree_insert DROP \ РїРѕРґ С‚РµРј Р¶Рµ РєР»СЋС‡РѕРј
   S" value3" DROP S" key3" DROP tr 3 g_tree_insert DROP
   S" value0" DROP S" key0" DROP tr 3 g_tree_insert DROP
   tr 1 g_tree_nnodes .

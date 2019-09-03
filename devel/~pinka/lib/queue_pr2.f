@@ -1,13 +1,13 @@
 \ 07.Jul.2001 Sat 21:27 Ruv
 
-\ Очередь с приоритетом  Low Value First
+\ РћС‡РµСЂРµРґСЊ СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј  Low Value First
 
 ( module export:
      queue.  LeaveLow        Enterly NewQueue       
      VocPrioritySupport      DelQueue 
 )
 \ 05.Jul.2002 Fri 23:47 + Queue-Count + ^cnt
-\ 14.Sep.2003 Sun  + mapQueue * Исправлена серьезная ошибка насчет ^cnt
+\ 14.Sep.2003 Sun  + mapQueue * РСЃРїСЂР°РІР»РµРЅР° СЃРµСЂСЊРµР·РЅР°СЏ РѕС€РёР±РєР° РЅР°СЃС‡РµС‚ ^cnt
 \ 06.Oct.2003 + QueueLow,   rename: Queue-Count -> QueueLen, Aa-Bb -> AaBb
 
 REQUIRE {  lib/ext/locals.f
@@ -16,12 +16,12 @@ MODULE:  VocPrioritySupport
 
 \ priority: LowValueFirst
 
-( двунаправленный упорядоченный по priority список. )
+( РґРІСѓРЅР°РїСЂР°РІР»РµРЅРЅС‹Р№ СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅС‹Р№ РїРѕ priority СЃРїРёСЃРѕРє. )
 0  \ list element
 1 CELLS  -- ^next
 1 CELLS  -- ^prev
 1 CELLS  -- ^priority
-      0  -- ^cnt  \ т.к. используется только у первого псевдо-элемента ( a )
+      0  -- ^cnt  \ С‚.Рє. РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ Сѓ РїРµСЂРІРѕРіРѕ РїСЃРµРІРґРѕ-СЌР»РµРјРµРЅС‚Р° ( a )
 1 CELLS  -- ^value
 CONSTANT /elist
 
@@ -36,9 +36,9 @@ CONSTANT /elist
 : remove { elem -- }
   elem ^next @  elem ^prev @  ^next !
   elem ^prev @  elem ^next @  ^prev !
-  \ правлю только ссылки на elem 
-  \ сам elem  не правлю.
-  \ Всегда есть линк слева и справа (изначально)
+  \ РїСЂР°РІР»СЋ С‚РѕР»СЊРєРѕ СЃСЃС‹Р»РєРё РЅР° elem 
+  \ СЃР°Рј elem  РЅРµ РїСЂР°РІР»СЋ.
+  \ Р’СЃРµРіРґР° РµСЃС‚СЊ Р»РёРЅРє СЃР»РµРІР° Рё СЃРїСЂР°РІР° (РёР·РЅР°С‡Р°Р»СЊРЅРѕ)
 ;
 
 EXPORT
@@ -51,7 +51,7 @@ EXPORT
   a z ^prev !
   -1 a ^priority !
    0 z ^priority ! \ must be so !
-   ( граница - по граничному priority )
+   ( РіСЂР°РЅРёС†Р° - РїРѕ РіСЂР°РЅРёС‡РЅРѕРјСѓ priority )
   a  z ^value !
   z
 ; \ queue = elem_z
@@ -65,7 +65,7 @@ DEFINITIONS
 EXPORT
 
 : Enterly { x pr  queue  \ newel  -- }
-\ включить элемент x в очередь queue с приоритетом pr
+\ РІРєР»СЋС‡РёС‚СЊ СЌР»РµРјРµРЅС‚ x РІ РѕС‡РµСЂРµРґСЊ queue СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј pr
   queue ^value @ ^cnt 1+!
   queue first ( elem )
   BEGIN pr OVER ^priority @ U< WHILE ^next @ REPEAT ( elem ) 
@@ -76,9 +76,9 @@ EXPORT
 ;
 
 : LeaveLow  ( queue -- x true | false )
-\ исключить из очереди первый элемент (c наименьшим численным значением pr),
-\ оставить элемент на стеке и true, в случае успеха
-\ или false в случае не успеха (пустая очередь).
+\ РёСЃРєР»СЋС‡РёС‚СЊ РёР· РѕС‡РµСЂРµРґРё РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ (c РЅР°РёРјРµРЅСЊС€РёРј С‡РёСЃР»РµРЅРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј pr),
+\ РѕСЃС‚Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РЅР° СЃС‚РµРєРµ Рё true, РІ СЃР»СѓС‡Р°Рµ СѓСЃРїРµС…Р°
+\ РёР»Рё false РІ СЃР»СѓС‡Р°Рµ РЅРµ СѓСЃРїРµС…Р° (РїСѓСЃС‚Р°СЏ РѕС‡РµСЂРµРґСЊ).
   { q \ elem }
   q ^value @ ^cnt @ IF
     -1 q ^value @ ^cnt +!

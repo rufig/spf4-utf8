@@ -1,9 +1,9 @@
 \ http://fforum.winglion.ru//viewtopic.php?t=465
 
-\ Подсчет кол-ва битов в слов
-\ Подключение преобразование системы счисления 
+\ РџРѕРґСЃС‡РµС‚ РєРѕР»-РІР° Р±РёС‚РѕРІ РІ СЃР»РѕРІ
+\ РџРѕРґРєР»СЋС‡РµРЅРёРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЃРёСЃС‚РµРјС‹ СЃС‡РёСЃР»РµРЅРёСЏ 
 
-: countBitsInBytes ( i byte — i ) 
+: countBitsInBytes ( i byte вЂ” i ) 
   SWAP OVER     1 AND IF 1+ THEN 
        OVER     2 AND IF 1+ THEN 
        OVER     4 AND IF 1+ THEN 
@@ -16,7 +16,7 @@
 ; 
 
 \ Case2 -------------------------------------------------- 
-: countBitsInCell ( i cell — i ) 
+: countBitsInCell ( i cell вЂ” i ) 
    DUP 0x55555555 AND SWAP 0xAAAAAAAA AND 1 RSHIFT + 
    DUP 0x33333333 AND SWAP 0xCCCCCCCC AND 2 RSHIFT + 
    DUP 0x0F0F0F0F AND SWAP 0xF0F0F0F0 AND 4 RSHIFT + 
@@ -26,7 +26,7 @@
 ; 
 
 \ Case3 -------------------------------------------------- 
-: BITS-BYTE \ byte — i 
+: BITS-BYTE \ byte вЂ” i 
 DUP 0x55 AND SWAP 0xAA AND 1 RSHIFT + 
 DUP 0x33 AND SWAP 0xCC AND 2 RSHIFT + 
 DUP 0x0F AND SWAP 0xF0 AND 4 RSHIFT + 
@@ -43,7 +43,7 @@ LOOP
 
 GEN-TBL-BYTE 
 
-: BitsInByte ( i byte — i ) 
+: BitsInByte ( i byte вЂ” i ) 
    [BITS-BYTE] + C@ 
    + 
 ; 
@@ -54,18 +54,18 @@ GEN-TBL-BYTE
 
 100 MB * CONSTANT BytesInArray
 
-\ Выделние тестового масиива 
+\ Р’С‹РґРµР»РЅРёРµ С‚РµСЃС‚РѕРІРѕРіРѕ РјР°СЃРёРёРІР° 
 USER Array 
   BytesInArray ALLOCATE THROW Array ! 
 
-\ Заполнение массива 
+\ Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° 
 : FillArray 
   BytesInArray 0 DO 
     I 256 MOD I Array @ + C! 
   LOOP 
 ; FillArray 
 
-\ Гоняем на тестовом массиве первый метод 
+\ Р“РѕРЅСЏРµРј РЅР° С‚РµСЃС‚РѕРІРѕРј РјР°СЃСЃРёРІРµ РїРµСЂРІС‹Р№ РјРµС‚РѕРґ 
 : Case1 
   0 
   BytesInArray 0 DO 
@@ -73,7 +73,7 @@ USER Array
   LOOP 
 ; 
 
-\ Гоняем на тестовом массиве второй метод 
+\ Р“РѕРЅСЏРµРј РЅР° С‚РµСЃС‚РѕРІРѕРј РјР°СЃСЃРёРІРµ РІС‚РѕСЂРѕР№ РјРµС‚РѕРґ 
 : Case2 
   0 
   BytesInArray 4 / 0 DO 
@@ -81,7 +81,7 @@ USER Array
   LOOP 
 ; 
 
-\ Гоняем на тестовом массиве третий метод 
+\ Р“РѕРЅСЏРµРј РЅР° С‚РµСЃС‚РѕРІРѕРј РјР°СЃСЃРёРІРµ С‚СЂРµС‚РёР№ РјРµС‚РѕРґ 
 : Case3 
   0 
   BytesInArray 0 DO 
@@ -89,7 +89,7 @@ USER Array
   LOOP 
 ; 
 
-\ Засекаем на время, что быстрее 
+\ Р—Р°СЃРµРєР°РµРј РЅР° РІСЂРµРјСЏ, С‡С‚Рѕ Р±С‹СЃС‚СЂРµРµ 
 REQUIRE time-reset ~af/lib/elapse.f 
 
  time-reset Case1 .elapsed CR 

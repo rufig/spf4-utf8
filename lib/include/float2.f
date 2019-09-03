@@ -1,33 +1,33 @@
-\ Float-áèáëèîòåêà äëÿ spf4
-\ Ñëîâà âûñîêîãî óðîâíÿ
+\ Float-Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð´Ð»Ñ spf4
+\ Ð¡Ð»Ð¾Ð²Ð° Ð²Ñ‹ÑÐ¾ÐºÐ¾Ð³Ð¾ ÑƒÑ€Ð¾Ð²Ð½Ñ
 \ [c] Dmitry Yakimov [ftech@tula.net]
-\ 64 áèòíàÿ àðèôìåòèêà ïî óìîë÷àíèþ!
+\ 64 Ð±Ð¸Ñ‚Ð½Ð°Ñ Ð°Ñ€Ð¸Ñ„Ð¼ÐµÑ‚Ð¸ÐºÐ° Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ!
 
-\ + FABORT çàìåíåí FNOP 
-\ ! èñïðàâëåí FINIT, àâòîìàòè÷åñêàÿ ðåèíèöèàëèçàöèÿ ïðè èñêëþ÷åíèè
-\ ! íîâûé íåîáðåçàþùèé REPRESENT
-\ ! èñïðàâëåíà áåñêîíå÷íîñòü ~yGREK 
+\ + FABORT Ð·Ð°Ð¼ÐµÐ½ÐµÐ½ FNOP 
+\ ! Ð¸ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½ FINIT, Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ Ñ€ÐµÐ¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¿Ñ€Ð¸ Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ð¸
+\ ! Ð½Ð¾Ð²Ñ‹Ð¹ Ð½ÐµÐ¾Ð±Ñ€ÐµÐ·Ð°ÑŽÑ‰Ð¸Ð¹ REPRESENT
+\ ! Ð¸ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð° Ð±ÐµÑÐºÐ¾Ð½ÐµÑ‡Ð½Ð¾ÑÑ‚ÑŒ ~yGREK 
 
-\ ! ïåðåïèñàí F. ,ðåôàêòîðèíã ( 9.03.2005 ~day )
-\ ! ïîôèêñåí FS. ( 9.03.2005 ~day )
+\ ! Ð¿ÐµÑ€ÐµÐ¿Ð¸ÑÐ°Ð½ F. ,Ñ€ÐµÑ„Ð°ÐºÑ‚Ð¾Ñ€Ð¸Ð½Ð³ ( 9.03.2005 ~day )
+\ ! Ð¿Ð¾Ñ„Ð¸ÐºÑÐµÐ½ FS. ( 9.03.2005 ~day )
 
 \ Hi level words
 \ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 \ ~day\float\floatkern.f
 USER-CREATE FLOAT-PAD ( -- c-addr ) \ 94 CORE EXT
- \ c-addr - àäðåñ îáëàñòè äëÿ ôîðìèðîâàíèÿ ñòðîêîâîãî ïðåäñòàâëåíèÿ float 
- \ ÷èñëà 
+ \ c-addr - Ð°Ð´Ñ€ÐµÑ Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð´Ð»Ñ Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ ÑÑ‚Ñ€Ð¾ÐºÐ¾Ð²Ð¾Ð³Ð¾ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ñ float 
+ \ Ñ‡Ð¸ÑÐ»Ð° 
 0xFF USER-ALLOT
 
 USER FFORM
 USER FFORM-EXP
-USER ?PRINT-EXP       \ ïå÷àòü ñ ýêñïîíåíòîé èëè áåç íåå
+USER ?PRINT-EXP       \ Ð¿ÐµÑ‡Ð°Ñ‚ÑŒ Ñ ÑÐºÑÐ¿Ð¾Ð½ÐµÐ½Ñ‚Ð¾Ð¹ Ð¸Ð»Ð¸ Ð±ÐµÐ· Ð½ÐµÐµ
 USER F-SIZE
-USER PAST-COMMA \ ÷èñëî çíàêîâ ïîñëå òî÷êè
-USER ?IS-COMMA  \ ïîÿâèëàñü òî÷êà èëè íåò
+USER PAST-COMMA \ Ñ‡Ð¸ÑÐ»Ð¾ Ð·Ð½Ð°ÐºÐ¾Ð² Ð¿Ð¾ÑÐ»Ðµ Ñ‚Ð¾Ñ‡ÐºÐ¸
+USER ?IS-COMMA  \ Ð¿Ð¾ÑÐ²Ð¸Ð»Ð°ÑÑŒ Ñ‚Ð¾Ñ‡ÐºÐ° Ð¸Ð»Ð¸ Ð½ÐµÑ‚
 
-USER ?FSTRICT \ äîïîëíÿòü ëè òî÷íî íóëÿìè äî PRECISION
+USER ?FSTRICT \ Ð´Ð¾Ð¿Ð¾Ð»Ð½ÑÑ‚ÑŒ Ð»Ð¸ Ñ‚Ð¾Ñ‡Ð½Ð¾ Ð½ÑƒÐ»ÑÐ¼Ð¸ Ð´Ð¾ PRECISION
 
 : FSTRICT ( -- ? ) ?FSTRICT @ ;
 : SET-FSTRICT ( ? -- ) ?FSTRICT ! ;
@@ -100,22 +100,22 @@ DECIMAL
 : FINF FINF-ADDR F@ ;
 : -FINF FINF FNEGATE ;
 
-\ Ìëàäøèå øåñòü áèò ìàñêèðóþò îøèáêè #I #D #Z #O #U #P
-: ERROR-MODE \ Âêëþ÷àåò îøèáêè ñîïðîöåññîðà êðîìå #P 
-             \ ïîòîìó ÷òî #P ðåàãèðóåò íà íîëü
+\ ÐœÐ»Ð°Ð´ÑˆÐ¸Ðµ ÑˆÐµÑÑ‚ÑŒ Ð±Ð¸Ñ‚ Ð¼Ð°ÑÐºÐ¸Ñ€ÑƒÑŽÑ‚ Ð¾ÑˆÐ¸Ð±ÐºÐ¸ #I #D #Z #O #U #P
+: ERROR-MODE \ Ð’ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ Ð¾ÑˆÐ¸Ð±ÐºÐ¸ ÑÐ¾Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€Ð° ÐºÑ€Ð¾Ð¼Ðµ #P 
+             \ Ð¿Ð¾Ñ‚Ð¾Ð¼Ñƒ Ñ‡Ñ‚Ð¾ #P Ñ€ÐµÐ°Ð³Ð¸Ñ€ÑƒÐµÑ‚ Ð½Ð° Ð½Ð¾Ð»ÑŒ
    GETFPUCW
    127 INVERT AND
    32 OR
    SETFPUCW
 ;
-: NORMAL-MODE \ Âñ¸ òèõî êðîìà #I è ñòåêà
+: NORMAL-MODE \ Ð’ÑÑ‘ Ñ‚Ð¸Ñ…Ð¾ ÐºÑ€Ð¾Ð¼Ð° #I Ð¸ ÑÑ‚ÐµÐºÐ°
   GETFPUCW
   127 OR
   1 INVERT AND
   SETFPUCW
 ;
 
-: SILENT-MODE \ Âñ¸ òèõî
+: SILENT-MODE \ Ð’ÑÑ‘ Ñ‚Ð¸Ñ…Ð¾
   GETFPUCW
   127 OR
   SETFPUCW
@@ -124,7 +124,7 @@ DECIMAL
 : FPUmask CREATE , DOES> @ GETFPUCW AND 0<> ;
 : FPUstate CREATE , DOES> @ GETFPUSW AND 0<> ;
 
-\ Ñîñòîÿíèå è ìàñêè ñîïðîöåññîðà
+\ Ð¡Ð¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¸ Ð¼Ð°ÑÐºÐ¸ ÑÐ¾Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€Ð°
  1 FPUstate ?IE   1 FPUmask ?IM
  2 FPUstate ?DE   2 FPUmask ?DM
  4 FPUstate ?ZE   4 FPUmask ?ZM
@@ -182,9 +182,9 @@ WARNING !
   THEN
 ;
 
-\ Èäåì äî ïåðâîé íå öèôðû, òî÷êó ïðîïóñêàåì
+\ Ð˜Ð´ÐµÐ¼ Ð´Ð¾ Ð¿ÐµÑ€Ð²Ð¾Ð¹ Ð½Ðµ Ñ†Ð¸Ñ„Ñ€Ñ‹, Ñ‚Ð¾Ñ‡ÐºÑƒ Ð¿Ñ€Ð¾Ð¿ÑƒÑÐºÐ°ÐµÐ¼
 
-: FRAC>F ( addr u -- F: r )              \ èñïîëüçóåò 2 ðåãèñòðà FPU
+: FRAC>F ( addr u -- F: r )              \ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ 2 Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð° FPU
   .e
   CHARS OVER + SWAP
   DO
@@ -202,7 +202,7 @@ WARNING !
 : >FLOAT-ABS  ( addr u -- F: r D:  bool )
    BASE @ >R DECIMAL
    GETFPUCW >R UP-MODE 
-   2DUP GET-EXP DROP         \  addr u u2 - ýêñïîíåíòà
+   2DUP GET-EXP DROP         \  addr u u2 - ÑÐºÑÐ¿Ð¾Ð½ÐµÐ½Ñ‚Ð°
    ROT ROT FRAC>F             \ u2
    ?IS-COMMA @ 0= IF PAST-COMMA 1+! THEN
    PAST-COMMA @ - F10X  F*  ?OE ?IE OR 
@@ -217,10 +217,10 @@ WARNING !
 
 \ Simple BNF parser ( ver. 2.2)
 
-\ Ñäâèíóòü ïîçèöèþ â ñòðîêå âïðàâî íà ÷èñëî ïðèñóòñòâóþùèõ ñèìâîëîâ, íî íå
-\ áîëüøå ÷åì MIN(u, max)
+\ Ð¡Ð´Ð²Ð¸Ð½ÑƒÑ‚ÑŒ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ Ð²Ð¿Ñ€Ð°Ð²Ð¾ Ð½Ð° Ñ‡Ð¸ÑÐ»Ð¾ Ð¿Ñ€Ð¸ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ñ… ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð², Ð½Ð¾ Ð½Ðµ
+\ Ð±Ð¾Ð»ÑŒÑˆÐµ Ñ‡ÐµÐ¼ MIN(u, max)
 
-\ Åñëè ñäâèãîâ áûëî ìåíüøå ÷åì min òî âûäàåì 0, èíà÷å -1.
+\ Ð•ÑÐ»Ð¸ ÑÐ´Ð²Ð¸Ð³Ð¾Ð² Ð±Ñ‹Ð»Ð¾ Ð¼ÐµÐ½ÑŒÑˆÐµ Ñ‡ÐµÐ¼ min Ñ‚Ð¾ Ð²Ñ‹Ð´Ð°ÐµÐ¼ 0, Ð¸Ð½Ð°Ñ‡Ðµ -1.
 
 : CHECK-SET ( addr u max min addr2 u2 -- addr2 u2 bool )
     >R >R >R OVER MIN >R SWAP R>
@@ -233,7 +233,7 @@ WARNING !
       3 CELLS RP+@       
       ROT 
       >R RP@ 1 SEARCH RDROP NIP NIP
-      0= IF     \ ïåðâûé íåñîâïàâøèé ñèìâîë
+      0= IF     \ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ð½ÐµÑÐ¾Ð²Ð¿Ð°Ð²ÑˆÐ¸Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð»
            DROP SWAP
            R@ - SWAP R@ CHARS + SWAP
            2R> 1+ < RDROP RDROP EXIT
@@ -269,7 +269,7 @@ WARNING !
     1   1 <EXP>     >R
     1   0 <SIGN>    >R
     4   0 <DIGITS>  >R
-    NIP 0= \ Ïîñëå âñåãî ýòîãî äîëæåí áûòü êîíåö ñòðîêè
+    NIP 0= \ ÐŸÐ¾ÑÐ»Ðµ Ð²ÑÐµÐ³Ð¾ ÑÑ‚Ð¾Ð³Ð¾ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ ÐºÐ¾Ð½ÐµÑ† ÑÑ‚Ñ€Ð¾ÐºÐ¸
     2R> 2R> 2R> R> AND
     AND AND AND AND AND
     AND
@@ -293,7 +293,7 @@ HEX
 
 HEX
 
-\ Åñëè íåò ìàñêè, òî ðóãàåìñÿ
+\ Ð•ÑÐ»Ð¸ Ð½ÐµÑ‚ Ð¼Ð°ÑÐºÐ¸, Ñ‚Ð¾ Ñ€ÑƒÐ³Ð°ÐµÐ¼ÑÑ
 : FABORT FNOP ;
 
 DECIMAL
@@ -312,7 +312,7 @@ DECIMAL
     R> SETFPUCW
 ;
 
-\ Äàåò ÷èñëî çíàêîâ öåëîé ÷àñòè ÷èñëà
+\ Ð”Ð°ÐµÑ‚ Ñ‡Ð¸ÑÐ»Ð¾ Ð·Ð½Ð°ÐºÐ¾Ð² Ñ†ÐµÐ»Ð¾Ð¹ Ñ‡Ð°ÑÑ‚Ð¸ Ñ‡Ð¸ÑÐ»Ð°
 : #EXP ( -- n ) ( r -- r )  
    FDUP F0=  IF PRECISION  ELSE
    FDUP FABS FLOG FLOOR F>D DROP THEN
@@ -364,7 +364,7 @@ VECT FEMIT
 
 : FDISPLAY ( n -- )
    DUP 1 <
-   IF \ ÷èñëî < 1      
+   IF \ Ñ‡Ð¸ÑÐ»Ð¾ < 1      
       DUP 1 < IF [CHAR] 0 FEMIT THEN
       [CHAR] . FEMIT
       ABS DUP 0 ?DO [CHAR] 0 FEMIT LOOP
@@ -372,7 +372,7 @@ VECT FEMIT
       (T0) FTYPE
    ELSE
      FLOAT-PAD OVER 0 MAX PRECISION MIN FTYPE
-     \ âûâåäåì äðîáíóþ ÷àñòü
+     \ Ð²Ñ‹Ð²ÐµÐ´ÐµÐ¼ Ð´Ñ€Ð¾Ð±Ð½ÑƒÑŽ Ñ‡Ð°ÑÑ‚ÑŒ
      [CHAR] . FEMIT
      DUP FLOAT-PAD + PRECISION ROT - 0 MAX
      (T0)

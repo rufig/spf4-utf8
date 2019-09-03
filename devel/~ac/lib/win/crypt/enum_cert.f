@@ -1,4 +1,4 @@
-( перебор сертификатов в хранилище и поиск сертификата по subject )
+( РїРµСЂРµР±РѕСЂ СЃРµСЂС‚РёС„РёРєР°С‚РѕРІ РІ С…СЂР°РЅРёР»РёС‰Рµ Рё РїРѕРёСЃРє СЃРµСЂС‚РёС„РёРєР°С‚Р° РїРѕ subject )
 REQUIRE GetCertSubjectName ~ac/lib/win/crypt/cert.f 
 
 WINAPI: CertOpenStore               CRYPT32.DLL

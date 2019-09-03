@@ -1,8 +1,8 @@
-( Процедуры времени выполнения для WINAPI и WNDPROC
-  Windows-зависимые слова.
+( РџСЂРѕС†РµРґСѓСЂС‹ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ РґР»СЏ WINAPI Рё WNDPROC
+  Windows-Р·Р°РІРёСЃРёРјС‹Рµ СЃР»РѕРІР°.
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Преобразование из 16-разрядного в 32-разрядный код - 1995-96гг
-  Ревизия - сентябрь 1999
+  РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РёР· 16-СЂР°Р·СЂСЏРґРЅРѕРіРѕ РІ 32-СЂР°Р·СЂСЏРґРЅС‹Р№ РєРѕРґ - 1995-96РіРі
+  Р РµРІРёР·РёСЏ - СЃРµРЅС‚СЏР±СЂСЊ 1999
 )
 
 VARIABLE AOLL
@@ -78,7 +78,7 @@ END-CODE
 ' _WINAPI-CODE TO WINAPI-CODE
 
 CODE API-CALL ( ... extern-addr -- x )
-\ вызов внешней функции (API или метода объекта через COM)
+\ РІС‹Р·РѕРІ РІРЅРµС€РЅРµР№ С„СѓРЅРєС†РёРё (API РёР»Рё РјРµС‚РѕРґР° РѕР±СЉРµРєС‚Р° С‡РµСЂРµР· COM)
 @@1:  PUSH ESI
       PUSH EDI
       PUSH EBP
@@ -90,7 +90,7 @@ CODE API-CALL ( ... extern-addr -- x )
       CLD
       REP MOVS DWORD
       MOV  EBP, ESP
-      POP  EAX  \ адрес вызываемой процедуры лежал на верхушке стека данных Форта
+      POP  EAX  \ Р°РґСЂРµСЃ РІС‹Р·С‹РІР°РµРјРѕР№ РїСЂРѕС†РµРґСѓСЂС‹ Р»РµР¶Р°Р» РЅР° РІРµСЂС…СѓС€РєРµ СЃС‚РµРєР° РґР°РЅРЅС‹С… Р¤РѕСЂС‚Р°
       CALL EAX
       MOV  EBX, EBP
       SUB  EBX, ESP
@@ -112,11 +112,11 @@ CODE _WNDPROC-CODE
      MOV  EAX, ESP
      SUB  ESP, # #ST-RES
      PUSH EBP
-     MOV  EBP, 4 [EAX] ( адрес возврата из CALLBACK )
+     MOV  EBP, 4 [EAX] ( Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° РёР· CALLBACK )
      PUSH EBP
      MOV  EBP, EAX
      ADD  EBP, # 8
-     MOV  EAX, [EAX] ( адрес адреса форт-процедуры )
+     MOV  EAX, [EAX] ( Р°РґСЂРµСЃ Р°РґСЂРµСЃР° С„РѕСЂС‚-РїСЂРѕС†РµРґСѓСЂС‹ )
      MOV  EAX, [EAX]
      PUSH EBX
      PUSH ECX
@@ -131,8 +131,8 @@ CODE _WNDPROC-CODE
      POP  EBX
      MOV  EAX, ESP
      MOV  ESP, EBP
-     MOV  EBP, 4 [EAX] \ сохраненный EBP
-     MOV  EAX, [EAX]   \ адрес возврата из CALLBACK
+     MOV  EBP, 4 [EAX] \ СЃРѕС…СЂР°РЅРµРЅРЅС‹Р№ EBP
+     MOV  EAX, [EAX]   \ Р°РґСЂРµСЃ РІРѕР·РІСЂР°С‚Р° РёР· CALLBACK
      XCHG EAX, [ESP]
      RET
      INT 3
@@ -151,8 +151,8 @@ END-CODE
 
 ' _WNDPROC-CODE TO WNDPROC-CODE
 
-VECT FORTH-INSTANCE>  \ эти процедуры будут выполняться на входе
-VECT <FORTH-INSTANCE  \ и выходе в WNDPROC-процедуры (инициализация TlsIndex)
+VECT FORTH-INSTANCE>  \ СЌС‚Рё РїСЂРѕС†РµРґСѓСЂС‹ Р±СѓРґСѓС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РЅР° РІС…РѕРґРµ
+VECT <FORTH-INSTANCE  \ Рё РІС‹С…РѕРґРµ РІ WNDPROC-РїСЂРѕС†РµРґСѓСЂС‹ (РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ TlsIndex)
 
 ' FORTH-INSTANCE> TO TC-FORTH-INSTANCE>
 ' <FORTH-INSTANCE TO TC-<FORTH-INSTANCE

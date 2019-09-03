@@ -1,11 +1,11 @@
-\ Простейшая работа с консольными утилитами.
-\ SEXECL - запуск программы с заданной ком.строкой и stdin'ом,
-\ получение её stdout'а в виде строки.
-\ SEXEC - аналогично, но для потенциально бесконечных процессов,
-\ поэтому результат не возвращает, а берет xt, который напускается
-\ на каждую строку результата.
+\ РџСЂРѕСЃС‚РµР№С€Р°СЏ СЂР°Р±РѕС‚Р° СЃ РєРѕРЅСЃРѕР»СЊРЅС‹РјРё СѓС‚РёР»РёС‚Р°РјРё.
+\ SEXECL - Р·Р°РїСѓСЃРє РїСЂРѕРіСЂР°РјРјС‹ СЃ Р·Р°РґР°РЅРЅРѕР№ РєРѕРј.СЃС‚СЂРѕРєРѕР№ Рё stdin'РѕРј,
+\ РїРѕР»СѓС‡РµРЅРёРµ РµС‘ stdout'Р° РІ РІРёРґРµ СЃС‚СЂРѕРєРё.
+\ SEXEC - Р°РЅР°Р»РѕРіРёС‡РЅРѕ, РЅРѕ РґР»СЏ РїРѕС‚РµРЅС†РёР°Р»СЊРЅРѕ Р±РµСЃРєРѕРЅРµС‡РЅС‹С… РїСЂРѕС†РµСЃСЃРѕРІ,
+\ РїРѕСЌС‚РѕРјСѓ СЂРµР·СѓР»СЊС‚Р°С‚ РЅРµ РІРѕР·РІСЂР°С‰Р°РµС‚, Р° Р±РµСЂРµС‚ xt, РєРѕС‚РѕСЂС‹Р№ РЅР°РїСѓСЃРєР°РµС‚СЃСЏ
+\ РЅР° РєР°Р¶РґСѓСЋ СЃС‚СЂРѕРєСѓ СЂРµР·СѓР»СЊС‚Р°С‚Р°.
 
-( примеры использования см. в конце файла )
+( РїСЂРёРјРµСЂС‹ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЃРј. РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р° )
 
 REQUIRE ChildAppErr ~ac/lib/win/process/child_app.f
 REQUIRE PipeLine    ~ac/lib/win/process/pipeline.f
@@ -72,7 +72,7 @@ REQUIRE STR@        ~ac/lib/str5.f
 
 \ S" " S" ping.exe www.forth.org.ru"    SEXECL 2DUP . . TYPE CR TYPE CR CR
 \ S" " S" cvs diff child_app.f"         SEXECL 2DUP . . TYPE CR TYPE CR CR
-\ S" " S" netstat дай ошибку в stderr!" SEXECL 2DUP . . TYPE CR TYPE CR CR
+\ S" " S" netstat РґР°Р№ РѕС€РёР±РєСѓ РІ stderr!" SEXECL 2DUP . . TYPE CR TYPE CR CR
 \ " cd pub{CRLF}ls -l{CRLF}quit{CRLF}" STR@ S" ftp.exe -Ad ftp.forth.org.ru"  SEXECL 2DUP . . TYPE CR TYPE CR CR
 
 \ :NONAME ." [" TYPE ." ]" CR ; S" " S" ping.exe -n 15 www.forth.org.ru"  SEXEC

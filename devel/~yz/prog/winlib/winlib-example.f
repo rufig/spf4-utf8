@@ -1,4 +1,4 @@
-DIS-OPT \ для версий ниже 4.00 build 10
+DIS-OPT \ РґР»СЏ РІРµСЂСЃРёР№ РЅРёР¶Рµ 4.00 build 10
 REQUIRE WINDOWS... ~yz/lib/winlib.f
 SET-OPT
 
@@ -13,7 +13,7 @@ PROC: quit
 PROC;
 
 PROC: hello
-  " Привет!" msg
+  " РџСЂРёРІРµС‚!" msg
 PROC;
 
 WINAPI: SelectObject GDI32.DLL
@@ -21,25 +21,25 @@ WINAPI: TextOutA GDI32.DLL
 
 PROC: paint
   times windc SelectObject DROP
-  " Привет всем!" ASCIIZ> SWAP 0 0 windc TextOutA DROP  
+  " РџСЂРёРІРµС‚ РІСЃРµРј!" ASCIIZ> SWAP 0 0 windc TextOutA DROP  
 PROC;
 
-\ Вложенное меню
+\ Р’Р»РѕР¶РµРЅРЅРѕРµ РјРµРЅСЋ
 MENU: inner
-  hello MENUITEM Тоже привет 
+  hello MENUITEM РўРѕР¶Рµ РїСЂРёРІРµС‚ 
 MENU;
 
-\ Основное меню
+\ РћСЃРЅРѕРІРЅРѕРµ РјРµРЅСЋ
 MENU: filemenu
-  hello MENUITEM &Привет\tF5
-  inner SUBMENU &Вложенное меню
-  ' NOOP DISABLED MENUITEM Отключено
+  hello MENUITEM &РџСЂРёРІРµС‚\tF5
+  inner SUBMENU &Р’Р»РѕР¶РµРЅРЅРѕРµ РјРµРЅСЋ
+  ' NOOP DISABLED MENUITEM РћС‚РєР»СЋС‡РµРЅРѕ
   LINE
   quit MENUITEM &Quit\tAlt-X
 MENU;
 
 MENU: mainmenu
-  filemenu SUBMENU Файл
+  filemenu SUBMENU Р¤Р°Р№Р»
 MENU;
 
 \ -------------------------------------
@@ -59,7 +59,7 @@ M;
 MESSAGES;
 \ -------------------------------------
 
-\ Таблица быстрых клавиш
+\ РўР°Р±Р»РёС†Р° Р±С‹СЃС‚СЂС‹С… РєР»Р°РІРёС€
 KEYTABLE
   hello ONKEY vk_f5
   quit  ONKEY alt+X
@@ -69,35 +69,35 @@ WINAPI: CreateHatchBrush GDI32.DLL
 
 : run
   WINDOWS...
-  \ 0 - нет родительского окна
+  \ 0 - РЅРµС‚ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕРєРЅР°
   0 create-window TO win
-  \ Объявим главное окно, при закрытии которого программа завершится
+  \ РћР±СЉСЏРІРёРј РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ, РїСЂРё Р·Р°РєСЂС‹С‚РёРё РєРѕС‚РѕСЂРѕРіРѕ РїСЂРѕРіСЂР°РјРјР° Р·Р°РІРµСЂС€РёС‚СЃСЏ
   win TO winmain
   win dialog-window TO win2
-  \ заголовки окон
-  " Пример окна верхнего уровня" win -text!
-  " Дочернее окно" win2 -text!
-  \ размер и положение дочернего окна
+  \ Р·Р°РіРѕР»РѕРІРєРё РѕРєРѕРЅ
+  " РџСЂРёРјРµСЂ РѕРєРЅР° РІРµСЂС…РЅРµРіРѕ СѓСЂРѕРІРЅСЏ" win -text!
+  " Р”РѕС‡РµСЂРЅРµРµ РѕРєРЅРѕ" win2 -text!
+  \ СЂР°Р·РјРµСЂ Рё РїРѕР»РѕР¶РµРЅРёРµ РґРѕС‡РµСЂРЅРµРіРѕ РѕРєРЅР°
   100 100 win2 winresize
   100 100 win2 winmove
-  \ цвет дочернего окна
+  \ С†РІРµС‚ РґРѕС‡РµСЂРЅРµРіРѕ РѕРєРЅР°
   win2 -bgbrush@ DeleteObject DROP
   blue >bgr W: hs_bdiagonal CreateHatchBrush win2 -bgbrush!
-  \ добавить меню к основному окну
+  \ РґРѕР±Р°РІРёС‚СЊ РјРµРЅСЋ Рє РѕСЃРЅРѕРІРЅРѕРјСѓ РѕРєРЅСѓ
   mainmenu win attach-menubar
-  \ создать шрифт
+  \ СЃРѕР·РґР°С‚СЊ С€СЂРёС„С‚
   " Times New Roman Cyr" 36 bold italic create-font TO times
-  \ установить процедуру отрисовки окна
+  \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїСЂРѕС†РµРґСѓСЂСѓ РѕС‚СЂРёСЃРѕРІРєРё РѕРєРЅР°
   paint win -painter!
-  \ установить наш обработчик сообщений
+  \ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°С€ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕРѕР±С‰РµРЅРёР№
   my win -wndproc!
-  \ показать окна, поскольку по умолчанию они невидимые
+  \ РїРѕРєР°Р·Р°С‚СЊ РѕРєРЅР°, РїРѕСЃРєРѕР»СЊРєСѓ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РѕРЅРё РЅРµРІРёРґРёРјС‹Рµ
   win wincenter
   win winshow
   win2 wincenter
   win2 winshow
   ...WINDOWS
-  ." Программа завершилась"
+  ." РџСЂРѕРіСЂР°РјРјР° Р·Р°РІРµСЂС€РёР»Р°СЃСЊ"
   times delete-font
   BYE ;
 

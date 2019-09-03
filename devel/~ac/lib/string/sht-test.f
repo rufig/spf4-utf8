@@ -1,5 +1,5 @@
 REQUIRE ST-FOREACH-HASHED ~ac/lib/string/sht.f 
-\ тесты и примеры для sht.f
+\ С‚РµСЃС‚С‹ Рё РїСЂРёРјРµСЂС‹ РґР»СЏ sht.f
 
 USER TSHT TSHT . CR
 : TEST DUP sht.keyhash 32 TYPE SPACE sht.valhash 32 TYPE SPACE TYPE ."  === " TYPE CR ;

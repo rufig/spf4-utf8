@@ -1,4 +1,4 @@
-\ Упрощение работы с xpath-функциями, выдающими float-результаты.
+\ РЈРїСЂРѕС‰РµРЅРёРµ СЂР°Р±РѕС‚С‹ СЃ xpath-С„СѓРЅРєС†РёСЏРјРё, РІС‹РґР°СЋС‰РёРјРё float-СЂРµР·СѓР»СЊС‚Р°С‚С‹.
 
 REQUIRE XML_XPATH      ~ac/lib/lin/xml/xml.f
 
@@ -12,6 +12,6 @@ PREVIOUS
 :NONAME xpo.floatval ( 12 DUMP) CELL+ 2@ P.0> TYPE ; xpathTypes 2 CELLS + !
 :NONAME xpo.floatval CELL+ 2@ P.0> ;                xpathTypes@ 2 CELLS + !
 
-\EOF пример
+\EOF РїСЂРёРјРµСЂ
 S" xml-rpc.xml" S" count(//member)" XML_XPATH
 S" xml-rpc.xml" S" string(count(//member))" XML_XPATH

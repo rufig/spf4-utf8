@@ -1,20 +1,20 @@
 \ 2008-04-08 ~mOleg
-\ Ñopyright [C] 2008 mOleg mininoleg@yahoo.com
-\ óäâîåíèå óíèêàëüíûõ öèôð ñòðîêè
-\ ðåøåíèå çàäà÷êè äëÿ êîíêóðñà http://fforum.winglion.ru/viewtopic.php?t=1228
+\ Ð¡opyright [C] 2008 mOleg mininoleg@yahoo.com
+\ ÑƒÐ´Ð²Ð¾ÐµÐ½Ð¸Ðµ ÑƒÐ½Ð¸ÐºÐ°Ð»ÑŒÐ½Ñ‹Ñ… Ñ†Ð¸Ñ„Ñ€ ÑÑ‚Ñ€Ð¾ÐºÐ¸
+\ Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ Ð·Ð°Ð´Ð°Ñ‡ÐºÐ¸ Ð´Ð»Ñ ÐºÐ¾Ð½ÐºÑƒÑ€ÑÐ° http://fforum.winglion.ru/viewtopic.php?t=1228
 
   10 CONSTANT basedigits
 
-\ ïî êîëè÷åñòâó çíà÷àùèõ öèôð
- CREATE Ñiphers basedigits CELLS ALLOT
+\ Ð¿Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ñƒ Ð·Ð½Ð°Ñ‡Ð°Ñ‰Ð¸Ñ… Ñ†Ð¸Ñ„Ñ€
+ CREATE Ð¡iphers basedigits CELLS ALLOT
 
-\ ñòèðàåì ñîäåðæèìîå ìàññèâà
-: init ( --> ) Ñiphers basedigits CELLS ERASE ;
+\ ÑÑ‚Ð¸Ñ€Ð°ÐµÐ¼ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ðµ Ð¼Ð°ÑÑÐ¸Ð²Ð°
+: init ( --> ) Ð¡iphers basedigits CELLS ERASE ;
 
-\ íàéòè ïîëå â ìàññèâå, ñîîòâåòñòâóþùåå öèôðå
-: cstat ( char --> ) [CHAR] 0 - CELLS Ñiphers + ;
+\ Ð½Ð°Ð¹Ñ‚Ð¸ Ð¿Ð¾Ð»Ðµ Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ, ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰ÐµÐµ Ñ†Ð¸Ñ„Ñ€Ðµ
+: cstat ( char --> ) [CHAR] 0 - CELLS Ð¡iphers + ;
 
-\ ïîäãîòîâèëè ìàññèâ
+\ Ð¿Ð¾Ð´Ð³Ð¾Ñ‚Ð¾Ð²Ð¸Ð»Ð¸ Ð¼Ð°ÑÑÐ¸Ð²
 : prep ( asc # --> )
        OVER + SWAP
        BEGIN 2DUP <> WHILE
@@ -22,7 +22,7 @@
            1 +
        REPEAT 2DROP ;
 
-\ ïðåîáîðàçîâàëè èñõîäíóþ ñòðîêó
+\ Ð¿Ñ€ÐµÐ¾Ð±Ð¾Ñ€Ð°Ð·Ð¾Ð²Ð°Ð»Ð¸ Ð¸ÑÑ…Ð¾Ð´Ð½ÑƒÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ
 : transf ( asc # --> )
          OVER +
          <# BEGIN 2DUP <> WHILE 1 -
@@ -32,7 +32,7 @@
             REPEAT
           #> ;
 
-\ ñîáñòâåííî, ãëàâíîå ñëîâî
+\ ÑÐ¾Ð±ÑÑ‚Ð²ÐµÐ½Ð½Ð¾, Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ ÑÐ»Ð¾Ð²Ð¾
 : sample ( asc # --> ) init 2DUP prep transf TYPE ;
 
 S" 874205257" sample CR

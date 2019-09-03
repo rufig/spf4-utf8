@@ -10,8 +10,8 @@ MODULE: EDialer
   : ReadyForAction ( -- addr u )
     EDialerWindow
     S" TTabbedNotebook" FindChildByClass
-    ->" Ñîåäèíåíèå"
-    ->" Ñîåäèíåíèå"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
     S" TButton" FindChildByClass
     GetWindowText
   ;
@@ -19,34 +19,34 @@ MODULE: EDialer
   : BreakDial
     EDialerWindow
     S" TTabbedNotebook" FindChildByClass
-    ->" Ñîåäèíåíèå"
-    ->" Ñîåäèíåíèå"
-    ->" Ïðåðâàòü"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" ÐŸÑ€ÐµÑ€Ð²Ð°Ñ‚ÑŒ"
     push
   ;
 
   : Disconnect
     EDialerWindow
     S" TTabbedNotebook" FindChildByClass
-    ->" Ñîåäèíåíèå"
-    ->" Ñîåäèíåíèå"
-    ->" Ðàçîðâàòü"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" Ð Ð°Ð·Ð¾Ñ€Ð²Ð°Ñ‚ÑŒ"
     push
   ;
 
   : Connect
     EDialerWindow
     S" TTabbedNotebook" FindChildByClass
-    ->" Ñîåäèíåíèå"
-    ->" Ñîåäèíåíèå"
-    ->" Çâîíèòü"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
+    ->" Ð—Ð²Ð¾Ð½Ð¸Ñ‚ÑŒ"
     push
   ;
 
   : Reconnect
     EDialerWindow
     S" TTabbedNotebook" FindChildByClass
-    ->" Ñîåäèíåíèå"
+    ->" Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ"
     DUP
       S" TListBox" FindChildByClass >R
       0x00070007 1 WM_LBUTTONDBLCLK R@ SendMessageA DROP

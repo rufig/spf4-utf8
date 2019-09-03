@@ -2,11 +2,11 @@
 \ Work in spf3, spf4
 
 \ save v2
-\ Сохраняет в exe с ресурсами из fres файла
+\ РЎРѕС…СЂР°РЅСЏРµС‚ РІ exe СЃ СЂРµСЃСѓСЂСЃР°РјРё РёР· fres С„Р°Р№Р»Р°
 ( addr_exe u_exe addr_fres u_fres -- )
-\ если ресурсы не нужны, то u_fres = 0
-\ Либа save создана на основе resources.f Ю. Жиловца (~yz\lib\resources.f )
-\ и либы SaveWithRes
+\ РµСЃР»Рё СЂРµСЃСѓСЂСЃС‹ РЅРµ РЅСѓР¶РЅС‹, С‚Рѕ u_fres = 0
+\ Р›РёР±Р° save СЃРѕР·РґР°РЅР° РЅР° РѕСЃРЅРѕРІРµ resources.f Р®. Р–РёР»РѕРІС†Р° (~yz\lib\resources.f )
+\ Рё Р»РёР±С‹ SaveWithRes
 
 DECIMAL
 
@@ -23,13 +23,13 @@ TRUE VALUE ?Res
 0 VALUE START-RES-TABLE
 
 : relocate ( adr xt -- ) 
-\ применить ко всем элементам каталога adr слово xt
+\ РїСЂРёРјРµРЅРёС‚СЊ РєРѕ РІСЃРµРј СЌР»РµРјРµРЅС‚Р°Рј РєР°С‚Р°Р»РѕРіР° adr СЃР»РѕРІРѕ xt
   >R
-  DUP 12 + W@ ( именованные записи) OVER 14 + W@ ( неименованные записи) +
+  DUP 12 + W@ ( РёРјРµРЅРѕРІР°РЅРЅС‹Рµ Р·Р°РїРёСЃРё) OVER 14 + W@ ( РЅРµРёРјРµРЅРѕРІР°РЅРЅС‹Рµ Р·Р°РїРёСЃРё) +
   SWAP 16 + SWAP
   BEGIN ( adr #) DUP WHILE
     OVER CELL+ @ 0x7FFFFFFF AND END-CODE-SEG + R@ EXECUTE
-  SWAP 2 CELLS + ( длина записи) SWAP 1-
+  SWAP 2 CELLS + ( РґР»РёРЅР° Р·Р°РїРёСЃРё) SWAP 1-
   REPEAT 2DROP
   RDROP
 ;
@@ -42,7 +42,7 @@ TRUE VALUE ?Res
   DUP IF
     R/O OPEN-FILE THROW >R
     END-CODE-SEG R@ FILE-SIZE 2DROP R@ READ-FILE THROW ALLOT
-    END-CODE-SEG ['] relocate1 relocate \ добавить ко всем адресам ресурсов
+    END-CODE-SEG ['] relocate1 relocate \ РґРѕР±Р°РІРёС‚СЊ РєРѕ РІСЃРµРј Р°РґСЂРµСЃР°Рј СЂРµСЃСѓСЂСЃРѕРІ
      \ IMAGE-SIZE BASEOFCODE +
     R> CLOSE-FILE DROP
   ELSE
@@ -51,13 +51,13 @@ TRUE VALUE ?Res
 ;
 
 : SAVE ( offset c-addr u -- )
-  ( сохранение наработанной форт-системы в EXE-файле формата PE - Win32 )
+  ( СЃРѕС…СЂР°РЅРµРЅРёРµ РЅР°СЂР°Р±РѕС‚Р°РЅРЅРѕР№ С„РѕСЂС‚-СЃРёСЃС‚РµРјС‹ РІ EXE-С„Р°Р№Р»Рµ С„РѕСЂРјР°С‚Р° PE - Win32 )
   R/W CREATE-FILE THROW >R
   ModuleName R/O OPEN-FILE-SHARED THROW >R
   HERE SIZE-HEADER R@ READ-FILE THROW SIZE-HEADER < THROW
   R> CLOSE-FILE THROW
 
-  \ если ресурсов нет (u_coff = 0), то END-CODE-SEG = END-RES-SEG
+  \ РµСЃР»Рё СЂРµСЃСѓСЂСЃРѕРІ РЅРµС‚ (u_coff = 0), С‚Рѕ END-CODE-SEG = END-RES-SEG
   END-CODE-SEG END-RES-SEG = IF FALSE ELSE TRUE THEN TO ?Res
 
   ?Res IF 3 ELSE 2 THEN HERE START-PE-HEADER 0x06  + + W! ( Num of Objects)
@@ -96,7 +96,7 @@ TRUE VALUE ?Res
     AOLL @ @ AOGPA @ @ ROT
     IMAGE-BASE 0x1034 + AOLL @ !
     IMAGE-BASE 0x1038 + AOGPA @ !
-    HERE SIZE-HEADER R@ WRITE-FILE THROW ( заголовок и таблица импорта )
+    HERE SIZE-HEADER R@ WRITE-FILE THROW ( Р·Р°РіРѕР»РѕРІРѕРє Рё С‚Р°Р±Р»РёС†Р° РёРјРїРѕСЂС‚Р° )
     ERASED-CNT 0!
     IMAGE-BEGIN HERE OVER -   ROT ALLOT   R@ WRITE-FILE THROW
     ERASED-CNT 1+!

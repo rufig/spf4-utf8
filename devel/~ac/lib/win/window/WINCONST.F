@@ -1,4 +1,4 @@
-28 CONSTANT /MSG  \ размер структуры оконных сообщений
+28 CONSTANT /MSG  \ СЂР°Р·РјРµСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹ РѕРєРѕРЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№
 
 : #define
   BASE @ >R
@@ -112,7 +112,7 @@ WS_EX_WINDOWEDGE WS_EX_CLIENTEDGE OR CONSTANT WS_EX_OVERLAPPEDWINDOW
 WS_EX_WINDOWEDGE WS_EX_TOOLWINDOW OR WS_EX_TOPMOST OR CONSTANT  WS_EX_PALETTEWINDOW
 
 
-\ Сообщения Windows
+\ РЎРѕРѕР±С‰РµРЅРёСЏ Windows
 #define WM_SIZE                         0x0005
 #define WM_PAINT                        0x000F
 #define WM_CLOSE                        0x0010
@@ -149,7 +149,7 @@ WS_EX_WINDOWEDGE WS_EX_TOOLWINDOW OR WS_EX_TOPMOST OR CONSTANT  WS_EX_PALETTEWIN
 \ #if(WINVER >= 0x0400)
 #define ES_NUMBER           0x2000L
 
-\ стили SP-Forth
+\ СЃС‚РёР»Рё SP-Forth
   WS_OVERLAPPEDWINDOW WS_VSCROLL OR WS_HSCROLL OR
   ES_AUTOVSCROLL OR ES_AUTOHSCROLL OR
   ES_MULTILINE OR ES_WANTRETURN OR
@@ -160,10 +160,10 @@ CONSTANT SPF_STDEDIT
   ES_MULTILINE OR ES_WANTRETURN OR
 CONSTANT SPF_RICHEDIT
 
-\ Сообщения для RichEdit
+\ РЎРѕРѕР±С‰РµРЅРёСЏ РґР»СЏ RichEdit
 WM_USER 53 + CONSTANT EM_EXLIMITTEXT
 
-\ Сообщения ListBox
+\ РЎРѕРѕР±С‰РµРЅРёСЏ ListBox
 
 #define LB_ADDSTRING            0x0180
 #define LB_DELETESTRING         0x0182
@@ -171,11 +171,11 @@ WM_USER 53 + CONSTANT EM_EXLIMITTEXT
 #define LB_GETCURSEL            0x0188
 -1 CONSTANT LB_ERR
 
-\ Стили ListBox
+\ РЎС‚РёР»Рё ListBox
 
 #define LBS_MULTICOLUMN         0x0200L
 
-\ Стили DialogBox
+\ РЎС‚РёР»Рё DialogBox
 
 #define DS_MODALFRAME           0x0080
 #define DS_SETFONT              0x0040
@@ -184,7 +184,7 @@ WM_USER 53 + CONSTANT EM_EXLIMITTEXT
 1 CONSTANT IDOK
 2 CONSTANT IDCANCEL
 
-\ Сообщения DialogBox
+\ РЎРѕРѕР±С‰РµРЅРёСЏ DialogBox
 
 #define WM_INITDIALOG           0x0110
 #define WM_COMMAND              0x0111
@@ -192,7 +192,7 @@ WM_USER 53 + CONSTANT EM_EXLIMITTEXT
 #define WM_SYSTIMER             0x0118
 #define WM_NOTIFY               0x004E
 
-\ Классы DialogBoxControls
+\ РљР»Р°СЃСЃС‹ DialogBoxControls
 BASE @ HEX
 0080 CONSTANT DI_Button 
 0081 CONSTANT DI_Edit 
@@ -202,7 +202,7 @@ BASE @ HEX
 0085 CONSTANT DI_Combobox
 BASE !
 
-\ флаги для GetAncestor
+\ С„Р»Р°РіРё РґР»СЏ GetAncestor
 #define     GA_PARENT       1
 #define     GA_ROOT         2
 #define     GA_ROOTOWNER    3

@@ -2,7 +2,7 @@ VARIABLE Urlmon
 WINAPI: CreateURLMoniker URLMON.DLL
 WINAPI: ShowHTMLDialog Mshtml.dll
 
-: L" ( "ccc" -- ) \ ******* компиляция строки в UNICODE
+: L" ( "ccc" -- ) \ ******* ╨║╨╛╨╝╨┐╨╕╨╗╤П╤Ж╨╕╤П ╤Б╤В╤А╨╛╨║╨╕ ╨▓ UNICODE
   [CHAR] " PARSE
   0 ?DO DUP I + C@ W, LOOP DROP 0 W,
 ;

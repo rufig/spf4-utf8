@@ -1,63 +1,63 @@
 \ 24-06-2007 ~mOleg
 \ Copyright [C] 2007 mOleg mininoleg@yahoo.com
-\ преобразование потока чисел в бинарное представление
+\ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїРѕС‚РѕРєР° С‡РёСЃРµР» РІ Р±РёРЅР°СЂРЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ
 
  REQUIRE ?DEFINED devel\~moleg\lib\util\ifdef.f
  REQUIRE SkipChar devel\~mOleg\lib\util\parser.f
  REQUIRE >CIPHER  devel\~moleg\lib\parsing\number.f
  REQUIRE bPlus    devel\~moleg\lib\arrays\barray.f
 
-        USER-VALUE bit-size \ сколько бит занимает один символ
-        USER-VALUE max-char \ максимально допустимое цифровое значение символа
+        USER-VALUE bit-size \ СЃРєРѕР»СЊРєРѕ Р±РёС‚ Р·Р°РЅРёРјР°РµС‚ РѕРґРёРЅ СЃРёРјРІРѕР»
+        USER-VALUE max-char \ РјР°РєСЃРёРјР°Р»СЊРЅРѕ РґРѕРїСѓСЃС‚РёРјРѕРµ С†РёС„СЂРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃРёРјРІРѕР»Р°
 
-\ направляем битовый поток в PAD
+\ РЅР°РїСЂР°РІР»СЏРµРј Р±РёС‚РѕРІС‹Р№ РїРѕС‚РѕРє РІ PAD
 : |bbuf ( --> )
         SYSTEM-PAD DUP barray ! PAD OVER - ERASE
         0 retain ! ;
 
-\ вернуть адрес начала битового массива и его длину в байтах
+\ РІРµСЂРЅСѓС‚СЊ Р°РґСЂРµСЃ РЅР°С‡Р°Р»Р° Р±РёС‚РѕРІРѕРіРѕ РјР°СЃСЃРёРІР° Рё РµРіРѕ РґР»РёРЅСѓ РІ Р±Р°Р№С‚Р°С…
 : bbuf> ( --> addr # )
         barray @ retain @ bits/addr
         /MOD SWAP 0<> NEGATE + ;
 
-\ определяем тип потока
+\ РѕРїСЂРµРґРµР»СЏРµРј С‚РёРї РїРѕС‚РѕРєР°
 : stream-type ( --> )
               SkipDelimiters PeekChar
-              \ шестнадцатиричные
+              \ С€РµСЃС‚РЅР°РґС†Р°С‚РёСЂРёС‡РЅС‹Рµ
               [CHAR] x OVER = OVER [CHAR] X = OR
                      IF DROP SkipChar 4 TO bit-size 0x10 TO max-char EXIT THEN
-              \ восьмиричные
+              \ РІРѕСЃСЊРјРёСЂРёС‡РЅС‹Рµ
               [CHAR] o OVER = OVER [CHAR] O = OR
                      IF DROP SkipChar 3 TO bit-size 0x8 TO max-char EXIT THEN
-              \ двоичные
+              \ РґРІРѕРёС‡РЅС‹Рµ
               [CHAR] b OVER = OVER [CHAR] B = OR
                      IF DROP SkipChar 1 TO bit-size 0x2 TO max-char EXIT THEN
 
-              \ по умолчанию 16ричные числа
+              \ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ 16СЂРёС‡РЅС‹Рµ С‡РёСЃР»Р°
               DROP 4 TO bit-size 0x10 TO max-char
               ;
 
-\ разобрать входной поток до завершающей скобки '}' или ']'
+\ СЂР°Р·РѕР±СЂР°С‚СЊ РІС…РѕРґРЅРѕР№ РїРѕС‚РѕРє РґРѕ Р·Р°РІРµСЂС€Р°СЋС‰РµР№ СЃРєРѕР±РєРё '}' РёР»Рё ']'
 : parse-stream ( --> )
-               BEGIN SkipDelimiters GetChar WHILE \ не исчерпан входной поток
-                     >CIPHER DUP 0 max-char WITHIN WHILE \ допустимые символы
+               BEGIN SkipDelimiters GetChar WHILE \ РЅРµ РёСЃС‡РµСЂРїР°РЅ РІС…РѕРґРЅРѕР№ РїРѕС‚РѕРє
+                     >CIPHER DUP 0 max-char WITHIN WHILE \ РґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹
                      bit-size bPlus
                      SkipChar
-                  REPEAT \ возможно завершающая скобка
+                  REPEAT \ РІРѕР·РјРѕР¶РЅРѕ Р·Р°РІРµСЂС€Р°СЋС‰Р°СЏ СЃРєРѕР±РєР°
                      PeekChar [CHAR] } = PeekChar [CHAR] ] = OR
                      IF SkipChar DROP EXIT THEN
                THEN DROP -1 THROW ;
 
-\ вернуть адрес преобразованного потока в двоичное представление
+\ РІРµСЂРЅСѓС‚СЊ Р°РґСЂРµСЃ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРЅРѕРіРѕ РїРѕС‚РѕРєР° РІ РґРІРѕРёС‡РЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ
 : STREAM{ ( /stream} --> addr # )
           |bbuf stream-type
                 ['] parse-stream CATCH THROW
           bbuf> ;
 
-\ компилировать поток в текущее определение
+\ РєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ РїРѕС‚РѕРє РІ С‚РµРєСѓС‰РµРµ РѕРїСЂРµРґРµР»РµРЅРёРµ
 : STREAM[ ( /stream --> ) STREAM{ S, ; IMMEDIATE
 
-?DEFINED test{ \EOF -- тестовая секция ---------------------------------------
+?DEFINED test{ \EOF -- С‚РµСЃС‚РѕРІР°СЏ СЃРµРєС†РёСЏ ---------------------------------------
 
 test{ STREAM{ FAD3C5EB} DROP @ 0xEBC5D3FA <> THROW
       STREAM{ o1234560} DROP @ 0x80CB29 <> THROW

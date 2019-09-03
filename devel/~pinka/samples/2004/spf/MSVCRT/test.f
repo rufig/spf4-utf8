@@ -67,7 +67,7 @@ PREVIOUS
 
 : testfile  S" lib\asm\486asm.f" FIND-FULLNAME ;
 
-\ чтобы OS сделала кэширование файла:
+\ С‡С‚РѕР±С‹ OS СЃРґРµР»Р°Р»Р° РєСЌС€РёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»Р°:
 testfile read(WinAPI)
 testfile read(MSVCRT)
 testfile read(FStream)

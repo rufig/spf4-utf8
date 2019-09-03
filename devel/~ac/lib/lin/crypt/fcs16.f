@@ -1,17 +1,17 @@
-\ FCS-16 - контрольная сумма для PPP и HDLC
-\ Основано на С-коде из RFC 1662
+\ FCS-16 - РєРѕРЅС‚СЂРѕР»СЊРЅР°СЏ СЃСѓРјРјР° РґР»СЏ PPP Рё HDLC
+\ РћСЃРЅРѕРІР°РЅРѕ РЅР° РЎ-РєРѕРґРµ РёР· RFC 1662
 
-\ Если PPP-кадры помещаются внутрь L2TP/PPTP-кадров, то контрольные суммы не используются.
-\ FCS-16 нужен для PPP over serial (USB/COM-модемы и т.п.)
+\ Р•СЃР»Рё PPP-РєР°РґСЂС‹ РїРѕРјРµС‰Р°СЋС‚СЃСЏ РІРЅСѓС‚СЂСЊ L2TP/PPTP-РєР°РґСЂРѕРІ, С‚Рѕ РєРѕРЅС‚СЂРѕР»СЊРЅС‹Рµ СЃСѓРјРјС‹ РЅРµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ.
+\ FCS-16 РЅСѓР¶РµРЅ РґР»СЏ PPP over serial (USB/COM-РјРѕРґРµРјС‹ Рё С‚.Рї.)
 
-: fсstab,
+: fСЃstab,
   BASE @ >R HEX
   0x20 0 DO 
     REFILL DROP
     0x10 0 DO NextWord EVALUATE C, LOOP
   LOOP R> BASE !
 ;
-CREATE fcstab fсstab,
+CREATE fcstab fСЃstab,
 00 00 89 11 12 23 9B 32  24 46 AD 57 36 65 BF 74
 48 8C C1 9D 5A AF D3 BE  6C CA E5 DB 7E E9 F7 F8
 81 10 08 01 93 33 1A 22  A5 56 2C 47 B7 75 3E 64
@@ -57,7 +57,7 @@ C7 7B 4E 6A D5 58 5C 49  E3 3D 6A 2C F1 1E 78 0F
 ;
 
 0xFFFF CONSTANT PPPINITFCS16 \ Initial FCS value
-0xF0B8 CONSTANT PPPGOODFCS16 \ Good final FCS value (для проверки: если считать вместе с 2 байтами fcs, то должно получиться это)
+0xF0B8 CONSTANT PPPGOODFCS16 \ Good final FCS value (РґР»СЏ РїСЂРѕРІРµСЂРєРё: РµСЃР»Рё СЃС‡РёС‚Р°С‚СЊ РІРјРµСЃС‚Рµ СЃ 2 Р±Р°Р№С‚Р°РјРё fcs, С‚Рѕ РґРѕР»Р¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊСЃСЏ СЌС‚Рѕ)
 
 \EOF
 
@@ -71,7 +71,7 @@ CREATE TEST
 0x01 C, \ lcp-command 1=LcpConfigureRequest
 0x00 C, \ lcp-id
 0x00 C, \
-0x17 C, \ lcp-len, включая 4 байта заголовка
+0x17 C, \ lcp-len, РІРєР»СЋС‡Р°СЏ 4 Р±Р°Р№С‚Р° Р·Р°РіРѕР»РѕРІРєР°
 
 0x02 C,
 0x06 C,

@@ -10,10 +10,10 @@ CELL -- wts.State \ 0=WTSActive, 1=WTSConnected, 2=WTSConnectQuery, 3=WTSShadow,
 CONSTANT /WTS_SESSION_INFO
 
 : ForEachWTSession { par xt \ cnt ses wts -- }
-\ для каждой терминальной сессии выполнить xt со следующими параметрами:
-\ ( a u sid state par -- flag ) где a u - имя станции (Console,RDP-Tcp), sid - id сессии (0,1,65536),
-\ state - состояние (см. выше, напр.4,0,6), par - пользовательский параметр (напр. аккумулятор),
-\ xt возвращает flag продолжения
+\ РґР»СЏ РєР°Р¶РґРѕР№ С‚РµСЂРјРёРЅР°Р»СЊРЅРѕР№ СЃРµСЃСЃРёРё РІС‹РїРѕР»РЅРёС‚СЊ xt СЃРѕ СЃР»РµРґСѓСЋС‰РёРјРё РїР°СЂР°РјРµС‚СЂР°РјРё:
+\ ( a u sid state par -- flag ) РіРґРµ a u - РёРјСЏ СЃС‚Р°РЅС†РёРё (Console,RDP-Tcp), sid - id СЃРµСЃСЃРёРё (0,1,65536),
+\ state - СЃРѕСЃС‚РѕСЏРЅРёРµ (СЃРј. РІС‹С€Рµ, РЅР°РїСЂ.4,0,6), par - РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РїР°СЂР°РјРµС‚СЂ (РЅР°РїСЂ. Р°РєРєСѓРјСѓР»СЏС‚РѕСЂ),
+\ xt РІРѕР·РІСЂР°С‰Р°РµС‚ flag РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ
   ^ cnt ^ ses 1 0 0 WTSEnumerateSessionsA
   IF
     cnt 0 ?DO
@@ -26,8 +26,8 @@ CONSTANT /WTS_SESSION_INFO
 
 \EOF
 0 :NONAME . . . TYPE CR TRUE ; ForEachWTSession
-\EOF пример вывода
+\EOF РїСЂРёРјРµСЂ РІС‹РІРѕРґР°
 0 4 0
-0 0 1 RDP-Tcp#0 <- активно подключение через RDP
+0 0 1 RDP-Tcp#0 <- Р°РєС‚РёРІРЅРѕ РїРѕРґРєР»СЋС‡РµРЅРёРµ С‡РµСЂРµР· RDP
 0 1 3 Console
 0 6 65536 RDP-Tcp

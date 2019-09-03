@@ -1,4 +1,4 @@
-\ Локальные переменные vs bac4th
+\ Р›РѕРєР°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ vs bac4th
 ~profit\lib\bac4th.f
 lib\ext\locals.f
 

@@ -1,5 +1,5 @@
 : read ( addr len socket -- )
-  \ прочесть ровно len байт из сокета socket и записать в addr
+  \ РїСЂРѕС‡РµСЃС‚СЊ СЂРѕРІРЅРѕ len Р±Р°Р№С‚ РёР· СЃРѕРєРµС‚Р° socket Рё Р·Р°РїРёСЃР°С‚СЊ РІ addr
   { _addr _len _sock \ _p }
   0 -> _p
   BEGIN
@@ -8,7 +8,7 @@
     0 _len _addr _p +  _sock
     recv DUP SOCKET_ERROR =
     IF WSAGetLastError ELSE 0 THEN THROW
-    DUP 0= IF DROP -1002 THROW THEN ( если принято 0, то обрыв соединения )
+    DUP 0= IF DROP -1002 THROW THEN ( РµСЃР»Рё РїСЂРёРЅСЏС‚Рѕ 0, С‚Рѕ РѕР±СЂС‹РІ СЃРѕРµРґРёРЅРµРЅРёСЏ )
     DUP _p + -> _p
     _len SWAP - -> _len
   REPEAT

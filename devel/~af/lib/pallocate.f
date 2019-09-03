@@ -1,6 +1,6 @@
 \ Andrey Filatkin, af@forth.org.ru
 \ Work in spf3, spf4
-\ Выделение динамической памяти, доступной во всех потоках
+\ Р’С‹РґРµР»РµРЅРёРµ РґРёРЅР°РјРёС‡РµСЃРєРѕР№ РїР°РјСЏС‚Рё, РґРѕСЃС‚СѓРїРЅРѕР№ РІРѕ РІСЃРµС… РїРѕС‚РѕРєР°С…
 
 VOCABULARY PAllocSupport
 GET-CURRENT ALSO PAllocSupport DEFINITIONS

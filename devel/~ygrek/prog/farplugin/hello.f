@@ -6,8 +6,8 @@ REQUIRE NEWDIALOG ~ygrek/lib/far/control.f
 ' STARTLOG TO FARPLUGIN-INIT
 
 ( 
- Функция GetMsg возвращает строку сообщения из языкового файла.
- А это надстройка над Info.GetMsg для сокращения кода :-)
+ ╨д╤Г╨╜╨║╤Ж╨╕╤П GetMsg ╨▓╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╤В ╤Б╤В╤А╨╛╨║╤Г ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╨╕╨╖ ╤П╨╖╤Л╨║╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░.
+ ╨Р ╤Н╤В╨╛ ╨╜╨░╨┤╤Б╤В╤А╨╛╨╣╨║╨░ ╨╜╨░╨┤ Info.GetMsg ╨┤╨╗╤П ╤Б╨╛╨║╤А╨░╤Й╨╡╨╜╨╕╤П ╨║╨╛╨┤╨░ :-)
 
 : GetMsg ( MsgId -- pchar ) FARAPI. ModuleNumber @ FARAPI. GetMsg @ API-CALL ;
 
@@ -18,9 +18,9 @@ REQUIRE NEWDIALOG ~ygrek/lib/far/control.f
 DROP
 
 ( 
-Функция SetStartupInfo вызывается один раз, перед всеми
-другими функциями. Она передается плагину информацию,
-необходимую для дальнейшей работы.
+╨д╤Г╨╜╨║╤Ж╨╕╤П SetStartupInfo ╨▓╤Л╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ╨╛╨┤╨╕╨╜ ╤А╨░╨╖, ╨┐╨╡╤А╨╡╨┤ ╨▓╤Б╨╡╨╝╨╕
+╨┤╤А╤Г╨│╨╕╨╝╨╕ ╤Д╤Г╨╜╨║╤Ж╨╕╤П╨╝╨╕. ╨Ю╨╜╨░ ╨┐╨╡╤А╨╡╨┤╨░╨╡╤В╤Б╤П ╨┐╨╗╨░╨│╨╕╨╜╤Г ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╤О,
+╨╜╨╡╨╛╨▒╤Е╨╛╨┤╨╕╨╝╤Г╤О ╨┤╨╗╤П ╨┤╨░╨╗╤М╨╜╨╡╨╣╤И╨╡╨╣ ╤А╨░╨▒╨╛╤В╤Л.
 )
 
 :NONAME ( psi -- void )
@@ -29,8 +29,8 @@ DROP
 ; 1 CELLS CALLBACK: SetStartupInfo
 
 ( 
-Функция GetPluginInfo вызывается для получения основной
-  [general] информации о плагине
+╨д╤Г╨╜╨║╤Ж╨╕╤П GetPluginInfo ╨▓╤Л╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ╨┤╨╗╤П ╨┐╨╛╨╗╤Г╤З╨╡╨╜╨╕╤П ╨╛╤Б╨╜╨╛╨▓╨╜╨╛╨╣
+  [general] ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╨╕ ╨╛ ╨┐╨╗╨░╨│╨╕╨╜╨╡
 )
 
 VARIABLE MyPluginMenuStrings \ array[0..0] of PChar;
@@ -53,7 +53,7 @@ VARIABLE MyPluginConfigStrings
 
    1 pi. PluginConfigStringsNumber !
 
-  SOMETHING \ Возвращаем что-нибудь
+  SOMETHING \ ╨Т╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╤З╤В╨╛-╨╜╨╕╨▒╤Г╨┤╤М
 ; 1 CELLS CALLBACK: GetPluginInfo
 
 0 VALUE .output
@@ -138,7 +138,7 @@ MESSAGES;
   INVALID_HANDLE_VALUE ; 2 CELLS CALLBACK: OpenPlugin
 
 (
-  Вызывается при вызове из меню настроек плагинов
+  ╨Т╤Л╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ╨┐╤А╨╕ ╨▓╤Л╨╖╨╛╨▓╨╡ ╨╕╨╖ ╨╝╨╡╨╜╤О ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨┐╨╗╨░╨│╨╕╨╜╨╛╨▓
 ) 
 :NONAME ( number -- flag )
   DROP

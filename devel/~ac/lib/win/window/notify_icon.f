@@ -1,12 +1,12 @@
-\ 21.07.08: адаптация к изменениям API после 99го года
-\ fixme: изменения испытаны только на Vista...
-\ 24.02.09: на XP автодеградируем отрезанием hBalloonIcon, иначе не работает
+\ 21.07.08: Р°РґР°РїС‚Р°С†РёСЏ Рє РёР·РјРµРЅРµРЅРёСЏРј API РїРѕСЃР»Рµ 99РіРѕ РіРѕРґР°
+\ fixme: РёР·РјРµРЅРµРЅРёСЏ РёСЃРїС‹С‚Р°РЅС‹ С‚РѕР»СЊРєРѕ РЅР° Vista...
+\ 24.02.09: РЅР° XP Р°РІС‚РѕРґРµРіСЂР°РґРёСЂСѓРµРј РѕС‚СЂРµР·Р°РЅРёРµРј hBalloonIcon, РёРЅР°С‡Рµ РЅРµ СЂР°Р±РѕС‚Р°РµС‚
 
 REQUIRE Window    ~ac/lib/win/window/window.f
 REQUIRE LoadIcon  ~ac/lib/win/window/image.f
 REQUIRE TrackMenu ~ac/lib/win/window/popupmenu.f
-\ REQUIRE WinNT?    ~ac/lib/win/winver.f конфликтует с подключаемым позже quick-swl или storage (из-за AT-PROCESS...)
-\                                        поэтому ниже тупо определено GetWinVer
+\ REQUIRE WinNT?    ~ac/lib/win/winver.f РєРѕРЅС„Р»РёРєС‚СѓРµС‚ СЃ РїРѕРґРєР»СЋС‡Р°РµРјС‹Рј РїРѕР·Р¶Рµ quick-swl РёР»Рё storage (РёР·-Р·Р° AT-PROCESS...)
+\                                        РїРѕСЌС‚РѕРјСѓ РЅРёР¶Рµ С‚СѓРїРѕ РѕРїСЂРµРґРµР»РµРЅРѕ GetWinVer
 
 WINAPI: Shell_NotifyIcon SHELL32.DLL
 
@@ -29,7 +29,7 @@ WINAPI: Shell_NotifyIcon SHELL32.DLL
 4 -- uFlags
 4 -- uCallbackMessage
 4 -- hIcon
-128 -- szTip \ до W2K было 64
+128 -- szTip \ РґРѕ W2K Р±С‹Р»Рѕ 64
   4 -- dwState
   4 -- dwStateMask
 256 -- szInfo
@@ -63,7 +63,7 @@ WINAPI: GetVersionExA KERNEL32.DLL
 ;
 
 : TrayIconSetTitle ( addr u -- )
-\ установить заголовок balloon tooltip'а (ПЕРЕД вызовом установки иконки)
+\ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ Р·Р°РіРѕР»РѕРІРѕРє balloon tooltip'Р° (РџР•Р Р•Р” РІС‹Р·РѕРІРѕРј СѓСЃС‚Р°РЅРѕРІРєРё РёРєРѕРЅРєРё)
   IconData szInfoTitle SWAP 1+ MOVE
 ;
 S" SPF" TrayIconSetTitle
@@ -101,7 +101,7 @@ S" SPF" TrayIconSetTitle
   NIF_TIP NIF_INFO OR IconData uFlags @ OR IconData uFlags !
 ;
 : TrayIconMessage ( addr u -- )
-\ изменить сообщение у последней выведенной в tray иконки
+\ РёР·РјРµРЅРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ Сѓ РїРѕСЃР»РµРґРЅРµР№ РІС‹РІРµРґРµРЅРЅРѕР№ РІ tray РёРєРѕРЅРєРё
   || a u mem || (( a u ))
   IconData -> mem IconDataSetSize
   mem szTip 128 ERASE a mem szTip u 127 MIN MOVE
@@ -144,9 +144,9 @@ S" SPF" TrayIconSetTitle
   mem NIM_MODIFY Shell_NotifyIcon DROP
 ;
 
-\ S" Это пример" S" ico\mail10.ico" 1997 S" STATIC" 0 0 Window TrayIconCreate KEY DROP TrayIconDelete
+\ S" Р­С‚Рѕ РїСЂРёРјРµСЂ" S" ico\mail10.ico" 1997 S" STATIC" 0 0 Window TrayIconCreate KEY DROP TrayIconDelete
 
 \EOF
-S" Это пример" 1 1 S" STATIC" 0 0 Window TrayIconCreateFromResource 
+S" Р­С‚Рѕ РїСЂРёРјРµСЂ" 1 1 S" STATIC" 0 0 Window TrayIconCreateFromResource 
 3000 PAUSE
-S" Это продолжение" TrayIconMessage KEY DROP TrayIconDelete
+S" Р­С‚Рѕ РїСЂРѕРґРѕР»Р¶РµРЅРёРµ" TrayIconMessage KEY DROP TrayIconDelete

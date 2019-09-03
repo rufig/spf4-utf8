@@ -1,15 +1,15 @@
 \ $Id$
 \
-\ Ïåðåíàïðàâëåíèå âñåãî âûâîäà ñëîâà â ñòðîêó
+\ ÐŸÐµÑ€ÐµÐ½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð²ÑÐµÐ³Ð¾ Ð²Ñ‹Ð²Ð¾Ð´Ð° ÑÐ»Ð¾Ð²Ð° Ð² ÑÑ‚Ñ€Ð¾ÐºÑƒ
 \ TYPE>STR ( xt -- s )
-\ Ëîâèò èñêëþ÷åíèÿ âíóòðè xt, ðàáîòàåò íåçàâèñèìî â êàæäîì ïîòîêå
+\ Ð›Ð¾Ð²Ð¸Ñ‚ Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ xt, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð½ÐµÐ·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ Ð² ÐºÐ°Ð¶Ð´Ð¾Ð¼ Ð¿Ð¾Ñ‚Ð¾ÐºÐµ
 
-\ Ïðèìåð
+\ ÐŸÑ€Ð¸Ð¼ÐµÑ€
 \ :NONAME 3 . ." test" 3 SPACES ." hello" ; TYPE>STR
-\ äà¸ò " 3 test   hello"
+\ Ð´Ð°Ñ‘Ñ‚ " 3 test   hello"
 
-\ â TYPE ïîäñîâûâàåòñÿ ïîïîòî÷íûé USER-TYPE
-\ ñì. îáñóæäåíèå â http://www.nabble.com/IsDelimiter-t4856219.html
+\ Ð² TYPE Ð¿Ð¾Ð´ÑÐ¾Ð²Ñ‹Ð²Ð°ÐµÑ‚ÑÑ Ð¿Ð¾Ð¿Ð¾Ñ‚Ð¾Ñ‡Ð½Ñ‹Ð¹ USER-TYPE
+\ ÑÐ¼. Ð¾Ð±ÑÑƒÐ¶Ð´ÐµÐ½Ð¸Ðµ Ð² http://www.nabble.com/IsDelimiter-t4856219.html
 USER-VECT USER-TYPE
 ' TYPE1 TO USER-TYPE
 ..: AT-THREAD-STARTING ['] TYPE1 TO USER-TYPE ;..
@@ -28,7 +28,7 @@ USER-VALUE this.heap \ thanks to ruvim (in callback the THREAD-HEAP is changed)
 
 EXPORT
 
-\ Âåñü êîíñîëüíûé âûâîä xt áóäåò ñîõðàí¸í â ñòðîêó str
+\ Ð’ÐµÑÑŒ ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒÐ½Ñ‹Ð¹ Ð²Ñ‹Ð²Ð¾Ð´ xt Ð±ÑƒÐ´ÐµÑ‚ ÑÐ¾Ñ…Ñ€Ð°Ð½Ñ‘Ð½ Ð² ÑÑ‚Ñ€Ð¾ÐºÑƒ str
 : TYPE>STR-CATCH { xt | old.type old.heap old.str -- str ior }
 
    \ save all values that we will modify
@@ -57,8 +57,8 @@ EXPORT
    old.heap TO this.heap
    old.str TO this.str ;
 
-\ Ñîõðàíèòü âåñü êîíñîëüíûé âûâîä
-\ Èãíîðèðîâàòü èñêëþ÷åíèÿ - ëîã áóäåò ñîõðàí¸í â ñòðîêó (åñëè áûë)
+\ Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ Ð²ÐµÑÑŒ ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒÐ½Ñ‹Ð¹ Ð²Ñ‹Ð²Ð¾Ð´
+\ Ð˜Ð³Ð½Ð¾Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ - Ð»Ð¾Ð³ Ð±ÑƒÐ´ÐµÑ‚ ÑÐ¾Ñ…Ñ€Ð°Ð½Ñ‘Ð½ Ð² ÑÑ‚Ñ€Ð¾ÐºÑƒ (ÐµÑÐ»Ð¸ Ð±Ñ‹Ð»)
 : TYPE>STR ( xt -- str ) TYPE>STR-CATCH DROP ;
 
 ;MODULE

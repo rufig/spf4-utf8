@@ -26,7 +26,7 @@ CREATE WDS_PAT  0x101 ALLOT
         VOC-LIST
         BEGIN @ DUP WHILE
                 DUP CELL+ VOC-NAME.
-                DUP 3 CELLS + @ \ wid предка
+                DUP 3 CELLS + @ \ wid РїСЂРµРґРєР°
                 ?DUP IF ."  defined in "  VOC-NAME.
                      ELSE ."  is the main vocabulary"
                      THEN CR

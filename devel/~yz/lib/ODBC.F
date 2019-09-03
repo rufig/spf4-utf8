@@ -1,8 +1,8 @@
-\ Доступ к базам данных через ODBC
-\ Ю. Жиловец, 16.10.2003
+\ Р”РѕСЃС‚СѓРї Рє Р±Р°Р·Р°Рј РґР°РЅРЅС‹С… С‡РµСЂРµР· ODBC
+\ Р®. Р–РёР»РѕРІРµС†, 16.10.2003
 
-\ Некоторые фрагменты (инициализация, подключение к базе, обработка ошибок)
-\ позаимствованы у А. Черезова: ~ac/lib/win/odbc/odbc.f
+\ РќРµРєРѕС‚РѕСЂС‹Рµ С„СЂР°РіРјРµРЅС‚С‹ (РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ, РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р±Р°Р·Рµ, РѕР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє)
+\ РїРѕР·Р°РёРјСЃС‚РІРѕРІР°РЅС‹ Сѓ Рђ. Р§РµСЂРµР·РѕРІР°: ~ac/lib/win/odbc/odbc.f
 
 REQUIRE "  ~yz/lib/common.f
 REQUIRE LOAD-CONSTANTS ~yz/lib/const.f
@@ -87,7 +87,7 @@ WINAPI: SQLColAttribute ODBC32.DLL
   num
 ;
 
-\ Предполагаем, что длинней 50 символов свойств не будет
+\ РџСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ РґР»РёРЅРЅРµР№ 50 СЃРёРјРІРѕР»РѕРІ СЃРІРѕР№СЃС‚РІ РЅРµ Р±СѓРґРµС‚
 : ColStrAttribute { addr col attr fodbc \ len -- }
   0 ^ len 50 addr attr col fodbc odbcStat @ SQLColAttribute DROP
 ;
@@ -238,7 +238,7 @@ EXPORT
   fodbc odbcEnv SQLAllocEnv SQL_OK?
   IF 
      W: SQL_IS_INTEGER W: SQL_OV_ODBC2 W: SQL_ATTR_ODBC_VERSION
-     fodbc odbcEnv @ SQLSetEnvAttr DROP \ без этого новый ODBC работать не хочет
+     fodbc odbcEnv @ SQLSetEnvAttr DROP \ Р±РµР· СЌС‚РѕРіРѕ РЅРѕРІС‹Р№ ODBC СЂР°Р±РѕС‚Р°С‚СЊ РЅРµ С…РѕС‡РµС‚
      fodbc odbcConn  fodbc odbcEnv @ SQLAllocConnect SQL_OK? fodbc SWAP
   ELSE fodbc FALSE THEN
 ;
@@ -283,7 +283,7 @@ EXPORT
 
 StartSQL DROP TO s
 
-S" реклама" 0 0 0 0 s ConnectSQL DROP
+S" СЂРµРєР»Р°РјР°" 0 0 0 0 s ConnectSQL DROP
 " SELECT firstticket FROM info" s ExecuteSQL DROP
 BIND
 SQL_INTEGER res

@@ -5,7 +5,7 @@
 
 REQUIRE REPLACE-WORD lib/ext/patch.f
 REQUIRE ON           lib/ext/onoff.f
-REQUIRE [IF]         lib/include/tools.f \ должно быть подключено до caseins-варианта
+REQUIRE [IF]         lib/include/tools.f \ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕРґРєР»СЋС‡РµРЅРѕ РґРѕ caseins-РІР°СЂРёР°РЅС‚Р°
 REQUIRE [else]       lib/ext/caseins-tools.f
 
 VARIABLE CASE-INS \ switcher
@@ -29,9 +29,9 @@ CASE-INS ON
 ' USEARCH-WORDLIST TO SEARCH-WORDLIST
 
 : UDIGIT ( C N1 -- N2 -1|0 ) 
-\ N2 - значение литеры C как
-\ цифры в системе счисления по основанию N1
-\ hex-цифры могут быть строчными
+\ N2 - Р·РЅР°С‡РµРЅРёРµ Р»РёС‚РµСЂС‹ C РєР°Рє
+\ С†РёС„СЂС‹ РІ СЃРёСЃС‚РµРјРµ СЃС‡РёСЃР»РµРЅРёСЏ РїРѕ РѕСЃРЅРѕРІР°РЅРёСЋ N1
+\ hex-С†РёС„СЂС‹ РјРѕРіСѓС‚ Р±С‹С‚СЊ СЃС‚СЂРѕС‡РЅС‹РјРё
   SWAP
   DUP [CHAR] 0 [CHAR] 9 1+ WITHIN
   IF \ within 0..9

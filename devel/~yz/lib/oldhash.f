@@ -1,24 +1,24 @@
-\ Расстановочные таблицы
-\ Ю. Жиловец, 18.12.2002, с добавлениями А. Черезова
+\ Р Р°СЃСЃС‚Р°РЅРѕРІРѕС‡РЅС‹Рµ С‚Р°Р±Р»РёС†С‹
+\ Р®. Р–РёР»РѕРІРµС†, 18.12.2002, СЃ РґРѕР±Р°РІР»РµРЅРёСЏРјРё Рђ. Р§РµСЂРµР·РѕРІР°
 
 REQUIRE GMEMINIT ~yz/lib/gmem.f
 
 MODULE: HASH-TABLES
 
-\ Формат таблицы:
-\ +0	cell	Число списков
-\ +4 	n cells	Начала списков записей
+\ Р¤РѕСЂРјР°С‚ С‚Р°Р±Р»РёС†С‹:
+\ +0	cell	Р§РёСЃР»Рѕ СЃРїРёСЃРєРѕРІ
+\ +4 	n cells	РќР°С‡Р°Р»Р° СЃРїРёСЃРєРѕРІ Р·Р°РїРёСЃРµР№
 
-\ Формат записи
+\ Р¤РѕСЂРјР°С‚ Р·Р°РїРёСЃРё
 0 
-CELL -- :link   \ Указатель на следующую запись / 0
-CELL -- :key    \ указатель на строку - ключ
-CELL -- :value  \ Указатель на значение
-1    -- :free   \ 0 - число, <>0 строка
+CELL -- :link   \ РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ Р·Р°РїРёСЃСЊ / 0
+CELL -- :key    \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂРѕРєСѓ - РєР»СЋС‡
+CELL -- :value  \ РЈРєР°Р·Р°С‚РµР»СЊ РЅР° Р·РЅР°С‡РµРЅРёРµ
+1    -- :free   \ 0 - С‡РёСЃР»Рѕ, <>0 СЃС‚СЂРѕРєР°
 == #rec
 
 : make-hash ( n -- )
-  \ очистит хэш-таблицу ALLOCATE
+  \ РѕС‡РёСЃС‚РёС‚ С…СЌС€-С‚Р°Р±Р»РёС†Сѓ ALLOCATE
   DUP 1+ CELLS MGETMEM 2DUP ! PRESS ;
 
 : (HASH) ( akey nkey n2 -- )
@@ -32,9 +32,9 @@ CELL -- :value  \ Указатель на значение
   BEGIN
     ( akey nkey prev rec)
     2>R ( akey nkey)
-    2DUP R@ :key @ COUNT COMPARE 0= IF ( нашли ключ) 2DROP 2R> ( ." found" s.) EXIT THEN
+    2DUP R@ :key @ COUNT COMPARE 0= IF ( РЅР°С€Р»Рё РєР»СЋС‡) 2DROP 2R> ( ." found" s.) EXIT THEN
     R> RDROP  ( akey nkey rec)
-    DUP :link @ ?DUP 0= IF ( не нашли ключ) PRESS PRESS 0 ( ." notfound" s.) EXIT THEN
+    DUP :link @ ?DUP 0= IF ( РЅРµ РЅР°С€Р»Рё РєР»СЋС‡) PRESS PRESS 0 ( ." notfound" s.) EXIT THEN
   AGAIN ;
 
 : del-value ( rec -- )

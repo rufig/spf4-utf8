@@ -60,7 +60,7 @@ CREATE str1 S" A" S",
 str1 COUNT hash-mod HASH  VALUE hash1
 
 0 [IF]
-\ просто max-(разность по модулю)
+\ РїСЂРѕСЃС‚Рѕ max-(СЂР°Р·РЅРѕСЃС‚СЊ РїРѕ РјРѕРґСѓР»СЋ)
 
 : fitness ( c -- w )
   <# HOLD 0. #> 
@@ -79,7 +79,7 @@ str1 COUNT hash-mod HASH  VALUE hash1
 ;
 
 1 [IF]
-\ число совпадающих битов,
+\ С‡РёСЃР»Рѕ СЃРѕРІРїР°РґР°СЋС‰РёС… Р±РёС‚РѕРІ,
 : fitness ( c -- w )
   <# HOLD 0. #>
   DUP IF

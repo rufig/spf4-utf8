@@ -18,7 +18,7 @@ CLASS: ChooseDirDialog
         var lParam          \ LPARAM lParam; 
         var iImage          \ int iImage; 
     ;RECORD /BROWSEINFO
-    var _path \ Добавил Абдрахимов И.А.
+    var _path \ Р”РѕР±Р°РІРёР» РђР±РґСЂР°С…РёРјРѕРІ Р.Рђ.
     var vPIDL
 CONSTR: init
     MAX_PATH ALLOCATE THROW pszDisplayName !

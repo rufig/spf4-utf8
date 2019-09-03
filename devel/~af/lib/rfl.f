@@ -21,24 +21,24 @@ USES user32.dll
 1024 CONSTANT MF_BYPOSITION
    0 CONSTANT MF_STRING
 
-0 VALUE IdFirstRFL \ первый идентификатор
-0 VALUE MaxCountRFL \ максимальное число файлов в списке
-0 VALUE RFLBefore \ где вставлять список в меню
-0 VALUE hRFLMenu \ меню содержащее список
+0 VALUE IdFirstRFL \ РїРµСЂРІС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ
+0 VALUE MaxCountRFL \ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ С„Р°Р№Р»РѕРІ РІ СЃРїРёСЃРєРµ
+0 VALUE RFLBefore \ РіРґРµ РІСЃС‚Р°РІР»СЏС‚СЊ СЃРїРёСЃРѕРє РІ РјРµРЅСЋ
+0 VALUE hRFLMenu \ РјРµРЅСЋ СЃРѕРґРµСЂР¶Р°С‰РµРµ СЃРїРёСЃРѕРє
 
 VOCABULARY RFLSupport
 GET-CURRENT ALSO RFLSupport DEFINITIONS
 
-0 VALUE RFList \ лист, хранящий имена файлов. 9 ячеек, 0-вая ячейка - голова
-0 VALUE inifile  \ имя файла, в котором хранится список
-0 VALUE rflsection \ имя секции rfl
+0 VALUE RFList \ Р»РёСЃС‚, С…СЂР°РЅСЏС‰РёР№ РёРјРµРЅР° С„Р°Р№Р»РѕРІ. 9 СЏС‡РµРµРє, 0-РІР°СЏ СЏС‡РµР№РєР° - РіРѕР»РѕРІР°
+0 VALUE inifile  \ РёРјСЏ С„Р°Р№Р»Р°, РІ РєРѕС‚РѕСЂРѕРј С…СЂР°РЅРёС‚СЃСЏ СЃРїРёСЃРѕРє
+0 VALUE rflsection \ РёРјСЏ СЃРµРєС†РёРё rfl
 
 ALSO PAllocSupport
 
-\ в spf3 какие то проблемы с ALLOCATE, пришлось использовать
-\ глобальный ALLOCATE
+\ РІ spf3 РєР°РєРёРµ С‚Рѕ РїСЂРѕР±Р»РµРјС‹ СЃ ALLOCATE, РїСЂРёС€Р»РѕСЃСЊ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ
+\ РіР»РѕР±Р°Р»СЊРЅС‹Р№ ALLOCATE
 : HEAP-PROCESS-COPY ( addr u -- addr1 )
-\ скопировать строку в хип программы и вернуть её адрес в хипе
+\ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РІ С…РёРї РїСЂРѕРіСЂР°РјРјС‹ Рё РІРµСЂРЅСѓС‚СЊ РµС‘ Р°РґСЂРµСЃ РІ С…РёРїРµ
   0 MAX
   DUP 1+ ALLOCATE THROW DUP >R
   SWAP DUP >R MOVE
@@ -46,11 +46,11 @@ ALSO PAllocSupport
 ;
 
 : AddRFLNode ( addr u -- )
-  \ удаление последнего в списке
+  \ СѓРґР°Р»РµРЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ РІ СЃРїРёСЃРєРµ
   RFList 8 CELLS + @ ?DUP IF FREE DROP THEN
-  \ сдвиг списка
+  \ СЃРґРІРёРі СЃРїРёСЃРєР°
   RFList DUP CELL+ 8 CELLS MOVE
-  \ добавление нового файла в начало
+  \ РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ С„Р°Р№Р»Р° РІ РЅР°С‡Р°Р»Рѕ
   HEAP-PROCESS-COPY RFList !
 ;
 

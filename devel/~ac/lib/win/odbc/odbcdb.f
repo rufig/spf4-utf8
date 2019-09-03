@@ -1,5 +1,5 @@
-\ Аналог (сырой!) библиотеки ~ac/lib/lin/sql/sql3db.f,
-\ но для ODBC. Плюс некоторые доп.расширения - db_exec_voc и db@.
+\ РђРЅР°Р»РѕРі (СЃС‹СЂРѕР№!) Р±РёР±Р»РёРѕС‚РµРєРё ~ac/lib/lin/sql/sql3db.f,
+\ РЅРѕ РґР»СЏ ODBC. РџР»СЋСЃ РЅРµРєРѕС‚РѕСЂС‹Рµ РґРѕРї.СЂР°СЃС€РёСЂРµРЅРёСЏ - db_exec_voc Рё db@.
 
 \ REQUIRE EXC-DUMP2 ~pinka/spf/exc-dump.f 
 
@@ -16,7 +16,7 @@ REQUIRE SqlInit   ~ac/lib/win/odbc/xmldb2.f
 : db_open2 ( S" sqldriver" -- fodbc )
   StartSQL 0= IF DROP 0 EXIT THEN
   DUP >R
-  ConnectFile R@ SQL_ConnError \ THROW с дампом ошибки
+  ConnectFile R@ SQL_ConnError \ THROW СЃ РґР°РјРїРѕРј РѕС€РёР±РєРё
   R>
 ;
 : db_gets ( addr u sqh -- addr u ... )
@@ -34,9 +34,9 @@ REQUIRE SqlInit   ~ac/lib/win/odbc/xmldb2.f
   DUP >R ExecSQL R> SQL_Error
 ;
 : db_exec { addr u par xt q \ i -- }
-\ выполнить SQL-запрос(ы) из addr u,
-\ вызывая для каждого результата функцию xt с параметрами i par ppStmt
-\ в запросах НЕ биндятся макроподстановки :name и $name
+\ РІС‹РїРѕР»РЅРёС‚СЊ SQL-Р·Р°РїСЂРѕСЃ(С‹) РёР· addr u,
+\ РІС‹Р·С‹РІР°СЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂРµР·СѓР»СЊС‚Р°С‚Р° С„СѓРЅРєС†РёСЋ xt СЃ РїР°СЂР°РјРµС‚СЂР°РјРё i par ppStmt
+\ РІ Р·Р°РїСЂРѕСЃР°С… РќР• Р±РёРЅРґСЏС‚СЃСЏ РјР°РєСЂРѕРїРѕРґСЃС‚Р°РЅРѕРІРєРё :name Рё $name
 
   q 0= IF 70103 THROW THEN
 
@@ -49,13 +49,13 @@ REQUIRE SqlInit   ~ac/lib/win/odbc/xmldb2.f
     ELSE FALSE THEN
   WHILE
     i 1+ -> i
-    i par q xt EXECUTE \ возвращает флаг продолжения
+    i par q xt EXECUTE \ РІРѕР·РІСЂР°С‰Р°РµС‚ С„Р»Р°Рі РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ
   REPEAT
 ;
 
 USER SqlQT
 
-\ ## возвращается первое поле первой строки от query
+\ ## РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РїРµСЂРІРѕРµ РїРѕР»Рµ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё РѕС‚ query
 
 : oid_query { $query -- id }
   SqlQT @ 0= IF 70104 THROW THEN
@@ -63,20 +63,20 @@ USER SqlQT
   $query STR@ SqlQT @ db_gets 0 0 2SWAP >NUMBER 2DROP D>S \ $query STRFREE
 ;
 
-\ ## выполнить первый запрос, если query вернул более 0 строк, иначе второй
-\ ## возвращается первое поле первой строки от query или insert_id от query2
-\ ## (т.е. условная вставка записи в базу)
+\ ## РІС‹РїРѕР»РЅРёС‚СЊ РїРµСЂРІС‹Р№ Р·Р°РїСЂРѕСЃ, РµСЃР»Рё query РІРµСЂРЅСѓР» Р±РѕР»РµРµ 0 СЃС‚СЂРѕРє, РёРЅР°С‡Рµ РІС‚РѕСЂРѕР№
+\ ## РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РїРµСЂРІРѕРµ РїРѕР»Рµ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё РѕС‚ query РёР»Рё insert_id РѕС‚ query2
+\ ## (С‚.Рµ. СѓСЃР»РѕРІРЅР°СЏ РІСЃС‚Р°РІРєР° Р·Р°РїРёСЃРё РІ Р±Р°Р·Сѓ)
 
 : oreg_query { $query $query1 $query2 \ id -- id }
   SqlQT @ 0= IF 70105 THROW THEN
 
-  $query oid_query DUP -> id \ $query там НЕ освободилось
+  $query oid_query DUP -> id \ $query С‚Р°Рј РќР• РѕСЃРІРѕР±РѕРґРёР»РѕСЃСЊ
   IF
     $query1 STR@ SqlQT @ db_exec_
   ELSE
     $query2 STR@ SqlQT @ db_exec_ \ SQH @ db3_insert_id -> id
-    $query oid_query -> id \ повторный запрос, чтобы не зависеть от ON CONFLICT
-                          \ и вставок в других потоках
+    $query oid_query -> id \ РїРѕРІС‚РѕСЂРЅС‹Р№ Р·Р°РїСЂРѕСЃ, С‡С‚РѕР±С‹ РЅРµ Р·Р°РІРёСЃРµС‚СЊ РѕС‚ ON CONFLICT
+                          \ Рё РІСЃС‚Р°РІРѕРє РІ РґСЂСѓРіРёС… РїРѕС‚РѕРєР°С…
   THEN
   $query1 STRFREE  $query2 STRFREE
   $query STRFREE
@@ -157,8 +157,8 @@ USER SqS
   THEN
 ;
 : db@ { addr u q -- }
-\ выполнить запрос addr u и по первой строке результатов создать
-\ строчные переменные в текущем словаре компиляции.
+\ РІС‹РїРѕР»РЅРёС‚СЊ Р·Р°РїСЂРѕСЃ addr u Рё РїРѕ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРµ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ СЃРѕР·РґР°С‚СЊ
+\ СЃС‚СЂРѕС‡РЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ РІ С‚РµРєСѓС‰РµРј СЃР»РѕРІР°СЂРµ РєРѕРјРїРёР»СЏС†РёРё.
 
   q 0= IF 70107 THROW THEN
   addr u q ExecSQL q SQL_Error
@@ -169,7 +169,7 @@ USER SqS
      EVALUATE 0 , db@Does
   LOOP DROP
 
-  \ переменные могут остаться и пустыми
+  \ РїРµСЂРµРјРµРЅРЅС‹Рµ РјРѕРіСѓС‚ РѕСЃС‚Р°С‚СЊСЃСЏ Рё РїСѓСЃС‚С‹РјРё
   q NextRow
   IF
     q ResultCols 0 ?DO
@@ -182,7 +182,7 @@ USER SqS
   DOES> DUP @ SWAP CELL+ @ Col
   DUP 0 > IF EXIT ELSE 2DROP S" " THEN
 ;
-: db_bindvoc { q -- } \ при использовании не забывать про временные словари ;)
+: db_bindvoc { q -- } \ РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё РЅРµ Р·Р°Р±С‹РІР°С‚СЊ РїСЂРѕ РІСЂРµРјРµРЅРЅС‹Рµ СЃР»РѕРІР°СЂРё ;)
   q
   q ResultCols 0 ?DO
      I 1+ OVER ColName " CREATE {s}" STR@ \ 2DUP TYPE CR
@@ -190,10 +190,10 @@ USER SqS
   LOOP DROP \ CR
 ;
 : db_exec_voc { addr u par xt q \ i -- }
-\ выполнить SQL-запрос(ы) из addr u,
-\ вызывая для каждого результата функцию xt с параметрами i par ppStmt
-\ в запросах НЕ биндятся макроподстановки :name и $name.
-\ Внутри цикла (слову xt) поля доступны не только по номерам, но и по именам.
+\ РІС‹РїРѕР»РЅРёС‚СЊ SQL-Р·Р°РїСЂРѕСЃ(С‹) РёР· addr u,
+\ РІС‹Р·С‹РІР°СЏ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂРµР·СѓР»СЊС‚Р°С‚Р° С„СѓРЅРєС†РёСЋ xt СЃ РїР°СЂР°РјРµС‚СЂР°РјРё i par ppStmt
+\ РІ Р·Р°РїСЂРѕСЃР°С… РќР• Р±РёРЅРґСЏС‚СЃСЏ РјР°РєСЂРѕРїРѕРґСЃС‚Р°РЅРѕРІРєРё :name Рё $name.
+\ Р’РЅСѓС‚СЂРё С†РёРєР»Р° (СЃР»РѕРІСѓ xt) РїРѕР»СЏ РґРѕСЃС‚СѓРїРЅС‹ РЅРµ С‚РѕР»СЊРєРѕ РїРѕ РЅРѕРјРµСЂР°Рј, РЅРѕ Рё РїРѕ РёРјРµРЅР°Рј.
 
   q 0= IF 70108 THROW THEN
 
@@ -208,7 +208,7 @@ USER SqS
     ELSE FALSE THEN
   WHILE
     i 1+ -> i
-    i par q xt EXECUTE \ возвращает флаг продолжения
+    i par q xt EXECUTE \ РІРѕР·РІСЂР°С‰Р°РµС‚ С„Р»Р°Рі РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ
   REPEAT
 ;
 

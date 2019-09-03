@@ -1,5 +1,5 @@
 ( 
-  Œ®¤ã«ì ¤«ï à¥è¥­¨ï ¤¨äãà®¢
+  ÐœÐ¾Ð´ÑƒÐ»ÑŒ Ð´Ð»Ñ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ Ð´Ð¸Ñ„ÑƒÑ€Ð¾Ð²
   yGREK heretix 
   06.Mar.2005
 )
@@ -9,16 +9,16 @@ REQUIRE F.   lib/include/float2.f
 PRINT-EXP
 
 0e FVALUE tn 
-0e FVALUE fn \ ª®®à¤¨­ âë â¥ªãé¥© â®çª¨
-0.01e FVALUE step \ è £  «£®à¨â¬  
-2.E FVALUE interval \ ¤«¨­  ¨­â¥à¢ «  
+0e FVALUE fn \ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ Ñ‚Ð¾Ñ‡ÐºÐ¸
+0.01e FVALUE step \ ÑˆÐ°Ð³ Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð° 
+2.E FVALUE interval \ Ð´Ð»Ð¸Ð½Ð° Ð¸Ð½Ñ‚ÐµÑ€Ð²Ð°Ð»Ð° 
 
 0e FVALUE err-norma
 
 VECT difur-func ( F: x y -- F: f )
 VECT difur-solution ( F: x -- f )
-VECT difur-init \ ãáâ ­®¢¨âì ­ ç «ì­ë¥ tn,fn ; ®¡­ã«¨âì err-norma
-                \ ãª § âì interval ¨ step
+VECT difur-init \ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ðµ tn,fn ; Ð¾Ð±Ð½ÑƒÐ»Ð¸Ñ‚ÑŒ err-norma
+                \ ÑƒÐºÐ°Ð·Ð°Ñ‚ÑŒ interval Ð¸ step
 
 MODULE: DifUr_RungeKutta
 
@@ -34,7 +34,7 @@ MODULE: DifUr_RungeKutta
 EXPORT
 
 : RungeKutta ( -- F: f )
-( Žç¥à¥¤­®¥ §­ ç¥­¨ã ¬¥â®¤  ã­£¥-Šãââ  4-â® ¯®àï¤ª )
+( ÐžÑ‡ÐµÑ€ÐµÐ´Ð½Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñƒ Ð¼ÐµÑ‚Ð¾Ð´Ð° Ð ÑƒÐ½Ð³Ðµ-ÐšÑƒÑ‚Ñ‚Ð° 4-Ñ‚Ð¾ Ð¿Ð¾Ñ€ÑÐ´ÐºÐ°)
  F1 
  F2 2.E F* F+
  F3 2.E F* F+ 
@@ -50,7 +50,7 @@ EXPORT
   tn difur-solution fn F- FABS FDUP F* err-norma F+ FTO err-norma
 ; 
 
-: #steps ( - N ) interval step F/ F>DS ; \ ª®«-¢® è £®¢  «£®à¨â¬  ¯à¨ ¤ ­®¬ step
+: #steps ( - N ) interval step F/ F>DS ; \ ÐºÐ¾Ð»-Ð²Ð¾ ÑˆÐ°Ð³Ð¾Ð² Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð° Ð¿Ñ€Ð¸ Ð´Ð°Ð½Ð¾Ð¼ step
 
 ;MODULE
 

@@ -1,8 +1,8 @@
 \ WINLIB 1.14
 
-\ Библиотека пользовательского интерфейса Windows
-\ ч. 1. Базовые объекты, окна, меню, быстрые клавиши
-\ Ю. Жиловец, 8.12.2001
+\ Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° Windows
+\ С‡. 1. Р‘Р°Р·РѕРІС‹Рµ РѕР±СЉРµРєС‚С‹, РѕРєРЅР°, РјРµРЅСЋ, Р±С‹СЃС‚СЂС‹Рµ РєР»Р°РІРёС€Рё
+\ Р®. Р–РёР»РѕРІРµС†, 8.12.2001
 
 REQUIRE "       ~yz/lib/common.f
 REQUIRE PROC:   ~yz/lib/proc.f
@@ -17,20 +17,20 @@ S" ~yz/cons/commctrl.const" LOAD-CONSTANTS
 : OR! ( n a -- ) SWAP OVER @ OR SWAP ! ;
 : ORC! ( c a -- ) SWAP OVER C@ OR SWAP C! ;
 
-\ Это будет наш объект, изображающий окна, кнопочки и т.д.
-\ Не понимаю, зачем заводить настоящие объекты с наследованием и прочей
-\ ерундой, если достаточно и обыкновенной таблицы с данными, а к ней - нужные слова
-\ формат таблицы:
-\ +0	b	флаги (см. ниже)
-\ +1	с	данные / адрес слова get
-\ +5	с	адрес слова set
-\ для таблиц-шаблонов в начале еще стоит ячейка с числом записей
+\ Р­С‚Рѕ Р±СѓРґРµС‚ РЅР°С€ РѕР±СЉРµРєС‚, РёР·РѕР±СЂР°Р¶Р°СЋС‰РёР№ РѕРєРЅР°, РєРЅРѕРїРѕС‡РєРё Рё С‚.Рґ.
+\ РќРµ РїРѕРЅРёРјР°СЋ, Р·Р°С‡РµРј Р·Р°РІРѕРґРёС‚СЊ РЅР°СЃС‚РѕСЏС‰РёРµ РѕР±СЉРµРєС‚С‹ СЃ РЅР°СЃР»РµРґРѕРІР°РЅРёРµРј Рё РїСЂРѕС‡РµР№
+\ РµСЂСѓРЅРґРѕР№, РµСЃР»Рё РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Рё РѕР±С‹РєРЅРѕРІРµРЅРЅРѕР№ С‚Р°Р±Р»РёС†С‹ СЃ РґР°РЅРЅС‹РјРё, Р° Рє РЅРµР№ - РЅСѓР¶РЅС‹Рµ СЃР»РѕРІР°
+\ С„РѕСЂРјР°С‚ С‚Р°Р±Р»РёС†С‹:
+\ +0	b	С„Р»Р°РіРё (СЃРј. РЅРёР¶Рµ)
+\ +1	СЃ	РґР°РЅРЅС‹Рµ / Р°РґСЂРµСЃ СЃР»РѕРІР° get
+\ +5	СЃ	Р°РґСЂРµСЃ СЃР»РѕРІР° set
+\ РґР»СЏ С‚Р°Р±Р»РёС†-С€Р°Р±Р»РѕРЅРѕРІ РІ РЅР°С‡Р°Р»Рµ РµС‰Рµ СЃС‚РѕРёС‚ СЏС‡РµР№РєР° СЃ С‡РёСЃР»РѕРј Р·Р°РїРёСЃРµР№
 
-\ Флаги
-\ 7	есть процедура-getter
-\ 6	есть процедура-setter
-\ 5	разделяемый объект	(пока не используется)
-\ 3-0	тип данных              (пока не используется)
+\ Р¤Р»Р°РіРё
+\ 7	РµСЃС‚СЊ РїСЂРѕС†РµРґСѓСЂР°-getter
+\ 6	РµСЃС‚СЊ РїСЂРѕС†РµРґСѓСЂР°-setter
+\ 5	СЂР°Р·РґРµР»СЏРµРјС‹Р№ РѕР±СЉРµРєС‚	(РїРѕРєР° РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ)
+\ 3-0	С‚РёРї РґР°РЅРЅС‹С…              (РїРѕРєР° РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ)
 
 0x40 == set-flag
 0xC0 == getset-flag
@@ -40,10 +40,10 @@ S" ~yz/cons/commctrl.const" LOAD-CONSTANTS
 : shared? ( a -- ?) C@ 0x20 AND ;
 : datatype ( a -- ) C@ 0x0F AND ;
 
-\ Типы данных
-\ 0 == _val  \ значение
-\ 1 == _mem  \ область памяти, подлежит уничтожению через FREEMEM
-\ 2 == _gdi  \ объект GDI, подлежит уничтожению через DeleteObject
+\ РўРёРїС‹ РґР°РЅРЅС‹С…
+\ 0 == _val  \ Р·РЅР°С‡РµРЅРёРµ
+\ 1 == _mem  \ РѕР±Р»Р°СЃС‚СЊ РїР°РјСЏС‚Рё, РїРѕРґР»РµР¶РёС‚ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЋ С‡РµСЂРµР· FREEMEM
+\ 2 == _gdi  \ РѕР±СЉРµРєС‚ GDI, РїРѕРґР»РµР¶РёС‚ СѓРЅРёС‡С‚РѕР¶РµРЅРёСЋ С‡РµСЂРµР· DeleteObject
 
 2 CELLS 1+ == #tab
 
@@ -138,26 +138,26 @@ VARIABLE lastitem
 : del-table ( table -- ) MFREEMEM ;
 
 \ ----------------------------------------
-\ Свойства, общие для всех окон
+\ РЎРІРѕР№СЃС‚РІР°, РѕР±С‰РёРµ РґР»СЏ РІСЃРµС… РѕРєРѕРЅ
 0 table common
-  item -hwnd    	\ дескриптор окна
-  item -pre		\ выполняется до стандартной оконной процедуры
-  item -wndproc		\ оконная процедура
-  item -messages        \ Список обработчиков сообщений по умолчанию
-  item -style 	getset 	\ стиль окна
-  item -color 		\ цвет букв
-  item -bgcolor set	\ цвет фона
-  item -bgbrush ( _gdi type)	\ кисть для фона окна
-  item -painter		\ процедура отрисовки окна
-  item -xsize	\ размер окна по горизонтали
-  item -ysize	\ размер окна по вертикали
-  item -parent	\ окно, в котором размещен элемент
-  item -text getset	\ максимальный размер строки - 255 символов. 
-                	\ Для richedit и ему подобных - переопределить чтение/запись
-  item -userdata        \ пользовательские данные
+  item -hwnd    	\ РґРµСЃРєСЂРёРїС‚РѕСЂ РѕРєРЅР°
+  item -pre		\ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РґРѕ СЃС‚Р°РЅРґР°СЂС‚РЅРѕР№ РѕРєРѕРЅРЅРѕР№ РїСЂРѕС†РµРґСѓСЂС‹
+  item -wndproc		\ РѕРєРѕРЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
+  item -messages        \ РЎРїРёСЃРѕРє РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ СЃРѕРѕР±С‰РµРЅРёР№ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+  item -style 	getset 	\ СЃС‚РёР»СЊ РѕРєРЅР°
+  item -color 		\ С†РІРµС‚ Р±СѓРєРІ
+  item -bgcolor set	\ С†РІРµС‚ С„РѕРЅР°
+  item -bgbrush ( _gdi type)	\ РєРёСЃС‚СЊ РґР»СЏ С„РѕРЅР° РѕРєРЅР°
+  item -painter		\ РїСЂРѕС†РµРґСѓСЂР° РѕС‚СЂРёСЃРѕРІРєРё РѕРєРЅР°
+  item -xsize	\ СЂР°Р·РјРµСЂ РѕРєРЅР° РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+  item -ysize	\ СЂР°Р·РјРµСЂ РѕРєРЅР° РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+  item -parent	\ РѕРєРЅРѕ, РІ РєРѕС‚РѕСЂРѕРј СЂР°Р·РјРµС‰РµРЅ СЌР»РµРјРµРЅС‚
+  item -text getset	\ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ СЃС‚СЂРѕРєРё - 255 СЃРёРјРІРѕР»РѕРІ. 
+                	\ Р”Р»СЏ richedit Рё РµРјСѓ РїРѕРґРѕР±РЅС‹С… - РїРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ С‡С‚РµРЅРёРµ/Р·Р°РїРёСЃСЊ
+  item -userdata        \ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёРµ РґР°РЅРЅС‹Рµ
 endtable
 
-\ меню
+\ РјРµРЅСЋ
 0 table menu
   item -hmenu
   item -itemsinfo
@@ -247,20 +247,20 @@ WINAPI: SetWindowLongA USER32.DLL
 
 \ ----------------------------------------
 common table window
- item -icon getset	\ иконка
- item -smicon getset	\ маленькая иконка
- item -menus		\ меню окна
- item -status		\ статус
- item -toolbar          \ палитра инструментов
- item -minustop		\ размер элементов, закрывающих окно сверху
- item -minusbottom	\ размер элементов, закрывающих окно снизу
- item -hscroll  	\ список обработчиков горизонтальной прокрутки
- item -vscroll		\ список обработчиков вертикальной прокрутки
- item -grid set 	\ решетка окна
- item -gridresize     	\ процедура изменения размеров решетки
+ item -icon getset	\ РёРєРѕРЅРєР°
+ item -smicon getset	\ РјР°Р»РµРЅСЊРєР°СЏ РёРєРѕРЅРєР°
+ item -menus		\ РјРµРЅСЋ РѕРєРЅР°
+ item -status		\ СЃС‚Р°С‚СѓСЃ
+ item -toolbar          \ РїР°Р»РёС‚СЂР° РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
+ item -minustop		\ СЂР°Р·РјРµСЂ СЌР»РµРјРµРЅС‚РѕРІ, Р·Р°РєСЂС‹РІР°СЋС‰РёС… РѕРєРЅРѕ СЃРІРµСЂС…Сѓ
+ item -minusbottom	\ СЂР°Р·РјРµСЂ СЌР»РµРјРµРЅС‚РѕРІ, Р·Р°РєСЂС‹РІР°СЋС‰РёС… РѕРєРЅРѕ СЃРЅРёР·Сѓ
+ item -hscroll  	\ СЃРїРёСЃРѕРє РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РїСЂРѕРєСЂСѓС‚РєРё
+ item -vscroll		\ СЃРїРёСЃРѕРє РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РїСЂРѕРєСЂСѓС‚РєРё
+ item -grid set 	\ СЂРµС€РµС‚РєР° РѕРєРЅР°
+ item -gridresize     	\ РїСЂРѕС†РµРґСѓСЂР° РёР·РјРµРЅРµРЅРёСЏ СЂР°Р·РјРµСЂРѕРІ СЂРµС€РµС‚РєРё
 \ item -gridctlresize
- item -dialog	  \ флажок: надо ли обрабатывать диалоговые кнопки
- item -defaultbutton   \ Кнопка по умолчанию
+ item -dialog	  \ С„Р»Р°Р¶РѕРє: РЅР°РґРѕ Р»Рё РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РґРёР°Р»РѕРіРѕРІС‹Рµ РєРЅРѕРїРєРё
+ item -defaultbutton   \ РљРЅРѕРїРєР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 endtable
 
 : window! ( n hwnd -- )
@@ -282,10 +282,10 @@ endtable
 -smicon window setitem
 
 \ ----------------------------------------
-\ Формат универсальной таблицы:
-\ +0 cell   число записей
-\ +4 cell   текущий указатель
-\ +8 ...    данные
+\ Р¤РѕСЂРјР°С‚ СѓРЅРёРІРµСЂСЃР°Р»СЊРЅРѕР№ С‚Р°Р±Р»РёС†С‹:
+\ +0 cell   С‡РёСЃР»Рѕ Р·Р°РїРёСЃРµР№
+\ +4 cell   С‚РµРєСѓС‰РёР№ СѓРєР°Р·Р°С‚РµР»СЊ
+\ +8 ...    РґР°РЅРЅС‹Рµ
 : :no ;
 : :ptr CELL+ ;
 : :data 2 CELLS+ ;
@@ -311,10 +311,10 @@ endtable
   >R HERE R@ :data OVER R> utable-size 0 :data - DUP ALLOT CMOVE ;
 
 
-\ Формат XtTable:
-\ +0 c	количество записей
-\ +4 c  поле связи
-\ записи по две ячейки каждая:
+\ Р¤РѕСЂРјР°С‚ XtTable:
+\ +0 c	РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃРµР№
+\ +4 c  РїРѕР»Рµ СЃРІСЏР·Рё
+\ Р·Р°РїРёСЃРё РїРѕ РґРІРµ СЏС‡РµР№РєРё РєР°Р¶РґР°СЏ:
 \ id, xt
 
 2 CELLS == #xttable
@@ -369,14 +369,14 @@ VARIABLE xtname
 ;
 
 : M; ( msg# xt secret-sign -- )
-  CELL" M:  " <> ABORT" M; без M:"
+  CELL" M:  " <> ABORT" M; Р±РµР· M:"
   S" ;" EVAL-WORD
   ( msg# xt ) SWAP >xtptr >xtptr  xttable ut++
 ; IMMEDIATE
 
 \  xlist:
-\ +0 n	указатель на первый элемент списка / 0
-\ +4 n	указатель на последний элемент списка
+\ +0 n	СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ СЃРїРёСЃРєР° / 0
+\ +4 n	СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚ СЃРїРёСЃРєР°
 
 : XLIST ( ->bl; -- )
   CREATE 0 , 0 , ;
@@ -415,7 +415,7 @@ VARIABLE xtname
   #xttable +LOOP
   DROP FALSE ;
 
-\ если вызванное слово вернуло false, делаем вид, что ничего не нашли
+\ РµСЃР»Рё РІС‹Р·РІР°РЅРЅРѕРµ СЃР»РѕРІРѕ РІРµСЂРЅСѓР»Рѕ false, РґРµР»Р°РµРј РІРёРґ, С‡С‚Рѕ РЅРёС‡РµРіРѕ РЅРµ РЅР°С€Р»Рё
 : ?find-in-xtable ( id xttable -- ?)
   find-in-xtable DUP IF DROP THEN ;
 
@@ -450,8 +450,8 @@ USER-VALUE this-id
 
 WINAPI: AdjustWindowRectEx USER32.DLL
 
-\ высчитывает полный размер окна по размеру клиентской области
-\ + высота статуса + высота панели инструмента
+\ РІС‹СЃС‡РёС‚С‹РІР°РµС‚ РїРѕР»РЅС‹Р№ СЂР°Р·РјРµСЂ РѕРєРЅР° РїРѕ СЂР°Р·РјРµСЂСѓ РєР»РёРµРЅС‚СЃРєРѕР№ РѕР±Р»Р°СЃС‚Рё
+\ + РІС‹СЃРѕС‚Р° СЃС‚Р°С‚СѓСЃР° + РІС‹СЃРѕС‚Р° РїР°РЅРµР»Рё РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°
 : nc-win-size { dx dy win \ [ 4 CELLS ] rect -- ex ey }
   dx rect 2 CELLS!  dy  rect 3 CELLS!
   W: gwl_exstyle win -hwnd@ GetWindowLongA win -menus@ 
@@ -466,7 +466,7 @@ WINAPI: AdjustWindowRectEx USER32.DLL
 0 VALUE current-window
 0 VALUE accel-xtable
 \ --------------------------------------
-\ оконная функция
+\ РѕРєРѕРЅРЅР°СЏ С„СѓРЅРєС†РёСЏ
 
 USER-VALUE hwnd
 USER-VALUE message
@@ -491,11 +491,11 @@ USER-VALUE paint-rect
 ;
 
 \ --------------------------------------
-\ Оконная функция для стандартных окон
+\ РћРєРѕРЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РѕРєРѕРЅ
 
 MESSAGES: main-dispatch
 
-\ закрасим фон 
+\ Р·Р°РєСЂР°СЃРёРј С„РѕРЅ 
 WINAPI: FillRect      USER32.DLL
 WINAPI: GetClientRect USER32.DLL
 
@@ -515,10 +515,10 @@ VECT menu-painter
 
 M: wm_drawitem
    lparam @ W: odt_menu = IF 
-     \ это меню
+     \ СЌС‚Рѕ РјРµРЅСЋ
      menu-painter 
    ELSE
-     \ это элемент управления
+     \ СЌС‚Рѕ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ
      lparam 6 CELLS@ TO windc
      lparam 7 CELLS+ TO paint-rect
      lparam 5 CELLS@ window@ ?DUP IF
@@ -558,13 +558,13 @@ WINAPI: PostMessageA USER32.DLL
 M: wm_nextdlgctl
   lparam 0= thiswin -dialog@ AND IF
     wparam IF
-      \ имитируем нажатие Shift-Tab
+      \ РёРјРёС‚РёСЂСѓРµРј РЅР°Р¶Р°С‚РёРµ Shift-Tab
       0x002A0001 W: vk_shift W: wm_keydown hwnd PostMessageA DROP
       0x000F0001 W: vk_tab   W: wm_keydown hwnd PostMessageA DROP
       0xC00F0001 W: vk_tab   W: wm_keyup   hwnd PostMessageA DROP
       0xC02A0001 W: vk_shift W: wm_keyup   hwnd PostMessageA DROP
     ELSE 
-      \ имитируем нажатие Tab
+      \ РёРјРёС‚РёСЂСѓРµРј РЅР°Р¶Р°С‚РёРµ Tab
       0x000F0001 W: vk_tab W: wm_keydown hwnd PostMessageA DROP
       0x800F0001 W: vk_tab W: wm_keyup   hwnd PostMessageA DROP
     THEN  
@@ -573,17 +573,17 @@ M: wm_nextdlgctl
 M;
 
 M: wm_size
-  \ запоминаем новый размер
+  \ Р·Р°РїРѕРјРёРЅР°РµРј РЅРѕРІС‹Р№ СЂР°Р·РјРµСЂ
   lparam LOWORD thiswin -xsize!
   lparam HIWORD thiswin -minustop@ - thiswin -minusbottom@ - thiswin -ysize!
-  \ уведомим окно статуса и панели инструментов о том, что размер изменился
+  \ СѓРІРµРґРѕРјРёРј РѕРєРЅРѕ СЃС‚Р°С‚СѓСЃР° Рё РїР°РЅРµР»Рё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ Рѕ С‚РѕРј, С‡С‚Рѕ СЂР°Р·РјРµСЂ РёР·РјРµРЅРёР»СЃСЏ
   thiswin -status@ ?DUP IF
     >R 0 0 W: wm_size R> send DROP
   THEN
   thiswin -toolbar@ ?DUP IF
     >R 0 0 W: wm_size R> send DROP
   THEN
-  \ заставим решетку перерисоваться
+  \ Р·Р°СЃС‚Р°РІРёРј СЂРµС€РµС‚РєСѓ РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊСЃСЏ
   thiswin -grid@ IF thiswin -gridresize@ EXECUTE THEN
   TRUE
 M;
@@ -601,12 +601,12 @@ WINAPI: SetActiveWindow USER32.DLL
 0 VALUE dialog-filter
 
 M: wm_activate
-  \ если активизируется окно с установленным -dialog, запоминаем его 
-  \ дескриптор
+  \ РµСЃР»Рё Р°РєС‚РёРІРёР·РёСЂСѓРµС‚СЃСЏ РѕРєРЅРѕ СЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рј -dialog, Р·Р°РїРѕРјРёРЅР°РµРј РµРіРѕ 
+  \ РґРµСЃРєСЂРёРїС‚РѕСЂ
   wparam LOWORD W: wa_inactive <> IF 
     thiswin -dialog@ IF hwnd ELSE 0 THEN
   THEN TO dialog-filter
-  \ если есть модальное окно, не даем переключиться на другое
+  \ РµСЃР»Рё РµСЃС‚СЊ РјРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ, РЅРµ РґР°РµРј РїРµСЂРµРєР»СЋС‡РёС‚СЊСЃСЏ РЅР° РґСЂСѓРіРѕРµ
   modal-window 0= IF FALSE EXIT THEN
   wparam LOWORD W: wa_inactive <> hwnd modal-window <> AND IF
     modal-window SetActiveWindow DROP
@@ -620,22 +620,22 @@ VECT command  ' NOOP TO command
 VECT scrollctlproc  ' NOOP TO scrollctlproc
 VECT notifyproc  ' NOOP TO notifyproc
 
-10 == first-menu-id \ после всех кодов IDxxx
+10 == first-menu-id \ РїРѕСЃР»Рµ РІСЃРµС… РєРѕРґРѕРІ IDxxx
 
 M: wm_command
    lparam IF
-     \ привет от кнопочек
+     \ РїСЂРёРІРµС‚ РѕС‚ РєРЅРѕРїРѕС‡РµРє
      command
    ELSE
      wparam HIWORD IF
-       \ быстрые клавиши 
+       \ Р±С‹СЃС‚СЂС‹Рµ РєР»Р°РІРёС€Рё 
        wparam LOWORD accel-xtable find-in-xtable DROP
      ELSE
        wparam LOWORD DUP first-menu-id < IF
-         \ завершение диалога
+         \ Р·Р°РІРµСЂС€РµРЅРёРµ РґРёР°Р»РѕРіР°
          DUP W: idok = IF
-           \ если нажали Enter - отработаем команду
-           \ кнопки по умолчанию
+           \ РµСЃР»Рё РЅР°Р¶Р°Р»Рё Enter - РѕС‚СЂР°Р±РѕС‚Р°РµРј РєРѕРјР°РЅРґСѓ
+           \ РєРЅРѕРїРєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
            DROP
            thiswin -defaultbutton@ ?DUP IF
              W: bm_click ?send DROP
@@ -644,7 +644,7 @@ M: wm_command
            end-dialog
          THEN
        ELSE
-         \ привет от меню
+         \ РїСЂРёРІРµС‚ РѕС‚ РјРµРЅСЋ
          thiswin -menus@ find-and-execute DROP
        THEN
      THEN
@@ -653,7 +653,7 @@ M: wm_command
 M;
 
 : set-colors
-  lparam window@ DUP 0= IF EXIT THEN \ не наше окно
+  lparam window@ DUP 0= IF EXIT THEN \ РЅРµ РЅР°С€Рµ РѕРєРЅРѕ
   TO thisctl
   thisctl -bgcolor@ transparent = IF
     W: transparent wparam SetBkMode DROP
@@ -704,7 +704,7 @@ M;
 MESSAGES;
 
 \ ---------------------------------
-\ Стандартная оконная функция для элементов управления
+\ РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ РѕРєРѕРЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ СЌР»РµРјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ
 
 MESSAGES: control-std-wndproc
 
@@ -735,7 +735,7 @@ WINAPI: DefWindowProcA USER32.DLL
 \      ." wparam=" wparam . ." lparam=" lparam .H CR
   hwnd window@ TO thiswin
   thiswin 0= IF
-    \ окно еще не сформировано
+    \ РѕРєРЅРѕ РµС‰Рµ РЅРµ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРѕ
     lparam wparam message hwnd DefWindowProcA EXIT
   THEN
   0 TO return-value
@@ -746,7 +746,7 @@ WINAPI: DefWindowProcA USER32.DLL
       message thiswin -wndproc@ ?find-in-xtable
     THEN
   THEN
-  IF  \ кто-то обработал сообщение
+  IF  \ РєС‚Рѕ-С‚Рѕ РѕР±СЂР°Р±РѕС‚Р°Р» СЃРѕРѕР±С‰РµРЅРёРµ
     return-value
   ELSE
     lparam wparam message hwnd DefWindowProcA
@@ -755,7 +755,7 @@ WINAPI: DefWindowProcA USER32.DLL
 ; WNDPROC: dispatch
 
 \ --------------------------------------
-\ созидание и уничтожение окон
+\ СЃРѕР·РёРґР°РЅРёРµ Рё СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РѕРєРѕРЅ
 
 WINAPI: CreateWindowExA USER32.DLL
 WINAPI: ShowScrollBar   USER32.DLL
@@ -773,9 +773,9 @@ WINAPI: LoadIconA       USER32.DLL
   ( hwnd) DUP >R win -hwnd!
   win R> window!
   ['] NOOP win -painter!
-  \ спрячем полосы прокрутки
+  \ СЃРїСЂСЏС‡РµРј РїРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё
   FALSE W: sb_both win -hwnd@ ShowScrollBar DROP
-  \ загрузим иконки
+  \ Р·Р°РіСЂСѓР·РёРј РёРєРѕРЅРєРё
   parent 0= IF
     1 IMAGE-BASE LoadIconA win -icon!
     2 IMAGE-BASE LoadIconA win -smicon!
@@ -813,7 +813,7 @@ WINAPI: DestroyWindow USER32.DLL
   del-table ;
 
 \ --------------------------------------
-\ элементарные операции над окнами
+\ СЌР»РµРјРµРЅС‚Р°СЂРЅС‹Рµ РѕРїРµСЂР°С†РёРё РЅР°Рґ РѕРєРЅР°РјРё
 
 WINAPI: ShowWindow USER32.DLL
 
@@ -844,7 +844,7 @@ WINAPI: SetFocus USER32.DLL
 
 WINAPI: ScreenToClient USER32.DLL
 
-\ То же самое, но в координатах родительского окна
+\ РўРѕ Р¶Рµ СЃР°РјРѕРµ, РЅРѕ РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С… СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕРєРЅР°
 : child-win-rect { win \ [ 4 CELLS ] rect -- x1 y1 x2 y2 }
   rect win -hwnd@ GetWindowRect DROP
   win -parent@ ?DUP IF
@@ -855,7 +855,7 @@ WINAPI: ScreenToClient USER32.DLL
   rect 2 CELLS@  rect 3 CELLS@
 ;
 
-\ Настоящий размер окна
+\ РќР°СЃС‚РѕСЏС‰РёР№ СЂР°Р·РјРµСЂ РѕРєРЅР°
 : win-size ( win -- )
   win-rect SWAP >R SWAP - R> ROT - SWAP ;
 
@@ -869,26 +869,26 @@ WINAPI: SetWindowPos USER32.DLL
   >R SWAP (* swp_nomove swp_noownerzorder swp_nozorder *) -ROT 
   0 0 0 R> -hwnd@ SetWindowPos DROP ;
 
-\ Изменить размер простого окна (типа органа управления)
+\ РР·РјРµРЅРёС‚СЊ СЂР°Р·РјРµСЂ РїСЂРѕСЃС‚РѕРіРѕ РѕРєРЅР° (С‚РёРїР° РѕСЂРіР°РЅР° СѓРїСЂР°РІР»РµРЅРёСЏ)
 : resize ( xsize ysize win -- )
   DUP >R new-size
   R@ win-size R@ -ysize! R> -xsize!
 ;
 
-\ Изменить размер сложного окна
+\ РР·РјРµРЅРёС‚СЊ СЂР°Р·РјРµСЂ СЃР»РѕР¶РЅРѕРіРѕ РѕРєРЅР°
 : winresize ( xsize ysize win -- )
   DUP >R nc-win-size R> new-size
-  \ новый размер окна в него запишет сообщение wm_size
+  \ РЅРѕРІС‹Р№ СЂР°Р·РјРµСЂ РѕРєРЅР° РІ РЅРµРіРѕ Р·Р°РїРёС€РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ wm_size
 ;
 
-\ заставить окно перерисоваться в ближайшее время
+\ Р·Р°СЃС‚Р°РІРёС‚СЊ РѕРєРЅРѕ РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊСЃСЏ РІ Р±Р»РёР¶Р°Р№С€РµРµ РІСЂРµРјСЏ
 : force-redraw ( win -- )
   TRUE 0 ROT -hwnd@ InvalidateRect DROP
 ;
 \ --------------------------------------
 \ Message Boxes
 
-\ если = 0, по умолчанию система ставит заголовок "Ошибка"
+\ РµСЃР»Рё = 0, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ СЃРёСЃС‚РµРјР° СЃС‚Р°РІРёС‚ Р·Р°РіРѕР»РѕРІРѕРє "РћС€РёР±РєР°"
 0 VALUE mbox-title
 
 WINAPI: MessageBoxA USER32.DLL
@@ -901,7 +901,7 @@ WINAPI: MessageBoxA USER32.DLL
   mbox-title SWAP (* mb_ok mb_iconstop *) message-box DROP ;
 
 \ --------------------------------------
-\ всякая информация
+\ РІСЃСЏРєР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ
 WINAPI: GetSystemMetrics USER32.DLL
 
 : screen-x ( -- x) W: sm_cxscreen GetSystemMetrics ;
@@ -913,13 +913,13 @@ WINAPI: GetSystemMetrics USER32.DLL
   winmove ;
 
 \ --------------------------------------
-\ раздача идентификаторов
+\ СЂР°Р·РґР°С‡Р° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ
 
 VARIABLE menu-id   first-menu-id menu-id !
 : next-menu-id  ( -- n) menu-id @  menu-id 1+! ;
  
 \ --------------------------------------
-\ менюшки
+\ РјРµРЅСЋС€РєРё
 
 VARIABLE menu-flags
 
@@ -962,11 +962,11 @@ VARIABLE menu-flags
 : MENU; ( -- )
   0 c>yptr
   create-saved-xtname
-  \ делаем table вручную
-  0 C, 0 , 0 , \ сюда в свое время будет записано hmenu
-  0 C, HERE xttable utable-size + 2 CELLS + , 0 , \ адрес таблицы с информацией об элементах меню
+  \ РґРµР»Р°РµРј table РІСЂСѓС‡РЅСѓСЋ
+  0 C, 0 , 0 , \ СЃСЋРґР° РІ СЃРІРѕРµ РІСЂРµРјСЏ Р±СѓРґРµС‚ Р·Р°РїРёСЃР°РЅРѕ hmenu
+  0 C, HERE xttable utable-size + 2 CELLS + , 0 , \ Р°РґСЂРµСЃ С‚Р°Р±Р»РёС†С‹ СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ РѕР± СЌР»РµРјРµРЅС‚Р°С… РјРµРЅСЋ
   land-xttable  \ xttable
-  land-ytable   \ информация об элементах меню
+  land-ytable   \ РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± СЌР»РµРјРµРЅС‚Р°С… РјРµРЅСЋ
   xttable destroy-utable
   ytable destroy-utable
 ;
@@ -1055,7 +1055,7 @@ WINAPI: SetMenu USER32.DLL
 
 WINAPI: TrackPopupMenu USER32.DLL
 
-\ работает только при установленном winmain
+\ СЂР°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ РїСЂРё СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕРј winmain
 : show-menu { menu x y \ menulist -- }
   menu wake-menu
   menu make-menus-list TO menulist
@@ -1108,7 +1108,7 @@ WINAPI: GetMenuItemID      USER32.DLL
   -hwnd@ DrawMenuBar DROP ;
 
 \ --------------------------------------
-\ клавиши быстрого вызова
+\ РєР»Р°РІРёС€Рё Р±С‹СЃС‚СЂРѕРіРѕ РІС‹Р·РѕРІР°
 
 0 VALUE acctable
 
@@ -1135,9 +1135,9 @@ WINAPI: GetMenuItemID      USER32.DLL
   flags
 ;
 
-\ таблицы клавиш заводят для процедуры еще один id, даже если у нее уже есть
-\ свой код, выделенный MENUITEM. Это не страшно, поскольку 16000 id должно
-\ хватить всем
+\ С‚Р°Р±Р»РёС†С‹ РєР»Р°РІРёС€ Р·Р°РІРѕРґСЏС‚ РґР»СЏ РїСЂРѕС†РµРґСѓСЂС‹ РµС‰Рµ РѕРґРёРЅ id, РґР°Р¶Рµ РµСЃР»Рё Сѓ РЅРµРµ СѓР¶Рµ РµСЃС‚СЊ
+\ СЃРІРѕР№ РєРѕРґ, РІС‹РґРµР»РµРЅРЅС‹Р№ MENUITEM. Р­С‚Рѕ РЅРµ СЃС‚СЂР°С€РЅРѕ, РїРѕСЃРєРѕР»СЊРєСѓ 16000 id РґРѕР»Р¶РЅРѕ
+\ С…РІР°С‚РёС‚СЊ РІСЃРµРј
 : ONKEY ( ->bl; proc -- ) 
   BL PARSE parse-key acctable uc>> 
   0 acctable uc>> acctable uw>>
@@ -1156,7 +1156,7 @@ WINAPI: GetMenuItemID      USER32.DLL
 ;
 
 \ ----------------------------------
-\ Шрифты
+\ РЁСЂРёС„С‚С‹
 VARIABLE font-attr   font-attr 0!
 : bold   1 font-attr OR! ;
 : italic 2 font-attr OR! ;
@@ -1188,12 +1188,12 @@ WINAPI: CreateFontA GDI32.DLL
 0 VALUE hbaseunits
 0 VALUE vbaseunits
 
-\ пересчет базовых диалоговых единиц в пиксели
+\ РїРµСЂРµСЃС‡РµС‚ Р±Р°Р·РѕРІС‹С… РґРёР°Р»РѕРіРѕРІС‹С… РµРґРёРЅРёС† РІ РїРёРєСЃРµР»Рё
 : hdu ( n -- n1) hbaseunits 4 */ ;
 : vdu ( n -- n1) vbaseunits 8 */ ;
 : dunits ( n n1 -- n2 n3) vdu SWAP hdu SWAP ;
 \ --------------------------------------
-\ регистрация класса окна и общая инициализация
+\ СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР° РѕРєРЅР° Рё РѕР±С‰Р°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 
 WINAPI: InitCommonControlsEx COMCTL32.DLL
 
@@ -1210,10 +1210,10 @@ WINAPI: GetDeviceCaps GDI32.DLL
 WINAPI: DeleteDC      GDI32.DLL
 
 : WINDOWS...
-\ инициализация
+\ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
   main-dispatch common-window-proclist insert-to-begin
   control-std-wndproc common-control-proclist insert-to-begin
-\ регистрация класса окна
+\ СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
   HERE init->>
 \ typedef struct _WNDCLASS {    // wc  
  (* cs_vredraw cs_hredraw cs_dblclks cs_bytealignclient *) >>  \ UINT    style; 
@@ -1228,14 +1228,14 @@ WINAPI: DeleteDC      GDI32.DLL
  0 >>			\   LPCTSTR lpszMenuName; 
  classname >>		\   LPCTSTR lpszClassName; 
 \ } WNDCLASS; 
- HERE RegisterClassA 0= IF " WinLib: Не могу зарегистрировать класс окна" 
+ HERE RegisterClassA 0= IF " WinLib: РќРµ РјРѕРіСѓ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ РєР»Р°СЃСЃ РѕРєРЅР°" 
       err BYE THEN
-\ Узнаем логическое разрешение экрана
+\ РЈР·РЅР°РµРј Р»РѕРіРёС‡РµСЃРєРѕРµ СЂР°Р·СЂРµС€РµРЅРёРµ СЌРєСЂР°РЅР°
   0 CreateCompatibleDC W: logpixelsx OVER GetDeviceCaps
   TO logpixels DeleteDC DROP
-\ Спросим размер диалоговых единиц
+\ РЎРїСЂРѕСЃРёРј СЂР°Р·РјРµСЂ РґРёР°Р»РѕРіРѕРІС‹С… РµРґРёРЅРёС†
   GetDialogBaseUnits DUP LOWORD TO hbaseunits HIWORD TO vbaseunits
-\ Общие штучки
+\ РћР±С‰РёРµ С€С‚СѓС‡РєРё
  W: icc_win95_classes initcc ;
 
 WINAPI: GetMessageA             USER32.DLL
@@ -1249,7 +1249,7 @@ WINAPI: IsDialogMessage         USER32.DLL
 : ?dialog ( msg -- ?) 
   dialog-filter DUP IF IsDialogMessage ELSE 2DROP FALSE THEN ;
 
-: ...WINDOWS \ главный цикл окна
+: ...WINDOWS \ РіР»Р°РІРЅС‹Р№ С†РёРєР» РѕРєРЅР°
   { \ [ 7 CELLS ] msg keytable -- }
   acctable IF
     acctable :no @ acctable :data CreateAcceleratorTableA

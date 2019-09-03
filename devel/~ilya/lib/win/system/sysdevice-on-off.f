@@ -1,4 +1,4 @@
-\ Включаем/отключаем системные устройства (модем, камера, USB - устройства, ...)
+\ Р’РєР»СЋС‡Р°РµРј/РѕС‚РєР»СЋС‡Р°РµРј СЃРёСЃС‚РµРјРЅС‹Рµ СѓСЃС‚СЂРѕР№СЃС‚РІР° (РјРѕРґРµРј, РєР°РјРµСЂР°, USB - СѓСЃС‚СЂРѕР№СЃС‚РІР°, ...)
 \ Aug 2008
 WINAPI: SetupDiEnumDeviceInfo Setupapi.dll
 WINAPI: SetupDiGetClassDevsA Setupapi.dll
@@ -29,7 +29,7 @@ CREATE DeviceDesc 255 ALLOT
 0x19 CONSTANT SPDRP_DEVTYPE
 16 CONSTANT SPDRP_CAPABILITIES
 
-\ =========== Структуры
+\ =========== РЎС‚СЂСѓРєС‚СѓСЂС‹
 0
 CELL -- cbSize
 CELL -- InstallFunction
@@ -92,7 +92,7 @@ THEN
  DICS_DISABLE
 \ DICS_ENABLE
 \ S" Acer Crystal Eye webcam"
-S" SD плата памяти"
+S" SD РїР»Р°С‚Р° РїР°РјСЏС‚Рё"
 plug/unplag-device
 ;
 test

@@ -7,13 +7,13 @@ REQUIRE SYSTEMTIME lib/include/facil.f
 
 : UNIT ( n -- )
 \ ( n ) UNIT <name>
-\ ·Æß§†≠®• •§®≠®ÊÎ ®ß¨•‡•≠®Ô <name>, ·ÆÆ‚¢•‚·‚¢„ÓÈ•© Á®·´„ n
+\ —Å–æ–∑–¥–∞–Ω–∏–µ –µ–¥–∏–Ω–∏—Ü—ã –∏–∑–º–µ—Ä–µ–Ω–∏—è <name>, —Å–æ–æ—Ç–≤–µ—Ç—Å—Ç–≤—É—é—â–µ–π —á–∏—Å–ª—É n
 \ <name> ( k -- k*n )
   CREATE , DOES> @ * ;
 
 
 VOCABULARY TimeUnits
-\ Ö§®≠®ÊÎ ®ß¨•‡•≠®Ô ¢‡•¨•≠®
+\ –ï–¥–∏–Ω–∏—Ü—ã –∏–∑–º–µ—Ä–µ–Ω–∏—è –≤—Ä–µ–º–µ–Ω–∏
 ALSO TimeUnits DEFINITIONS
 
 1 UNIT ms
@@ -24,13 +24,13 @@ ALSO TimeUnits DEFINITIONS
 PREVIOUS DEFINITIONS
 
 : GetDayTimeSMH ( -- sec min hour )
-\ ‚•™„È•• ¢‡•¨Ô
+\ —Ç–µ–∫—É—â–µ–µ –≤—Ä–µ–º—è
   TIME&DATE ( -- sec min hr day mt year )
   DROP DROP DROP
 ;
 
 : SMH>Time ( sec min hour -- t )
-\ Ø•‡•¢Æ§ ¢‡•¨•≠® ¢ ¨·
+\ –ø–µ—Ä–µ–≤–æ–¥ –≤—Ä–µ–º–µ–Ω–∏ –≤ –º—Å
   [ ALSO TimeUnits ]
     hour
     SWAP min +
@@ -39,13 +39,13 @@ PREVIOUS DEFINITIONS
 ;
 
 : GetDayTime ( -- t )
-\ ‚•™„È•• ¢‡•¨Ô ¢ ¨·
+\ —Ç–µ–∫—É—â–µ–µ –≤—Ä–µ–º—è –≤ –º—Å
   GetDayTimeSMH
   SMH>Time
 ;
 
 : TimeTo ( t1 t2 -- t3 )
-\ Ç‡•¨•≠® Æ‚ t1 §Æ t2 ¢ ¨·
+\ –í—Ä–µ–º–µ–Ω–∏ –æ—Ç t1 –¥–æ t2 –≤ –º—Å
   SWAP -
   DUP 0< IF
     [ ALSO TimeUnits ]
@@ -55,18 +55,18 @@ PREVIOUS DEFINITIONS
 ;
 
 : WaitFor ( t -- )
-\ Ü§Ò¨ ¢‡•¨•≠® t ¨·
+\ –ñ–¥—ë–º –≤—Ä–µ–º–µ–Ω–∏ t –º—Å
   GetDayTime SWAP TimeTo PAUSE
 ;
 
 0 VALUE thru
-\ à≠‚•‡¢†´ ¨•¶§„ ¢ÎØÆ´≠•≠®•¨ ≠•Æ°ÂÆ§®¨ÎÂ §•©·‚¢®©.
+\ –ò–Ω—Ç–µ—Ä–≤–∞–ª –º–µ–∂–¥—É –≤—ã–ø–æ–ª–Ω–µ–Ω–∏–µ–º –Ω–µ–æ–±—Ö–æ–¥–∏–º—ã—Ö –¥–µ–π—Å—Ç–≤–∏–π.
 0 VALUE hour
 0 VALUE min
 VARIABLE WaitTime
 
 VOCABULARY Interface
-\ ê•†´®ß†Ê®Ô ®≠‚•‡‰•©·†:
+\ –†–µ–∞–ª–∏–∑–∞—Ü–∏—è –∏–Ω—Ç–µ—Ä—Ñ–µ–π—Å–∞:
 \ do
 \   ...
 \ thru 5 sec
@@ -76,12 +76,12 @@ VOCABULARY Interface
 \ every day at 12 hour 34 min
 \ and
 \ every hour at 34 min
-\ ä†¶§Î© °´Æ™ do ... thru|every ® and every|thru Ø‡•§·‚†¢´Ô•‚ ·Æ°Æ© ØÆ‚Æ™
+\ –ö–∞–∂–¥—ã–π –±–ª–æ–∫ do ... thru|every –∏ and every|thru –ø—Ä–µ–¥—Å—Ç–∞–≤–ª—è–µ—Ç —Å–æ–±–æ–π –ø–æ—Ç–æ–∫
 
 ALSO Interface DEFINITIONS
 
 \ VOCABULARY Commands
-\ ·´Æ¢† §´Ô °´Æ™Æ¢ do ... thru|every
+\ —Å–ª–æ–≤–∞ –¥–ª—è –±–ª–æ–∫–æ–≤ do ... thru|every
 \ ALSO Commands DEFINITIONS
 \ PREVIOUS
 \ : ." POSTPONE ." ; IMMEDIATE

@@ -1,7 +1,7 @@
-REQUIRE >Дата         ~ac/lib/win/date/date.f
+REQUIRE >Р”Р°С‚Р°         ~ac/lib/win/date/date.f
 REQUIRE #N            ~ac/lib/win/date/date-int.f
 
-1 1 1970 >Дата CONSTANT d01011970
+1 1 1970 >Р”Р°С‚Р° CONSTANT d01011970
 
 86400 CONSTANT SecsPerDay
 
@@ -9,7 +9,7 @@ REQUIRE #N            ~ac/lib/win/date/date-int.f
   d01011970 - SecsPerDay *
 ;
 : SecsSince1970 ( -- n )
-  ТекущаяДата SecsSince1970To
+  РўРµРєСѓС‰Р°СЏР”Р°С‚Р° SecsSince1970To
 ;
 : UnixDate ( -- n )
   TIME&DATE 2DROP DROP

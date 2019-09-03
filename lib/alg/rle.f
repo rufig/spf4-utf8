@@ -46,7 +46,7 @@ USER DbPtr
 ;
 
 : Pack20
-   Next@ >R \ äàííûé ñèìâîë
+   Next@ >R \ Ð´Ð°Ð½Ð½Ñ‹Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð»
    0
    BEGIN
      DUP Next+@ R@ =
@@ -102,7 +102,7 @@ USER DbPtr
    THEN
    Next@ DUP >R
    rle.pbComp @ TUCK 1+ DBC!
-   1 \ ïåðâûé áàéò óæå îòïðàâèëè
+   1 \ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ð±Ð°Ð¹Ñ‚ ÑƒÐ¶Ðµ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ð»Ð¸
    BEGIN           
      DUP Next+@  
      R> OVER >R <>

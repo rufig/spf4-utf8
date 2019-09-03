@@ -49,7 +49,7 @@ CELL -- dimY
 ;
 : 0Matrix 0 0 Matrix ;
 : ?Empty ( addr -- addr )
- ( Ø‡Æ¢•‡®‚Ï ≠• ≠Æ´Ï ´® ·Æ§•‡¶®¨Æ• †§‡•·† ® •·´® ‚†™® §† ‚Æ Æ·¢Æ°Æ§®‚Ï)
+ ( –ø—Ä–æ–≤–µ—Ä–∏—Ç—å –Ω–µ –Ω–æ–ª—å –ª–∏ —Å–æ–¥–µ—Ä–∂–∏–º–æ–µ –∞–¥—Ä–µ—Å–∞ –∏ –µ—Å–ª–∏ —Ç–∞–∫–∏ –¥–∞ —Ç–æ –æ—Å–≤–æ–±–æ–¥–∏—Ç—å)
     DUP @ ?DUP 0<> IF FREEMEM THEN ;
 : TempMatrix ( x y -- ^matrix)
     matrix::/SIZE GETMEM >R
@@ -69,8 +69,8 @@ CELL -- dimY
    RDROP
 ;
 : READ-WORD ( fileid -- addr u )
-( ·Á®‚†‚Ï · ‰†©´† ·´Æ¢Æ Æ£‡†≠®Á•≠≠Æ• ·®¨¢Æ´†¨® · ™Æ§†¨® ¨•≠ÏË• BL
-  ¢ ™Æ≠Ê• ‰†©´† ·®‚„†Ê®Ô ≠• ÆØ‡•§•´•≠†
+( —Å—á–∏—Ç–∞—Ç—å —Å —Ñ–∞–π–ª–∞ —Å–ª–æ–≤–æ –æ–≥—Ä–∞–Ω–∏—á–µ–Ω–Ω–æ–µ —Å–∏–º–≤–æ–ª–∞–º–∏ —Å –∫–æ–¥–∞–º–∏ –º–µ–Ω—å—à–µ BL
+  –≤ –∫–æ–Ω—Ü–µ —Ñ–∞–π–ª–∞ —Å–∏—Ç—É–∞—Ü–∏—è –Ω–µ –æ–ø—Ä–µ–¥–µ–ª–µ–Ω–∞
 
 )
    >R 64 GETMEM DUP
@@ -100,15 +100,15 @@ CELL -- dimY
    R> Msize 0 ?DO ( fileid addr )
     OVER READ-WORD 2DUP
     DEPTH 2- >R
-    EVALUATE ( §Æ´¶≠Æ ß†Ø®Â≠„‚Ï ≠† ‰´Æ†‚·™®© ·‚•™)
+    EVALUATE ( –¥–æ–ª–∂–Ω–æ –∑–∞–ø–∏—Ö–Ω—É—Ç—å –Ω–∞ —Ñ–ª–æ–∞—Ç—Å–∫–∏–π —Å—Ç–µ–∫)
     DEPTH R> <> ABORT" Matrix: Need floating point numbers in file"
-    DROP FREE THROW ( „°®´® ·‚‡Æ™„)
+    DROP FREE THROW ( —É–±–∏–ª–∏ —Å—Ç—Ä–æ–∫—É)
     DUP F! 10 +
    LOOP
    DROP CLOSE-FILE THROW
 ;
-: MCopy ( ^m1 ^m2 -- )( ·™ÆØ®‡Æ¢†‚Ï ¨†‚‡®Ê„ 1 ¢ ¨†‚‡®Ê„ 2
-                     •·´® 2 ≠• Ø„·‚Æ ‚Æ ÆÁ®·‚®‚Ï)
+: MCopy ( ^m1 ^m2 -- )( —Å–∫–æ–ø–∏—Ä–æ–≤–∞—Ç—å –º–∞—Ç—Ä–∏—Ü—É 1 –≤ –º–∞—Ç—Ä–∏—Ü—É 2
+                     –µ—Å–ª–∏ 2 –Ω–µ –ø—É—Å—Ç–æ —Ç–æ –æ—á–∏—Å—Ç–∏—Ç—å)
    >R
    DUP Msize 10 * ALLOCATE THROW R@ matrix::data ?Empty ! 
    DUP .dimX R@ matrix::dimX !
@@ -119,7 +119,7 @@ CELL -- dimY
    ROT CMOVE
 ;
 : TempCopy ( ^m1 -- temp ) _TempMatrix MCopy _TempMatrix ;
-: VNorma ( ^vector -- F: norma ) \ çÆ‡¨† ¢•™‚Æ‡†
+: VNorma ( ^vector -- F: norma ) \ –ù–æ—Ä–º–∞ –≤–µ–∫—Ç–æ—Ä–∞
    DUP .dimX 1 <> ABORT" Matrix: Can't calculate norma"
    0e
    DUP .dimY 0 DO
@@ -128,7 +128,7 @@ CELL -- dimY
    DROP
    FSQRT
 ;
-: VNorma/ ( ^vector -- ) \ çÆ‡¨®‡Æ¢†‚Ï ¢•™‚Æ‡
+: VNorma/ ( ^vector -- ) \ –ù–æ—Ä–º–∏—Ä–æ–≤–∞—Ç—å –≤–µ–∫—Ç–æ—Ä
   DUP VNorma
   DUP .dimY 0 DO
   DUP 0 I MXY@ FOVER F/ DUP 0 I MXY! 
@@ -136,8 +136,8 @@ CELL -- dimY
   DROP FDROP
 ;
 : MM* { m1 m2 \ cnt -- m3 } 
- ( Ø•‡•¨≠Æ¶®‚Ï §¢• ¨†‚‡®ÊÎ - ‡•ß„´Ï‚†‚ ¢ m3
-   Ø‡®ÁÒ¨ m3 ¢‡•¨•≠≠†Ô •·´® ≠„¶≠† §†´ÏË• ‚Æ ·™ÆØ®‡„©‚•)
+ ( –ø–µ—Ä–µ–º–Ω–æ–∂–∏—Ç—å –¥–≤–µ –º–∞—Ç—Ä–∏—Ü—ã - —Ä–µ–∑—É–ª—å—Ç–∞—Ç –≤ m3
+   –ø—Ä–∏—á—ë–º m3 –≤—Ä–µ–º–µ–Ω–Ω–∞—è –µ—Å–ª–∏ –Ω—É–∂–Ω–∞ –¥–∞–ª—å—à–µ —Ç–æ —Å–∫–æ–ø–∏—Ä—É–π—Ç–µ)
 
    m2 .dimY m1 .dimX <> ABORT" Matrix: Can't multiply matrices"
    m2 .dimX m1 .dimY TempMatrix DROP
@@ -158,7 +158,7 @@ CELL -- dimY
 ;
 : MM+
  { m1 m2 \ cnt -- } 
- ( Ø•‡•¨≠Æ¶®‚Ï §¢• ¨†‚‡®ÊÎ - ‡•ß„´Ï‚†‚ ¢ m1 )
+ ( –ø–µ—Ä–µ–º–Ω–æ–∂–∏—Ç—å –¥–≤–µ –º–∞—Ç—Ä–∏—Ü—ã - —Ä–µ–∑—É–ª—å—Ç–∞—Ç –≤ m1 )
 
    m2 .dimY m1 .dimY <> 
    m2 .dimX m1 .dimX <>

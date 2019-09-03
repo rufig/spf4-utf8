@@ -8,5 +8,5 @@ msxsl %1 "%own_location%fml2ans-ext.xsl" > %tmp%\fml2ans-lastresult.f & %throw%
 start notepad %tmp%\fml2ans-lastresult.f
 
 exit /B
-rem saxon на выходе дает UNIX-строки (0xA), которые notepad не переваривает.
-rem -- поэтому тут msxsl
+rem saxon РЅР° РІС‹С…РѕРґРµ РґР°РµС‚ UNIX-СЃС‚СЂРѕРєРё (0xA), РєРѕС‚РѕСЂС‹Рµ notepad РЅРµ РїРµСЂРµРІР°СЂРёРІР°РµС‚.
+rem -- РїРѕСЌС‚РѕРјСѓ С‚СѓС‚ msxsl

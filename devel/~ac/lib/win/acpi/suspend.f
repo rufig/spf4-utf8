@@ -1,4 +1,4 @@
-\ программное усыпление машины
+\ РїСЂРѕРіСЂР°РјРјРЅРѕРµ СѓСЃС‹РїР»РµРЅРёРµ РјР°С€РёРЅС‹
 
 REQUIRE SetPrivilege ~ac/lib/win/access/nt_privelege.f 
 
@@ -10,10 +10,10 @@ WINAPI: SetSystemPowerState Kernel32.dll
 ;
 : AcpiSuspend ( -- ior )
 
-  \ если не выставить права, то SetSystemPowerState выдаст 1314
-  ['] GetShutdownPrivilege CATCH ?DUP IF EXIT THEN  \ при неправильном имени Se - аппаратный exception внутри LookupPrivilegeValueA !!!
+  \ РµСЃР»Рё РЅРµ РІС‹СЃС‚Р°РІРёС‚СЊ РїСЂР°РІР°, С‚Рѕ SetSystemPowerState РІС‹РґР°СЃС‚ 1314
+  ['] GetShutdownPrivilege CATCH ?DUP IF EXIT THEN  \ РїСЂРё РЅРµРїСЂР°РІРёР»СЊРЅРѕРј РёРјРµРЅРё Se - Р°РїРїР°СЂР°С‚РЅС‹Р№ exception РІРЅСѓС‚СЂРё LookupPrivilegeValueA !!!
 
   IsPwrSuspendAllowed 1 =
-  IF 0 1 SetSystemPowerState ERR ELSE 5 THEN \ возврат из функции происходит при выходе из сна
+  IF 0 1 SetSystemPowerState ERR ELSE 5 THEN \ РІРѕР·РІСЂР°С‚ РёР· С„СѓРЅРєС†РёРё РїСЂРѕРёСЃС…РѕРґРёС‚ РїСЂРё РІС‹С…РѕРґРµ РёР· СЃРЅР°
 ;
 \ AcpiSuspend .

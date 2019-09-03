@@ -28,9 +28,9 @@ REQUIRE [DEFINED] lib/include/tools.f
   SWAP CLOSE-FILE DROP ( ior ) 0 SWAP ( 0 ior )
 ;
 
-\ Вариант:
+\ Р’Р°СЂРёР°РЅС‚:
 \ OPEN-FILE-LOG ( a u fam -- h ior )
-\ -- хорошо согласуется по сигнатуре с другими OPEN-FILE-* 
+\ -- С…РѕСЂРѕС€Рѕ СЃРѕРіР»Р°СЃСѓРµС‚СЃСЏ РїРѕ СЃРёРіРЅР°С‚СѓСЂРµ СЃ РґСЂСѓРіРёРјРё OPEN-FILE-* 
 [THEN]
 
 

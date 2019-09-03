@@ -1,12 +1,12 @@
-\ Тест "офисного" антивирусного API Windows.
-\ Лучше всего работает с Microsoft Security Essentials.
-\ Под Windows 7 также работает со штатным Windows Defender.
-\ Почтовые файлы проверять НЕ умеет.
+\ РўРµСЃС‚ "РѕС„РёСЃРЅРѕРіРѕ" Р°РЅС‚РёРІРёСЂСѓСЃРЅРѕРіРѕ API Windows.
+\ Р›СѓС‡С€Рµ РІСЃРµРіРѕ СЂР°Р±РѕС‚Р°РµС‚ СЃ Microsoft Security Essentials.
+\ РџРѕРґ Windows 7 С‚Р°РєР¶Рµ СЂР°Р±РѕС‚Р°РµС‚ СЃРѕ С€С‚Р°С‚РЅС‹Рј Windows Defender.
+\ РџРѕС‡С‚РѕРІС‹Рµ С„Р°Р№Р»С‹ РїСЂРѕРІРµСЂСЏС‚СЊ РќР• СѓРјРµРµС‚.
 
-\ Имена обнаруженных вирусов этот API не возвращает.
-\ Файлы, в которых обнаружен вирус, через несколько минут после
-\ проверки помещаются антивирусом в карантин (а в момент проверки
-\ выскакивает окошко с сообщением о вирусе).
+\ РРјРµРЅР° РѕР±РЅР°СЂСѓР¶РµРЅРЅС‹С… РІРёСЂСѓСЃРѕРІ СЌС‚РѕС‚ API РЅРµ РІРѕР·РІСЂР°С‰Р°РµС‚.
+\ Р¤Р°Р№Р»С‹, РІ РєРѕС‚РѕСЂС‹С… РѕР±РЅР°СЂСѓР¶РµРЅ РІРёСЂСѓСЃ, С‡РµСЂРµР· РЅРµСЃРєРѕР»СЊРєРѕ РјРёРЅСѓС‚ РїРѕСЃР»Рµ
+\ РїСЂРѕРІРµСЂРєРё РїРѕРјРµС‰Р°СЋС‚СЃСЏ Р°РЅС‚РёРІРёСЂСѓСЃРѕРј РІ РєР°СЂР°РЅС‚РёРЅ (Р° РІ РјРѕРјРµРЅС‚ РїСЂРѕРІРµСЂРєРё
+\ РІС‹СЃРєР°РєРёРІР°РµС‚ РѕРєРѕС€РєРѕ СЃ СЃРѕРѕР±С‰РµРЅРёРµРј Рѕ РІРёСЂСѓСЃРµ).
 
 REQUIRE CLSID,  ~ac/lib/win/com/com.f
 REQUIRE {       lib/ext/locals.f
@@ -146,7 +146,7 @@ Interface;
   /MSOAVINFO info MSOAV.cbsize !
   0x3 info MSOAV.flags C!
   \ GetDesktopWindow info MSOAV.hwnd !
-  S" shdocvw" >BSTR info MSOAV.pwzHostName ! \ см. HKEY_CLASSES_ROOT\CLSID\{2781761E-28E1-4109-99FE-B9D127C57AFE}\Hosts
+  S" shdocvw" >BSTR info MSOAV.pwzHostName ! \ СЃРј. HKEY_CLASSES_ROOT\CLSID\{2781761E-28E1-4109-99FE-B9D127C57AFE}\Hosts
   \ S" http://www.eicar.org/download/eicarcom2.zip" >BSTR info MSOAV.pwzOrigURL !
 
   a u >BSTR info MSOAV.pwzFullPath !
@@ -155,7 +155,7 @@ Interface;
   S" {0002e005-0000-0000-c000-000000000046}" CreateObject THROW -> cmgr \ StdComponentCategoriesMgr
   ^ cats IID_ICatInformation cmgr ::QueryInterface THROW
 
-  \ перебираем установленные антивирусы
+  \ РїРµСЂРµР±РёСЂР°РµРј СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р°РЅС‚РёРІРёСЂСѓСЃС‹
 
   ^ aenum 0 0 S" {56FFCC30-D398-11d0-B2AE-00A0C908FA49}" >UNICODE String>CLSID THROW
   1 cats ::EnumClassesOfCategories THROW
@@ -180,10 +180,10 @@ Interface;
 \  ^ msoav IID_IOfficeAntiVirus norton ::QueryInterface HEX ." no=" U.
 \  ^ msoav IID_IOfficeAntiVirus wdefender ::QueryInterface THROW
 
-  \ Интерфейс IAttachmentExecute внутри работает через IOfficeAntiVirus
-  \ Но на практике IOfficeAntiVirus срабатывает реже, чем IAttachmentExecute,
-  \ т.к. IOfficeAntiVirus не из всех приложений согласен вызываться...
-  \ ::Save меняет дату файла, а при обнаружении вируса удаляет файл
+  \ РРЅС‚РµСЂС„РµР№СЃ IAttachmentExecute РІРЅСѓС‚СЂРё СЂР°Р±РѕС‚Р°РµС‚ С‡РµСЂРµР· IOfficeAntiVirus
+  \ РќРѕ РЅР° РїСЂР°РєС‚РёРєРµ IOfficeAntiVirus СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ СЂРµР¶Рµ, С‡РµРј IAttachmentExecute,
+  \ С‚.Рє. IOfficeAntiVirus РЅРµ РёР· РІСЃРµС… РїСЂРёР»РѕР¶РµРЅРёР№ СЃРѕРіР»Р°СЃРµРЅ РІС‹Р·С‹РІР°С‚СЊСЃСЏ...
+  \ ::Save РјРµРЅСЏРµС‚ РґР°С‚Сѓ С„Р°Р№Р»Р°, Р° РїСЂРё РѕР±РЅР°СЂСѓР¶РµРЅРёРё РІРёСЂСѓСЃР° СѓРґР°Р»СЏРµС‚ С„Р°Р№Р»
 (
   CLSID_AttachmentServices CreateObject THROW -> aes
   \ ^ ae IID_IAttachmentExecute CLSCTX_INPROC_SERVER 0 CLSID_AttachmentServices >UNICODE String>CLSID THROW CoCreateInstance HEX U.
@@ -196,8 +196,8 @@ Interface;
   THEN
 )
 
-\ найден вирус и файл удален #define E_FAIL (0x80004005L)
-\ 0x80070002 файл не найден или заблокирован  ERROR_FILE_NOT_FOUND
+\ РЅР°Р№РґРµРЅ РІРёСЂСѓСЃ Рё С„Р°Р№Р» СѓРґР°Р»РµРЅ #define E_FAIL (0x80004005L)
+\ 0x80070002 С„Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ РёР»Рё Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅ  ERROR_FILE_NOT_FOUND
 \ #define INET_E_SECURITY_PROBLEM          _HRESULT_TYPEDEF_(0x800C000EL)
 
   0

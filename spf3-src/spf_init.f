@@ -1,6 +1,6 @@
-( Инициализация USER-переменных.
+( РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ USER-РїРµСЂРµРјРµРЅРЅС‹С….
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Сентябрь 1999
+  РЎРµРЅС‚СЏР±СЂСЊ 1999
 )
 
 VARIABLE MAINX
@@ -11,7 +11,7 @@ VECT <FLOAT-INIT>
 
 : USER-INIT
   ERASED-CNT @ 0=
-  IF ( один раз на задачу )
+  IF ( РѕРґРёРЅ СЂР°Р· РЅР° Р·Р°РґР°С‡Сѓ )
      ERASE-IMPORTS
      ERASED-CNT 1+!
      CONSOLE-HANDLES
@@ -69,7 +69,7 @@ VARIABLE IN-EXCEPTION
   DUP @ ."  CODE:" U. 
   DUP 3 CELLS + @ ."  ADDRESS:" DUP U. ."  WORD:" WordByAddr TYPE SPACE
   ."  REGISTERS:"
-  DUP 4 CELLS + @ CELLS + \ может быть указано смещение структуры на 2 CELLS
+  DUP 4 CELLS + @ CELLS + \ РјРѕР¶РµС‚ Р±С‹С‚СЊ СѓРєР°Р·Р°РЅРѕ СЃРјРµС‰РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РЅР° 2 CELLS
   176 + DUP 12 CELLS DUMP CR
   ." USER DATA: " TlsIndex@ U. ." THREAD ID: " 36 FS@ U.
   ." HANDLER: " HANDLER @ U.
@@ -112,14 +112,14 @@ VARIABLE IN-EXCEPTION
 : ERR-EXIT ( xt -- )
   CATCH
   ?DUP IF ['] ERROR CATCH IF 4 ELSE 3 THEN HALT THEN
-  \ выходим с кодом ошибки 3, если обычная ошибка при инициализации 
-  \ 4 - если вложенная
+  \ РІС‹С…РѕРґРёРј СЃ РєРѕРґРѕРј РѕС€РёР±РєРё 3, РµСЃР»Рё РѕР±С‹С‡РЅР°СЏ РѕС€РёР±РєР° РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё 
+  \ 4 - РµСЃР»Рё РІР»РѕР¶РµРЅРЅР°СЏ
 ;
 
 TRUE VALUE SPF-INIT?
 
 \ Startup
-\ Точка входа при запуске:
+\ РўРѕС‡РєР° РІС…РѕРґР° РїСЂРё Р·Р°РїСѓСЃРєРµ:
 
 : (INIT)
   SPF-INIT?

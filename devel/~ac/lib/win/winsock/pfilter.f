@@ -1,6 +1,6 @@
 REQUIRE fsockopen ~ac/lib/win/winsock/psocket.f 
 
-\ WINAPI: PfCreateInterface Iphlpapi.dll \ вот ведь хитрецы... :)
+\ WINAPI: PfCreateInterface Iphlpapi.dll \ РІРѕС‚ РІРµРґСЊ С…РёС‚СЂРµС†С‹... :)
 WINAPI: _PfCreateInterface@24            Iphlpapi.dll
 WINAPI: _PfAddFiltersToInterface@24      Iphlpapi.dll
 WINAPI: _PfBindInterfaceToIPAddress@12   Iphlpapi.dll
@@ -104,36 +104,36 @@ VARIABLE FILTER-IP
   PF_IPV4 FILTER-IH @ _PfBindInterfaceToIPAddress@12 0 <> THROW
 ;
 : FilterAdd ( srchost srcmask srcport targethost targetmask targetport -- )
-\ запретить пакеты с srchost srcmask srcport на targethost targetmask targetport
+\ Р·Р°РїСЂРµС‚РёС‚СЊ РїР°РєРµС‚С‹ СЃ srchost srcmask srcport РЅР° targethost targetmask targetport
   FILTER-IH @ FilterAddRule 0 <> THROW
 ;
 : FilterAddIp ( srcip targetip -- )
-\ запретить пакеты с srcip на targetip
+\ Р·Р°РїСЂРµС‚РёС‚СЊ РїР°РєРµС‚С‹ СЃ srcip РЅР° targetip
   FILTER-IH @ FilterAddIpRule 0 <> THROW
 ;
 : FilterDelIp ( srcip targetip -- )
-\ отключить ранее введенный запрет
+\ РѕС‚РєР»СЋС‡РёС‚СЊ СЂР°РЅРµРµ РІРІРµРґРµРЅРЅС‹Р№ Р·Р°РїСЂРµС‚
   FILTER-IH @ FilterDelIpRule 0 <> THROW
 ;
 
 : FilterDenyPacketsTo { host port -- }
-\ запретить исходящие соединения к хосту:порту
+\ Р·Р°РїСЂРµС‚РёС‚СЊ РёСЃС…РѕРґСЏС‰РёРµ СЃРѕРµРґРёРЅРµРЅРёСЏ Рє С…РѕСЃС‚Сѓ:РїРѕСЂС‚Сѓ
   " 0.0.0.0" " 0.0.0.0" 0
   host " 255.255.255.255" port
   FilterAdd
 ;
 : FilterDenyPacketsFrom { host port -- }
-\ запретить любые соединения с указанного хоста
+\ Р·Р°РїСЂРµС‚РёС‚СЊ Р»СЋР±С‹Рµ СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ СѓРєР°Р·Р°РЅРЅРѕРіРѕ С…РѕСЃС‚Р°
   host " 255.255.255.255" port
   " 0.0.0.0" " 0.0.0.0" 0
   FilterAdd
 ;
 : FilterDenyPacketsFromIp ( ip if_ip -- )
-\ запретить любые соединения с указанного ip к if_ip
+\ Р·Р°РїСЂРµС‚РёС‚СЊ Р»СЋР±С‹Рµ СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ СѓРєР°Р·Р°РЅРЅРѕРіРѕ ip Рє if_ip
   FilterAddIp
 ;
 : FilterAllowPacketsFromIp ( ip if_ip -- )
-\ разрешить соединения с указанного ip к if_ip
+\ СЂР°Р·СЂРµС€РёС‚СЊ СЃРѕРµРґРёРЅРµРЅРёСЏ СЃ СѓРєР°Р·Р°РЅРЅРѕРіРѕ ip Рє if_ip
   FilterDelIp
 ;
 

@@ -1,12 +1,12 @@
-( 26.01.2000 ×åðåçîâ À. )
+( 26.01.2000 Ð§ÐµÑ€ÐµÐ·Ð¾Ð² Ð. )
 
-( Ñîçäàíèå øàáëîíîâ äèàëîãîâ Windows )
+( Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð² Ð´Ð¸Ð°Ð»Ð¾Ð³Ð¾Ð² Windows )
 
 REQUIRE ||             ~ac/lib/temps.f
 REQUIRE CW_USEDEFAULT  ~ac/lib/win/window/winconst.f
 
 \ --------------------------------------------------------
-\ ******* ïðîöåäóðà äëÿ ñîçäàíèÿ øàáëîíà äèàëîãà â ïàìÿòè
+\ ******* Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð° Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð° Ð´Ð¸Ð°Ð»Ð¾Ð³Ð° Ð² Ð¿Ð°Ð¼ÑÑ‚Ð¸
 0
 4 -- DLGTEMPLATE.style
 4 -- DLGTEMPLATE.dwExtendedStyle
@@ -27,7 +27,7 @@ CONSTANT /DLGTEMPLATE
 2 -- DLGITEMTEMPLATE.id
 CONSTANT /DLGITEMTEMPLATE
 
-: L" ( "ccc" -- ) \ ******* êîìïèëÿöèÿ ñòðîêè â UNICODE
+: L" ( "ccc" -- ) \ ******* ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ñ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² UNICODE
   [CHAR] " PARSE
   0 ?DO DUP I + C@ W, LOOP DROP 
   0 W,
@@ -68,7 +68,7 @@ CONSTANT /DLGITEMTEMPLATE
   t DLGITEMTEMPLATE.id   W!
   >IN @ #TIB @ <
   IF L" ELSE 0 W, THEN  \ title (initial text)
-  HERE 4 MOD 2 = IF -2 ALLOT BL W, 0 W, THEN \ ýõ, MS, MS ... :)
+  HERE 4 MOD 2 = IF -2 ALLOT BL W, 0 W, THEN \ ÑÑ…, MS, MS ... :)
   0 ,                   \ creation data
   1+
 ;
@@ -87,7 +87,7 @@ CONSTANT /DLGITEMTEMPLATE
 
 \ ----------------------------------------------------------------------
 
-( Ïðèìåð
+( ÐŸÑ€Ð¸Ð¼ÐµÑ€
 0 0 102 64
 WS_POPUP WS_SYSMENU OR WS_CAPTION OR DS_MODALFRAME OR
 DS_SETFONT OR DS_CENTER OR
@@ -105,6 +105,6 @@ DIALOG: PasswordDialog Login
 
 DIALOG;
 
-\ ñîõðàíåíèå äèàëîãà äëÿ DialogLoad
+\ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ Ð´Ð¸Ð°Ð»Ð¾Ð³Ð° Ð´Ð»Ñ DialogLoad
 \ PasswordDialog @ HERE OVER - S" password_dialog.res" R/W CREATE-FILE THROW WRITE-FILE THROW
 )

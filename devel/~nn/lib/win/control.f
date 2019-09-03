@@ -1,4 +1,4 @@
-\ Контролы Windows
+\ РљРѕРЅС‚СЂРѕР»С‹ Windows
 REQUIRE CLASS:       ~nn/class/class.f
 REQUIRE Window       ~nn/lib/win/window.f
 REQUIRE FrameWindow  ~nn/lib/win/framewindow.f
@@ -14,11 +14,11 @@ REQUIRE FrameWindow  ~nn/lib/win/framewindow.f
 
 CLASS: Control <SUPER Window
         var vOwner
-        var OnClick \ Событие
-        var OnDoubleClick \ Событие
-        var OnRClick \ Событие
-        var OnRDoubleClick \ Событие
-        var OrigProc \ адрес стандартного обработчика сообщений
+        var OnClick \ РЎРѕР±С‹С‚РёРµ
+        var OnDoubleClick \ РЎРѕР±С‹С‚РёРµ
+        var OnRClick \ РЎРѕР±С‹С‚РёРµ
+        var OnRDoubleClick \ РЎРѕР±С‹С‚РёРµ
+        var OrigProc \ Р°РґСЂРµСЃ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРіРѕ РѕР±СЂР°Р±РѕС‚С‡РёРєР° СЃРѕРѕР±С‰РµРЅРёР№
 
 M: pos ( x y -- ) ToPixels pos ;
 M: set_pos ( x y -- ) ToPixels vWidth @ vHeight @ MovePixels ;
@@ -61,7 +61,7 @@ M: ToOrigProc ( -- )
 
 WNDPROC: ContrProc
 
-    USER CC-Init? \ однократная инициализация CommonControls
+    USER CC-Init? \ РѕРґРЅРѕРєСЂР°С‚РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ CommonControls
     CREATE   CC_INITS 8 , BASE @ HEX 3FFF , BASE !
 
     WINAPI: InitCommonControlsEx COMCTL32.DLL
@@ -80,7 +80,7 @@ M: Create ( owner -- )
     DUP vOwner !
 \    WS_EX_CONTROLPARENT vExStyle @ OR vExStyle !
     Create
-    hParent @ HANDLE>OBJ ->CLASS FrameWindow vFont @ \ Установить фонт родителя
+    hParent @ HANDLE>OBJ ->CLASS FrameWindow vFont @ \ РЈСЃС‚Р°РЅРѕРІРёС‚СЊ С„РѕРЅС‚ СЂРѕРґРёС‚РµР»СЏ
     ->CLASS Font handle @ SetFont
     AfterCreate
 ;
@@ -203,20 +203,20 @@ M: FromFile { a u \ h buf -- }
     buf FREE DROP
 ;
 
-\ Если нет выбранных, то возвращает -1
+\ Р•СЃР»Рё РЅРµС‚ РІС‹Р±СЂР°РЅРЅС‹С…, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµС‚ -1
 M: Current ( -- u )
     0 0 LB_GETCURSEL SendMessage  DUP LB_ERR =
     IF DROP -1 THEN
 ;
 
-\ Возвращает число оставшихся элементов или -1 если
-\ исходный индех был неправилен
+\ Р’РѕР·РІСЂР°С‰Р°РµС‚ С‡РёСЃР»Рѕ РѕСЃС‚Р°РІС€РёС…СЃСЏ СЌР»РµРјРµРЅС‚РѕРІ РёР»Рё -1 РµСЃР»Рё
+\ РёСЃС…РѕРґРЅС‹Р№ РёРЅРґРµС… Р±С‹Р» РЅРµРїСЂР°РІРёР»РµРЅ
 M: Delete ( u1 -- u2 )
     0 SWAP LB_DELETESTRING SendMessage
     DUP LB_ERR = IF DROP -1 THEN
 ;
 
-\ Дает индекс элемента на котором щелкнули мышью
+\ Р”Р°РµС‚ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РЅР° РєРѕС‚РѕСЂРѕРј С‰РµР»РєРЅСѓР»Рё РјС‹С€СЊСЋ
 M: ItemFromPoint ( -- u )
     0. >R >R RP@
     GetCursorPos DROP RP@ handle @ ScreenToClient DROP

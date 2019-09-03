@@ -4,7 +4,7 @@ REQUIRE WL-MODULES ~day\lib\includemodule.f
 
 NEEDS ~day\wincons\wc.f
 
-\ Êëàññû DialogBoxControls
+\ ÐšÐ»Ð°ÑÑÑ‹ DialogBoxControls
 BASE @ HEX
 0080 CONSTANT DI_Button 
 0081 CONSTANT DI_Edit 
@@ -15,7 +15,7 @@ BASE @ HEX
 BASE !
 
 \ --------------------------------------------------------
-\ ******* ïðîöåäóðà äëÿ ñîçäàíèÿ øàáëîíà äèàëîãà â ïàìÿòè
+\ ******* Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð° Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð° Ð´Ð¸Ð°Ð»Ð¾Ð³Ð° Ð² Ð¿Ð°Ð¼ÑÑ‚Ð¸
 0
 4 -- DLGTEMPLATE.style
 4 -- DLGTEMPLATE.dwExtendedStyle
@@ -41,7 +41,7 @@ CONSTANT /DLGITEMTEMPLATE
    0 W,
 ;
 
-: L" ( "ccc" -- ) \ ******* êîìïèëÿöèÿ ñòðîêè â UNICODE
+: L" ( "ccc" -- ) \ ******* ÐºÐ¾Ð¼Ð¿Ð¸Ð»ÑÑ†Ð¸Ñ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² UNICODE
   [CHAR] " PARSE L,
 ;
 
@@ -83,7 +83,7 @@ CONSTANT /DLGITEMTEMPLATE
   R> DLGITEMTEMPLATE.id   W!
   >IN @ #TIB @ <
   IF L" ELSE 0 W, THEN  \ title (initial text)
-  HERE 4 MOD 2 = IF -2 ALLOT BL W, 0 W, THEN \ ýõ, MS, MS ... :)
+  HERE 4 MOD 2 = IF -2 ALLOT BL W, 0 W, THEN \ ÑÑ…, MS, MS ... :)
   0 ,                   \ creation data
   1+
 ;

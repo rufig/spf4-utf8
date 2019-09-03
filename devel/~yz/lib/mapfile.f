@@ -1,5 +1,5 @@
-\ Отображение файлов
-\ Ю. Жиловец, 6.04.2003
+\ РћС‚РѕР±СЂР°Р¶РµРЅРёРµ С„Р°Р№Р»РѕРІ
+\ Р®. Р–РёР»РѕРІРµС†, 6.04.2003
 
 MODULE: MAPFILE
 
@@ -10,7 +10,7 @@ WINAPI: MapViewOfFile      KERNEL32.DLL
 WINAPI: UnmapViewOfFile    KERNEL32.DLL
 
 0
-CELL -- :mapaddr \ должен стоять первым
+CELL -- :mapaddr \ РґРѕР»Р¶РµРЅ СЃС‚РѕСЏС‚СЊ РїРµСЂРІС‹Рј
 CELL -- :mapobj
 CELL -- :mapfile
 == /mapping

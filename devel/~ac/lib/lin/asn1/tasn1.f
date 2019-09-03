@@ -1,5 +1,5 @@
 \ http://www.gnu.org/software/libtasn1/manual/libtasn1.html
-\ Òðåáóåòñÿ dll: libtasn1.dll
+\ Ð¢Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ dll: libtasn1.dll
 \ http://josefsson.org/gnutls4win/
 
 REQUIRE SO  ~ac/lib/ns/so-xt.f
@@ -11,23 +11,23 @@ ALSO SO NEW: libtasn1-3.so
 USER uAsn1LenOver
 
 : >asn_len { len \ nlen alenx alen -- asnlen u }
-\ ïðåîáðàçóåò äëèíó len â asn1-äëèíó asnlen è "äëèíó äëèííû"
-\ (÷èñëî èñïîëüçîâàííûõ áàéò) u.
-\ åñëè êîäèðóåìàÿ äëèíà áîëüøå ÷åì 0xFFFFFF, òî
-\ u=5, è íå ïîìåñòèâøèéñÿ â asnlen áàéò ëåæèò â uAsn1LenOver
+\ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·ÑƒÐµÑ‚ Ð´Ð»Ð¸Ð½Ñƒ len Ð² asn1-Ð´Ð»Ð¸Ð½Ñƒ asnlen Ð¸ "Ð´Ð»Ð¸Ð½Ñƒ Ð´Ð»Ð¸Ð½Ð½Ñ‹"
+\ (Ñ‡Ð¸ÑÐ»Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð½Ñ‹Ñ… Ð±Ð°Ð¹Ñ‚) u.
+\ ÐµÑÐ»Ð¸ ÐºÐ¾Ð´Ð¸Ñ€ÑƒÐµÐ¼Ð°Ñ Ð´Ð»Ð¸Ð½Ð° Ð±Ð¾Ð»ÑŒÑˆÐµ Ñ‡ÐµÐ¼ 0xFFFFFF, Ñ‚Ð¾
+\ u=5, Ð¸ Ð½Ðµ Ð¿Ð¾Ð¼ÐµÑÑ‚Ð¸Ð²ÑˆÐ¸Ð¹ÑÑ Ð² asnlen Ð±Ð°Ð¹Ñ‚ Ð»ÐµÐ¶Ð¸Ñ‚ Ð² uAsn1LenOver
   ^ nlen ^ alen len 3 asn1_length_der DROP
   alenx uAsn1LenOver !
   alen nlen
 ;
 : >asn_str { a u \ a2 u2 -- a2 u2 }
-\ ïðåîáðàçóåò ñòðîêó a u â ñòðîêó ñ asn1-ñ÷åò÷èêîì a2 u2
+\ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·ÑƒÐµÑ‚ ÑÑ‚Ñ€Ð¾ÐºÑƒ a u Ð² ÑÑ‚Ñ€Ð¾ÐºÑƒ Ñ asn1-ÑÑ‡ÐµÑ‚Ñ‡Ð¸ÐºÐ¾Ð¼ a2 u2
   u 5 + ALLOCATE THROW -> a2
   ^ u2 a2 u a 4 asn1_octet_der DROP
   a2 u2
 ;
 : asn_str> { a u \ u2 -- a2 u2 }
-\ ïðåîáðàçóåò ñòðîêó ñ asn1-ñ÷åò÷èêîì (a) â ôîðò-ñòðîêó a2 u2
-\ ñì. òó æå ôóíêöèþ AsnStr> â ~ac/lib/list/asn1.f 
+\ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·ÑƒÐµÑ‚ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ñ asn1-ÑÑ‡ÐµÑ‚Ñ‡Ð¸ÐºÐ¾Ð¼ (a) Ð² Ñ„Ð¾Ñ€Ñ‚-ÑÑ‚Ñ€Ð¾ÐºÑƒ a2 u2
+\ ÑÐ¼. Ñ‚Ñƒ Ð¶Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ AsnStr> Ð² ~ac/lib/list/asn1.f 
   ^ u2 u a 3 asn1_get_length_ber
   u2 a + SWAP
 ;

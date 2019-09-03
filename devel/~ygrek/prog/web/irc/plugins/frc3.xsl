@@ -3,7 +3,7 @@
 
 <!--
 $Id$
-Данные о погоде от http://informer.gismeteo.ru
+Р”Р°РЅРЅС‹Рµ Рѕ РїРѕРіРѕРґРµ РѕС‚ http://informer.gismeteo.ru
 -->
 
 <xsl:output method="text" encoding="windows-1251"/>
@@ -13,12 +13,12 @@ $Id$
 <xsl:when test="@type='frc3'">
   <xsl:apply-templates select="//FORECAST[1]"/>
 </xsl:when>
-<xsl:otherwise>Недоступно</xsl:otherwise>
+<xsl:otherwise>РќРµРґРѕСЃС‚СѓРїРЅРѕ</xsl:otherwise>
 </xsl:choose>
 </xsl:template>
 
 <xsl:template match="FORECAST">
-<xsl:text>на </xsl:text>
+<xsl:text>РЅР° </xsl:text>
 <xsl:call-template name="tod_str">
   <xsl:with-param name="A"><xsl:value-of select="@tod"/></xsl:with-param>
 </xsl:call-template>
@@ -30,20 +30,20 @@ $Id$
 <xsl:value-of select="@day"/>/<xsl:value-of select="@month"/>/<xsl:value-of select="@year"/>
 <xsl:text> - </xsl:text>
 
-<xsl:text>температура </xsl:text>
+<xsl:text>С‚РµРјРїРµСЂР°С‚СѓСЂР° </xsl:text>
 <xsl:for-each select="TEMPERATURE">
 <xsl:call-template name="maxmin"/>
 </xsl:for-each>
-<xsl:text> °C </xsl:text>
+<xsl:text> В°C </xsl:text>
 
-<xsl:text>давление </xsl:text>
+<xsl:text>РґР°РІР»РµРЅРёРµ </xsl:text>
 <xsl:for-each select="PRESSURE">
 <xsl:call-template name="average"/>
 </xsl:for-each>
-<xsl:text> мм рт. ст. </xsl:text>
+<xsl:text> РјРј СЂС‚. СЃС‚. </xsl:text>
 <xsl:text> </xsl:text>
 
-<xsl:text>ветер </xsl:text>
+<xsl:text>РІРµС‚РµСЂ </xsl:text>
 <xsl:for-each select="WIND">
 <xsl:call-template name="wind_str">
   <xsl:with-param name="A"><xsl:value-of select="@direction"/></xsl:with-param>
@@ -51,9 +51,9 @@ $Id$
 <xsl:text> </xsl:text>
 <xsl:call-template name="average"/>
 </xsl:for-each>
-<xsl:text> м/с </xsl:text>
+<xsl:text> Рј/СЃ </xsl:text>
 
-<xsl:text>влажность </xsl:text>
+<xsl:text>РІР»Р°Р¶РЅРѕСЃС‚СЊ </xsl:text>
 <xsl:for-each select="RELWET">
 <xsl:call-template name="average"/>
 </xsl:for-each>
@@ -87,33 +87,33 @@ $Id$
   <xsl:template name="weekday_str">
     <xsl:param name="A"/>
     <xsl:choose>
-     <xsl:when test="$A=1">Вс</xsl:when>
-     <xsl:when test="$A=2">Пн</xsl:when>
-     <xsl:when test="$A=3">Вт</xsl:when>
-     <xsl:when test="$A=4">Ср</xsl:when>
-     <xsl:when test="$A=5">Чт</xsl:when>
-     <xsl:when test="$A=6">Пт</xsl:when>
-     <xsl:when test="$A=7">Сб</xsl:when>
+     <xsl:when test="$A=1">Р’СЃ</xsl:when>
+     <xsl:when test="$A=2">РџРЅ</xsl:when>
+     <xsl:when test="$A=3">Р’С‚</xsl:when>
+     <xsl:when test="$A=4">РЎСЂ</xsl:when>
+     <xsl:when test="$A=5">Р§С‚</xsl:when>
+     <xsl:when test="$A=6">РџС‚</xsl:when>
+     <xsl:when test="$A=7">РЎР±</xsl:when>
     </xsl:choose>
   </xsl:template>
 
   <xsl:template name="cloudiness_str">
     <xsl:param name="A"/>
     <xsl:choose>
-     <xsl:when test="$A=0">ясно</xsl:when>
-     <xsl:when test="$A=1">малооблачно</xsl:when>
-     <xsl:when test="$A=2">облачно</xsl:when>
-     <xsl:when test="$A=3">пасмурно</xsl:when>
+     <xsl:when test="$A=0">СЏСЃРЅРѕ</xsl:when>
+     <xsl:when test="$A=1">РјР°Р»РѕРѕР±Р»Р°С‡РЅРѕ</xsl:when>
+     <xsl:when test="$A=2">РѕР±Р»Р°С‡РЅРѕ</xsl:when>
+     <xsl:when test="$A=3">РїР°СЃРјСѓСЂРЅРѕ</xsl:when>
     </xsl:choose>
   </xsl:template>
 
   <xsl:template name="tod_str">
     <xsl:param name="A"/>
     <xsl:choose>
-     <xsl:when test="$A=0">ночь</xsl:when>
-     <xsl:when test="$A=1">утро</xsl:when>
-     <xsl:when test="$A=2">день</xsl:when>
-     <xsl:when test="$A=3">вечер</xsl:when>
+     <xsl:when test="$A=0">РЅРѕС‡СЊ</xsl:when>
+     <xsl:when test="$A=1">СѓС‚СЂРѕ</xsl:when>
+     <xsl:when test="$A=2">РґРµРЅСЊ</xsl:when>
+     <xsl:when test="$A=3">РІРµС‡РµСЂ</xsl:when>
     </xsl:choose>
   </xsl:template>
 
@@ -122,26 +122,26 @@ $Id$
     <xsl:param name="R"/>
     <xsl:param name="S"/>
     <xsl:choose>
-     <xsl:when test="$A=4"><xsl:if test="$R=0">возможен </xsl:if>дождь</xsl:when>
-     <xsl:when test="$A=5"><xsl:if test="$R=0">возможен </xsl:if>ливень</xsl:when>
-     <xsl:when test="$A=6 or $A=7"><xsl:if test="$R=0">возможен </xsl:if>снег</xsl:when>
-     <xsl:when test="$A=8"><xsl:if test="$S=0">возможна </xsl:if>гроза</xsl:when>
-     <xsl:when test="$A=9">неизвестно</xsl:when>
-     <xsl:when test="$A=10">без осадков</xsl:when>
+     <xsl:when test="$A=4"><xsl:if test="$R=0">РІРѕР·РјРѕР¶РµРЅ </xsl:if>РґРѕР¶РґСЊ</xsl:when>
+     <xsl:when test="$A=5"><xsl:if test="$R=0">РІРѕР·РјРѕР¶РµРЅ </xsl:if>Р»РёРІРµРЅСЊ</xsl:when>
+     <xsl:when test="$A=6 or $A=7"><xsl:if test="$R=0">РІРѕР·РјРѕР¶РµРЅ </xsl:if>СЃРЅРµРі</xsl:when>
+     <xsl:when test="$A=8"><xsl:if test="$S=0">РІРѕР·РјРѕР¶РЅР° </xsl:if>РіСЂРѕР·Р°</xsl:when>
+     <xsl:when test="$A=9">РЅРµРёР·РІРµСЃС‚РЅРѕ</xsl:when>
+     <xsl:when test="$A=10">Р±РµР· РѕСЃР°РґРєРѕРІ</xsl:when>
     </xsl:choose>
   </xsl:template>
 
   <xsl:template name="wind_str">
     <xsl:param name="A"/>
     <xsl:choose>
-     <xsl:when test="$A=0">сев</xsl:when>
-     <xsl:when test="$A=1">сев-вост</xsl:when>
-     <xsl:when test="$A=2">вост</xsl:when>
-     <xsl:when test="$A=3">юго-вост</xsl:when>
-     <xsl:when test="$A=4">южн</xsl:when>
-     <xsl:when test="$A=5">юго-зап</xsl:when>
-     <xsl:when test="$A=6">зап</xsl:when>
-     <xsl:when test="$A=7">сев-зап</xsl:when>
+     <xsl:when test="$A=0">СЃРµРІ</xsl:when>
+     <xsl:when test="$A=1">СЃРµРІ-РІРѕСЃС‚</xsl:when>
+     <xsl:when test="$A=2">РІРѕСЃС‚</xsl:when>
+     <xsl:when test="$A=3">СЋРіРѕ-РІРѕСЃС‚</xsl:when>
+     <xsl:when test="$A=4">СЋР¶РЅ</xsl:when>
+     <xsl:when test="$A=5">СЋРіРѕ-Р·Р°Рї</xsl:when>
+     <xsl:when test="$A=6">Р·Р°Рї</xsl:when>
+     <xsl:when test="$A=7">СЃРµРІ-Р·Р°Рї</xsl:when>
     </xsl:choose>
   </xsl:template>
 

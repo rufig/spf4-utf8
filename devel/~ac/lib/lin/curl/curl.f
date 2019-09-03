@@ -1,7 +1,7 @@
-\ Получение файлов по HTTP/FTP через библиотеку CURL
-\ ~ac: переписал через xt-so.f 18.08.2005
+\ РџРѕР»СѓС‡РµРЅРёРµ С„Р°Р№Р»РѕРІ РїРѕ HTTP/FTP С‡РµСЂРµР· Р±РёР±Р»РёРѕС‚РµРєСѓ CURL
+\ ~ac: РїРµСЂРµРїРёСЃР°Р» С‡РµСЂРµР· xt-so.f 18.08.2005
 \ $Id$
-\ требуется libcurl.dll - http://curl.haxx.se/latest.cgi?curl=win32-devel-ssl
+\ С‚СЂРµР±СѓРµС‚СЃСЏ libcurl.dll - http://curl.haxx.se/latest.cgi?curl=win32-devel-ssl
 
 REQUIRE SO            ~ac/lib/ns/so-xt.f
 REQUIRE STR@          ~ac/lib/str5.f
@@ -18,10 +18,10 @@ ALSO SO NEW: libcurl.so.3
 ALSO SO NEW: libcurl.so.4
 
 \ Global libcurl initialization
-\ ~ac 01.01.2008: эта инициализация с каждой следующей версией curl
-\ тормошит всё больше дополнительных dll (на сегодняшний день уже пять),
-\ поэтому лучше оставить возможность отложить или отменить инициализацию,
-\ как было раньше, а для совместимости сделаем CURL-GLOBAL-INIT вектором.
+\ ~ac 01.01.2008: СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃ РєР°Р¶РґРѕР№ СЃР»РµРґСѓСЋС‰РµР№ РІРµСЂСЃРёРµР№ curl
+\ С‚РѕСЂРјРѕС€РёС‚ РІСЃС‘ Р±РѕР»СЊС€Рµ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… dll (РЅР° СЃРµРіРѕРґРЅСЏС€РЅРёР№ РґРµРЅСЊ СѓР¶Рµ РїСЏС‚СЊ),
+\ РїРѕСЌС‚РѕРјСѓ Р»СѓС‡С€Рµ РѕСЃС‚Р°РІРёС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РѕС‚Р»РѕР¶РёС‚СЊ РёР»Рё РѕС‚РјРµРЅРёС‚СЊ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ,
+\ РєР°Рє Р±С‹Р»Рѕ СЂР°РЅСЊС€Рµ, Р° РґР»СЏ СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚Рё СЃРґРµР»Р°РµРј CURL-GLOBAL-INIT РІРµРєС‚РѕСЂРѕРј.
 
 VARIABLE CURL-ERR
 
@@ -56,12 +56,12 @@ USER uCurlTimeout
 
 : CURL-SETOPT ( value opt h -- ) 3 curl_easy_setopt THROW ;
 
-\ Слово-расширение - вызывается перед curl_perform
+\ РЎР»РѕРІРѕ-СЂР°СЃС€РёСЂРµРЅРёРµ - РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРµСЂРµРґ curl_perform
 : AT-CURL-PRE ( h -- h ) ... ;
 
-\ если прокси paddr pu - непустая строка, то явно используется этот прокси
-\ curl умеет использовать переменные окружения http_proxy, ftp_proxy
-\ поэтому можно не задавать прокси явно.
+\ РµСЃР»Рё РїСЂРѕРєСЃРё paddr pu - РЅРµРїСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°, С‚Рѕ СЏРІРЅРѕ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ СЌС‚РѕС‚ РїСЂРѕРєСЃРё
+\ curl СѓРјРµРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ РѕРєСЂСѓР¶РµРЅРёСЏ http_proxy, ftp_proxy
+\ РїРѕСЌС‚РѕРјСѓ РјРѕР¶РЅРѕ РЅРµ Р·Р°РґР°РІР°С‚СЊ РїСЂРѕРєСЃРё СЏРІРЅРѕ.
 : GET-FILE-VIAPROXY-COOK { addr u ca cu paddr pu \ h url pr de slist -- str }
   "" uCurlRes !
   0 curl_easy_init -> h
@@ -107,7 +107,7 @@ USER uCurlTimeout
   S" " 2SWAP GET-FILE-VIAPROXY-COOK
 ;
 : GET-FILE ( addr u -- str )
-  \ без прокси или с заданным в переменной окружения http_proxy
+  \ Р±РµР· РїСЂРѕРєСЃРё РёР»Рё СЃ Р·Р°РґР°РЅРЅС‹Рј РІ РїРµСЂРµРјРµРЅРЅРѕР№ РѕРєСЂСѓР¶РµРЅРёСЏ http_proxy
   2DUP FILE-EXIST IF FILE 2DUP >STR NIP SWAP FREE THROW EXIT THEN
   S" " GET-FILE-VIAPROXY
 ;
@@ -115,7 +115,7 @@ USER uCurlTimeout
 PREVIOUS PREVIOUS PREVIOUS PREVIOUS
 
 \EOF
-\ регистрация IP для xml-запросов к яндексу: http://xml.yandex.ru/ip.xml
+\ СЂРµРіРёСЃС‚СЂР°С†РёСЏ IP РґР»СЏ xml-Р·Р°РїСЂРѕСЃРѕРІ Рє СЏРЅРґРµРєСЃСѓ: http://xml.yandex.ru/ip.xml
 : TEST
   S" http://xmlsearch.yandex.ru/xmlsearch?query=sp-forth" GET-FILE STYPE CR
   S" http://xmlsearch.yandex.ru/xmlsearch?query=sp-forth" S" http://proxy.enet.ru:3128/" GET-FILE-VIAPROXY STYPE CR

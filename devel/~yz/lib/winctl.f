@@ -1,15 +1,15 @@
 \ WINLIB 1.13
 
-\ Библиотека пользовательского интерфейса Windows
-\ ч. 2. Стандартные элементы интерфейса и их размещение
-\ Ю. Жиловец, 2.02.2002
+\ Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° Windows
+\ С‡. 2. РЎС‚Р°РЅРґР°СЂС‚РЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РёРЅС‚РµСЂС„РµР№СЃР° Рё РёС… СЂР°Р·РјРµС‰РµРЅРёРµ
+\ Р®. Р–РёР»РѕРІРµС†, 2.02.2002
 
 REQUIRE WINDOWS... ~yz/lib/winlib.f
 
 0 VALUE common-tooltip
 
 \ ------------------------------
-\ Полезные процедуры
+\ РџРѕР»РµР·РЅС‹Рµ РїСЂРѕС†РµРґСѓСЂС‹
 
 WINAPI: SelectObject          GDI32.DLL
 WINAPI: GetTextExtentPoint32A GDI32.DLL
@@ -17,22 +17,22 @@ WINAPI: GetDC                 USER32.DLL
 WINAPI: ReleaseDC             USER32.DLL
 
 common table control
-  item -font	getset	\ шрифт
-  item -align 	set 	\ выравнивание текста
-  item -notify  	\ обработчик уведомлений
-  item -command 	\ вызов команды
-  item -defcommand	\ сообщение по умолчанию
-  item -updown		\ спин-симбионт
-  item -tooltip  getset \ подсказка
-  item -tooltipexists   \ флажок: есть ли подсказка
-  item -locked          \ нельзя менять размеры
-  \ специализированные слова
-  item -calcsize        \ слово вычисления размеров окна
-  item -ctlshow         \ слово показа элемента
-  item -ctlhide         \ слово отключения показа элемента
-  item -ctlresize       \ изменение размеров
-  item -ctlmove		\ перестановка элемента
-  item -ctladdpart      \ добавление внутренних частей к окну
+  item -font	getset	\ С€СЂРёС„С‚
+  item -align 	set 	\ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ С‚РµРєСЃС‚Р°
+  item -notify  	\ РѕР±СЂР°Р±РѕС‚С‡РёРє СѓРІРµРґРѕРјР»РµРЅРёР№
+  item -command 	\ РІС‹Р·РѕРІ РєРѕРјР°РЅРґС‹
+  item -defcommand	\ СЃРѕРѕР±С‰РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+  item -updown		\ СЃРїРёРЅ-СЃРёРјР±РёРѕРЅС‚
+  item -tooltip  getset \ РїРѕРґСЃРєР°Р·РєР°
+  item -tooltipexists   \ С„Р»Р°Р¶РѕРє: РµСЃС‚СЊ Р»Рё РїРѕРґСЃРєР°Р·РєР°
+  item -locked          \ РЅРµР»СЊР·СЏ РјРµРЅСЏС‚СЊ СЂР°Р·РјРµСЂС‹
+  \ СЃРїРµС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Рµ СЃР»РѕРІР°
+  item -calcsize        \ СЃР»РѕРІРѕ РІС‹С‡РёСЃР»РµРЅРёСЏ СЂР°Р·РјРµСЂРѕРІ РѕРєРЅР°
+  item -ctlshow         \ СЃР»РѕРІРѕ РїРѕРєР°Р·Р° СЌР»РµРјРµРЅС‚Р°
+  item -ctlhide         \ СЃР»РѕРІРѕ РѕС‚РєР»СЋС‡РµРЅРёСЏ РїРѕРєР°Р·Р° СЌР»РµРјРµРЅС‚Р°
+  item -ctlresize       \ РёР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂРѕРІ
+  item -ctlmove		\ РїРµСЂРµСЃС‚Р°РЅРѕРІРєР° СЌР»РµРјРµРЅС‚Р°
+  item -ctladdpart      \ РґРѕР±Р°РІР»РµРЅРёРµ РІРЅСѓС‚СЂРµРЅРЅРёС… С‡Р°СЃС‚РµР№ Рє РѕРєРЅСѓ
 endtable
 
 VECT common-tooltip-op
@@ -70,7 +70,7 @@ WINAPI: GetIconInfo USER32.DLL
 : +style ( style ctl -- ) DUP -style@ ROT OR SWAP -style! ;
 
 \ -----------------------------------
-\ Элементы управления
+\ Р­Р»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ
 
 :NONAME \ get-font ( ctl -- font)
   W: wm_getfont ?send ;
@@ -104,10 +104,10 @@ USER-VALUE this
 
 :NONAME
   lparam @ window@ TO thisctl
-  thisctl 0= IF FALSE EXIT THEN \ сообщение не от наших объектов не обрабатываем
+  thisctl 0= IF FALSE EXIT THEN \ СЃРѕРѕР±С‰РµРЅРёРµ РЅРµ РѕС‚ РЅР°С€РёС… РѕР±СЉРµРєС‚РѕРІ РЅРµ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј
   lparam 3 CELLS + TO lparam
   lparam CELL- @
-  \ подменяем сообщение для панели инструментов
+  \ РїРѕРґРјРµРЅСЏРµРј СЃРѕРѕР±С‰РµРЅРёРµ РґР»СЏ РїР°РЅРµР»Рё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
   DUP W: tbn_dropdown = IF DROP W: bn_clicked THEN
   DUP thisctl -defcommand@ = IF
     DROP thisctl -command@ EXECUTE
@@ -117,13 +117,13 @@ USER-VALUE this
 ; TO notifyproc
 
 \ ----------------------------------
-\ Шрифт по умолчанию
+\ РЁСЂРёС„С‚ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
 : default-font ( font -- ) TO def-font ;
 : -sysfont  0 this -font! ;
 
 \ ----------------------------------
-\ Строки статуса
+\ РЎС‚СЂРѕРєРё СЃС‚Р°С‚СѓСЃР°
 
 WINAPI: CreateStatusWindow COMCTL32.DLL
 
@@ -145,7 +145,7 @@ WINAPI: CreateStatusWindow COMCTL32.DLL
  >R SWAP W: sb_settexta R> -status@ send DROP ;
 
 \ --------------------------------
-\ Статические элементы
+\ РЎС‚Р°С‚РёС‡РµСЃРєРёРµ СЌР»РµРјРµРЅС‚С‹
 
 0 == left
 1 == center
@@ -154,9 +154,9 @@ WINAPI: CreateStatusWindow COMCTL32.DLL
 " STATIC" ASCIIZ static
 
 control table buttonlike
-  item -xpad		\ горизонтальное расстояние от текста до края
-  item -ypad		\ вертикальное расстояние от текста до края
-  item -image	getset	\ текущая картинка
+  item -xpad		\ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РµРєСЃС‚Р° РґРѕ РєСЂР°СЏ
+  item -ypad		\ РІРµСЂС‚РёРєР°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РµРєСЃС‚Р° РґРѕ РєСЂР°СЏ
+  item -image	getset	\ С‚РµРєСѓС‰Р°СЏ РєР°СЂС‚РёРЅРєР°
   item -state	getset
 endtable
 
@@ -171,7 +171,7 @@ endtable
 
 :NONAME \ set-labeltext ( z ctl -- ) 
   2DUP set-text DUP ?invalidate DUP adjust-size 
-  \ заставим элемент перерисоваться еще раз
+  \ Р·Р°СЃС‚Р°РІРёРј СЌР»РµРјРµРЅС‚ РїРµСЂРµСЂРёСЃРѕРІР°С‚СЊСЃСЏ РµС‰Рµ СЂР°Р·
   set-text
 ; -text buttonlike storeset
 
@@ -231,7 +231,7 @@ endtable
   create-control-exstyle ;
 
 \ -----------------------------
-\ Кнопки
+\ РљРЅРѕРїРєРё
 
 " BUTTON" ASCIIZ buttons
 
@@ -322,9 +322,9 @@ endtable
 
 : ?uncheck-group ( grp -- ) CELL+ @ ?DUP IF 0 SWAP set-state THEN ;
 
-\ Формат группы:
-\ +0	cell	Код установленной кнопки
-\ +4	cell	Адрес установленной кнопки
+\ Р¤РѕСЂРјР°С‚ РіСЂСѓРїРїС‹:
+\ +0	cell	РљРѕРґ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ РєРЅРѕРїРєРё
+\ +4	cell	РђРґСЂРµСЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ РєРЅРѕРїРєРё
 
 : GROUP ( ->bl; -- ) 
   CREATE -1 , 0 , ;
@@ -356,7 +356,7 @@ endtable
 
 PROC: check-this-radio ( -- ) thisctl check-radio ;
 
-\ игнорируем state - радиокнопки не надо сбрасывать по одной
+\ РёРіРЅРѕСЂРёСЂСѓРµРј state - СЂР°РґРёРѕРєРЅРѕРїРєРё РЅРµ РЅР°РґРѕ СЃР±СЂР°СЃС‹РІР°С‚СЊ РїРѕ РѕРґРЅРѕР№
 : set-radio-state ( state ctl -- )
   PRESS check-radio ;
 
@@ -376,7 +376,7 @@ PROC: check-this-radio ( -- ) thisctl check-radio ;
   R> ;
 
 \ -----------------------------
-\ Строка редактирования
+\ РЎС‚СЂРѕРєР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
 
 " EDIT" ASCIIZ edits
 
@@ -406,7 +406,7 @@ PROC: check-this-radio ( -- ) thisctl check-radio ;
 : limit-edit ( n ctl -- ) W: em_setlimittext wsend DROP ;
 
 \ ------------------------------
-\ Обработка сообщения wm_command
+\ РћР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёСЏ wm_command
 
 :NONAME
   lparam window@ TO thisctl
@@ -419,10 +419,10 @@ PROC: check-this-radio ( -- ) thisctl check-radio ;
 ; TO command
 
 \ -----------------------------
-\ Окна-списки
+\ РћРєРЅР°-СЃРїРёСЃРєРё
 
 control table listlike
-  item -selected getset	\ Текущий выбранный элемент
+  item -selected getset	\ РўРµРєСѓС‰РёР№ РІС‹Р±СЂР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚
 endtable
 
 : lb-getsel ( ctl -- pos)
@@ -452,7 +452,7 @@ endtable
 : lb-count ( lb -- n) W: lb_getcount ?send ;
 
 \ ----------------------------------
-\ Комбинированные списки
+\ РљРѕРјР±РёРЅРёСЂРѕРІР°РЅРЅС‹Рµ СЃРїРёСЃРєРё
 
 : cb-getsel ( ctl -- pos)
   W: cb_getcursel ?send ;
@@ -481,14 +481,14 @@ endtable
 : combo-count ( lb -- n) W: cb_getcount ?send ;
 
 \ --------------------------------
-\ Полосы прокрутки
+\ РџРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё
 
 " SCROLLBAR" ASCIIZ scrolls
 
 control table scrolllike
-  item -pos	getset	\ Позиция бегунка
-  item -min	getset  \ минимальная позиция прокрутки
-  item -max	getset	\ максимальная позиция прокрутки
+  item -pos	getset	\ РџРѕР·РёС†РёСЏ Р±РµРіСѓРЅРєР°
+  item -min	getset  \ РјРёРЅРёРјР°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ РїСЂРѕРєСЂСѓС‚РєРё
+  item -max	getset	\ РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ РїСЂРѕРєСЂСѓС‚РєРё
 endtable
 
 WINAPI: GetScrollPos   USER32.DLL
@@ -542,7 +542,7 @@ WINAPI: SetScrollRange USER32.DLL
 ; TO scrollctlproc
 
 \ -----------------------------
-\ Размещение объектов
+\ Р Р°Р·РјРµС‰РµРЅРёРµ РѕР±СЉРµРєС‚РѕРІ
 
 : ctl-size ( ctl -- x y)
   DUP -calcsize@ ?DUP IF
@@ -558,8 +558,8 @@ WINAPI: SetScrollRange USER32.DLL
 : (set-ud) ( ctl what -- )
   SWAP >R 0 W: udm_setbuddy R> -updown@ send DROP ;
 
-\ спин делается видимым, так как система почему-то при добавлении
-\ прячет его, если спин относится к полю ввода
+\ СЃРїРёРЅ РґРµР»Р°РµС‚СЃСЏ РІРёРґРёРјС‹Рј, С‚Р°Рє РєР°Рє СЃРёСЃС‚РµРјР° РїРѕС‡РµРјСѓ-С‚Рѕ РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё
+\ РїСЂСЏС‡РµС‚ РµРіРѕ, РµСЃР»Рё СЃРїРёРЅ РѕС‚РЅРѕСЃРёС‚СЃСЏ Рє РїРѕР»СЋ РІРІРѕРґР°
 : add-ud ( ctl -- ) DUP DUP -hwnd@ (set-ud) -updown@ winshow ;
 
 : remove-ud ( ctl -- ) DUP ctl-size 2 PICK 0 (set-ud) ROT resize ;
@@ -625,10 +625,10 @@ WINAPI: SetParent USER32.DLL
 : remove ( ctl -- ) 
   DUP winhide 0 SWAP -parent! ;
 
-\ Быстрая инициализация текущего объекта
+\ Р‘С‹СЃС‚СЂР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С‚РµРєСѓС‰РµРіРѕ РѕР±СЉРµРєС‚Р°
 \ (/ -font f  -color blue  -bgcolor white  /)
 
-\ Более хитрые вещи:
+\ Р‘РѕР»РµРµ С…РёС‚СЂС‹Рµ РІРµС‰Рё:
 \ (/ -name value-var  -size 100 200 /)
 
 -1 == -size
@@ -640,10 +640,10 @@ WINAPI: SetParent USER32.DLL
     I @ CASE
     -size OF 
       I CELL- @ I 2 CELLS - @ this ctlresize
-      3 ( параметра)
+      3 ( РїР°СЂР°РјРµС‚СЂР°)
     ENDOF
       I CELL- @ SWAP this setproc
-      2 ( параметра)
+      2 ( РїР°СЂР°РјРµС‚СЂР°)
     END-CASE
   CELLS NEGATE +LOOP
   ELSE
@@ -654,7 +654,7 @@ WINAPI: SetParent USER32.DLL
 : -name ( ->bl; -- ) POSTPONE this [COMPILE] TO ; IMMEDIATE
 
 \ -----------------------------
-\ Сетки
+\ РЎРµС‚РєРё
 
 VARIABLE cur-grid
 VARIABLE cur-row
@@ -695,38 +695,38 @@ cur-height bfield -height
 : -yfixed  fixed -height ;
 
 0
-CELL -- :gsign 	 \ подпись "GRID"
-CELL -- :glink   \ указатель на первый ряд
-CELL -- :gwidth  \ ширина сетки: должна быть 3-ей (wm_getminmaxinfo)
-CELL -- :gheight \ высота сетки: должна быть 4-ей (wm_getminmaxinfo)
-CELL -- :gfixheight \ сумма фиксированных по высоте клеток
-CELL -- :gbox	 \ рамка вокруг сетки
+CELL -- :gsign 	 \ РїРѕРґРїРёСЃСЊ "GRID"
+CELL -- :glink   \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЂСЏРґ
+CELL -- :gwidth  \ С€РёСЂРёРЅР° СЃРµС‚РєРё: РґРѕР»Р¶РЅР° Р±С‹С‚СЊ 3-РµР№ (wm_getminmaxinfo)
+CELL -- :gheight \ РІС‹СЃРѕС‚Р° СЃРµС‚РєРё: РґРѕР»Р¶РЅР° Р±С‹С‚СЊ 4-РµР№ (wm_getminmaxinfo)
+CELL -- :gfixheight \ СЃСѓРјРјР° С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹С… РїРѕ РІС‹СЃРѕС‚Рµ РєР»РµС‚РѕРє
+CELL -- :gbox	 \ СЂР°РјРєР° РІРѕРєСЂСѓРі СЃРµС‚РєРё
 == #grid
 
 0 
-CELL -- :rlink   \ указатель на следующий ряд
-CELL -- :rbacklink  \ указатель на предыдущий ряд
-CELL -- :rblink  \ указатель на клетки ряда
-CELL -- :rwidth  \ ширина ряда
-CELL -- :rheight \ высота ряда
-CELL -- :rfixwidth  \ сумма фиксированных по х клеток
+CELL -- :rlink   \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СЂСЏРґ
+CELL -- :rbacklink  \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЂСЏРґ
+CELL -- :rblink  \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РєР»РµС‚РєРё СЂСЏРґР°
+CELL -- :rwidth  \ С€РёСЂРёРЅР° СЂСЏРґР°
+CELL -- :rheight \ РІС‹СЃРѕС‚Р° СЂСЏРґР°
+CELL -- :rfixwidth  \ СЃСѓРјРјР° С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹С… РїРѕ С… РєР»РµС‚РѕРє
 == #row
 
 0
-CELL -- :blink     \ указатель на следующую клетку
-CELL -- :bbacklink \ указатель на предыдущую клетку
-CELL -- :bwidth   \ ширина клетки
-CELL -- :bheight  \ высота клетки
-CELL -- :brelw    \ относительная ширина клетки
-CELL -- :brelh    \ относительная высота клетки
-CELL -- :bxmargin \ горизонтальное поле
-CELL -- :bymargin \ вертикальное поле
-CELL -- :bhalign  \ выравнивание по горизонтали
-CELL -- :bvalign  \ выравнивание по вертикали
-CELL -- :bdweller \ обитатель клетки
-CELL -- :bdwellerw \ его ширина
-CELL -- :bdwellerh \ и высота
-CELL -- :bnostretch \ не растягивать клетку
+CELL -- :blink     \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ РєР»РµС‚РєСѓ
+CELL -- :bbacklink \ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰СѓСЋ РєР»РµС‚РєСѓ
+CELL -- :bwidth   \ С€РёСЂРёРЅР° РєР»РµС‚РєРё
+CELL -- :bheight  \ РІС‹СЃРѕС‚Р° РєР»РµС‚РєРё
+CELL -- :brelw    \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅР°СЏ С€РёСЂРёРЅР° РєР»РµС‚РєРё
+CELL -- :brelh    \ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅР°СЏ РІС‹СЃРѕС‚Р° РєР»РµС‚РєРё
+CELL -- :bxmargin \ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРµ РїРѕР»Рµ
+CELL -- :bymargin \ РІРµСЂС‚РёРєР°Р»СЊРЅРѕРµ РїРѕР»Рµ
+CELL -- :bhalign  \ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+CELL -- :bvalign  \ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+CELL -- :bdweller \ РѕР±РёС‚Р°С‚РµР»СЊ РєР»РµС‚РєРё
+CELL -- :bdwellerw \ РµРіРѕ С€РёСЂРёРЅР°
+CELL -- :bdwellerh \ Рё РІС‹СЃРѕС‚Р°
+CELL -- :bnostretch \ РЅРµ СЂР°СЃС‚СЏРіРёРІР°С‚СЊ РєР»РµС‚РєСѓ
 == #binding
 
 : defaultbind ( -- ) 
@@ -815,13 +815,13 @@ CELL -- :bnostretch \ не растягивать клетку
 : restore-grid-vars ( n n1 n2 --  )
   cur-bind ! cur-row ! cur-grid ! ;
 
-\ Вспомогательные операции с сеткой ---------
+\ Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ РѕРїРµСЂР°С†РёРё СЃ СЃРµС‚РєРѕР№ ---------
 
-\ Заметка на полях: вся работа с сетками изнутри смотрится некрасиво.
-\ Проблема в том, что есть рекурсивные вызовы и при каждом таком вызове
-\ приходится сохранять глобальные переменные.
-\ Локальными обойтись нельзя, поскольку обработка размазана по многим словам.
-\ Поэтому все в целом по стилю напоминает Фортран :-(
+\ Р—Р°РјРµС‚РєР° РЅР° РїРѕР»СЏС…: РІСЃСЏ СЂР°Р±РѕС‚Р° СЃ СЃРµС‚РєР°РјРё РёР·РЅСѓС‚СЂРё СЃРјРѕС‚СЂРёС‚СЃСЏ РЅРµРєСЂР°СЃРёРІРѕ.
+\ РџСЂРѕР±Р»РµРјР° РІ С‚РѕРј, С‡С‚Рѕ РµСЃС‚СЊ СЂРµРєСѓСЂСЃРёРІРЅС‹Рµ РІС‹Р·РѕРІС‹ Рё РїСЂРё РєР°Р¶РґРѕРј С‚Р°РєРѕРј РІС‹Р·РѕРІРµ
+\ РїСЂРёС…РѕРґРёС‚СЃСЏ СЃРѕС…СЂР°РЅСЏС‚СЊ РіР»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ.
+\ Р›РѕРєР°Р»СЊРЅС‹РјРё РѕР±РѕР№С‚РёСЃСЊ РЅРµР»СЊР·СЏ, РїРѕСЃРєРѕР»СЊРєСѓ РѕР±СЂР°Р±РѕС‚РєР° СЂР°Р·РјР°Р·Р°РЅР° РїРѕ РјРЅРѕРіРёРј СЃР»РѕРІР°Рј.
+\ РџРѕСЌС‚РѕРјСѓ РІСЃРµ РІ С†РµР»РѕРј РїРѕ СЃС‚РёР»СЋ РЅР°РїРѕРјРёРЅР°РµС‚ Р¤РѕСЂС‚СЂР°РЅ :-(
 
 : (find-grid-x) ( x grid -- )
   :rblink @ DUP 0= IF EXIT THEN
@@ -896,7 +896,7 @@ PROC: (ggrid)
   (ggrid) traverse-grid
  restore-grid-vars ;
 
-\ Подгонка сетки --------------
+\ РџРѕРґРіРѕРЅРєР° СЃРµС‚РєРё --------------
 
 VECT arrange-grid
 VARIABLE temp
@@ -910,7 +910,7 @@ VARIABLE temp2
   R@ :gwidth @ R> :gheight @ ;
 
 : GRID; ( savedparams -- grid )
-  \ заставим сетку рассчитать свои параметры
+  \ Р·Р°СЃС‚Р°РІРёРј СЃРµС‚РєСѓ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ СЃРІРѕРё РїР°СЂР°РјРµС‚СЂС‹
   cur-grid @ >R
   cur-height ! cur-width !
   cur-yy !
@@ -922,8 +922,8 @@ VARIABLE temp2
 
 : dweller-size ( a -- w h) DUP grid? IF grid-size ELSE ctl-size THEN ;
 
-\ первый проход ряда:
-\ проходим по всем клеткам, считаем максимальную высоту и общую ширину
+\ РїРµСЂРІС‹Р№ РїСЂРѕС…РѕРґ СЂСЏРґР°:
+\ РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєР»РµС‚РєР°Рј, СЃС‡РёС‚Р°РµРј РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ РІС‹СЃРѕС‚Сѓ Рё РѕР±С‰СѓСЋ С€РёСЂРёРЅСѓ
 PROC: row-pass1
   cur-bind @ >R
   R@ :bdweller @ dweller-size DUP R@ :bdwellerh ! OVER R@ :bdwellerw !
@@ -933,32 +933,32 @@ PROC: row-pass1
 \ ." rp1: " cur-bind @ :bwidth @ . cur-bind @ :bheight @ . CR
 PROC;
 
-\ первый проход:
-\ считаем размеры каждого обитателя клетки + поля
-\ и высчитываем размеры каждого ряда
+\ РїРµСЂРІС‹Р№ РїСЂРѕС…РѕРґ:
+\ СЃС‡РёС‚Р°РµРј СЂР°Р·РјРµСЂС‹ РєР°Р¶РґРѕРіРѕ РѕР±РёС‚Р°С‚РµР»СЏ РєР»РµС‚РєРё + РїРѕР»СЏ
+\ Рё РІС‹СЃС‡РёС‚С‹РІР°РµРј СЂР°Р·РјРµСЂС‹ РєР°Р¶РґРѕРіРѕ СЂСЏРґР°
 PROC: grid-pass1
   cur-row @ :rwidth 0!  cur-row @ :rheight 0!
   row-pass1 traverse-row 
 \ ." gp1: " cur-row @ :rwidth @ . cur-row @ :rheight @ . CR
 PROC;
 
-\ второй проход:
-\ считаем общую высоту и максимальную ширину таблицы
+\ РІС‚РѕСЂРѕР№ РїСЂРѕС…РѕРґ:
+\ СЃС‡РёС‚Р°РµРј РѕР±С‰СѓСЋ РІС‹СЃРѕС‚Сѓ Рё РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ С€РёСЂРёРЅСѓ С‚Р°Р±Р»РёС†С‹
 PROC: grid-pass2
   cur-grid @ :gwidth @ cur-row @ :rwidth @ MAX cur-grid @ :gwidth !
   cur-row @ :rheight @ cur-grid @ :gheight +!
 \ ." gp2: " cur-grid @ :gwidth @ . cur-grid @ :gheight @ . CR
 PROC;
 
-\ третий проход:
-\ Находим все фиксированные клетки, запоминаем их размеры с обратным знаком
-\ и накапливаем их общую сумму в параметрах ряда
+\ С‚СЂРµС‚РёР№ РїСЂРѕС…РѕРґ:
+\ РќР°С…РѕРґРёРј РІСЃРµ С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹Рµ РєР»РµС‚РєРё, Р·Р°РїРѕРјРёРЅР°РµРј РёС… СЂР°Р·РјРµСЂС‹ СЃ РѕР±СЂР°С‚РЅС‹Рј Р·РЅР°РєРѕРј
+\ Рё РЅР°РєР°РїР»РёРІР°РµРј РёС… РѕР±С‰СѓСЋ СЃСѓРјРјСѓ РІ РїР°СЂР°РјРµС‚СЂР°С… СЂСЏРґР°
 PROC: row-pass3
   cur-bind @ :brelw @ fixed = IF
     cur-bind @ :bwidth @ DUP NEGATE cur-bind @ :brelw !
     cur-row @ :rfixwidth +!
   THEN
-  \ если высота клетки фиксирована - отметим этот факт в temp
+  \ РµСЃР»Рё РІС‹СЃРѕС‚Р° РєР»РµС‚РєРё С„РёРєСЃРёСЂРѕРІР°РЅР° - РѕС‚РјРµС‚РёРј СЌС‚РѕС‚ С„Р°РєС‚ РІ temp
   cur-bind @ :brelh @ fixed = IF
     TRUE temp !
   THEN
@@ -970,23 +970,23 @@ PROC: grid-pass3
   temp 0!
   row-pass3 traverse-row
   temp @ IF
-  \ если высота ряда фиксирована, запишем ее с обратным знаком
+  \ РµСЃР»Рё РІС‹СЃРѕС‚Р° СЂСЏРґР° С„РёРєСЃРёСЂРѕРІР°РЅР°, Р·Р°РїРёС€РµРј РµРµ СЃ РѕР±СЂР°С‚РЅС‹Рј Р·РЅР°РєРѕРј
     cur-row @ :rheight @ DUP NEGATE cur-row @ :rheight !
-    \ и запомним в параметрах сетки
+    \ Рё Р·Р°РїРѕРјРЅРёРј РІ РїР°СЂР°РјРµС‚СЂР°С… СЃРµС‚РєРё
     cur-grid @ :gfixheight +!
   THEN
 \ ." gp3: rfixh=" cur-grid @ :gfixheight @ . CR
 PROC;
 
-\ четвертый проход:
-\ высчитываем размеры каждой нефиксированной клетки и каждого нефиксированного ряда
-\ в %% к общей ширине таблицы
+\ С‡РµС‚РІРµСЂС‚С‹Р№ РїСЂРѕС…РѕРґ:
+\ РІС‹СЃС‡РёС‚С‹РІР°РµРј СЂР°Р·РјРµСЂС‹ РєР°Р¶РґРѕР№ РЅРµС„РёРєСЃРёСЂРѕРІР°РЅРЅРѕР№ РєР»РµС‚РєРё Рё РєР°Р¶РґРѕРіРѕ РЅРµС„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРіРѕ СЂСЏРґР°
+\ РІ %% Рє РѕР±С‰РµР№ С€РёСЂРёРЅРµ С‚Р°Р±Р»РёС†С‹
 
 PROC: row-pass4
   cur-bind @ :brelw @ DUP 0< NOT IF
     ?DUP 0= IF 
       cur-bind @ :bwidth @ 1000 temp @ */
-    \ если выставлена - перевести из % в %%
+    \ РµСЃР»Рё РІС‹СЃС‚Р°РІР»РµРЅР° - РїРµСЂРµРІРµСЃС‚Рё РёР· % РІ %%
     ELSE 
       10 *
     THEN
@@ -996,11 +996,11 @@ PROC: row-pass4
 PROC;
 
 PROC: grid-pass4
-  \ ширина текущего ряда без фиксированных клеток
+  \ С€РёСЂРёРЅР° С‚РµРєСѓС‰РµРіРѕ СЂСЏРґР° Р±РµР· С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹С… РєР»РµС‚РѕРє
   cur-row @ :rwidth @ cur-row @ :rfixwidth @ - temp !
   row-pass4 traverse-row
   cur-row @ :rheight @ 0 > IF
-    \ посчитаем высоту ряда в %%
+    \ РїРѕСЃС‡РёС‚Р°РµРј РІС‹СЃРѕС‚Сѓ СЂСЏРґР° РІ %%
     cur-row @ :rheight @ 1000 cur-grid @ :gheight @ cur-grid @ :gfixheight @ - */
     cur-row @ :rheight !
   THEN
@@ -1021,7 +1021,7 @@ VECT add-grid-to-window
 ;
 
 : add-controls-in-row ( row -- )
-  \ ищем последнюю ячейку...
+  \ РёС‰РµРј РїРѕСЃР»РµРґРЅСЋСЋ СЏС‡РµР№РєСѓ...
   ?DUP IF
     BEGIN
       ?DUP
@@ -1029,7 +1029,7 @@ VECT add-grid-to-window
       DUP cur-bind !
       :blink @
     REPEAT
-     \ и проходим ячейки в обратном порядке
+     \ Рё РїСЂРѕС…РѕРґРёРј СЏС‡РµР№РєРё РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ
      cur-bind @ 
      BEGIN
        DUP :bdweller @ add-control
@@ -1037,14 +1037,14 @@ VECT add-grid-to-window
     ?DUP 0= UNTIL
   THEN ;
 
-\ Проходим всю сетку задом наперед и подключаем к окну 
-\ все элементы управления
+\ РџСЂРѕС…РѕРґРёРј РІСЃСЋ СЃРµС‚РєСѓ Р·Р°РґРѕРј РЅР°РїРµСЂРµРґ Рё РїРѕРґРєР»СЋС‡Р°РµРј Рє РѕРєРЅСѓ 
+\ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ
 :NONAME ( show? grid win -- )
   ROT temp !
   current-window -ROT
   TO current-window
   cur-grid @ SWAP cur-grid !
-  \ ищем последний ряд...
+  \ РёС‰РµРј РїРѕСЃР»РµРґРЅРёР№ СЂСЏРґ...
   cur-grid @ :glink @ ?DUP IF
     BEGIN
       ?DUP
@@ -1052,7 +1052,7 @@ VECT add-grid-to-window
       DUP cur-row !
       :rlink @
     REPEAT
-    \ и проходим ряды в обратном порядке
+    \ Рё РїСЂРѕС…РѕРґРёРј СЂСЏРґС‹ РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ
     cur-row @ 
     BEGIN
       DUP :rblink @ add-controls-in-row
@@ -1078,7 +1078,7 @@ VECT add-grid-to-window
 \ ---------------------------
 VECT map-grid
 
-\ в cur-halign и cur-valign запомним ширину ячейки и высоту ряда
+\ РІ cur-halign Рё cur-valign Р·Р°РїРѕРјРЅРёРј С€РёСЂРёРЅСѓ СЏС‡РµР№РєРё Рё РІС‹СЃРѕС‚Сѓ СЂСЏРґР°
 
 PROC: map-bind { \ new-w new-h new-x new-y ww hh xm ym resize? }
   cur-bind @ :bwidth @ cur-halign !
@@ -1086,7 +1086,7 @@ PROC: map-bind { \ new-w new-h new-x new-y ww hh xm ym resize? }
   cur-bind @ :bymargin @ TO ym
   cur-halign @ xm 2* - TO ww
   cur-valign @ ym 2* - TO hh
-\ рассчитываем х
+\ СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј С…
   cur-bind @ :bhalign @ CASE
     bleft   OF xm ENDOF
     bcenter OF 
@@ -1100,7 +1100,7 @@ PROC: map-bind { \ new-w new-h new-x new-y ww hh xm ym resize? }
       xm
     ENDOF
   ENDCASE TO new-x
-\ рассчитываем y
+\ СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј y
   cur-bind @ :bvalign @ CASE
     bleft   OF ym ENDOF
     bcenter OF 
@@ -1117,7 +1117,7 @@ PROC: map-bind { \ new-w new-h new-x new-y ww hh xm ym resize? }
 \ ." map-bind: xx=" cur-xx @ . ." width=" cur-halign @ .
 \ ." newx=" new-x . ." newy=" new-y .
 \ ." neww=" new-w . ." newh=" new-h . CR
-\ если надо - изменяем размер
+\ РµСЃР»Рё РЅР°РґРѕ - РёР·РјРµРЅСЏРµРј СЂР°Р·РјРµСЂ
   new-w new-h + DUP TO resize? IF
     new-w 0= IF cur-bind @ :bdwellerw @ TO new-w THEN
     new-h 0= IF cur-bind @ :bdwellerh @ TO new-h THEN
@@ -1143,7 +1143,7 @@ PROC: map-bind { \ new-w new-h new-x new-y ww hh xm ym resize? }
     THEN
     new-x cur-xx @ + new-y cur-yy @ + ROT another-place
   THEN
-\ передвигаемся дальше
+\ РїРµСЂРµРґРІРёРіР°РµРјСЃСЏ РґР°Р»СЊС€Рµ
   cur-halign @ cur-xx +!
 PROC;
 
@@ -1155,9 +1155,9 @@ PROC: calc-bind
 PROC;
 
 PROC: stretch-bind
-  \ temp - общая сумма растяжения
-  \ temp2 - сумма длин растягиваемых ячеек
-  \ распределяем дополнительные длины пропорционально длине ячейки
+  \ temp - РѕР±С‰Р°СЏ СЃСѓРјРјР° СЂР°СЃС‚СЏР¶РµРЅРёСЏ
+  \ temp2 - СЃСѓРјРјР° РґР»РёРЅ СЂР°СЃС‚СЏРіРёРІР°РµРјС‹С… СЏС‡РµРµРє
+  \ СЂР°СЃРїСЂРµРґРµР»СЏРµРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РґР»РёРЅС‹ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕ РґР»РёРЅРµ СЏС‡РµР№РєРё
   cur-bind @ :bnostretch @ 0= IF
     cur-bind @ :bwidth @ temp @ temp2 @ */ cur-bind @ :bwidth +!
   THEN
@@ -1168,19 +1168,19 @@ PROC: map-row
     IF ABS ELSE cur-height @ cur-grid @ :gfixheight @ - 1000 */ THEN
   cur-valign !
 \ ." map-row: yy=" cur-yy @ . ." height=" cur-valign @ . CR
-\ высчитаем ширину каждой ячейки, общую сумму ячеек (temp) 
-\ и сумму нерастягиваемых ячеек (temp2)
+\ РІС‹СЃС‡РёС‚Р°РµРј С€РёСЂРёРЅСѓ РєР°Р¶РґРѕР№ СЏС‡РµР№РєРё, РѕР±С‰СѓСЋ СЃСѓРјРјСѓ СЏС‡РµРµРє (temp) 
+\ Рё СЃСѓРјРјСѓ РЅРµСЂР°СЃС‚СЏРіРёРІР°РµРјС‹С… СЏС‡РµРµРє (temp2)
   temp 0!  temp2 0!
   calc-bind traverse-row
-\ растянем при необходимости ячейки
+\ СЂР°СЃС‚СЏРЅРµРј РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё СЏС‡РµР№РєРё
   cur-width @ temp @ - 1 > IF
-    \ сумма растягиваемых ячеек
+    \ СЃСѓРјРјР° СЂР°СЃС‚СЏРіРёРІР°РµРјС‹С… СЏС‡РµРµРє
     temp @ temp2 @ - temp2 !
-    \ общая сумма растяжения
+    \ РѕР±С‰Р°СЏ СЃСѓРјРјР° СЂР°СЃС‚СЏР¶РµРЅРёСЏ
     cur-width @ temp @ - temp !
     stretch-bind traverse-row
   THEN
-\ расставим содержание ячеек
+\ СЂР°СЃСЃС‚Р°РІРёРј СЃРѕРґРµСЂР¶Р°РЅРёРµ СЏС‡РµРµРє
   cur-xx @
   map-bind traverse-row
   cur-valign @ cur-yy +!
@@ -1190,7 +1190,7 @@ PROC;
 :NONAME ( xbeg ybeg width height grid -- )
 \ ." map-grid: xbeg=" 4 PICK . ." ybeg=" 3 PICK . ." w=" 2 PICK . ." h=" 1 PICK . CR
   >R >R >R >R >R
-  \ сохраним все глобальные переменные
+  \ СЃРѕС…СЂР°РЅРёРј РІСЃРµ РіР»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
   save-grid-vars
   cur-width @ cur-height @
   cur-xx @ cur-yy @
@@ -1198,7 +1198,7 @@ PROC;
   R> cur-xx ! R> cur-yy ! 
   R> cur-width ! R> cur-height ! R> cur-grid !
   map-row traverse-grid
-  \ восстановим глобальные переменные
+  \ РІРѕСЃСЃС‚Р°РЅРѕРІРёРј РіР»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
   cur-valign ! cur-halign !
   cur-yy ! cur-xx !
   cur-height ! cur-width !
@@ -1216,7 +1216,7 @@ TO map-grid
   -hwnd@ GetParent ?DUP IF 
     window@ DUP -xsize@ SWAP -ysize@
   ELSE
-    screen-x 10 - screen-y 20 - ( с небольшой поправкой на оформление окна)
+    screen-x 10 - screen-y 20 - ( СЃ РЅРµР±РѕР»СЊС€РѕР№ РїРѕРїСЂР°РІРєРѕР№ РЅР° РѕС„РѕСЂРјР»РµРЅРёРµ РѕРєРЅР°)
   THEN ;
 
 :NONAME { grid win -- }
@@ -1233,7 +1233,7 @@ TO map-grid
   thiswin resize-window-grid
 ; -gridresize window store
 
-\ Модальные диалоги ==================
+\ РњРѕРґР°Р»СЊРЅС‹Рµ РґРёР°Р»РѕРіРё ==================
 
 : MODAL... ( z -- oldmw olddlg )
   modal-window dialog 

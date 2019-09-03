@@ -37,10 +37,10 @@ InstallDirRegKey HKLM "SOFTWARE\${PROD_VENDOR}\${PROD_NAME}" "InstallLocation"
 
 !define MUI_ABORTWARNING
 !define MUI_ICON "${PROD_ICON}"
-; Пускай BrandingText будет NSIS'овский
+; РџСѓСЃРєР°Р№ BrandingText Р±СѓРґРµС‚ NSIS'РѕРІСЃРєРёР№
 ; BrandingText /TRIMRIGHT  "$(LBrandingSitePlaceHolderPl)"
-; NSIS вычисляет длину строки BrandingText до раскрытия макросов,
-; поэтому подгоняем длину макроса под длину результата.
+; NSIS РІС‹С‡РёСЃР»СЏРµС‚ РґР»РёРЅСѓ СЃС‚СЂРѕРєРё BrandingText РґРѕ СЂР°СЃРєСЂС‹С‚РёСЏ РјР°РєСЂРѕСЃРѕРІ,
+; РїРѕСЌС‚РѕРјСѓ РїРѕРґРіРѕРЅСЏРµРј РґР»РёРЅСѓ РјР°РєСЂРѕСЃР° РїРѕРґ РґР»РёРЅСѓ СЂРµР·СѓР»СЊС‚Р°С‚Р°.
 
 ;--------------------------------
 ; Pages
@@ -76,10 +76,10 @@ InstallDirRegKey HKLM "SOFTWARE\${PROD_VENDOR}\${PROD_NAME}" "InstallLocation"
 !insertmacro MUI_LANGUAGE "Russian"
 
 LangString LSetup ${LANG_ENGLISH} "Installing"
-LangString LSetup ${LANG_RUSSIAN} "Установка"
+LangString LSetup ${LANG_RUSSIAN} "РЈСЃС‚Р°РЅРѕРІРєР°"
 
 LangString LSupportText ${LANG_ENGLISH} "Support site: www.forth.org.ru"
-LangString LSupportText ${LANG_RUSSIAN} "Поддержка на сайте www.forth.org.ru"
+LangString LSupportText ${LANG_RUSSIAN} "РџРѕРґРґРµСЂР¶РєР° РЅР° СЃР°Р№С‚Рµ www.forth.org.ru"
 
 LangString LSupportLink ${LANG_ENGLISH} "http://www.forth.org.ru/"
 LangString LSupportLink ${LANG_RUSSIAN} "http://www.forth.org.ru/"
@@ -88,19 +88,19 @@ LangString LBrandingSitePlaceHolderPl ${LANG_ENGLISH} "http://www.forth.org.ru/"
 LangString LBrandingSitePlaceHolderPl ${LANG_RUSSIAN} "http://www.forth.org.ru/"
 
 LangString LEservInstalled ${LANG_ENGLISH} "${PROD_NAME} installed successfully."
-LangString LEservInstalled ${LANG_RUSSIAN} "${PROD_NAME} успешно установлен."
+LangString LEservInstalled ${LANG_RUSSIAN} "${PROD_NAME} СѓСЃРїРµС€РЅРѕ СѓСЃС‚Р°РЅРѕРІР»РµРЅ."
 
 LangString LClickNext ${LANG_ENGLISH} "Click 'Next' to continue"
-LangString LClickNext ${LANG_RUSSIAN} "Нажмите 'Далее' для продолжения"
+LangString LClickNext ${LANG_RUSSIAN} "РќР°Р¶РјРёС‚Рµ 'Р”Р°Р»РµРµ' РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ"
 
 LangString LNoInstall ${LANG_ENGLISH} "don't install"
-LangString LNoInstall ${LANG_RUSSIAN} "не устанавливаем"
+LangString LNoInstall ${LANG_RUSSIAN} "РЅРµ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј"
 
 LangString LServiceHeader3 ${LANG_ENGLISH} "Install finishing"
-LangString LServiceHeader3 ${LANG_RUSSIAN} "Завершение установки"
+LangString LServiceHeader3 ${LANG_RUSSIAN} "Р—Р°РІРµСЂС€РµРЅРёРµ СѓСЃС‚Р°РЅРѕРІРєРё"
 
 LangString LReadmeYN ${LANG_ENGLISH} "Do you want to read README?"
-LangString LReadmeYN ${LANG_RUSSIAN} "Будете читать README?"
+LangString LReadmeYN ${LANG_RUSSIAN} "Р‘СѓРґРµС‚Рµ С‡РёС‚Р°С‚СЊ README?"
 
 LicenseLangString LLicenseData ${LANG_ENGLISH} "{SPF-PATH}\docs\license\gpl.en.txt"
 LicenseLangString LLicenseData ${LANG_RUSSIAN} "{SPF-PATH}\docs\license\gpl.ru.txt"
@@ -121,13 +121,13 @@ LangString LDevelFile ${LANG_ENGLISH} "docs\devel.en.html"
 LangString LDevelFile ${LANG_RUSSIAN} "docs\devel.ru.html" 
 
 LangString LLinkLicense ${LANG_ENGLISH} "License"
-LangString LLinkLicense ${LANG_RUSSIAN} "Лицензия"
+LangString LLinkLicense ${LANG_RUSSIAN} "Р›РёС†РµРЅР·РёСЏ"
 
 LangString LDocsAll ${LANG_ENGLISH} "Documentation"
 LangString LDocsAll ${LANG_RUSSIAN} "Documentation"
 
 LangString LViewReadmeText ${LANG_ENGLISH} "View README"
-LangString LViewReadmeText ${LANG_RUSSIAN} "Посмотреть README" 
+LangString LViewReadmeText ${LANG_RUSSIAN} "РџРѕСЃРјРѕС‚СЂРµС‚СЊ README" 
 
 ;-------------
 ; Sections
@@ -136,31 +136,31 @@ LangString LSecUnRegValText ${LANG_ENGLISH} "Add/Remove"
 LangString LSecUnRegValText ${LANG_RUSSIAN} "Add/Remove"
 
 LangString LSecUnRegValDesc ${LANG_ENGLISH} "Register ${PROD_NAME} in system registry so you can manage it through Add/Remove Programs"
-LangString LSecUnRegValDesc ${LANG_RUSSIAN} "Зарегистрировать ${PROD_NAME} в системном реестре, так что вы сможете легко изменить установку с помощью Add/Remove Programs"
+LangString LSecUnRegValDesc ${LANG_RUSSIAN} "Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ ${PROD_NAME} РІ СЃРёСЃС‚РµРјРЅРѕРј СЂРµРµСЃС‚СЂРµ, С‚Р°Рє С‡С‚Рѕ РІС‹ СЃРјРѕР¶РµС‚Рµ Р»РµРіРєРѕ РёР·РјРµРЅРёС‚СЊ СѓСЃС‚Р°РЅРѕРІРєСѓ СЃ РїРѕРјРѕС‰СЊСЋ Add/Remove Programs"
 
 LangString LSecAssociateText ${LANG_ENGLISH} "File extensions"
-LangString LSecAssociateText ${LANG_RUSSIAN} "Расширения файлов"
+LangString LSecAssociateText ${LANG_RUSSIAN} "Р Р°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»РѕРІ"
 
 LangString LSecAssociateDesc ${LANG_ENGLISH} "Associate *.spf, *.f file extensions with ${PROD_NAME}"
-LangString LSecAssociateDesc ${LANG_RUSSIAN} "Зарегистрировать расширения файлов *.spf и *.f на ${PROD_NAME}"
+LangString LSecAssociateDesc ${LANG_RUSSIAN} "Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»РѕРІ *.spf Рё *.f РЅР° ${PROD_NAME}"
 
 LangString LSecShortcutsText ${LANG_ENGLISH} "Shortcuts"
-LangString LSecShortcutsText ${LANG_RUSSIAN} "Ярлыки"
+LangString LSecShortcutsText ${LANG_RUSSIAN} "РЇСЂР»С‹РєРё"
 
 LangString LSecShortcutsDesc ${LANG_ENGLISH} "Add shortcuts"
-LangString LSecShortcutsDesc ${LANG_RUSSIAN} "Добавить ярлыки"
+LangString LSecShortcutsDesc ${LANG_RUSSIAN} "Р”РѕР±Р°РІРёС‚СЊ СЏСЂР»С‹РєРё"
 
 LangString LSecStartMenuText ${LANG_ENGLISH} "Start Menu"
-LangString LSecStartMenuText ${LANG_RUSSIAN} "Главное Меню"
+LangString LSecStartMenuText ${LANG_RUSSIAN} "Р“Р»Р°РІРЅРѕРµ РњРµРЅСЋ"
 
 LangString LSecStartMenuDesc ${LANG_ENGLISH} "Add shortcuts to the Start Menu"
-LangString LSecStartMenuDesc ${LANG_RUSSIAN} "Добавить ярлыки в главное меню"
+LangString LSecStartMenuDesc ${LANG_RUSSIAN} "Р”РѕР±Р°РІРёС‚СЊ СЏСЂР»С‹РєРё РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ"
 
 LangString LSecDesktopText ${LANG_ENGLISH} "Desktop"
-LangString LSecDesktopText ${LANG_RUSSIAN} "Рабочий стол"
+LangString LSecDesktopText ${LANG_RUSSIAN} "Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»"
 
 LangString LSecDesktopDesc ${LANG_ENGLISH} "Add shortcut to the Desktop"
-LangString LSecDesktopDesc ${LANG_RUSSIAN} "Добавить ярлык на рабочий стол"
+LangString LSecDesktopDesc ${LANG_RUSSIAN} "Р”РѕР±Р°РІРёС‚СЊ СЏСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РёР№ СЃС‚РѕР»"
 
 ;-------------
 
@@ -168,22 +168,22 @@ LangString LSecSPFText ${LANG_ENGLISH} "${PROD_NAME}"
 LangString LSecSPFText ${LANG_RUSSIAN} "${PROD_NAME}"
 
 LangString LSecSPFDesc ${LANG_ENGLISH} "${PROD_NAME} executable, libraries, devel, documentation etc"
-LangString LSecSPFDesc ${LANG_RUSSIAN} "${PROD_NAME}, библиотеки, документация, devel итд"
+LangString LSecSPFDesc ${LANG_RUSSIAN} "${PROD_NAME}, Р±РёР±Р»РёРѕС‚РµРєРё, РґРѕРєСѓРјРµРЅС‚Р°С†РёСЏ, devel РёС‚Рґ"
 
 LangString LAlreadyInstalledText ${LANG_ENGLISH} "It looks like ${PROD_NAME} is already present in '$INSTDIR'.$\r$\nOverwrite?$\r$\n(If you answer YES all the files will be overwritten.)"
-LangString LAlreadyInstalledText ${LANG_RUSSIAN} "Похоже, что ${PROD_NAME} уже установлен в '$INSTDIR'.$\r$\nПерезаписать поверх?$\r$\n(Если вы ответите ДА, все файлы будут перезаписаны.)"
+LangString LAlreadyInstalledText ${LANG_RUSSIAN} "РџРѕС…РѕР¶Рµ, С‡С‚Рѕ ${PROD_NAME} СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ РІ '$INSTDIR'.$\r$\nРџРµСЂРµР·Р°РїРёСЃР°С‚СЊ РїРѕРІРµСЂС…?$\r$\n(Р•СЃР»Рё РІС‹ РѕС‚РІРµС‚РёС‚Рµ Р”Рђ, РІСЃРµ С„Р°Р№Р»С‹ Р±СѓРґСѓС‚ РїРµСЂРµР·Р°РїРёСЃР°РЅС‹.)"
 
 LangString LUninstall ${LANG_ENGLISH} "To uninstall ${PROD_NAME}, stop its services and click 'Remove' button."
-LangString LUninstall ${LANG_RUSSIAN} "Если вы решили удалить ${PROD_NAME}, остановите его сервисы и нажмите 'Удалить' для продолжения."
+LangString LUninstall ${LANG_RUSSIAN} "Р•СЃР»Рё РІС‹ СЂРµС€РёР»Рё СѓРґР°Р»РёС‚СЊ ${PROD_NAME}, РѕСЃС‚Р°РЅРѕРІРёС‚Рµ РµРіРѕ СЃРµСЂРІРёСЃС‹ Рё РЅР°Р¶РјРёС‚Рµ 'РЈРґР°Р»РёС‚СЊ' РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ."
 
 LangString LWelcomeHeaderText ${LANG_ENGLISH} "Welcome to the ${PROD_NAME} Setup Wizard"
-LangString LWelcomeHeaderText ${LANG_RUSSIAN} "Вас приветствует мастер установки ${PROD_NAME}"
+LangString LWelcomeHeaderText ${LANG_RUSSIAN} "Р’Р°СЃ РїСЂРёРІРµС‚СЃС‚РІСѓРµС‚ РјР°СЃС‚РµСЂ СѓСЃС‚Р°РЅРѕРІРєРё ${PROD_NAME}"
 
 LangString LWelcomeMainText ${LANG_ENGLISH} "This wizard will install ${PROD_NAME} ${VER_MAJOR}.${VER_MINOR}.\r\n\r\nIf you have previously installed ${PROD_NAME} and it is currently running, please exit ${PROD_NAME} first before continuing this installation.\r\n\r\n$_CLICK"
-LangString LWelcomeMainText ${LANG_RUSSIAN} "Эта программа установит ${PROD_NAME} ${VER_MAJOR}.${VER_MINOR} на Ваш компьютер.\r\n\r\nЕсли вы ранее устанавливали ${PROD_NAME} и он сейчас запущен, пожалуйста завершите ${PROD_NAME} до начала установки.\r\n\r\n$_CLICK"
+LangString LWelcomeMainText ${LANG_RUSSIAN} "Р­С‚Р° РїСЂРѕРіСЂР°РјРјР° СѓСЃС‚Р°РЅРѕРІРёС‚ ${PROD_NAME} ${VER_MAJOR}.${VER_MINOR} РЅР° Р’Р°С€ РєРѕРјРїСЊСЋС‚РµСЂ.\r\n\r\nР•СЃР»Рё РІС‹ СЂР°РЅРµРµ СѓСЃС‚Р°РЅР°РІР»РёРІР°Р»Рё ${PROD_NAME} Рё РѕРЅ СЃРµР№С‡Р°СЃ Р·Р°РїСѓС‰РµРЅ, РїРѕР¶Р°Р»СѓР№СЃС‚Р° Р·Р°РІРµСЂС€РёС‚Рµ ${PROD_NAME} РґРѕ РЅР°С‡Р°Р»Р° СѓСЃС‚Р°РЅРѕРІРєРё.\r\n\r\n$_CLICK"
 
 LangString LAssocPresentWarn ${LANG_ENGLISH} "Extension '$R0' is already associated as '$R1'.$\r$\nDo you want to overwrite this association?"
-LangString LAssocPresentWarn ${LANG_RUSSIAN} "Расширение '$R0' уже зарегистрировано, как '$R1'.$\r$\nВы уверены что хотите перезаписать?"
+LangString LAssocPresentWarn ${LANG_RUSSIAN} "Р Р°СЃС€РёСЂРµРЅРёРµ '$R0' СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРѕ, РєР°Рє '$R1'.$\r$\nР’С‹ СѓРІРµСЂРµРЅС‹ С‡С‚Рѕ С…РѕС‚РёС‚Рµ РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ?"
 
 ;--------------------------------
 ; Installer Functions
@@ -368,16 +368,16 @@ UninstallIcon "${MUI_ICON}"
 Section "Uninstall"
 
   SetDetailsPrint textonly
-  DetailPrint "Удаляем ${PROD_NAME}..."
+  DetailPrint "РЈРґР°Р»СЏРµРј ${PROD_NAME}..."
   SetDetailsPrint listonly
 
   IfFileExists $INSTDIR\spf4.exe spf_installed
-    MessageBox MB_YESNO "Похоже, что ${PROD_NAME} не установлен в '$INSTDIR'.$\r$\nПопробовать все равно? (не рекомендуется)" IDYES spf_installed
-    Abort "Uninstall прерван"
+    MessageBox MB_YESNO "РџРѕС…РѕР¶Рµ, С‡С‚Рѕ ${PROD_NAME} РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ РІ '$INSTDIR'.$\r$\nРџРѕРїСЂРѕР±РѕРІР°С‚СЊ РІСЃРµ СЂР°РІРЅРѕ? (РЅРµ СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ)" IDYES spf_installed
+    Abort "Uninstall РїСЂРµСЂРІР°РЅ"
   spf_installed:
 
   SetDetailsPrint textonly
-  DetailPrint "Удаляем файлы $INSTDIR\*..."
+  DetailPrint "РЈРґР°Р»СЏРµРј С„Р°Р№Р»С‹ $INSTDIR\*..."
   SetDetailsPrint listonly
 
   RMDir /r "$SMPROGRAMS\${PROD_NAME}"

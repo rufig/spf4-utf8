@@ -1,5 +1,5 @@
-\ Ïîëó÷åíèå èìåíè êîíòðîëëåðà äîìåíà AD â ôîðìàòå "\\õîñò.dc.â.äîìåíå".
-\ Åñëè êîìïüþòåð âíå äîìåíà (âíå MS-äîìåíîâ), òî âîçâðàùàåòñÿ ïóñòàÿ ñòðîêà.
+\ ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸Ð¼ÐµÐ½Ð¸ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»Ð»ÐµÑ€Ð° Ð´Ð¾Ð¼ÐµÐ½Ð° AD Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ "\\Ñ…Ð¾ÑÑ‚.dc.Ð².Ð´Ð¾Ð¼ÐµÐ½Ðµ".
+\ Ð•ÑÐ»Ð¸ ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€ Ð²Ð½Ðµ Ð´Ð¾Ð¼ÐµÐ½Ð° (Ð²Ð½Ðµ MS-Ð´Ð¾Ð¼ÐµÐ½Ð¾Ð²), Ñ‚Ð¾ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ÑÑ Ð¿ÑƒÑÑ‚Ð°Ñ ÑÑ‚Ñ€Ð¾ÐºÐ°.
 
  4 CONSTANT /LPTSTR
  4 CONSTANT /ULONG
@@ -39,7 +39,7 @@ VARIABLE ADDC_DEBUG
      R@ dci.DomainControllerName @ ASCIIZ> TYPE CR     \ \\host.dom.ain
      R@ dci.DomainControllerAddress @ ASCIIZ> TYPE CR  \ \\169.254.98.49
      R@ dci.DomainControllerAddressType @ .            \ 1
-     R@ dci.DomainGuid /GUID DUMP CR                   \ 16 áàéò GUID
+     R@ dci.DomainGuid /GUID DUMP CR                   \ 16 Ð±Ð°Ð¹Ñ‚ GUID
      R@ dci.DomainName @ ASCIIZ> TYPE CR               \ dom.ain
      R@ dci.DnsForestName @ ASCIIZ> TYPE CR            \ dom.ain
      R@ dci.Flags @ . CR                               \ -536870403

@@ -3,12 +3,12 @@
 1500 VALUE PACK_SIZE
 
 : ServerUdp { ss \ mem port ip size -- ior }
-\ Серверный поток:
-\ и выполнять обработку клиентских пакетов.
-\ ss - серверный сокет, уже настроенный bind.
+\ РЎРµСЂРІРµСЂРЅС‹Р№ РїРѕС‚РѕРє:
+\ Рё РІС‹РїРѕР»РЅСЏС‚СЊ РѕР±СЂР°Р±РѕС‚РєСѓ РєР»РёРµРЅС‚СЃРєРёС… РїР°РєРµС‚РѕРІ.
+\ ss - СЃРµСЂРІРµСЂРЅС‹Р№ СЃРѕРєРµС‚, СѓР¶Рµ РЅР°СЃС‚СЂРѕРµРЅРЅС‹Р№ bind.
   SP@ S0 !
   ss TO vServerSocket
-  ss TO vClientSocket \ это для лога
+  ss TO vClientSocket \ СЌС‚Рѕ РґР»СЏ Р»РѕРіР°
   PACK_SIZE ALLOCATE THROW -> mem
   NextThread
   BEGIN

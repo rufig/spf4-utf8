@@ -1,8 +1,8 @@
-( 17.08.1999 Черезов А. )
+( 17.08.1999 Р§РµСЂРµР·РѕРІ Рђ. )
 
-( Работа с базами данных ODBC, замена библиотеки s.txt двухлетней давности.
-  + обновление 19.08.1999
-  + замена temps на locals 7.12.2000
+( Р Р°Р±РѕС‚Р° СЃ Р±Р°Р·Р°РјРё РґР°РЅРЅС‹С… ODBC, Р·Р°РјРµРЅР° Р±РёР±Р»РёРѕС‚РµРєРё s.txt РґРІСѓС…Р»РµС‚РЅРµР№ РґР°РІРЅРѕСЃС‚Рё.
+  + РѕР±РЅРѕРІР»РµРЅРёРµ 19.08.1999
+  + Р·Р°РјРµРЅР° temps РЅР° locals 7.12.2000
 )
 
 REQUIRE { ~ac/lib/locals.f
@@ -122,7 +122,7 @@ VECT vSQLDumpError ' SQLDumpError TO vSQLDumpError
   fodbc odbcEnv SQLAllocEnv SQL_OK?
   IF
      SQL_IS_INTEGER SQL_OV_ODBC2 SQL_ATTR_ODBC_VERSION
-     fodbc odbcEnv @ SQLSetEnvAttr DROP \ без этого новый ODBC работать не хочет
+     fodbc odbcEnv @ SQLSetEnvAttr DROP \ Р±РµР· СЌС‚РѕРіРѕ РЅРѕРІС‹Р№ ODBC СЂР°Р±РѕС‚Р°С‚СЊ РЅРµ С…РѕС‡РµС‚
      fodbc odbcConn  fodbc odbcEnv @ SQLAllocConnect SQL_OK? fodbc SWAP
   ELSE fodbc FALSE THEN
 ;
@@ -193,7 +193,7 @@ CONSTANT /ci
   m ciDataTypePtr @ SqlIsBinary \ BLOB
   IF m ciColumnSizePtr @ 2* m ciColumnSizePtr ! THEN
   m ciColumnSizePtr @ DUP -1 < IF DROP 200000 THEN
-  200000 MIN m ciColumnSizePtr ! \ баги в некоторых ODBC
+  200000 MIN m ciColumnSizePtr ! \ Р±Р°РіРё РІ РЅРµРєРѕС‚РѕСЂС‹С… ODBC
 ;
 : IndexResultCols ( fodbc -- )
   0 OVER odbcColsIndex !
@@ -209,7 +209,7 @@ CONSTANT /ci
     DUP
   WHILE
     DUP ciColumnSizePtr @
-        0 MAX \ NULL выдает размер -1
+        0 MAX \ NULL РІС‹РґР°РµС‚ СЂР°Р·РјРµСЂ -1
         n + -> n
     ciLink @
   REPEAT DROP
@@ -278,7 +278,7 @@ VECT vSQLLastQuery ' SQLLastQuery TO vSQLLastQuery
 : ExecSQL ( S" statement" fodbc -- ior )
   { sta stu fodbc }
   sta stu vSQLLastQuery
-  fodbc FreeStmt \ освободим предыдущий запрос, если был
+  fodbc FreeStmt \ РѕСЃРІРѕР±РѕРґРёРј РїСЂРµРґС‹РґСѓС‰РёР№ Р·Р°РїСЂРѕСЃ, РµСЃР»Рё Р±С‹Р»
   fodbc odbcStat  fodbc odbcConn @  SQLAllocStmt
   DUP SQL_OK?
   IF DROP
@@ -293,13 +293,13 @@ VECT vSQLLastQuery ' SQLLastQuery TO vSQLLastQuery
 \  0 ( SQL_COMMIT) fodbc odbcEnv @ 1 ( SQL_HANDLE_ENV) SQLEndTran DROP
   fodbc FreeStmt
   fodbc odbcConn @ ?DUP IF DUP SQLDisconnect DROP SQLFreeConnect DROP fodbc odbcConn 0! THEN
-( disconnect нужен после каждого UPDATE для некоторых ODBC-драйверов...
-  но при нескольких запросах per connect лучше не пользоваться FreeExec )
+( disconnect РЅСѓР¶РµРЅ РїРѕСЃР»Рµ РєР°Р¶РґРѕРіРѕ UPDATE РґР»СЏ РЅРµРєРѕС‚РѕСЂС‹С… ODBC-РґСЂР°Р№РІРµСЂРѕРІ...
+  РЅРѕ РїСЂРё РЅРµСЃРєРѕР»СЊРєРёС… Р·Р°РїСЂРѕСЃР°С… per connect Р»СѓС‡С€Рµ РЅРµ РїРѕР»СЊР·РѕРІР°С‚СЊСЃСЏ FreeExec )
 ;
 : StopSQL ( fodbc -- )
   { fodbc }
 \  fodbc odbcConn @ SQLDisconnect DROP
-  fodbc 0= IF EXIT THEN \ уже закрыто или не было открыто...
+  fodbc 0= IF EXIT THEN \ СѓР¶Рµ Р·Р°РєСЂС‹С‚Рѕ РёР»Рё РЅРµ Р±С‹Р»Рѕ РѕС‚РєСЂС‹С‚Рѕ...
   fodbc FreeStmt
   fodbc odbcConn @ ?DUP IF DUP SQLDisconnect DROP SQLFreeConnect DROP THEN
   fodbc odbcEnv  @ SQLFreeEnv DROP

@@ -15,7 +15,7 @@
 ;
 
 : ENUM-VOCS-FORTH ( xt -- )
-\ перебор только обычных форт-словарей (у которых CLASS равен 0 или FORTH-WORDLIST )
+\ РїРµСЂРµР±РѕСЂ С‚РѕР»СЊРєРѕ РѕР±С‹С‡РЅС‹С… С„РѕСЂС‚-СЃР»РѕРІР°СЂРµР№ (Сѓ РєРѕС‚РѕСЂС‹С… CLASS СЂР°РІРµРЅ 0 РёР»Рё FORTH-WORDLIST )
 \ xt ( wid -- )
   >R VOC-LIST @ BEGIN DUP WHILE
     DUP CELL+ ( a wid ) 

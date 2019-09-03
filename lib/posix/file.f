@@ -17,7 +17,7 @@ REQUIRE [UNDEFINED]           lib/include/tools.f
 
 0 [IF]
 : TOEND-FILE ( fileid -- ior )
-\ ïåðåìåñòèòü óêàçàòåëü ôàéëà  â êîíåö ôàéëà.
+\ Ð¿ÐµÑ€ÐµÐ¼ÐµÑÑ‚Ð¸Ñ‚ÑŒ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ñ„Ð°Ð¹Ð»Ð°  Ð² ÐºÐ¾Ð½ÐµÑ† Ñ„Ð°Ð¹Ð»Ð°.
 
   DUP >R   FILE-SIZE  ( fileid -- ud ior ) 
   ?DUP IF R> DROP NIP NIP EXIT THEN
@@ -50,8 +50,8 @@ WINAPI: GetFullPathNameA KERNEL32.DLL (
   -- DWORD )
 
 : ExtFilePathName ( a u -- a u1 )
-\ ïèøåò èìÿ ñ ïóòåì âìåñòî èìåíè â áóôåð ïî àäðåñó a.
-\ áóôåð äîëæåí áûòü íå ìåíåå MAX_PATH
+\ Ð¿Ð¸ÑˆÐµÑ‚ Ð¸Ð¼Ñ Ñ Ð¿ÑƒÑ‚ÐµÐ¼ Ð²Ð¼ÐµÑÑ‚Ð¾ Ð¸Ð¼ÐµÐ½Ð¸ Ð² Ð±ÑƒÑ„ÐµÑ€ Ð¿Ð¾ Ð°Ð´Ñ€ÐµÑÑƒ a.
+\ Ð±ÑƒÑ„ÐµÑ€ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ Ð½Ðµ Ð¼ÐµÐ½ÐµÐµ MAX_PATH
   OVER + 0! >R
   0 SP@ R@
   MAX_PATH R@

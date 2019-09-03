@@ -14,7 +14,7 @@ S" ~ygrek/lib/data/opengl.const" ADD-CONST-VOC
   glGetError ?DUP IF CR ." GL error " . THEN
 ;
 
-\ ïåðåíîñèò ÷èñëî ñ float-ñòåêà íà ñòåê äàííûõ â ôîðìàòå "32 áèò" (êàê åãî îæèäàþò GL ôóíêöèè)
+\ Ð¿ÐµÑ€ÐµÐ½Ð¾ÑÐ¸Ñ‚ Ñ‡Ð¸ÑÐ»Ð¾ Ñ float-ÑÑ‚ÐµÐºÐ° Ð½Ð° ÑÑ‚ÐµÐº Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ "32 Ð±Ð¸Ñ‚" (ÐºÐ°Ðº ÐµÐ³Ð¾ Ð¾Ð¶Ð¸Ð´Ð°ÑŽÑ‚ GL Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸)
 : float ( F: f -- D: f ) FLOAT>DATA32 ;
 
 \ [ 0x8D C, 0x6D C, 0xFC C,
@@ -29,5 +29,5 @@ S" ~ygrek/lib/data/opengl.const" ADD-CONST-VOC
 \        RET
 \ END-CODE
 
-\ --""-- â ôîðìàòå "64 áèò"
+\ --""-- Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ "64 Ð±Ð¸Ñ‚"
 : double ( F: f -- D: f1 f2 ) FLOAT>DATA SWAP ;

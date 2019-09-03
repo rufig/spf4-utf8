@@ -1,7 +1,7 @@
 \ $Id$
 \ Work in spf3, spf4
-\ LOCALS стандарта 94.
-\ Объявление -
+\ LOCALS СЃС‚Р°РЅРґР°СЂС‚Р° 94.
+\ РћР±СЉСЏРІР»РµРЅРёРµ -
 \ LOCALS| n1 n2 n3 |
 
 REQUIRE { ~MAK\locals1.f

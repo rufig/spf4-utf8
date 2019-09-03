@@ -6,7 +6,7 @@ REQUIRE MENUITEM ~day\joop\win\menu.f
 
 ~day\joop\samples\about_dlg.f
 
-\ Идентификаторы меню
+\ РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹ РјРµРЅСЋ
 105 CONSTANT MI_CLOSE
 106 CONSTANT MI_EXIT
 107 CONSTANT MI_CUT
@@ -45,7 +45,7 @@ CLASS: MyWindow <SUPER FrameWindow
 ;
 
 : :initListBox
-  \ Вывести список только директорий в c:
+  \ Р’С‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє С‚РѕР»СЊРєРѕ РґРёСЂРµРєС‚РѕСЂРёР№ РІ c:
     S" c:\*" DROP
     DDL_DIRECTORY DDL_EXCLUSIVE  OR
     LB_DIR listBox1 <handle @
@@ -88,14 +88,14 @@ M: MI_BINARY
 ;
                
 : :button1Click
-   S" Выберите меню File\open\text file" self :showMessage
+   S" Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЋ File\open\text file" self :showMessage
 ;
 
 : :button2Click { \ w }
    MyWindow :new -> w
    self w :create
    105 55 200 160 w :move       
-   S" Вот что может jOOP!" w :setText   
+   S" Р’РѕС‚ С‡С‚Рѕ РјРѕР¶РµС‚ jOOP!" w :setText   
    w :showModal DROP
    w :free
 ;
@@ -110,9 +110,9 @@ M: MI_BINARY
    
    S" Hello"  10 35 80 11 self edit1 :install
    max-path edit1 :setLimit
-   S" Модальное окно" 40 60 50 20 self button2 :install
+   S" РњРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ" 40 60 50 20 self button2 :install
    ['] :button2Click button2 <OnClick !
-   S" Это просто текст, причем особенным шрифтом. Обратите на это внимание"
+   S" Р­С‚Рѕ РїСЂРѕСЃС‚Рѕ С‚РµРєСЃС‚, РїСЂРёС‡РµРј РѕСЃРѕР±РµРЅРЅС‹Рј С€СЂРёС„С‚РѕРј. РћР±СЂР°С‚РёС‚Рµ РЅР° СЌС‚Рѕ РІРЅРёРјР°РЅРёРµ"
    100 45 70 80 self st1 :install
    
    Font :new -> sfont
@@ -122,7 +122,7 @@ M: MI_BINARY
    sfont <handle @ st1 :setFont
 
    
-   S" Кликните правой кнопкой мыши на форме. Это окно - не диалог Windows!!!"
+   S" РљР»РёРєРЅРёС‚Рµ РїСЂР°РІРѕР№ РєРЅРѕРїРєРѕР№ РјС‹С€Рё РЅР° С„РѕСЂРјРµ. Р­С‚Рѕ РѕРєРЅРѕ - РЅРµ РґРёР°Р»РѕРі Windows!!!"
    20 100 150 30 self st2 :install      
    S" Times New Roman" DROP sfont <lpszFace !   
    TRUE sfont <italic !
@@ -143,7 +143,7 @@ M: MI_BINARY
 : test { \ w }
    MyWindow :new -> w
    0 w :create
-   S" Вот что может jOOP!" w :setText
+   S" Р’РѕС‚ С‡С‚Рѕ РјРѕР¶РµС‚ jOOP!" w :setText
    100 50 200 160 w :move    
    w :show
    w :run 

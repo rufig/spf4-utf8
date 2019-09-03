@@ -55,15 +55,15 @@ VARIABLE desc2U
 		THEN
 	THEN ;
 
-: event: ( d m y "decs-¤®"|"desc-бҐЈ®¤­п"\n -- )
+: event: ( d m y "decs-В¤В®"|"desc-Р±ТђР€В®В¤В­Рї"\n -- )
 	days-left [CHAR] | PARSE 0 PARSE ?update-min-left-days
 ;
 
-: GP ( d m y "ѓЏ-зҐЈ®"\n -- )
+: GP ( d m y "С“РЏ-Р·ТђР€В®"\n -- )
 	days-left 0 PARSE
 	<#
 		HOLDS
-		S" Гран-При " HOLDS
+		S" Р“СЂР°РЅ-РџСЂРё " HOLDS
 	0. #>
 	2DUP ?update-min-left-days
 ;
@@ -73,29 +73,29 @@ ALSO Propis
 : .dl
 	desc1U @ 0= IF EXIT THEN
 	min-left-days @ 1 > IF
-		." До "
+		." Р”Рѕ "
 		desc1A desc1U @ TYPE
 		SPACE
 		min-left-days @
 		DUP number-of
-			S" осталось" nSTR
-			S" остался" nSTR
-			S" осталось" nSTR
+			S" РѕСЃС‚Р°Р»РѕСЃСЊ" nSTR
+			S" РѕСЃС‚Р°Р»СЃСЏ" nSTR
+			S" РѕСЃС‚Р°Р»РѕСЃСЊ" nSTR
 			DROP
 		TYPE
 		SPACE
 		DUP S>D male <# #trans 0. #> OEM>ANSI TYPE SPACE
 		number-of
-			S" дней" nSTR
-			S" день" nSTR
-			S" дня" nSTR
+			S" РґРЅРµР№" nSTR
+			S" РґРµРЅСЊ" nSTR
+			S" РґРЅСЏ" nSTR
 			DROP
 		TYPE
 	ELSE
 		min-left-days @ IF
-			." Завтра "
+			." Р—Р°РІС‚СЂР° "
 		ELSE
-			." Сегодня "
+			." РЎРµРіРѕРґРЅСЏ "
 		THEN
 		desc2A desc2U @ TYPE
 	THEN

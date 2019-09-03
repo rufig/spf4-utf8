@@ -2,12 +2,12 @@ REQUIRE ->" ~micro/autopush/interface.f
 
 MODULE: ConnectWindow
   : hwnd ( -- hwnd | 0 )
-    desktop ->" ”ÒÚ‡ÌÓ‚ÎÂÌ‡ Ò‚ˇÁ¸ Ò 8-180"
+    desktop ->" –£—Å—Ç–∞–Ω–æ–≤–ª–µ–Ω–∞ —Å–≤—è–∑—å —Å 8-180"
   ;
   : IsConnect ( -- f )
     hwnd 0<>
   ;
   : Disconnect ( -- )
-    hwnd ->" «‡‚Â&¯ËÚ¸ Ò‚ˇÁ¸" push
+    hwnd ->" –ó–∞–≤–µ—Ä&—à–∏—Ç—å —Å–≤—è–∑—å" push
   ;
 ;MODULE

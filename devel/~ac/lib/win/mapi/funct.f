@@ -10,9 +10,9 @@ WINAPI: MAPIUninitialize   MAPI32.DLL
 WINAPI: MAPILogonEx        MAPI32.DLL
 
 WINAPI: HrQueryAllRows@24  MAPI32.DLL
-\ WINAPI: HrMAPIOpenFolderEx MAPI32.DLL \ из EDK, не устанавливается с аутлуком
+\ WINAPI: HrMAPIOpenFolderEx MAPI32.DLL \ РёР· EDK, РЅРµ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ СЃ Р°СѓС‚Р»СѓРєРѕРј
 
-WINAPI: WrapCompressedRTFStream MAPI32.DLL \ html в MAPI хранится как сжатый RTF
-\ WINAPI: WrapCompressedRTFStreamEx MAPI32.DLL \ в Outlook 2002 нет
+WINAPI: WrapCompressedRTFStream MAPI32.DLL \ html РІ MAPI С…СЂР°РЅРёС‚СЃСЏ РєР°Рє СЃР¶Р°С‚С‹Р№ RTF
+\ WINAPI: WrapCompressedRTFStreamEx MAPI32.DLL \ РІ Outlook 2002 РЅРµС‚
 
 WINAPI: OpenStreamOnFile   MAPI32.DLL

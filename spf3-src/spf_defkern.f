@@ -1,8 +1,8 @@
-( Процедуры времени выполнения для CONSTANT, VARIABLE, etc.
-  ОС-независимые слова.
+( РџСЂРѕС†РµРґСѓСЂС‹ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ РґР»СЏ CONSTANT, VARIABLE, etc.
+  РћРЎ-РЅРµР·Р°РІРёСЃРёРјС‹Рµ СЃР»РѕРІР°.
   Copyright [C] 1992-1999 A.Cherezov ac@forth.org
-  Преобразование из 16-разрядного в 32-разрядный код - 1995-96гг
-  Ревизия - сентябрь 1999
+  РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РёР· 16-СЂР°Р·СЂСЏРґРЅРѕРіРѕ РІ 32-СЂР°Р·СЂСЏРґРЅС‹Р№ РєРѕРґ - 1995-96РіРі
+  Р РµРІРёР·РёСЏ - СЃРµРЅС‚СЏР±СЂСЊ 1999
 )
 
 CODE LIT ( -- x )
@@ -51,7 +51,7 @@ END-CODE
 CODE _USER-VALUE-CODE
      POP EBX
      SUB EBP, # 4
-     MOV EBX, [EBX] \ user-смещение
+     MOV EBX, [EBX] \ user-СЃРјРµС‰РµРЅРёРµ
      ADD EBX, EDI
      MOV EAX, [EBX]
      MOV [EBP], EAX
@@ -83,7 +83,7 @@ CODE _TOUSER-VALUE-CODE
      MOV EAX, [EBP]
      ADD EBP, # 4
      SUB EBX, # 9
-     MOV EBX, [EBX] \ смещение user-переменной
+     MOV EBX, [EBX] \ СЃРјРµС‰РµРЅРёРµ user-РїРµСЂРµРјРµРЅРЅРѕР№
      ADD EBX, EDI
      MOV [EBX], EAX
      RET

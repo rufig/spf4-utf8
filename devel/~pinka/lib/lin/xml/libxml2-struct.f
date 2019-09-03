@@ -3,7 +3,7 @@
 
 REQUIRE [UNDEFINED] lib/include/tools.f
 
-\ REQUIRE AsQName     ~pinka/samples/2006/syntax/qname.f \ понятие однословных строк в виде `abc
+\ REQUIRE AsQName     ~pinka/samples/2006/syntax/qname.f \ РїРѕРЅСЏС‚РёРµ РѕРґРЅРѕСЃР»РѕРІРЅС‹С… СЃС‚СЂРѕРє РІ РІРёРґРµ `abc
 \ REQUIRE [UNDEFINED] lib/include/tools.f
 \ REQUIRE libxml2.dll ~ac/lib/lin/xml/xml.f 
 

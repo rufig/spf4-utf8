@@ -1,8 +1,8 @@
-\ Расширения Control.f  от ~nn
+\ Р Р°СЃС€РёСЂРµРЅРёСЏ Control.f  РѕС‚ ~nn
 \
 \ 
-\ Раcширение класса ListBox
-\ 29.03.2005г. Абдрахимов И.А.
+\ Р Р°cС€РёСЂРµРЅРёРµ РєР»Р°СЃСЃР° ListBox
+\ 29.03.2005Рі. РђР±РґСЂР°С…РёРјРѕРІ Р.Рђ.
 REQUIRE ColorON ~ilya\lib\win\gui\FrameWindowC.f
 REQUIRE CASE \lib\ext\case.f
 REQUIRE W>S ~ilya/lib/w-s.f
@@ -14,17 +14,17 @@ ListBox REOPEN
 M: ListboxScrollTo ( index  -- )
   0 SWAP LB_SETTOPINDEX  SendMessage DROP
 ;
-\ Очистить весь список
+\ РћС‡РёСЃС‚РёС‚СЊ РІРµСЃСЊ СЃРїРёСЃРѕРє
 M: ClearAll 0 0 LB_RESETCONTENT SendMessage DROP ;
-\ Найти строку z  в списке
+\ РќР°Р№С‚Рё СЃС‚СЂРѕРєСѓ z  РІ СЃРїРёСЃРєРµ
 M: Find ( z -- n )
 TRUE LB_FINDSTRING SendMessage 
 ;
-\ Выбрать в списке 0 ( z) строку адресованную z
+\ Р’С‹Р±СЂР°С‚СЊ РІ СЃРїРёСЃРєРµ 0 ( z) СЃС‚СЂРѕРєСѓ Р°РґСЂРµСЃРѕРІР°РЅРЅСѓСЋ z
 M: Select ( z -- )
 TRUE LB_SELECTSTRING SendMessage DROP
 ;
-\ Установить ширину столбца
+\ РЈСЃС‚Р°РЅРѕРІРёС‚СЊ С€РёСЂРёРЅСѓ СЃС‚РѕР»Р±С†Р°
 M: SetColumnWith ( n -- )
 0 SWAP LB_SETCOLUMNWIDTH SendMessage DROP
 ;
@@ -41,7 +41,7 @@ C: LBN_SELCHANGE OnClick GoParent ;
 
 
 Edit REOPEN
-\ Выделить текст
+\ Р’С‹РґРµР»РёС‚СЊ С‚РµРєСЃС‚
 M: SetSelect ( ustart uend -- )
 EM_SETSEL SendMessage DROP ;
 
@@ -52,8 +52,8 @@ EM_SETSEL SendMessage DROP ;
 
 CLASS: ScrollBar <SUPER Control
 		var OnChange
-        var pos		\ текущая позиция "бегунка"
-		var step	\ шаг перемещения "бегунка"
+        var pos		\ С‚РµРєСѓС‰Р°СЏ РїРѕР·РёС†РёСЏ "Р±РµРіСѓРЅРєР°"
+		var step	\ С€Р°Рі РїРµСЂРµРјРµС‰РµРЅРёСЏ "Р±РµРіСѓРЅРєР°"
 		var min
 		var max
 CONSTR: init init 
@@ -85,8 +85,8 @@ M: SetPos ( u)
     pos !
 ;
 
-\ Этот метод используется в нижеследующем доопределении 
-\ класса FrameWindow
+\ Р­С‚РѕС‚ РјРµС‚РѕРґ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РЅРёР¶РµСЃР»РµРґСѓСЋС‰РµРј РґРѕРѕРїСЂРµРґРµР»РµРЅРёРё 
+\ РєР»Р°СЃСЃР° FrameWindow
 M: Scroll
 CASE
 		SB_THUMBPOSITION OF W>S pos ! ENDOF
@@ -185,7 +185,7 @@ CLASS: AXControl <SUPER Window
 		var lhook
 
 
-\ События ActiveX 
+\ РЎРѕР±С‹С‚РёСЏ ActiveX 
 M: AXHook ( memid xt -- )
 control @ -ROT OVER >R Hook
 R> lhook AppendNode
@@ -206,7 +206,7 @@ free
 ;
 
 
-M: CreateAX ( adr n -- )	\ Где adr n - ProgId (Пример: "MSCAL.Calendar" и т.п.)
+M: CreateAX ( adr n -- )	\ Р“РґРµ adr n - ProgId (РџСЂРёРјРµСЂ: "MSCAL.Calendar" Рё С‚.Рї.)
 	Create 
 	DROP >R 0 0  handle @ R> >unicodebuf  DUP >R  AtlAxCreateControl CR ." this!" CR R> FREE THROW CR ." AXC=" . \ ABORT" Not ax"
 	control handle @ AtlAxGetControl CR ." rez=" .

@@ -1,4 +1,4 @@
-\ Поддержка OpenID 1.1
+\ РџРѕРґРґРµСЂР¶РєР° OpenID 1.1
 
 REQUIRE X509Pk2PEM ~ac/lib/lin/openssl/x509req.f
 REQUIRE base64     ~ac/lib/string/conv.f
@@ -69,9 +69,9 @@ VECT vIsSet :NONAME 2DROP FALSE ; TO vIsSet
   0 ROT ROT 3 BN_bin2bn ( g )
 ;
 : DhGenKeys { \ dh p g pk pklen -- pk pklen dh }
-\ первый шаг согласования ключей Diffie-Hellman
-\ генерирует пару ключей, возвращает открытый ключ, конвертированный в big endian,
-\ и структуру dh с закрытым ключем, внутренности которой не важны, т.к. никуда не передаются
+\ РїРµСЂРІС‹Р№ С€Р°Рі СЃРѕРіР»Р°СЃРѕРІР°РЅРёСЏ РєР»СЋС‡РµР№ Diffie-Hellman
+\ РіРµРЅРµСЂРёСЂСѓРµС‚ РїР°СЂСѓ РєР»СЋС‡РµР№, РІРѕР·РІСЂР°С‰Р°РµС‚ РѕС‚РєСЂС‹С‚С‹Р№ РєР»СЋС‡, РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°РЅРЅС‹Р№ РІ big endian,
+\ Рё СЃС‚СЂСѓРєС‚СѓСЂСѓ dh СЃ Р·Р°РєСЂС‹С‚С‹Рј РєР»СЋС‡РµРј, РІРЅСѓС‚СЂРµРЅРЅРѕСЃС‚Рё РєРѕС‚РѕСЂРѕР№ РЅРµ РІР°Р¶РЅС‹, С‚.Рє. РЅРёРєСѓРґР° РЅРµ РїРµСЂРµРґР°СЋС‚СЃСЏ
 
   0 DH_new -> dh
   default_p DROP ^ p 2 BN_dec2bn DROP
@@ -94,22 +94,22 @@ VECT vIsSet :NONAME 2DROP FALSE ; TO vIsSet
   dh spub ck 3 DH_compute_key -> cklen  cklen 1 < THROW
   ck cklen
 ;
-: DhTest { \ pk1 pklen1 dh1 pk2 pklen2 dh2 } \ самопроверка; должно получиться два одинаковых дампа
+: DhTest { \ pk1 pklen1 dh1 pk2 pklen2 dh2 } \ СЃР°РјРѕРїСЂРѕРІРµСЂРєР°; РґРѕР»Р¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊСЃСЏ РґРІР° РѕРґРёРЅР°РєРѕРІС‹С… РґР°РјРїР°
 
-  \ клиент
+  \ РєР»РёРµРЅС‚
   DhGenKeys -> dh1 -> pklen1 -> pk1
 
-  \ сервер
+  \ СЃРµСЂРІРµСЂ
   DhGenKeys -> dh2 -> pklen2 -> pk2
   pk1 pklen1 dh2 DhGetSharedKey DUMP CR
   dh2 DhFree
 
-  \ клиент
+  \ РєР»РёРµРЅС‚
   pk2 pklen2 dh1 DhGetSharedKey DUMP CR
   dh1 DhFree
 ;
 : OpenIdGetSharedKey { urla urlu \ dh spub ck cklen key_sha1 mac_key -- ka ku }
-\ на зависимой стороне (consumer'а)
+\ РЅР° Р·Р°РІРёСЃРёРјРѕР№ СЃС‚РѕСЂРѕРЅРµ (consumer'Р°)
   enc_mac_key 0!
   DhGenKeys -> dh
   ( pk pklen) base64 2DUP ." consumer:" TYPE CR
@@ -121,10 +121,10 @@ VECT vIsSet :NONAME 2DROP FALSE ; TO vIsSet
   dh_server_public @ STR@ debase64
   dh DhGetSharedKey -> cklen -> ck
   ." Shared ckey:" ck cklen base64 TYPE CR
-\ для HMAC-подписей в OpenID используется не этот длинный 1024-битный общий ключ,
-\ а короткий ключ, создаваемый сервером, и передаваемый по сети в XOR'нутом SHA-хэшем общего ключа виде
+\ РґР»СЏ HMAC-РїРѕРґРїРёСЃРµР№ РІ OpenID РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РЅРµ СЌС‚РѕС‚ РґР»РёРЅРЅС‹Р№ 1024-Р±РёС‚РЅС‹Р№ РѕР±С‰РёР№ РєР»СЋС‡,
+\ Р° РєРѕСЂРѕС‚РєРёР№ РєР»СЋС‡, СЃРѕР·РґР°РІР°РµРјС‹Р№ СЃРµСЂРІРµСЂРѕРј, Рё РїРµСЂРµРґР°РІР°РµРјС‹Р№ РїРѕ СЃРµС‚Рё РІ XOR'РЅСѓС‚РѕРј SHA-С…СЌС€РµРј РѕР±С‰РµРіРѕ РєР»СЋС‡Р° РІРёРґРµ
   20 ALLOCATE THROW -> key_sha1
-  key_sha1 cklen ck 3 SHA1 DROP \ тот же key_sha1
+  key_sha1 cklen ck 3 SHA1 DROP \ С‚РѕС‚ Р¶Рµ key_sha1
   enc_mac_key @ STR@ debase64 20 <> THROW -> mac_key
   \ mac_key 20 DUMP CR
   20 0 DO mac_key I + C@ key_sha1 I + C@ XOR mac_key I + C! LOOP
@@ -134,7 +134,7 @@ VECT vIsSet :NONAME 2DROP FALSE ; TO vIsSet
   CRLF DROP 1+ 1
 ;
 : OpenIdServerAssociate { \ dh pk pklen ck cklen key_sha1 mac_key enc_mac_key1 s -- addr u }
-\ на стороне openid-сервера
+\ РЅР° СЃС‚РѕСЂРѕРЅРµ openid-СЃРµСЂРІРµСЂР°
   S" openid.dh_consumer_public" vIsSet 0= IF EXIT THEN
   S" openid.session_type" vIsSet 0= IF EXIT THEN
   S" openid.assoc_type" vIsSet 0= IF EXIT THEN
@@ -149,10 +149,10 @@ VECT vIsSet :NONAME 2DROP FALSE ; TO vIsSet
 
 ." Shared ckey:" ck cklen base64 TYPE CR
   20 ALLOCATE THROW -> key_sha1
-  key_sha1 cklen ck 3 SHA1 DROP \ адрес тот же key_sha1
+  key_sha1 cklen ck 3 SHA1 DROP \ Р°РґСЂРµСЃ С‚РѕС‚ Р¶Рµ key_sha1
 
   20 ALLOCATE THROW -> mac_key
-  mac_key 20 0xA5 FILL          \ fixme: ключ и assoc_handle должны быть уникальны и храниться в БД на сервере
+  mac_key 20 0xA5 FILL          \ fixme: РєР»СЋС‡ Рё assoc_handle РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹ Рё С…СЂР°РЅРёС‚СЊСЃСЏ РІ Р‘Р” РЅР° СЃРµСЂРІРµСЂРµ
   20 ALLOCATE THROW -> enc_mac_key1
   20 0 DO mac_key I + C@ key_sha1 I + C@ XOR enc_mac_key1 I + C! LOOP
   enc_mac_key1 20 base64 enc_mac_key S!
@@ -180,6 +180,6 @@ PREVIOUS
 \ S" https://open.login.yahooapis.com/openid/op/1.1/auth" OpenIdGetSharedKey DUMP CR
 \ S" http://api.screenname.aol.com/auth/openidServer" OpenIdGetSharedKey DUMP CR
 \ S" http://rainbow.koenig.ru/openid.e" OpenIdGetSharedKey DUMP CR
-\ S" http://www.postbin.org/1b5k0vn" OpenIdGetSharedKey DUMP CR \ отладчик :)
+\ S" http://www.postbin.org/1b5k0vn" OpenIdGetSharedKey DUMP CR \ РѕС‚Р»Р°РґС‡РёРє :)
 \ S" http://certifi.ca/_serve" OpenIdGetSharedKey DUMP CR
 \EOF

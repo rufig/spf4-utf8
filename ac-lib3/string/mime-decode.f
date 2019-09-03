@@ -43,7 +43,7 @@ PREVIOUS SWAP SET-CURRENT CONSTANT CHARSET-DECODERS-WL
   R> BASE ! s STR@
 ;
 : MimeValueDecode1 ( encoding-a encoding-u text-a text-u flag -- addr u )
-\ flag=true, если text закодирован base64
+\ flag=true, РµСЃР»Рё text Р·Р°РєРѕРґРёСЂРѕРІР°РЅ base64
   IF debase64 ELSE dequotep THEN
   2SWAP CHARSET-DECODERS-WL SEARCH-WORDLIST IF EXECUTE THEN
 ;
@@ -53,16 +53,16 @@ PREVIOUS SWAP SET-CURRENT CONSTANT CHARSET-DECODERS-WL
     addr u S" =?" SEARCH
   WHILE
     -> tu -> ta
-    addr ta OVER - s STR+                                  \ некодированный текст
-    ta 2+ tu 2- S" ?" SEARCH 0= IF s STR+ s STR@ EXIT THEN \ ошибка encoder'а
+    addr ta OVER - s STR+                                  \ РЅРµРєРѕРґРёСЂРѕРІР°РЅРЅС‹Р№ С‚РµРєСЃС‚
+    ta 2+ tu 2- S" ?" SEARCH 0= IF s STR+ s STR@ EXIT THEN \ РѕС€РёР±РєР° encoder'Р°
     -> tu ta 2+ SWAP DUP -> ta OVER - \ encoding
-    tu 5 < IF 2DROP ta tu s STR+ s STR@ EXIT THEN                \ ошибка encoder'а
+    tu 5 < IF 2DROP ta tu s STR+ s STR@ EXIT THEN                \ РѕС€РёР±РєР° encoder'Р°
     ta 3 S" ?B?" COMPARE-U 0= -> b
     ta 3 + tu 3 - S" ?=" SEARCH 0= IF s STR+ 2DROP s STR@ EXIT THEN
     2- -> u DUP 2+ -> addr
     ta 3 + SWAP OVER - \ text
     b MimeValueDecode1 s STR+
-  REPEAT                                   \ остаток текста не кодирован
+  REPEAT                                   \ РѕСЃС‚Р°С‚РѕРє С‚РµРєСЃС‚Р° РЅРµ РєРѕРґРёСЂРѕРІР°РЅ
   s STR+ s STR@
 ;
 : StripLwsp1 { \ s }
@@ -76,9 +76,9 @@ PREVIOUS SWAP SET-CURRENT CONSTANT CHARSET-DECODERS-WL
   s STR@
 ;
 : StripLwsp ( addr u -- addr2 u2 )
-\ убрать из текста заголовка символы CRLFLWSP
-\ т.е. переводы строк с последующими пробельными
-\ символами, означающие перенос длинной строки
+\ СѓР±СЂР°С‚СЊ РёР· С‚РµРєСЃС‚Р° Р·Р°РіРѕР»РѕРІРєР° СЃРёРјРІРѕР»С‹ CRLFLWSP
+\ С‚.Рµ. РїРµСЂРµРІРѕРґС‹ СЃС‚СЂРѕРє СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРјРё РїСЂРѕР±РµР»СЊРЅС‹РјРё
+\ СЃРёРјРІРѕР»Р°РјРё, РѕР·РЅР°С‡Р°СЋС‰РёРµ РїРµСЂРµРЅРѕСЃ РґР»РёРЅРЅРѕР№ СЃС‚СЂРѕРєРё
   ['] StripLwsp1 EVALUATE-WITH
 ;
 

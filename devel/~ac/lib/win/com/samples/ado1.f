@@ -76,9 +76,9 @@ CREATE DispParams2 0 , 0 , 0 , 0 ,
 
 
 : InvokeNamedMethod ( params oid addr u -- result ior )
-\ ¢ë¯®«­¨âì ¬¥â®¤ á § ¤ ­­ë¬ addr u ¨¬¥­¥¬
-\ à ¡®â ¥â â®«ìª® ¤«ï ª« áá®¢, ¯®¤¤¥à¦¨¢ îé¨å dual interface (IDispatch)
-  ROT GetIDispatch ?DUP IF 2SWAP 2DROP EXIT THEN \ ­¥â ¨­â¥àä¥©á  IDispatch
+\ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð¼ÐµÑ‚Ð¾Ð´ Ñ Ð·Ð°Ð´Ð°Ð½Ð½Ñ‹Ð¼ addr u Ð¸Ð¼ÐµÐ½ÐµÐ¼
+\ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ ÐºÐ»Ð°ÑÑÐ¾Ð², Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÑŽÑ‰Ð¸Ñ… dual interface (IDispatch)
+  ROT GetIDispatch ?DUP IF 2SWAP 2DROP EXIT THEN \ Ð½ÐµÑ‚ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ° IDispatch
   >R
   >UNICODE DROP SysAllocString >R
   0 >R RP@ LOCALE_USER_DEFAULT 1 RP@ CELL+ IID_NULL RP@ CELL+ CELL+ @

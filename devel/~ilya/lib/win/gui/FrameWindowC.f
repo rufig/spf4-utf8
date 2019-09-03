@@ -1,5 +1,5 @@
-\ Раскрашиваем контролы
-\ Абдрахимов И.А.
+\ Р Р°СЃРєСЂР°С€РёРІР°РµРј РєРѕРЅС‚СЂРѕР»С‹
+\ РђР±РґСЂР°С…РёРјРѕРІ Р.Рђ.
 
 REQUIRE FrameWindow ~nn/lib/win/FrameWindow.f
 : h. BASE @ >R HEX . R> BASE ! ;
@@ -51,11 +51,11 @@ Set-colors
 W: WM_CTLCOLORDLG
 Set-colors 
 ;
-\ Включаем расцветку для элемента
+\ Р’РєР»СЋС‡Р°РµРј СЂР°СЃС†РІРµС‚РєСѓ РґР»СЏ СЌР»РµРјРµРЅС‚Р°
 M: ColorON
 TRUE vColored !
 ;
-\ Выключаем расцветку для элемента
+\ Р’С‹РєР»СЋС‡Р°РµРј СЂР°СЃС†РІРµС‚РєСѓ РґР»СЏ СЌР»РµРјРµРЅС‚Р°
 M: ColorOFF
 FALSE vColored !
 ;
@@ -66,7 +66,7 @@ vColored @ IF vBkColor @ DeleteObject DROP THEN
 M: cre-bk
 vColored @ IF vBkColor @ DUP vTextBkColor ! CreateSolidBrush vBkColor ! THEN
 ;
-\ Устанавливаем цвета для элемента
+\ РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С†РІРµС‚Р° РґР»СЏ СЌР»РµРјРµРЅС‚Р°
 M: Set-color ( text bk -- )
 del-bk
 vBkColor !

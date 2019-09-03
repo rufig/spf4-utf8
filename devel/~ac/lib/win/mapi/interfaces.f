@@ -26,7 +26,7 @@ Interface;
 IID_IUnknown
 Interface: IID_IMAPIProp {00000000-0000-0000-C000-000000000000}
   Method: ::GetLastError2 \ Not supported - do not use. 
-  Method: ::SaveChanges \ Not supported - do not use. ( Не правда, работает! :)
+  Method: ::SaveChanges \ Not supported - do not use. ( РќРµ РїСЂР°РІРґР°, СЂР°Р±РѕС‚Р°РµС‚! :)
   Method: ::GetProps \ Retrieves one or more properties. 
   Method: ::GetPropList \ Not supported - do not use. 
   Method: ::OpenProperty \ Returns a pointer to an interface to be used to access a property. 
@@ -38,7 +38,7 @@ Interface: IID_IMAPIProp {00000000-0000-0000-C000-000000000000}
   Method: ::GetIDsFromNames \ Provides the property identifiers that correspond to one or more property names. 
 Interface;
 
-( взято из MSDN, не работает OpenEntry!, т.к. ошибочно алфавитный порядок vtable...
+( РІР·СЏС‚Рѕ РёР· MSDN, РЅРµ СЂР°Р±РѕС‚Р°РµС‚ OpenEntry!, С‚.Рє. РѕС€РёР±РѕС‡РЅРѕ Р°Р»С„Р°РІРёС‚РЅС‹Р№ РїРѕСЂСЏРґРѕРє vtable...
 IID_IMAPIProp
 Interface: IID_IMsgStore {00000000-0000-0000-C000-000000000000}
   Method: ::AbortSubmit \ Not supported - do not use. 
@@ -57,7 +57,7 @@ Interface: IID_IMsgStore {00000000-0000-0000-C000-000000000000}
 Interface;
 )
 
-( из MAPIdefs.h:)
+( РёР· MAPIdefs.h:)
 IID_IMAPIProp
 Interface: IID_IMsgStore {00000000-0000-0000-C000-000000000000}
   Method: ::Advise2
@@ -140,7 +140,7 @@ Interface: IID_IMessage {00000000-0000-0000-C000-000000000000}
   Method: ::GetRecipientTable \ Returns the message's recipient table. 
   Method: ::ModifyRecipients \ Adds, deletes, or modifies message recipients. 
   Method: ::SubmitMessage \ Saves all changes to the message and marks it as ready for sending. 
-  Method: ::SetReadFlag \ Not supported - do not use. (А на деле работает! :)
+  Method: ::SetReadFlag \ Not supported - do not use. (Рђ РЅР° РґРµР»Рµ СЂР°Р±РѕС‚Р°РµС‚! :)
 Interface;
 
 

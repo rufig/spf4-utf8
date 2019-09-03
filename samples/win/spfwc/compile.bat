@@ -1,7 +1,7 @@
 if exist spf4wc.fres goto fres_done
 if exist spf4wc.res goto res_done
-REM Скомпилировать файл ресурсов. Подойдёт любой стандартный компилятор RC файлов.
-REM Например rc.exe из поставки MS Visual Studio, brcc32.exe из поставки Borland продуктов, etc
+REM РЎРєРѕРјРїРёР»РёСЂРѕРІР°С‚СЊ С„Р°Р№Р» СЂРµСЃСѓСЂСЃРѕРІ. РџРѕРґРѕР№РґС‘С‚ Р»СЋР±РѕР№ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРјРїРёР»СЏС‚РѕСЂ RC С„Р°Р№Р»РѕРІ.
+REM РќР°РїСЂРёРјРµСЂ rc.exe РёР· РїРѕСЃС‚Р°РІРєРё MS Visual Studio, brcc32.exe РёР· РїРѕСЃС‚Р°РІРєРё Borland РїСЂРѕРґСѓРєС‚РѕРІ, etc
 windres spf4wc.rc spf4wc.res
 :res_done
 if exist ..\..\..\devel\~yz\prog\fres\fres.exe goto fres_exe_done

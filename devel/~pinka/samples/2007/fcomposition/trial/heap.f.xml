@@ -13,7 +13,7 @@
 
 <comment>
   
-  Здесь еще хотелось бы пару ( addr -- ) к ALLOCATED ( u -- addr u )
+  Р—РґРµСЃСЊ РµС‰Рµ С…РѕС‚РµР»РѕСЃСЊ Р±С‹ РїР°СЂСѓ ( addr -- ) Рє ALLOCATED ( u -- addr u )
 
   <def name="{what-name?}" ds=" addr -- "> FREE THROW </def>
 

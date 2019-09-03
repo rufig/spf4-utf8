@@ -308,7 +308,7 @@ USER PURGE-WITHDIRS
         fh2 CLOSE-FILE DROP
         \ 0 0 fh1 RESIZE-FILE THROW
         fh1 CLOSE-FILE DROP
-        \ теперь старый файл удаляем
+        \ С‚РµРїРµСЂСЊ СЃС‚Р°СЂС‹Р№ С„Р°Р№Р» СѓРґР°Р»СЏРµРј
         a u DELETE-R/O-FILE IF a u crop-temp-name DROP a MoveFileA DROP THEN
         a temp-name MoveFileA DROP
     ELSE

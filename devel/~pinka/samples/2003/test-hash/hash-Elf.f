@@ -17,7 +17,7 @@ REQUIRE { lib\ext\locals.f
  REPEAT  h
  u1 ?DUP IF UMOD THEN
 ;
-( что-то, похожее на Elf..)
+( С‡С‚Рѕ-С‚Рѕ, РїРѕС…РѕР¶РµРµ РЅР° Elf..)
 
 
 \EOF
@@ -28,7 +28,7 @@ REQUIRE { lib\ext\locals.f
 \ Message-ID: <14237.001209@forth.org.ru>
 \ Subject: Re: [sp-forth] hash
 
-\ ElfHash на форте
+\ ElfHash РЅР° С„РѕСЂС‚Рµ
 
 : Hash { a u \ h -- u } \  0 <= u <= max_val
  0 -> h    a u + -> u
@@ -49,7 +49,7 @@ Message-ID: <1226.001209@forth.org.ru>
 Subject: [sp-forth] Hash -functions
 
 
-Исходники на сях  из неких статей на тему сабжа.
+РСЃС…РѕРґРЅРёРєРё РЅР° СЃСЏС…  РёР· РЅРµРєРёС… СЃС‚Р°С‚РµР№ РЅР° С‚РµРјСѓ СЃР°Р±Р¶Р°.
 
 ========================================================================
 

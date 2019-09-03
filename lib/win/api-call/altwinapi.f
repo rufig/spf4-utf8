@@ -1,4 +1,4 @@
-\ Более быстрый вариант _WINAPI-CODE
+\ Р‘РѕР»РµРµ Р±С‹СЃС‚СЂС‹Р№ РІР°СЂРёР°РЅС‚ _WINAPI-CODE
 
 S" lib\ext\spf-asm-tmp.f" INCLUDED
 
@@ -58,7 +58,7 @@ CODE _WINAPI-CODE
 @@3:  RET
 END-CODE
 
-: WINAPI: ( "ИмяПроцедуры" "ИмяБиблиотеки" -- )
+: WINAPI: ( "РРјСЏРџСЂРѕС†РµРґСѓСЂС‹" "РРјСЏР‘РёР±Р»РёРѕС‚РµРєРё" -- )
   NEW-WINAPI?
   IF HEADER
   ELSE

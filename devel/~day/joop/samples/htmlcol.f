@@ -1,5 +1,5 @@
-\ Подборка цветов для HTML
-\ ПисАлось на время, а не на удобочитаемость или стиль :-)
+\ РџРѕРґР±РѕСЂРєР° С†РІРµС‚РѕРІ РґР»СЏ HTML
+\ РџРёСЃРђР»РѕСЃСЊ РЅР° РІСЂРµРјСЏ, Р° РЅРµ РЅР° СѓРґРѕР±РѕС‡РёС‚Р°РµРјРѕСЃС‚СЊ РёР»Рё СЃС‚РёР»СЊ :-)
 
 REQUIRE FrameWindow ~day\joop\win\framewindow.f
 REQUIRE Button ~day\joop\win\control.f
@@ -99,7 +99,7 @@ CLASS: AppWindow <SUPER FrameWindow
 ;
 
 : :create
-  \ Здесь действия перед созданием окна ф-ей CreateWindowEx
+  \ Р—РґРµСЃСЊ РґРµР№СЃС‚РІРёСЏ РїРµСЂРµРґ СЃРѕР·РґР°РЅРёРµРј РѕРєРЅР° С„-РµР№ CreateWindowEx
     own :create
     255 0 0 rgb CreateSolidBrush sc1 <brush !
     0 255 0 rgb CreateSolidBrush sc2 <brush !
@@ -214,7 +214,7 @@ W: WM_VSCROLL { \ obj pos }
    BYE
 ;
 
-HERE IMAGE-BASE - 10000 + TO IMAGE-SIZE \ Вместо 10000 свое значение
+HERE IMAGE-BASE - 10000 + TO IMAGE-SIZE \ Р’РјРµСЃС‚Рѕ 10000 СЃРІРѕРµ Р·РЅР°С‡РµРЅРёРµ
 ' RUN MAINX !
 TRUE TO ?GUI
 S" htmlcol.exe" SAVE BYE

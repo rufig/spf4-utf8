@@ -1,4 +1,4 @@
-\ --------- пример ActiveX-сервера ----------------
+\ --------- РїСЂРёРјРµСЂ ActiveX-СЃРµСЂРІРµСЂР° ----------------
 
 REQUIRE Class: ~ac/lib/win/com/com_server.f
 
@@ -14,10 +14,10 @@ VECT vSPF.IDispatch
 CREATE TEST_RESULT 3 ( _cell) , 0 , 5 , 0 ,
 CREATE TEST_RESULT 8 ( _cell) , 0 , S" TEST ANSWER" >BSTR , 0 ,
 \ CREATE TEST_RESULT 9 ( _obj) , 0 , ForthIUnknown , 0 ,
-\ можно вернуть объект в качестве результата, и тогда можно продолжать вызовы
-\ типа такого: Words = Forth.Test.Evaluate("WORDS")
+\ РјРѕР¶РЅРѕ РІРµСЂРЅСѓС‚СЊ РѕР±СЉРµРєС‚ РІ РєР°С‡РµСЃС‚РІРµ СЂРµР·СѓР»СЊС‚Р°С‚Р°, Рё С‚РѕРіРґР° РјРѕР¶РЅРѕ РїСЂРѕРґРѕР»Р¶Р°С‚СЊ РІС‹Р·РѕРІС‹
+\ С‚РёРїР° С‚Р°РєРѕРіРѕ: Words = Forth.Test.Evaluate("WORDS")
 
-\ ===================== базовый класс IUnknown ========================
+\ ===================== Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ IUnknown ========================
 IID_IUnknown
 Class: SPF.IUnknown {C6DFBA32-DF7B-4829-AA3B-EE4F90ED5961}
 
@@ -76,10 +76,10 @@ USER uExcep
 USER uFlags
 
 : param@ ( variant -- ... )
-\ переданные по ссылке переменные (обычный FORTH.NEGATE(VAR)) рекурсивно
-\ разворачиваются, как если бы были переданы значения.
-\ Это лишает некоторых возможностей, но зато логически чище,
-\ и удобнее использовать.
+\ РїРµСЂРµРґР°РЅРЅС‹Рµ РїРѕ СЃСЃС‹Р»РєРµ РїРµСЂРµРјРµРЅРЅС‹Рµ (РѕР±С‹С‡РЅС‹Р№ FORTH.NEGATE(VAR)) СЂРµРєСѓСЂСЃРёРІРЅРѕ
+\ СЂР°Р·РІРѕСЂР°С‡РёРІР°СЋС‚СЃСЏ, РєР°Рє РµСЃР»Рё Р±С‹ Р±С‹Р»Рё РїРµСЂРµРґР°РЅС‹ Р·РЅР°С‡РµРЅРёСЏ.
+\ Р­С‚Рѕ Р»РёС€Р°РµС‚ РЅРµРєРѕС‚РѕСЂС‹С… РІРѕР·РјРѕР¶РЅРѕСЃС‚РµР№, РЅРѕ Р·Р°С‚Рѕ Р»РѕРіРёС‡РµСЃРєРё С‡РёС‰Рµ,
+\ Рё СѓРґРѕР±РЅРµРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ.
   >R
   ." TYPE=" R@ W@ .
   R@ W@ 2 = IF R> 2 CELLS + @ DUP . ." ," EXIT THEN
@@ -152,15 +152,15 @@ Extends SPF.IUnknown
      THEN
   SP@ uSPInvoke @ - DUP .
   DUP -4 = IF DROP
-              3 R@ ! ( uFlags @ 3 = IF @ THEN) \ бейсик не делает разницы между method и property_get
+              3 R@ ! ( uFlags @ 3 = IF @ THEN) \ Р±РµР№СЃРёРє РЅРµ РґРµР»Р°РµС‚ СЂР°Р·РЅРёС†С‹ РјРµР¶РґСѓ method Рё property_get
               R> 2 CELLS + ! 0 EXIT
-           THEN \ число
+           THEN \ С‡РёСЃР»Рѕ
   DUP -8 = IF DROP
               uFlags @ DISPATCH_PROPERTYPUT AND 
-              IF ! RDROP 0 EXIT THEN \ присвоение переменной форта
+              IF ! RDROP 0 EXIT THEN \ РїСЂРёСЃРІРѕРµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№ С„РѕСЂС‚Р°
               8 R@ ! >BSTR R> 2 CELLS + ! 0 EXIT
-           THEN \ строка
-  0 = IF RDROP 0 EXIT THEN \ нет результатов
+           THEN \ СЃС‚СЂРѕРєР°
+  0 = IF RDROP 0 EXIT THEN \ РЅРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
   uSPInvoke @ SP! RDROP 
   DISP_E_BADPARAMCOUNT
 ; METHOD

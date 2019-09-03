@@ -1,4 +1,4 @@
-( Управление привилегиями в WinNT/2000 А.Ч. 24.Mar.2000 )
+( РЈРїСЂР°РІР»РµРЅРёРµ РїСЂРёРІРёР»РµРіРёСЏРјРё РІ WinNT/2000 Рђ.Р§. 24.Mar.2000 )
 
 WINAPI: GetCurrentProcess     KERNEL32.DLL
 WINAPI: LookupPrivilegeValueA ADVAPI32.DLL

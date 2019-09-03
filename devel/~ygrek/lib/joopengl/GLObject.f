@@ -1,16 +1,16 @@
 \ Last changes 01/05/2005
 
-\ Классы для GL окна
-\ Самые полезные - GLPlot2D и GLGraph2D для рисования графиков
-\ см. пример использования в ~ygrek/iasa/matmod1 matmod2
+\ ╨Ъ╨╗╨░╤Б╤Б╤Л ╨┤╨╗╤П GL ╨╛╨║╨╜╨░
+\ ╨б╨░╨╝╤Л╨╡ ╨┐╨╛╨╗╨╡╨╖╨╜╤Л╨╡ - GLPlot2D ╨╕ GLGraph2D ╨┤╨╗╤П ╤А╨╕╤Б╨╛╨▓╨░╨╜╨╕╤П ╨│╤А╨░╤Д╨╕╨║╨╛╨▓
+\ ╤Б╨╝. ╨┐╤А╨╕╨╝╨╡╤А ╨╕╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╤П ╨▓ ~ygrek/iasa/matmod1 matmod2
 \ (c) 2005 yGREK heretix   mailto: heretix@yandex.ru
 \ Started 02/2005
 
 \ 01.May.2005  ~ygrek
-\ Добавил :resize в фигуры - удобно. Теперь -1e s :resize переворачивает фигуру
+\ ╨Ф╨╛╨▒╨░╨▓╨╕╨╗ :resize ╨▓ ╤Д╨╕╨│╤Г╤А╤Л - ╤Г╨┤╨╛╨▒╨╜╨╛. ╨в╨╡╨┐╨╡╤А╤М -1e s :resize ╨┐╨╡╤А╨╡╨▓╨╛╤А╨░╤З╨╕╨▓╨░╨╡╤В ╤Д╨╕╨│╤Г╤А╤Г
 
-\ TODO: Ортопроекцию для графиков и избавиться от хаков 
-\ в подборе параметров для сцены чтобы увидеть график
+\ TODO: ╨Ю╤А╤В╨╛╨┐╤А╨╛╨╡╨║╤Ж╨╕╤О ╨┤╨╗╤П ╨│╤А╨░╤Д╨╕╨║╨╛╨▓ ╨╕ ╨╕╨╖╨▒╨░╨▓╨╕╤В╤М╤Б╤П ╨╛╤В ╤Е╨░╨║╨╛╨▓ 
+\ ╨▓ ╨┐╨╛╨┤╨▒╨╛╤А╨╡ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╨╛╨▓ ╨┤╨╗╤П ╤Б╤Ж╨╡╨╜╤Л ╤З╤В╨╛╨▒╤Л ╤Г╨▓╨╕╨┤╨╡╤В╤М ╨│╤А╨░╤Д╨╕╨║
 
 REQUIRE CLASS:         ~day/joop/oop.f
 REQUIRE glBegin        ~ygrek/lib/data/opengl.f  
@@ -53,8 +53,8 @@ END-CODE)
 ;
 
 CLASS: Point <SUPER Object
-\ класс 3D точка
-\ координаты вещественные 8 байт FDOUBLE
+\ ╨║╨╗╨░╤Б╤Б 3D ╤В╨╛╤З╨║╨░
+\ ╨║╨╛╨╛╤А╨┤╨╕╨╜╨░╤В╤Л ╨▓╨╡╤Й╨╡╤Б╤В╨▓╨╡╨╜╨╜╤Л╨╡ 8 ╨▒╨░╨╣╤В FDOUBLE
     4 VAR x1  4 VAR x2   \ x
     4 VAR y1  4 VAR y2   \ y 
     4 VAR z1  4 VAR z2   \ z
@@ -103,10 +103,10 @@ CLASS: GLObject <SUPER Object
 : :draw
    glLoadIdentity DROP  \ Reset The Current Modelview Matrix
 
-   shift :getf glTranslatef DROP \ Сдвиг
+   shift :getf glTranslatef DROP \ ╨б╨┤╨▓╨╕╨│
 
-   1E float 0E float 0E float  \ вектор-ось вращения
-   angle :x float glRotatef DROP  \ Поворот
+   1E float 0E float 0E float  \ ╨▓╨╡╨║╤В╨╛╤А-╨╛╤Б╤М ╨▓╤А╨░╤Й╨╡╨╜╨╕╤П
+   angle :x float glRotatef DROP  \ ╨Я╨╛╨▓╨╛╤А╨╛╤В
 
    0E float 1E float 0E float  
    angle :y float glRotatef DROP 
@@ -118,7 +118,7 @@ CLASS: GLObject <SUPER Object
 : :init
   own :init
   0e 0e -5e shift :set
-  \ angle сам обнулится
+  \ angle ╤Б╨░╨╝ ╨╛╨▒╨╜╤Г╨╗╨╕╤В╤Б╤П
   0e 2e 0e angle.speed :set
   ( ." Object init. ")
 ;
@@ -240,20 +240,20 @@ CLASS: GLCube <SUPER GLObject
   FSWAP DUP DF! 8 + DUP DF! 8 +
 ;
 
-<< :findScale \ вычислить границы графика
+<< :findScale \ ╨▓╤Л╤З╨╕╤Б╨╗╨╕╤В╤М ╨│╤А╨░╨╜╨╕╤Ж╤Л ╨│╤А╨░╤Д╨╕╨║╨░
 << :getScale ( -- min.x max.x min.y max.y ) 
-<< :setScale ( min.x max.x min.y max.y -- ) \ вручную установить масштаб
-<< :makeScale ( -- ) \ применить масштаб
-<< :data! ( ndata data -- ) \ данныые графика
-<< :points! ( ndata -- ) \ кол-во точек для записи, выделить память
-<< :point! ( x y -- ) \ добавить очередную точку к графику
-<< :draw \ нарисовать
+<< :setScale ( min.x max.x min.y max.y -- ) \ ╨▓╤А╤Г╤З╨╜╤Г╤О ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М ╨╝╨░╤Б╤И╤В╨░╨▒
+<< :makeScale ( -- ) \ ╨┐╤А╨╕╨╝╨╡╨╜╨╕╤В╤М ╨╝╨░╤Б╤И╤В╨░╨▒
+<< :data! ( ndata data -- ) \ ╨┤╨░╨╜╨╜╤Л╤Л╨╡ ╨│╤А╨░╤Д╨╕╨║╨░
+<< :points! ( ndata -- ) \ ╨║╨╛╨╗-╨▓╨╛ ╤В╨╛╤З╨╡╨║ ╨┤╨╗╤П ╨╖╨░╨┐╨╕╤Б╨╕, ╨▓╤Л╨┤╨╡╨╗╨╕╤В╤М ╨┐╨░╨╝╤П╤В╤М
+<< :point! ( x y -- ) \ ╨┤╨╛╨▒╨░╨▓╨╕╤В╤М ╨╛╤З╨╡╤А╨╡╨┤╨╜╤Г╤О ╤В╨╛╤З╨║╤Г ╨║ ╨│╤А╨░╤Д╨╕╨║╤Г
+<< :draw \ ╨╜╨░╤А╨╕╤Б╨╛╨▓╨░╤В╤М
 
 pvar: <color
 CLASS: Graph2D <SUPER Object
-  CELL VAR data  \ адрес памяти с парами точек x,y
-  CELL VAR ndata \ кол-во точек
-  CELL VAR cur   \ текущий адрес в таблице точек
+  CELL VAR data  \ ╨░╨┤╤А╨╡╤Б ╨┐╨░╨╝╤П╤В╨╕ ╤Б ╨┐╨░╤А╨░╨╝╨╕ ╤В╨╛╤З╨╡╨║ x,y
+  CELL VAR ndata \ ╨║╨╛╨╗-╨▓╨╛ ╤В╨╛╤З╨╡╨║
+  CELL VAR cur   \ ╤В╨╡╨║╤Г╤Й╨╕╨╣ ╨░╨┤╤А╨╡╤Б ╨▓ ╤В╨░╨▒╨╗╨╕╤Ж╨╡ ╤В╨╛╤З╨╡╨║
  Point OBJ min
  Point OBJ max
  Point OBJ color
@@ -276,11 +276,11 @@ CLASS: Graph2D <SUPER Object
 ;
 
 : :findScale
-  \ Начальные значения
+  \ ╨Э╨░╤З╨░╨╗╤М╨╜╤Л╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П
   data @
    (x,y) FDUP max :y! min :y!
          FDUP max :x! min :x!
-  \ ищем границы графика
+  \ ╨╕╤Й╨╡╨╝ ╨│╤А╨░╨╜╨╕╤Ж╤Л ╨│╤А╨░╤Д╨╕╨║╨░
   ndata @ 1- 0 DO
    (x,y) FDUP
      max :y FSWAP F< IF FDUP max :y! THEN
@@ -300,7 +300,7 @@ CLASS: Graph2D <SUPER Object
    IF min :y 1e-5 F+ max :y!   min :y 1e-5 F- max :y!  THEN
 
  data @ 
-  ndata @ 0 DO   \ масштабируем
+  ndata @ 0 DO   \ ╨╝╨░╤Б╤И╤В╨░╨▒╨╕╤А╤Г╨╡╨╝
    DUP (x,y) DROP
    min :y F-
    max :y min :y F- F/
@@ -337,26 +337,26 @@ CLASS: Graph2D <SUPER Object
 \ : each.show <data @ :show 0 ;
 
 \ ==============================================
-<< :draw  \ отрисовка графиков
-<< :add ( obj -- ) \ добавить график на чертёж
-<< :autoScale \ подобрать масштаб так чтобы все текущие графики были видны
-<< :scaleLast \ применить текущий масштаб к последнему графику
+<< :draw  \ ╨╛╤В╤А╨╕╤Б╨╛╨▓╨║╨░ ╨│╤А╨░╤Д╨╕╨║╨╛╨▓
+<< :add ( obj -- ) \ ╨┤╨╛╨▒╨░╨▓╨╕╤В╤М ╨│╤А╨░╤Д╨╕╨║ ╨╜╨░ ╤З╨╡╤А╤В╤С╨╢
+<< :autoScale \ ╨┐╨╛╨┤╨╛╨▒╤А╨░╤В╤М ╨╝╨░╤Б╤И╤В╨░╨▒ ╤В╨░╨║ ╤З╤В╨╛╨▒╤Л ╨▓╤Б╨╡ ╤В╨╡╨║╤Г╤Й╨╕╨╡ ╨│╤А╨░╤Д╨╕╨║╨╕ ╨▒╤Л╨╗╨╕ ╨▓╨╕╨┤╨╜╤Л
+<< :scaleLast \ ╨┐╤А╨╕╨╝╨╡╨╜╨╕╤В╤М ╤В╨╡╨║╤Г╤Й╨╕╨╣ ╨╝╨░╤Б╤И╤В╨░╨▒ ╨║ ╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╡╨╝╤Г ╨│╤А╨░╤Д╨╕╨║╤Г
 << :getScale ( -- min.x max.x min.y max.y ) 
-<< :setScale ( min.x max.x min.y max.y -- ) \ вручную установить масштаб
-<< :maxScale ( min.x max.x min.y max.y -- ) \ впихнуть и эти размеры в окно
+<< :setScale ( min.x max.x min.y max.y -- ) \ ╨▓╤А╤Г╤З╨╜╤Г╤О ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╕╤В╤М ╨╝╨░╤Б╤И╤В╨░╨▒
+<< :maxScale ( min.x max.x min.y max.y -- ) \ ╨▓╨┐╨╕╤Е╨╜╤Г╤В╤М ╨╕ ╤Н╤В╨╕ ╤А╨░╨╖╨╝╨╡╤А╤Л ╨▓ ╨╛╨║╨╜╨╛
 
 pvar: <min
 pvar: <max
 CLASS: GLPlot2D <SUPER GLObject
      Point OBJ max 
-     Point OBJ min    \ размеры окна
-      List OBJ graphs \ графики
+     Point OBJ min    \ ╤А╨░╨╖╨╝╨╡╤А╤Л ╨╛╨║╨╜╨░
+      List OBJ graphs \ ╨│╤А╨░╤Д╨╕╨║╨╕
   Iterator OBJ iter
 
 : :init
   own :init
 
-  -0.7e -0.5e -1.5e shift :set \ для полноэкранного GL окна
+  -0.7e -0.5e -1.5e shift :set \ ╨┤╨╗╤П ╨┐╨╛╨╗╨╜╨╛╤Н╨║╤А╨░╨╜╨╜╨╛╨│╨╛ GL ╨╛╨║╨╜╨░
   0e 0e 0e angle.speed :set
 
   graphs iter :set
@@ -366,7 +366,7 @@ CLASS: GLPlot2D <SUPER GLObject
 : :draw 
   own :draw
 
-  \ Координатные орты
+  \ ╨Ъ╨╛╨╛╤А╨┤╨╕╨╜╨░╤В╨╜╤Л╨╡ ╨╛╤А╤В╤Л
   GL_LINE_STRIP glBegin DROP \ Drawing Using Lines
     Green SetColor
     -0.05e -0.05e 0e Vertex3f

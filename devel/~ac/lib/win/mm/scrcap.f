@@ -1,5 +1,5 @@
-\ Запись экрана в BMP-файл.
-\ Переведенный в Форт пример с сайта
+\ Р—Р°РїРёСЃСЊ СЌРєСЂР°РЅР° РІ BMP-С„Р°Р№Р».
+\ РџРµСЂРµРІРµРґРµРЅРЅС‹Р№ РІ Р¤РѕСЂС‚ РїСЂРёРјРµСЂ СЃ СЃР°Р№С‚Р°
 \ http://msdn.microsoft.com/en-us/library/dd183533%28v=VS.85%29.aspx
 
 REQUIRE GetClientRect    ~ac/lib/win/window/window.f 
@@ -115,7 +115,7 @@ CONSTANT /BITMAPINFOHEADER
   bmpScreen bmHeight @ bi biHeight !
   1 bi biPlanes W!
   32 bi biBitCount W!
-  \ 24 bi biBitCount W! \ для CreatePng
+  \ 24 bi biBitCount W! \ РґР»СЏ CreatePng
   BI_RGB bi biCompression !
   bi biSizeImage 0!
   bi biXPelsPerMeter 0!
@@ -145,7 +145,7 @@ CONSTANT /BITMAPINFOHEADER
 
   \ lpbitmap dwBmpSize S" test_screen.png" rcClient R.right @ rcClient R.left @ -
   \ CreatePng
-  \ Картинка в png получается перевернутой.
+  \ РљР°СЂС‚РёРЅРєР° РІ png РїРѕР»СѓС‡Р°РµС‚СЃСЏ РїРµСЂРµРІРµСЂРЅСѓС‚РѕР№.
 
   rcClient FREE THROW
   bmpScreen FREE THROW
@@ -154,7 +154,7 @@ CONSTANT /BITMAPINFOHEADER
   lpbitmap FREE THROW
 
   hbmScreen DeleteObject DROP
-  \ hdcMemDC hwnd ReleaseDC . \ тут в msdn ошибка
+  \ hdcMemDC hwnd ReleaseDC . \ С‚СѓС‚ РІ msdn РѕС€РёР±РєР°
   hdcMemDC DeleteDC DROP
   hdcScreen 0 ReleaseDC DROP
   hdcWindow hwnd ReleaseDC DROP

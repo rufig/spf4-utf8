@@ -1,12 +1,12 @@
-( Ïðîñòàÿ áèáëèîòåêà äëÿ ïðåîáðàçîâàíèÿ ñòðîêè ïàðàìåòðîâ
-  â íàáîð ôîðò-ñëîâ. Íàïðèìåð, âûïîëíåíèå
+( ÐŸÑ€Ð¾ÑÑ‚Ð°Ñ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ð´Ð»Ñ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð²
+  Ð² Ð½Ð°Ð±Ð¾Ñ€ Ñ„Ð¾Ñ€Ñ‚-ÑÐ»Ð¾Ð². ÐÐ°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ
   S" error_code=10060&from=http://10.1.1.11/" GetParamsFromString
-  ïðèâåäåò ê òîìó, ÷òî â òåêóùåì âðåìåííîì ñëîâàðå ïîÿâÿòñÿ ñëîâà
-  error_code è from, êîòîðûå ïðè âûïîëíåíèè áóäóò âîçâðàùàòü
-  ñòðîêó addr u ñî çíà÷åíèåì ýòîãî ïàðàìåòðà.
+  Ð¿Ñ€Ð¸Ð²ÐµÐ´ÐµÑ‚ Ðº Ñ‚Ð¾Ð¼Ñƒ, Ñ‡Ñ‚Ð¾ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¼ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¼ ÑÐ»Ð¾Ð²Ð°Ñ€Ðµ Ð¿Ð¾ÑÐ²ÑÑ‚ÑÑ ÑÐ»Ð¾Ð²Ð°
+  error_code Ð¸ from, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¿Ñ€Ð¸ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ð¸ Ð±ÑƒÐ´ÑƒÑ‚ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°Ñ‚ÑŒ
+  ÑÑ‚Ñ€Ð¾ÐºÑƒ addr u ÑÐ¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÐµÐ¼ ÑÑ‚Ð¾Ð³Ð¾ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°.
 )
 
-\ Áûâøèé acWEB\conf\http\plugins\fs\get_url_params.f 
+\ Ð‘Ñ‹Ð²ÑˆÐ¸Ð¹ acWEB\conf\http\plugins\fs\get_url_params.f 
 
 REQUIRE {             lib/ext/locals.f
 REQUIRE "             ~ac/lib/str5.f
@@ -21,7 +21,7 @@ VECT vCONVERT%post ' NOOP TO vCONVERT%post
 ;
 
 : CONVERT% ( a1 u1 -- a2 u2 )
-  \ äåêîäèðîâàíèå urlêîäèðîâàíèÿ - íàïðèìåð ïàðàìåòðîâ QUERY_STRING è POST.
+  \ Ð´ÐµÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ urlÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ - Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð² QUERY_STRING Ð¸ POST.
 
   vCONVERT%pre
 
@@ -50,7 +50,7 @@ VECT vCONVERT%post ' NOOP TO vCONVERT%post
 ;
 
 \ VOCABULARY PARAMS
-\ â îòëè÷èå îò FS, çäåñü áóäåò âðåìåííûé áåçûìÿííûé ñëîâàðü
+\ Ð² Ð¾Ñ‚Ð»Ð¸Ñ‡Ð¸Ðµ Ð¾Ñ‚ FS, Ð·Ð´ÐµÑÑŒ Ð±ÑƒÐ´ÐµÑ‚ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ð¹ Ð±ÐµÐ·Ñ‹Ð¼ÑÐ½Ð½Ñ‹Ð¹ ÑÐ»Ð¾Ð²Ð°Ñ€ÑŒ
 
 : STR@DOES
   DOES>  @ STR@ (") STR@
@@ -61,7 +61,7 @@ VECT vCONVERT%post ' NOOP TO vCONVERT%post
 : STR-LIT { \ s }
   "" -> s 1 PARSE CONVERT% s STR! s
 ;
-USER uCheckParam \ çäåñü xt ( addr u -- addr u true | false )
+USER uCheckParam \ Ð·Ð´ÐµÑÑŒ xt ( addr u -- addr u true | false )
 
 : STRING:
   [CHAR] = PARSE CONVERT% 255 MIN
@@ -69,7 +69,7 @@ USER uCheckParam \ çäåñü xt ( addr u -- addr u true | false )
   IF
     CREATED
     STR-LIT ,
-    'STR@DOES  ( êàâû÷êà ïîñòàâëåíà 01.01.2002 ~ac :)
+    'STR@DOES  ( ÐºÐ°Ð²Ñ‹Ñ‡ÐºÐ° Ð¿Ð¾ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð° 01.01.2002 ~ac :)
   THEN
 ;
 : Name:Value
@@ -160,7 +160,7 @@ USER uSParams
 ;
 : SetParam ( va vu pa pu -- )
 \  GET-CURRENT >R ALSO PARAMS DEFINITIONS
-\  óæå óñòàíîâëåíî íà âõîäå
+\  ÑƒÐ¶Ðµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾ Ð½Ð° Ð²Ñ…Ð¾Ð´Ðµ
   2DUP CONTEXT @ SEARCH-WORDLIST
   IF NIP NIP >BODY S!
   ELSE

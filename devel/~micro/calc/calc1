@@ -19,31 +19,31 @@ OBJECT STRING YS
 OBJECT STRING PS
 
 
-" Times New Roman Cyr" 20 Шрифт times
-" Times New Roman Cyr" 20 жирный Шрифт times-bold
+" Times New Roman Cyr" 20 РЁСЂРёС„С‚ times
+" Times New Roman Cyr" 20 Р¶РёСЂРЅС‹Р№ РЁСЂРёС„С‚ times-bold
 
-500 400 " Цалцулатор" Форма
-
-1 ===
-66 Ввод INDY
+500 400 " Р¦Р°Р»С†СѓР»Р°С‚РѕСЂ" Р¤РѕСЂРјР°
 
 1 ===
-66 Ввод INDX
+66 Р’РІРѕРґ INDY
 
 1 ===
-20 % " Основание:" Надпись
-10 % 2 Ввод-числа P 5 % пусто 20 % "  ОК " Кнопка okP
+66 Р’РІРѕРґ INDX
 
-1 === Линия
+1 ===
+20 % " РћСЃРЅРѕРІР°РЅРёРµ:" РќР°РґРїРёСЃСЊ
+10 % 2 Р’РІРѕРґ-С‡РёСЃР»Р° P 5 % РїСѓСЃС‚Рѕ 20 % "  РћРљ " РљРЅРѕРїРєР° okP
+
+1 === Р›РёРЅРёСЏ
 
 4 ===
 times-bold
-|| "    ^   " Кнопка enter
-|| "   <=>  " Кнопка swap
-|| "    +   " Кнопка plus
-|| "    -   " Кнопка minus
+|| "    ^   " РљРЅРѕРїРєР° enter
+|| "   <=>  " РљРЅРѕРїРєР° swap
+|| "    +   " РљРЅРѕРїРєР° plus
+|| "    -   " РљРЅРѕРїРєР° minus
 
-Обработчики
+РћР±СЂР°Р±РѕС‚С‡РёРєРё
 
 CLASS: INDICATOR
 CLASS PNUM N
@@ -62,7 +62,7 @@ CLASS STRING S
     ." Errmsg inst=" R@ . CR
     R@ <S
     R@ >Z
-    " Опа..."
+    " РћРїР°..."
     SWAP
     0
     MsgBox DROP
@@ -98,7 +98,7 @@ CLASS STRING S
 \  XS <S
 \  XS >Z
 \  DROP
-\  Окошко
+\  РћРєРѕС€РєРѕ
   ABORT" ERROR!"
 ;
 
@@ -107,10 +107,10 @@ CLASS STRING S
   ." 3. " XSS STRING SHOW
   IF ER-A @ ER-U @ CR TYPE CR ( ErrMsg ) THEN CR
   ." 4. " XSS STRING SHOW
-; дляКнопки okP
+; РґР»СЏРљРЅРѕРїРєРё okP
 
 :NONAME
   S" QWERTY" ErrMsg
-; дляКнопки enter
+; РґР»СЏРљРЅРѕРїРєРё enter
 
-Конец-формы
+РљРѕРЅРµС†-С„РѕСЂРјС‹

@@ -13,11 +13,11 @@ REQUIRE CreateObject ~ac/lib/win/com/com.f
   CREATE 
     HERE SWAP
     BL WORD COUNT CLSID, 
-    DUP ,               \ предок
-    Methods#            \ к-во методов предка
-    DUP ,               \ свои методы (к-во)
-    LATEST ,            \ своё имя
-    HERE CELL+ ,        \ oid класса (указатель на Vtable)
+    DUP ,               \ РїСЂРµРґРѕРє
+    Methods#            \ Рє-РІРѕ РјРµС‚РѕРґРѕРІ РїСЂРµРґРєР°
+    DUP ,               \ СЃРІРѕРё РјРµС‚РѕРґС‹ (Рє-РІРѕ)
+    LATEST ,            \ СЃРІРѕС‘ РёРјСЏ
+    HERE CELL+ ,        \ oid РєР»Р°СЃСЃР° (СѓРєР°Р·Р°С‚РµР»СЊ РЅР° Vtable)
     1+ CELLS HERE SWAP DUP ALLOT ERASE     \ VTABLE
     -1 ,
     GET-CURRENT WORDLIST SET-CURRENT SWAP
@@ -30,19 +30,19 @@ REQUIRE CreateObject ~ac/lib/win/com/com.f
 
 : Extends ( class_int -- class_int )
   DUP
-  ' EXECUTE             \ oid класса, из которого копируем VTABLE
-  DUP 2 CELLS - @ CELLS \ сколько копировать
+  ' EXECUTE             \ oid РєР»Р°СЃСЃР°, РёР· РєРѕС‚РѕСЂРѕРіРѕ РєРѕРїРёСЂСѓРµРј VTABLE
+  DUP 2 CELLS - @ CELLS \ СЃРєРѕР»СЊРєРѕ РєРѕРїРёСЂРѕРІР°С‚СЊ
   ( class_int class_int oid n )
-  SWAP @                \ откуда копировать
-  ROT 8 CELLS +         \ куда
+  SWAP @                \ РѕС‚РєСѓРґР° РєРѕРїРёСЂРѕРІР°С‚СЊ
+  ROT 8 CELLS +         \ РєСѓРґР°
   ROT MOVE
 ;
 
 : ToVtable ( class_int xt -- class_int )
   OVER >R
   LAST @ FIND
-  IF >BODY @ ( номер метода в VTABLE )
-     8 + \ смещение VTABLE в определении класса
+  IF >BODY @ ( РЅРѕРјРµСЂ РјРµС‚РѕРґР° РІ VTABLE )
+     8 + \ СЃРјРµС‰РµРЅРёРµ VTABLE РІ РѕРїСЂРµРґРµР»РµРЅРёРё РєР»Р°СЃСЃР°
      CELLS R> + !
   ELSE -321 THROW THEN
 ;

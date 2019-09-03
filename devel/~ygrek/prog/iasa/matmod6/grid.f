@@ -26,8 +26,8 @@ GRID
     ===
      hline 500 1 this ctlresize |
     ===
-     " График1" button -right add-1 this -command! | 
-     " График2" button -left  add-2 this -command! | 
+     " Р“СЂР°С„РёРє1" button -right add-1 this -command! | 
+     " Р“СЂР°С„РёРє2" button -left  add-2 this -command! | 
     [ PREVIOUS ]
 GRID; TO g1
 
@@ -49,8 +49,8 @@ GRID
     ===
      hline 500 1 this ctlresize |
     ===
-     " График1" button -right add-1 this -command! | 
-     " График2" button -left  add-2 this -command! | 
+     " Р“СЂР°С„РёРє1" button -right add-1 this -command! | 
+     " Р“СЂР°С„РёРє2" button -left  add-2 this -command! | 
     [ PREVIOUS ]
 GRID; TO g2
 ;
@@ -58,6 +58,6 @@ GRID; TO g2
 : make-tabs
  0 tabcontrol 
  16 create-il DUP 1 SWAP add-icon 0 this -imagelist!
- g1 " Снаряд" 0 0 this add-item
- g2 " Ракета" 0 1 this add-item
+ g1 " РЎРЅР°СЂСЏРґ" 0 0 this add-item
+ g2 " Р Р°РєРµС‚Р°" 0 1 this add-item
 ;

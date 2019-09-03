@@ -1,8 +1,8 @@
 \
 \ File Name: tm_stend.f
-\ Работа через COM со стендом MS-1
-\ Абдрахимов И.А.
-\ v 0.1	от 28.12.2004г.
+\ Р Р°Р±РѕС‚Р° С‡РµСЂРµР· COM СЃРѕ СЃС‚РµРЅРґРѕРј MS-1
+\ РђР±РґСЂР°С…РёРјРѕРІ Р.Рђ.
+\ v 0.1	РѕС‚ 28.12.2004Рі.
 \
 \
 
@@ -15,32 +15,32 @@ S" ~yz/lib/data.f" INCLUDED
 [THEN]
 
 
-\    ФОРМAТ КОМAНДЫ:     ESC, IDCOM, PAR_E, PAR_D, PAR_A, CR
+\    Р¤РћР РњAРў РљРћРњAРќР”Р«:     ESC, IDCOM, PAR_E, PAR_D, PAR_A, CR
 \
-\    ESC    -  МAРКЕР НAЧAЛA "ИСКЕЙП" ПОСЛЕДОВAТЕЛЬНОСТИ (БAЙТ 27)
-\    IDCOM  -  ЛИТЕРA - ИДЕНТИФИКAТОР КОММAНДЫ
-\    PAR_E  -  ПAРAМЕТР ПЕРЕДAВAЕМЫЙ НA ИСПОЛНЕНИЕ В РЕГИСТРЕ E
+\    ESC    -  РњAР РљР•Р  РќAР§AР›A "РРЎРљР•Р™Рџ" РџРћРЎР›Р•Р”РћР’AРўР•Р›Р¬РќРћРЎРўР (Р‘AР™Рў 27)
+\    IDCOM  -  Р›РРўР•Р A - РР”Р•РќРўРР¤РРљAРўРћР  РљРћРњРњAРќР”Р«
+\    PAR_E  -  РџAР AРњР•РўР  РџР•Р Р•Р”AР’AР•РњР«Р™ РќA РРЎРџРћР›РќР•РќРР• Р’ Р Р•Р“РРЎРўР Р• E
 \    PAR_D  -                                                 D
 \    PAR_A  -                                                 A
-\    CR     -  МAРКЕР КОНЦA "ИСКЕЙП" ПОСЛЕДОВAТЕЛЬНОСТИ (БAЙТ 13)
+\    CR     -  РњAР РљР•Р  РљРћРќР¦A "РРЎРљР•Р™Рџ" РџРћРЎР›Р•Р”РћР’AРўР•Р›Р¬РќРћРЎРўР (Р‘AР™Рў 13)
 
 : ESC-OTVET
 rcv-buf 1+ C@ 
 		CASE
-			[CHAR] j OF CR S" Слишком большой блок !!!" DROP .ansiz ENDOF
-			[CHAR] d OF CR S" Шина не захвачена !" DROP .ansiz ENDOF
-			[CHAR] B OF CR S" Шина захвачена !" DROP .ansiz ENDOF
-			[CHAR] E OF CR S" Начинаю приём !" DROP .ansiz ENDOF
-			[CHAR] M OF CR S" Хорошее CRC !" DROP .ansiz ENDOF
-			[CHAR] m OF CR S" Плохое CRC !" DROP .ansiz ENDOF
-			[CHAR] p OF CR S" Не удалось запрограммировать Flash !" DROP .ansiz ENDOF
-			[CHAR] P OF CR S" Flash успешно запрограммирована !" DROP .ansiz ENDOF
+			[CHAR] j OF CR S" РЎР»РёС€РєРѕРј Р±РѕР»СЊС€РѕР№ Р±Р»РѕРє !!!" DROP .ansiz ENDOF
+			[CHAR] d OF CR S" РЁРёРЅР° РЅРµ Р·Р°С…РІР°С‡РµРЅР° !" DROP .ansiz ENDOF
+			[CHAR] B OF CR S" РЁРёРЅР° Р·Р°С…РІР°С‡РµРЅР° !" DROP .ansiz ENDOF
+			[CHAR] E OF CR S" РќР°С‡РёРЅР°СЋ РїСЂРёС‘Рј !" DROP .ansiz ENDOF
+			[CHAR] M OF CR S" РҐРѕСЂРѕС€РµРµ CRC !" DROP .ansiz ENDOF
+			[CHAR] m OF CR S" РџР»РѕС…РѕРµ CRC !" DROP .ansiz ENDOF
+			[CHAR] p OF CR S" РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РїСЂРѕРіСЂР°РјРјРёСЂРѕРІР°С‚СЊ Flash !" DROP .ansiz ENDOF
+			[CHAR] P OF CR S" Flash СѓСЃРїРµС€РЅРѕ Р·Р°РїСЂРѕРіСЂР°РјРјРёСЂРѕРІР°РЅР° !" DROP .ansiz ENDOF
 		ENDCASE	
 ;
 
 : FLPROG ( a de fbu fsz-- ) { fbu1 fsz1 -- }
-\ Прошиваем Flash
-\ de - размер файла
+\ РџСЂРѕС€РёРІР°РµРј Flash
+\ de - СЂР°Р·РјРµСЂ С„Р°Р№Р»Р°
 \ a - CRC
 \ EV_DSR
 EV_CTS SETCOMMMASK

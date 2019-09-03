@@ -1,14 +1,14 @@
 REQUIRE CODE lib/ext/spf-asm-tmp.f
 
-\ находит последний указанный символ в строке
-CODE last-character ( z с -- z'/0)
-\ AL - символ
-\ EBX - текущий указатель
-\ ECX - начало строки
+\ РЅР°С…РѕРґРёС‚ РїРѕСЃР»РµРґРЅРёР№ СѓРєР°Р·Р°РЅРЅС‹Р№ СЃРёРјРІРѕР» РІ СЃС‚СЂРѕРєРµ
+CODE last-character ( z СЃ -- z'/0)
+\ AL - СЃРёРјРІРѕР»
+\ EBX - С‚РµРєСѓС‰РёР№ СѓРєР°Р·Р°С‚РµР»СЊ
+\ ECX - РЅР°С‡Р°Р»Рѕ СЃС‚СЂРѕРєРё
      MOV EBX, [EBP]
      MOV ECX, EBX
      LEA EBP, 4 [EBP]
-\ находим конец строки
+\ РЅР°С…РѕРґРёРј РєРѕРЅРµС† СЃС‚СЂРѕРєРё
 @@2: CMP BYTE [EBX], # 0
      JE SHORT @@3
      INC EBX
@@ -20,19 +20,19 @@ CODE last-character ( z с -- z'/0)
      JE SHORT @@5
      DEC EBX
      JMP SHORT @@3
-\ нашли
+\ РЅР°С€Р»Рё
 @@4: MOV EAX, EBX
      RET
-\ не нашли
+\ РЅРµ РЅР°С€Р»Рё
 @@5: XOR EAX, EAX
      RET
 END-CODE
 
-\ заменяет последний указанный символ в строке на 0
+\ Р·Р°РјРµРЅСЏРµС‚ РїРѕСЃР»РµРґРЅРёР№ СѓРєР°Р·Р°РЅРЅС‹Р№ СЃРёРјРІРѕР» РІ СЃС‚СЂРѕРєРµ РЅР° 0
 : -trail ( z c -- )
   2DUP last-character ?DUP IF 
     ( z c z1) 0 SWAP C! 2DROP 
   ELSE
-    ( z с ) DROP
+    ( z СЃ ) DROP
   THEN 
 ;

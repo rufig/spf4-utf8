@@ -1,9 +1,9 @@
-\ Работа с буфером последних введенных строк
+\ ╨а╨░╨▒╨╛╤В╨░ ╤Б ╨▒╤Г╤Д╨╡╤А╨╛╨╝ ╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╕╤Е ╨▓╨▓╨╡╨┤╨╡╨╜╨╜╤Л╤Е ╤Б╤В╤А╨╛╨║
 
-  8 CONSTANT LruNum           \ число запоминаемых сообщений lru
-255 CONSTANT LruLen           \ размер одной строки буфера lru
+  8 CONSTANT LruNum           \ ╤З╨╕╤Б╨╗╨╛ ╨╖╨░╨┐╨╛╨╝╨╕╨╜╨░╨╡╨╝╤Л╤Е ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╨╣ lru
+255 CONSTANT LruLen           \ ╤А╨░╨╖╨╝╨╡╤А ╨╛╨┤╨╜╨╛╨╣ ╤Б╤В╤А╨╛╨║╨╕ ╨▒╤Г╤Д╨╡╤А╨░ lru
   0 VALUE CurrFromLru
-  0 VALUE LruBuf \ буфер history (last recently used)
+  0 VALUE LruBuf \ ╨▒╤Г╤Д╨╡╤А history (last recently used)
 
 : LruAddr ( n -- addr )
   LruLen * LruBuf +

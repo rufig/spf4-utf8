@@ -1,19 +1,19 @@
-\ NOTFOUND äëÿ SPF/Linux
+\ NOTFOUND Ð´Ð»Ñ SPF/Linux
 
-\ åñëè âäðóã óæå îïðåäåëåí - óõîäèì
+\ ÐµÑÐ»Ð¸ Ð²Ð´Ñ€ÑƒÐ³ ÑƒÐ¶Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½ - ÑƒÑ…Ð¾Ð´Ð¸Ð¼
 ' NOOP ' \EOF C" NOTFOUND" FIND NIP 1+ PICK  NIP NIP EXECUTE
 
 : NOTFOUND ( a u -- )
-\ îáðàùåíèå ê ñëîâàì â ñëîâàðÿõ â âèäå  vocname1::wordname
-\ èëè vocname1::vocname2::wordname è ò.ï.
-\ èëè vocname1:: wordname
+\ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ðµ Ðº ÑÐ»Ð¾Ð²Ð°Ð¼ Ð² ÑÐ»Ð¾Ð²Ð°Ñ€ÑÑ… Ð² Ð²Ð¸Ð´Ðµ  vocname1::wordname
+\ Ð¸Ð»Ð¸ vocname1::vocname2::wordname Ð¸ Ñ‚.Ð¿.
+\ Ð¸Ð»Ð¸ vocname1:: wordname
   2DUP 2>R ['] ?SLITERAL CATCH ?DUP IF NIP NIP 2R>
-  2DUP S" ::" SEARCH 0= IF 2DROP 2DROP THROW  THEN \ Âîîáùå åñòü :: ?
+  2DUP S" ::" SEARCH 0= IF 2DROP 2DROP THROW  THEN \ Ð’Ð¾Ð¾Ð±Ñ‰Ðµ ÐµÑÑ‚ÑŒ :: ?
   2DROP ROT DROP
   GET-ORDER  N>R
                          BEGIN ( a u )
     2DUP S" ::" SEARCH   WHILE ( a1 u1 a3 u3 )
-    2 -2 D+ ( ïðîïóñê ðàçäåëèòåëÿ :: )  2>R
+    2 -2 D+ ( Ð¿Ñ€Ð¾Ð¿ÑƒÑÐº Ñ€Ð°Ð·Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»Ñ :: )  2>R
     R@ - 2 - SFIND              IF
     SP@ >R
     ALSO EXECUTE SP@ R> - 0=

@@ -6,8 +6,8 @@ REQUIRE STR@ ~ac/lib/str5.f
 REQUIRE SPLIT- ~pinka/samples/2005/lib/split.f
 
 : replace-str- ( s s-old s-new -- )
-  \ заменить  s-old на s-new в строке s
-  \ s-old и s-new освобождаются
+  \ Р·Р°РјРµРЅРёС‚СЊ  s-old РЅР° s-new РІ СЃС‚СЂРѕРєРµ s
+  \ s-old Рё s-new РѕСЃРІРѕР±РѕР¶РґР°СЋС‚СЃСЏ
   "" { s so sn ss }
   s STR@
   BEGIN ( dright' )

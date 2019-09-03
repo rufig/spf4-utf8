@@ -1,19 +1,19 @@
-\ Древняя библиотека работы с иконками в трее, написанная больше 10 лет
-\ назад для "агентов" Eserv'а (pop3recv/smtpsend). Здесь адаптируется для
-\ работы с браузерным окном. Единственная причина, по которой нельзя
-\ использовать там notify_icon.f без этой обертки - то что windows извещения
-\ от иконки шлет не через SendMessage/PostMessage окна, а напрямую в оконную
-\ процедуру. А в browser.f таковой нет, используется штатная. "Субклассить"
-\ ради такой мелочи тяжелое окно AtlAxWin наверное не стоит. Тем более что
-\ иконка в трее нужна одна на приложение, а не на каждое браузерное окно.
-\ В общем, тут отдельное примитивное окошко субкласс listbox'а от агентов
-\ Eserv'а - самое то. Отрежем Eserv'оспецифические части, получится библиотека.
+\ Р”СЂРµРІРЅСЏСЏ Р±РёР±Р»РёРѕС‚РµРєР° СЂР°Р±РѕС‚С‹ СЃ РёРєРѕРЅРєР°РјРё РІ С‚СЂРµРµ, РЅР°РїРёСЃР°РЅРЅР°СЏ Р±РѕР»СЊС€Рµ 10 Р»РµС‚
+\ РЅР°Р·Р°Рґ РґР»СЏ "Р°РіРµРЅС‚РѕРІ" Eserv'Р° (pop3recv/smtpsend). Р—РґРµСЃСЊ Р°РґР°РїС‚РёСЂСѓРµС‚СЃСЏ РґР»СЏ
+\ СЂР°Р±РѕС‚С‹ СЃ Р±СЂР°СѓР·РµСЂРЅС‹Рј РѕРєРЅРѕРј. Р•РґРёРЅСЃС‚РІРµРЅРЅР°СЏ РїСЂРёС‡РёРЅР°, РїРѕ РєРѕС‚РѕСЂРѕР№ РЅРµР»СЊР·СЏ
+\ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚Р°Рј notify_icon.f Р±РµР· СЌС‚РѕР№ РѕР±РµСЂС‚РєРё - С‚Рѕ С‡С‚Рѕ windows РёР·РІРµС‰РµРЅРёСЏ
+\ РѕС‚ РёРєРѕРЅРєРё С€Р»РµС‚ РЅРµ С‡РµСЂРµР· SendMessage/PostMessage РѕРєРЅР°, Р° РЅР°РїСЂСЏРјСѓСЋ РІ РѕРєРѕРЅРЅСѓСЋ
+\ РїСЂРѕС†РµРґСѓСЂСѓ. Рђ РІ browser.f С‚Р°РєРѕРІРѕР№ РЅРµС‚, РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С€С‚Р°С‚РЅР°СЏ. "РЎСѓР±РєР»Р°СЃСЃРёС‚СЊ"
+\ СЂР°РґРё С‚Р°РєРѕР№ РјРµР»РѕС‡Рё С‚СЏР¶РµР»РѕРµ РѕРєРЅРѕ AtlAxWin РЅР°РІРµСЂРЅРѕРµ РЅРµ СЃС‚РѕРёС‚. РўРµРј Р±РѕР»РµРµ С‡С‚Рѕ
+\ РёРєРѕРЅРєР° РІ С‚СЂРµРµ РЅСѓР¶РЅР° РѕРґРЅР° РЅР° РїСЂРёР»РѕР¶РµРЅРёРµ, Р° РЅРµ РЅР° РєР°Р¶РґРѕРµ Р±СЂР°СѓР·РµСЂРЅРѕРµ РѕРєРЅРѕ.
+\ Р’ РѕР±С‰РµРј, С‚СѓС‚ РѕС‚РґРµР»СЊРЅРѕРµ РїСЂРёРјРёС‚РёРІРЅРѕРµ РѕРєРѕС€РєРѕ СЃСѓР±РєР»Р°СЃСЃ listbox'Р° РѕС‚ Р°РіРµРЅС‚РѕРІ
+\ Eserv'Р° - СЃР°РјРѕРµ С‚Рѕ. РћС‚СЂРµР¶РµРј Eserv'РѕСЃРїРµС†РёС„РёС‡РµСЃРєРёРµ С‡Р°СЃС‚Рё, РїРѕР»СѓС‡РёС‚СЃСЏ Р±РёР±Р»РёРѕС‚РµРєР°.
 
-\ Запуск по "hwnd StartAgentThread". Контекстное меню задается словарем
-\ CONT-MENU-VOC, а иконки для него - vGetIconFilename.
+\ Р—Р°РїСѓСЃРє РїРѕ "hwnd StartAgentThread". РљРѕРЅС‚РµРєСЃС‚РЅРѕРµ РјРµРЅСЋ Р·Р°РґР°РµС‚СЃСЏ СЃР»РѕРІР°СЂРµРј
+\ CONT-MENU-VOC, Р° РёРєРѕРЅРєРё РґР»СЏ РЅРµРіРѕ - vGetIconFilename.
 
-\ ToListBox - от экранного лога агентов Eserv. Тут не нужно, но вдруг 
-\ пригодится в том же качестве :)
+\ ToListBox - РѕС‚ СЌРєСЂР°РЅРЅРѕРіРѕ Р»РѕРіР° Р°РіРµРЅС‚РѕРІ Eserv. РўСѓС‚ РЅРµ РЅСѓР¶РЅРѕ, РЅРѕ РІРґСЂСѓРі 
+\ РїСЂРёРіРѕРґРёС‚СЃСЏ РІ С‚РѕРј Р¶Рµ РєР°С‡РµСЃС‚РІРµ :)
 
 REQUIRE TrayIconCreate ~ac/lib/win/window/notify_icon.f
 REQUIRE ListBoxAddItem ~ac/lib/win/window/listbox.f
@@ -34,7 +34,7 @@ VECT vtiOnStop  ' NOOP TO vtiOnStop
 VECT vtiOnStart ' NOOP TO vtiOnStart
 
 ALSO CONT-MENU DEFINITIONS
-: Выход
+: Р’С‹С…РѕРґ
   TRUE ImmExit !
   TrayIconDelete 
   SendQuit @ 0=
@@ -42,10 +42,10 @@ ALSO CONT-MENU DEFINITIONS
     BYE
   THEN
 ;
-: Сайт
+: РЎР°Р№С‚
   vtiSite
 ;
-: Открыть
+: РћС‚РєСЂС‹С‚СЊ
   vtiOpen
 ;
 GET-CURRENT
@@ -71,7 +71,7 @@ VARIABLE vaEnableWindow TRUE vaEnableWindow !
   wnd CONT-MENU-VOC MenuFromVocImg
 ;
 
-\ собственно обработка событий мыши:
+\ СЃРѕР±СЃС‚РІРµРЅРЅРѕ РѕР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёР№ РјС‹С€Рё:
 
 VECT vAgentWindowToggle
 
@@ -107,7 +107,7 @@ VARIABLE AGENT_TRACE
   IF wnd ContextMenu THEN
 
   msg MSG_AGENT_exit @ =
-  IF vtiOnStop CONT-MENU::Выход THEN
+  IF vtiOnStop CONT-MENU::Р’С‹С…РѕРґ THEN
 
   lparam wparam msg wnd   wnd WindowOrigProc
 ;
@@ -127,7 +127,7 @@ VALUE AgentIconFilename
   S" LISTBOX" WS_VSCROLL WS_HSCROLL OR \ WS_THICKFRAME OR WS_BORDER OR WS_SYSMENU OR
   WS_DISABLED OR WS_MINIMIZE OR WS_OVERLAPPEDWINDOW OR
   0 Window -> w
-  vaWND @ 0= IF w vaWND ! THEN \ если не задано, каким окном управлять, будем самим собой
+  vaWND @ 0= IF w vaWND ! THEN \ РµСЃР»Рё РЅРµ Р·Р°РґР°РЅРѕ, РєР°РєРёРј РѕРєРЅРѕРј СѓРїСЂР°РІР»СЏС‚СЊ, Р±СѓРґРµРј СЃР°РјРёРј СЃРѕР±РѕР№
   w AGENT-WND !
   AgentTipText COUNT AgentTitle
   ['] AGENT-WND-PROC w WindowSubclass
@@ -138,7 +138,7 @@ VALUE AgentIconFilename
     AgentTipText COUNT AgentIconFilename COUNT AgentIconID w TrayIconCreate
   THEN
 
-  32 32 w WindowSize \ странно: окно с неуказанным размером не получает сообщения от BroadcastSystemMessage
+  32 32 w WindowSize \ СЃС‚СЂР°РЅРЅРѕ: РѕРєРЅРѕ СЃ РЅРµСѓРєР°Р·Р°РЅРЅС‹Рј СЂР°Р·РјРµСЂРѕРј РЅРµ РїРѕР»СѓС‡Р°РµС‚ СЃРѕРѕР±С‰РµРЅРёСЏ РѕС‚ BroadcastSystemMessage
   vtiOnStart
 
   w MessageLoop
@@ -190,7 +190,7 @@ VALUE AgentIconFilename
   0 0 BL WORD COUNT >NUMBER 2DROP D>S TO LimitListbox
 ;
 : StartAgentThread ( hwnd -- )
-\ hwnd - какое окно вместо listbox'а будем переключать иконкой
+\ hwnd - РєР°РєРѕРµ РѕРєРЅРѕ РІРјРµСЃС‚Рѕ listbox'Р° Р±СѓРґРµРј РїРµСЂРµРєР»СЋС‡Р°С‚СЊ РёРєРѕРЅРєРѕР№
   AGENT-THREAD START DROP
 ;
 

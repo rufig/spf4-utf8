@@ -23,7 +23,7 @@ CLASS: SaverWindow <SUPER FrameWindow
    S" Comic Sans MS" DROP myFont <lpszFace !
    20 myFont <height !
    S" ssaver.txt" +ModuleDirName R/O OPEN-FILE
-   IF S" Íåò ôàéëèêà ssaver.txt!" ShowMessage BYE ELSE  inFile ! THEN
+   IF S" ÐÐµÑ‚ Ñ„Ð°Ð¹Ð»Ð¸ÐºÐ° ssaver.txt!" ShowMessage BYE ELSE  inFile ! THEN
    FW_BOLD myFont <weight !
 ;
 

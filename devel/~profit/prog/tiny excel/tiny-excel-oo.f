@@ -15,45 +15,45 @@ REQUIRE >=  ~profit/lib/logic.f
 0xC000008CL VALUE ARRAY_BOUNDS_EXCEEDED
 
 
-\ ------ ошибка ------
+\ ------ РѕС€РёР±РєР° ------
 CLASS error
 CString OBJ s
 init: SUPER name " #{s}" s ! ;
 : AsString ( -- addr u ) s @ STR@ ;
 ;CLASS
 
-\ ------ ошибка ввода ячейки ------
+\ ------ РѕС€РёР±РєР° РІРІРѕРґР° СЏС‡РµР№РєРё ------
 error SUBCLASS input ;CLASS
 
-\ ------ ошибка переполнения ------
+\ ------ РѕС€РёР±РєР° РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ ------
 error SUBCLASS overflow ;CLASS
 
-\ ------ ошибка приведения типов ------
+\ ------ РѕС€РёР±РєР° РїСЂРёРІРµРґРµРЅРёСЏ С‚РёРїРѕРІ ------
 error SUBCLASS typeCast ;CLASS
 
-\ ------ ошибка деления на ноль ------
+\ ------ РѕС€РёР±РєР° РґРµР»РµРЅРёСЏ РЅР° РЅРѕР»СЊ ------
 error SUBCLASS zeroDiv ;CLASS
 
-\ ------ ошибка некорректного задания числа ------
+\ ------ РѕС€РёР±РєР° РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРіРѕ Р·Р°РґР°РЅРёСЏ С‡РёСЃР»Р° ------
 error SUBCLASS number ;CLASS
 
-\ ------ ошибка выхода за границу ------
+\ ------ РѕС€РёР±РєР° РІС‹С…РѕРґР° Р·Р° РіСЂР°РЅРёС†Сѓ ------
 error SUBCLASS bounds ;CLASS
 
 bounds TO ARRAY_BOUNDS_EXCEEDED
 
-\ ------ ошибка -- циклическая ссылка ------
+\ ------ РѕС€РёР±РєР° -- С†РёРєР»РёС‡РµСЃРєР°СЏ СЃСЃС‹Р»РєР° ------
 error SUBCLASS cycle ;CLASS
 
-\ ------ ошибка в формуле ------
+\ ------ РѕС€РёР±РєР° РІ С„РѕСЂРјСѓР»Рµ ------
 error SUBCLASS formula ;CLASS
 
 : overflow? ( d -- ) DABS 2147483647. D> IF overflow THROW THEN ;
 
-: ?error ( obj^ err -- obj ) ?DUP IF NewObj OVER @ => errorObj! THEN ; \ <-- нехороший момент
+: ?error ( obj^ err -- obj ) ?DUP IF NewObj OVER @ => errorObj! THEN ; \ <-- РЅРµС…РѕСЂРѕС€РёР№ РјРѕРјРµРЅС‚
 
-\ ------ одномерный массив с методом добавления значения в конец ------
-\ и с итератором...
+\ ------ РѕРґРЅРѕРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ СЃ РјРµС‚РѕРґРѕРј РґРѕР±Р°РІР»РµРЅРёСЏ Р·РЅР°С‡РµРЅРёСЏ РІ РєРѕРЅРµС† ------
+\ Рё СЃ РёС‚РµСЂР°С‚РѕСЂРѕРј...
 vector SUBCLASS vectorAdd
 : :add ( x -- ) SUPER :resize1 SUPER :last ! ;
 : :iter { xt -- } \ xt ( addr -- )
@@ -64,7 +64,7 @@ SUPER :iterate
 LOOP DROP ;
 ;CLASS
 
-\ ------ двумерная таблица ------
+\ ------ РґРІСѓРјРµСЂРЅР°СЏ С‚Р°Р±Р»РёС†Р° ------
 vectorAdd SUBCLASS Table
 VAR _width
 VAR _height
@@ -79,16 +79,16 @@ xy SUPER :nth ;
 ;CLASS
 
 
-\ ------ класс ячейки ------
+\ ------ РєР»Р°СЃСЃ СЏС‡РµР№РєРё ------
 CLASS SpreadCell
 VAR sheet
 VAR contents
 CELL PROPERTY errorObj
 
 vectorAdd OBJ brefsArr
-\ массив обратных связей -- обратные связи есть у любых ячеек,
-\ т.к. любая ячейка имея возможность быть задействованной в 
-\ формуле может влиять на результат вычисления формулы
+\ РјР°СЃСЃРёРІ РѕР±СЂР°С‚РЅС‹С… СЃРІСЏР·РµР№ -- РѕР±СЂР°С‚РЅС‹Рµ СЃРІСЏР·Рё РµСЃС‚СЊ Сѓ Р»СЋР±С‹С… СЏС‡РµРµРє,
+\ С‚.Рє. Р»СЋР±Р°СЏ СЏС‡РµР№РєР° РёРјРµСЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ Р±С‹С‚СЊ Р·Р°РґРµР№СЃС‚РІРѕРІР°РЅРЅРѕР№ РІ 
+\ С„РѕСЂРјСѓР»Рµ РјРѕР¶РµС‚ РІР»РёСЏС‚СЊ РЅР° СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ С„РѕСЂРјСѓР»С‹
 
 : :addbrefsArr brefsArr :add ;
 
@@ -109,13 +109,13 @@ dispose: errorObj@ ?DUP IF FreeObj THEN ;
 
 : :fill-all-refs ;
 
-\ CATCH не совместим с HYPE (пока?) -- поэтому заводим отдельные методы-ловушки
+\ CATCH РЅРµ СЃРѕРІРјРµСЃС‚РёРј СЃ HYPE (РїРѕРєР°?) -- РїРѕСЌС‚РѕРјСѓ Р·Р°РІРѕРґРёРј РѕС‚РґРµР»СЊРЅС‹Рµ РјРµС‚РѕРґС‹-Р»РѕРІСѓС€РєРё
 : :catch-input ( addr u -- x1 x2 error | 0 ) (: SUPER this => :input ;) CATCH ;
 : :catch-fill-all-refs (  -- error | 0 ) (: SUPER this => :fill-all-refs ;) CATCH ;
 : :catch-resolve-cell (: SUPER this => resolve-cell ;) CATCH ;
 ;CLASS
 
-\ ------ пустая ячейка ------
+\ ------ РїСѓСЃС‚Р°СЏ СЏС‡РµР№РєР° ------
 SpreadCell SUBCLASS nullCell
 ;CLASS
 
@@ -123,7 +123,7 @@ SpreadCell SUBCLASS inputErrorCell
 init: input NewObj SUPER errorObj! ;
 ;CLASS
 
-\ ------ ячейка с числом ------
+\ ------ СЏС‡РµР№РєР° СЃ С‡РёСЃР»РѕРј ------
 SpreadCell SUBCLASS numberCell
 : :input ( addr u -- )
 -TRAILING 0. 2SWAP >NUMBER NIP ( ... ud 0 | ... xd ~0 )
@@ -132,26 +132,26 @@ SpreadCell SUBCLASS numberCell
 : AsString SUPER value S>D (D.) ;
 ;CLASS
 
-\ ------ ячейка со строкой ------
+\ ------ СЏС‡РµР№РєР° СЃРѕ СЃС‚СЂРѕРєРѕР№ ------
 SpreadCell SUBCLASS stringCell
 : :input ( addr u -- ) 1 CHARS /STRING >STR SUPER contents ! ;
 : calc-cell typeCast THROW ;
 : AsString SUPER value STR@ ;
 ;CLASS
 
-\ ------ ячейка с формулой ------
+\ ------ СЏС‡РµР№РєР° СЃ С„РѕСЂРјСѓР»РѕР№ ------
 stringCell SUBCLASS formulaCell
 
-vectorAdd OBJ refsArr \ массив прямых связей
-VAR unresolvedLinksCount \ кол-во неразрешённых прямых связей
+vectorAdd OBJ refsArr \ РјР°СЃСЃРёРІ РїСЂСЏРјС‹С… СЃРІСЏР·РµР№
+VAR unresolvedLinksCount \ РєРѕР»-РІРѕ РЅРµСЂР°Р·СЂРµС€С‘РЅРЅС‹С… РїСЂСЏРјС‹С… СЃРІСЏР·РµР№
 VAR resolved
 : resolved@ resolved @ ;
-VAR result \ результат вычисления формулы
+VAR result \ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ С„РѕСЂРјСѓР»С‹
 : result@ result @ ;
 
 : AsString result@ S>D (D.) ;
 
-\ Заполнение массива прямых ссылок
+\ Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° РїСЂСЏРјС‹С… СЃСЃС‹Р»РѕРє
 MODULE: fill-refs
 : cell_reference_occured ( row col -- ) 
 SUPER sheet @ => :xy @ refsArr :add ;
@@ -162,7 +162,7 @@ SUPER value process-expression
 refsArr :size unresolvedLinksCount ! ;
 ;MODULE
 
-\ Запись зависимостей между ячейками (изменение значения какой ячейки влияет на результат какой формулы)
+\ Р—Р°РїРёСЃСЊ Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№ РјРµР¶РґСѓ СЏС‡РµР№РєР°РјРё (РёР·РјРµРЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєР°РєРѕР№ СЏС‡РµР№РєРё РІР»РёСЏРµС‚ РЅР° СЂРµР·СѓР»СЊС‚Р°С‚ РєР°РєРѕР№ С„РѕСЂРјСѓР»С‹)
 MODULE: fill-brefs-for-cell
 : cell_reference_occured ( row col -- )
 SUPER sheet @ => :xy @ SUPER this SWAP => :addbrefsArr  ;
@@ -174,7 +174,7 @@ SUPER value process-expression ;
 
 : :fill-all-refs fill-refs-in-expression fill-brefs-in-expression ;
 
-\ Вычисление формулы в ячейке
+\ Р’С‹С‡РёСЃР»РµРЅРёРµ С„РѕСЂРјСѓР»С‹ РІ СЏС‡РµР№РєРµ
 MODULE: calc
 256 state-table op-save ( char -- xt )
 all: formula THROW ;
@@ -186,7 +186,7 @@ symbol: / (: DUP 0= IF zeroDiv THROW THEN / ;) ;
 
 : op-execute ( n1 xt n2 -- xt[n1,n2] ) SWAP EXECUTE ;
 : cell_reference_occured ( row col -- n ) SUPER sheet @ => :xy @ => result@ ;
-: nonnegative_number_occured ( n -- ... ) ; \ <-- автомат не поглощает получаемые числа -- они идут в вычисление
+: nonnegative_number_occured ( n -- ... ) ; \ <-- Р°РІС‚РѕРјР°С‚ РЅРµ РїРѕРіР»РѕС‰Р°РµС‚ РїРѕР»СѓС‡Р°РµРјС‹Рµ С‡РёСЃР»Р° -- РѕРЅРё РёРґСѓС‚ РІ РІС‹С‡РёСЃР»РµРЅРёРµ
 : operation_occured ( char -- 'xt ) >R op-execute R> op-save ;
 : error_occured ( -- ) formula THROW ;
 Include expression.f
@@ -204,12 +204,12 @@ SUPER this => :catch-calc-cell ?DUP IF NewObj SUPER errorObj! THEN
 SUPER resolve-cell THEN ;
 ;CLASS
 
-\ Взятие строки до разделителя-табулятора (строго один и строго табулятор! Никаких двух табуляторов для пущей красоты и пробелов)
+\ Р’Р·СЏС‚РёРµ СЃС‚СЂРѕРєРё РґРѕ СЂР°Р·РґРµР»РёС‚РµР»СЏ-С‚Р°Р±СѓР»СЏС‚РѕСЂР° (СЃС‚СЂРѕРіРѕ РѕРґРёРЅ Рё СЃС‚СЂРѕРіРѕ С‚Р°Р±СѓР»СЏС‚РѕСЂ! РќРёРєР°РєРёС… РґРІСѓС… С‚Р°Р±СѓР»СЏС‚РѕСЂРѕРІ РґР»СЏ РїСѓС‰РµР№ РєСЂР°СЃРѕС‚С‹ Рё РїСЂРѕР±РµР»РѕРІ)
 : tabParse ( -- addr-z u ) 9 PARSE 2DUP + 0 SWAP C! ;
-\ asciiz-строка нужна для того чтобы взятие первого символа в случае пустой строки 
-\ выдавало ноль в (в методе input-table )
+\ asciiz-СЃС‚СЂРѕРєР° РЅСѓР¶РЅР° РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РІР·СЏС‚РёРµ РїРµСЂРІРѕРіРѕ СЃРёРјРІРѕР»Р° РІ СЃР»СѓС‡Р°Рµ РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРё 
+\ РІС‹РґР°РІР°Р»Рѕ РЅРѕР»СЊ РІ (РІ РјРµС‚РѕРґРµ input-table )
 
-\ ------ класс листа ------
+\ ------ РєР»Р°СЃСЃ Р»РёСЃС‚Р° ------
 CLASS Spreadsheet
 Table OBJ t
 
@@ -271,21 +271,21 @@ LOOP LOOP ;
 
 
 
----------------tiny-excel--------------- \ Ошибка ссылки на ячейку (выход за заданные границы)
+---------------tiny-excel--------------- \ РћС€РёР±РєР° СЃСЃС‹Р»РєРё РЅР° СЏС‡РµР№РєСѓ (РІС‹С…РѕРґ Р·Р° Р·Р°РґР°РЅРЅС‹Рµ РіСЂР°РЅРёС†С‹)
 4	2
 1	=A5
 'bubu	3
 'bubu	3
 'bubu	3
 
----------------tiny-excel--------------- \ Деление на ноль
+---------------tiny-excel--------------- \ Р”РµР»РµРЅРёРµ РЅР° РЅРѕР»СЊ
 1	2
 =1/0
 
 \ #zerodiv
 
 
----------------tiny-excel--------------- \ Слишком большое число при вводе
+---------------tiny-excel--------------- \ РЎР»РёС€РєРѕРј Р±РѕР»СЊС€РѕРµ С‡РёСЃР»Рѕ РїСЂРё РІРІРѕРґРµ
 2	2
 9999999999	10
 =B1*B1	3

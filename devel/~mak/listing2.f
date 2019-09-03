@@ -170,8 +170,8 @@ EXPORT
   REPEAT  DROP
   TIB FREE THROW
   FROM_SOURCE-ID
- CLOSE-FILE THROW ( ошибка закрытия файла )
-  H-STDOUT CLOSE-FILE THROW ( ошибка закрытия файла )
+ CLOSE-FILE THROW ( РѕС€РёР±РєР° Р·Р°РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° )
+  H-STDOUT CLOSE-FILE THROW ( РѕС€РёР±РєР° Р·Р°РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° )
   R> BASE ! R> TO H-STDOUT
   R> CURSTR ! R> BLK ! R> TO SOURCE-ID R> #TIB ! R> >IN ! R> TO TIB
 ;
@@ -228,7 +228,7 @@ WARNING !
   BLK 0!
   ['] TranslateFlow_L RECEIVE-WITH ( ior )
   R> CLOSE-FILE SWAP THROW THROW
-  \ Вначале обрабатываем ior от RECEIVE-WITH, а потом от CLOSE-FILE (!)
+  \ Р’РЅР°С‡Р°Р»Рµ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј ior РѕС‚ RECEIVE-WITH, Р° РїРѕС‚РѕРј РѕС‚ CLOSE-FILE (!)
 ;
 
 : INCLUDED_STD_L ( i*x c-addr u -- j*x )

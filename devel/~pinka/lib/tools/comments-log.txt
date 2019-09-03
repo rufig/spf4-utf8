@@ -10,34 +10,34 @@ Unknown difference at 543E58  Exe offset: 2258  Word: GetFileSize
 Unknown difference at 543E59  Exe offset: 2259  Word: GetFileSize
 Unknown difference at 543E5A  Exe offset: 225A  Word: GetFileSize
 
-  WINAPI  адрес точки входа, 
-  т.к. был использован FILE-SIZE  \ ?
+  WINAPI  Р°РґСЂРµСЃ С‚РѕС‡РєРё РІС…РѕРґР°, 
+  С‚.Рє. Р±С‹Р» РёСЃРїРѕР»СЊР·РѕРІР°РЅ FILE-SIZE  \ ?
 
 Unknown difference at 5447CE  Exe offset: 2BCE  Word: USER-OFFS
 Unknown difference at 5447CF  Exe offset: 2BCF  Word: USER-OFFS
 
-  либа locals подлючилась только в exe2dll.f
-   и добавила несколько USER-переменных
+  Р»РёР±Р° locals РїРѕРґР»СЋС‡РёР»Р°СЃСЊ С‚РѕР»СЊРєРѕ РІ exe2dll.f
+   Рё РґРѕР±Р°РІРёР»Р° РЅРµСЃРєРѕР»СЊРєРѕ USER-РїРµСЂРµРјРµРЅРЅС‹С…
 
 Unknown difference at 5468F4  Exe offset: 4CF4  Word: REFILL
 Unknown difference at 5468F5  Exe offset: 4CF5  Word: REFILL
 
-  место между REFILL и NON-OPT-WL
-  Словарь(заголовок): WORDLIST CONSTANT NON-OPT-WL
-   записанное значение VOC-LIST почему-то оказалось разным
-   ( но, в целевой список словарей это значение не включается).
+  РјРµСЃС‚Рѕ РјРµР¶РґСѓ REFILL Рё NON-OPT-WL
+  РЎР»РѕРІР°СЂСЊ(Р·Р°РіРѕР»РѕРІРѕРє): WORDLIST CONSTANT NON-OPT-WL
+   Р·Р°РїРёСЃР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ VOC-LIST РїРѕС‡РµРјСѓ-С‚Рѕ РѕРєР°Р·Р°Р»РѕСЃСЊ СЂР°Р·РЅС‹Рј
+   ( РЅРѕ, РІ С†РµР»РµРІРѕР№ СЃРїРёСЃРѕРє СЃР»РѕРІР°СЂРµР№ СЌС‚Рѕ Р·РЅР°С‡РµРЅРёРµ РЅРµ РІРєР»СЋС‡Р°РµС‚СЃСЏ).
 
 Unknown difference at 546A2A  Exe offset: 4E2A  Word: (DP)
 Unknown difference at 546A2B  Exe offset: 4E2B  Word: (DP)
 Unknown difference at 546A2C  Exe offset: 4E2C  Word: (DP)
 
   ???
-  значение VARIABLE (DP)
+  Р·РЅР°С‡РµРЅРёРµ VARIABLE (DP)
 
-  т.к. locals.f подключились только в exe2dll.f
-  а они создают свой словарь (стандартный), 
-  и его контент пишется в основное хранилище (!)
-  Поэтому нельзя их там подключать.
+  С‚.Рє. locals.f РїРѕРґРєР»СЋС‡РёР»РёСЃСЊ С‚РѕР»СЊРєРѕ РІ exe2dll.f
+  Р° РѕРЅРё СЃРѕР·РґР°СЋС‚ СЃРІРѕР№ СЃР»РѕРІР°СЂСЊ (СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№), 
+  Рё РµРіРѕ РєРѕРЅС‚РµРЅС‚ РїРёС€РµС‚СЃСЏ РІ РѕСЃРЅРѕРІРЅРѕРµ С…СЂР°РЅРёР»РёС‰Рµ (!)
+  РџРѕСЌС‚РѕРјСѓ РЅРµР»СЊР·СЏ РёС… С‚Р°Рј РїРѕРґРєР»СЋС‡Р°С‚СЊ.
 
 
 Unknown difference at 546CA7  Exe offset: 50A7  Word: :-SET
@@ -45,9 +45,9 @@ Unknown difference at 546CA8  Exe offset: 50A8  Word: :-SET
 Unknown difference at 546CA9  Exe offset: 50A9  Word: :-SET
 
   0 VALUE :-SET
-  \ FALSE TO OPT?  не поможет, 
-  \   т.к. устанавливают их условные операторы, 
-  \   через "?BRANCH," ">MARK" и т.п.
+  \ FALSE TO OPT?  РЅРµ РїРѕРјРѕР¶РµС‚, 
+  \   С‚.Рє. СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‚ РёС… СѓСЃР»РѕРІРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹, 
+  \   С‡РµСЂРµР· "?BRANCH," ">MARK" Рё С‚.Рї.
 
 
 Unknown difference at 546CC4  Exe offset: 50C4  Word: J-SET
@@ -70,8 +70,8 @@ Unknown difference at 546D1F  Exe offset: 511F  Word: OP0
 Unknown difference at 546E2B  Exe offset: 522B  Word: OP0
 
 
-  Таблица оптимизатора.  \ OpBuffSize == 0x110  == 0x44 CELLS
-  По идее, значения не важны, когда надо - обновляются \ (?)
+  РўР°Р±Р»РёС†Р° РѕРїС‚РёРјРёР·Р°С‚РѕСЂР°.  \ OpBuffSize == 0x110  == 0x44 CELLS
+  РџРѕ РёРґРµРµ, Р·РЅР°С‡РµРЅРёСЏ РЅРµ РІР°Р¶РЅС‹, РєРѕРіРґР° РЅР°РґРѕ - РѕР±РЅРѕРІР»СЏСЋС‚СЃСЏ \ (?)
 
 
 Unknown difference at 547DA0  Exe offset: 61A0  Word: OPinsert
@@ -81,9 +81,9 @@ Unknown difference at 547DA0  Exe offset: 61A0  Word: OPinsert
   FFAB91D7 NEGATE .
   546E29  Ok
 
-  За счет оптимизатора, смещенная величина была обращена по знаку.
-  Надо фиксить... (!)  \ ***
-  Поэтому пока юзать оптимизатор для dll лучше не надо.
+  Р—Р° СЃС‡РµС‚ РѕРїС‚РёРјРёР·Р°С‚РѕСЂР°, СЃРјРµС‰РµРЅРЅР°СЏ РІРµР»РёС‡РёРЅР° Р±С‹Р»Р° РѕР±СЂР°С‰РµРЅР° РїРѕ Р·РЅР°РєСѓ.
+  РќР°РґРѕ С„РёРєСЃРёС‚СЊ... (!)  \ ***
+  РџРѕСЌС‚РѕРјСѓ РїРѕРєР° СЋР·Р°С‚СЊ РѕРїС‚РёРјРёР·Р°С‚РѕСЂ РґР»СЏ dll Р»СѓС‡С€Рµ РЅРµ РЅР°РґРѕ.
 
 
 Unknown difference at 5505AF  Exe offset: E9AF  Word: LAST
@@ -91,4 +91,4 @@ Unknown difference at 5505B0  Exe offset: E9B0  Word: LAST
 Unknown difference at 5505B1  Exe offset: E9B1  Word: LAST
 
   VARIABLE LAST
-  последняя скомпилированная статья
+  РїРѕСЃР»РµРґРЅСЏСЏ СЃРєРѕРјРїРёР»РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚Р°С‚СЊСЏ

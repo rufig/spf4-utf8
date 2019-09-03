@@ -15,24 +15,24 @@ MODULE: Propis
 2 CONSTANT female
 
 : trans-0-9-male ( n -- addr u )
-	S" ноль" nSTR
-	S" один" nSTR
-	S" два" nSTR
-	S" три" nSTR
-	S" четыре" nSTR
-	S" пять" nSTR
-	S" шесть" nSTR
-	S" семь" nSTR
-	S" восемь" nSTR
-	S" девять" nSTR
+	S" ╨╜╨╛╨╗╤М" nSTR
+	S" ╨╛╨┤╨╕╨╜" nSTR
+	S" ╨┤╨▓╨░" nSTR
+	S" ╤В╤А╨╕" nSTR
+	S" ╤З╨╡╤В╤Л╤А╨╡" nSTR
+	S" ╨┐╤П╤В╤М" nSTR
+	S" ╤И╨╡╤Б╤В╤М" nSTR
+	S" ╤Б╨╡╨╝╤М" nSTR
+	S" ╨▓╨╛╤Б╨╡╨╝╤М" nSTR
+	S" ╨┤╨╡╨▓╤П╤В╤М" nSTR
 	DROP
 ;
 
 : trans-0-9-female ( n -- addr u )
 	DUP 1 = OVER 2 = OR IF
 		1-
-		S" одна" nSTR
-		S" две" nSTR
+		S" ╨╛╨┤╨╜╨░" nSTR
+		S" ╨┤╨▓╨╡" nSTR
 		DROP
 	ELSE
 		trans-0-9-male
@@ -41,7 +41,7 @@ MODULE: Propis
 : trans-0-9-neuter ( n -- addr u )
 	DUP 1 = IF
 		DROP
-		S" одно"
+		S" ╨╛╨┤╨╜╨╛"
 	ELSE
 		trans-0-9-male
 	THEN ;
@@ -59,29 +59,29 @@ MODULE: Propis
 
 : trans-10-19-any ( n -- addr u )
 	10 -
-	S" десять" nSTR
-	S" одиннадцать" nSTR
-	S" двенадцать" nSTR
-	S" тринадцать" nSTR
-	S" четырнадцать" nSTR
-	S" пятнадцать" nSTR
-	S" шестнадцать" nSTR
-	S" семнадцать" nSTR
-	S" восемнадцать" nSTR
-	S" девятнадцать" nSTR
+	S" ╨┤╨╡╤Б╤П╤В╤М" nSTR
+	S" ╨╛╨┤╨╕╨╜╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╨┤╨▓╨╡╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╤В╤А╨╕╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╤З╨╡╤В╤Л╤А╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╨┐╤П╤В╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╤И╨╡╤Б╤В╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╤Б╨╡╨╝╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╨▓╨╛╤Б╨╡╨╝╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╨┤╨╡╨▓╤П╤В╨╜╨░╨┤╤Ж╨░╤В╤М" nSTR
 	DROP
 ;
 
 : trans-tens-2-9-any ( n -- addr u )
 	2 -
-	S" двадцать" nSTR
-	S" тридцать" nSTR
-	S" сорок" nSTR
-	S" пятьдесят" nSTR
-	S" шестьдесят" nSTR
-	S" семьдесят" nSTR
-	S" восемьдесят" nSTR
-	S" девяносто" nSTR
+	S" ╨┤╨▓╨░╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╤В╤А╨╕╨┤╤Ж╨░╤В╤М" nSTR
+	S" ╤Б╨╛╤А╨╛╨║" nSTR
+	S" ╨┐╤П╤В╤М╨┤╨╡╤Б╤П╤В" nSTR
+	S" ╤И╨╡╤Б╤В╤М╨┤╨╡╤Б╤П╤В" nSTR
+	S" ╤Б╨╡╨╝╤М╨┤╨╡╤Б╤П╤В" nSTR
+	S" ╨▓╨╛╤Б╨╡╨╝╤М╨┤╨╡╤Б╤П╤В" nSTR
+	S" ╨┤╨╡╨▓╤П╨╜╨╛╤Б╤В╨╛" nSTR
 	DROP
 ;
 
@@ -115,15 +115,15 @@ MODULE: Propis
 
 : trans-hundreds-1-9-any ( n -- addr u )
 	1-
-	S" сто" nSTR
-	S" двести" nSTR
-	S" триста" nSTR
-	S" четыреста" nSTR
-	S" пятьсот" nSTR
-	S" шестьсот" nSTR
-	S" семьсот" nSTR
-	S" восемсот" nSTR
-	S" девятьсот" nSTR
+	S" ╤Б╤В╨╛" nSTR
+	S" ╨┤╨▓╨╡╤Б╤В╨╕" nSTR
+	S" ╤В╤А╨╕╤Б╤В╨░" nSTR
+	S" ╤З╨╡╤В╤Л╤А╨╡╤Б╤В╨░" nSTR
+	S" ╨┐╤П╤В╤М╤Б╨╛╤В" nSTR
+	S" ╤И╨╡╤Б╤В╤М╤Б╨╛╤В" nSTR
+	S" ╤Б╨╡╨╝╤М╤Б╨╛╤В" nSTR
+	S" ╨▓╨╛╤Б╨╡╨╝╤Б╨╛╤В" nSTR
+	S" ╨┤╨╡╨▓╤П╤В╤М╤Б╨╛╤В" nSTR
 	DROP
 ;	
 
@@ -163,9 +163,9 @@ MODULE: Propis
 	ELSE
 		1000 ['] #trans-0-999 #try-trans-less-number-by
 		DUP number-of
-			S" тысяч" nSTR
-			S" тысяча" nSTR
-			S" тысячи" nSTR
+			S" ╤В╤Л╤Б╤П╤З" nSTR
+			S" ╤В╤Л╤Б╤П╤З╨░" nSTR
+			S" ╤В╤Л╤Б╤П╤З╨╕" nSTR
 			DROP
 		HOLDS
 		BL HOLD
@@ -179,9 +179,9 @@ MODULE: Propis
 	ELSE
 		1000000 ['] #trans-million #try-trans-less-number-by
 		DUP number-of
-			S" миллионов" nSTR
-			S" миллион" nSTR
-			S" миллиона" nSTR
+			S" ╨╝╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓" nSTR
+			S" ╨╝╨╕╨╗╨╗╨╕╨╛╨╜" nSTR
+			S" ╨╝╨╕╨╗╨╗╨╕╨╛╨╜╨░" nSTR
 			DROP
 		HOLDS
 		BL HOLD
@@ -189,20 +189,20 @@ MODULE: Propis
 	THEN
 ;
 
-\ максимальное 32битное число 2147483647
+\ ╨╝╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╨╛╨╡ 32╨▒╨╕╤В╨╜╨╛╨╡ ╤З╨╕╤Б╨╗╨╛ 2147483647
 \ 2 147 483 647
 \    |   |
-\    |   тысяч
-\    миллионов
+\    |   ╤В╤Л╤Б╤П╤З
+\    ╨╝╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓
 
-\ максимальное 64битное число 9223372036854775807
+\ ╨╝╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╨╛╨╡ 64╨▒╨╕╤В╨╜╨╛╨╡ ╤З╨╕╤Б╨╗╨╛ 9223372036854775807
 \ 9 223 372 036 854 775 807
 \    |   |   |   |   |
-\    |   |   |   |   тысяч
-\    |   |   |   миллионов
-\    |   |   миллиардов
-\    |   триллионов
-\    квадриллионов
+\    |   |   |   |   ╤В╤Л╤Б╤П╤З
+\    |   |   |   ╨╝╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓
+\    |   |   ╨╝╨╕╨╗╨╗╨╕╨░╤А╨┤╨╛╨▓
+\    |   ╤В╤А╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓
+\    ╨║╨▓╨░╨┤╤А╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓
 
 : mlrd-UM/MOD ( d n -- quotient remainder[d] )
 	>R
@@ -240,9 +240,9 @@ MODULE: Propis
 	ELSE
 		R> 1 ['] #D-trans-billion #D-try-trans-less-number-by
 		DUP number-of
-			S" миллиардов" nSTR
-			S" миллиард" nSTR
-			S" миллиарда" nSTR
+			S" ╨╝╨╕╨╗╨╗╨╕╨░╤А╨┤╨╛╨▓" nSTR
+			S" ╨╝╨╕╨╗╨╗╨╕╨░╤А╨┤" nSTR
+			S" ╨╝╨╕╨╗╨╗╨╕╨░╤А╨┤╨░" nSTR
 			DROP
 		HOLDS
 		BL HOLD
@@ -257,9 +257,9 @@ MODULE: Propis
 	ELSE
 		R> 1000 ['] #trans-trillion #D-try-trans-less-number-by
 		DUP number-of
-			S" триллионов" nSTR
-			S" триллион" nSTR
-			S" триллиона" nSTR
+			S" ╤В╤А╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓" nSTR
+			S" ╤В╤А╨╕╨╗╨╗╨╕╨╛╨╜" nSTR
+			S" ╤В╤А╨╕╨╗╨╗╨╕╨╛╨╜╨░" nSTR
 			DROP
 	    HOLDS
 	    BL HOLD
@@ -274,9 +274,9 @@ MODULE: Propis
 	ELSE
 		R> 1000000 ['] #trans-quadrillion #D-try-trans-less-number-by
 		DUP number-of
-			S" квадриллионов" nSTR
-			S" квадриллион" nSTR
-			S" квадриллиона" nSTR
+			S" ╨║╨▓╨░╨┤╤А╨╕╨╗╨╗╨╕╨╛╨╜╨╛╨▓" nSTR
+			S" ╨║╨▓╨░╨┤╤А╨╕╨╗╨╗╨╕╨╛╨╜" nSTR
+			S" ╨║╨▓╨░╨┤╤А╨╕╨╗╨╗╨╕╨╛╨╜╨░" nSTR
 			DROP
 	    HOLDS
 	    BL HOLD
@@ -288,8 +288,8 @@ MODULE: Propis
 
 \ \EOF
 
-\ на P100:
-\ число                 переводов в секунду
+\ ╨╜╨░ P100:
+\ ╤З╨╕╤Б╨╗╨╛                 ╨┐╨╡╤А╨╡╨▓╨╛╨┤╨╛╨▓ ╨▓ ╤Б╨╡╨║╤Г╨╜╨┤╤Г
 \ 999999999999999999     4000
 \ 100000000000000000    45000
 \                  1   166000
@@ -302,9 +302,9 @@ ALSO Propis
 		2DUP D.
 		2DUP <# female #trans 0. #> TYPE ."  "
 		D-number-of
-			S" белых ворон" nSTR
-			S" белая ворона" nSTR
-			S" белые вороны" nSTR
+			S" ╨▒╨╡╨╗╤Л╤Е ╨▓╨╛╤А╨╛╨╜" nSTR
+			S" ╨▒╨╡╨╗╨░╤П ╨▓╨╛╤А╨╛╨╜╨░" nSTR
+			S" ╨▒╨╡╨╗╤Л╨╡ ╨▓╨╛╤А╨╛╨╜╤Л" nSTR
 			DROP
 		TYPE CR
 		KEY DROP

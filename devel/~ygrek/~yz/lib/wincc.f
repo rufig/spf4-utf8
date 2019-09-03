@@ -2,14 +2,14 @@
 
 \ $Id$
 
-\ Библиотека пользовательского интерфейса Windows
-\ ч. 3. Общие элементы управления
-\ Ю. Жиловец, 10.09.2002
+\ Р‘РёР±Р»РёРѕС‚РµРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР° Windows
+\ С‡. 3. РћР±С‰РёРµ СЌР»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ
+\ Р®. Р–РёР»РѕРІРµС†, 10.09.2002
 
 REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
 
 \ -----------------------------
-\ Индикатор
+\ РРЅРґРёРєР°С‚РѕСЂ
 
 : progress-get-pos ( ctl -- )  W: pbm_deltapos ?send ;
 : progress-set-pos ( n ctl -- ) W: pbm_setpos wsend DROP ;
@@ -25,7 +25,7 @@ REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
   W: pbm_setrange R> send DROP ;
 
 \ -----------------------------------------
-\ Ползунки
+\ РџРѕР»Р·СѓРЅРєРё
 
 : tbget-pos ( ctl -- pos) W: tbm_getpos ?send ;
 : tbset-pos ( pos ctl -- ) >R TRUE SWAP W: tbm_setpos R> send DROP ;
@@ -44,7 +44,7 @@ REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
   R> ;
 
 \ --------------------------------------------
-\ Спины
+\ РЎРїРёРЅС‹
 
 " msctls_updown32" ASCIIZ updowns
 
@@ -75,7 +75,7 @@ REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
   SWAP -updown! ;
 
 \ --------------------------------
-\ Анимация
+\ РђРЅРёРјР°С†РёСЏ
 
 : start-anime ( ctl -- )
   >R -1 0xFFFF0000 W: acm_play R> send DROP ;
@@ -90,7 +90,7 @@ REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
   R> ;
 
 \ -------------------------------
-\ Календарь
+\ РљР°Р»РµРЅРґР°СЂСЊ
 
 : adjust-calendar { ctl \ [ 4 CELLS ] rect -- }
   0 rect W: mcm_getminreqrect ctl send DROP
@@ -130,9 +130,9 @@ REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
   R> ;
 
 \ ---------------------------------------
-\ IP-адрес
+\ IP-Р°РґСЂРµСЃ
 
-\ Не работает :-(
+\ РќРµ СЂР°Р±РѕС‚Р°РµС‚ :-(
 \ : ip-address ( -- ctl )
 \  W: icc_internet_classes initcc
 \  listlike " SysIPAddress32" 0 create-control >R
@@ -140,19 +140,19 @@ REQUIRE WINDOWS... ~ygrek/~yz/lib/winctl.f
 \  R> ;
 
 \ ----------------------------------------------
-\ Контейнеры
+\ РљРѕРЅС‚РµР№РЅРµСЂС‹
 
 listlike table container
-  item -addproc		\ добавить элемент
-  item -delproc		\ удалить элемент
-  item -numproc		\ число элементов
-  item -imagelist getset \ массив картинок
-  item -iwidth	getset  \ ширина элемента
-  item -iheight	getset	\ высота элемента
-  item -iflags	getset	\ флаги элемента
-  item -itext	getset	\ текст элемента
-  item -iimage	getset	\ картинка элемента
-  item -iparam	getset	\ параметр элемента
+  item -addproc		\ РґРѕР±Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚
+  item -delproc		\ СѓРґР°Р»РёС‚СЊ СЌР»РµРјРµРЅС‚
+  item -numproc		\ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ
+  item -imagelist getset \ РјР°СЃСЃРёРІ РєР°СЂС‚РёРЅРѕРє
+  item -iwidth	getset  \ С€РёСЂРёРЅР° СЌР»РµРјРµРЅС‚Р°
+  item -iheight	getset	\ РІС‹СЃРѕС‚Р° СЌР»РµРјРµРЅС‚Р°
+  item -iflags	getset	\ С„Р»Р°РіРё СЌР»РµРјРµРЅС‚Р°
+  item -itext	getset	\ С‚РµРєСЃС‚ СЌР»РµРјРµРЅС‚Р°
+  item -iimage	getset	\ РєР°СЂС‚РёРЅРєР° СЌР»РµРјРµРЅС‚Р°
+  item -iparam	getset	\ РїР°СЂР°РјРµС‚СЂ СЌР»РµРјРµРЅС‚Р°
 endtable
 
 : add-item ( ... i ctl -- ) DUP -addproc@ EXECUTE ;
@@ -178,12 +178,12 @@ PROC: (setn) ( n off1 off2 item -- ) PRESS SWAP CELLS+ ! PROC;
 
 PROC: (getc) ( off1 off2 item -- c ) PRESS + C@ PROC;
 : (bytefromitem) ( i ctl mask off off2 msg buf item -- c)
-  \ здесь off1 в байтах, а не в ячейках
+  \ Р·РґРµСЃСЊ off1 РІ Р±Р°Р№С‚Р°С…, Р° РЅРµ РІ СЏС‡РµР№РєР°С…
   (getc) 0 itemsend ;
 
 PROC: (setc) ( c off1 off2 item -- ) PRESS + C! PROC;
 : (bytetoitem) ( c ctl mask off off2 msg buf item -- )
-  \ здесь off1 в байтах, а не в ячейках
+  \ Р·РґРµСЃСЊ off1 РІ Р±Р°Р№С‚Р°С…, Р° РЅРµ РІ СЏС‡РµР№РєР°С…
   0 (setc) itemsend ;
 
 PROC: (gettext) ( z off1 off2 item -- )
@@ -219,7 +219,7 @@ PROC;
 : texttoitem ( z i ctl mask off1 off2 msg -- ) alloc-item DUP (texttoitem) ;
 
 \ ------------------------------------
-\ Заголовки
+\ Р—Р°РіРѕР»РѕРІРєРё
 
 -1 == callback
 -2 == none
@@ -306,11 +306,11 @@ PROC;
   R> ;
 
 \ --------------------------------
-\ Закладки
+\ Р—Р°РєР»Р°РґРєРё
 
 container table tabctl
-  item -maxwidth   \ ширина самой большой сетки
-  item -maxheight  \ высота самой большой сетки
+  item -maxwidth   \ С€РёСЂРёРЅР° СЃР°РјРѕР№ Р±РѕР»СЊС€РѕР№ СЃРµС‚РєРё
+  item -maxheight  \ РІС‹СЃРѕС‚Р° СЃР°РјРѕР№ Р±РѕР»СЊС€РѕР№ СЃРµС‚РєРё
 endtable
 
 PROC: calc-tab-size { tab \ [ 4 CELLS ] rect -- w h }
@@ -362,11 +362,11 @@ PROC;
 : set-tcil ( n 0 ctl -- ) PRESS W: tcm_setimagelist lsend DROP ;
 
 : map-current-tab-grid { tab \ [ 4 CELLS ] rect -- }
-  \ узнаем расположение элемента
+  \ СѓР·РЅР°РµРј СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
   tab child-win-rect rect 3 CELLS! rect 2 CELLS! rect 1 CELLS! rect !
-  \ запрашиваем координаты внутреннего места для сетки
+  \ Р·Р°РїСЂР°С€РёРІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РјРµСЃС‚Р° РґР»СЏ СЃРµС‚РєРё
   FALSE rect W: tcm_adjustrect tab send DROP
-  \ конструируем параметры
+  \ РєРѕРЅСЃС‚СЂСѓРёСЂСѓРµРј РїР°СЂР°РјРµС‚СЂС‹
   rect @ rect 1 CELLS@
   tab -parent@ ?DUP IF -minustop@ ELSE 0 THEN DUP >R - 2DUP
   rect 3 CELLS@ SWAP -  SWAP rect 2 CELLS@ SWAP -  SWAP R> -
@@ -436,10 +436,10 @@ MESSAGES;
   R> ;
 
 \ -----------------------------------------
-\ Панели инструментов
+\ РџР°РЅРµР»Рё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
 
 container table toolbarctl
-  item -istate      	 getset \ стиль элемента
+  item -istate      	 getset \ СЃС‚РёР»СЊ СЌР»РµРјРµРЅС‚Р°
 endtable
 
 \ :NONAME
@@ -482,13 +482,13 @@ endtable
 
 : tb-add { text image style proc n ctl \ [ 5 CELLS ] tbbutton -- }
   tbbutton init->>
-  image >>				\ картинка
-  n >>					\ код кнопки
-  W: tbstate_enabled C>>        	\ состояние кнопки
-  style C>>				\ стиль кнопки
+  image >>				\ РєР°СЂС‚РёРЅРєР°
+  n >>					\ РєРѕРґ РєРЅРѕРїРєРё
+  W: tbstate_enabled C>>        	\ СЃРѕСЃС‚РѕСЏРЅРёРµ РєРЅРѕРїРєРё
+  style C>>				\ СЃС‚РёР»СЊ РєРЅРѕРїРєРё
   0 W>>
   proc >>				\ lparam
-  text none <> IF text ELSE 0 THEN >>	\ строка
+  text none <> IF text ELSE 0 THEN >>	\ СЃС‚СЂРѕРєР°
   1 tbbutton W: tb_addbuttons ctl send DROP ;
 
 : separate { ctl \ [ 4 CELLS ] tbbutton -- }
@@ -507,7 +507,7 @@ endtable
   IMAGE-BASE buf ! id buf CELL+ !
   n buf W: tb_addbitmap ctl send ;
 
-\ Кнопка со стрелкой посылает wm_notify, обыкновенная кнопка - wm_command
+\ РљРЅРѕРїРєР° СЃРѕ СЃС‚СЂРµР»РєРѕР№ РїРѕСЃС‹Р»Р°РµС‚ wm_notify, РѕР±С‹РєРЅРѕРІРµРЅРЅР°СЏ РєРЅРѕРїРєР° - wm_command
 : dropdown? ( -- ?) message W: wm_notify = ;
 
 : tb-command
@@ -538,10 +538,10 @@ endtable
 : create-toolbar ( style win -- ) >R toolbar R> add-toolbar ;
 
 \ ----------------------------------
-\ Деревья
+\ Р”РµСЂРµРІСЊСЏ
 
 toolbarctl table treeviewctl
-  item -iselimage	getset	\ Картинка для выбранного элемента
+  item -iselimage	getset	\ РљР°СЂС‚РёРЅРєР° РґР»СЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 endtable
 
 : tv-add
@@ -631,17 +631,17 @@ endtable
   REPEAT ;
 
 \ -------------------------------------------
-\ Списки иконок
+\ РЎРїРёСЃРєРё РёРєРѕРЅРѕРє
 
 toolbarctl table listviewctl
-  item -exstyle  getset \ расширенный стиль
-  item -isubitem getset	\ подэлемент
-  item -ctext	getset	\ текст колонки
-  item -cflags	getset	\ флаги колонки
-  item -cwidth	getset	\ ширина колонки
-  item -csubitem getset	\ подэлемент, приписанный к колонке
-  item -cimage	getset	\ картинка колонки
-  item -corder	getset	\ порядок колонки
+  item -exstyle  getset \ СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ СЃС‚РёР»СЊ
+  item -isubitem getset	\ РїРѕРґСЌР»РµРјРµРЅС‚
+  item -ctext	getset	\ С‚РµРєСЃС‚ РєРѕР»РѕРЅРєРё
+  item -cflags	getset	\ С„Р»Р°РіРё РєРѕР»РѕРЅРєРё
+  item -cwidth	getset	\ С€РёСЂРёРЅР° РєРѕР»РѕРЅРєРё
+  item -csubitem getset	\ РїРѕРґСЌР»РµРјРµРЅС‚, РїСЂРёРїРёСЃР°РЅРЅС‹Р№ Рє РєРѕР»РѕРЅРєРµ
+  item -cimage	getset	\ РєР°СЂС‚РёРЅРєР° РєРѕР»РѕРЅРєРё
+  item -corder	getset	\ РїРѕСЂСЏРґРѕРє РєРѕР»РѕРЅРєРё
 endtable
 
 : lv-getcol W: lvm_getcolumna fromitem ;
@@ -761,9 +761,9 @@ endtable
 : lv-getimage ( i ctl -- n ) W: lvif_image 7 lv-get ;
 : lv-setimage ( n i ctl -- ) W: lvif_image 7 lv-set ;
 
-\ -1 не выделено ничего
-\ < -1 число выделенных (по модулю)
-\ > -1 индекс выделенного элемента
+\ -1 РЅРµ РІС‹РґРµР»РµРЅРѕ РЅРёС‡РµРіРѕ
+\ < -1 С‡РёСЃР»Рѕ РІС‹РґРµР»РµРЅРЅС‹С… (РїРѕ РјРѕРґСѓР»СЋ)
+\ > -1 РёРЅРґРµРєСЃ РІС‹РґРµР»РµРЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 : lv-getselect ( ctl -- n/i/-1 )
   DUP >R W: lvm_getselectedcount ?send
   ?DUP IF
@@ -814,12 +814,12 @@ endtable
 
 : add-column { text subitem i ctl \ [ 6 CELLS ] lvcol -- }
   lvcol init->>
-  (* lvcf_fmt lvcf_subitem lvcf_text lvcf_width *) >>	\ маска
-  W: lvcfmt_left >>					\ выравнивание
-  0 text W: lvm_getstringwidtha ctl send 20 + >>	\ ширина колонки							\ ширина колонки
-  text >>						\ текст
-  text ZLEN >>						\ к-во символов
-  subitem >>						\ подъэлемент
+  (* lvcf_fmt lvcf_subitem lvcf_text lvcf_width *) >>	\ РјР°СЃРєР°
+  W: lvcfmt_left >>					\ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ
+  0 text W: lvm_getstringwidtha ctl send 20 + >>	\ С€РёСЂРёРЅР° РєРѕР»РѕРЅРєРё							\ С€РёСЂРёРЅР° РєРѕР»РѕРЅРєРё
+  text >>						\ С‚РµРєСЃС‚
+  text ZLEN >>						\ Рє-РІРѕ СЃРёРјРІРѕР»РѕРІ
+  subitem >>						\ РїРѕРґСЉСЌР»РµРјРµРЅС‚
   i lvcol W: lvm_insertcolumna ctl send DROP ;
 
 : del-column ( i ctl -- ) W: lvm_deletecolumn wsend DROP ;
@@ -833,7 +833,7 @@ endtable
   REPEAT DROP ;
 
 \ -------------------------------
-\ Всплывающие подсказки
+\ Р’СЃРїР»С‹РІР°СЋС‰РёРµ РїРѕРґСЃРєР°Р·РєРё
 : create-tooltip ( style -- )
   >R  W: icc_tab_classes initcc
   control " tooltips_class32" R> 0 create-control-exstyle-notchild
@@ -852,12 +852,12 @@ endtable
   ti common-tooltip mess lsend DROP ; 
 TO common-tooltip-op
 
-\ все задержки в миллисекундах
-\ initial - сколько ждать перед "всплытием" если курсор пришёл с пустого места
-\ autopop - сколько времени висеть, пока курсор внутри контрола
-\ reshow - сколько ждать перед "всплытием" если курсор движется по контролам
-\ по умолчанию t, 10*t, t/5, где t - время даблклика
-\ чтобы сбросить значение в дефолтное - установите -1
+\ РІСЃРµ Р·Р°РґРµСЂР¶РєРё РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…
+\ initial - СЃРєРѕР»СЊРєРѕ Р¶РґР°С‚СЊ РїРµСЂРµРґ "РІСЃРїР»С‹С‚РёРµРј" РµСЃР»Рё РєСѓСЂСЃРѕСЂ РїСЂРёС€С‘Р» СЃ РїСѓСЃС‚РѕРіРѕ РјРµСЃС‚Р°
+\ autopop - СЃРєРѕР»СЊРєРѕ РІСЂРµРјРµРЅРё РІРёСЃРµС‚СЊ, РїРѕРєР° РєСѓСЂСЃРѕСЂ РІРЅСѓС‚СЂРё РєРѕРЅС‚СЂРѕР»Р°
+\ reshow - СЃРєРѕР»СЊРєРѕ Р¶РґР°С‚СЊ РїРµСЂРµРґ "РІСЃРїР»С‹С‚РёРµРј" РµСЃР»Рё РєСѓСЂСЃРѕСЂ РґРІРёР¶РµС‚СЃСЏ РїРѕ РєРѕРЅС‚СЂРѕР»Р°Рј
+\ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ t, 10*t, t/5, РіРґРµ t - РІСЂРµРјСЏ РґР°Р±Р»РєР»РёРєР°
+\ С‡С‚РѕР±С‹ СЃР±СЂРѕСЃРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ РІ РґРµС„РѕР»С‚РЅРѕРµ - СѓСЃС‚Р°РЅРѕРІРёС‚Рµ -1
 : set-tooltip-delay { initial autopop reshow tooltip -- }
   W: TTDT_INITIAL initial W: TTM_SETDELAYTIME tooltip send DROP 
   W: TTDT_AUTOPOP autopop W: TTM_SETDELAYTIME tooltip send DROP
@@ -868,7 +868,7 @@ TO common-tooltip-op
 \EOF
 
 \ -------------------------------
-\ Панели
+\ РџР°РЅРµР»Рё
 
 : rb-num ( ctl -- ) W: rb_getbandcount ?send ;
 : rb-del ;

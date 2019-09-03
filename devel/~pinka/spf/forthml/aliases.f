@@ -1,6 +1,6 @@
 \ 17.Feb.2007
 
-\ набор синонимов для избегания маскировки в xml
+\ РЅР°Р±РѕСЂ СЃРёРЅРѕРЅРёРјРѕРІ РґР»СЏ РёР·Р±РµРіР°РЅРёСЏ РјР°СЃРєРёСЂРѕРІРєРё РІ xml
 
 REQUIRE NAMING- ~pinka/spf/compiler/native-wordlist.f
 REQUIRE &       ~pinka/spf/compiler/native-context.f
@@ -24,5 +24,5 @@ REQUIRE &       ~pinka/spf/compiler/native-context.f
 
 
 \ 28.Jun.2008
-\ В XPath 2.0 используются: eq, ne, lt, le, gt, ge
+\ Р’ XPath 2.0 РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ: eq, ne, lt, le, gt, ge
 \ -- http://www.w3.org/TR/xpath20/#id-value-comparisons

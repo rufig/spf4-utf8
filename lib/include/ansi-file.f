@@ -17,7 +17,7 @@ MODULE: ANSI-FILE
 USER-VALUE PFILENAME
 USER-VALUE #FILENAME
 
-\ : INIT \ не надо, т.к. USER переменные всегда ноль при стартапе
+\ : INIT \ РЅРµ РЅР°РґРѕ, С‚.Рє. USER РїРµСЂРµРјРµРЅРЅС‹Рµ РІСЃРµРіРґР° РЅРѕР»СЊ РїСЂРё СЃС‚Р°СЂС‚Р°РїРµ
 \   0 TO PFILENAME
 \   0 TO #FILENAME ;
 
