@@ -27,24 +27,20 @@ USER EXC-HANDLER  \ аппаратные исключения (преобраз�
   DispatcherContext ContextRecord EstablisherFrame ExceptionRecord )
 VECT <EXC-DUMP> \ действия по обработке исключения
 
-: DROP-EXC-HANDLER
-  R> 0 FS! RDROP RDROP
-;
-
 : (EXC) ( DispatcherContext ContextRecord EstablisherFrame ExceptionRecord -- flag )
   (ENTER) \ фрейм для стека данных
-  0 FS@ \ адрес последнего назначенного фрейма обработки исключений
-  \ ищем в цепочке фреймов наш фрейм (по "метке", -- возможно, есть лучший способ?)
-  BEGIN DUP WHILE DUP -1 <> WHILE DUP CELL- @ ['] DROP-EXC-HANDLER <> WHILE ( ." alien " ) @ REPEAT THEN THEN
-  \ Цепочка завершается ссылкой на -1
-  DUP 0= OVER -1 = OR IF 0 TlsIndex! S" ERROR: EXC-frame not found " TYPE -1 ExitThread THEN
-  \ Шанс, что свой фрейм не найдем, весьма мал -- т.к. управление в (EXC) попадает только через этот фрейм.
+  \ 0 FS@ \ адрес последнего назначенного фрейма обработки исключений, EXCEPTION_REGISTRATION
+  \ @ -- адрес следующего фрейма, или -1 если данный фрейм последний
+  \ See-also: http://bytepointer.com/resources/pietrek_crash_course_depths_of_win32_seh.htm
+  \   Matt Pietrek, "A Crash Course on the Depths of Win32™ Structured Exception HandlingЭ
+  OVER \ EstablisherFrame - наш фрейм
   DUP 0 FS! \ восстанавливаем наш фрейм, чтобы продолжать ловить exceptions в будущем
   CELL+ CELL+ @ TlsIndex! \ ранее сохраненный указатель на USER-данные текущего потока
 
 \  2DROP 2DROP
 \  0 (LEAVE)               \ это если нужно передать обработку выше
 
+  ( ExceptionRecord )
   DUP @ 0xC000013A = IF \ CONTROL_C_EXIT - Ctrl+C on wine
     0xC000013A HALT
   THEN
@@ -58,10 +54,14 @@ VECT <EXC-DUMP> \ действия по обработке исключения
 
   FINIT \ если float исключение, восстанавливаем
 
+  ( ExceptionRecord )
   @ THROW  \ превращаем исключение в родное фортовое :)
   R> DROP   \ если все же добрались, то грамотно выходим из callback
 ;
 
+: DROP-EXC-HANDLER
+  R> 0 FS! RDROP RDROP
+;
 : SET-EXC-HANDLER
   R> R>
   TlsIndex@ >R
