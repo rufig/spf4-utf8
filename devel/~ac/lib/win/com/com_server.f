@@ -18,12 +18,12 @@ VARIABLE FCNT \ глобальный счетчик AddRef/Release, т.е. сч�
     DUP ,               \ предок (точнее IID реализуемого интерфейса)
     Methods#            \ к-во методов предка
     DUP ,               \ свои методы (к-во)
-    LATEST ,            \ своё имя
+    LATEST-NAME NAME>CSTRING ,  \ своё имя
     HERE CELL+ ,        \ oid класса (указатель на Vtable)
     1+ CELLS HERE SWAP DUP ALLOT ERASE     \ VTABLE
     -1 ,
     GET-CURRENT WORDLIST
-    LATEST OVER VOC-NAME! \ для осмысленного представления в ORDER
+    LATEST-NAME NAME>CSTRING OVER VOC-NAME! \ для осмысленного представления в ORDER
     SET-CURRENT SWAP
   DOES> 7 CELLS + ( oid )
 ;
@@ -91,12 +91,12 @@ CONSTANT /COM_OBJ \ вдруг когда-нибудь придется доба
 
 : ToVtable ( class_int xt -- class_int )
   OVER >R
-  LAST @ FIND
+  LATEST-NAME NAME>CSTRING FIND
   IF >BODY @ ( номер метода в VTABLE )
      8 + \ смещение VTABLE в определении класса
      CELLS R> + !
   ELSE -321 THROW THEN
 ;
 : METHOD ( class_int -- class_int )
-  LAST @ NAME> TASK ToVtable
+  LATEST-NAME-XT TASK ToVtable
 ;

@@ -7,7 +7,7 @@
  REQUIRE COMPILE  devel\~moleg\lib\util\compile.f
 
 \ та часть, которая работает одновременно с CREATE (обычно) »
-: (DOES1) ( r: addr --> ) LATEST NAME> R> OVER - CFL - SWAP 1 + A! ;
+: (DOES1) ( r: addr --> ) LATEST-NAME-XT R> OVER - CFL - SWAP 1 + A! ;
 
 \ эта часть выполняется во время вызова кода за DOES> »
 : (DOES2) ( --> addr )

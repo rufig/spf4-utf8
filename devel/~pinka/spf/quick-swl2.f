@@ -70,13 +70,14 @@ USER-VALUE hash
 : update-hash ( exth -- )
   >R
   R@ .last  @
-  R@ .wid @ @  ( l2 l )
+  R@ .wid @ LATEST-NAME-IN  ( nt2 nt )
   2DUP = IF 2DROP RDROP EXIT THEN
   \ если словарь пуст - 0 0 - тоже выход
 
-  DUP CHAR+ C@ 12 = IF CDR THEN
-  2DUP = IF 2DROP RDROP EXIT THEN
+  DUP NAME>CSTRING CHAR+ C@ 12 = IF
   \ не добавляем последнее слово, если скрыто ( by HIDE )
+    NAME>NEXT-NAME 2DUP = IF 2DROP RDROP EXIT THEN
+  THEN
 
   DUP R@ .last !
   R> .hash @ TO hash
@@ -86,11 +87,11 @@ USER-VALUE hash
   0 >R
   ( l2 l )          BEGIN
   2DUP <>           WHILE
-  DUP >R
-  CDR DUP 0=        UNTIL THEN 2DROP
+  DUP >R NAME>NEXT-NAME
+  DUP 0=            UNTIL THEN 2DROP
   ( )               BEGIN
   R> DUP            WHILE
-  DUP COUNT 
+  DUP NAME>STRING
   hash HASH!N       REPEAT DROP
   \ добавлять в хэш-таблицу надо в том же порядке, 
   \ в котором слова добавлялись в словарь
@@ -106,7 +107,7 @@ USER-VALUE hash
   wid-exth DUP .last @     IF
   HEAP-ID >R  HEAP-GLOBAL
     .hash @    >R
-    DUP COUNT  R> HASH!N
+    DUP NAME>STRING R> HASH!N
   R> HEAP-ID!               ELSE
   \ чтобы при сцеплении списков все слова добавлялись
   NIP update-hash           THEN
@@ -182,8 +183,8 @@ EXPORT
 
 : MARKER
   WARNING @ >R WARNING 0!
-    LATEST
-    >IN @ >R  MARKER LATEST NAME>  R> >IN ! 
+    LATEST-NAME
+    >IN @ >R  MARKER LATEST-NAME-XT  R> >IN !
     ( last marker-xt )
     CREATE
      , , GET-CURRENT ,
@@ -254,11 +255,8 @@ VECT 0SWL  \ иниц.-ия модуля QuickSWL  при запуске сис�
 
 USER LAST-WID
 
-: LastWord2Hash ( -- )
-  LAST @ LAST-WID @ update1-wlhash
-;
 : LatestWord2Hash ( -- )
-  LATEST ?DUP IF GET-CURRENT update1-wlhash THEN
+  GET-CURRENT LATEST-NAME-IN ?DUP IF GET-CURRENT update1-wlhash THEN
 ;
 
 EXPORT
@@ -273,7 +271,7 @@ USER-VALUE NOW-COLON?
 
   NOW-COLON?            IF
   FALSE TO NOW-COLON?   ELSE
-  LastWord2Hash         THEN
+  LatestWord2Hash       THEN
 ;
 
 : : ( C: "<spaces>name" -- colon-sys ) \ 94
