@@ -40,6 +40,13 @@
   2 RSHIFT
 ;
 
+: /STRING ( c-addr1 u1 n -- c-addr2 u2 ) \ 94 STRING
+  \ c-addr2 = c-addr1 + n ; u2 = u1 - n
+  \ An ambiguous condition exists if n is greater than u1.
+  \ See also https://forthhub.github.io/forth-sf-net/Standard+/slash-string/index.html
+  DUP >R  -  SWAP R> +  SWAP
+;
+
 : MOVE ( addr1 addr2 u -- ) \ 94
 \ Если u больше нуля, копировать содержимое u байт из addr1 в addr2.
 \ После MOVE в u байтах по адресу addr2 содержится в точности то же,

@@ -99,7 +99,8 @@
 \ семантику времени выполнения, данную ниже, к текущему определению.
 \ Время выполнения: ( -- char )
 \ Положить char, значение первого символа name, на стек.
-  PARSE-NAME DROP C@ [COMPILE] LITERAL
+  TAKE-LEXEME ( sd.lexeme )
+  DROP C@ [COMPILE] LITERAL
 ; IMMEDIATE
 
 : ABORT"   \ 94
