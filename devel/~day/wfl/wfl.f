@@ -13,7 +13,7 @@ NEEDS 		~yz\lib\comevents.f
 
 EXPORT
 
-: [[ POSTPONE [[ ; IMMEDIATE
+: [[ [COMPILE] [[ ; IMMEDIATE
 
 ;MODULE
 

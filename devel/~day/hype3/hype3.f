@@ -522,17 +522,17 @@ SET-CURRENT PREVIOUS
 \ Export some needed words
 : OBJ-SIZE OBJ-SIZE ;
 
-: ^ POSTPONE ^ ; IMMEDIATE
+: ^ [COMPILE] ^ ; IMMEDIATE
 
 \ ^ is used in SPF4 locals
-: => POSTPONE ^ ; IMMEDIATE
+: => [COMPILE] ^ ; IMMEDIATE
 
-: SUPER POSTPONE SUPER ; IMMEDIATE
+: SUPER [COMPILE] SUPER ; IMMEDIATE
 
 : init: init: ;
 : dispose: dispose: ;
 
-: SELF POSTPONE SELF ; IMMEDIATE
+: SELF [COMPILE] SELF ; IMMEDIATE
 
 : NewObj ( ta -- addr )
     ['] ALLOCATE NewObjWith
